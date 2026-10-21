@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The X Archive: every post by @TheRubberDuck79 | The Rubber Duck&trade;</title>
+<meta name="description" content="A searchable archive of every post by The Rubber Duck (@TheRubberDuck79) on X, April 2020 to September 2026: full text, links, media and dates as posted.">
+<meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/x/x.css">
+<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="banner">
+  <div class="banner-in">
+    <img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck">
+    <h1 class="wm"><a href="/">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
+    <div class="meta">
+      <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
+      <a href="/ledger.html">The Drop Ledger</a>
+      <a href="/album.html">The Red Pill Album</a>
+    </div>
+  </div>
+</header>
+<main>
+<section class="lead">
+  <h2>The X Archive</h2>
+  <p id="stats">Every post by @TheRubberDuck79, exactly as posted. Search the full text, filter, and open any post on its own page.</p>
+</section>
+<hr>
+<div class="layout">
+<form class="f" id="f" role="search" autocomplete="off">
+  <label>Search text<input type="search" name="q" id="q" placeholder='q, "great awakening", #WWG1WGA'></label>
+  <p class="hint">All words must match. Use <code>"exact phrase"</code>, <code>-exclude</code>, <code>prefix*</code>, <code>#hashtag</code> or <code>@user</code>.</p>
+  <details id="adv" open><summary>Filters</summary><div class="advin">
+  <div class="two">
+    <label>From<input type="date" name="from" min="2020-04-01" max="2026-12-31"></label>
+    <label>To<input type="date" name="to" min="2020-04-01" max="2026-12-31"></label>
+  </div>
+  <div class="two">
+    <label>Year<select name="y" id="y"><option value="">All</option></select></label>
+    <label>Sort<select name="sort"><option value="new">Newest</option><option value="old">Oldest</option></select></label>
+  </div>
+  <label>Type<select name="type"><option value="all">All types</option><option value="original">Original posts</option><option value="reply">Replies</option><option value="retweet">Reposts (retweets)</option><option value="quote">Quote posts</option><option value="thread">Self-thread replies</option></select></label>
+  <label>Media<select name="media"><option value="any">Any</option><option value="media">Has media</option><option value="photo">Photo</option><option value="video">Video</option><option value="gif">GIF</option><option value="none">No media</option><option value="links">Has links</option></select></label>
+  <label>Q-related<select name="qr"><option value="all">All posts</option><option value="q">Q-related (any)</option><option value="strong">Q-related (strong)</option><option value="broad">Q-related (broad only)</option><option value="not">Not Q-related</option></select></label>
+  <label>Hashtag<input name="h" list="dl-h" placeholder="WWG1WGA"></label>
+  <label>Mention<input name="m" list="dl-m" placeholder="POTUS"></label>
+  <label>Linked domain<input name="d" list="dl-d" placeholder="youtube.com"></label>
+  </div></details>
+  <div class="btns"><button class="go" type="submit">Search</button><button type="button" id="reset">Reset</button></div>
+  <datalist id="dl-h"></datalist><datalist id="dl-m"></datalist><datalist id="dl-d"></datalist>
+</form>
+<section aria-live="polite">
+  <div class="bar"><span class="count" id="count">Loading the archive</span><span class="time" id="time"></span></div>
+  <div class="posts" id="res"></div>
+  <nav class="pager" id="pager" aria-label="Result pages"></nav>
+</section>
+</div>
+<hr>
+<section class="dl" id="downloads">
+  <h3>Download the data</h3>
+  <table><thead><tr><th>Year</th><th>Posts</th><th>JSONL (gzip)</th><th>CSV (gzip)</th></tr></thead><tbody id="dlt"></tbody></table>
+  <p>One file per year, UTC dates. Each row has the post id, date, X link, type, reply/repost/quote context, the original text with t.co links, the expanded text, linked URLs, media URLs on pbs.twimg.com and video.twimg.com, hashtags, mentions, like and repost counts, and the Q-related tier.</p>
+</section>
+</main>
+<hr>
+<footer>&copy; The Rubber Duck&trade; | <a href="/">Home</a> | <a href="https://x.com/TheRubberDuck79">@TheRubberDuck79 on X</a></footer>
+<script src="/x/x.js"></script>
+<script src="/x/home.js"></script>
+</body>
+</html>
