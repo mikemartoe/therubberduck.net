@@ -252,6 +252,20 @@ body::before{
 .door.wide .door-sub{font-family:var(--mono,'Courier New',monospace);font-size:.95rem;letter-spacing:.06em;color:var(--muted)}
 .door-x-l{display:flex;align-items:center;gap:14px;min-width:0}
 .door-av{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--line);background:#000}
+/* door icons — one size, one shape on every door (the X avatar included) */
+.door-l{display:flex;align-items:center;gap:14px;min-width:0;flex:1}
+.door-ic,.door-x .door-av{width:52px;height:52px;border-radius:10px;object-fit:cover;flex:none;display:block;
+  border:1px solid rgba(255,255,255,.14);background:#000;box-shadow:0 2px 10px rgba(0,0,0,.6)}
+.door-l .door-label{min-width:0}
+.door.wide .door-l{flex:none}
+.door.wide .door-t{display:flex;align-items:baseline;gap:14px;min-width:0}
+@media (max-width:599px){
+  .door.wide{justify-content:space-between}
+  .door.wide .door-l{flex:1}
+  .door.wide .door-t{flex-direction:column;align-items:flex-start;gap:6px}
+  .door.wide .door-sub{font-size:.82rem;letter-spacing:.03em}
+}
+@media (max-width:380px){.door-ic,.door-x .door-av{width:46px;height:46px;border-radius:9px}}
 .door-x-t{display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left;align-items:flex-start}
 .door-x .door-sub{font-family:var(--mono,'Courier New',monospace);font-size:.82rem;line-height:1.35;letter-spacing:.03em;color:var(--ink-soft)}
 .door:hover,.door:focus-visible{
@@ -347,29 +361,29 @@ body::before{
 
   <nav class="doors" aria-label="Sites">
     <a class="door" href="videos.html">
-      <span class="door-label">Videos</span>
+      <span class="door-l"><img class="door-ic" src="images/icons/videos.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">Videos</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
     <a class="door" href="listening-room.html">
-      <span class="door-label">The Listening Room</span>
+      <span class="door-l"><img class="door-ic" src="images/icons/listening-room.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Listening Room</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
     <a class="door" href="ledger.html">
-      <span class="door-label">The Drop Ledger</span>
+      <span class="door-l"><img class="door-ic" src="images/icons/drop-ledger.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Drop Ledger</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
     <a class="door" href="album.html">
-      <span class="door-label">The Red Pill Album</span>
+      <span class="door-l"><img class="door-ic" src="images/icons/red-pill-album.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Red Pill Album</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
     <a class="door" href="memes.html">
-      <span class="door-label">The Meme Dump</span>
+      <span class="door-l"><img class="door-ic" src="images/icons/meme-dump.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Meme Dump</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
-    <a class="door door-x" href="/x/"><span class="door-x-l"><img class="door-av" src="/assets/trd/img/duck-banner.png" alt=""><span class="door-x-t"><span class="door-label">Twitter / X Archive</span><span class="door-sub">The Rubber Duck&trade;<br>@TheRubberDuck79</span></span></span>
+    <a class="door door-x" href="/x/"><span class="door-x-l"><img class="door-av" src="/assets/trd/img/duck-banner.png" width="52" height="52" alt=""><span class="door-x-t"><span class="door-label">Twitter / X Archive</span><span class="door-sub">The Rubber Duck&trade;<br>@TheRubberDuck79</span></span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
-    <a class="door wide door-scif" href="/pdfs.html"><span class="door-label">The SCIF Reading Room</span><span class="door-sub">the PDF library</span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg></a>
+    <a class="door wide door-scif" href="/pdfs.html"><span class="door-l"><img class="door-ic" src="images/icons/scif.webp" width="52" height="52" alt="" decoding="async"><span class="door-t"><span class="door-label">The SCIF Reading Room</span><span class="door-sub">the PDF library</span></span></span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg></a>
   </nav>
 
 </main>
