@@ -325,7 +325,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-ink);outline
 }
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
+<script src="/assets/trd/duckpod.js" data-trd-keep></script>
+</head>
 <body>
 <header class="banner">
   <div class="banner-in">
@@ -662,42 +664,37 @@ var yrEl=document.getElementById('yr'); if(yrEl) yrEl.textContent=new Date().get
   els.forEach(function(el){if(el.getAttribute('data-rv')==='wait')io.observe(el);});
 })();
 
-/* tracks: one shared audio element, straight through the album */
+/* tracks: these buttons drive the site-wide player (The Duck Pod), so one track plays at a time
+   and the record keeps playing while visitors move around the site */
 (function(){
   var rows=[].slice.call(document.querySelectorAll('.al-list .tr'));
   if(!rows.length)return;
-  var audio=new Audio(); audio.preload='none';
-  var cur=-1;
   rows.forEach(function(r){var td=r.querySelector('.td');r.dataset.full=td.textContent;});
   function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
-  function secs(str){var p=(str||'').split(':');return p.length===2?((+p[0])*60+(+p[1]||0)):0;}
-  function paint(){
+  function paint(st){
     rows.forEach(function(r,i){
-      var on=(i===cur), live=on&&!audio.paused;
+      var on=!!(st&&st.started&&i===st.i), live=on&&st.playing;
       r.classList.toggle('is-playing',live);
       var b=r.querySelector('.tr-btn');
       b.setAttribute('aria-pressed',live?'true':'false');
       b.setAttribute('aria-label',(live?'Pause track: ':'Play track: ')+r.dataset.title);
-      if(!on){r.querySelector('.tr-fill').style.width='0%';r.querySelector('.td').textContent=r.dataset.full;}
+      r.querySelector('.tr-fill').style.width=on&&st.d?Math.min(100,(st.t/st.d)*100)+'%':'0%';
+      r.querySelector('.td').textContent=on&&st.t>0?fmt(st.t)+' / '+fmt(st.d):r.dataset.full;
     });
   }
-  function play(i){
-    if(i<0||i>=rows.length)return;
-    if(i===cur&&!audio.paused){audio.pause();return;}
-    if(i!==cur){cur=i;audio.src=rows[i].dataset.preview;}
-    var p=audio.play(); if(p&&p.catch)p.catch(function(){paint();});
+  if(window.trdPod){
+    rows.forEach(function(r,i){r.querySelector('.tr-btn').addEventListener('click',function(){window.trdPod.toggleIndex(i);});});
+    document.addEventListener('trdpod:state',function(e){paint(e.detail);});
+    paint(window.trdPod.state());
+    return;
   }
+  /* fallback if the player script is unavailable: play on this page */
+  var audio=new Audio(); audio.preload='none'; var cur=-1;
+  function st(){return {i:cur,started:cur>=0,playing:!audio.paused,t:audio.currentTime,d:isFinite(audio.duration)?audio.duration:0};}
+  function play(i){if(i===cur&&!audio.paused){audio.pause();return;}if(i!==cur){cur=i;audio.src=rows[i].dataset.preview;}var p=audio.play();if(p&&p.catch)p.catch(function(){paint(st());});}
   rows.forEach(function(r,i){r.querySelector('.tr-btn').addEventListener('click',function(){play(i);});});
-  audio.addEventListener('play',paint);
-  audio.addEventListener('pause',paint);
-  audio.addEventListener('ended',function(){if(cur+1<rows.length){play(cur+1);}else{cur=-1;paint();}});
-  audio.addEventListener('timeupdate',function(){
-    if(cur<0)return;
-    var r=rows[cur], known=isFinite(audio.duration)&&audio.duration>0;
-    var total=known?audio.duration:(secs(r.dataset.full)||1);
-    r.querySelector('.tr-fill').style.width=Math.min(100,(audio.currentTime/total)*100)+'%';
-    r.querySelector('.td').textContent=fmt(audio.currentTime)+' / '+(known?fmt(audio.duration):r.dataset.full);
-  });
+  ['play','pause','timeupdate'].forEach(function(ev){audio.addEventListener(ev,function(){paint(st());});});
+  audio.addEventListener('ended',function(){if(cur+1<rows.length)play(cur+1);else{cur=-1;paint(st());}});
 })();
 </script>
 <!-- trd-support -->
@@ -731,13 +728,13 @@ var yrEl=document.getElementById('yr'); if(yrEl) yrEl.textContent=new Date().get
   <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.png" alt=""></button>
 </div>
 <script>
-(function(){var w=document.getElementById('trdSup');if(!w)return;var K='trdSupClosed';
+(function(){var w=document.getElementById('trdSup');if(!w)return;var K='trdSupClosed2';
 try{if(sessionStorage.getItem(K)){w.hidden=true;return}}catch(e){}
 w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.toggle('open')});
 w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true;try{sessionStorage.setItem(K,'1')}catch(e){}});
-var seen=false;try{seen=sessionStorage.getItem('trdSupSeen')}catch(e){}
+var seen=false;try{seen=sessionStorage.getItem('trdSupTap2')}catch(e){}
 if(!seen)w.classList.add('wig');
-w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.remove('wig');if(w.classList.contains('open')){try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}try{var A=window.AudioContext||window.webkitAudioContext;if(A){var c=window._trdAC||(window._trdAC=new A()),t=c.currentTime,o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o.type='sawtooth';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(330,t+.16);f.type='bandpass';f.frequency.value=1100;f.Q.value=4;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.18);o.connect(f);f.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.2)}}catch(e){}}try{sessionStorage.setItem('trdSupSeen','1')}catch(e){}});
+w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.remove('wig');if(w.classList.contains('open')){try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}try{var A=window.AudioContext||window.webkitAudioContext;if(A){var c=window._trdAC||(window._trdAC=new A()),t=c.currentTime,o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o.type='sawtooth';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(330,t+.16);f.type='bandpass';f.frequency.value=1100;f.Q.value=4;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.18);o.connect(f);f.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.2)}}catch(e){}}try{sessionStorage.setItem('trdSupTap2','1')}catch(e){}});
 })();
 </script>
 <!-- /trd-support -->

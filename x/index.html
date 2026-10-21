@@ -8,7 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/x/x.css">
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"></head>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
+<script src="/assets/trd/duckpod.js" data-trd-keep></script>
+</head>
 <body>
 <header class="banner">
   <div class="banner-in">
@@ -98,13 +100,13 @@
   <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.png" alt=""></button>
 </div>
 <script>
-(function(){var w=document.getElementById('trdSup');if(!w)return;var K='trdSupClosed';
+(function(){var w=document.getElementById('trdSup');if(!w)return;var K='trdSupClosed2';
 try{if(sessionStorage.getItem(K)){w.hidden=true;return}}catch(e){}
 w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.toggle('open')});
 w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true;try{sessionStorage.setItem(K,'1')}catch(e){}});
-var seen=false;try{seen=sessionStorage.getItem('trdSupSeen')}catch(e){}
+var seen=false;try{seen=sessionStorage.getItem('trdSupTap2')}catch(e){}
 if(!seen)w.classList.add('wig');
-w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.remove('wig');if(w.classList.contains('open')){try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}try{var A=window.AudioContext||window.webkitAudioContext;if(A){var c=window._trdAC||(window._trdAC=new A()),t=c.currentTime,o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o.type='sawtooth';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(330,t+.16);f.type='bandpass';f.frequency.value=1100;f.Q.value=4;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.18);o.connect(f);f.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.2)}}catch(e){}}try{sessionStorage.setItem('trdSupSeen','1')}catch(e){}});
+w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.remove('wig');if(w.classList.contains('open')){try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}try{var A=window.AudioContext||window.webkitAudioContext;if(A){var c=window._trdAC||(window._trdAC=new A()),t=c.currentTime,o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o.type='sawtooth';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(330,t+.16);f.type='bandpass';f.frequency.value=1100;f.Q.value=4;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.18);o.connect(f);f.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.2)}}catch(e){}}try{sessionStorage.setItem('trdSupTap2','1')}catch(e){}});
 })();
 </script>
 <!-- /trd-support -->
