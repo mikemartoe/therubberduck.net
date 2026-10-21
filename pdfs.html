@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCIF Reading Room | PDF Library | The Rubber Duck&trade;</title>
+<meta name="description" content="The Rubber Duck SCIF Reading Room: public documents and books on Q, PSYOP, Epstein and more, styled as classified files for fun.">
+<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+@font-face{font-family:'Steelfish';src:url('scif/assets/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'Courier Prime';src:url('scif/assets/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Courier Prime';src:url('scif/assets/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Oswald';src:url('scif/assets/fonts/Oswald-VariableFont_wght.ttf') format('truetype');font-weight:200 700;font-display:swap}
+
+:root{
+  --wall:#2b2e27; --wall-deep:#1b1d18; --steel:#5d6259; --steel-hi:#8a9086; --steel-lo:#3a3e37;
+  --manila:#d8c08a; --manila-hi:#e6d3a3; --manila-lo:#b89d62; --sheet:#f3eedf; --ink:#1d1b16;
+  --ts:#c8102e; --s:#e86a10; --c:#1f4fa8; --u:#2f7d32;
+  --lamp:rgba(255,214,140,.30);
+  --type:'Courier Prime','Courier New',Courier,monospace;
+  --label:'Oswald','Arial Narrow',Arial,sans-serif;
+  --display:'Steelfish','Oswald','Arial Narrow',Impact,sans-serif;
+  --max:1320px; --gap:28px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--wall-deep);color:#ece6d4;font-family:var(--type);font-size:18px;line-height:1.5}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- site header (matches therubberduck.net) ---------- */
+.banner{background:#000;color:#fff;position:relative;z-index:5}
+.banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
+.banner img{height:92px;width:auto;display:block}
+.wm{font-family:'Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;font-size:96px;line-height:.9;letter-spacing:-.01em;margin:0;white-space:nowrap}
+.wm a{color:#fff;text-decoration:none}
+.wm sup{font-size:.28em;vertical-align:1.6em;margin-left:2px}
+.meta{display:flex;flex-direction:column;gap:6px;font-size:15px;line-height:1.2;font-family:var(--type)}
+.meta a{color:#fff}
+.meta .handle{color:#bbb}
+
+/* ---------- classification marking strip ---------- */
+.marking{background:var(--u);color:#fff;text-align:center;font-family:var(--label);font-weight:600;letter-spacing:.32em;font-size:15px;padding:6px 12px;text-transform:uppercase}
+
+/* ---------- room ---------- */
+.room{position:relative;overflow:hidden;
+  background:
+   radial-gradient(ellipse 900px 520px at 50% -40px,var(--lamp),transparent 70%),
+   radial-gradient(ellipse 1400px 900px at 50% 30%,rgba(255,200,120,.07),transparent 70%),
+   repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 2px,transparent 2px 120px),
+   linear-gradient(180deg,var(--wall) 0%,var(--wall-deep) 100%);
+}
+.room::before{content:"";position:absolute;inset:0;background:url('scif/assets/img/paper-grain.png');opacity:.5;pointer-events:none}
+.lamp{position:absolute;left:50%;top:0;transform:translateX(-50%);width:190px;height:40px;pointer-events:none}
+.lamp::before{content:"";position:absolute;left:50%;top:0;width:4px;height:14px;background:#111;transform:translateX(-50%)}
+.lamp::after{content:"";position:absolute;left:50%;top:12px;transform:translateX(-50%);width:150px;height:24px;border-radius:0 0 80px 80px/0 0 24px 24px;background:linear-gradient(#2c3a2c,#17201a);box-shadow:0 14px 40px 10px rgba(255,214,140,.35)}
+.wrap{position:relative;max-width:var(--max);margin:0 auto;padding:0 var(--gap)}
+
+.intro{display:grid;grid-template-columns:1.35fr 1fr;gap:var(--gap);align-items:stretch;padding:70px 0 var(--gap)}
+.panel{background:rgba(14,15,12,.72);border:1px solid rgba(232,222,190,.16);box-shadow:inset 0 0 0 4px rgba(0,0,0,.25),0 18px 40px rgba(0,0,0,.35);padding:30px 34px;display:flex;flex-direction:column}
+.kicker{font-family:var(--label);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#d9c48f;font-size:15px;margin:0 0 6px}
+h1.room-title{font-family:var(--display);font-weight:700;font-size:84px;line-height:.92;margin:0 0 14px;color:#f3ead2;letter-spacing:.01em}
+h1.room-title .red{color:#e2312f}
+.lede{font-size:19px;margin:0 0 18px;color:#e5dec9}
+.memo{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;margin:0 0 18px;padding:16px 18px;background:#e9e3cf;color:var(--ink);border-left:10px solid var(--ts);font-size:17px}
+.memo b{font-family:var(--label);font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:15px}
+.memo em{font-style:normal;font-weight:700}
+.memo .bars{display:flex;gap:8px}.memo .bars i{display:block;height:12px;background:#111}
+.rules{list-style:none;margin:0;padding:16px 0 0;border-top:1px dashed rgba(232,222,190,.25);display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;font-size:16px;color:#cfc7ae}
+.rules li::before{content:"\25A0";color:#e2312f;margin-right:9px;font-size:12px;vertical-align:2px}
+.redact{display:inline-block;background:#0b0b09;color:transparent;border-radius:1px;height:.95em;vertical-align:-.08em;user-select:none}
+
+.log h2{font-family:var(--label);font-weight:600;font-size:22px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 14px;text-align:center;color:#f3ead2}
+.badge{display:grid;grid-template-columns:86px 1fr;gap:16px;align-items:center;background:#e9e3cf;color:var(--ink);padding:14px 16px;border-radius:8px;border-top:12px solid var(--ts);margin-bottom:16px;box-shadow:0 6px 16px rgba(0,0,0,.4)}
+.badge img{width:86px;height:74px;object-fit:contain;background:#111;border-radius:4px;padding:4px}
+.badge b{display:block;font-family:var(--label);font-size:20px;letter-spacing:.08em;text-transform:uppercase}
+.badge span{display:block;font-size:15px}
+.logrows{flex:1;display:grid;grid-template-columns:auto 1fr;grid-auto-rows:1fr;margin:0 0 16px;font-size:16px}
+.logrows dt,.logrows dd{display:flex;align-items:center;margin:0;padding:5px 0;border-bottom:1px dashed rgba(232,222,190,.22)}
+.logrows dt{font-family:var(--label);letter-spacing:.18em;text-transform:uppercase;color:#d9c48f;padding-right:22px;font-size:15px}
+.logrows dd{justify-content:flex-end;text-align:right;color:#efe8d3;text-transform:uppercase}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:auto}
+.tally div{text-align:center;padding:10px 6px;background:rgba(0,0,0,.35);border-top:6px solid var(--k)}
+.tally b{display:block;font-family:var(--display);font-size:44px;line-height:1;color:#f3ead2}
+.tally span{font-family:var(--label);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#d7cfb6}
+
+/* ---------- controls ---------- */
+.controls{display:grid;grid-template-columns:1fr auto;gap:var(--gap);align-items:stretch;margin-bottom:var(--gap)}
+.search{display:flex;align-items:center;background:#e9e3cf;border:2px solid #0c0c0a;box-shadow:inset 0 2px 0 rgba(0,0,0,.12)}
+.search label{font-family:var(--label);font-weight:600;letter-spacing:.18em;font-size:15px;background:#0c0c0a;color:#e9e3cf;padding:0 16px;align-self:stretch;display:flex;align-items:center;text-transform:uppercase}
+.search input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:19px;color:var(--ink);padding:13px 14px;outline:none}
+.filters{display:flex;gap:8px}
+.filters button{font-family:var(--label);font-weight:600;font-size:16px;letter-spacing:.12em;text-transform:uppercase;border:2px solid #0c0c0a;background:#3a3e37;color:#f0ead8;padding:0 18px;min-height:52px;display:flex;align-items:center;gap:8px}
+.filters button i{width:12px;height:12px;background:var(--k);display:inline-block}
+.filters button[aria-pressed="true"]{background:#e9e3cf;color:var(--ink)}
+.countline{text-align:center;font-family:var(--label);letter-spacing:.2em;text-transform:uppercase;font-size:15px;color:#cfc7ae;margin:-8px 0 var(--gap)}
+
+/* ---------- folders ---------- */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);align-items:stretch;padding-bottom:var(--gap)}
+.folder{position:relative;display:flex;flex-direction:column;padding-top:30px;text-align:left;border:0;background:none;color:inherit;width:100%;transition:transform .18s ease}
+.folder:hover,.folder:focus-visible{transform:translateY(-5px)}
+.folder:focus-visible{outline:3px solid #f1d27a;outline-offset:4px}
+.folder .tab{position:absolute;top:0;left:18px;height:34px;padding:0 18px;background:linear-gradient(var(--manila-hi),var(--manila));border-radius:8px 8px 0 0;font-family:var(--type);font-weight:700;font-size:16px;color:var(--ink);display:flex;align-items:center;letter-spacing:.06em;box-shadow:0 -1px 0 rgba(0,0,0,.15)}
+.folder .body{flex:1;display:flex;flex-direction:column;background:linear-gradient(160deg,var(--manila-hi),var(--manila) 55%,var(--manila-lo));border-radius:0 6px 6px 6px;padding:14px;box-shadow:0 16px 28px rgba(0,0,0,.45),inset 0 0 0 1px rgba(0,0,0,.08);position:relative}
+.folder .body::after{content:"";position:absolute;inset:0;background:url('scif/assets/img/paper-grain.png');opacity:.7;border-radius:inherit;pointer-events:none}
+.cover{flex:1;display:flex;flex-direction:column;background:var(--sheet);color:var(--ink);border:9px solid var(--k);position:relative;box-shadow:0 2px 5px rgba(0,0,0,.2);transform:rotate(var(--tilt,0deg))}
+.cover .lv{background:var(--k);color:#fff;text-align:center;font-family:var(--label);font-weight:700;font-size:21px;letter-spacing:.3em;padding:4px 0 6px;text-transform:uppercase}
+.cover .lv.b{margin-top:auto}
+.cover .inner{padding:14px 16px 12px;display:flex;flex-direction:column;gap:10px;flex:1}
+.cover .row{display:grid;grid-template-columns:1fr 112px;gap:12px;align-items:start}
+.cover .h3{display:block;font-family:var(--type);font-weight:700;font-size:23px;line-height:1.2;margin:0;text-transform:uppercase}
+.cover .thumb{width:112px;height:144px;object-fit:cover;object-position:top;border:1px solid #8b8574;background:#fff;box-shadow:2px 2px 0 rgba(0,0,0,.18);filter:grayscale(.4) sepia(.25)}
+.cover .facts{display:flex;justify-content:space-between;font-family:var(--label);font-weight:500;font-size:16px;letter-spacing:.1em;text-transform:uppercase;border-top:1px solid #b9b19a;border-bottom:1px solid #b9b19a;padding:5px 0}
+.cover .desc{display:block;margin:0;font-size:18px;line-height:1.42;flex:1}
+.cover .bars{display:flex;gap:6px;align-items:center}
+.cover .bars span{height:12px;background:#111;display:block}
+.cover .pull{display:flex;justify-content:center;align-items:center;gap:10px;font-family:var(--label);font-weight:600;letter-spacing:.2em;font-size:15px;text-transform:uppercase;background:#1b1d18;color:#f0e9d3;padding:9px 0;margin-top:2px}
+.stamp{position:absolute;right:14px;top:96px;width:120px;text-align:center;transform:rotate(-12deg);font-family:var(--label);font-weight:700;font-size:16px;letter-spacing:.06em;color:var(--k);border:3px solid var(--k);padding:1px 0;opacity:.6;pointer-events:none;white-space:nowrap;
+  -webkit-mask-image:url('scif/assets/img/stamp-grunge.png');mask-image:url('scif/assets/img/stamp-grunge.png');-webkit-mask-size:180px;mask-size:180px;mix-blend-mode:multiply;text-transform:uppercase}
+.folder.filler{cursor:default}
+.folder.filler:hover{transform:none}
+.folder.filler .cover{--k:#55584f}
+.folder.filler .withdrawn{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:20px;text-align:center}
+.folder.filler .withdrawn b{font-family:var(--display);font-size:40px;letter-spacing:.04em;line-height:1}
+.folder.filler .withdrawn span{display:block;height:13px;background:#111;width:80%}
+.folder.filler .withdrawn span:nth-child(odd){width:62%}
+.empty{display:none;text-align:center;padding:40px;font-size:20px;border:2px dashed rgba(232,222,190,.3);margin-bottom:var(--gap)}
+
+/* ---------- footer ---------- */
+.foot{background:#0b0c0a;border-top:1px solid #23251f;text-align:center;padding:26px var(--gap) 30px;color:#d9d2bd}
+.foot .notice{font-family:var(--label);font-weight:600;font-size:19px;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin:0 0 6px}
+.foot p{margin:0;font-size:16px}
+
+/* ---------- entry: vault door ---------- */
+#entry{position:fixed;inset:0;z-index:50;background:#0d0e0c;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#entry[hidden]{display:none}
+.door{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr}
+.leaf{position:relative;background:
+   radial-gradient(circle at 18px 18px,#9aa096 3px,transparent 4px) 0 0/72px 72px,
+   linear-gradient(90deg,#4c5148,#6c7268 40%,#535950);transition:transform .75s cubic-bezier(.7,0,.3,1)}
+.leaf.l{box-shadow:inset -10px 0 18px rgba(0,0,0,.5)}
+.leaf.r{background:
+   radial-gradient(circle at 54px 18px,#9aa096 3px,transparent 4px) 0 0/72px 72px,
+   linear-gradient(270deg,#4c5148,#6c7268 40%,#535950);box-shadow:inset 10px 0 18px rgba(0,0,0,.5)}
+.leaf::after{content:"";position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;
+  background:repeating-linear-gradient(45deg,#d9a800 0 22px,#141414 22px 44px) top/100% 22px no-repeat,repeating-linear-gradient(45deg,#d9a800 0 22px,#141414 22px 44px) bottom/100% 22px no-repeat}
+.leaf.l::before{content:"";position:absolute;right:0;top:12%;bottom:12%;width:26px;background:repeating-linear-gradient(180deg,#9aa096 0 34px,#2e322c 34px 40px,transparent 40px 90px);opacity:.9}
+.vwheel{position:absolute;left:9%;top:50%;width:240px;height:240px;margin-top:-120px;border-radius:50%;border:14px solid #3b3f38;background:radial-gradient(circle,#9aa096 0 14%,#4b5047 15% 62%,#3e423b 63%);box-shadow:0 0 0 6px #262924,0 18px 40px rgba(0,0,0,.6);transition:transform .7s ease-in-out}
+.vwheel::before,.vwheel::after{content:"";position:absolute;left:50%;top:50%;width:250px;height:20px;margin:-10px 0 0 -125px;background:#2b2f29;border-radius:10px;box-shadow:0 2px 0 #111}
+.vwheel::after{transform:rotate(90deg)}
+.hinge{position:absolute;right:5%;width:34px;height:120px;background:linear-gradient(90deg,#3a3e37,#7b8177,#3a3e37);border:2px solid #1a1c18;border-radius:6px}
+.hinge.t{top:16%}.hinge.b{bottom:16%}
+#entry.go .vwheel{transform:rotate(240deg)}
+#entry.open .leaf.l{transform:translateX(-101%)}
+#entry.open .leaf.r{transform:translateX(101%)}
+#entry.open .console,#entry.open .placard{opacity:0;transition:opacity .25s}
+#entry.done{opacity:0;transition:opacity .25s}
+.leaf.l .leaf.r #entry.go .placard{position:relative;z-index:2;text-align:center;margin-bottom:24px}
+.placard .sign{display:inline-block;background:#f4f1e6;color:#b3121f;border:8px solid #b3121f;padding:12px 30px 14px;box-shadow:0 10px 30px rgba(0,0,0,.55)}
+.placard .sign b{display:block;font-family:var(--display);font-size:76px;line-height:.95;letter-spacing:.04em}
+.placard .sign span{display:block;font-family:var(--label);font-weight:600;font-size:20px;letter-spacing:.28em;color:#111}
+.stage{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.console{display:grid;grid-template-columns:auto auto;gap:22px;align-items:stretch;background:#1d201b;border:3px solid #0a0b09;padding:20px;box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 0 0 1px #3a3e37}
+.reader,.keypad{background:#2a2e28;border:2px solid #0a0b09;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;width:220px}
+.reader .lbl,.keypad .lbl{font-family:var(--label);font-size:14px;letter-spacing:.24em;color:#c7c1ac;text-transform:uppercase}
+.slot{position:relative;width:150px;height:150px;background:#151714;border:2px solid #0a0b09;overflow:hidden;display:flex;align-items:flex-start;justify-content:center}
+.slot::after{content:"";position:absolute;left:14px;right:14px;top:70px;height:8px;background:#000;border-radius:4px}
+.card{position:absolute;top:-120px;width:84px;height:118px;background:#efe9d6;border-top:16px solid var(--ts);border-radius:5px;transition:top .38s ease-in;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-family:var(--label);font-size:11px;color:#111;letter-spacing:.1em}
+.card img{width:52px;height:44px;object-fit:contain;background:#111;border-radius:3px}
+#entry.go .card{top:10px}
+.led{width:16px;height:16px;border-radius:50%;background:#b11;box-shadow:0 0 12px #f33;transition:background .2s,box-shadow .2s}
+#entry.ok .led{background:#1c3;box-shadow:0 0 14px #3f6}
+.display{width:100%;background:#0a120a;color:#57ff7a;font-family:var(--type);font-size:20px;letter-spacing:.3em;text-align:center;padding:6px 0;border:1px solid #000;min-height:40px}
+.keys{display:grid;grid-template-columns:repeat(3,52px);gap:8px}
+.keys span{height:44px;display:flex;align-items:center;justify-content:center;background:linear-gradient(#5b6157,#454a42);border:1px solid #111;border-radius:4px;color:#f1ecda;font-family:var(--label);font-size:20px;box-shadow:0 3px 0 #111}
+.keys span.hit{background:#e9e3cf;color:#111;transform:translateY(2px);box-shadow:0 1px 0 #111}
+.entry-actions{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:22px}
+.signin{display:flex;align-items:stretch;border:2px solid #0a0b09;background:#e9e3cf}
+.signin label{background:#0a0b09;color:#e9e3cf;font-family:var(--label);font-weight:600;letter-spacing:.16em;font-size:14px;padding:0 12px;display:flex;align-items:center;text-transform:uppercase}
+.signin input{border:0;background:transparent;font:inherit;font-size:18px;padding:10px 12px;width:240px;color:#111;outline:none;text-transform:uppercase}
+.btn-badge{font-family:var(--label);font-weight:700;font-size:22px;letter-spacing:.22em;text-transform:uppercase;background:#b3121f;color:#fff;border:3px solid #0a0b09;padding:12px 44px;box-shadow:0 6px 0 #0a0b09}
+.btn-badge:active{transform:translateY(3px);box-shadow:0 3px 0 #0a0b09}
+.btn-skip{background:none;border:0;color:#d8d2bf;text-decoration:underline;font-size:16px;font-family:var(--type)}
+
+/* ---------- viewer ---------- */
+#viewer{position:fixed;inset:0;z-index:40;display:none;background:rgba(6,7,5,.82)}
+#viewer.show{display:block}
+.drawer{position:absolute;left:50%;bottom:-40px;width:560px;margin-left:-280px;height:150px;background:linear-gradient(#70766c,#4c5148);border:3px solid #111;border-radius:4px;transform:translateY(100%);transition:transform .35s ease-out;box-shadow:0 -10px 30px rgba(0,0,0,.6)}
+.drawer::before{content:"";position:absolute;left:50%;top:22px;width:160px;height:22px;margin-left:-80px;background:#2b2e28;border-radius:11px;box-shadow:inset 0 3px 0 #111}
+.drawer::after{content:"SAFE 2  /  DRAWER 1";position:absolute;left:0;right:0;top:56px;text-align:center;font-family:var(--label);letter-spacing:.3em;color:#e6e0cc;font-size:15px}
+#viewer.pull .drawer{transform:translateY(0)}
+.vpanel{position:absolute;inset:26px;max-width:1240px;margin:0 auto;display:flex;flex-direction:column;background:var(--manila);border-radius:6px;box-shadow:0 30px 70px rgba(0,0,0,.7);transform:translateY(110%);transition:transform .45s cubic-bezier(.2,.8,.2,1) .2s}
+#viewer.open .vpanel{transform:none}
+.vhead{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:12px 16px;color:var(--ink)}
+.vtitle{display:flex;align-items:center;gap:14px;min-width:0}
+.vtitle .vlv{text-transform:uppercase;background:var(--k);color:#fff;font-family:var(--label);font-weight:700;letter-spacing:.24em;padding:6px 14px;font-size:17px;white-space:nowrap}
+.vtitle b{font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vtitle small{font-family:var(--label);font-size:15px;letter-spacing:.12em;white-space:nowrap}
+.vbtns{display:flex;gap:10px}
+.vbtns a,.vbtns button{font-family:var(--label);font-weight:600;font-size:16px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;background:#1b1d18;color:#f0e9d3;border:2px solid #0a0b09;padding:9px 18px;display:flex;align-items:center}
+.vbtns .close{background:#b3121f;color:#fff}
+.vbody{flex:1;position:relative;margin:0 16px 16px;background:#55584f;border:9px solid var(--k)}
+.vbody .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#f0e9d3;font-family:var(--label);letter-spacing:.2em;text-transform:uppercase;font-size:16px}
+.vbody .ph img{max-height:60%;box-shadow:0 10px 30px rgba(0,0,0,.5);background:#fff}
+.vbody iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+.vbar{display:flex;justify-content:center;background:var(--k);color:#fff;font-family:var(--label);font-weight:700;letter-spacing:.34em;font-size:15px;padding:3px 0;margin:0 16px 12px;text-transform:uppercase}
+.toast{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:#0c0c0a;color:#f0e9d3;border:2px solid #e9e3cf;padding:12px 18px;font-size:16px;z-index:60;display:none;max-width:90vw;text-align:center}
+.toast.show{display:block}
+
+/* ---------- responsive ---------- */
+@media (max-width:1240px){h1.room-title{font-size:72px}}
+@media (max-width:980px){
+  .intro{grid-template-columns:1fr}
+  .controls{grid-template-columns:1fr}
+  .filters{justify-content:center;flex-wrap:wrap}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:820px){
+  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+  .banner img{height:62px}
+  .wm{font-size:58px}
+  .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
+}
+@media (max-width:1100px){.vwheel,.hinge{display:none}}
+@media (max-width:640px){
+  .memo,.logrows{display:none}
+  .tally{margin-top:0}
+  .kicker{letter-spacing:.18em;font-size:14px}
+  .meta{font-size:13px;gap:4px 12px}
+  .rules li{font-size:16px}
+  .cover .h3{font-size:21px}
+  :root{--gap:16px}
+  body{font-size:17px}
+  .marking{font-size:12px;letter-spacing:.2em}
+  .intro{padding-top:50px}
+  .panel{padding:22px 20px}
+  h1.room-title{font-size:58px}
+  .rules{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .filters{display:grid;grid-template-columns:1fr 1fr}
+  .filters button{justify-content:center;padding:0 8px;font-size:15px}
+  .search label{padding:0 10px;font-size:13px}
+  .placard .sign b{font-size:46px}
+  .placard .sign span{font-size:14px;letter-spacing:.18em}
+  .placard .sign{padding:10px 16px}
+  .console{grid-template-columns:1fr 1fr;gap:10px;padding:12px}
+  .reader,.keypad{width:auto;padding:10px}
+  .slot{width:110px;height:130px}
+  .keys{grid-template-columns:repeat(3,38px);gap:6px}
+  .keys span{height:34px;font-size:17px}
+  .display{font-size:15px;letter-spacing:.15em}
+  .signin input{width:150px}
+  .btn-badge{font-size:19px;padding:11px 30px}
+    .leaf.l   }
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div id="entry" role="dialog" aria-modal="true" aria-labelledby="entry-title">
+  <div class="door" aria-hidden="true"><div class="leaf l"><div class="vwheel"></div></div><div class="leaf r"><div class="hinge t"></div><div class="hinge b"></div></div></div>
+  <div class="stage">
+    <div class="placard"><div class="sign"><b id="entry-title">SECURE AREA</b><span>AUTHORIZED PERSONNEL ONLY</span></div></div>
+    <div class="console" aria-hidden="true">
+      <div class="reader"><div class="lbl">Badge reader</div><div class="slot"><div class="card"><img src="scif/assets/img/duck-banner.png" alt="">TRD-79</div></div><div class="led"></div></div>
+      <div class="keypad"><div class="lbl">Cipher lock</div><div class="display" id="kd">----</div>
+        <div class="keys" id="keys"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>*</span><span>0</span><span>#</span></div></div>
+    </div>
+    <div class="entry-actions">
+      <div class="signin"><label for="who">Sign the access log</label><input id="who" maxlength="20" placeholder="YOUR NAME" autocomplete="off"></div>
+      <button class="btn-badge" id="badgein" type="button">Badge in</button>
+      <button class="btn-skip" id="skip" type="button">Skip the door</button>
+    </div>
+  </div>
+</div>
+
+<header class="banner">
+  <div class="banner-in">
+    <img src="scif/assets/img/duck-banner.png" alt="The Rubber Duck">
+    <p class="wm"><a href="/">THE RUBBER DUCK<sup>&trade;</sup></a></p>
+    <div class="meta">
+      <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
+      <a href="/ledger.html">The Drop Ledger</a>
+      <a href="/memes.html">The Meme Dump</a>
+    </div>
+  </div>
+</header>
+<div class="marking">Top Secret // SCI // Duck Eyes Only</div>
+
+<main class="room">
+  <div class="lamp" aria-hidden="true"></div>
+  <div class="wrap">
+    <section class="intro">
+      <div class="panel">
+        <p class="kicker">Facility 79 &middot; Document Control</p>
+        <h1 class="room-title">The SCIF <span class="red">Reading Room</span></h1>
+        <p class="lede">You are inside. Every folder on this table was pulled from the safe for your eyes only. Find a file by name or subject, filter by classification, then open it to read, download or carry it out.</p>
+        <div class="memo"><b>Memorandum for the record</b><span>Holdings on the table: <em id="mfiles">--</em> files, <em id="mpages">--</em> pages. Subject matter: Q drops, PSYOP doctrine, the Epstein files, State Department email and <span class="redact" style="width:6.5em">x</span> books.</span><span class="bars" aria-hidden="true"><i style="width:34%"></i><i style="width:22%"></i><i style="width:28%"></i></span></div>
+        <ul class="rules">
+          <li>No phones past the door</li>
+          <li>Read here or take a copy</li>
+          <li>Every file is numbered</li>
+          <li>Return files to the drawer</li>
+        </ul>
+      </div>
+      <aside class="panel log" aria-label="Access log">
+        <h2>Access Log</h2>
+        <div class="badge"><img src="scif/assets/img/duck-banner.png" alt=""><div><b id="visitor">Visitor</b><span>Cleared: TS // SCI</span><span id="timein">Time in: --:--</span></div></div>
+        <dl class="logrows"><dt>Date</dt><dd id="ldate">--</dd><dt>Badge</dt><dd>TRD-79</dd><dt>Escort</dt><dd>Not required</dd><dt>Purpose</dt><dd>Research</dd></dl>
+        <div class="tally" id="tally"></div>
+      </aside>
+    </section>
+
+    <section class="controls" aria-label="Search and filter">
+      <div class="search"><label for="q">Search</label><input id="q" type="search" placeholder="Title, subject or description" autocomplete="off"></div>
+      <div class="filters" id="filters" role="group" aria-label="Filter by classification"></div>
+    </section>
+    <p class="countline" id="count" aria-live="polite"></p>
+    <p class="empty" id="empty">No files match that search. Try another word or clear the filter.</p>
+    <section class="grid" id="grid" aria-label="Documents"></section>
+  </div>
+</main>
+
+<footer class="foot">
+  <p class="notice">Nothing here is classified.</p>
+  <p>These are public documents and books, styled as classified files for fun. The markings, levels and control numbers are decoration only.</p>
+</footer>
+<div class="marking bottom">Top Secret // SCI // Duck Eyes Only</div>
+
+<div id="viewer" aria-hidden="true">
+  <div class="drawer" aria-hidden="true"></div>
+  <div class="vpanel" role="dialog" aria-modal="true" aria-labelledby="vt">
+    <div class="vbar" id="vbar"></div>
+    <div class="vhead">
+      <div class="vtitle"><span class="vlv" id="vlv"></span><b id="vt"></b><small id="vmeta"></small></div>
+      <div class="vbtns"><a id="vdl" href="#" download>Download</a><a id="vtab" href="#" target="_blank" rel="noopener">New tab</a><button class="close" id="vclose" type="button">Close</button></div>
+    </div>
+    <div class="vbody"><div class="ph"><img id="vph" alt="">Loading document</div><iframe id="vframe" title="PDF document"></iframe></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+var DOCS = [{"id":"TRD-0001","file":"scif/pdfs/qalerts-compressed.pdf","name":"qalerts-compressed.pdf","title":"Q Drops: The Complete Q Alerts Printout","level":"TS","desc":"Printed compilation of all 4,966 Q posts from the Q Alerts archive, from drop 1 on Oct 28, 2017, set out in numbered, timestamped columns.","topic":"Q DROPS","pages":119,"bytes":64127816,"mb":61.2,"thumb":"scif/assets/thumbs/qalerts-compressed.png","large":true},{"id":"TRD-0002","file":"scif/pdfs/Behold_a_Pale_Horse_by_Milton_William_Cooper_1991.pdf","name":"Behold_a_Pale_Horse_by_Milton_William_Cooper_1991.pdf","title":"Behold a Pale Horse","level":"TS","desc":"Milton William Cooper's 1991 book. It opens with Revelation 6:8 and his note that its purpose is to convince the reader that something is terribly wrong.","topic":"BOOKS","pages":500,"bytes":18936676,"mb":18.1,"thumb":"scif/assets/thumbs/Behold_a_Pale_Horse_by_Milton_William_Cooper_1991.png","large":false},{"id":"TRD-0003","file":"scif/pdfs/epstein-documents-943-pages.pdf","name":"epstein-documents-943-pages.pdf","title":"Giuffre v. Maxwell: Unsealed Documents","level":"TS","desc":"943 pages ordered unsealed by Judge Loretta Preska and filed Jan 3, 2024 in the Southern District of New York, opening with Ghislaine Maxwell's 2015 emails.","topic":"EPSTEIN","pages":943,"bytes":23944032,"mb":22.8,"thumb":"scif/assets/thumbs/epstein-documents-943-pages.png","large":false},{"id":"TRD-0004","file":"scif/pdfs/MindWar.pdf","name":"MindWar.pdf","title":"From PSYOP to MindWar: The Psychology of Victory","level":"S","desc":"A 1980 talking paper from the 7th Psychological Operations Group by Col. Paul E. Vallely with Maj. Michael A. Aquino, with Aquino's 2003 introduction.","topic":"PSYOP","pages":10,"bytes":120177,"mb":0.1,"thumb":"scif/assets/thumbs/MindWar.png","large":false},{"id":"TRD-0005","file":"scif/pdfs/fm3-05-30.pdf","name":"fm3-05-30.pdf","title":"FM 3-05.30: Psychological Operations","level":"S","desc":"U.S. Army field manual on Psychological Operations, dated 15 April 2005, from Headquarters, Department of the Army, with a distribution restriction notice on the cover.","topic":"PSYOP","pages":179,"bytes":2203578,"mb":2.1,"thumb":"scif/assets/thumbs/fm3-05-30.png","large":false},{"id":"TRD-0006","file":"scif/pdfs/epstein-flight-manifests.pdf","name":"epstein-flight-manifests.pdf","title":"Epstein Flight Logs: Exhibit MM","level":"S","desc":"Court exhibit from Epstein v. Edwards: copies of pilot David Rodgers' handwritten flight logs listing dates, aircraft, airports and passenger initials.","topic":"EPSTEIN","pages":73,"bytes":9504224,"mb":9.1,"thumb":"scif/assets/thumbs/epstein-flight-manifests.png","large":false},{"id":"TRD-0007","file":"scif/pdfs/Jeffrey%20Epstein%20Part%2001%20of%2008.pdf","name":"Jeffrey Epstein Part 01 of 08.pdf","title":"FBI Records: Jeffrey Epstein, Part 1 of 8","level":"S","desc":"FBI records release on Jeffrey Epstein, part 1 of 8. It opens with a Deleted Page Information Sheet listing withheld pages and the exemptions cited.","topic":"EPSTEIN","pages":44,"bytes":2662507,"mb":2.5,"thumb":"scif/assets/thumbs/Jeffrey_Epstein_Part_01_of_08.png","large":false},{"id":"TRD-0008","file":"scif/pdfs/C05773185.pdf","name":"C05773185.pdf","title":"State Dept. Email C05773185: Missing Kids in Haiti","level":"C","desc":"FOIA release of a Jan 22, 2010 email in which Hillary Clinton forwards an AFP report on children going missing from Haiti hospitals, with the note 'As predicted.'","topic":"STATE DEPT","pages":2,"bytes":17942,"mb":0.0,"thumb":"scif/assets/thumbs/C05773185.png","large":false},{"id":"TRD-0009","file":"scif/pdfs/C05766648.pdf","name":"C05766648.pdf","title":"State Dept. Email C05766648: Haiti Baptists","level":"C","desc":"FOIA release of a Feb 1, 2010 email forwarded by Cheryl Mills, carrying an AP report on the U.S. Baptists arrested taking 33 children out of Haiti.","topic":"STATE DEPT","pages":1,"bytes":11377,"mb":0.0,"thumb":"scif/assets/thumbs/C05766648.png","large":false},{"id":"TRD-0010","file":"scif/pdfs/Veil_of_Invisibility.pdf","name":"Veil_of_Invisibility.pdf","title":"Veil of Invisibility","level":"C","desc":"Alexander R. Putney's 2009 Human Resonance book in three chapters: Curious George, Veil of Invisibility and The CIA 'Oracle', opening on Tesla at Colorado Springs.","topic":"BOOKS","pages":83,"bytes":5482513,"mb":5.2,"thumb":"scif/assets/thumbs/Veil_of_Invisibility.png","large":false},{"id":"TRD-0011","file":"scif/pdfs/Hillary%20Clinton%20in%20Wonderland%20-%20Includes%20Quotes%20from%20the%20Campaign%20Trail.pdf","name":"Hillary Clinton in Wonderland - Includes Quotes from the Campaign Trail.pdf","title":"Hillary Clinton in Wonderland","level":"C","desc":"A 2016 parody rewrite of Alice in Wonderland with Hillary Clinton as Alice, followed by a section of her quotes from the campaign trail.","topic":"SATIRE","pages":63,"bytes":334219,"mb":0.3,"thumb":"scif/assets/thumbs/Hillary_Clinton_in_Wonderland_-_Includes_Quotes_from_the_Campaign_Trail.png","large":false}];
+var LV = {TS:{name:"Top Secret",color:"var(--ts)"},S:{name:"Secret",color:"var(--s)"},C:{name:"Confidential",color:"var(--c)"}};
+var $ = function(id){return document.getElementById(id);};
+function store(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v);}catch(e){return null;}}
+function track(id,title){
+  try{ if(window.goatcounter&&typeof window.goatcounter.count==="function"){ window.goatcounter.count({path:"scif/open/"+id,title:title,event:true}); } }catch(e){}
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function fmtMB(d){return d.mb<0.1?Math.max(1,Math.round(d.bytes/1024))+" KB":d.mb.toFixed(1)+" MB";}
+function stamp(){var d=new Date();return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2);}
+
+/* ---------- entry ---------- */
+var entry=$("entry");
+function setVisitor(){var n=store("trd.scif.who")||"Visitor";$("visitor").textContent=n;$("timein").textContent="Time in: "+(store("trd.scif.time")||stamp());try{$("ldate").textContent=new Date().toLocaleDateString("en-US",{day:"2-digit",month:"short",year:"numeric"});}catch(e){}}
+function finish(){entry.classList.add("done");setTimeout(function(){entry.hidden=true;},260);document.body.style.overflow="";}
+function admit(fast){
+  var n=($("who").value||"").trim().toUpperCase().replace(/[^A-Z0-9 .'-]/g,"").slice(0,20);
+  store("trd.scif.cleared","1");store("trd.scif.who",n||"Visitor");store("trd.scif.time",stamp());setVisitor();
+  if(fast){finish();return;}
+  $("badgein").disabled=true;entry.classList.add("go");
+  var seq=["7","9","1","7"],keys=[].slice.call($("keys").children),i=0,kd=$("kd");kd.textContent="";
+  setTimeout(function step(){
+    if(i<seq.length){var k=keys.filter(function(s){return s.textContent===seq[i];})[0];k.classList.add("hit");setTimeout(function(){k.classList.remove("hit");},110);kd.textContent+="*";i++;setTimeout(step,140);}
+    else{entry.classList.add("ok");kd.textContent="GRANTED";setTimeout(function(){entry.classList.add("open");setTimeout(finish,700);},250);}
+  },380);
+}
+if(store("trd.scif.cleared")==="1"){entry.hidden=true;setVisitor();}
+else{document.body.style.overflow="hidden";$("badgein").focus();}
+$("badgein").addEventListener("click",function(){admit(false);});
+$("skip").addEventListener("click",function(){admit(true);});
+$("who").addEventListener("keydown",function(e){if(e.key==="Enter")admit(false);});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!entry.hidden)admit(true);});
+
+/* ---------- room ---------- */
+var grid=$("grid"),q=$("q"),filter="ALL";
+var tallyHTML="";["TS","S","C"].forEach(function(k){var c=DOCS.filter(function(d){return d.level===k;}).length;tallyHTML+='<div style="--k:'+LV[k].color+'"><b>'+c+'</b><span>'+LV[k].name+'</span></div>';});
+$("tally").innerHTML=tallyHTML;
+$("mfiles").textContent=DOCS.length;$("mpages").textContent=DOCS.reduce(function(a,d){return a+d.pages;},0).toLocaleString("en-US");
+var fHTML='<button type="button" data-f="ALL" aria-pressed="true">All</button>';
+["TS","S","C"].forEach(function(k){fHTML+='<button type="button" data-f="'+k+'" aria-pressed="false" style="--k:'+LV[k].color+'"><i></i>'+LV[k].name+'</button>';});
+$("filters").innerHTML=fHTML;
+$("filters").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;filter=b.getAttribute("data-f");[].forEach.call(this.children,function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});render();});
+q.addEventListener("input",render);
+var tilts=["-.6deg",".5deg","-.3deg",".7deg","-.5deg",".3deg"];
+function bars(i){var w=[[38,22,30],[26,40,18],[44,16,28],[20,34,36]][i%4];return '<div class="bars" aria-hidden="true"><span style="width:'+w[0]+'%"></span><span style="width:'+w[1]+'%"></span><span style="width:'+w[2]+'%"></span></div>';}
+function card(d,i){
+  var l=LV[d.level];
+  return '<button type="button" class="folder" data-id="'+d.id+'" style="--k:'+l.color+'" aria-label="Open '+esc(d.title)+', '+d.pages+' pages, '+l.name+'">'+
+   '<span class="tab">'+d.id+'</span><span class="body"><span class="cover" style="--tilt:'+tilts[i%tilts.length]+'">'+
+   '<span class="lv">'+l.name+'</span><span class="inner">'+
+   '<span class="row"><span class="h3">'+esc(d.title)+'</span><img class="thumb" src="'+d.thumb+'" alt="" loading="lazy" width="112" height="144"></span>'+
+   '<span class="facts"><span>'+d.pages+' pages</span><span>'+fmtMB(d)+'</span><span>'+esc(d.topic)+'</span></span>'+
+   '<span class="desc">'+esc(d.desc)+'</span>'+bars(i)+
+   '<span class="pull">Pull file</span></span>'+
+   '<span class="lv b">'+l.name+'</span><span class="stamp" aria-hidden="true">'+l.name+'</span></span></span></button>';
+}
+function filler(n){return '<div class="folder filler" aria-hidden="true"><span class="tab">TRD-XXXX</span><span class="body"><span class="cover"><span class="lv">Withdrawn</span><span class="withdrawn"><b>FILE WITHDRAWN</b><span></span><span></span><span></span><span></span></span><span class="lv b">Withdrawn</span></span></span></div>';}
+function cols(){return getComputedStyle(grid).gridTemplateColumns.split(" ").filter(Boolean).length||1;}
+function render(){
+  var t=q.value.trim().toLowerCase();
+  var list=DOCS.filter(function(d){return (filter==="ALL"||d.level===filter)&&(!t||(d.title+" "+d.desc+" "+d.topic+" "+d.id).toLowerCase().indexOf(t)>-1);});
+  var h=list.map(card).join("");
+  var c=cols(),r=list.length%c;
+  if(list.length&&r&&c>1){for(var i=0;i<c-r;i++)h+=filler(i);}
+  grid.innerHTML=h;
+  $("empty").style.display=list.length?"none":"block";
+  $("count").textContent=list.length+" of "+DOCS.length+" files on the table";
+}
+render();
+var lastCols=cols();window.addEventListener("resize",function(){var c=cols();if(c!==lastCols){lastCols=c;render();}});
+
+/* ---------- viewer ---------- */
+var viewer=$("viewer"),frame=$("vframe"),lastFocus=null;
+function isMobile(){return window.matchMedia("(max-width: 820px)").matches||/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);}
+function toast(m){var t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("show");},2600);}
+grid.addEventListener("click",function(e){
+  var b=e.target.closest(".folder[data-id]");if(!b)return;
+  var d=DOCS.filter(function(x){return x.id===b.getAttribute("data-id");})[0];if(!d)return;
+  track(d.id,d.title);
+  if(isMobile()){var w=null;try{w=window.open(d.file,"_blank");}catch(err){}if(w){try{w.opener=null;}catch(err){}toast("File "+d.id+" opened in a new tab");}else{location.href=d.file;}return;}
+  lastFocus=b;open(d);
+});
+function open(d){
+  var l=LV[d.level];
+  viewer.style.setProperty("--k",l.color);
+  $("vlv").textContent=l.name;$("vbar").textContent=l.name+"  //  "+d.id;
+  $("vt").textContent=d.title;$("vmeta").textContent=d.pages+" pages  /  "+fmtMB(d);
+  $("vdl").href=d.file;$("vdl").setAttribute("download",d.name);$("vtab").href=d.file;
+  $("vph").src=d.thumb;frame.src="about:blank";
+  viewer.classList.add("show");viewer.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+  requestAnimationFrame(function(){requestAnimationFrame(function(){viewer.classList.add("pull");setTimeout(function(){viewer.classList.add("open");},150);});});
+  setTimeout(function(){frame.src=d.file+"#view=FitH";},500);
+  $("vclose").focus();
+}
+function close(){
+  viewer.classList.remove("open");
+  setTimeout(function(){viewer.classList.remove("pull");},200);
+  setTimeout(function(){viewer.classList.remove("show");viewer.setAttribute("aria-hidden","true");frame.src="about:blank";document.body.style.overflow="";if(lastFocus)lastFocus.focus();},520);
+}
+$("vclose").addEventListener("click",close);
+viewer.addEventListener("click",function(e){if(e.target===viewer)close();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&viewer.classList.contains("show"))close();});
+})();
+</script>
+</body>
+</html>

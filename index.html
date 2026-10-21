@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- e3:plan-override: This page is not the Drop Ledger. The direction's eight-preset plan (nav-pill, hero-kinetic, manifesto, contrib-heatmap, timeline-vertical, faq-accordion, cta-split, footer-editorial) describes ledger.html, which keeps it. This page is a coming-soon holding page by explicit request: one centred column, a wordmark, a handle, a status line and two links — no nav, no sections, no storefront. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Rubber Duck™ — coming soon</title>
+<meta name="description" content="The home of @TheRubberDuck79. Two places open now: The Drop Ledger and The Red Pill Album.">
+<meta name="theme-color" content="#050505">
+<link rel="icon" href="images/brand/favicon.svg" type="image/svg+xml">
+<!-- Icons: Lucide — ISC — https://github.com/lucide-icons/lucide -->
+<style>
+/* ============ FACES (self-hosted, no CDN) ============ */
+@font-face{
+  font-family:'Steelfish';
+  src:url('fonts/Steelfish%20Bd.otf') format('opentype');
+  font-weight:700; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:'Roboto';
+  src:url('fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight:400; font-style:normal; font-display:swap;
+}
+
+/* ============ TOKENS ============ */
+:root{
+  --bg:#050505;
+  --ink:#FFFFFF;
+  --ink-soft:#E6E4E2;
+  --muted:#8A8A8A;
+  --line:#1C1C1C;
+  --line-strong:#2A2A2A;
+  --red:#E10600;          /* the album's red, held in reserve */
+  --red-bright:#FF3B33;   /* red for anything that has to be read as text */
+
+  --display:'Steelfish','Arial Narrow',Impact,system-ui,sans-serif;
+  --body:'Roboto','Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Liberation Mono',monospace;
+
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* one restrained red breath behind the mark — the only light in the room */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:radial-gradient(62% 46% at 50% 34%, rgba(225,6,0,.09) 0%, rgba(225,6,0,.028) 42%, transparent 72%);
+}
+
+/* ============ THE ROOM — the duck, standing in the red light ============ */
+.room{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  min-height:100svh;
+  overflow:hidden;
+  pointer-events:none;
+}
+.room picture{position:absolute; inset:0; display:block}
+.room .duck{
+  position:absolute;
+  /* Desktop: the WHOLE duck, centred behind the wordmark. cover cropped the silhouette;
+     contain shows all of it at ~90% of the viewport height. The 5% band top and bottom is
+     the headroom the drift needs: roomDrift grows the box by 2.8% and lifts it 1.4%, so the
+     silhouette uses at most ~1.4% of that 5% and never reaches the frame edge. The phone
+     block at the end of this stylesheet overrides inset/width/height with its own values. */
+  inset:5% 0;
+  width:100%;
+  height:90%;
+  object-fit:contain;
+  object-position:50% 50%;
+  opacity:.64;
+  /* A black duck on a #050505 ground: brightness alone can't fix it, because a quarter of
+     the cut-out's pixels sit at luminance <=5 and multiplying near-zero is still near-zero.
+     So contrast is pulled DOWN (0.80) to lift the shadow side off black, then brightness
+     carries the body up to ~95 and the gloss explains itself. saturate holds the eye red;
+     the red rim follows the cut-out's own alpha so the silhouette has an edge. */
+  filter:brightness(1.45) contrast(.80) saturate(1.15) drop-shadow(0 0 36px rgba(225,6,0,.34)) drop-shadow(0 0 120px rgba(225,6,0,.26)) drop-shadow(0 0 12px rgba(255,130,90,.26));
+  animation:roomDrift 48s var(--ease) infinite alternate;
+  will-change:transform;
+}
+@keyframes roomDrift{
+  from{transform:scale(1) translate3d(0,0,0)}
+  to{transform:scale(1.028) translate3d(0,-1.4%,0)}
+}
+
+/* scrim: a soft band across the column, a local hold behind it, then a vignette so the frame edges fall away.
+   The duck's head and the base keep their brightness; only the strip the words live on is held down. */
+.haze{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(5,5,5,0) 10%, rgba(5,5,5,.26) 25%, rgba(5,5,5,.40) 50%, rgba(5,5,5,.34) 74%, rgba(5,5,5,0) 90%),
+    radial-gradient(58% 42% at 50% 47%, rgba(5,5,5,.52) 0%, rgba(5,5,5,.36) 46%, rgba(5,5,5,0) 78%),
+    radial-gradient(124% 98% at 50% 48%, rgba(5,5,5,0) 34%, rgba(5,5,5,.40) 74%, rgba(5,5,5,.88) 100%);
+}
+
+/* ============ THE COLUMN ============ */
+.stage{
+  position:relative;
+  z-index:2;
+  min-height:100svh;
+  max-width:1040px;
+  margin:0 auto;
+  padding:clamp(56px,10vh,120px) 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+/* ---- status line ---- */
+.status{
+  margin:0;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--ink-soft);
+  text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
+}
+.status .dot{
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 0 3px rgba(225,6,0,.14), 0 0 12px rgba(225,6,0,.55);
+  flex:none;
+  animation:breathe 4.2s ease-in-out infinite;
+}
+@keyframes breathe{
+  0%,100%{opacity:.55; box-shadow:0 0 0 3px rgba(225,6,0,.10), 0 0 10px rgba(225,6,0,.40)}
+  50%{opacity:1; box-shadow:0 0 0 4px rgba(225,6,0,.18), 0 0 16px rgba(225,6,0,.70)}
+}
+
+/* ---- wordmark ---- */
+.wordmark{
+  margin:clamp(22px,4.5vh,40px) 0 0;
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(4.1rem,16.6vw,6.2rem);
+  line-height:.84;
+  letter-spacing:-.015em;
+  color:var(--ink);
+  text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
+  text-wrap:balance;
+}
+.wordmark .l{display:block}
+.wordmark sup{
+  font-family:var(--body);
+  font-size:.24em;
+  font-weight:400;
+  letter-spacing:0;
+  vertical-align:.85em;
+  margin-left:.06em;
+  color:var(--ink-soft);
+}
+
+@media (min-width:620px){
+  .wordmark{font-size:clamp(3.6rem,10.6vw,9.4rem); line-height:.88}
+  .wordmark .l{display:inline}
+}
+
+/* ---- handle ---- */
+.handle{
+  margin:clamp(18px,3.6vh,30px) 0 0;
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:.1em;
+  color:var(--muted);
+  text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
+}
+
+/* ---- rule ---- */
+.rule{
+  width:min(420px,72vw);
+  height:1px;
+  margin:clamp(30px,6vh,52px) auto clamp(26px,5vh,44px);
+  background:linear-gradient(90deg,transparent,var(--line-strong) 18%,var(--line-strong) 82%,transparent);
+  position:relative;
+}
+.rule::after{
+  content:"";
+  position:absolute;
+  left:50%; top:-1px;
+  transform:translateX(-50%);
+  width:44px; height:2px;
+  background:var(--red);
+}
+
+/* ---- the two doors ---- */
+.doors{
+  width:100%;
+  max-width:700px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+/* six doors, three even rows of two — no wide row, no empty cell */
+@media (min-width:600px){
+  .doors{grid-template-columns:1fr 1fr; gap:14px}
+  .doors .door{grid-column:auto}
+}
+.door{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:17px 20px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:rgba(255,255,255,.014);
+  color:var(--ink);
+  text-decoration:none;
+  transition:border-color .24s var(--ease), background .24s var(--ease), transform .24s var(--ease);
+}
+.door-label{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(1.45rem,2.4vw,1.75rem);
+  line-height:1;
+  letter-spacing:.005em;
+  text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
+}
+.door .icon{
+  flex:none;
+  color:var(--muted);
+  transition:color .24s var(--ease), transform .24s var(--ease);
+}
+.door:hover,.door:focus-visible{
+  border-color:var(--red);
+  background:rgba(225,6,0,.055);
+  transform:translateY(-2px);
+}
+.door:hover .icon,.door:focus-visible .icon{
+  color:var(--red-bright);
+  transform:translate(2px,-2px);
+}
+
+:focus-visible{outline:2px solid var(--red-bright); outline-offset:3px; border-radius:4px}
+.door:focus-visible{outline-offset:2px}
+
+@media (max-width:620px){
+  /* On a phone the duck is the subject, not wallpaper: whole silhouette in frame,
+     scaled up, lifted out of the black, and held behind the column. */
+  /* 109% box, pulled back 4.5% each way: the duck draws ~9% larger than a plain contain.
+     110% is the hard ceiling on a 390 viewport — past it the bill and tail tip over the
+     screen edges, and the whole silhouette is the point. width/height are set explicitly
+     because the base rule's 100% would otherwise win and a bare negative inset would only
+     shift the frame instead of scaling it. */
+  .room .duck{inset:-4.5%; width:109%; height:109%; object-fit:contain; object-position:50% 46%; opacity:.88}
+  .haze{
+    background:
+      linear-gradient(180deg, rgba(5,5,5,.58) 0%, rgba(5,5,5,.16) 22%, rgba(5,5,5,.26) 46%, rgba(5,5,5,.22) 62%, rgba(5,5,5,.14) 82%, rgba(5,5,5,.74) 100%),
+      /* one tight scrim, clamped to the text block (wordmark + handle, ~27%-51% down)
+         instead of two broad radials that stack to ~71% coverage and grey the duck out.
+         Peak .34 is all 65px bold white needs; below the handle the duck is uncovered. */
+      radial-gradient(68% 24% at 50% 39%, rgba(5,5,5,.34) 0%, rgba(5,5,5,.26) 58%, rgba(5,5,5,0) 100%);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important}
+  .door:hover,.door:focus-visible{transform:none}
+  .room .duck{animation:none; transform:none}
+}
+
+/* ---- one rubber duck header — same as listening-room.html ---- */
+@font-face{font-family:'TRD Steelfish';src:url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'TRD Courier';src:url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+.banner{background:#000;color:#fff;position:relative;z-index:200;border-bottom:1px solid #2a1d10;box-shadow:0 1px 0 rgba(255,200,100,.18),0 10px 30px rgba(0,0,0,.7)}
+.banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
+.banner img{height:92px;width:auto;display:block}
+.banner .wm{font-family:'TRD Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;font-size:96px;line-height:.9;letter-spacing:-.01em;margin:0;white-space:nowrap}
+.banner .wm a{color:#fff;text-decoration:none}
+.banner .wm sup{font-size:.28em;vertical-align:1.6em;margin-left:2px}
+.banner .meta{display:flex;flex-direction:column;gap:6px;font-family:'TRD Courier','Courier Prime',monospace;font-size:15px;line-height:1.2}
+.banner .meta a{color:#ffe2a0}
+.banner .meta .handle{color:#b9ab8c}
+@media (max-width:760px){
+  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+  .banner img{height:62px}
+  .banner .wm{font-size:58px}
+  .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
+}
+</style>
+<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="banner">
+  <div class="banner-in">
+    <img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck">
+    <h1 class="wm"><a href="/">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
+    <div class="meta">
+      <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
+      <a href="/ledger.html">The Drop Ledger</a>
+      <a href="/album.html">The Red Pill Album</a>
+    </div>
+  </div>
+</header>
+
+
+<div class="room" aria-hidden="true">
+  <picture>
+    <source srcset="images/brand/duck-hero-soft.webp" type="image/webp">
+    <img class="duck" src="images/brand/duck-hero-soft.png" alt="" width="1178" height="1011" decoding="async" fetchpriority="high">
+  </picture>
+  <span class="haze"></span>
+</div>
+
+<main class="stage">
+
+  <p class="status"><span class="dot" aria-hidden="true"></span>Coming soon</p>
+
+  <h1 class="wordmark"><span class="l">THE RUBBER</span> <span class="l">DUCK<sup>™</sup></span></h1>
+
+  <p class="handle">@TheRubberDuck79</p>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <nav class="doors" aria-label="Sites">
+    <a class="door" href="videos.html">
+      <span class="door-label">Videos</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
+    </a>
+    <a class="door" href="listening-room.html">
+      <span class="door-label">The Listening Room</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
+    </a>
+    <a class="door" href="/Qdrops/">
+      <span class="door-label">Q Drops</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
+    </a>
+    <a class="door" href="ledger.html">
+      <span class="door-label">The Drop Ledger</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
+    </a>
+    <a class="door" href="album.html">
+      <span class="door-label">The Red Pill Album</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
+    </a>
+    <a class="door" href="memes.html">
+      <span class="door-label">The Meme Dump</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
+    </a>
+  </nav>
+
+</main>
+
+</body>
+</html>

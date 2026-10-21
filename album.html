@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Red Pill Album — The Rubber Duck™</title>
+<meta name="description" content="The Red Pill Album by The Rubber Duck™ — 22 tracks, released 30 April 2026. Play the whole record — 22 tracks, straight through — then buy or download it on Apple Music, or stream it on Spotify.">
+<!-- Icons: Lucide — ISC — https://github.com/lucide-icons/lucide -->
+<style>
+/* The album's own type — self-hosted, no font CDN. */
+@font-face{font-family:'RedPillDisplay';src:url('fonts/Steelfish Bd.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'RedPillDisplay';src:url('fonts/Steelfish Rg.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'RedPillBody';src:url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'RedPillBody';src:url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'RedPillBody';src:url('fonts/Roboto-Black.ttf') format('truetype');font-weight:900;font-style:normal;font-display:swap}
+:root,html[data-theme="dark"]{
+  --bg:#050505; --surface-1:#0B0B0B; --surface-2:#141414;
+  --border:#2A1212; --text:#FFFFFF; --muted:#B9B9B9;
+  --accent:#E10600; --accent-hover:#FF2D33; --accent-ink:#FF3B41;
+  --accent-2:#1A0808; --on-accent:#FFFFFF;
+  /* --accent-deep: the filled-button hover. #FF2D33 under white ink is 3.7:1,
+     so the fill steps DOWN and the glow steps up — white stays at 5.9:1. */
+  --accent-deep:#C00500;
+  --duck-red:#FF2D33; --duck-red-glow:rgba(255,45,51,.42);
+  --btn:#E10600; --btn-hover:#FF2D33;
+  --font-display:'RedPillDisplay', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-body:'RedPillBody', 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --maxw:1200px; --nav-h:84px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:500;letter-spacing:-.02em;line-height:1.08;margin:0}
+p{margin:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+::selection{background:var(--accent);color:#FFFFFF}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+
+.skip{position:absolute;left:-9999px;top:0;background:var(--text);color:var(--bg);padding:12px 18px;z-index:200;border-radius:0 0 10px 0}
+.skip:focus{left:0}
+
+.al-wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,32px)}
+.eyebrow{
+  font-size:16px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
+  color:var(--muted);display:flex;align-items:center;gap:12px;
+  font-family:var(--font-display);
+}
+
+/* ---------- reveal (visible by default; JS only dims what is still below the fold) ---------- */
+.rv{opacity:1;transform:none}
+.rv[data-rv="wait"]{opacity:0;transform:translateY(14px)}
+.rv[data-rv="in"]{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .6s var(--ease)}
+@media (prefers-reduced-motion: reduce){
+  .rv,.rv[data-rv="wait"],.rv[data-rv="in"]{opacity:1!important;transform:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ================= NAV (same pill as ledger.html) ================= */
+.e3-nav-pill{
+  --_a:var(--accent);--_s:var(--surface-1);--_t:var(--text);--_m:var(--muted);
+  --_on:var(--on-accent);--_fd:var(--font-display);--_e:var(--ease);
+  position:sticky;top:0;z-index:60;display:flex;justify-content:center;padding:14px 12px;
+}
+.e3-nav-pill .k-pill{pointer-events:auto;position:relative;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 14px;background:rgba(5,5,5,.92);border:1px solid var(--border);border-radius:6px;box-shadow:0 18px 50px -24px #000,inset 0 1px 0 rgba(225,6,0,.08);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4)}
+.e3-nav-pill .k-brand{display:inline-flex;align-items:center;gap:8px;margin-right:10px;text-decoration:none;color:var(--text);font-family:var(--font-display)}
+.e3-nav-pill .k-logo{display:block;height:30px}
+.e3-nav-pill .k-logo svg{height:100%;width:auto;display:block}
+.e3-nav-pill .k-logo tspan{fill:#FF2D33} /* the dot is text: #E10600 is 4.10:1 on black, this is 5.51:1 */
+.e3-nav-pill .k-links{position:relative;display:flex;margin:0;padding:0;list-style:none}
+.e3-nav-pill .k-ind{position:absolute;top:0;left:0;width:0;height:100%;border-radius:4px;background:rgba(225,6,0,.1);opacity:0;transition:left .45s var(--_e),width .45s var(--_e),opacity .3s;pointer-events:none}
+.e3-nav-pill .k-links a{position:relative;display:flex;align-items:center;height:44px;padding:0 15px;border-radius:999px;color:var(--muted);text-decoration:none;font-family:var(--font-display);font-size:15px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transition:color .25s}
+.e3-nav-pill .k-links a:hover,.e3-nav-pill .k-links a.k-current{color:var(--accent-ink)}
+.e3-nav-pill .k-cta{display:inline-flex;align-items:center;gap:8px;height:44px;margin-left:8px;padding:0 18px;border-radius:4px;background:var(--accent);border:1px solid var(--accent);color:var(--on-accent);text-decoration:none;white-space:nowrap;font-family:var(--font-display);font-size:13.5px;letter-spacing:.06em;text-transform:uppercase;transition:transform .3s var(--_e),box-shadow .3s,background .25s}
+.e3-nav-pill .k-cta:hover{background:var(--accent-deep);border-color:var(--accent-hover);box-shadow:0 0 26px rgba(225,6,0,.38)}
+.e3-nav-pill .k-cta svg{width:15px;height:15px;transition:transform .3s var(--_e)}
+.e3-nav-pill .k-cta:hover svg{transform:translateX(3px)}
+@media(max-width:1040px){
+  .e3-nav-pill .k-links{display:none}
+  .e3-nav-pill .k-pill{width:100%;justify-content:space-between;gap:8px;padding-left:10px}
+}
+@media(max-width:430px){
+  .e3-nav-pill{padding:10px 8px}
+  .e3-nav-pill .k-logo{height:26px}
+  .e3-nav-pill .k-cta{padding:0 12px;font-size:12px;letter-spacing:.04em;gap:6px}
+  .e3-nav-pill .k-cta svg{width:13px;height:13px}
+}
+@media(prefers-reduced-motion:reduce){.e3-nav-pill .k-ind,.e3-nav-pill .k-cta,.e3-nav-pill .k-cta svg{transition:none}}
+
+/* ================= HERO ================= */
+.al-hero{padding:clamp(14px,2.4vw,26px) 0 clamp(22px,3vw,34px);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.al-hero .al-wrap{position:relative;z-index:1}
+.al-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,394px);gap:clamp(32px,5vw,72px);align-items:center}
+@media(max-width:899px){.al-grid{grid-template-columns:1fr;gap:24px}.al-hero{padding-bottom:18px}}
+
+.al-hero .eyebrow{margin-bottom:clamp(12px,1.7vw,18px)}
+.al-hero .eyebrow .caret{
+  width:9px;height:15px;background:var(--accent);display:inline-block;flex:none;
+  box-shadow:0 0 12px rgba(225,6,0,.55);
+  animation:al-blink 1.15s steps(1,end) infinite;
+}
+@keyframes al-blink{0%,49%{opacity:1}50%,100%{opacity:.12}}
+@media(prefers-reduced-motion:reduce){.al-hero .eyebrow .caret{animation:none}}
+
+.al-hero h1{
+  font-size:clamp(2.35rem,6.6vw,4.9rem);line-height:.98;letter-spacing:-.03em;
+  color:var(--text);max-width:14ch;overflow-wrap:break-word;
+}
+.al-artist{
+  margin-top:14px;font-family:var(--font-display);font-size:clamp(1.15rem,2vw,1.5rem);
+  color:var(--text);letter-spacing:.01em;
+}
+.al-hero-lede{margin-top:14px;color:var(--muted);font-size:clamp(1rem,.95rem+.25vw,1.12rem);max-width:46ch}
+.al-hero-lede b{color:var(--text);font-weight:500}
+.al-meta{
+  margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 20px;
+  font-family:var(--font-display);font-size:14px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+}
+.al-meta span{display:inline-flex;align-items:center;gap:8px}
+.al-meta span::before{content:"";width:6px;height:6px;background:var(--accent-ink);flex:none}
+
+/* framed cover — generous margins, not edge to edge */
+.al-plate{margin:0;padding:clamp(14px,2vw,22px);background:var(--surface-1);border:1px solid var(--border);border-radius:4px;position:relative;max-width:394px}
+.al-plate img{width:100%;height:auto;border-radius:2px;aspect-ratio:1/1;object-fit:cover;background:var(--surface-2)}
+.al-plate figcaption{
+  margin:12px 2px 2px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-family:var(--font-display);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+.al-hero-copy .al-hero-cta{margin-top:clamp(22px,2.6vw,30px)}
+.al-hero-cta .al-cta-note{flex:0 0 100%;margin:2px 0 0;max-width:38ch;font-size:12.5px;line-height:1.45;color:var(--muted)}
+
+/* ================= STATEMENT ================= */
+.al-statement{padding:clamp(24px,3.2vw,42px) 0;border-bottom:1px solid var(--border);background:var(--surface-1)}
+.al-quote{
+  margin-top:clamp(14px,2vw,22px);
+  font-size:clamp(1.75rem,4.6vw,3.4rem);line-height:1.1;letter-spacing:-.03em;
+  color:var(--text);max-width:22ch;font-weight:500;
+}
+.al-quote .qm{color:var(--accent-ink);font-size:.5em;vertical-align:.42em;letter-spacing:0}
+.al-attr{
+  margin-top:clamp(14px,2vw,20px);font-family:var(--font-display);
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+}
+.al-attr b{color:var(--text);font-weight:500}
+
+/* ================= TRACKLIST ================= */
+.al-tracks{padding:clamp(24px,3.2vw,42px) 0;border-bottom:1px solid var(--border)}
+.al-tracks-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(16px,2.2vw,26px)}
+.al-tracks h2{font-size:clamp(1.6rem,3.4vw,2.4rem);margin-top:14px;letter-spacing:-.025em}
+/* the one red element on this page */
+.al-count{display:flex;align-items:baseline;gap:10px;font-family:var(--font-display)}
+.al-count .n{
+  font-size:clamp(2.5rem,5.4vw,3.4rem);line-height:.86;font-weight:600;letter-spacing:-.04em;
+  color:var(--duck-red);text-shadow:0 0 34px var(--duck-red-glow);
+}
+.al-count .l{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+.al-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--border)}
+.al-list li{
+  position:relative;display:flex;align-items:center;gap:clamp(12px,2vw,22px);
+  padding:clamp(11px,1.5vw,15px) clamp(6px,1vw,12px);
+  border-bottom:1px solid var(--border);
+  transition:background .22s var(--ease),color .22s var(--ease);
+}
+.al-list li:hover,.al-list li:focus-within{background:var(--surface-2)}
+.al-list .tn{
+  flex:0 0 3.2ch;font-family:var(--font-display);font-size:13px;letter-spacing:.02em;
+  color:#B9B9B9;font-variant-numeric:tabular-nums;transition:color .22s var(--ease);
+}
+.al-list li:hover .tn{color:var(--accent-ink)}
+.al-list .tt{
+  flex:1 1 auto;min-width:0;font-family:var(--font-body);font-size:clamp(15px,.95rem+.15vw,16.5px);
+  color:var(--text);line-height:1.4;overflow-wrap:break-word;
+}
+.al-list .td{
+  flex:none;font-family:var(--font-display);font-size:13px;color:#B9B9B9;
+  font-variant-numeric:tabular-nums;letter-spacing:.04em;
+}
+/* ---- track player ---- */
+.tr-btn{
+  flex:0 0 34px;width:34px;height:34px;display:grid;place-items:center;padding:0;position:relative;
+  background:transparent;border:1px solid var(--border);border-radius:50%;color:var(--text);cursor:pointer;
+  transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease),transform .2s var(--ease);
+}
+.tr-btn::after{content:"";position:absolute;inset:-5px;border-radius:50%}
+.tr-btn:hover{border-color:var(--accent);color:var(--accent-ink);transform:scale(1.06)}
+.tr-btn:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+.tr-btn svg{width:13px;height:13px;display:block}
+.tr-btn .i-pause{display:none}
+.tr.is-playing .tr-btn{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tr.is-playing .tr-btn:hover{background:var(--accent-deep)}
+.tr.is-playing .i-play{display:none}
+.tr.is-playing .i-pause{display:block}
+.tr.is-playing .tn{color:var(--accent-ink)}
+.tr-track{position:absolute;left:0;right:0;bottom:-1px;height:2px;pointer-events:none}
+.tr-fill{display:block;height:100%;width:0;background:var(--accent-ink);transition:width .15s linear}
+.tr.is-playing .tr-track{background:rgba(255,59,65,.16)}
+.al-tracks-note{margin-top:12px;color:var(--muted);font-size:14.5px;max-width:56ch}
+@media(prefers-reduced-motion:reduce){.tr-btn,.tr-fill{transition:none}.tr-btn:hover{transform:none}}
+@media(max-width:520px){
+  .al-list li{gap:9px;padding:12px 2px}
+  .al-list .tn{flex-basis:2.8ch;font-size:12.5px}
+  .al-list .tt{font-size:15px;flex:1 1 0}
+  .al-list .td{font-size:12.5px;letter-spacing:0}
+  .tr-btn{flex:0 0 38px;width:38px;height:38px}
+  .tr-btn::after{inset:-3px}
+}
+
+/* ================= FACTS ================= */
+.al-facts{padding:clamp(20px,2.6vw,32px) 0;border-bottom:1px solid var(--border);background:var(--surface-1)}
+.al-facts dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:0;background:var(--border);border:1px solid var(--border)}
+.al-facts dl > div{background:var(--bg);padding:clamp(14px,1.8vw,20px) clamp(14px,2vw,20px)}
+.al-facts dt{font-family:var(--font-display);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.al-facts dd{margin:10px 0 0;font-family:var(--font-display);font-size:clamp(.95rem,1.7vw,1.25rem);color:var(--text);letter-spacing:-.01em;overflow-wrap:anywhere}
+@media(max-width:720px){.al-facts dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ================= LISTEN ================= */
+.al-listen{padding:clamp(24px,3.2vw,42px) 0}
+.al-listen h2{font-size:clamp(1.6rem,3.4vw,2.2rem);margin-top:14px}
+.al-listen p.al-note{margin-top:14px;color:var(--muted);font-size:14.5px;max-width:52ch}
+.al-listen p.al-note+p.al-note{margin-top:6px}
+/* The album-sale bonus — Duck's own line, given its own plate so it is not read past. */
+.al-bonus{
+  margin-top:20px;max-width:52ch;padding:16px 20px 17px 20px;
+  background:var(--surface-1);border:1px solid var(--border);border-left:4px solid var(--accent);
+  border-radius:0 10px 10px 0;
+}
+.al-bonus-label{
+  margin:0;font-family:var(--font-display);font-size:12.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent-ink);
+}
+.al-bonus-line{margin:8px 0 0;color:var(--text);font-size:clamp(1.02rem,1.6vw,1.15rem);line-height:1.5}
+.al-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(18px,2vw,24px)}
+.al-btn{
+  display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:0 24px;
+  font-family:var(--font-display);font-size:14px;letter-spacing:.09em;text-transform:uppercase;
+  text-decoration:none;border-radius:4px;transition:transform .25s var(--ease),background .25s,border-color .25s,box-shadow .25s;
+}
+.al-btn svg{width:15px;height:15px}
+.al-btn:hover{transform:translateY(-2px)}
+.al-btn:active{transform:translateY(0)}
+.al-btn-primary{background:var(--accent);border:1px solid var(--accent);color:var(--on-accent);font-weight:600}
+.al-btn-primary:hover{background:var(--accent-deep);border-color:var(--accent-hover);box-shadow:0 0 30px rgba(225,6,0,.38)}
+.al-btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.al-btn-ghost:hover{border-color:var(--accent);color:var(--accent-ink)}
+@media(max-width:520px){.al-links .al-btn{width:100%;justify-content:center}}
+@media(prefers-reduced-motion:reduce){.al-btn{transition:none}.al-btn:hover{transform:none}}
+
+/* ================= ARTIST AVATAR ================= */
+.al-artist{display:flex;align-items:center;gap:12px}
+.al-ava{
+  width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none;background:var(--surface-2);
+  border:1px solid var(--border);
+  box-shadow:0 0 0 1px rgba(255,45,51,.16),0 0 26px rgba(225,6,0,.18);
+}
+.al-attr{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.al-attr .al-ava{width:30px;height:30px;box-shadow:0 0 0 1px rgba(225,6,0,.12),0 0 18px rgba(225,6,0,.14)}
+
+/* ================= THE SHINE — the specular off the pill ================= */
+.al-shine{position:relative;overflow:hidden;border-radius:2px;isolation:isolate;background:var(--surface-2);line-height:0}
+.al-shine img{display:block;width:100%;height:auto;position:relative;z-index:0}
+.al-shine::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(178deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 28%);
+}
+.al-shine::after{
+  content:"";position:absolute;z-index:3;pointer-events:none;top:-70%;left:0;width:44%;height:240%;
+  background:linear-gradient(96deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.16) 37%,rgba(255,255,255,.5) 50%,rgba(255,255,255,.16) 63%,rgba(255,255,255,0) 80%);
+  transform:rotate(10deg) translate3d(-180%,0,0);
+  transition:transform 1.05s var(--ease);
+  mix-blend-mode:screen;filter:blur(6px);
+}
+.al-shine:hover::after,.al-shine:focus-within::after{transform:rotate(10deg) translate3d(340%,0,0)}
+@media(prefers-reduced-motion:reduce){.al-shine::after{display:none}}
+
+/* ================= VINYL — full bleed, image only ================= */
+.al-vinyl{position:relative;overflow:hidden;border-bottom:1px solid var(--border);background:#050505;line-height:0}
+.al-vinyl-media{line-height:0}
+.al-vinyl-media img{width:100%;height:auto;aspect-ratio:1800/1200;object-fit:cover;object-position:center;display:block}
+
+/* ================= ARTWORK ================= */
+.al-art{padding:clamp(24px,3.2vw,42px) 0;border-bottom:1px solid var(--border)}
+.al-art-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;margin-bottom:clamp(16px,2.2vw,26px)}
+.al-art-head h2{font-size:clamp(1.6rem,3.4vw,2.4rem);margin-top:14px;letter-spacing:-.025em}
+.al-art-note{color:var(--muted);font-size:14.5px;max-width:42ch;line-height:1.6}
+.al-art-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.8vw,20px)}
+@media(max-width:760px){.al-art-grid{grid-template-columns:1fr}}
+.al-art-fig{margin:0;padding:clamp(10px,1.3vw,16px);background:var(--surface-1);border:1px solid var(--border);border-radius:4px}
+.al-art-fig .al-shine{aspect-ratio:1/1}
+.al-art-fig .al-shine img{height:100%;object-fit:cover}
+.al-art-fig figcaption{
+  margin:12px 2px 2px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  font-family:var(--font-display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+}
+/* touch: the sweep runs once on tap / keyboard focus, hover version untouched */
+@keyframes al-sweep{from{transform:rotate(10deg) translate3d(-180%,0,0)}to{transform:rotate(10deg) translate3d(340%,0,0)}}
+@media(hover:none){
+  .al-art-fig:active .al-shine::after,.al-art-fig:focus-within .al-shine::after{animation:al-sweep 1.05s var(--ease) 1}
+}
+
+
+/* ---- one rubber duck header — same as listening-room.html ---- */
+@font-face{font-family:'TRD Steelfish';src:url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'TRD Courier';src:url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+.banner{background:#000;color:#fff;position:relative;z-index:200;border-bottom:1px solid #2a1d10;box-shadow:0 1px 0 rgba(255,200,100,.18),0 10px 30px rgba(0,0,0,.7)}
+.banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
+.banner img{height:92px;width:auto;display:block}
+.banner .wm{font-family:'TRD Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;font-size:96px;line-height:.9;letter-spacing:-.01em;margin:0;white-space:nowrap}
+.banner .wm a{color:#fff;text-decoration:none}
+.banner .wm sup{font-size:.28em;vertical-align:1.6em;margin-left:2px}
+.banner .meta{display:flex;flex-direction:column;gap:6px;font-family:'TRD Courier','Courier Prime',monospace;font-size:15px;line-height:1.2}
+.banner .meta a{color:#ffe2a0}
+.banner .meta .handle{color:#b9ab8c}
+@media (max-width:760px){
+  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+  .banner img{height:62px}
+  .banner .wm{font-size:58px}
+  .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
+}
+</style>
+<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="banner">
+  <div class="banner-in">
+    <img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck">
+    <h1 class="wm"><a href="/">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
+    <div class="meta">
+      <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
+      <a href="/ledger.html">The Drop Ledger</a>
+      <a href="/album.html">The Red Pill Album</a>
+    </div>
+  </div>
+</header>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<section class="e3 e3-nav-pill" aria-label="Site navigation">
+  <nav class="k-pill" aria-label="Primary">
+    <a class="k-brand" href="ledger.html">
+      <span class="k-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 207 40" height="40" role="img" aria-label="Red Pill Album" style="color:inherit"><text x="0" y="20" dy=".36em" font-family="RedPillDisplay, 'JetBrains Mono', ui-monospace, monospace" font-size="22" font-weight="600" letter-spacing="-0.02em" fill="currentColor">Red Pill Album<tspan fill="#FF2D33">.</tspan></text></svg></span>
+    </a>
+    <div class="k-links">
+      <span class="k-ind" aria-hidden="true"></span>
+      <a href="ledger.html#archive">The record</a>
+      <a href="ledger.html#calendar">Calendar</a>
+      <a href="ledger.html#chronology">Chronology</a>
+      <a href="ledger.html#method">Method</a>
+      <a href="album.html" aria-current="page">Album</a>
+      <a href="process.html">Process</a>
+    </div>
+    <a class="k-cta" href="ledger.html#archive"><b>Search the ledger</b><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg></a>
+  </nav>
+</section>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="al-hero" aria-labelledby="album-title">
+    <div class="al-wrap">
+      <div class="al-grid">
+        <div class="al-hero-copy">
+          <p class="eyebrow"><span class="caret" aria-hidden="true"></span>THE RED PILL ALBUM · <span style="white-space:nowrap">EASTBOUND &amp; DOWN</span></p>
+          <h1 id="album-title">THE RED PILL ALBUM</h1>
+          <p class="al-artist"><img class="al-ava" src="images/duck-avatar.jpg" width="52" height="52" alt="The Rubber Duck™" decoding="async">The Rubber Duck™</p>
+          <p class="al-hero-lede"><b>22 tracks</b>, released 30 April 2026.</p>
+          <p class="al-meta">
+            <span>Singer/Songwriter · World</span>
+            <span>UPC 825324557449</span>
+          </p>
+          <div class="al-links al-hero-cta">
+            <a class="al-btn al-btn-primary" href="https://music.apple.com/us/album/the-red-pill-album/1896233683" rel="noopener">Buy on Apple Music<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8"/></svg></a>
+            <a class="al-btn al-btn-ghost" href="https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4" rel="noopener">Listen on Spotify<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8"/></svg></a>
+            <p class="al-cta-note">Buying the whole album earns The Rubber Duck™ a bonus on every sale — and that helps.</p>
+          </div>
+        </div>
+
+        <figure class="al-plate">
+          <div class="al-shine"><picture style="display:contents"><source type="image/webp" srcset="images/opt/album-cover-card.webp"><img src="images/opt/album-cover-card.jpg" width="2400" height="2400" fetchpriority="high" alt="Cover of The Red Pill Album: a glossy red capsule pill on a scratched black sleeve, with “Red Pill” lettered at the top, “Album” at the bottom and The Rubber Duck™ in the lower right corner."></picture></div>
+          <figcaption><span>The Red Pill Album</span><span>Eastbound &amp; Down</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATEMENT ================= -->
+  <section class="al-statement rv" aria-labelledby="statement-title">
+    <div class="al-wrap">
+      <p class="eyebrow">In the artist's words</p>
+      <h2 class="al-quote" id="statement-title"><span class="qm" aria-hidden="true">“</span>I may be wrong, but I'm not lying.<span class="qm" aria-hidden="true">”</span></h2>
+      <p class="al-attr"><img class="al-ava" src="images/duck-avatar.jpg" width="30" height="30" alt="" loading="lazy" decoding="async"><span>— <b>The Rubber Duck™</b>, on <cite>The Red Pill Album</cite></span></p>
+    </div>
+  </section>
+
+  <!-- ================= TRACKLIST ================= -->
+  <section class="al-tracks" id="tracklist" aria-labelledby="tracks-title">
+    <div class="al-wrap">
+      <div class="al-tracks-head">
+        <div>
+          <p class="eyebrow">The tracklist</p>
+          <h2 id="tracks-title">Every track, in order</h2>
+            <p class="al-tracks-note">Press play on any track to hear the full song — it runs straight on into the next, right through the record.</p>
+        </div>
+        <p class="al-count" aria-label="22 tracks"><span class="n">22</span><span class="l">tracks</span></p>
+      </div>
+
+      <ol class="al-list">
+        <li class="tr" data-preview="audio/01-and-frogs-to-destroy-them.mp3" data-title="And Frogs To Destroy Them">
+          <span class="tn">01</span>
+          <button class="tr-btn" type="button" aria-label="Play track: And Frogs To Destroy Them" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">And Frogs To Destroy Them</span>
+          <span class="td">2:36</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/02-boom-boom-boom.mp3" data-title="Boom, Boom, Boom">
+          <span class="tn">02</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Boom, Boom, Boom" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Boom, Boom, Boom</span>
+          <span class="td">3:23</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/03-dark-to-light.mp3" data-title="Dark to Light">
+          <span class="tn">03</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Dark to Light" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Dark to Light</span>
+          <span class="td">2:50</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/04-enjoy-the-show.mp3" data-title="Enjoy The Show">
+          <span class="tn">04</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Enjoy The Show" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Enjoy The Show</span>
+          <span class="td">4:46</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/05-follow-marina-abramovic.mp3" data-title="Follow Marina Abramovic">
+          <span class="tn">05</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Follow Marina Abramovic" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Follow Marina Abramovic</span>
+          <span class="td">3:03</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/06-full-control.mp3" data-title="Full Control">
+          <span class="tn">06</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Full Control" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Full Control</span>
+          <span class="td">3:19</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/07-god-wins.mp3" data-title="GOD WINS">
+          <span class="tn">07</span>
+          <button class="tr-btn" type="button" aria-label="Play track: GOD WINS" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">GOD WINS</span>
+          <span class="td">2:39</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/08-military-intelligence.mp3" data-title="Military Intelligence">
+          <span class="tn">08</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Military Intelligence" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Military Intelligence</span>
+          <span class="td">3:38</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/09-mockingbird.mp3" data-title="Mockingbird">
+          <span class="tn">09</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Mockingbird" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Mockingbird</span>
+          <span class="td">4:56</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/10-q-clearance-patriot.mp3" data-title="Q Clearance Patriot">
+          <span class="tn">10</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Q Clearance Patriot" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Q Clearance Patriot</span>
+          <span class="td">6:04</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/11-shall-we-play-a-game.mp3" data-title="Shall We Play a Game">
+          <span class="tn">11</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Shall We Play a Game" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Shall We Play a Game</span>
+          <span class="td">2:48</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/12-the-storm-is-upon-us.mp3" data-title="The Storm Is Upon Us">
+          <span class="tn">12</span>
+          <button class="tr-btn" type="button" aria-label="Play track: The Storm Is Upon Us" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">The Storm Is Upon Us</span>
+          <span class="td">2:51</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/13-there-is-no-qanon.mp3" data-title="There is no Qanon">
+          <span class="tn">13</span>
+          <button class="tr-btn" type="button" aria-label="Play track: There is no Qanon" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">There is no Qanon</span>
+          <span class="td">3:37</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/14-trumpxiputin-trump-zee-pootin.mp3" data-title="Trumpxiputin (trump-zee-pootin)">
+          <span class="tn">14</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Trumpxiputin (trump-zee-pootin)" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Trumpxiputin (trump-zee-pootin)</span>
+          <span class="td">3:49</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/15-very-dangerous-animal.mp3" data-title="Very Dangerous Animal">
+          <span class="tn">15</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Very Dangerous Animal" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Very Dangerous Animal</span>
+          <span class="td">4:33</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/16-welcome-to-epstein-island.mp3" data-title="Welcome To Epstein Island">
+          <span class="tn">16</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Welcome To Epstein Island" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Welcome To Epstein Island</span>
+          <span class="td">3:24</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/17-what-happened-to-diana.mp3" data-title="What happened to Diana">
+          <span class="tn">17</span>
+          <button class="tr-btn" type="button" aria-label="Play track: What happened to Diana" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">What happened to Diana</span>
+          <span class="td">3:54</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/18-what-makes-a-movie-good.mp3" data-title="What makes a movie GOOD">
+          <span class="tn">18</span>
+          <button class="tr-btn" type="button" aria-label="Play track: What makes a movie GOOD" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">What makes a movie GOOD</span>
+          <span class="td">3:04</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/19-who-follows-satan.mp3" data-title="Who Follows Satan">
+          <span class="tn">19</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Who Follows Satan" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Who Follows Satan</span>
+          <span class="td">2:31</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/20-who-is-rachel-c-handler.mp3" data-title="Who is Rachel (C)handler">
+          <span class="tn">20</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Who is Rachel (C)handler" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Who is Rachel (C)handler</span>
+          <span class="td">3:24</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/21-wizards-warlocks.mp3" data-title="Wizards &amp; Warlocks">
+          <span class="tn">21</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Wizards &amp; Warlocks" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Wizards &amp; Warlocks</span>
+          <span class="td">3:44</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+        <li class="tr" data-preview="audio/22-alice-in-wonderland.mp3" data-title="Alice in Wonderland">
+          <span class="tn">22</span>
+          <button class="tr-btn" type="button" aria-label="Play track: Alice in Wonderland" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
+          <span class="tt">Alice in Wonderland</span>
+          <span class="td">6:26</span>
+          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= VINYL ================= -->
+  <section class="al-vinyl rv" id="vinyl" aria-label="The album on vinyl">
+    <div class="al-vinyl-media">
+      <picture style="display:contents"><source type="image/webp" srcset="images/opt/album-vinyl-band.webp"><img src="images/opt/album-vinyl-band.jpg" width="1400" height="933" loading="lazy" decoding="async" alt="A black turntable with a stack of Red Pill Album sleeves and a vinyl record beside it on a grey surface."></picture>
+    </div>
+  </section>
+
+  <!-- ================= ARTWORK ================= -->
+  <section class="al-art rv" id="artwork" aria-labelledby="art-title">
+    <div class="al-wrap">
+      <div class="al-art-head">
+        <div>
+          <p class="eyebrow">The artwork</p>
+          <h2 id="art-title">One pill, pressed on black</h2>
+        </div>
+        <p class="al-art-note">Cover and the record itself — the same red, two ways. Move across a plate, or tap one, to catch the shine.</p>
+      </div>
+
+      <div class="al-art-grid">
+        <figure class="al-art-fig">
+          <div class="al-shine"><picture style="display:contents"><source type="image/webp" srcset="images/opt/plate-cover-large.webp"><img src="images/opt/plate-cover-large.jpg" width="2800" height="2800" loading="lazy" decoding="async" alt="The Red Pill Album front cover: a glossy red capsule pill centred on a scratched black background, with “Red Pill” above it and “Album” below."></picture></div>
+          <figcaption><span>Front cover</span><span>The Red Pill Album</span></figcaption>
+        </figure>
+
+        <figure class="al-art-fig">
+          <div class="al-shine"><picture style="display:contents"><source type="image/webp" srcset="images/opt/plate-record-large.webp"><img src="images/opt/plate-record-large.jpg" width="2800" height="2800" loading="lazy" decoding="async" alt="The record itself: a black vinyl disc inside a clear plastic sleeve, its centre label reading “Red Pill Album” with track listings below."></picture></div>
+          <figcaption><span>The record</span><span>Sleeve and label</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FACTS ================= -->
+  <section class="al-facts rv" aria-label="Release facts">
+    <div class="al-wrap">
+      <dl>
+        <div><dt>Tracks</dt><dd>22</dd></div>
+        <div><dt>Runtime</dt><dd>1 hr 21 min</dd></div>
+        <div><dt>Released</dt><dd>30 Apr 2026</dd></div>
+        <div><dt>UPC</dt><dd>825324557449</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ================= LISTEN ================= -->
+  <section class="al-listen rv" id="listen" aria-labelledby="listen-title">
+    <div class="al-wrap">
+      <p class="eyebrow">Listen</p>
+      <h2 id="listen-title">The record, on its services</h2>
+      <p class="al-note">The whole album plays on this page — all 22 tracks, in order, start to finish. It is on the services too: Apple Music is where you buy or download the record, and Spotify has it to stream.</p>
+      <div class="al-bonus">
+        <p class="al-bonus-label">Buy the full album</p>
+        <p class="al-bonus-line">Buying the whole album earns The Rubber Duck™ a bonus on every sale — and that helps.</p>
+      </div>
+      <div class="al-links">
+        <a class="al-btn al-btn-primary" href="https://music.apple.com/us/album/the-red-pill-album/1896233683" rel="noopener">Buy or download on Apple Music<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="al-btn al-btn-ghost" href="https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4" rel="noopener">Listen on Spotify<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8"/></svg></a>
+        <a class="al-btn al-btn-ghost" href="https://distrokid.com/hyperfollow/therubberduck/the-red-pill-album/" rel="noopener">Every platform<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M9 7h8v8"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+var yrEl=document.getElementById('yr'); if(yrEl) yrEl.textContent=new Date().getFullYear();
+
+/* nav: mark the current page, slide the chip on hover/focus — same behaviour as ledger.html */
+(function(){
+  var root=document.querySelector('.e3-nav-pill'),links=root.querySelector('.k-links'),
+      ind=root.querySelector('.k-ind'),as=[].slice.call(links.querySelectorAll('a')),
+      here=(location.pathname.split('/').pop()||'ledger.html');
+  function moveTo(a){if(!a){ind.style.opacity=0;return;}ind.style.left=a.offsetLeft+'px';ind.style.width=a.offsetWidth+'px';ind.style.opacity=1;}
+  function cur(){return root.querySelector('.k-current');}
+  function current(a){as.forEach(function(x){x.classList.toggle('k-current',x===a);});moveTo(a);}
+  as.forEach(function(a){a.addEventListener('pointerenter',function(){moveTo(a);});a.addEventListener('focus',function(){moveTo(a);});});
+  links.addEventListener('pointerleave',function(){moveTo(cur());});
+  links.addEventListener('focusout',function(){moveTo(cur());});
+  addEventListener('resize',function(){moveTo(cur());});
+  var start=as.filter(function(a){return (a.getAttribute('href')||'').split('#')[0]===here;})[0]||as[0];
+  requestAnimationFrame(function(){current(start);});
+})();
+
+/* reveal: everything is visible; JS only dims what is still below the fold */
+(function(){
+  var rm=matchMedia('(prefers-reduced-motion: reduce)');
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if(rm.matches||!('IntersectionObserver' in window))return;
+  els.forEach(function(el){if(el.getBoundingClientRect().top>innerHeight*0.92)el.setAttribute('data-rv','wait');});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.setAttribute('data-rv','in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){if(el.getAttribute('data-rv')==='wait')io.observe(el);});
+})();
+
+/* tracks: one shared audio element, straight through the album */
+(function(){
+  var rows=[].slice.call(document.querySelectorAll('.al-list .tr'));
+  if(!rows.length)return;
+  var audio=new Audio(); audio.preload='none';
+  var cur=-1;
+  rows.forEach(function(r){var td=r.querySelector('.td');r.dataset.full=td.textContent;});
+  function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
+  function secs(str){var p=(str||'').split(':');return p.length===2?((+p[0])*60+(+p[1]||0)):0;}
+  function paint(){
+    rows.forEach(function(r,i){
+      var on=(i===cur), live=on&&!audio.paused;
+      r.classList.toggle('is-playing',live);
+      var b=r.querySelector('.tr-btn');
+      b.setAttribute('aria-pressed',live?'true':'false');
+      b.setAttribute('aria-label',(live?'Pause track: ':'Play track: ')+r.dataset.title);
+      if(!on){r.querySelector('.tr-fill').style.width='0%';r.querySelector('.td').textContent=r.dataset.full;}
+    });
+  }
+  function play(i){
+    if(i<0||i>=rows.length)return;
+    if(i===cur&&!audio.paused){audio.pause();return;}
+    if(i!==cur){cur=i;audio.src=rows[i].dataset.preview;}
+    var p=audio.play(); if(p&&p.catch)p.catch(function(){paint();});
+  }
+  rows.forEach(function(r,i){r.querySelector('.tr-btn').addEventListener('click',function(){play(i);});});
+  audio.addEventListener('play',paint);
+  audio.addEventListener('pause',paint);
+  audio.addEventListener('ended',function(){if(cur+1<rows.length){play(cur+1);}else{cur=-1;paint();}});
+  audio.addEventListener('timeupdate',function(){
+    if(cur<0)return;
+    var r=rows[cur], known=isFinite(audio.duration)&&audio.duration>0;
+    var total=known?audio.duration:(secs(r.dataset.full)||1);
+    r.querySelector('.tr-fill').style.width=Math.min(100,(audio.currentTime/total)*100)+'%';
+    r.querySelector('.td').textContent=fmt(audio.currentTime)+' / '+(known?fmt(audio.duration):r.dataset.full);
+  });
+})();
+</script>
+</body>
+</html>
