@@ -100,16 +100,17 @@ h1 em{font-style:normal;color:var(--accent-text);
 .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
 .btn.primary:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--accent-ink)}
 .btn[aria-expanded="true"]{border-color:var(--accent);color:var(--accent-text);background:rgba(168,85,247,.22)}
-/* PDF library — its own lane: manila paper, not a filter chip, not a meme tile */
-.btn-pdf{display:inline-flex;align-items:center;gap:8px;background:#E2D2A6;border:1px solid #C4AC74;color:#241A0B;
-  padding:9px 15px;border-radius:9px;text-decoration:none;font-family:var(--body);font-weight:700;font-size:.93rem;
-  letter-spacing:.02em;box-shadow:0 1px 0 rgba(0,0,0,.25),inset 0 0 0 1px rgba(255,255,255,.28);
+/* every control in the bar shares one height so the row sits level, top and bottom */
+.bar-in > .btn,.bar select.sort{box-sizing:border-box;height:40px;display:inline-flex;align-items:center;padding-top:0;padding-bottom:0;line-height:1}
+/* SCIF Reading Room: its own lane, manila folder paper like the homepage door, not a filter chip */
+.btn-scif{gap:8px;background:#E2D2A6;border:1px solid #C4AC74;color:#241A0B;
+  padding:0 15px 0 9px;text-decoration:none;font-weight:700;white-space:nowrap;
+  box-shadow:0 1px 0 rgba(0,0,0,.25),inset 0 0 0 1px rgba(255,255,255,.28);
   transition:background .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease),box-shadow .18s var(--ease)}
-.btn-pdf:hover{background:#EFE0B8;border-color:#8A1B13;color:#241A0B;transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.3)}
-.btn-pdf svg{width:17px;height:17px;flex:0 0 auto}
-.btn-pdf .pdf-kind{font-family:var(--mono,monospace);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
-  border:1px solid rgba(36,26,11,.45);padding:1px 4px;border-radius:3px}
+.btn-scif:hover{background:#EFE0B8;border-color:#8A1B13;color:#241A0B;transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.3)}
+.btn-scif img{width:28px;height:28px;flex:0 0 auto;display:block;border-radius:6px;object-fit:cover;box-shadow:0 0 0 1px rgba(36,26,11,.35)}
 .bar .spacer{margin-left:auto}
+.sortwrap{display:inline-flex;align-items:center;gap:10px}  /* SORT label never strands away from its menu */
 select.sort{background:var(--surface-1);border:1px solid var(--border);color:var(--text);font-family:var(--body);font-weight:600;
   font-size:var(--step--1);padding:10px 12px;border-radius:11px;letter-spacing:.01em}
 select.sort:hover{border-color:var(--accent)}
@@ -162,6 +163,12 @@ main{position:relative;z-index:1}
   .brand span{font-size:.58rem;letter-spacing:.1em}
   .hero{padding:38px 14px 24px}
   .bar-in{padding:10px 14px}
+  /* phone: three full rows, edge to edge — Shuffle | Filters, then the SCIF door, then seed + sort */
+  .bar-in > .btn{flex:1 1 0;min-width:max-content;justify-content:center}
+  .bar-in > .btn-scif{flex-basis:100%}
+  .bar .spacer{display:none}
+  .bar-in > .sortwrap{flex:1 1 auto}
+  .sortwrap select.sort{flex:1 1 auto}
   .gridwrap{padding:18px 14px 36px}
 }
 .tile{break-inside:avoid;margin:0 0 14px;position:relative;border:1px solid var(--border);border-radius:14px;overflow:hidden;
@@ -300,22 +307,24 @@ footer.site b{font-family:var(--display);color:var(--text);font-weight:700}
   <div class="bar-in">
     <button class="btn primary" id="shuffle">⤨ Shuffle again</button>
     <button class="btn" id="togglefilters" aria-expanded="false" aria-controls="panel">⚙ Filters <span id="fcount"></span></button>
-    <a class="btn btn-pdf" href="pdfs.html" title="PDF Library — cleared documents, grouped by topic">
-      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/></g></svg>
-      PDF Library <span class="pdf-kind">Docs</span>
+    <a class="btn btn-scif" href="/pdfs.html" title="The SCIF Reading Room: the PDF library">
+      <img src="images/icons/scif.webp" width="28" height="28" alt="" decoding="async">
+      <span class="scif-l">The SCIF Reading Room</span>
     </a>
     <span class="seedwrap">seed <code id="seedlabel" title="Click to copy a link to this exact arrangement">—</code></span>
     <span class="spacer"></span>
-    <label class="mono" for="sort" style="font-size:var(--step--1);color:var(--muted);letter-spacing:.06em">SORT</label>
-    <select class="sort" id="sort">
-      <option value="relevance">Best match</option>
-      <option value="random" selected>Random</option>
-      <option value="largest">Largest first</option>
-      <option value="smallest">Smallest</option>
-      <option value="newest">Newest added</option>
-      <option value="widest">Widest</option>
-      <option value="tagged">Most tagged</option>
-    </select>
+    <span class="sortwrap">
+      <label class="mono" for="sort" style="font-size:var(--step--1);color:var(--muted);letter-spacing:.06em">SORT</label>
+      <select class="sort" id="sort">
+        <option value="relevance">Best match</option>
+        <option value="random" selected>Random</option>
+        <option value="largest">Largest first</option>
+        <option value="smallest">Smallest</option>
+        <option value="newest">Newest added</option>
+        <option value="widest">Widest</option>
+        <option value="tagged">Most tagged</option>
+      </select>
+    </span>
   </div>
 </div>
 
