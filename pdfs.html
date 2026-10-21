@@ -465,6 +465,9 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"&&viewer.clas
 .trd-sup-x{position:absolute;top:4px;right:4px;width:20px;height:20px;border:0;border-radius:50%;background:#eee;color:#333;font-size:14px;line-height:20px;cursor:pointer;padding:0}
 .trd-sup-x:hover{background:#ddd}
 @media (max-width:480px){.trd-sup{right:8px;bottom:8px}.trd-sup-duck{width:68px;height:68px;padding:5px}.trd-sup-bub{max-width:165px;margin-bottom:32px;padding:9px 11px}.trd-sup-bub p{font-size:12px}}
+.trd-sup.wig:not(.open) .trd-sup-duck{animation:trdWig 5s ease-in-out 1.5s infinite;transform-origin:50% 85%}
+@keyframes trdWig{0%,76%,100%{transform:rotate(0) translateY(0)}79%{transform:rotate(-12deg) translateY(-4px)}82%{transform:rotate(10deg) translateY(-4px)}85%{transform:rotate(-8deg) translateY(-2px)}88%{transform:rotate(6deg)}91%{transform:rotate(-3deg)}94%{transform:rotate(0)}}
+@media (prefers-reduced-motion:reduce){.trd-sup.wig .trd-sup-duck{animation:none}}
 @media print{.trd-sup{display:none}}
 </style>
 <div class="trd-sup" id="trdSup">
@@ -481,7 +484,8 @@ try{if(sessionStorage.getItem(K)){w.hidden=true;return}}catch(e){}
 w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.toggle('open')});
 w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true;try{sessionStorage.setItem(K,'1')}catch(e){}});
 var seen=false;try{seen=sessionStorage.getItem('trdSupSeen')}catch(e){}
-if(!seen){setTimeout(function(){w.classList.add('open');try{sessionStorage.setItem('trdSupSeen','1')}catch(e){}},4000)}
+if(!seen)w.classList.add('wig');
+w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.remove('wig');if(w.classList.contains('open')){try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}try{var A=window.AudioContext||window.webkitAudioContext;if(A){var c=window._trdAC||(window._trdAC=new A()),t=c.currentTime,o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o.type='sawtooth';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(330,t+.16);f.type='bandpass';f.frequency.value=1100;f.Q.value=4;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.18);o.connect(f);f.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.2)}}catch(e){}}try{sessionStorage.setItem('trdSupSeen','1')}catch(e){}});
 })();
 </script>
 <!-- /trd-support -->
