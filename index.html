@@ -245,6 +245,8 @@ body::before{
   color:var(--muted);
   transition:color .24s var(--ease), transform .24s var(--ease);
 }
+.door.wide{grid-column:1/-1; justify-content:center; gap:14px}
+.door.wide .door-sub{font-family:var(--mono,'Courier New',monospace);font-size:.95rem;letter-spacing:.06em;color:var(--muted)}
 .door:hover,.door:focus-visible{
   border-color:var(--red);
   background:rgba(225,6,0,.055);
@@ -359,6 +361,11 @@ body::before{
     </a>
     <a class="door" href="memes.html">
       <span class="door-label">The Meme Dump</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
+    </a>
+    <a class="door wide" href="/x/">
+      <span class="door-label">The X Archive</span>
+      <span class="door-sub">search all 61,225 posts</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
   </nav>
