@@ -225,9 +225,12 @@ body::before{
   justify-content:space-between;
   gap:18px;
   padding:17px 20px;
-  border:1px solid var(--line);
+  border:1px solid rgba(225,6,0,.55);
+  border-left:4px solid var(--red);
   border-radius:7px;
-  background:rgba(255,255,255,.014);
+  background:rgba(8,8,8,.86);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  box-shadow:0 8px 26px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.06);
   color:var(--ink);
   text-decoration:none;
   transition:border-color .24s var(--ease), background .24s var(--ease), transform .24s var(--ease);
@@ -242,7 +245,7 @@ body::before{
 }
 .door .icon{
   flex:none;
-  color:var(--muted);
+  color:var(--red-bright);
   transition:color .24s var(--ease), transform .24s var(--ease);
 }
 .door.wide{grid-column:1/-1; justify-content:center; gap:14px}
@@ -250,10 +253,10 @@ body::before{
 .door-x-l{display:flex;align-items:center;gap:14px;min-width:0}
 .door-av{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--line);background:#000}
 .door-x-t{display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left;align-items:flex-start}
-.door-x .door-sub{font-family:var(--mono,'Courier New',monospace);font-size:.82rem;line-height:1.35;letter-spacing:.03em;color:var(--muted)}
+.door-x .door-sub{font-family:var(--mono,'Courier New',monospace);font-size:.82rem;line-height:1.35;letter-spacing:.03em;color:var(--ink-soft)}
 .door:hover,.door:focus-visible{
-  border-color:var(--red);
-  background:rgba(225,6,0,.055);
+  border-color:var(--red-bright);
+  background:rgba(40,4,3,.92);
   transform:translateY(-2px);
 }
 .door:hover .icon,.door:focus-visible .icon{
