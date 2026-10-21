@@ -551,5 +551,42 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<!-- trd-support -->
+<style>
+.trd-sup{position:fixed;right:14px;bottom:14px;z-index:2147483000;display:flex;align-items:flex-end;gap:8px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.trd-sup[hidden]{display:none}
+.trd-sup-duck{flex:none;width:84px;height:84px;border:0;padding:6px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.55) 0%,rgba(255,255,255,.18) 55%,rgba(255,255,255,0) 72%);cursor:pointer;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6)) drop-shadow(0 0 1px rgba(255,255,255,.9));transition:transform .2s ease}
+.trd-sup-duck:hover{transform:translateY(-3px) rotate(-4deg)}
+.trd-sup-duck img{width:100%;height:100%;object-fit:contain;display:block}
+.trd-sup-bub{position:relative;max-width:180px;margin-bottom:40px;background:#fff;color:#111;border-radius:16px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.55);opacity:0;transform:translateY(8px) scale(.96);transform-origin:bottom right;pointer-events:none;transition:opacity .3s ease,transform .3s ease}
+.trd-sup.open .trd-sup-bub{opacity:1;transform:none;pointer-events:auto}
+.trd-sup-bub:after{content:"";position:absolute;right:-8px;bottom:16px;border:9px solid transparent;border-left-color:#fff;border-right:0}
+.trd-sup-bub p{margin:0 16px 8px 0;font-size:12.5px;line-height:1.32}
+.trd-sup-bub b{color:#c10500}
+.trd-sup-go{display:inline-block;background:#e10600;color:#fff!important;text-decoration:none!important;font-weight:700;font-size:12.5px;padding:6px 11px;border-radius:999px}
+.trd-sup-go:hover{background:#ff2a1f}
+.trd-sup-x{position:absolute;top:4px;right:4px;width:20px;height:20px;border:0;border-radius:50%;background:#eee;color:#333;font-size:14px;line-height:20px;cursor:pointer;padding:0}
+.trd-sup-x:hover{background:#ddd}
+@media (max-width:480px){.trd-sup{right:8px;bottom:8px}.trd-sup-duck{width:68px;height:68px;padding:5px}.trd-sup-bub{max-width:165px;margin-bottom:32px;padding:9px 11px}.trd-sup-bub p{font-size:12px}}
+@media print{.trd-sup{display:none}}
+</style>
+<div class="trd-sup" id="trdSup">
+  <div class="trd-sup-bub" role="dialog" aria-label="Support The Rubber Duck">
+    <button class="trd-sup-x" type="button" aria-label="Close">&times;</button>
+    <p>The site is free, and <b>the site is me</b>. Help keep the Duck flying.</p>
+    <a class="trd-sup-go" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Support the Duck</a>
+  </div>
+  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.png" alt=""></button>
+</div>
+<script>
+(function(){var w=document.getElementById('trdSup');if(!w)return;var K='trdSupClosed';
+try{if(sessionStorage.getItem(K)){w.hidden=true;return}}catch(e){}
+w.querySelector('.trd-sup-duck').addEventListener('click',function(){w.classList.toggle('open')});
+w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true;try{sessionStorage.setItem(K,'1')}catch(e){}});
+var seen=false;try{seen=sessionStorage.getItem('trdSupSeen')}catch(e){}
+if(!seen){setTimeout(function(){w.classList.add('open');try{sessionStorage.setItem('trdSupSeen','1')}catch(e){}},4000)}
+})();
+</script>
+<!-- /trd-support -->
 </body>
 </html>
