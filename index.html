@@ -314,6 +314,45 @@ body::before{
 .door.door-pod:hover .tpd-strip,.door.door-pod:focus-visible .tpd-strip{transform:translateY(-2px)}
 .door.door-pod:hover .tpd-btn{filter:brightness(1.08)}
 .door.door-pod.tpd-detached{border-style:dashed;border-left-style:solid;background:rgba(0,0,0,.9)}
+/* ---- PC laptops + landscape: Drop Ledger / Red Pill Album / Meme Dump stacked in one
+   full-width column, the player in the middle. Pairs above and below keep the grid even:
+   Videos | Listening Room, the stack of three, Twitter / X | SCIF. Every row is the same
+   height (1fr), every half the same width, labels and the player scaled up to fill.
+   Phone portrait (<600px wide, one column) is untouched. ---- */
+@media (min-width:900px), (orientation:landscape) and (min-width:600px){
+  .doors{max-width:740px;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:14px}
+  .doors .door{grid-column:auto;padding:16px 22px}
+  .doors .door.door-stack{grid-column:1/-1;justify-content:center;gap:22px}
+  .door.door-stack .door-l{flex:none;gap:20px}
+  .doors .door-stack .door-label{font-size:2.6rem}
+  .door-stack .door-ic{width:72px;height:72px;border-radius:13px}
+  .door-stack .icon{width:24px;height:24px}
+  .doors .door-label{font-size:2.05rem}
+  .door-ic,.door-x .door-av{width:60px;height:60px;border-radius:11px}
+  .door-l,.door-x-l{gap:16px}
+  .door-x .door-sub,.door.wide .door-sub{font-size:.86rem;letter-spacing:.03em}
+  /* SCIF leaves its wide row and pairs with Twitter / X, laid out the same way */
+  .doors .door.wide{grid-column:auto;justify-content:space-between}
+  .door.wide .door-l{flex:1}
+  .door.wide .door-t{flex-direction:column;align-items:flex-start;gap:6px}
+  /* the player, sized to its full-width socket */
+  .doors .door.door-pod{padding:8px 10px 8px 9px}
+  .door-pod .tpd-strip{gap:12px;padding:0 12px 0 12px;border-radius:18px}
+  .door-pod .tpd-disc{width:74px;height:74px}
+  .door-pod .tpd-btn{width:46px;height:46px}
+  .door-pod .tpd-btn svg{width:18px;height:18px}
+  .door-pod .tpd-eq{height:17px;gap:3px}
+  .door-pod .tpd-eq i{width:4px}
+  .door-pod .tpd-lcd{height:76px;gap:14px;padding:0 12px 0 10px}
+  .door-pod .tpd-cover{width:60px!important;height:60px!important}
+  .door-pod .tpd-meta{gap:5px}
+  .door-pod .tpd-t{font-size:29px}
+  .door-pod .tpd-s{font-size:16px}
+  .door-pod .tpd-idle-eq{right:16px;top:20px;bottom:10px;gap:5px}
+  .door-pod .tpd-idle-eq i{width:5px}
+  .door-pod .tpd-tools{gap:12px}
+  .door-pod .tpd-tools svg{width:17px;height:17px}
+}
 /* ---- one rubber duck header — same as listening-room.html ---- */
 @font-face{font-family:'TRD Steelfish';src:url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
 @font-face{font-family:'TRD Courier';src:url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
@@ -378,18 +417,18 @@ body::before{
       <span class="door-l"><img class="door-ic" src="images/icons/listening-room.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Listening Room</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
-    <a class="door" href="ledger.html">
+    <a class="door door-stack" href="ledger.html">
       <span class="door-l"><img class="door-ic" src="images/icons/drop-ledger.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Drop Ledger</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
-    <a class="door door-pod" href="album.html" data-trd-pod-door aria-label="The Red Pill Album. Play the album">
+    <a class="door door-pod door-stack" href="album.html" data-trd-pod-door aria-label="The Red Pill Album. Play the album">
       <span class="tpd-strip" id="podDoorStrip">
         <span class="tpd-disc" aria-hidden="true"><span class="tpd-btn"><svg class="tpd-i-play" viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="tpd-i-pause" viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg><span class="tpd-eq"><i></i><i></i><i></i></span></span></span>
         <span class="tpd-lcd"><span class="tpd-idle-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><img class="tpd-cover" src="/assets/trd/img/red-pill-cover-192.jpg" width="40" height="40" alt="" decoding="async"><span class="tpd-meta"><span class="tpd-t">The Red Pill Album</span><span class="tpd-s">22 tracks</span></span><span class="tpd-prog" aria-hidden="true"><i></i></span></span>
         <span class="tpd-tools" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M12 7.5l7 7-1.6 1.6-5.4-5.4-5.4 5.4L5 14.5z"/></svg><svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M8.5 4.5a5 5 0 0 1 7.07 0l4 4a5 5 0 0 1-7.07 7.07l-4-4a5 5 0 0 1 0-7.07Zm1.41 1.41a3 3 0 0 0 0 4.24L11.76 12 16 7.76l-1.85-1.85a3 3 0 0 0-4.24 0Z"/></svg></span>
       </span>
     </a>
-    <a class="door" href="memes.html">
+    <a class="door door-stack" href="memes.html">
       <span class="door-l"><img class="door-ic" src="images/icons/meme-dump.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Meme Dump</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
