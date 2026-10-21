@@ -35,6 +35,6 @@ This file explains how the site works so anyone Duck trusts can keep it going wi
 
 ## Rules from Duck
 - Show Duck a preview before publishing anything new.
-- Keep cansecoman33@gmail.com and private client details out of the site.
+- Keep personal email addresses and private client details out of the site.
 - Nothing on the site may be served from Duck's own PC.
 - Never put passwords or keys in this repo or in a chat.
