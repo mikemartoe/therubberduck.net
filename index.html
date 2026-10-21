@@ -305,6 +305,15 @@ body::before{
   .room .duck{animation:none; transform:none}
 }
 
+
+/* ---- the Red Pill Album door: the player strip itself, sitting in a door-sized socket ---- */
+.door.door-pod{min-width:0;padding:7px 9px 7px 8px;align-items:stretch;justify-content:stretch;gap:0;
+  box-shadow:0 8px 26px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.06), inset 0 2px 12px rgba(0,0,0,.8)}
+.door.door-pod .tpd-strip{transition:transform .24s var(--ease), box-shadow .24s var(--ease)}
+.door.door-pod:hover,.door.door-pod:focus-visible{transform:none;background:rgba(8,8,8,.86)}
+.door.door-pod:hover .tpd-strip,.door.door-pod:focus-visible .tpd-strip{transform:translateY(-2px)}
+.door.door-pod:hover .tpd-btn{filter:brightness(1.08)}
+.door.door-pod.tpd-detached{border-style:dashed;border-left-style:solid;background:rgba(0,0,0,.9)}
 /* ---- one rubber duck header — same as listening-room.html ---- */
 @font-face{font-family:'TRD Steelfish';src:url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
 @font-face{font-family:'TRD Courier';src:url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
@@ -373,9 +382,12 @@ body::before{
       <span class="door-l"><img class="door-ic" src="images/icons/drop-ledger.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Drop Ledger</span></span>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
     </a>
-    <a class="door" href="album.html">
-      <span class="door-l"><img class="door-ic" src="images/icons/red-pill-album.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Red Pill Album</span></span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
+    <a class="door door-pod" href="album.html" data-trd-pod-door aria-label="The Red Pill Album. Play the album">
+      <span class="tpd-strip" id="podDoorStrip">
+        <span class="tpd-disc" aria-hidden="true"><span class="tpd-btn"><svg class="tpd-i-play" viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="tpd-i-pause" viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg><span class="tpd-eq"><i></i><i></i><i></i></span></span></span>
+        <span class="tpd-lcd"><span class="tpd-idle-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><img class="tpd-cover" src="/assets/trd/img/red-pill-cover-192.jpg" width="40" height="40" alt="" decoding="async"><span class="tpd-meta"><span class="tpd-t">The Red Pill Album</span><span class="tpd-s">22 tracks</span></span><span class="tpd-prog" aria-hidden="true"><i></i></span></span>
+        <span class="tpd-tools" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M12 7.5l7 7-1.6 1.6-5.4-5.4-5.4 5.4L5 14.5z"/></svg><svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M8.5 4.5a5 5 0 0 1 7.07 0l4 4a5 5 0 0 1-7.07 7.07l-4-4a5 5 0 0 1 0-7.07Zm1.41 1.41a3 3 0 0 0 0 4.24L11.76 12 16 7.76l-1.85-1.85a3 3 0 0 0-4.24 0Z"/></svg></span>
+      </span>
     </a>
     <a class="door" href="memes.html">
       <span class="door-l"><img class="door-ic" src="images/icons/meme-dump.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Meme Dump</span></span>
@@ -389,6 +401,32 @@ body::before{
 
 </main>
 
+<script>
+/* The Red Pill Album door is the player strip. First tap: start the album, the strip lifts
+   off and flies to its floating spot, then the album page opens. After that it shows what
+   is playing and simply opens the album page. Without the player script it is a plain link. */
+(function(){
+  var door=document.querySelector('[data-trd-pod-door]'); if(!door||!window.trdPod)return;
+  var strip=door.querySelector('.tpd-strip'), t=door.querySelector('.tpd-t'), sub=door.querySelector('.tpd-s'), bar=door.querySelector('.tpd-prog i');
+  function paint(st){
+    if(!st||!st.started){strip.classList.remove('tpd-live','tpd-playing');door.setAttribute('aria-label','The Red Pill Album. Play the album');return;}
+    strip.classList.add('tpd-live'); strip.classList.toggle('tpd-playing',!!st.playing);
+    if(t.textContent!==st.title)t.textContent=st.title;
+    var line=(st.playing?'Now Playing':'Paused')+'  \u00b7  '+(st.i+1)+' of 22';
+    if(sub.textContent!==line)sub.textContent=line;
+    bar.style.width=st.d?Math.min(100,st.t/st.d*100)+'%':'0%';
+    door.setAttribute('aria-label',(st.playing?'Now playing: ':'Paused: ')+st.title+'. Open The Red Pill Album');
+  }
+  door.addEventListener('click',function(e){
+    if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    if(window.trdPod.state().started)return;          /* the site router opens album.html */
+    e.preventDefault();
+    window.trdPod.launchFrom(strip,door.getAttribute('href'));
+  });
+  document.addEventListener('trdpod:state',function(e){paint(e.detail);});
+  paint(window.trdPod.state());
+})();
+</script>
 <!-- trd-support -->
 <style>
 .trd-sup{position:fixed;right:14px;bottom:14px;z-index:2147483000;display:flex;align-items:flex-end;gap:8px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}

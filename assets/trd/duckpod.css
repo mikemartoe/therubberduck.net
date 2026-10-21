@@ -183,3 +183,76 @@
 .trd-sup{pointer-events:none}
 .trd-sup-duck{pointer-events:auto}
 .trd-sup.open .trd-sup-bub{pointer-events:auto}
+
+/* ================= the pod strip as a page element (homepage door) =================
+   Global (not scoped to #trd-pod) so the same strip can sit in a page and also fly
+   out of it as a ghost during the "detach" animation. */
+.tpd-strip{position:relative;display:flex;align-items:center;gap:8px;flex:1;min-width:0;min-height:72px;padding:0 7px 0 9px;border-radius:16px;
+  font-family:"Helvetica Neue",Helvetica,"Myriad Pro","Segoe UI",Arial,system-ui,sans-serif;color:#111;line-height:1.2;text-align:left;letter-spacing:0;text-transform:none;
+  -webkit-font-smoothing:antialiased;box-sizing:border-box;
+  background:linear-gradient(162deg,#ffffff 0%,#f6f6f6 38%,#e7e7e7 78%,#d8d8d8 100%);
+  box-shadow:0 0 0 1px #8f8f8f,0 0 0 3px #e9e9e9,0 0 0 4px #9c9c9c,inset 0 1px 0 rgba(255,255,255,.95),inset 0 -3px 8px rgba(0,0,0,.07),0 8px 20px -6px rgba(0,0,0,.7)}
+.tpd-strip *{box-sizing:border-box}
+.tpd-strip::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(118deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,0) 34%,rgba(255,255,255,0) 70%,rgba(255,255,255,.25) 100%)}
+.tpd-grip{width:10px;align-self:stretch;display:flex;align-items:center;justify-content:center;flex:none}
+.tpd-grip i{display:block;width:4px;height:28px;border-radius:2px;background:repeating-linear-gradient(180deg,#b5b5b5 0 2px,transparent 2px 4px)}
+.tpd-disc{position:relative;z-index:1;width:52px;height:52px;flex:none;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 30%,#ffffff,#e3e3e3);box-shadow:0 0 0 1px #c3c3c3,inset 0 -2px 4px rgba(0,0,0,.08)}
+.tpd-btn{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(#ff4b50,#e10600 55%,#b80400);box-shadow:0 0 0 1px #9c0300,0 2px 4px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.45)}
+.tpd-btn svg{width:13px;height:13px;display:none}
+.tpd-btn .tpd-i-play{display:block;margin-left:2px}
+.tpd-eq{display:none;align-items:flex-end;gap:2px;height:13px}
+.tpd-eq i{display:block;width:3px;height:100%;background:#fff;border-radius:1px;transform-origin:50% 100%;animation:tpd-eq 1s ease-in-out infinite}
+.tpd-eq i:nth-child(2){animation-delay:-.35s}.tpd-eq i:nth-child(3){animation-delay:-.7s}
+@keyframes tpd-eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.tpd-live .tpd-btn .tpd-i-play{display:none}
+.tpd-live.tpd-playing .tpd-eq{display:flex}
+.tpd-live:not(.tpd-playing) .tpd-btn .tpd-i-pause{display:block}
+.tpd-live:not(.tpd-playing) .tpd-btn{background:linear-gradient(#8a8a8a,#5c5c5c);box-shadow:0 0 0 1px #4a4a4a,0 2px 4px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.35)}
+.tpd-lcd{position:relative;z-index:1;flex:1;min-width:0;height:54px;display:flex;align-items:center;gap:8px;padding:0 6px 0 7px;border-radius:6px;overflow:hidden;color:#16202a;
+  background:linear-gradient(180deg,#f1f5f8,#cfd9e1);box-shadow:0 0 0 3px #1a1a1a,inset 0 0 0 1px #5d6a74,inset 0 2px 6px rgba(0,0,0,.25)}
+.tpd-cover{width:38px!important;height:38px!important;flex:none;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.35);background:#111;object-fit:cover;max-width:none}
+.tpd-meta{min-width:0;flex:1;display:flex;flex-direction:column;gap:3px}
+.tpd-t{display:block;font-size:17px;font-weight:700;color:#0f171e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tpd-s{display:block;font-size:13px;color:#34404a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tpd-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(0,0,0,.12)}
+.tpd-prog i{display:block;height:100%;width:0;background:#e10600}
+.tpd-tools{display:flex;flex-direction:column;align-items:center;gap:8px;flex:none;position:relative;z-index:1;color:#8a8a8a;padding:0}
+.tpd-tools svg{width:14px;height:14px;display:block}
+@media (max-width:374px){.tpd-t{font-size:16px}}
+@media (max-width:340px){.tpd-cover{display:none!important}}
+@media (prefers-reduced-motion:reduce){.tpd-eq i{animation:none;transform:scaleY(.7)}}
+
+/* the ghost that lifts off the page and flies to the floating spot */
+.tp-ghost{position:fixed!important;z-index:2147482600;margin:0!important;pointer-events:none;will-change:left,top,width,height,transform}
+#trd-pod.tp-doorhide{--tp-space:0px}
+#trd-pod.tp-doorhide .tp-dock{display:none}
+#trd-pod.tp-arriving .tp-dock{opacity:0}
+#trd-pod .tp-dock{transition:opacity .22s ease}
+
+/* phones: no font boosting inside the little screens */
+.tp-dock,.tpd-strip{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+
+/* ---- idle door: a switched-on player (only before the album has been started) ---- */
+.tpd-idle-eq{position:absolute;right:9px;top:24px;bottom:8px;z-index:0;display:flex;align-items:flex-end;gap:3px;pointer-events:none;opacity:.2}
+.tpd-idle-eq i{display:block;width:3px;height:100%;border-radius:1px;background:#1d2a36;transform-origin:50% 100%;transform:scaleY(.35);
+  animation:tpd-idle 2.6s ease-in-out infinite}
+.tpd-idle-eq i:nth-child(1){animation-delay:-.2s}.tpd-idle-eq i:nth-child(2){animation-delay:-1.1s;animation-duration:2.2s}
+.tpd-idle-eq i:nth-child(3){animation-delay:-.6s;animation-duration:3s}.tpd-idle-eq i:nth-child(4){animation-delay:-1.7s}
+.tpd-idle-eq i:nth-child(5){animation-delay:-.9s;animation-duration:2.4s}.tpd-idle-eq i:nth-child(6){animation-delay:-2.1s;animation-duration:2.8s}
+.tpd-idle-eq i:nth-child(7){animation-delay:-1.4s;animation-duration:2.3s}
+@keyframes tpd-idle{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(.8)}}
+.tpd-lcd .tpd-cover,.tpd-lcd .tpd-meta{position:relative;z-index:1}
+.tpd-live .tpd-idle-eq{display:none}
+.tpd-strip:not(.tpd-live) .tpd-btn{animation:tpd-power 2.8s ease-in-out infinite}
+@keyframes tpd-power{
+  0%,100%{box-shadow:0 0 0 1px #9c0300,0 2px 4px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.45),0 0 0 0 rgba(225,6,0,0)}
+  50%{box-shadow:0 0 0 1px #9c0300,0 2px 4px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.45),0 0 10px 3px rgba(225,6,0,.38)}}
+@media (prefers-reduced-motion:reduce){
+  .tpd-idle-eq i{animation:none}
+  .tpd-idle-eq i:nth-child(1){transform:scaleY(.4)}.tpd-idle-eq i:nth-child(2){transform:scaleY(.7)}.tpd-idle-eq i:nth-child(3){transform:scaleY(.5)}
+  .tpd-idle-eq i:nth-child(4){transform:scaleY(.85)}.tpd-idle-eq i:nth-child(5){transform:scaleY(.45)}.tpd-idle-eq i:nth-child(6){transform:scaleY(.65)}.tpd-idle-eq i:nth-child(7){transform:scaleY(.3)}
+  .tpd-strip:not(.tpd-live) .tpd-btn{animation:none;box-shadow:0 0 0 1px #9c0300,0 2px 4px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.45),0 0 8px 2px rgba(225,6,0,.28)}
+}

@@ -347,6 +347,7 @@
     els.miniBtn.setAttribute('aria-label', S.playing ? 'Pause' : (S.started ? 'Play ' + t.title : 'Play The Red Pill Album'));
     els.lis.forEach(function (li, i) { li.classList.toggle('tp-cur', S.started && i === S.i); });
     els.clkv.textContent = S.clicker ? 'On' : 'Off';
+    syncDoor();
     tick();
     emit();
   }
@@ -514,6 +515,56 @@
     on(dock, 'touchmove', function (e) { if (drag) e.preventDefault(); }, { passive: false });
   }
 
+  /* ================= a page can host the strip itself =================
+     A page element marked [data-trd-pod-door] (the homepage door) stands in for the
+     floating strip until the album has been started, so two strips never show at once. */
+  var launching = false, hintPending = false;
+  function syncDoor() {
+    if (!root) return;
+    var hide = !S.started && !launching && !!D.querySelector('[data-trd-pod-door]');
+    var was = root.classList.contains('tp-doorhide');
+    root.classList.toggle('tp-doorhide', hide);
+    if (was && !hide && hintPending) { hintPending = false; maybeHint(); }
+  }
+  /* Start the album from a page strip and fly that strip to the floating spot, then go to href. */
+  function launchFrom(src, href) {
+    if (launching || !root) return;
+    launching = true;
+    if (href) getPage(href).catch(function () {});
+    if (S.view !== 'mini') setView('mini', true);
+    play();                                   /* inside the tap, so the browser allows it */
+    var rm = W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.classList.remove('tp-doorhide');
+    var from = src.getBoundingClientRect(), to = dock.getBoundingClientRect();
+    function done() {
+      launching = false; root.classList.remove('tp-arriving'); render(); applyPos();
+      if (href) go(new URL(href, location.href).href, true);
+    }
+    if (rm || !src.animate || !from.width) { done(); return; }
+    root.classList.add('tp-arriving');   /* hidden until its fade animation takes over below */
+    var ghost = src.cloneNode(true);
+    ghost.classList.add('tp-ghost'); ghost.removeAttribute('id');
+    ghost.style.left = from.left + 'px'; ghost.style.top = from.top + 'px';
+    ghost.style.width = from.width + 'px'; ghost.style.height = from.height + 'px';
+    root.appendChild(ghost);
+    src.style.visibility = 'hidden';
+    var hostDoor = src.closest('[data-trd-pod-door]'); if (hostDoor) hostDoor.classList.add('tpd-detached');
+    var midL = (from.left + to.left) / 2, midT = Math.min(from.top, to.top) - Math.min(90, W.innerHeight * 0.12);
+    var midW = (from.width + to.width) / 2, midH = (from.height + to.height) / 2;
+    var lift = '0 0 0 1px #8f8f8f,0 0 0 3px #e9e9e9,0 0 0 4px #9c9c9c,0 34px 60px -10px rgba(0,0,0,.85),0 10px 24px rgba(0,0,0,.5)';
+    var a = ghost.animate([
+      { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', transform: 'translateY(0) scale(1) rotate(0)', opacity: 1, offset: 0 },
+      { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', transform: 'translateY(-16px) scale(1.04) rotate(-1.5deg)', boxShadow: lift, opacity: 1, offset: 0.24 },
+      { left: midL + 'px', top: Math.max(8, midT) + 'px', width: midW + 'px', height: midH + 'px', transform: 'translateY(0) scale(1.03) rotate(1.5deg)', boxShadow: lift, opacity: 1, offset: 0.62 },
+      { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', transform: 'translateY(0) scale(1) rotate(0)', opacity: 1, offset: 0.9 },
+      { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', transform: 'none', opacity: 0, offset: 1 }
+    ], { duration: 1100, easing: 'cubic-bezier(.45,0,.2,1)', fill: 'forwards' });
+    /* the real strip fades in under the ghost as it lands (same clock as the flight) */
+    root.classList.remove('tp-arriving');
+    if (dock.animate) dock.animate([{ opacity: 0 }, { opacity: 0, offset: 0.86 }, { opacity: 1 }], { duration: 1100, easing: 'linear' });
+    a.onfinish = function () { ghost.remove(); done(); };
+  }
+
   /* ================= first-visit hint ================= */
   var hintTimer = 0;
   function maybeHint() {
@@ -521,6 +572,7 @@
     if (seen || S.pos) return;
     _setTimeout(function () {
       if (!dock || dock.classList.contains('tp-dragging')) return;
+      if (root.classList.contains('tp-doorhide') || launching) { hintPending = true; return; }
       dock.classList.add('tp-hinting', 'tp-nudge');
       hintTimer = _setTimeout(function () { endHint(true); }, 6000);
     }, 900);
@@ -689,5 +741,5 @@
 
   W.trdPod = { play: play, pause: pause, toggle: toggle, playIndex: playIndex, toggleIndex: toggleIndex, next: next, prev: prev,
     state: state, tracks: TRACKS.map(function (t) { return { title: t.title, src: t.src, length: t.len }; }), audio: audio,
-    view: function (v) { if (v) setView(v); return S.view; }, resetPosition: resetPos, navigate: function (h) { return go(h, true); } };
+    view: function (v) { if (v) setView(v); return S.view; }, resetPosition: resetPos, launchFrom: launchFrom, navigate: function (h) { return go(h, true); } };
 })();
