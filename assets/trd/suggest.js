@@ -19,13 +19,15 @@
        the page source:  'https://formsubmit.co/ajax/<random-string>'
        (FormSubmit treats that as a new form, so it may ask to activate once more.)
      Set ENDPOINT to '' to switch sending off (the card says the box is closed).
-     SHOW_TAB: the small "Suggestions" tab on the right edge of wide screens.
-     TAB_OFF: pages whose content runs to the right edge get no tab.          */
+     SHOW_TAB: the "Suggestions" opener. A pill on the right edge (>=700px wide);
+       a small round button at bottom-left on phones.
+     COMPACT: pages whose content runs to the right edge get the round button
+       at every width instead of the pill.                                    */
   var CONFIG = {
     ENDPOINT: 'https://formsubmit.co/ajax/therubberduk@gmail.com',
     SUBJECT: 'Suggestion Box: therubberduck.net',
     SHOW_TAB: true,
-    TAB_OFF: /^\/memes\.html$/i
+    COMPACT: /^\/memes\.html$/i
   };
   /* ===================================================================== */
 
@@ -45,6 +47,9 @@
   var reduce = W.matchMedia ? W.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var _st = W.setTimeout.bind(W);   // captured before duckpod.js patches it (this file loads first)
   function wait(ms) { return new Promise(function (r) { _st(r, ms); }); }
+  var RO = W.ResizeObserver || null;                                // originals, captured before duckpod.js wraps them
+  var _raf = W.requestAnimationFrame ? W.requestAnimationFrame.bind(W) : function (f) { return _st(f, 16); };
+  var phoneMQ = W.matchMedia ? W.matchMedia('(max-width: 699px)') : { matches: false };
 
   /* ================= the box, drawn ================= */
   var uidN = 0;
@@ -127,7 +132,14 @@
 
   var fx = el('div', '');
   fx.id = 'trd-suggest-fx';
-  fx.innerHTML = '<button class="trs-tab" type="button" aria-haspopup="dialog" aria-label="Open the suggestion box"><i></i><span>Suggestions</span></button>';
+  fx.innerHTML = '<button class="trs-tab" type="button" aria-haspopup="dialog" aria-label="Suggestions: open the suggestion box" title="Suggestions">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' +
+      '<path d="M12 2.8a6.2 6.2 0 0 0-3.7 11.2c.75.57 1.2 1.3 1.2 2.2v.6h5v-.6c0-.9.45-1.63 1.2-2.2A6.2 6.2 0 0 0 12 2.8Z"/>' +
+      '<path d="M9.6 19.4h4.8M10.6 21.8h2.8"/>' +
+      '<path class="trs-glow" d="M10.4 10.6 12 12.4l1.6-1.8"/>' +
+    '</svg>' +
+    '<span class="trs-lbl" aria-hidden="true">Suggestions</span><span class="trs-tip" aria-hidden="true">Suggestions</span></button>';
+  try { if (!sessionStorage.getItem('trs-hello')) { fx.classList.add('trs-hello'); sessionStorage.setItem('trs-hello', '1'); } } catch (e) { fx.classList.add('trs-hello'); }
 
   var dlg = el('dialog', 'trs-dlg');
   dlg.setAttribute('aria-labelledby', 'trs-title');
@@ -169,11 +181,70 @@
     var b = D.body; if (!b) return;
     var pod = D.getElementById('trd-pod'), ref = pod && pod.parentNode === b ? pod : null;
     sec.classList.toggle('trs-nopod', !ref);
-    fx.classList.toggle('trs-tab-on', !!CONFIG.SHOW_TAB && !(CONFIG.TAB_OFF && CONFIG.TAB_OFF.test(location.pathname)));
+    fx.classList.toggle('trs-tab-off', !CONFIG.SHOW_TAB);
     if (sec.parentNode !== b) { if (dlg.open) resetAfterNav(); b.insertBefore(sec, ref); }
     if (fx.parentNode !== b) b.insertBefore(fx, ref);
     if (dlg.parentNode !== b) b.insertBefore(dlg, ref);
+    fit();
   }
+
+  /* ================= the tab: shape + keep it clear of the player and the duck ================= */
+  var tab = q('.trs-tab', fx), fitQ = false, watched = [], ro = null, mo = null;
+  function vis(n) {
+    if (!n || !n.isConnected) return null;
+    var cs = W.getComputedStyle(n); if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity === 0) return null;
+    var r = n.getBoundingClientRect(); return r.width && r.height ? r : null;
+  }
+  function obstacles() {
+    var out = [], dock = D.querySelector('#trd-pod .tp-dock'), hint = dock && dock.classList.contains('tp-hinting') && dock.querySelector('.tp-hint');
+    [dock, hint, D.querySelector('.trd-sup-duck')].forEach(function (n) { var r = vis(n); if (r) out.push(r); });
+    return out;
+  }
+  function watch() {                                                // re-measure when the player changes size, view or place
+    var want = [D.getElementById('trd-pod'), D.querySelector('#trd-pod .tp-dock'), D.getElementById('trdSup')].filter(Boolean);
+    if (want.length === watched.length && want.every(function (n, i) { return n === watched[i]; })) return;
+    watched = want;
+    if (mo) mo.disconnect(); if (ro) ro.disconnect();
+    mo = new MO(fit); ro = RO ? new RO(fit) : null;
+    want.forEach(function (n) {
+      mo.observe(n, { attributes: true, attributeFilter: ['class', 'style', 'data-view', 'hidden'] });
+      if (ro) ro.observe(n.id === 'trd-pod' ? (n.querySelector('.tp-dock') || n) : n);
+    });
+  }
+  function fit() { if (!fitQ) { fitQ = true; _raf(fitNow); } }
+  function fitNow() {
+    fitQ = false;
+    if (!fx.isConnected) return;
+    var dot = !!phoneMQ.matches || !!(CONFIG.COMPACT && CONFIG.COMPACT.test(location.pathname));
+    fx.classList.toggle('trs-dot', dot);
+    tab.setAttribute('title', 'Suggestions');
+    /* keep it inside the visible screen even when a page overflows sideways (fixed boxes then
+       anchor to the wider layout viewport); ignored while pinch-zoomed */
+    var vv = W.visualViewport, vx = 0, vl = 0;
+    if (vv && vv.scale <= 1.01) { vx = Math.max(0, Math.round(W.innerWidth - vv.offsetLeft - vv.width)); vl = Math.max(0, Math.round(vv.offsetLeft)); }
+    fx.style.setProperty('--trs-vx', vx + 'px'); fx.style.setProperty('--trs-vl', vl + 'px');
+    fx.style.setProperty('--trs-lift', '0px');
+    watch();
+    var r = vis(tab); if (!r) return;
+    var obs = obstacles(), lift = 0, top = r.top, bot = r.bottom, gap = 10;
+    for (var pass = 0; pass < 4; pass++) {                         // step above whatever it would touch
+      var moved = false;
+      obs.forEach(function (o) {
+        if (r.right + gap > o.left && r.left - gap < o.right && bot + gap > o.top && top - gap < o.bottom) {
+          var d = bot + gap - o.top; lift += d; top -= d; bot -= d; moved = true;
+        }
+      });
+      if (!moved) break;
+    }
+    if (top < 8) lift = Math.max(0, lift - (8 - top));             // never push it off the top
+    fx.style.setProperty('--trs-lift', Math.round(lift) + 'px');
+  }
+  on(W, 'resize', fit);
+  if (W.visualViewport) { on(W.visualViewport, 'resize', fit); on(W.visualViewport, 'scroll', fit); }
+  if (phoneMQ.addEventListener) phoneMQ.addEventListener('change', fit); else if (phoneMQ.addListener) phoneMQ.addListener(fit);
+  on(W, 'load', fit);
+  _st(fit, 400); _st(fit, 1500);
+  _st(function () { fx.classList.remove('trs-hello'); }, 4000);     // the first-load glow runs once, then never again
   function resetAfterNav() { try { dlg.close(); } catch (e) {} D.documentElement.classList.remove('trs-lock'); }
   function boot() {
     place();
