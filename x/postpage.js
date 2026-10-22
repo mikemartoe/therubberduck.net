@@ -9,6 +9,9 @@
   if(i === undefined){ miss('Post ' + esc(id) + ' is not in this archive. <a href="https://x.com/TheRubberDuck79/status/' + esc(id) + '" target="_blank" rel="noopener">Try it on X</a>.'); return; }
   const p = await postAt(i);
   document.title = 'Post ' + p.i + ', ' + p.c.slice(0, 10) + ' | The X Archive | The Rubber Duck\u2122';
+  let canon = document.querySelector('link[rel="canonical"]');
+  if(!canon){ canon = document.createElement('link'); canon.rel = 'canonical'; document.head.appendChild(canon); }
+  canon.href = 'https://therubberduck.net/x/post.html?id=' + id;
   $('main').innerHTML = postHtml(p, {full: true, hi: true});
   const nav = [];
   if(i > 0) nav.push('<a href="/x/post.html?id=' + META.ids[i - 1] + '">Older post</a>'); else nav.push('<span></span>');
