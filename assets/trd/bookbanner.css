@@ -232,3 +232,10 @@ a.trd-shopsign:focus-visible{outline:2px solid #FFD77A; outline-offset:3px}
 @media print{a.trd-shopsign{display:none}}
 /* mid widths (761-1099px): the header row is too tight for the shop sign beside the links, so it wraps under them */
 @media (max-width:1099px) and (min-width:761px){ .banner .banner-in{flex-wrap:wrap; row-gap:8px} }
+
+/* ---------- square anon mission cover art (replaces the CSS-built tall cover); same height, so the banner stays 86px ---------- */
+#trd-book .trb-book{width:10.2em; height:10.2em}
+#trd-book .trb-book::after{content:none}
+#trd-book .trb-cover-img{display:block; width:100%; height:100%; object-fit:cover; border-radius:.3em; border:1px solid #2a2a2a}
+/* the CTA sits right after the title block, in the same row */
+#trd-book .trb-copy{flex:0 1 auto}

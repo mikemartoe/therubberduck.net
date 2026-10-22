@@ -49,12 +49,7 @@
   bar.innerHTML =
     '<a class="trb-in" href="' + esc(CONFIG.URL) + '" target="_blank" rel="noopener" title="' + esc(CONFIG.KICKER.toLowerCase() + ': ' + full + '. ' + CONFIG.DETAIL + ' ' + CONFIG.PRICE + '. ' + CONFIG.CTA + '.') + '">' +
       '<span class="trb-book" aria-hidden="true">' +
-        '<span class="trb-cover">' +
-          '<span class="trb-c-top">anon<br>mission</span>' +
-          '<span class="trb-c-q">Q</span>' +
-          '<img class="trb-c-duck" src="/assets/trd/img/duck-banner.png" alt="" width="268" height="230" decoding="async">' +
-          '<span class="trb-c-by">The Rubber Duck</span>' +
-        '</span>' +
+        '<img class="trb-cover-img" src="/assets/trd/img/anon-mission-cover.webp" srcset="/assets/trd/img/anon-mission-cover.webp 1x, /assets/trd/img/anon-mission-cover@2x.webp 2x" alt="" width="72" height="72" decoding="async">' +
       '</span>' +
       '<span class="trb-copy">' +
         '<span class="trb-line">' +
