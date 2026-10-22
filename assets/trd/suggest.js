@@ -1,5 +1,5 @@
 /* The Suggestion Box for therubberduck.net
-   A wooden box at the foot of every page (and a small side tab on wide screens).
+   A wooden box at the foot of every page (and a small hand-painted suggestion box beside the support duck, bottom-right).
    Clicking it opens a typed index card; on send the card drops into the slot.
    Survives the Duck Pod's soft navigation: the same nodes are put back after
    every body swap, so a half-written card is never lost.
@@ -19,15 +19,14 @@
        the page source:  'https://formsubmit.co/ajax/<random-string>'
        (FormSubmit treats that as a new form, so it may ask to activate once more.)
      Set ENDPOINT to '' to switch sending off (the card says the box is closed).
-     SHOW_TAB: the "Suggestions" opener. A pill on the right edge (>=700px wide);
-       a small round button at bottom-left on phones.
-     COMPACT: pages whose content runs to the right edge get the round button
-       at every width instead of the pill.                                    */
+     SHOW_TAB: the "Suggestions" opener, a small hand-painted suggestion box beside the support duck
+       on every page and at every width (never taller than the duck; a little smaller on phones).
+       Desktop (700px+): the box takes the bottom-right corner and the duck steps left of it.
+       Phones: the box stands left of the duck, or above it when the album player is in the way.  */
   var CONFIG = {
     ENDPOINT: 'https://formsubmit.co/ajax/therubberduk@gmail.com',
     SUBJECT: 'Suggestion Box: therubberduck.net',
-    SHOW_TAB: true,
-    COMPACT: /^\/memes\.html$/i
+    SHOW_TAB: true
   };
   /* ===================================================================== */
 
@@ -49,7 +48,6 @@
   function wait(ms) { return new Promise(function (r) { _st(r, ms); }); }
   var RO = W.ResizeObserver || null;                                // originals, captured before duckpod.js wraps them
   var _raf = W.requestAnimationFrame ? W.requestAnimationFrame.bind(W) : function (f) { return _st(f, 16); };
-  var phoneMQ = W.matchMedia ? W.matchMedia('(max-width: 699px)') : { matches: false };
 
   /* ================= the box, drawn ================= */
   var uidN = 0;
@@ -133,12 +131,8 @@
   var fx = el('div', '');
   fx.id = 'trd-suggest-fx';
   fx.innerHTML = '<button class="trs-tab" type="button" aria-haspopup="dialog" aria-label="Suggestions: open the suggestion box" title="Suggestions">' +
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' +
-      '<path d="M12 2.8a6.2 6.2 0 0 0-3.7 11.2c.75.57 1.2 1.3 1.2 2.2v.6h5v-.6c0-.9.45-1.63 1.2-2.2A6.2 6.2 0 0 0 12 2.8Z"/>' +
-      '<path d="M9.6 19.4h4.8M10.6 21.8h2.8"/>' +
-      '<path class="trs-glow" d="M10.4 10.6 12 12.4l1.6-1.8"/>' +
-    '</svg>' +
-    '<span class="trs-lbl" aria-hidden="true">Suggestions</span><span class="trs-tip" aria-hidden="true">Suggestions</span></button>';
+    '<img src="/assets/trd/img/suggestion-box-trd.webp" srcset="/assets/trd/img/suggestion-box-trd.webp 1x, /assets/trd/img/suggestion-box-trd@2x.webp 2x" alt="" width="176" height="240" decoding="async" draggable="false">' +
+    '<span class="trs-tip" aria-hidden="true">Suggestions</span></button>';
   try { if (!sessionStorage.getItem('trs-hello')) { fx.classList.add('trs-hello'); sessionStorage.setItem('trs-hello', '1'); } } catch (e) { fx.classList.add('trs-hello'); }
 
   var dlg = el('dialog', 'trs-dlg');
@@ -178,6 +172,7 @@
 
   /* ================= placement + soft-navigation survival ================= */
   function place() {
+    corner();
     var b = D.body; if (!b) return;
     var pod = D.getElementById('trd-pod'), ref = pod && pod.parentNode === b ? pod : null;
     sec.classList.toggle('trs-nopod', !ref);
@@ -188,8 +183,14 @@
     fit();
   }
 
-  /* ================= the tab: shape + keep it clear of the player and the duck ================= */
+  /* ================= the box opener: beside the duck, clear of the player, its hint and the duck ================= */
   var tab = q('.trs-tab', fx), fitQ = false, watched = [], ro = null, mo = null;
+  var wide = W.matchMedia ? W.matchMedia('(min-width: 700px)') : { matches: true };     // desktop: box in the corner, duck to its left
+  function corner() {                                               // Duck Pod's soft navigation copies the new page's <html> class, so this is re-applied
+    var h = D.documentElement, want = !!CONFIG.SHOW_TAB;
+    if (h.classList.contains('trs-box-r') !== want) h.classList.toggle('trs-box-r', want);
+  }
+  corner();                                                         // before first paint, so the duck never jumps
   function vis(n) {
     if (!n || !n.isConnected) return null;
     var cs = W.getComputedStyle(n); if (cs.display === 'none' || cs.visibility === 'hidden' || +cs.opacity === 0) return null;
@@ -197,10 +198,18 @@
   }
   function obstacles() {
     var out = [], dock = D.querySelector('#trd-pod .tp-dock'), hint = dock && dock.classList.contains('tp-hinting') && dock.querySelector('.tp-hint');
-    [dock, hint, D.querySelector('.trd-sup-duck')].forEach(function (n) { var r = vis(n); if (r) out.push(r); });
+    [dock, hint].forEach(function (n) { var r = vis(n); if (r) out.push({ r: r, g: 10 }); });
+    var duck = D.querySelector('.trd-sup-duck'), dr = vis(duck);
+    if (dr) out.push({ r: duckBox(duck) || dr, g: 4 });
     return out;
   }
-  function watch() {                                                // re-measure when the player changes size, view or place
+  /* the duck's resting box: its wiggle and hover rotate it, so measure the layout, not the transformed rect */
+  function duckBox(duck) {
+    var sup = D.getElementById('trdSup'), sr = vis(sup);
+    if (!sr || duck.parentNode !== sup) return null;
+    return { left: sr.right - duck.offsetWidth, right: sr.right, top: sr.bottom - duck.offsetHeight, bottom: sr.bottom };
+  }
+  function watch() {                                                // re-measure when the player or the duck changes size, view or place
     var want = [D.getElementById('trd-pod'), D.querySelector('#trd-pod .tp-dock'), D.getElementById('trdSup')].filter(Boolean);
     if (want.length === watched.length && want.every(function (n, i) { return n === watched[i]; })) return;
     watched = want;
@@ -211,44 +220,73 @@
       if (ro) ro.observe(n.id === 'trd-pod' ? (n.querySelector('.tp-dock') || n) : n);
     });
   }
+  function hits(b, obs) {
+    for (var i = 0; i < obs.length; i++) {
+      var o = obs[i].r, g = obs[i].g;
+      if (b.right + g > o.left && b.left - g < o.right && b.bottom + g > o.top && b.top - g < o.bottom) return o;
+    }
+    return null;
+  }
   function fit() { if (!fitQ) { fitQ = true; _raf(fitNow); } }
   function fitNow() {
     fitQ = false;
     if (!fx.isConnected) return;
-    var dot = !!phoneMQ.matches || !!(CONFIG.COMPACT && CONFIG.COMPACT.test(location.pathname));
-    fx.classList.toggle('trs-dot', dot);
     tab.setAttribute('title', 'Suggestions');
-    /* keep it inside the visible screen even when a page overflows sideways (fixed boxes then
-       anchor to the wider layout viewport); ignored while pinch-zoomed */
-    var vv = W.visualViewport, vx = 0, vl = 0;
-    if (vv && vv.scale <= 1.01) { vx = Math.max(0, Math.round(W.innerWidth - vv.offsetLeft - vv.width)); vl = Math.max(0, Math.round(vv.offsetLeft)); }
-    fx.style.setProperty('--trs-vx', vx + 'px'); fx.style.setProperty('--trs-vl', vl + 'px');
-    fx.style.setProperty('--trs-lift', '0px');
     watch();
-    var r = vis(tab); if (!r) return;
-    var obs = obstacles(), lift = 0, top = r.top, bot = r.bottom, gap = 10;
-    for (var pass = 0; pass < 4; pass++) {                         // step above whatever it would touch
-      var moved = false;
-      obs.forEach(function (o) {
-        if (r.right + gap > o.left && r.left - gap < o.right && bot + gap > o.top && top - gap < o.bottom) {
-          var d = bot + gap - o.top; lift += d; top -= d; bot -= d; moved = true;
-        }
-      });
-      if (!moved) break;
+    var sup = D.getElementById('trdSup'), duck = D.querySelector('.trd-sup-duck');
+    fx.classList.toggle('trs-behind', !!(sup && !sup.hidden && sup.classList.contains('open')));
+    var w = tab.offsetWidth, h = tab.offsetHeight; if (!w || !h) return;
+    /* where the fixed layer's right and bottom edges are, in client coordinates */
+    var cw = D.documentElement.clientWidth, ch = W.innerHeight, sr = vis(sup), dr = duck && vis(duck) && sr ? duckBox(duck) : null;
+    var cands = [];
+    if (dr) {
+      var scs = W.getComputedStyle(sup), offR = parseFloat(scs.right) || 0, offB = parseFloat(scs.bottom) || 0;
+      cw = sr.right + offR; ch = sr.bottom + offB;
+      /* stand on the duck's baseline: the bottom of its image (object-fit: contain inside the padded button) */
+      var img = duck.querySelector('img'), dcs = W.getComputedStyle(duck), base = offB + (parseFloat(dcs.paddingBottom) || 0);
+      if (img && img.naturalWidth && img.clientWidth) {
+        var ih = Math.min(img.clientHeight, img.clientWidth * img.naturalHeight / img.naturalWidth);
+        base += (img.clientHeight - ih) / 2 + ih * 0.03;                       // the duck's rounded base sits ~3% above its picture's edge
+      }
+      var dw = duck.offsetWidth, dh = duck.offsetHeight;
+      if (wide.matches && D.documentElement.classList.contains('trs-box-r')) {
+        cands.push({ r: Math.max(0, offR - w - 8), b: base });                    // desktop: in the corner, right of the (moved) duck, same baseline
+      } else {
+        cands.push({ r: offR + dw + 10, b: base });                               // phones: just left of the duck, same baseline
+      }
+      cands.push({ r: offR + Math.round((dw - w) / 2), b: offB + dh + 8 });          // the player is in the way: stand on top of the duck
+    } else {
+      cands.push({ r: 14, b: 14 });                                               // no duck: the corner
     }
-    if (top < 8) lift = Math.max(0, lift - (8 - top));             // never push it off the top
-    fx.style.setProperty('--trs-lift', Math.round(lift) + 'px');
+    var obs = obstacles(), pick = null, best = null;
+    cands.forEach(function (c) {
+      if (pick) return;
+      var box = { left: cw - c.r - w, right: cw - c.r, top: ch - c.b - h, bottom: ch - c.b }, lift = 0;
+      for (var pass = 0; pass < 6; pass++) {                       // step above whatever it would touch
+        var o = hits(box, obs); if (!o) break;
+        var gg = 10, d = box.bottom + gg - o.top; lift += d; box.top -= d; box.bottom -= d;
+      }
+      if (box.top < 8) lift = Math.max(0, lift - (8 - box.top));    // never push it off the top
+      c.lift = lift;
+      if (!lift) pick = c; else if (!best || lift < best.lift) best = c;
+    });
+    pick = pick || best || cands[0];                               // a clear spot wins; otherwise the smallest lift
+    fx.style.setProperty('--trs-r', Math.round(pick.r) + 'px');
+    fx.style.setProperty('--trs-b', Math.round(pick.b) + 'px');
+    fx.style.setProperty('--trs-lift', Math.round(pick.lift || 0) + 'px');
   }
   on(W, 'resize', fit);
+  try { on(wide, 'change', fit); } catch (e) {}
   if (W.visualViewport) { on(W.visualViewport, 'resize', fit); on(W.visualViewport, 'scroll', fit); }
-  if (phoneMQ.addEventListener) phoneMQ.addEventListener('change', fit); else if (phoneMQ.addListener) phoneMQ.addListener(fit);
   on(W, 'load', fit);
   _st(fit, 400); _st(fit, 1500);
   _st(function () { fx.classList.remove('trs-hello'); }, 4000);     // the first-load glow runs once, then never again
   function resetAfterNav() { try { dlg.close(); } catch (e) {} D.documentElement.classList.remove('trs-lock'); }
   function boot() {
+    corner();
     place();
     new MO(function () { place(); }).observe(D.body, { childList: true });
+    new MO(function () { corner(); fit(); }).observe(D.documentElement, { attributes: true, attributeFilter: ['class'] });
   }
 
   /* ================= open / close ================= */

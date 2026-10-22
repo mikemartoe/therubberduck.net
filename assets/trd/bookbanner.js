@@ -19,13 +19,17 @@
     URL: 'https://thebookofq.gumroad.com/l/egzhsa',
     LABEL: '',                             // optional tag before the kicker; empty = none
     KICKER: 'ORDER YOUR COPY',
-    TITLE: ['All You Need To Know About Q - ', 'And Why They Made You Afraid To Ask!'],
+    TITLE: 'anon mission',                 // the lead, all lowercase, exactly as Mike writes it
+    OR: 'or',
+    SUBTITLE: 'all you need to know about q - and how they made you afraid to ask',
     DETAIL: 'A polished, printable PDF by The Rubber Duck, for just',
     PRICE: '$19.99',
     CTA: 'Grab your copy',
     CTA_SHORT: '$19.99 \u203a',            // phones and small laptops
     BIG: /^\/merch\.html$/i,
-    OFF: null
+    OFF: null,
+    STORE_URL: '/merch.html',              // the header's shop sign; '' switches it off
+    STORE_OFF: /^\/merch\.html$/i          // pages without the shop sign (the store itself)
   };
   /* ===================================================================== */
 
@@ -40,13 +44,13 @@
 
   var bar = D.createElement('aside');
   bar.id = 'trd-book';
-  bar.setAttribute('aria-label', 'The Rubber Duck book');
-  var full = CONFIG.TITLE.join('');
+  bar.setAttribute('aria-label', 'The Rubber Duck book: ' + CONFIG.TITLE);
+  var full = CONFIG.TITLE + ' ' + CONFIG.OR + ' ' + CONFIG.SUBTITLE;
   bar.innerHTML =
-    '<a class="trb-in" href="' + esc(CONFIG.URL) + '" target="_blank" rel="noopener" title="' + esc(CONFIG.KICKER + ': \u201c' + full + '\u201d, ' + CONFIG.DETAIL + ' ' + CONFIG.PRICE + '. ' + CONFIG.CTA + '.') + '">' +
+    '<a class="trb-in" href="' + esc(CONFIG.URL) + '" target="_blank" rel="noopener" title="' + esc(CONFIG.KICKER.toLowerCase() + ': ' + full + '. ' + CONFIG.DETAIL + ' ' + CONFIG.PRICE + '. ' + CONFIG.CTA + '.') + '">' +
       '<span class="trb-book" aria-hidden="true">' +
         '<span class="trb-cover">' +
-          '<span class="trb-c-top">All you need<br>to know about</span>' +
+          '<span class="trb-c-top">anon<br>mission</span>' +
           '<span class="trb-c-q">Q</span>' +
           '<img class="trb-c-duck" src="/assets/trd/img/duck-banner.png" alt="" width="268" height="230" decoding="async">' +
           '<span class="trb-c-by">The Rubber Duck</span>' +
@@ -55,9 +59,10 @@
       '<span class="trb-copy">' +
         '<span class="trb-line">' +
           '<span class="trb-k">' + (CONFIG.LABEL ? '<b>' + esc(CONFIG.LABEL) + '</b>' : '') + '<span class="trb-k2">' + esc(CONFIG.KICKER) + '</span></span>' +
-          '<span class="trb-t">&ldquo;' + esc(full) + '&rdquo;</span>' +
+          '<span class="trb-t" lang="en">' + esc(CONFIG.TITLE) + '</span>' +
           '<span class="trb-p">' + esc(CONFIG.PRICE) + '</span>' +
         '</span>' +
+        '<span class="trb-sub"><span class="trb-or">' + esc(CONFIG.OR) + '</span> <span class="trb-st">' + esc(CONFIG.SUBTITLE) + '</span></span>' +
         '<span class="trb-d">' + esc(CONFIG.DETAIL) + ' ' + esc(CONFIG.PRICE) + '.</span>' +
       '</span>' +
       '<span class="trb-cta"><span class="trb-cta-l">' + esc(CONFIG.CTA) + '</span><span class="trb-cta-s">' + esc(CONFIG.CTA_SHORT) + '</span></span>' +
@@ -74,6 +79,19 @@
     }
     if (head) { if (head.nextElementSibling !== bar) b.insertBefore(bar, head.nextSibling); }
     else if (bar.parentNode !== b) b.insertBefore(bar, b.firstChild);
+    placeSign(head);
+  }
+
+  /* ---- TRD Collectibles: one small shop sign in the header of every page (not on the store itself) ---- */
+  var sign = D.createElement('a');
+  sign.className = 'trd-shopsign'; sign.href = CONFIG.STORE_URL;
+  sign.setAttribute('aria-label', 'Visit TRD Collectibles, the store');
+  sign.innerHTML = '<span class="trd-shopsign-k" aria-hidden="true">Visit</span><span class="trd-shopsign-n" aria-hidden="true">TRD Collectibles</span>';
+  function placeSign(head) {
+    var inn = head && head.querySelector('.banner-in');
+    var off = !CONFIG.STORE_URL || (CONFIG.STORE_OFF && CONFIG.STORE_OFF.test(location.pathname));
+    if (!inn || off) { if (sign.parentNode) sign.parentNode.removeChild(sign); return; }
+    if (sign.parentNode !== inn || inn.lastElementChild !== sign) inn.appendChild(sign);
   }
 
   /* ---- fit the title to its line: the stylesheet picks the mode per screen size
@@ -95,11 +113,12 @@
     var gap = parseFloat(W.getComputedStyle(line).columnGap) || 0, other = 0, n = 0;
     [].forEach.call(line.children, function (c) {
       if (c === t || W.getComputedStyle(c).display === 'none') return;
+      if (Math.abs(c.offsetTop + c.offsetHeight - t.offsetTop - t.offsetHeight) > c.offsetHeight) return;   // on its own row (the store page's kicker): takes no room from the title
       other += c.getBoundingClientRect().width; n++;
     });
     t.style.fontSize = '100px';
     var nat = t.scrollWidth;
-    var room = w - other - gap * n - 2;
+    var room = w - other - gap * n - 4;
     var size = nat ? Math.floor(100 * room / nat * 10) / 10 : max;
     t.style.fontSize = Math.max(min, Math.min(max, size)) + 'px';
   }

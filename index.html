@@ -1,358 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- e3:plan-override: This page is not the Drop Ledger. The direction's eight-preset plan (nav-pill, hero-kinetic, manifesto, contrib-heatmap, timeline-vertical, faq-accordion, cta-split, footer-editorial) describes ledger.html, which keeps it. This page is a coming-soon holding page by explicit request: one centred column, a wordmark, a handle, a status line and two links — no nav, no sections, no storefront. -->
+<!-- e3:plan-override: This page is not the Drop Ledger (ledger.html keeps that plan). The homepage is a one-screen front room by explicit request: a welcome line, two stacks of cassette doors, the album as a cassette deck and the TRD Collectibles shop entrance, with no scroll on a laptop or PC. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Rubber Duck™</title>
 <meta name="description" content="The home of The Rubber Duck™ (@TheRubberDuck79). Videos, The Listening Room, The Drop Ledger, The Red Pill Album, The Meme Dump, the Twitter / X Archive and the SCIF Reading Room.">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#1a120c">
 <!-- Icons: Lucide — ISC — https://github.com/lucide-icons/lucide -->
 <style>
 /* ============ FACES (self-hosted, no CDN) ============ */
-@font-face{
-  font-family:'Steelfish';
-  src:url('fonts/Steelfish%20Bd.otf') format('opentype');
-  font-weight:700; font-style:normal; font-display:swap;
-}
-@font-face{
-  font-family:'Roboto';
-  src:url('fonts/Roboto-Regular.ttf') format('truetype');
-  font-weight:400; font-style:normal; font-display:swap;
-}
+@font-face{font-family:'Steelfish';src:url('fonts/Steelfish%20Bd.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Black.ttf') format('truetype');font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'TRD Oswald';src:url('/assets/trd/fonts/Oswald-VariableFont_wght.ttf') format('truetype');font-weight:200 700;font-display:swap}
+@font-face{font-family:'TRD Courier B';src:url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Yellowtail';src:url('/assets/trd/fonts/Yellowtail-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 
-/* ============ TOKENS ============ */
+/* ============ TOKENS: warm, welcoming, vintage ============ */
 :root{
-  --bg:#050505;
-  --ink:#FFFFFF;
-  --ink-soft:#E6E4E2;
-  --muted:#8A8A8A;
-  --line:#1C1C1C;
-  --line-strong:#2A2A2A;
-  --red:#E10600;          /* the album's red, held in reserve */
-  --red-bright:#FF3B33;   /* red for anything that has to be read as text */
-
+  --bg:#1a120c;            /* warm walnut, not black */
+  --ink:#fbf3e0;
+  --ink-soft:#eadcbc;
+  --muted:#c9b48e;
+  --paper:#fbf4e3; --paper2:#f1e3c2;
+  --brown:#2e1f13; --brown2:#6b4a2c;
+  --mustard:#e3a82b; --mustard2:#c98a17; --orange:#e2652a; --red:#c8302b; --wood:#6b4325;
   --display:'Steelfish','Arial Narrow',Impact,system-ui,sans-serif;
   --body:'Roboto','Helvetica Neue',Arial,sans-serif;
-  --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,'Liberation Mono',monospace;
-
+  --retro:'Bungee','Arial Black',Impact,sans-serif;
+  --script:'Yellowtail','Brush Script MT',cursive;
   --ease:cubic-bezier(.16,1,.3,1);
 }
-
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:var(--body);
-  font-size:16px;
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-/* one restrained red breath behind the mark — the only light in the room */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:radial-gradient(62% 46% at 50% 34%, rgba(225,6,0,.09) 0%, rgba(225,6,0,.028) 42%, transparent 72%);
-}
+/* a warm lamp over the room instead of a red glare */
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(70% 55% at 38% 30%,rgba(255,196,110,.13) 0%,rgba(255,170,80,.05) 45%,transparent 75%),
+             radial-gradient(40% 40% at 85% 60%,rgba(227,168,43,.08) 0%,transparent 70%)}
 
-/* ============ THE ROOM — the duck, standing in the red light ============ */
-.room{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  min-height:100svh;
-  overflow:hidden;
-  pointer-events:none;
-}
-.room picture{position:absolute; inset:0; display:block}
-.room .duck{
-  position:absolute;
-  /* Desktop: the WHOLE duck, centred behind the wordmark. cover cropped the silhouette;
-     contain shows all of it at ~90% of the viewport height. The 5% band top and bottom is
-     the headroom the drift needs: roomDrift grows the box by 2.8% and lifts it 1.4%, so the
-     silhouette uses at most ~1.4% of that 5% and never reaches the frame edge. The phone
-     block at the end of this stylesheet overrides inset/width/height with its own values. */
-  inset:5% 0;
-  width:100%;
-  height:90%;
-  object-fit:contain;
-  object-position:50% 50%;
-  opacity:.64;
-  /* A black duck on a #050505 ground: brightness alone can't fix it, because a quarter of
-     the cut-out's pixels sit at luminance <=5 and multiplying near-zero is still near-zero.
-     So contrast is pulled DOWN (0.80) to lift the shadow side off black, then brightness
-     carries the body up to ~95 and the gloss explains itself. saturate holds the eye red;
-     the red rim follows the cut-out's own alpha so the silhouette has an edge. */
-  filter:brightness(1.45) contrast(.80) saturate(1.15) drop-shadow(0 0 36px rgba(225,6,0,.34)) drop-shadow(0 0 120px rgba(225,6,0,.26)) drop-shadow(0 0 12px rgba(255,130,90,.26));
-  animation:roomDrift 48s var(--ease) infinite alternate;
-  will-change:transform;
-}
-@keyframes roomDrift{
-  from{transform:scale(1) translate3d(0,0,0)}
-  to{transform:scale(1.028) translate3d(0,-1.4%,0)}
-}
+/* ============ THE ROOM: the duck, softly lit, in the background ============ */
+.room{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.room picture{position:absolute;inset:0;display:block}
+.room .duck{position:absolute;inset:6% 0;width:100%;height:88%;object-fit:contain;object-position:34% 50%;opacity:.16;
+  filter:sepia(.75) saturate(1.3) brightness(1.5) contrast(.8);animation:roomDrift 48s var(--ease) infinite alternate;will-change:transform}
+@keyframes roomDrift{from{transform:scale(1)}to{transform:scale(1.025) translate3d(0,-1%,0)}}
+.haze{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 40%,rgba(26,18,12,0) 40%,rgba(18,12,8,.75) 100%)}
 
-/* scrim: a soft band across the column, a local hold behind it, then a vignette so the frame edges fall away.
-   The duck's head and the base keep their brightness; only the strip the words live on is held down. */
-.haze{
-  position:absolute;
-  inset:0;
+/* ============ THE STAGE ============ */
+.stage{position:relative;z-index:2;width:100%;max-width:1240px;margin:0 auto;padding:22px 16px 28px;
+  display:grid;grid-template-columns:1fr;gap:22px}
+.hall{display:flex;flex-direction:column;gap:20px;min-width:0}
+.top{display:flex;flex-direction:column;gap:18px;min-width:0}
+
+/* ---- welcome ---- */
+.hello{margin:0;text-align:left;display:flex;flex-direction:column;min-width:0}
+.hello-k{margin:0;font-family:var(--script);font-size:28px;line-height:1;color:var(--mustard);text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.hello-h{margin:6px 0 0;font-family:var(--display);font-weight:700;font-size:40px;line-height:1;letter-spacing:.01em;color:var(--ink)}
+.hello-s{margin:10px 0 0;font-size:16px;line-height:1.45;color:var(--ink-soft)}
+.hello-s b{color:#ffd77a;font-weight:700}
+.hello-how{margin:12px 0 0;display:flex;align-items:center;gap:10px;font:700 14.5px/1.3 var(--body);color:#f3d48a}
+.hello-how svg{flex:none;width:18px;height:18px;color:var(--mustard)}
+.hello-how b{color:#fff}
+
+/* ============ THE TAPE DECK: The Red Pill Album as a cassette; press play and it becomes the player ============ */
+.deck{position:relative;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;min-width:0;text-decoration:none;color:#222;
+  padding:10px 14px 12px;border-radius:10px;
   background:
-    linear-gradient(180deg, rgba(5,5,5,0) 10%, rgba(5,5,5,.26) 25%, rgba(5,5,5,.40) 50%, rgba(5,5,5,.34) 74%, rgba(5,5,5,0) 90%),
-    radial-gradient(58% 42% at 50% 47%, rgba(5,5,5,.52) 0%, rgba(5,5,5,.36) 46%, rgba(5,5,5,0) 78%),
-    radial-gradient(124% 98% at 50% 48%, rgba(5,5,5,0) 34%, rgba(5,5,5,.40) 74%, rgba(5,5,5,.88) 100%);
-}
+    repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),
+    linear-gradient(180deg,#d9d6cf 0%,#bdb8ae 55%,#a8a397 100%);
+  border-left:12px solid #5a3720;border-right:12px solid #5a3720;
+  box-shadow:0 0 0 2px #2e1f13,0 18px 36px rgba(0,0,0,.6),0 0 60px rgba(255,170,80,.14),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(0,0,0,.2);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.deck::before,.deck::after{content:"";position:absolute;top:0;bottom:0;width:12px;pointer-events:none;
+  background:repeating-linear-gradient(180deg,rgba(0,0,0,.18) 0 2px,transparent 2px 7px),linear-gradient(90deg,#4a2c17,#7a4c2c 50%,#4a2c17)}
+.deck::before{left:-12px;border-radius:10px 0 0 10px}
+.deck::after{right:-12px;border-radius:0 10px 10px 0}
+.deck:hover,.deck:focus-visible{transform:translateY(-3px);box-shadow:0 0 0 2px #2e1f13,0 0 0 5px var(--mustard),0 24px 44px rgba(0,0,0,.65),0 0 70px rgba(255,170,80,.25)}
+.deck-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font:700 11px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#4a4237}
+.deck-top b{font-family:var(--retro);font-weight:400;letter-spacing:.06em;font-size:12.5px;color:#2e1f13}
+.deck-led{display:inline-flex;align-items:center;gap:6px}
+.deck-led i{width:8px;height:8px;border-radius:50%;background:#5a1410;box-shadow:inset 0 1px 1px rgba(0,0,0,.5)}
+.deck.is-playing .deck-led i{background:#ff3b33;box-shadow:0 0 6px #ff3b33,0 0 12px rgba(255,59,51,.6)}
+/* the cassette well (a size container, so the cassette keeps its shape at any size) */
+.deck-well{container-type:size;min-height:0;display:grid;place-items:center;border-radius:6px;padding:6px;
+  background:linear-gradient(180deg,#1b1714,#2a2420);box-shadow:inset 0 3px 10px rgba(0,0,0,.8),inset 0 0 0 1px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.5)}
+.deck.tpd-detached .deck-well{outline:2px dashed rgba(227,168,43,.6);outline-offset:-4px}
 
-/* ============ THE COLUMN ============ */
-.stage{
-  position:relative;
-  z-index:2;
-  min-height:100svh;
-  max-width:1040px;
-  margin:0 auto;
-  padding:clamp(56px,10vh,120px) 24px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
+/* the cassette: a standard Compact Cassette (100.4 x 63.8 mm), front view, worn from years in a glovebox.
+   All positions are % of the shell; type is in cqw so it scales, also while it flies into the player.
+   Regular-weight typewriter only (no bold). */
+.cas{container-type:inline-size;position:relative;display:block;width:min(100cqw,calc(100cqh * 1.5737));aspect-ratio:100.4/63.8;border-radius:3.2%/5%;
+  background:url('/assets/trd/img/cas-scratch.webp') center/100% 100% no-repeat,linear-gradient(160deg,#3a3633 0%,#211e1c 45%,#161412 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),inset 0 2px 0 rgba(255,255,255,.1),0 6px 16px rgba(0,0,0,.65);overflow:hidden;transition:transform .3s var(--ease);
+  font-family:'TRD Courier','Courier Prime','Courier New',monospace;font-weight:400}
+.deck:hover .cas,.deck:focus-visible .cas{transform:scale(1.015)}
+.cas i.sc{position:absolute;width:3.2%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#8d8a86 0 35%,#4e4b48 40% 100%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);z-index:2}
+.cas i.sc::after{content:"";position:absolute;left:20%;right:20%;top:46%;height:9%;background:#2a2826;transform:rotate(var(--r,20deg))}
+.cas i.s1{left:2.9%;top:5.5%}.cas i.s2{right:2.9%;top:5.5%;--r:-35deg}.cas i.s3{left:2.9%;bottom:5.5%;--r:70deg}.cas i.s4{right:2.9%;bottom:5.5%;--r:5deg}.cas i.s5{left:48.4%;bottom:7%;--r:-60deg}
+/* the paper label: faded print, rubbed edges, scuffs, top-right corner lifting */
+.cas-label{position:absolute;left:5%;right:5%;top:6.3%;height:67.4%;border-radius:1.2%/2.5%;
+  background:url('/assets/trd/img/rpa-label-aged.webp') center/100% 100% no-repeat,#d9c9a3;
+  box-shadow:inset 0 0 0 1px rgba(226,212,176,.25),inset 0 0 14px rgba(0,0,0,.45),0 0 0 .5px rgba(0,0,0,.5);
+  clip-path:polygon(0 0,93.5% 0,100% 13.5%,100% 100%,0 100%)}
+.cas-peel{position:absolute;right:5%;top:6.3%;width:5.85%;height:9.1%;z-index:1;pointer-events:none;
+  background:linear-gradient(225deg,transparent 0 49%,#e7dcc0 50%,#cdbb92 78%,#b9a57a 100%);clip-path:polygon(0 0,100% 100%,0 100%);
+  filter:drop-shadow(-1px 1px 1.5px rgba(0,0,0,.55))}
+.cas-head{position:absolute;left:3.5%;right:3.5%;top:3%;height:18%;display:flex;align-items:center;justify-content:space-between;gap:3%}
+.cas-art{display:flex;align-items:center;gap:1.6cqw;min-width:0}
+.cas-t{flex:none;font-size:5.4cqw;line-height:1;color:#efe7d6;letter-spacing:-.02em;white-space:nowrap;opacity:.92;text-shadow:0 0 1px rgba(0,0,0,.6)}
+.cas-pill{flex:none;display:block;width:15cqw;height:auto;filter:saturate(.8) brightness(.92) drop-shadow(0 1px 2px rgba(0,0,0,.7))}
+.cas-mark{flex:none;display:flex;flex-direction:column;align-items:center;gap:.6cqw;margin-right:3cqw}
+.cas-oval{display:flex;align-items:center;gap:.6cqw;padding:.4cqw 1.5cqw;border:.3cqw solid #cfc6b4;border-radius:50%;font-size:2.3cqw;line-height:1;color:#e9e1cf;letter-spacing:.06em}
+.cas-oval img{width:3.2cqw;height:auto;display:block;opacity:.9}
+.cas-cat{font-size:2cqw;line-height:1;color:#bfb6a5;letter-spacing:.08em}
+.cas-meta{position:absolute;left:18%;right:18%;top:22.5%;text-align:center;font-size:2.2cqw;line-height:1.1;letter-spacing:.06em;color:#d8cfbd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cas-side{position:absolute;left:2%;top:34%;width:14%;height:36%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e4dccb}
+.cas-side small{font-size:1.9cqw;line-height:1;letter-spacing:.1em}
+.cas-side b{font-family:'Yellowtail',cursive;font-weight:400;font-size:9cqw;line-height:.9;color:#f2eee4;transform:rotate(-8deg);opacity:.9;text-shadow:0 0 1px rgba(255,255,255,.3)}
+.cas-by{position:absolute;right:2%;top:44%;width:14%;text-align:center;font-size:1.9cqw;line-height:1.3;color:#bfb6a5;letter-spacing:.06em}
+.cas-list{position:absolute;left:3.5%;right:3.5%;bottom:3%;height:24%;display:grid;grid-template-columns:1.25fr 1fr;grid-auto-rows:1fr;column-gap:2.5%;align-content:center;
+  font-size:2.6cqw;line-height:1.2;color:#e6dece;letter-spacing:-.04em}
+.cas-list span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cas-list i{font-style:normal;color:#d8574b}
+/* the window: tape pack on two hubs, 42.5 mm apart */
+.cas-win{position:absolute;left:21%;width:58%;top:28.2%;height:26.6%;border-radius:999px;z-index:1;
+  background:linear-gradient(180deg,rgba(40,30,24,.92),rgba(15,12,10,.96));box-shadow:inset 0 0 0 1.5px #2e1f13,inset 0 2px 4px rgba(0,0,0,.6),0 0 0 2px rgba(10,8,6,.55);overflow:hidden}
+.cas-win::after{content:"";position:absolute;inset:0;background:linear-gradient(170deg,rgba(255,255,255,.2) 0 22%,transparent 22% 100%),url('/assets/trd/img/cas-scratch.webp') center/300% 300%}
+.cas-tape{position:absolute;left:30%;right:30%;top:22%;bottom:22%;background:linear-gradient(180deg,#5a3720,#3b2414);border-radius:3px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+.reel{position:absolute;top:50%;aspect-ratio:1;transform:translateY(-50%);border-radius:50%;background:radial-gradient(circle,transparent 0 46%,#4a2c17 47% 100%)}
+.reel.l{left:2%;width:30%}.reel.r{right:4%;width:22%}
+.reel b{position:absolute;inset:0;margin:auto;width:58%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,#1a1a1a 0 18%,transparent 19%),repeating-conic-gradient(#e0362b 0 30deg,#a8170f 30deg 60deg);
+  box-shadow:0 0 0 1.5px #f2b0a8;animation:reel 2.2s linear infinite;animation-play-state:paused}
+.reel.r b{width:80%}
+.deck.is-playing .reel b{animation-play-state:running}
+@keyframes reel{to{transform:rotate(-360deg)}}
+/* the raised head-access foot: 64 mm at the top, 74 mm at the base */
+.cas-foot{position:absolute;left:13.2%;right:13.2%;bottom:0;height:20%;clip-path:polygon(6.8% 0,93.2% 0,100% 100%,0 100%);
+  background:linear-gradient(180deg,#2c2826,#1a1715);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.cas-foot i{position:absolute;bottom:26%;width:5.5%;aspect-ratio:1;border-radius:50%;background:#050505;box-shadow:inset 0 1px 1px rgba(255,255,255,.15)}
+.cas-foot i:nth-child(1){left:12%}.cas-foot i:nth-child(2){left:30%;width:3.5%;border-radius:20%}.cas-foot i:nth-child(3){right:30%;width:3.5%;border-radius:20%}.cas-foot i:nth-child(4){right:12%}
+.deck-keys{display:flex;align-items:stretch;gap:6px}
+.key{flex:1;display:grid;place-items:center;min-height:34px;border-radius:4px 4px 6px 6px;color:#3a3530;
+  background:linear-gradient(180deg,#f2efe8,#cfcac0);box-shadow:0 3px 0 #8d877b,0 5px 8px rgba(0,0,0,.35),inset 0 1px 0 #fff}
+.key svg{width:16px;height:16px}
+.key-play{flex:3;display:flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;color:#fff;font:700 15px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;
+  background:linear-gradient(180deg,#e2452b,#b8261d);box-shadow:0 3px 0 #6e130c,0 5px 10px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35);animation:playGlow 2.8s ease-in-out infinite}
+.key-play svg{width:18px;height:18px}
+@keyframes playGlow{0%,100%{box-shadow:0 3px 0 #6e130c,0 5px 10px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35)}50%{box-shadow:0 3px 0 #6e130c,0 5px 10px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35),0 0 18px 3px rgba(255,120,60,.55)}}
+.deck:hover .key-play,.deck:focus-visible .key-play{transform:translateY(2px);box-shadow:0 1px 0 #6e130c,0 3px 6px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35)}
+.deck.is-live .key-play{animation:none}
+.key-play .kp-on{display:none}
+.deck.is-live .key-play .kp-off{display:none}.deck.is-live .key-play .kp-on{display:inline}
 
-/* ---- status line ---- */
-.status{
-  margin:0;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:.18em;
-  color:var(--ink-soft);
-  text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
-}
-.status .dot{
-  width:6px; height:6px;
-  border-radius:50%;
-  background:var(--red);
-  box-shadow:0 0 0 3px rgba(225,6,0,.14), 0 0 12px rgba(225,6,0,.55);
-  flex:none;
-  animation:breathe 4.2s ease-in-out infinite;
-}
-@keyframes breathe{
-  0%,100%{opacity:.55; box-shadow:0 0 0 3px rgba(225,6,0,.10), 0 0 10px rgba(225,6,0,.40)}
-  50%{opacity:1; box-shadow:0 0 0 4px rgba(225,6,0,.18), 0 0 16px rgba(225,6,0,.70)}
-}
+/* ============ THE STACKS: every room as a cassette spine in its clear case ============ */
+.stacks{display:grid;grid-template-columns:1fr;gap:10px}
+.stack{display:grid;gap:10px;min-width:0}
+.spine{--off:0px;--rot:0deg;position:relative;display:block;min-width:0;min-height:62px;padding:4px 5px;border-radius:3px;text-decoration:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.62) 0,rgba(255,255,255,.2) 3px,rgba(210,220,230,.10) 50%,rgba(255,255,255,.2) calc(100% - 3px),rgba(255,255,255,.55) 100%);
+  border:1px solid rgba(255,255,255,.38);box-shadow:0 3px 0 rgba(0,0,0,.35),0 8px 16px rgba(0,0,0,.42);
+  transform:translateX(var(--off)) rotate(var(--rot));transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.spine::after{content:"";position:absolute;left:5px;right:5px;top:4px;height:30%;pointer-events:none;border-radius:1px;
+  background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0))}
+.spine:hover,.spine:focus-visible{transform:translateX(calc(var(--off) + 12px)) rotate(0deg);
+  box-shadow:0 3px 0 rgba(0,0,0,.35),0 12px 24px rgba(0,0,0,.5),0 0 0 2px var(--mustard),0 0 26px rgba(255,190,90,.3)}
+.sp{position:relative;display:flex;align-items:center;gap:12px;height:100%;min-height:52px;padding:4px 10px 4px 8px;border-radius:1px;overflow:hidden}
+.sp-cat{flex:none;writing-mode:vertical-rl;transform:rotate(180deg);font:700 9.5px/1 var(--body);letter-spacing:.12em;opacity:.85}
+.sp-ic{flex:none;width:42px;height:42px;border-radius:5px;object-fit:cover;display:block;box-shadow:0 0 0 2px currentColor,0 2px 5px rgba(0,0,0,.4);background:#2e1f13}
+.sp-t{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.sp-n{font-size:20px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-s{font:400 14px/1.2 var(--body);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.sp-end{flex:none;display:flex;align-items:center;gap:9px}
+.sp-mk{display:flex;flex-direction:column;align-items:center;gap:2px;font:700 7.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.sp-mk img{width:26px;height:22px;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.sp-go{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;transition:transform .2s var(--ease)}
+.sp-go svg{width:16px;height:16px}
+.spine:hover .sp-go,.spine:focus-visible .sp-go{transform:translateX(3px)}
+.start-tag{position:absolute;top:-11px;right:62px;z-index:2;padding:3px 10px 2px;border-radius:999px;background:var(--orange);color:#fff;
+  font:700 11.5px/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase;box-shadow:0 2px 6px rgba(0,0,0,.4)}
 
-/* ---- wordmark ---- */
-.wordmark{
-  margin:clamp(22px,4.5vh,40px) 0 0;
-  font-family:var(--display);
-  font-weight:700;
-  font-size:clamp(4.1rem,16.6vw,6.2rem);
-  line-height:.84;
-  letter-spacing:-.015em;
-  color:var(--ink);
-  text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
-  text-wrap:balance;
-}
-.wordmark .l{display:block}
-.wordmark sup{
-  font-family:var(--body);
-  font-size:.24em;
-  font-weight:400;
-  letter-spacing:0;
-  vertical-align:.85em;
-  margin-left:.06em;
-  color:var(--ink-soft);
-}
+/* six original 80s spines (no real artists, labels or marks) */
+/* 1 Videos: brushed chrome, heavy black italic, red pinstripes */
+.t1 .sp{background:linear-gradient(180deg,#f4f4f2,#c9c8c4 55%,#e2e1dd);color:#141414}
+.t1 .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(90deg,#c8302b 0 2px,transparent 2px 4px,#c8302b 4px 6px)}
+.t1 .sp-n{font-family:var(--body);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:.02em}
+.t1 .sp-s{color:#3a3a3a}.t1 .sp-go{background:#141414;color:#fff}
+/* 2 The Listening Room: cream with red blocky letters */
+.t2 .sp{background:linear-gradient(180deg,#fbf4e3,#efe2c2);color:#c8202b}
+.t2 .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:#c8202b}
+.t2 .sp-n{font-family:var(--retro);font-size:17px;letter-spacing:.01em}
+.t2 .sp-s{color:#5a3a22}.t2 .sp-go{background:#c8202b;color:#fff}
+/* 3 The SCIF Reading Room: an 80s sunset rainbow */
+.t3 .sp{background:linear-gradient(90deg,#3c1f63 0%,#8d2a77 28%,#d9483f 55%,#f08a2c 78%,#f6c945 100%);color:#fff}
+.t3 .sp-n{font-family:var(--body);font-weight:900;font-style:italic;text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.t3 .sp-s{color:#fff3df;text-shadow:0 1px 2px rgba(0,0,0,.45)}.t3 .sp-go{background:rgba(255,255,255,.92);color:#5a1f4f}
+/* 4 The Drop Ledger: yellow condensed letters on black */
+.t4 .sp{background:linear-gradient(180deg,#151515,#050505);color:#ffd21f}
+.t4 .sp-n{font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:.06em;text-transform:uppercase}
+.t4 .sp-s{color:#efe5c8}.t4 .sp-go{background:#ffd21f;color:#111}
+/* 5 The Meme Dump: neon pink on midnight blue, cyan echo */
+.t5 .sp{background:linear-gradient(180deg,#1d2266,#121548);color:#ff5fae}
+.t5 .sp::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(84,220,255,.08) 0 1px,transparent 1px 16px)}
+.t5 .sp-n{font-family:var(--retro);font-size:17px;text-shadow:2px 2px 0 #23c3e6}
+.t5 .sp-s{color:#bfeeff}.t5 .sp-go{background:#ff5fae;color:#fff}
+/* 6 Twitter / X Archive: white with tall blue letters and a red-blue double stripe */
+.t6 .sp{background:linear-gradient(180deg,#ffffff,#e9e6de);color:#1f4fa0}
+.t6 .sp::before{content:"";position:absolute;right:0;top:0;bottom:0;width:7px;background:linear-gradient(90deg,#c8302b 0 3px,#fff 3px 4px,#1f4fa0 4px 7px)}
+.t6 .sp-n{font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:.03em}
+.t6 .sp-s{color:#3d4656}.t6 .sp-go{background:#1f4fa0;color:#fff}
+/* hand-stacked, not machine-perfect */
+.stack-a .spine:nth-child(1){--off:0px;--rot:-.25deg}.stack-a .spine:nth-child(2){--off:9px;--rot:.2deg}.stack-a .spine:nth-child(3){--off:-3px;--rot:-.15deg}
+.stack-b .spine:nth-child(1){--off:6px;--rot:.2deg}.stack-b .spine:nth-child(2){--off:-4px;--rot:-.25deg}.stack-b .spine:nth-child(3){--off:3px;--rot:.15deg}
 
-@media (min-width:620px){
-  .wordmark{font-size:clamp(3.6rem,10.6vw,9.4rem); line-height:.88}
-  .wordmark .l{display:inline}
-}
+/* ============ TRD COLLECTIBLES: a Main Street card shop entrance ============ */
+.shop{position:relative;display:flex;flex-direction:column;min-height:420px;border-radius:12px 12px 6px 6px;overflow:hidden;text-decoration:none;color:var(--brown);
+  /* brick facade */
+  background:
+    repeating-linear-gradient(0deg,rgba(40,18,10,.55) 0 2px,transparent 2px 22px),
+    repeating-linear-gradient(90deg,rgba(40,18,10,.45) 0 2px,transparent 2px 44px) 0 0/44px 44px,
+    repeating-linear-gradient(90deg,transparent 0 22px,rgba(40,18,10,.45) 22px 24px,transparent 24px 44px) 0 22px/44px 44px,
+    linear-gradient(180deg,#8a3b26,#73301f);
+  box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 2px #3b2414,0 0 0 5px var(--mustard2),0 0 70px rgba(255,180,80,.16);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.shop:hover,.shop:focus-visible{transform:translateY(-3px);box-shadow:0 24px 50px rgba(0,0,0,.6),0 0 0 2px #3b2414,0 0 0 5px var(--mustard),0 0 40px rgba(255,190,90,.25)}
+.shop-cornice{flex:none;height:14px;background:linear-gradient(180deg,#e9d8b0,#b89a62);border-bottom:3px solid #4a2c17}
+/* the sign board */
+.shop-sign{flex:none;margin:12px 16px 0;padding:10px 12px 11px;border-radius:6px;text-align:center;
+  background:linear-gradient(180deg,#3d2616,#2a190e);border:3px solid var(--mustard);box-shadow:0 0 0 2px #2a190e,0 6px 12px rgba(0,0,0,.45),inset 0 0 18px rgba(0,0,0,.6)}
+.shop-sign-pre{display:block;font-family:var(--script);font-size:20px;line-height:1;color:#ffd77a}
+.shop-sign-name{display:block;margin-top:3px;font-family:var(--retro);font-size:27px;line-height:1.05;color:#f6ecd4;letter-spacing:.01em;
+  text-shadow:0 2px 0 #c8302b,0 3px 0 #7a1d16,0 0 14px rgba(255,200,120,.25);white-space:nowrap}
+/* the awning: 70s stripes with a scalloped edge */
+.shop-awning{flex:none;position:relative;height:46px;margin:12px -4px 0;
+  background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 40%,rgba(255,255,255,.08) 70%,rgba(0,0,0,.12)),
+    repeating-linear-gradient(90deg,#c8302b 0 22px,#e2652a 22px 44px,#e3a82b 44px 66px,#7a4a24 66px 88px);
+  box-shadow:0 10px 14px -6px rgba(0,0,0,.6)}
+.shop-awning::after{content:"";position:absolute;left:0;right:0;top:100%;height:11px;
+  background:radial-gradient(circle at 11px 0,#a8401f 10.5px,transparent 11px) 0 0/22px 11px repeat-x;filter:drop-shadow(0 3px 2px rgba(0,0,0,.4))}
+/* the shopfront: window + door, in wood */
+.shop-front{flex:1;min-height:0;display:flex;gap:10px;margin:22px 16px 0;padding:10px;border-radius:4px 4px 0 0;
+  background:linear-gradient(90deg,#5a3720,#7a4c2c 20%,#6b4325 50%,#7a4c2c 80%,#5a3720);
+  box-shadow:inset 0 0 0 2px #3b2414,inset 0 3px 8px rgba(0,0,0,.4)}
+.shop-window{position:relative;flex:2.6;min-width:0;border-radius:3px;overflow:hidden;
+  background:radial-gradient(90% 70% at 50% 30%,#fff1c7 0%,#f2c873 40%,#b9772e 100%);
+  box-shadow:inset 0 0 0 3px var(--mustard2),inset 0 0 0 5px #3b2414,inset 0 10px 24px rgba(90,40,10,.45)}
+.shop-window::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;box-shadow:inset 0 0 0 3px var(--mustard2),inset 0 0 0 5px #3b2414,inset 0 8px 18px rgba(60,25,5,.4);
+  background:linear-gradient(115deg,rgba(255,255,255,.22) 0 9%,transparent 9% 22%,rgba(255,255,255,.1) 22% 25%,transparent 25%)}
+.shop-neon{position:absolute;z-index:3;top:5%;left:50%;transform:translateX(-50%);padding:3px 10px 1px;border:2px solid #ff5a8a;border-radius:10px;
+  font-family:var(--retro);font-size:26px;line-height:1.1;color:#fff;letter-spacing:.06em;
+  text-shadow:0 0 4px #fff,0 0 10px #ff4f7e,0 0 20px #ff2f63,0 0 34px #ff2f63;
+  box-shadow:0 0 8px #ff4f7e,0 0 18px rgba(255,47,99,.55),inset 0 0 8px rgba(255,79,126,.6);background:rgba(60,10,20,.25);
+  animation:neonHum 6s steps(1) infinite}
+@keyframes neonHum{0%,91%,94%,100%{opacity:1}92%,93.5%{opacity:.55}}
+.shop-in{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;filter:saturate(1.05) brightness(1.04)}
+/* real product mockups standing on the window sill, like a price-tagged display */
+.shop-cards{position:absolute;left:7%;right:7%;bottom:6%;height:22%;display:flex;justify-content:space-between;align-items:flex-end;container-type:size;z-index:1}
+.card{position:relative;flex:none;height:100cqh;width:auto;aspect-ratio:4/5;padding:4px 4px 13px;border-radius:4px;background:#fbf4e3;
+  border:2px solid var(--mustard);box-shadow:0 5px 10px rgba(60,25,5,.5)}
+.card img{display:block;width:100%;height:100%;object-fit:cover;border-radius:2px;background:#fff}
+.card::after{content:attr(data-name);position:absolute;left:0;right:0;bottom:2px;text-align:center;font:700 8.5px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:#7a1d16;white-space:nowrap}
+.card.c1{transform:rotate(-5deg)}
+.card.c2{transform:rotate(4deg)}
+.shop-shelf{position:absolute;left:0;right:0;bottom:0;height:8%;z-index:1;background:linear-gradient(180deg,#7a4c2c,#4a2c17);box-shadow:0 -3px 6px rgba(0,0,0,.25)}
+.shop-door{position:relative;flex:1;min-width:0;border-radius:3px;padding:8% 4.5% 0;
+  background:linear-gradient(90deg,#3e7a5f,#4f8f71 50%,#3e7a5f);box-shadow:inset 0 0 0 3px #2c5642,inset 0 0 0 5px #3b2414}
+.shop-door-glass{display:block;height:46%;border-radius:2px;position:relative;
+  background:linear-gradient(rgba(255,214,140,.12),rgba(255,214,140,.12)),url(assets/trd/img/shop-interior.webp) 92% 62%/auto 210% no-repeat,#e6b45e;box-shadow:inset 0 0 0 3px var(--mustard2)}
+.shop-door-glass::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.35) 0 14%,transparent 14%)}
+.shop-hang{position:absolute;left:50%;top:22%;transform:translateX(-50%) rotate(-3deg);padding:3px 7px 2px;background:#fbf4e3;border:2px solid var(--red);border-radius:3px;
+  font:700 11px/1.1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--red);white-space:nowrap;box-shadow:0 2px 4px rgba(0,0,0,.35);z-index:1}
+.shop-hang::before{content:"";position:absolute;left:50%;bottom:100%;width:26px;height:12px;margin-left:-13px;border:1.5px solid #3b2414;border-bottom:0;border-radius:13px 13px 0 0}
+.shop-door-panel{display:block;height:24%;margin-top:9%;border-radius:2px;box-shadow:inset 0 0 0 2px #2c5642,inset 0 0 0 4px rgba(255,255,255,.12)}
+.shop-knob{position:absolute;right:9%;top:62%;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3c4,#e3a82b 50%,#8a5a12)}
+/* the step and the doormat line */
+.shop-step{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 8px;padding:10px 14px;
+  background:linear-gradient(180deg,#d9c7a2,#b9a47c);border-top:4px solid #8f7a55;border-radius:0 0 4px 4px}
+.shop-step-l{font:700 14.5px/1.2 var(--body);color:var(--brown);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.shop-step-go{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 12px 7px 14px;border-radius:999px;background:var(--red);color:#fff;
+  font:700 14px/1 var(--body);box-shadow:0 3px 0 #7a1d16;transition:background .2s ease}
+.shop-step-go svg{width:16px;height:16px}
+.shop:hover .shop-step-go,.shop:focus-visible .shop-step-go{background:#e04a2c}
+.shop-walk{flex:none;height:10px;background:linear-gradient(180deg,#5c5148,#3a332d)}
 
-/* ---- handle ---- */
-.handle{
-  margin:clamp(18px,3.6vh,30px) 0 0;
-  font-family:var(--mono);
-  font-size:13px;
-  letter-spacing:.1em;
-  color:var(--muted);
-  text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
-}
+/* ---- the suggestion line (desktop band) ---- */
+.band{display:none}
 
-/* ---- rule ---- */
-.rule{
-  width:min(420px,72vw);
-  height:1px;
-  margin:clamp(30px,6vh,52px) auto clamp(26px,5vh,44px);
-  background:linear-gradient(90deg,transparent,var(--line-strong) 18%,var(--line-strong) 82%,transparent);
-  position:relative;
-}
-.rule::after{
-  content:"";
-  position:absolute;
-  left:50%; top:-1px;
-  transform:translateX(-50%);
-  width:44px; height:2px;
-  background:var(--red);
-}
+:focus-visible{outline:3px solid #ffd77a;outline-offset:3px;border-radius:6px}
 
-/* ---- the two doors ---- */
-.doors{
-  width:100%;
-  max-width:700px;
-  display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
-}
-/* six doors, three even rows of two — no wide row, no empty cell */
+/* ============ TABLETS / WIDE PHONES ============ */
 @media (min-width:600px){
-  .doors{grid-template-columns:1fr 1fr; gap:14px}
-  .doors .door{grid-column:auto}
+  .stacks{grid-template-columns:1fr 1fr;gap:18px}
+  .hello-h{font-size:46px}
+  .deck-well{height:360px}
 }
-.door{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  padding:17px 20px;
-  border:1px solid rgba(225,6,0,.55);
-  border-left:4px solid var(--red);
-  border-radius:7px;
-  background:rgba(8,8,8,.86);
-  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-  box-shadow:0 8px 26px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.06);
-  color:var(--ink);
-  text-decoration:none;
-  transition:border-color .24s var(--ease), background .24s var(--ease), transform .24s var(--ease);
+
+/* ============ LAPTOP / PC: the whole room on one screen, no scroll ============
+   Hall (left): the welcome and the tape deck share a row (same top and bottom edges); under them
+   two stacks of three cassette spines. The shop (right) spans the whole hall. Below everything a band
+   the height of the support duck: the floating player's resting spot (left), the suggestion line
+   (centre), the duck and the suggestion box (right). */
+@media (min-width:1024px) and (min-height:620px){
+  body{display:flex;flex-direction:column;height:100vh;height:100svh;overflow:hidden}
+  body > .banner,body > #trd-book{flex:none}
+  #trd-suggest{display:none!important}
+  #trd-pod{height:0!important}
+  .stage{flex:1;min-height:0;max-width:clamp(1240px,84vw,1640px);padding:clamp(16px,2.6vh,34px) 24px 0;
+    grid-template-columns:minmax(0,1fr) clamp(330px,23.5vw,480px);grid-template-rows:minmax(0,1fr) clamp(114px,12.5vh,134px);
+    column-gap:clamp(28px,2.6vw,52px);row-gap:0}
+  body > #trd-book .trb-in{width:min(clamp(1240px,84vw,1640px),100%)}
+  .hall{gap:clamp(14px,2.2vh,26px);min-height:0}
+  .top{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) var(--deckw,minmax(0,1fr));gap:clamp(18px,1.8vw,30px)}
+  .hello{justify-content:center}
+  .hello-k{font-size:clamp(24px,3.3vh,36px)}
+  .hello-h{font-size:clamp(30px,min(4.9vh,2.75vw),64px)}
+  .hello-s{font-size:clamp(15px,min(2vh,1.15vw),20px);margin-top:clamp(6px,1.2vh,14px)}
+  .hello-how{font-size:clamp(14px,min(1.85vh,1.05vw),18px);margin-top:clamp(8px,1.4vh,16px)}
+  .deck{min-height:0;padding:clamp(7px,1.1vh,14px) 14px clamp(9px,1.3vh,16px);gap:clamp(5px,.9vh,10px)}
+  .deck-well{height:auto}
+  .key{min-height:clamp(30px,4.4vh,48px)}
+  .key-play{font-size:clamp(13.5px,1.8vh,17px)}
+  .stacks{grid-template-columns:1fr 1fr;gap:clamp(18px,1.8vw,30px)}
+  .stack{gap:clamp(8px,1.2vh,14px)}
+  .spine{height:clamp(58px,7.8vh,96px);min-height:0}
+  .sp{min-height:0}
+  .sp-ic{width:clamp(38px,5.2vh,62px);height:clamp(38px,5.2vh,62px)}
+  .sp-n{font-size:clamp(17px,min(2.5vh,1.3vw),27px)}
+  .t2 .sp-n,.t5 .sp-n{font-size:clamp(14.5px,min(2.1vh,1.07vw),23px)}
+  .t4 .sp-n,.t6 .sp-n{font-size:clamp(21px,min(3vh,1.55vw),33px)}
+  .t1 .sp-n,.t3 .sp-n{font-size:clamp(15.5px,min(2.25vh,1.13vw),25px)}
+  .sp-s{font-size:clamp(12.5px,min(1.75vh,.9vw),17px)}
+  .sp{gap:clamp(9px,.8vw,14px)}
+  .shop{min-height:0}
+  .shop-sign-name{font-size:clamp(19px,min(3.4vh,1.75vw),36px)}
+  .shop-sign-pre{font-size:clamp(17px,2.3vh,26px)}
+  .shop-awning{height:clamp(32px,5vh,58px)}
+  .shop-neon{font-size:clamp(20px,3.2vh,34px)}
+  .shop-step-l{font-size:clamp(13px,min(1.75vh,1vw),17px)}
+  .shop-step-go{font-size:clamp(13px,min(1.7vh,.98vw),16px)}
+  .card::after{font-size:clamp(8px,1.1vh,11px)}
+  .band{grid-column:1/-1;display:flex;align-items:center;justify-content:center;padding-bottom:6px}
+  .band-sug{-webkit-appearance:none;appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:12px;padding:11px 20px;border-radius:999px;
+    border:1.5px dashed rgba(227,168,43,.65);background:rgba(46,31,19,.72);color:var(--ink-soft);font:400 clamp(15px,1.9vh,18px)/1.2 var(--body);
+    transition:background .2s ease,border-color .2s ease}
+  .band-sug b{color:#ffd77a;font-weight:700}
+  .band-sug svg{width:20px;height:20px;color:var(--mustard)}
+  .band-sug:hover,.band-sug:focus-visible{background:rgba(70,46,26,.9);border-color:var(--mustard)}
 }
-.door-label{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:clamp(1.45rem,2.4vw,1.75rem);
-  line-height:1;
-  letter-spacing:.005em;
-  text-shadow:0 2px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9);
+
+/* shorter laptop screens (768-820px tall): give the cassette more room so its label reads */
+@media (min-width:1024px) and (min-height:620px) and (max-height:920px){
+  .deck-top{display:none}
+  .deck{grid-template-rows:minmax(0,1fr) auto;padding-top:9px}
+  .deck-well{padding:4px}
+  .spine{height:clamp(54px,6.9vh,64px)}
+  .key{min-height:clamp(30px,3.8vh,36px)}
+  .sp-s{-webkit-line-clamp:1}
 }
-.door .icon{
-  flex:none;
-  color:var(--red-bright);
-  transition:color .24s var(--ease), transform .24s var(--ease);
+@media (min-width:1024px) and (min-height:620px) and (max-height:820px){
+  .spine{height:clamp(54px,7.3vh,60px)}
+  .sp-ic{width:36px;height:36px}
 }
-.door.wide{grid-column:1/-1; justify-content:center; gap:14px}
-.door.wide .door-sub{font-family:var(--mono,'Courier New',monospace);font-size:.95rem;letter-spacing:.06em;color:var(--muted)}
-.door-x-l{display:flex;align-items:center;gap:14px;min-width:0}
-.door-av{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--line);background:#000}
-/* door icons — one size, one shape on every door (the X avatar included) */
-.door-l{display:flex;align-items:center;gap:14px;min-width:0;flex:1}
-.door-ic,.door-x .door-av{width:52px;height:52px;border-radius:10px;object-fit:cover;flex:none;display:block;
-  border:1px solid rgba(255,255,255,.14);background:#000;box-shadow:0 2px 10px rgba(0,0,0,.6)}
-.door-l .door-label{min-width:0}
-.door.wide .door-l{flex:none}
-.door.wide .door-t{display:flex;align-items:baseline;gap:14px;min-width:0}
+
+/* ============ PHONES ============ */
 @media (max-width:599px){
-  .door.wide{justify-content:space-between}
-  .door.wide .door-l{flex:1}
-  .door.wide .door-t{flex-direction:column;align-items:flex-start;gap:6px}
-  .door.wide .door-sub{font-size:.82rem;letter-spacing:.03em}
+  .stage{padding:18px 14px 24px;gap:24px}
+  .hello-k{font-size:26px}
+  .hello-h{font-size:38px}
+  .deck-well{height:auto;aspect-ratio:100/66}
+  .stacks{gap:10px}
+  .spine{min-height:66px}
+  .sp-n{font-size:19px}.t2 .sp-n,.t5 .sp-n{font-size:16px}.t4 .sp-n,.t6 .sp-n{font-size:24px}
+  .sp-s{font-size:13.5px}
+  .sp-mk{display:none}
+  .shop{min-height:470px;margin:6px 2px 0}
+  .shop-sign-name{font-size:24px}
+  .room .duck{object-position:50% 50%;opacity:.14}
 }
-@media (max-width:380px){.door-ic,.door-x .door-av{width:46px;height:46px;border-radius:9px}}
-.door-x-t{display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left;align-items:flex-start}
-.door-x .door-sub{font-family:var(--mono,'Courier New',monospace);font-size:.82rem;line-height:1.35;letter-spacing:.03em;color:var(--ink-soft)}
-.door:hover,.door:focus-visible{
-  border-color:var(--red-bright);
-  background:rgba(40,4,3,.92);
-  transform:translateY(-2px);
-}
-.door:hover .icon,.door:focus-visible .icon{
-  color:var(--red-bright);
-  transform:translate(2px,-2px);
-}
-
-:focus-visible{outline:2px solid var(--red-bright); outline-offset:3px; border-radius:4px}
-.door:focus-visible{outline-offset:2px}
-
-@media (max-width:620px){
-  /* On a phone the duck is the subject, not wallpaper: whole silhouette in frame,
-     scaled up, lifted out of the black, and held behind the column. */
-  /* 109% box, pulled back 4.5% each way: the duck draws ~9% larger than a plain contain.
-     110% is the hard ceiling on a 390 viewport — past it the bill and tail tip over the
-     screen edges, and the whole silhouette is the point. width/height are set explicitly
-     because the base rule's 100% would otherwise win and a bare negative inset would only
-     shift the frame instead of scaling it. */
-  .room .duck{inset:-4.5%; width:109%; height:109%; object-fit:contain; object-position:50% 46%; opacity:.88}
-  .haze{
-    background:
-      linear-gradient(180deg, rgba(5,5,5,.58) 0%, rgba(5,5,5,.16) 22%, rgba(5,5,5,.26) 46%, rgba(5,5,5,.22) 62%, rgba(5,5,5,.14) 82%, rgba(5,5,5,.74) 100%),
-      /* one tight scrim, clamped to the text block (wordmark + handle, ~27%-51% down)
-         instead of two broad radials that stack to ~71% coverage and grey the duck out.
-         Peak .34 is all 65px bold white needs; below the handle the duck is uncovered. */
-      radial-gradient(68% 24% at 50% 39%, rgba(5,5,5,.34) 0%, rgba(5,5,5,.26) 58%, rgba(5,5,5,0) 100%);
-  }
-}
-
 @media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none !important; transition:none !important}
-  .door:hover,.door:focus-visible{transform:none}
-  .room .duck{animation:none; transform:none}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .spine:hover,.spine:focus-visible,.deck:hover,.shop:hover{transform:translateX(var(--off,0px))}
 }
 
-
-/* ---- the Red Pill Album door: the player strip itself, sitting in a door-sized socket ---- */
-.door.door-pod{min-width:0;padding:7px 9px 7px 8px;align-items:stretch;justify-content:stretch;gap:0;
-  box-shadow:0 8px 26px rgba(0,0,0,.65), inset 0 1px 0 rgba(255,255,255,.06), inset 0 2px 12px rgba(0,0,0,.8)}
-.door.door-pod .tpd-strip{transition:transform .24s var(--ease), box-shadow .24s var(--ease)}
-.door.door-pod:hover,.door.door-pod:focus-visible{transform:none;background:rgba(8,8,8,.86)}
-.door.door-pod:hover .tpd-strip,.door.door-pod:focus-visible .tpd-strip{transform:translateY(-2px)}
-.door.door-pod:hover .tpd-btn{filter:brightness(1.08)}
-.door.door-pod.tpd-detached{border-style:dashed;border-left-style:solid;background:rgba(0,0,0,.9)}
-/* ---- PC laptops + landscape: Drop Ledger / Red Pill Album / Meme Dump stacked in one
-   full-width column, the player in the middle. Pairs above and below keep the grid even:
-   Videos | Listening Room, the stack of three, Twitter / X | SCIF. Every row is the same
-   height (1fr), every half the same width, labels and the player scaled up to fill.
-   Phone portrait (<600px wide, one column) is untouched. ---- */
-@media (min-width:900px), (orientation:landscape) and (min-width:600px){
-  .doors{max-width:740px;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:14px}
-  .doors .door{grid-column:auto;padding:16px 22px}
-  .doors .door.door-stack{grid-column:1/-1;justify-content:center;gap:22px}
-  .door.door-stack .door-l{flex:none;gap:20px}
-  .doors .door-stack .door-label{font-size:2.6rem}
-  .door-stack .door-ic{width:72px;height:72px;border-radius:13px}
-  .door-stack .icon{width:24px;height:24px}
-  .doors .door-label{font-size:2.05rem}
-  .door-ic,.door-x .door-av{width:60px;height:60px;border-radius:11px}
-  .door-l,.door-x-l{gap:16px}
-  .door-x .door-sub,.door.wide .door-sub{font-size:.86rem;letter-spacing:.03em}
-  /* SCIF leaves its wide row and pairs with Twitter / X, laid out the same way */
-  .doors .door.wide{grid-column:auto;justify-content:space-between}
-  .door.wide .door-l{flex:1}
-  .door.wide .door-t{flex-direction:column;align-items:flex-start;gap:6px}
-  /* the player, sized to its full-width socket */
-  .doors .door.door-pod{padding:8px 10px 8px 9px}
-  .door-pod .tpd-strip{gap:12px;padding:0 12px 0 12px;border-radius:18px}
-  .door-pod .tpd-disc{width:74px;height:74px}
-  .door-pod .tpd-btn{width:46px;height:46px}
-  .door-pod .tpd-btn svg{width:18px;height:18px}
-  .door-pod .tpd-eq{height:17px;gap:3px}
-  .door-pod .tpd-eq i{width:4px}
-  .door-pod .tpd-lcd{height:76px;gap:14px;padding:0 12px 0 10px}
-  .door-pod .tpd-cover{width:60px!important;height:60px!important}
-  .door-pod .tpd-meta{gap:5px}
-  .door-pod .tpd-t{font-size:29px}
-  .door-pod .tpd-s{font-size:16px}
-  .door-pod .tpd-idle-eq{right:16px;top:20px;bottom:10px;gap:5px}
-  .door-pod .tpd-idle-eq i{width:5px}
-  .door-pod .tpd-tools{gap:12px}
-  .door-pod .tpd-tools svg{width:17px;height:17px}
-}
 /* ---- one rubber duck header — same as listening-room.html ---- */
 @font-face{font-family:'TRD Steelfish';src:url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
 @font-face{font-family:'TRD Courier';src:url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
@@ -371,21 +404,6 @@ body::before{
   .banner .wm{font-size:58px}
   .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
 }
-
-/* ---- The Store door: a little of the card shop on the homepage ---- */
-.door.door-store{position:relative;overflow:hidden;padding-bottom:22px;border-color:rgba(227,168,43,.6);border-left-color:#e3a82b;
-  background:linear-gradient(180deg,rgba(26,14,6,.92),rgba(12,7,3,.92))}
-.door.door-store::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;pointer-events:none;
-  background:linear-gradient(180deg,#c8202b 0 2.5px,#e2652a 2.5px 5px,#e3a82b 5px 7.5px,#7a4a24 7.5px 10px)}
-.door-store .door-st{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0}
-.door-store .door-label{color:#f6efdc}
-.door-store .door-sub{text-align:left;font-family:var(--mono,'Courier New',monospace);font-size:.82rem;letter-spacing:.04em;color:#e3a82b;line-height:1.3}
-.door-store .icon{color:#e3a82b}
-.door-store .door-ic{border-color:rgba(227,168,43,.45)}
-.door.door-store:hover,.door.door-store:focus-visible{border-color:#e3a82b}
-.door.door-store:hover .icon,.door.door-store:focus-visible .icon{color:#ffd36a}
-@media (min-width:900px){.door-store .door-sub{font-size:.9rem}}
-@media (max-width:599px){.door-store .door-sub{font-size:.76rem;letter-spacing:0}}
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:type" content="website"><meta property="og:site_name" content="The Rubber Duck™"><meta property="og:url" content="https://therubberduck.net/"><meta property="og:title" content="The Rubber Duck™"><meta property="og:description" content="The home of The Rubber Duck™ (@TheRubberDuck79). Videos, The Listening Room, The Drop Ledger, The Red Pill Album, The Meme Dump, the Twitter / X Archive and the SCIF Reading Room."><meta property="og:image" content="https://therubberduck.net/images/brand/trd-card.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The Rubber Duck homepage with all seven rooms"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@TheRubberDuck79"><meta name="twitter:creator" content="@TheRubberDuck79"><meta name="twitter:title" content="The Rubber Duck™"><meta name="twitter:description" content="The home of The Rubber Duck™ (@TheRubberDuck79). Videos, The Listening Room, The Drop Ledger, The Red Pill Album, The Meme Dump, the Twitter / X Archive and the SCIF Reading Room."><meta name="twitter:image" content="https://therubberduck.net/images/brand/trd-card.jpg"><meta name="twitter:image:alt" content="The Rubber Duck homepage with all seven rooms"><link rel="stylesheet" href="/assets/trd/suggest.css" data-trd-keep>
@@ -419,71 +437,110 @@ body::before{
 
 <main class="stage">
 
-  <p class="status"><span class="dot" aria-hidden="true"></span>Now live</p>
+  <div class="hall">
+    <div class="top">
+      <header class="hello">
+        <p class="hello-k">Welcome, curious minds</p>
+        <h2 class="hello-h">An open archive. Come take a look around.</h2>
+        <p class="hello-s">Shows, recordings, documents and the full record, organized so you can check the sources yourself.</p>
+        <p class="hello-how"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M12 5v14M6 13l6 6 6-6"/></svg><span>New here? Start with the <b>Videos</b> tape below, or press play on the album.</span></p>
+      </header>
 
-  <h1 class="wordmark"><span class="l">THE RUBBER</span> <span class="l">DUCK<sup>™</sup></span></h1>
+      <a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album">
+        <span class="deck-top" aria-hidden="true"><b>TRD</b><span>Stereo cassette deck</span><span class="deck-led"><i></i>Play</span></span>
+        <span class="deck-well">
+            <span class="cas" id="podCas" aria-hidden="true">
+              <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
+              <span class="cas-label">
+                <span class="cas-head"><span class="cas-art"><span class="cas-t">Red Pill</span><img class="cas-pill" src="/assets/trd/img/rpa-pill.webp" width="784" height="274" alt="" decoding="async"><span class="cas-t">Album</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">TRD-022</span></span></span>
+                <span class="cas-meta">Side A &middot; 22 tracks</span>
+                <span class="cas-side"><small>SIDE</small><b>A</b></span>
+                <span class="cas-by">Type II<br>C-90</span>
+                <span class="cas-list"><span><i>1.</i> And Frogs To Destroy Them</span><span><i>4.</i> Enjoy The Show</span><span><i>2.</i> Boom, Boom, Boom</span><span><i>7.</i> GOD WINS</span><span><i>3.</i> Dark to Light</span><span><i>10.</i> Q Clearance Patriot</span></span>
+              </span>
+              <span class="cas-peel"></span>
+              <span class="cas-win"><span class="reel l"><b></b></span><span class="cas-tape"></span><span class="reel r"><b></b></span></span>
+              <span class="cas-foot"><i></i><i></i><i></i><i></i></span>
+            </span>
+        </span>
+        <span class="deck-keys" aria-hidden="true"><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11 6v12l-8.5-6zM21 6v12l-8.5-6z"/></svg></span><span class="key key-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><span class="kp-off">Press play</span><span class="kp-on">Open player</span></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13 6v12l8.5-6zM3 6v12l8.5-6z"/></svg></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor"/></svg></span></span>
+      </a>
+    </div>
 
-  <p class="handle">@TheRubberDuck79</p>
+    <nav class="stacks" aria-label="Rooms">
+      <div class="stack stack-a">
+      <a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Videos</span><span class="sp-s">Recorded shows and interviews</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
+      <a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
+      <a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
+      </div>
+      <div class="stack stack-b">
+      <a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
+      <a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
+      <a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.png" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
+      </div>
+    </nav>
+  </div>
 
-  <div class="rule" aria-hidden="true"></div>
-
-  <nav class="doors" aria-label="Sites">
-    <a class="door" href="videos.html">
-      <span class="door-l"><img class="door-ic" src="images/icons/videos.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">Videos</span></span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
-    </a>
-    <a class="door" href="listening-room.html">
-      <span class="door-l"><img class="door-ic" src="images/icons/listening-room.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Listening Room</span></span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
-    </a>
-    <a class="door door-stack" href="ledger.html">
-      <span class="door-l"><img class="door-ic" src="images/icons/drop-ledger.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Drop Ledger</span></span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
-    </a>
-    <a class="door door-pod door-stack" href="album.html" data-trd-pod-door aria-label="The Red Pill Album. Play the album">
-      <span class="tpd-strip" id="podDoorStrip">
-        <span class="tpd-disc" aria-hidden="true"><span class="tpd-btn"><svg class="tpd-i-play" viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="tpd-i-pause" viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg><span class="tpd-eq"><i></i><i></i><i></i></span></span></span>
-        <span class="tpd-lcd"><span class="tpd-idle-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><img class="tpd-cover" src="/assets/trd/img/red-pill-cover-192.jpg" width="40" height="40" alt="" decoding="async"><span class="tpd-meta"><span class="tpd-t">The Red Pill Album</span><span class="tpd-s">22 tracks</span></span><span class="tpd-prog" aria-hidden="true"><i></i></span></span>
-        <span class="tpd-tools" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M12 7.5l7 7-1.6 1.6-5.4-5.4-5.4 5.4L5 14.5z"/></svg><svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M8.5 4.5a5 5 0 0 1 7.07 0l4 4a5 5 0 0 1-7.07 7.07l-4-4a5 5 0 0 1 0-7.07Zm1.41 1.41a3 3 0 0 0 0 4.24L11.76 12 16 7.76l-1.85-1.85a3 3 0 0 0-4.24 0Z"/></svg></span>
+  <a class="shop" href="merch.html" aria-label="TRD Collectibles. Caps, tees and signed pieces. Step inside the store">
+    <span class="shop-cornice" aria-hidden="true"></span>
+    <span class="shop-sign" aria-hidden="true"><span class="shop-sign-pre">The Rubber Duck&trade; presents</span><span class="shop-sign-name">TRD Collectibles</span></span>
+    <span class="shop-awning" aria-hidden="true"></span>
+    <span class="shop-front" aria-hidden="true">
+      <span class="shop-window">
+        <span class="shop-neon">OPEN</span>
+        <img class="shop-in" src="assets/trd/img/shop-interior.webp" srcset="assets/trd/img/shop-interior.webp 480w, assets/trd/img/shop-interior@2x.webp 800w" sizes="(min-width:761px) 22vw, 60vw" alt="" decoding="async">
+        <span class="shop-cards">
+          <span class="card c1" data-name="Cap"><img src="store-img/duck-dad-hat_black_product.webp" alt="" decoding="async"></span>
+          <span class="card c2" data-name="Mug"><img src="store-img/duck-mug_white.webp" alt="" decoding="async"></span>
+        </span>
+        <span class="shop-shelf"></span>
       </span>
-    </a>
-    <a class="door door-stack" href="memes.html">
-      <span class="door-l"><img class="door-ic" src="images/icons/meme-dump.webp" width="52" height="52" alt="" decoding="async"><span class="door-label">The Meme Dump</span></span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
-    </a>
-    <a class="door door-x" href="/x/"><span class="door-x-l"><img class="door-av" src="/assets/trd/img/duck-banner.png" width="52" height="52" alt=""><span class="door-x-t"><span class="door-label">Twitter / X Archive</span><span class="door-sub">The Rubber Duck&trade;<br>@TheRubberDuck79</span></span></span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
-    </a>
-    <a class="door wide door-scif" href="/pdfs.html"><span class="door-l"><img class="door-ic" src="images/icons/scif.webp" width="52" height="52" alt="" decoding="async"><span class="door-t"><span class="door-label">The SCIF Reading Room</span><span class="door-sub">the PDF library</span></span></span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg></a>
-    <a class="door door-stack door-store" href="merch.html">
-      <span class="door-l"><img class="door-ic" src="store-img/store-door-card.webp" width="52" height="52" alt="" decoding="async"><span class="door-st"><span class="door-label">The Store</span><span class="door-sub">caps &middot; tees &middot; signed pieces</span></span></span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M7 7h10v10M7 17L17 7"/></svg>
-    </a>
-  </nav>
+      <span class="shop-door"><span class="shop-door-glass"><span class="shop-hang">Come in</span></span><span class="shop-door-panel"></span><span class="shop-knob"></span></span>
+    </span>
+    <span class="shop-step"><span class="shop-step-l">Caps, tees, signed pieces</span><span class="shop-step-go">Step inside <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+    <span class="shop-walk" aria-hidden="true"></span>
+  </a>
+
+  <div class="band">
+    <button class="band-sug" type="button" data-sug>Got an idea for the site? <b>Drop a card in the suggestion box</b><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
 
 </main>
 
 <script>
-/* The Red Pill Album door is the player strip. First tap: start the album, the strip lifts
-   off and flies to its floating spot, then the album page opens. After that it shows what
-   is playing and simply opens the album page. Without the player script it is a plain link. */
+/* desktop: size the deck column so its dark bay is exactly cassette-shaped (100.4 x 63.8), filled edge to edge */
 (function(){
-  var door=document.querySelector('[data-trd-pod-door]'); if(!door||!window.trdPod)return;
-  var strip=door.querySelector('.tpd-strip'), t=door.querySelector('.tpd-t'), sub=door.querySelector('.tpd-s'), bar=door.querySelector('.tpd-prog i');
+  var mq=window.matchMedia('(min-width:1024px) and (min-height:620px)');
+  function size(){var top=document.querySelector('.top'),deck=document.querySelector('.deck'),well=deck&&deck.querySelector('.deck-well');
+    if(!top||!well)return; if(!mq.matches){top.style.removeProperty('--deckw');return;}
+    var cs=getComputedStyle(well),ph=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom),pw=parseFloat(cs.paddingLeft)+parseFloat(cs.paddingRight);
+    var h=well.clientHeight-ph, chrome=deck.offsetWidth-well.clientWidth+pw;
+    var w=Math.round(h*1.5737+chrome), max=Math.round(top.clientWidth*.56);
+    top.style.setProperty('--deckw',Math.min(w,max)+'px');}
+  size(); var t; window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(size,100);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
+})();
+/* the suggestion line in the desktop band opens the same card as the corner box */
+(function(){var b=document.querySelector('[data-sug]');if(b)b.addEventListener('click',function(e){if(window.trdSuggest)window.trdSuggest.open(e);});})();
+/* The Red Pill Album is a cassette in a tape deck. First press: start the album; the cassette lifts out
+   and flies to the floating player's spot, then the album page opens. After that the deck shows what is
+   playing (reels turn, PLAY lit) and simply opens the album page. Without the player script it is a plain link. */
+(function(){
+  var deck=document.querySelector('[data-trd-pod-door]'); if(!deck||!window.trdPod)return;
+  var cas=deck.querySelector('.cas'), meta=deck.querySelector('.cas-meta');
   function paint(st){
-    if(!st||!st.started){strip.classList.remove('tpd-live','tpd-playing');door.setAttribute('aria-label','The Red Pill Album. Play the album');return;}
-    strip.classList.add('tpd-live'); strip.classList.toggle('tpd-playing',!!st.playing);
-    if(t.textContent!==st.title)t.textContent=st.title;
-    var line=(st.playing?'Now Playing':'Paused')+'  \u00b7  '+(st.i+1)+' of 22';
-    if(sub.textContent!==line)sub.textContent=line;
-    bar.style.width=st.d?Math.min(100,st.t/st.d*100)+'%':'0%';
-    door.setAttribute('aria-label',(st.playing?'Now playing: ':'Paused: ')+st.title+'. Open The Red Pill Album');
+    var live=!!(st&&st.started);
+    deck.classList.toggle('is-live',live); deck.classList.toggle('is-playing',live&&!!st.playing);
+    if(!live){meta.textContent='Side A \u00b7 22 tracks';deck.setAttribute('aria-label','The Red Pill Album, 22 tracks. Press play to start the album');return;}
+    var line=(st.playing?'Now playing':'Paused')+' \u00b7 '+(st.i+1)+'/22 \u00b7 '+st.title;
+    if(meta.textContent!==line)meta.textContent=line;
+    deck.setAttribute('aria-label',(st.playing?'Now playing: ':'Paused: ')+st.title+'. Open The Red Pill Album');
   }
-  door.addEventListener('click',function(e){
+  deck.addEventListener('click',function(e){
     if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
     if(window.trdPod.state().started)return;          /* the site router opens album.html */
     e.preventDefault();
-    window.trdPod.launchFrom(strip,door.getAttribute('href'));
+    window.trdPod.launchFrom(cas,deck.getAttribute('href'));
   });
   document.addEventListener('trdpod:state',function(e){paint(e.detail);});
   paint(window.trdPod.state());

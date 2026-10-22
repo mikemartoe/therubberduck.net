@@ -1,5 +1,5 @@
-/* The Suggestion Box: a wooden box at the foot of every page (plus a small side tab, or a
-   round button on phones) that opens a typed index card. Self-contained; every rule is scoped to
+/* The Suggestion Box: a wooden box at the foot of every page (plus a small hand-painted
+   Rubber Duck suggestion box at bottom-right, beside the support duck) that opens a typed index card. Self-contained; every rule is scoped to
    #trd-suggest, #trd-suggest-fx or .trs-dlg so page styles and these never collide.
    Include once per page, in <head>, before duckpod:
      <link rel="stylesheet" href="/assets/trd/suggest.css" data-trd-keep>
@@ -70,66 +70,59 @@
   #trd-suggest .trs-cta{font-size:15px; padding:12px 20px 11px}
 }
 
-/* ================= the side tab =================
-   Desktop/tablet (>=700px wide): a compact pill fully on screen at the right edge, vertically
-   centred, icon above rotated "Suggestions". Phones (<700px) and edge-to-edge pages (CONFIG.COMPACT):
-   a small round button at bottom-left; suggest.js lifts it clear of the album player and the duck
-   (--trs-lift) and keeps it inside the visible viewport (--trs-vx). One soft glow on first load only. */
+/* ================= the box opener =================
+   A small hand-painted Rubber Duck suggestion box (oxblood, cream/black pinstripes) beside the support duck,
+   standing on the duck's baseline and never taller than the duck (64px tall on desktop, 54px on phones: the height of the duck's
+   own picture plus its glow; the duck button is 84px / 68px).
+   Desktop (700px and wider): the box takes the bottom-right corner and the duck steps left of it
+   (html.trs-box-r moves .trd-sup; set by suggest.js only while the opener is shown).
+   Phones: the box stands just left of the duck, or above it if the album player or its
+   "Drag me anywhere" hint is in the way (suggest.js measures and sets --trs-r / --trs-b / --trs-lift).
+   Without a duck it sits in the corner. Tooltip on hover/focus; one soft glow on first load only. */
 #trd-suggest-fx .trs-tab{
-  position:fixed; right:calc(8px + var(--trs-vx,0px)); top:50%; z-index:2147482000;
-  transform:translateY(calc(-50% - var(--trs-lift,0px)));
-  -webkit-appearance:none; appearance:none; margin:0; cursor:pointer;
-  display:flex; flex-direction:column; align-items:center; gap:9px;
-  width:44px; padding:13px 0 15px; border:1px solid rgba(244,236,214,.2); border-radius:22px;
-  background:linear-gradient(180deg,#1d1b19,#100f0e);
-  box-shadow:0 6px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
-  color:#EFE7D2; font:700 13px/1 var(--trs-mono); letter-spacing:.12em; text-transform:uppercase;
+  position:fixed; z-index:2147482000;
+  right:var(--trs-r,20px);
+  bottom:calc(var(--trs-b,20px) + env(safe-area-inset-bottom,0px) + var(--trs-lift,0px));
+  -webkit-appearance:none; appearance:none; margin:0; padding:0; cursor:pointer;
+  display:block; width:47px; height:64px; border:0; border-radius:6px; background:none;
+  color:#EFE7D2; font:700 13px/1 var(--trs-mono);
   -webkit-tap-highlight-color:transparent;
-  transition:translate .3s var(--trs-ease), box-shadow .3s var(--trs-ease), border-color .3s var(--trs-ease), background .3s var(--trs-ease);
+  transition:translate .3s var(--trs-ease), opacity .25s ease, visibility 0s;
 }
-#trd-suggest-fx .trs-tab svg{display:block; width:20px; height:20px; flex:none; color:#F4ECD6; overflow:visible}
-#trd-suggest-fx .trs-tab svg .trs-glow{color:var(--trs-red-txt)}
-#trd-suggest-fx .trs-tab .trs-lbl{writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; text-shadow:0 1px 0 rgba(0,0,0,.6)}
-#trd-suggest-fx .trs-tab::after{                               /* a hairline red accent along the pill's left edge */
-  content:""; position:absolute; left:-1px; top:26px; bottom:26px; width:2px; border-radius:2px; background:var(--trs-red); opacity:.7;
+#trd-suggest-fx .trs-tab img{
+  display:block; width:100%; height:100%; object-fit:contain; object-position:50% 100%; pointer-events:none;
+  filter:drop-shadow(0 5px 7px rgba(0,0,0,.7)) drop-shadow(0 0 1px rgba(0,0,0,.6));
+  transition:filter .3s var(--trs-ease);
 }
-#trd-suggest-fx .trs-tab:hover,#trd-suggest-fx .trs-tab:focus-visible{
-  translate:0 -2px; border-color:rgba(255,59,51,.55); background:linear-gradient(180deg,#26211e,#141110);
-  box-shadow:0 10px 24px rgba(0,0,0,.6), 0 0 0 1px rgba(225,6,0,.18), inset 0 1px 0 rgba(255,255,255,.08);
+#trd-suggest-fx .trs-tab:hover,#trd-suggest-fx .trs-tab:focus-visible{translate:0 -3px}
+#trd-suggest-fx .trs-tab:hover img,#trd-suggest-fx .trs-tab:focus-visible img{
+  filter:drop-shadow(0 9px 10px rgba(0,0,0,.75)) drop-shadow(0 0 1px rgba(0,0,0,.6)) brightness(1.06);
 }
 #trd-suggest-fx .trs-tab:active{translate:0 0}
-#trd-suggest-fx .trs-tab:focus-visible{outline:2px solid var(--trs-red-txt); outline-offset:3px}
-#trd-suggest-fx .trs-tip{display:none}
-#trd-suggest-fx.trs-tab-off .trs-tab{display:none}
-/* one gentle glow on first load, then still */
-#trd-suggest-fx.trs-hello .trs-tab{animation:trs-hello 2.4s ease-in-out .9s 1 both}
-@keyframes trs-hello{
-  0%,100%{box-shadow:0 6px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06), 0 0 0 0 rgba(225,6,0,0)}
-  45%{box-shadow:0 6px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06), 0 0 0 6px rgba(225,6,0,.22), 0 0 22px 4px rgba(225,6,0,.28)}
-}
-/* short landscape screens: a little tighter so it stays clear of the duck */
-@media (min-width:700px) and (max-height:480px){
-  #trd-suggest-fx .trs-tab{gap:7px; padding:10px 0 12px; font-size:12px; letter-spacing:.1em}
-  #trd-suggest-fx .trs-tab svg{width:18px; height:18px}
-}
-
-/* ---- round button: phones, and pages whose content runs to the right edge ---- */
-#trd-suggest-fx.trs-dot .trs-tab{
-  top:auto; right:auto; left:calc(12px + var(--trs-vl,0px));
-  bottom:calc(16px + env(safe-area-inset-bottom,0px) + var(--trs-lift,0px));
-  transform:none; width:44px; height:44px; padding:0; gap:0; justify-content:center; border-radius:50%;
-}
-#trd-suggest-fx.trs-dot .trs-tab::after{display:none}
-#trd-suggest-fx.trs-dot .trs-tab svg{width:21px; height:21px}
-#trd-suggest-fx.trs-dot .trs-lbl{position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; writing-mode:horizontal-tb; transform:none}
-#trd-suggest-fx.trs-dot .trs-tip{                              /* the label, as a tooltip just above */
-  display:block; position:absolute; left:0; bottom:calc(100% + 8px); transform:translateY(4px);
+#trd-suggest-fx .trs-tab:focus-visible{outline:2px solid var(--trs-red-txt); outline-offset:4px}
+#trd-suggest-fx .trs-tip{                                      /* the label, as a tooltip just above, centred */
+  display:block; position:absolute; left:50%; bottom:calc(100% + 10px); transform:translate(-50%,4px);
   padding:7px 10px 6px; border-radius:6px; background:#141210; border:1px solid rgba(244,236,214,.2);
-  color:#EFE7D2; font:700 12px/1 var(--trs-mono); letter-spacing:.1em; white-space:nowrap;
+  color:#EFE7D2; font:700 12px/1 var(--trs-mono); letter-spacing:.1em; text-transform:uppercase; white-space:nowrap;
   box-shadow:0 6px 16px rgba(0,0,0,.55); opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s var(--trs-ease);
 }
-#trd-suggest-fx.trs-dot .trs-tab:focus-visible .trs-tip{opacity:1; transform:none}
-@media (hover:hover){#trd-suggest-fx.trs-dot .trs-tab:hover .trs-tip{opacity:1; transform:none}}
+#trd-suggest-fx .trs-tab:focus-visible .trs-tip{opacity:1; transform:translate(-50%,0)}
+@media (hover:hover){#trd-suggest-fx .trs-tab:hover .trs-tip{opacity:1; transform:translate(-50%,0)}}
+#trd-suggest-fx.trs-tab-off .trs-tab{display:none}
+#trd-suggest-fx.trs-behind .trs-tab{opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility 0s .2s}   /* the duck's own bubble is open */
+/* phones: a little smaller, like the duck */
+@media (max-width:480px){
+  #trd-suggest-fx .trs-tab{width:40px; height:54px}
+}
+/* desktop: the duck steps left so the box can stand in the corner (corner 14px + box 47px + 8px gap;
+   the duck's own 6px padding makes the visible gap ~14px, matching the corner margin) */
+@media (min-width:700px){html.trs-box-r .trd-sup{right:69px}}
+/* one gentle glow on first load, then still */
+#trd-suggest-fx.trs-hello .trs-tab img{animation:trs-hello 2.4s ease-in-out .9s 1 both}
+@keyframes trs-hello{
+  0%,100%{filter:drop-shadow(0 5px 7px rgba(0,0,0,.7)) drop-shadow(0 0 1px rgba(0,0,0,.6)) drop-shadow(0 0 0 rgba(225,6,0,0))}
+  45%{filter:drop-shadow(0 5px 7px rgba(0,0,0,.7)) drop-shadow(0 0 1px rgba(0,0,0,.6)) drop-shadow(0 0 12px rgba(255,59,51,.65))}
+}
 
 /* ================= the dialog ================= */
 .trs-dlg{
@@ -230,7 +223,8 @@
 
 @media (prefers-reduced-motion:reduce){
   #trd-suggest .trs-art,#trd-suggest .trs-peek,#trd-suggest .trs-cta,#trd-suggest-fx .trs-tab,#trd-suggest-fx .trs-tip,.trs-dlg .trs-btn{transition:none}
-  #trd-suggest-fx.trs-hello .trs-tab{animation:none}
+  #trd-suggest-fx.trs-hello .trs-tab img{animation:none}
+  #trd-suggest-fx .trs-tab img{transition:none}
   #trd-suggest-fx .trs-tab:hover,#trd-suggest-fx .trs-tab:focus-visible{translate:none}
   #trd-suggest .trs-open:hover .trs-art,#trd-suggest .trs-open:focus-visible .trs-art{transform:none}
   #trd-suggest .trs-open:hover .trs-peek,#trd-suggest .trs-open:focus-visible .trs-peek{transform:translateY(-4px)}
