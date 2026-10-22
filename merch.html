@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Merch Counter | The Rubber Duck™</title>
+<meta name="description" content="Caps, tees, mugs, patches, stickers and hand-signed pieces from The Rubber Duck™, laid out like an old baseball card shop.">
+<meta name="theme-color" content="#140b05">
+<style>
+
+@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Courier Prime';src:url('/assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Courier Prime';src:url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Yellowtail';src:url('/assets/trd/fonts/Yellowtail-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+:root{--red:#c8202b;--red2:#e63a33;--mustard:#e3a82b;--orange:#e2652a;--brown:#7a4a24;--brown-dk:#3a2312;--cream:#f6efdc;--stock:#efe4c6;--ink:#24160b;
+  --gold1:#f6e3a1;--gold2:#c89b3c;--gold3:#8a6420;
+  --retro:'Bungee','Arial Black',Impact,sans-serif;--script:'Yellowtail','Brush Script MT',cursive;--mono:'Courier Prime','Courier New',monospace;
+  --body:'Roboto','Helvetica Neue',Arial,sans-serif;--ease:cubic-bezier(.16,1,.3,1);--noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:#fff;font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;background-color:#2d1b0d;
+  background-image:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.08) 30%,rgba(0,0,0,.4)),
+    repeating-linear-gradient(90deg,#3d2513 0 58px,#2a180b 58px 61px,#4a2d17 61px 120px,#26160a 120px 123px,#43291a 123px 178px,#2a180b 178px 181px)}
+a{color:inherit}
+.shop{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:30px 24px 48px}
+
+/* ============ the shop sign ============ */
+.sign{position:relative;background:#140b05;border:4px solid var(--mustard);border-radius:16px;
+  padding:26px 30px 24px;box-shadow:0 0 0 7px #140b05,0 0 0 11px var(--brown),0 22px 44px rgba(0,0,0,.6);overflow:hidden}
+.sign::before{content:"";position:absolute;inset:0;background-image:var(--noise);opacity:.35;pointer-events:none}
+.sign-c{position:relative;text-align:center}
+.stripes{display:flex;flex-direction:column;gap:5px;margin:0 auto 14px;width:min(620px,100%)}
+.stripes i{display:block;height:9px;border-radius:5px}
+.stripes i:nth-child(1){background:var(--red)}.stripes i:nth-child(2){background:var(--orange)}.stripes i:nth-child(3){background:var(--mustard)}.stripes i:nth-child(4){background:var(--brown)}
+.kicker{margin:0;font-family:var(--script);font-size:clamp(2rem,3.4vw,2.8rem);line-height:1;color:var(--mustard)}
+.marquee{margin:6px 0 0;font-family:var(--retro);font-weight:400;font-size:clamp(2.3rem,5.6vw,4.9rem);line-height:1;color:var(--cream);letter-spacing:.01em;
+  text-shadow:3px 3px 0 var(--red),6px 6px 0 var(--brown-dk)}
+.sub{margin:14px auto 0;font-family:var(--mono);font-weight:700;font-size:clamp(1rem,1.5vw,1.2rem);letter-spacing:.2em;text-transform:uppercase;color:var(--mustard)}
+.lede{margin:10px auto 0;max-width:640px;font-size:clamp(1.05rem,1.45vw,1.22rem);color:#f1e6cf;line-height:1.45;text-wrap:balance}
+.plaques{list-style:none;margin:22px auto 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;max-width:1040px}
+.plaques li{background:var(--cream);background-image:var(--noise);color:var(--ink);border-radius:10px;padding:12px 14px;text-align:center;border-bottom:5px solid var(--orange);box-shadow:0 6px 14px rgba(0,0,0,.45)}
+.plaques li:nth-child(2){border-bottom-color:var(--mustard)}.plaques li:nth-child(3){border-bottom-color:var(--red)}
+.plaques b{display:block;font-family:var(--retro);font-weight:400;font-size:1.12rem;line-height:1.1;color:var(--red)}
+.plaques span{display:block;margin-top:4px;font-size:1.02rem;line-height:1.3;text-wrap:balance}
+.neon{position:absolute;right:14px;top:12px;font-family:var(--retro);font-size:15px;letter-spacing:.12em;color:#ff5a4e;padding:3px 9px;border:2px solid #ff5a4e;border-radius:8px;
+  text-shadow:0 0 6px #ff3b30,0 0 14px #ff3b30;box-shadow:0 0 8px rgba(255,59,48,.65),inset 0 0 8px rgba(255,59,48,.45)}
+
+/* ============ section heads: brass plates ============ */
+.case,.counter,.wax{margin-top:38px}
+.head{text-align:center;margin:0 auto 18px}
+.head h2{display:inline-block;margin:0;font-family:var(--retro);font-weight:400;font-size:clamp(1.9rem,3.4vw,2.9rem);line-height:1.05;color:var(--cream);text-shadow:3px 3px 0 var(--brown-dk)}
+.head h2 small{display:block;font-family:var(--mono);font-weight:700;font-size:clamp(1rem,1.4vw,1.15rem);letter-spacing:.26em;text-transform:uppercase;color:var(--mustard);text-shadow:none;margin-bottom:6px}
+.head p{margin:8px auto 0;max-width:820px;font-size:clamp(1.05rem,1.5vw,1.2rem);color:#f1e6cf;text-wrap:balance}
+
+/* glass display case: wood frame, red velvet, glass sheen */
+.glass{position:relative;border-radius:6px;padding:26px;background:radial-gradient(120% 90% at 50% 0%,#6a0f0b 0%,#330504 58%,#1c0202 100%);
+  border:14px solid transparent;border-image:linear-gradient(180deg,#9a6534,#5a3518 45%,#3a2110) 1;box-shadow:inset 0 0 70px rgba(0,0,0,.75),0 22px 46px rgba(0,0,0,.6)}
+.glass::before{content:"";position:absolute;inset:0;background-image:var(--noise);opacity:.5;mix-blend-mode:multiply;pointer-events:none}
+.glass::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(112deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,0) 20%,rgba(255,255,255,0) 58%,rgba(255,255,255,.07) 68%,rgba(255,255,255,0) 77%)}
+.brass{display:block;width:max-content;max-width:100%;margin:0 auto 22px;position:relative;z-index:1;font-family:var(--mono);font-weight:700;font-size:1.02rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#3a2508;background:linear-gradient(180deg,#f6e3a1,#c89b3c 55%,#a97c2b);border-radius:4px;padding:7px 18px;box-shadow:0 2px 0 #5a3d10,0 6px 14px rgba(0,0,0,.55)}
+/* the counter: green felt under glass */
+.felt{position:relative;border-radius:6px;padding:26px;background:#174a33;background-image:var(--noise),radial-gradient(120% 90% at 50% 0%,#1f6646,#123a28);
+  border:14px solid transparent;border-image:linear-gradient(180deg,#c08a52,#8a5a2e 45%,#5a3518) 1;box-shadow:inset 0 0 60px rgba(0,0,0,.55),0 22px 46px rgba(0,0,0,.55)}
+.felt::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;background:linear-gradient(112deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 60%,rgba(255,255,255,.05) 70%,rgba(255,255,255,0) 78%)}
+/* the wax pack bin: a cardboard box with a wax-wrapper label */
+.bin{position:relative;border-radius:6px;padding:26px;background:#b58a55;background-image:var(--noise),linear-gradient(180deg,#c49a63,#a77a45);
+  border:14px solid #7a5230;box-shadow:inset 0 0 50px rgba(60,30,5,.55),0 22px 46px rgba(0,0,0,.55)}
+.wrapper{display:block;width:max-content;max-width:100%;margin:0 auto 22px;font-family:var(--retro);font-size:1.2rem;letter-spacing:.06em;color:#fff;text-shadow:2px 2px 0 #7a0d12;
+  background:repeating-linear-gradient(135deg,#c8202b 0 16px,#d83a3a 16px 32px);border:3px solid #fff;border-radius:6px;padding:8px 20px;box-shadow:0 0 0 3px #c8202b,0 8px 16px rgba(0,0,0,.4)}
+
+.grid{display:grid;gap:26px;position:relative;z-index:1}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* ============ an item = trading card + price tag ============ */
+.item{display:flex;flex-direction:column;gap:14px;min-width:0}
+.tc{position:relative;aspect-ratio:5/7;perspective:1600px;cursor:pointer;outline:none;flex:none;border-radius:12px;container-type:inline-size}
+@container (max-width:300px){.bio li:nth-child(4),.bk-foot{display:none}.bk-ship{font-size:12px}.fact p{font-size:12.5px}.back{gap:7px}}
+.tc-in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s var(--ease)}
+.tc.flipped .tc-in{transform:rotateY(180deg)}
+.tc:focus-visible{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--red)}
+.face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:12px;overflow:hidden;box-shadow:0 14px 26px rgba(0,0,0,.55),0 2px 4px rgba(0,0,0,.4)}
+.face::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6;background-image:var(--noise);opacity:.55;mix-blend-mode:multiply;
+  box-shadow:inset 0 0 0 2px rgba(255,248,225,.35),inset 0 0 22px rgba(70,40,5,.45)}
+/* front: two-tone team border, cream inner frame, photo, name plate */
+.front{display:flex;flex-direction:column;padding:11px 11px 10px;background:linear-gradient(180deg,var(--a) 0 60%,var(--b) 60% 100%)}
+.photo{position:relative;flex:1;min-height:0;border:5px solid var(--cream);border-radius:5px;background:#ece9e4;overflow:hidden}
+.photo picture,.photo>picture img{display:block;width:100%;height:100%}
+.photo>picture img{object-fit:contain;object-position:50% 50%;transition:opacity .2s}
+.plate{position:relative;margin-top:9px;background:var(--cream);border-radius:5px;padding:5px 10px 7px;text-align:center;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.team{display:block;font-family:var(--script);font-size:1.25rem;line-height:1;color:var(--a);margin-top:-1px}
+.nm{display:block;font-family:var(--retro);font-size:clamp(.95rem,1.32vw,1.18rem);line-height:1.1;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pos{position:absolute;left:3px;top:3px;z-index:5;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--retro);font-size:14px;color:#fff;background:var(--b);border:3px solid var(--cream);box-shadow:0 3px 6px rgba(0,0,0,.4);text-shadow:1px 1px 0 rgba(0,0,0,.35)}
+.cno{position:absolute;right:0;top:0;z-index:5;width:60px;height:60px;background:var(--cream);clip-path:polygon(0 0,100% 0,100% 100%);border-top-right-radius:12px}
+.cno i{position:absolute;right:7px;top:6px;font-style:normal;font-family:var(--retro);font-size:15px;color:var(--ink)}
+.rookie{position:absolute;right:8px;bottom:8px;z-index:4;font-family:var(--retro);font-size:13px;letter-spacing:.04em;color:var(--ink);background:var(--mustard);
+  border:2px solid var(--ink);border-radius:999px;padding:4px 11px;box-shadow:2px 2px 0 var(--ink);transform:rotate(-4deg)}
+/* signed: gold foil border, seal, autograph, serial */
+.signed .front{background:linear-gradient(135deg,#f6e3a1 0%,#c89b3c 22%,#fff1c2 42%,#a97c2b 62%,#f0d68a 80%,#8a6420 100%)}
+.signed .pos{background:#7a0d12}
+.signed .team{color:#8a6420}
+.seal{position:absolute;right:8px;top:44px;z-index:4;width:78px;height:78px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 35% 30%,#fff3c4,#d9b45a 45%,#8a6420);border:2px dashed #5a3d10;box-shadow:0 0 0 3px #d9b45a,0 4px 10px rgba(0,0,0,.45);
+  color:#3a2508;font-family:var(--retro);font-size:10px;line-height:1.05;text-align:center;transform:rotate(10deg)}
+.seal i{font-family:var(--script);font-style:normal;font-size:15px;line-height:1}
+.auto{position:absolute;left:14px;bottom:4px;z-index:4;font-family:var(--script);font-size:58px;line-height:1;color:#123a8c;transform:rotate(-10deg);
+  text-shadow:0 0 1px rgba(255,255,255,.7);opacity:.92;pointer-events:none}
+.serial{position:absolute;right:8px;bottom:10px;z-index:4;font-family:var(--mono);font-weight:700;font-size:15px;color:#3a2508;background:linear-gradient(180deg,#f6e3a1,#c89b3c);
+  border-radius:4px;padding:2px 8px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.serial i{font-style:normal;font-size:12px}.serial b{font-weight:700}
+/* back: printed cardboard, red ink */
+.back{transform:rotateY(180deg);display:flex;flex-direction:column;gap:8px;padding:12px;background:#d9ccad;color:var(--ink);border:8px solid #c8b78f}
+.bk-top{display:flex;align-items:center;gap:8px;background:var(--red);color:var(--cream);border-radius:4px;padding:7px 9px}
+.bk-no{flex:none;font-family:var(--retro);font-size:13px;background:var(--cream);color:var(--red);border-radius:4px;padding:3px 6px}
+.bk-nm{flex:1;min-width:0;font-family:var(--retro);font-size:1rem;line-height:1.1}
+.bk-pos{flex:none;font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.1em}
+.bio{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:13px;line-height:1.2}
+.bio li{display:flex;gap:8px;padding:3px 2px;border-bottom:1px dashed rgba(36,22,11,.35)}
+.bio b{flex:none;width:27%;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a1a14;padding-top:1px}
+.stat{width:100%;border-collapse:collapse;font-family:var(--mono);text-align:center;background:rgba(255,255,255,.35)}
+.stat th{background:var(--ink);color:var(--cream);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:4px 2px;font-weight:700}
+.stat td{font-weight:700;font-size:14px;padding:5px 2px;border:1px solid rgba(36,22,11,.3)}
+.stat td.amt{color:#8a1a14}
+.fact{flex:1;min-height:56px;display:flex;align-items:center;gap:10px;background:var(--cream);border:2px solid #8a1a14;border-radius:6px;padding:8px 10px}
+.fact p{margin:0;font-size:13.5px;line-height:1.3}
+.fact.has-pic picture{flex:none;width:42%;align-self:stretch}
+.fact.has-pic img{display:block;width:100%;height:100%;object-fit:cover;border-radius:4px}
+.bk-ship{margin:0;font-family:var(--mono);font-weight:700;font-size:13px;text-align:center;color:#8a1a14;letter-spacing:.04em}
+.bk-foot{margin:0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-align:center;color:#5a3d1c}
+.flip{position:absolute;left:50%;bottom:-11px;z-index:8;transform:translateX(-50%);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);background:var(--cream);border:2px solid var(--ink);border-radius:999px;padding:1px 12px;box-shadow:0 3px 8px rgba(0,0,0,.45);pointer-events:none;transition:background .2s}
+.tc:hover .flip,.tc:focus-visible .flip{background:var(--mustard)}
+
+/* ============ the price tag ============ */
+.tag{flex:1;display:flex;flex-direction:column;gap:11px;background:var(--cream);background-image:var(--noise);color:var(--ink);border-radius:10px;padding:14px;
+  border-top:6px solid var(--a);box-shadow:0 10px 20px rgba(0,0,0,.45)}
+.signed .tag{border-top-color:var(--gold2)}
+.line{width:100%;border-collapse:collapse;font-family:var(--mono);text-align:center}
+.line th{background:var(--ink);color:var(--cream);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:4px 2px;font-weight:700}
+.line td{font-weight:700;font-size:16px;padding:4px 2px;border:1px solid rgba(36,22,11,.3);white-space:nowrap}
+.line td.amt{font-family:var(--retro);font-weight:400;font-size:1.65rem;line-height:1.05;color:var(--red)}
+.opt{display:flex;flex-direction:column;gap:5px;margin:0}
+.lbl{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#8a1a14}
+.lbl b{font-weight:700;color:var(--ink);letter-spacing:.04em;text-transform:none;font-size:14px;margin-left:4px}
+.sws{display:flex;flex-wrap:wrap;gap:8px;min-height:32px;align-items:center}
+.sw{width:30px;height:30px;border-radius:50%;padding:0;cursor:pointer;border:2px solid #8f7a55;background:linear-gradient(135deg,var(--sa) 50%,var(--sb) 50%);box-shadow:inset 0 0 0 2px var(--cream)}
+.sw.on{border-color:var(--red);box-shadow:inset 0 0 0 2px var(--cream),0 0 0 2px var(--red)}
+.csel{display:none}
+.fix{margin:0;min-height:32px;display:flex;align-items:center;font-size:16px;font-weight:700;color:#3a2508;border:2px dashed #c9ad78;border-radius:8px;padding:4px 10px;background:rgba(255,255,255,.45)}
+select.size,select.csel{appearance:none;-webkit-appearance:none;width:100%;font:inherit;font-size:16px;font-weight:700;color:var(--ink);background:#fff;border:2px solid #b89a63;border-radius:8px;
+  padding:6px 34px 6px 10px;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--red) 50%),linear-gradient(135deg,var(--red) 50%,transparent 50%);
+  background-position:calc(100% - 18px) 52%,calc(100% - 12px) 52%;background-size:6px 6px;background-repeat:no-repeat}
+.size-row-pad{min-height:32px}
+.buy{margin-top:auto;display:block;text-align:center;text-decoration:none;background:var(--red);color:#fff;font-family:var(--retro);font-size:1.2rem;letter-spacing:.05em;
+  padding:12px 12px 11px;border-radius:10px;border-bottom:4px solid #7a0d12;transition:transform .15s var(--ease),background .15s}
+.buy:hover{background:var(--red2);transform:translateY(-1px)}
+.buy:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.signed .buy{background:linear-gradient(180deg,#e2bf62,#a97c2b);color:#24160b;border-bottom-color:#6b4c16}
+.signed .buy:hover{background:linear-gradient(180deg,#f0d07a,#b98a35)}
+:focus-visible{outline:2px solid var(--mustard);outline-offset:3px}
+
+footer{position:relative;z-index:1;text-align:center;padding:18px 24px 34px;font-family:var(--mono);font-size:16px;color:#cbb994;border-top:1px solid #2a1a10;background:#0c0704}
+footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
+
+@media (max-width:1180px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.neon{display:none}}
+@media (max-width:1180px) and (min-width:700px){.g4 .item,.g3 .item{display:grid;grid-template-columns:52% minmax(0,1fr);gap:14px;align-items:stretch}
+  .g3{grid-template-columns:1fr}.g3 .item{grid-template-columns:44% minmax(0,1fr)}}
+@media (max-width:699px){
+  .shop{padding:18px 12px 34px}
+  .sign{padding:18px 14px 16px;gap:14px;border-width:3px;box-shadow:0 0 0 5px #140b05,0 0 0 8px var(--brown),0 16px 30px rgba(0,0,0,.6)}
+  .stripes{gap:3px;margin-bottom:10px}.stripes i{height:6px}
+  .kicker{font-size:1.8rem}.marquee{font-size:2.15rem;text-shadow:2px 2px 0 var(--red),4px 4px 0 var(--brown-dk)}
+  .sub{font-size:.86rem;letter-spacing:.14em;margin-top:10px}
+  .lede{font-size:1.04rem}
+  .plaques{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}.plaques li{padding:8px 6px;border-bottom-width:4px}.plaques b{font-size:.84rem}.plaques span{font-size:.86rem}
+  .case,.counter,.wax{margin-top:26px}
+  .head h2{display:block;font-size:1.5rem}.head h2 small{font-size:.86rem;letter-spacing:.18em}.head p{font-size:1rem}
+  .glass,.felt,.bin{padding:12px;border-width:9px}
+  .brass{font-size:.8rem;letter-spacing:.14em;padding:6px 12px;margin-bottom:14px}
+  .wrapper{font-size:1rem;padding:6px 14px;margin-bottom:14px}
+  .grid,.g3,.g4{grid-template-columns:1fr;gap:16px}
+  .item{display:grid;grid-template-columns:47% minmax(0,1fr);gap:10px;align-items:stretch}
+  .tc{aspect-ratio:auto;min-height:250px;height:100%}
+  .front{padding:7px 7px 6px}
+  .photo{border-width:3px}
+  .plate{margin-top:6px;padding:3px 5px 5px}
+  .team{font-size:.95rem}.nm{font-size:.74rem}
+  .pos{width:36px;height:36px;font-size:10px;border-width:2px;left:2px;top:2px}
+  .cno{width:40px;height:40px}.cno i{font-size:11px;right:5px;top:4px}
+  .rookie{font-size:9px;padding:3px 7px;right:5px;bottom:5px;border-width:1.5px;box-shadow:1px 1px 0 var(--ink)}
+  .seal{width:52px;height:52px;font-size:7px;right:5px;top:30px}.seal i{font-size:10px}
+  .auto{font-size:36px;left:8px;bottom:2px}
+  .serial{font-size:11px;padding:1px 5px;right:5px;bottom:6px}.serial i{font-size:9px}
+  .back{padding:7px;gap:5px;border-width:5px}
+  .bk-top{padding:4px 6px;gap:5px}.bk-no{font-size:9px;padding:2px 4px}.bk-nm{font-size:.72rem}.bk-pos{display:none}
+  .bio{font-size:11px}.bio li{padding:2px 1px;gap:5px}.bio b{font-size:9px}.bio li:nth-child(n+4){display:none}.bio li{flex-direction:column;gap:0}.bio b{width:auto}
+  .stat th{font-size:8px;padding:2px 1px;letter-spacing:0}.stat td{font-size:10.5px;padding:3px 1px}
+  .fact{display:none}
+  .back{justify-content:space-between}
+  .bk-foot{display:none}
+  .bk-ship{display:none}
+  .stat td{white-space:nowrap}.stat td,.stat th{font-size:9.5px}
+  .flip{font-size:10px;padding:0 9px;bottom:-9px}
+  .tag{padding:10px;gap:8px;border-top-width:5px}
+  .line th{font-size:9.5px;letter-spacing:.02em;padding:3px 1px}.line td{font-size:13px;padding:3px 1px}.line td.amt{font-size:1.3rem}
+  .lbl{font-size:11px;letter-spacing:.08em}
+  .line .us{display:none}
+  .sws,.lbl .cname{display:none}
+  select.csel{display:block}
+  .fix{min-height:0;font-size:14px;padding:6px 9px}
+  select.size,select.csel{font-size:15px;padding:6px 28px 6px 9px;background-position:calc(100% - 15px) 52%,calc(100% - 9px) 52%}
+  .buy{font-size:1rem;padding:10px 8px 9px}
+}
+/* store only (this style block leaves with the page): on phones the minimized player tucks into the corner gutter, clear of the cards */
+@media (max-width:699px){
+  #trd-pod[data-view="pill"] .tp-dock:not(.tp-placed){left:0;bottom:10px}
+  #trd-pod[data-view="pill"] .tp-dock:not(.tp-placed) .tp-pill{display:flex;align-items:center;justify-content:center;width:32px;height:40px;overflow:visible}
+  #trd-pod[data-view="pill"] .tp-dock:not(.tp-placed) .tp-pill-cap{transform:rotate(-28deg) scale(.66)}
+  #trd-pod[data-view="pill"] .tp-dock:not(.tp-placed) .tp-pill:hover .tp-pill-cap{transform:rotate(-20deg) scale(.7)}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* ---- one rubber duck header — same as listening-room.html ---- */
+@font-face{font-family:'TRD Steelfish';src:url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'TRD Courier';src:url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+.banner{background:#000;color:#fff;position:relative;z-index:200;border-bottom:1px solid #2a1d10;box-shadow:0 1px 0 rgba(255,200,100,.18),0 10px 30px rgba(0,0,0,.7)}
+.banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
+.banner img{height:92px;width:auto;display:block}
+.banner .wm{font-family:'TRD Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;font-size:96px;line-height:.9;letter-spacing:-.01em;margin:0;white-space:nowrap}
+.banner .wm a{color:#fff;text-decoration:none}
+.banner .wm sup{font-size:.28em;vertical-align:1.6em;margin-left:2px}
+.banner .meta{display:flex;flex-direction:column;gap:6px;font-family:'TRD Courier','Courier Prime',monospace;font-size:15px;line-height:1.2}
+.banner .meta a{color:#ffe2a0}
+.banner .meta .handle{color:#b9ab8c}
+@media (max-width:760px){
+  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+  .banner img{height:62px}
+  .banner .wm{font-size:58px}
+  .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
+}
+
+</style>
+<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:type" content="website"><meta property="og:site_name" content="The Rubber Duck™"><meta property="og:url" content="https://therubberduck.net/merch.html"><meta property="og:title" content="The Merch Counter | The Rubber Duck™"><meta property="og:description" content="Caps, tees, mugs, patches, stickers and hand-signed pieces from The Rubber Duck™, laid out like an old baseball card shop."><meta property="og:image" content="https://therubberduck.net/images/brand/trd-card.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@TheRubberDuck79"><meta name="twitter:creator" content="@TheRubberDuck79"><meta name="twitter:title" content="The Merch Counter | The Rubber Duck™"><meta name="twitter:description" content="Caps, tees, mugs, patches, stickers and hand-signed pieces from The Rubber Duck™, laid out like an old baseball card shop."><meta name="twitter:image" content="https://therubberduck.net/images/brand/trd-card.jpg"><link rel="stylesheet" href="/assets/trd/suggest.css" data-trd-keep>
+<script src="/assets/trd/suggest.js" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
+<script src="/assets/trd/bookbanner.js" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
+<script src="/assets/trd/duckpod.js" data-trd-keep></script>
+</head>
+<body>
+<header class="banner">
+  <div class="banner-in">
+    <img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck">
+    <h1 class="wm"><a href="/">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
+    <div class="meta">
+      <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
+      <a href="/ledger.html">The Drop Ledger</a>
+      <a href="/album.html">The Red Pill Album</a>
+    </div>
+  </div>
+</header>
+
+<main class="shop">
+  <section class="sign" aria-labelledby="shop-title">
+    <div class="sign-c">
+      <div class="stripes" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <p class="kicker">The Rubber Duck&trade;</p>
+      <h1 class="marquee" id="shop-title">The Merch Counter</h1>
+      <p class="sub">Caps &middot; Tees &middot; Signed Pieces</p>
+      <p class="lede">The site stays free. Every hat, tee and sticker you pick up here supports The Rubber Duck and keeps the site running. Tap any card to flip it over.</p>
+    </div>
+    <ul class="plaques" aria-label="How ordering works">
+      <li><b>Made to order</b><span>Stitched or printed</span></li>
+      <li><b>Ships in 3-8 days</b><span>Business days, US shipping</span></li>
+      <li><b>Signed pieces</b><span>Ship in 2 to 3 weeks</span></li>
+      <li><b>Secure checkout</b><span>Paid through Stripe</span></li>
+    </ul>
+    <span class="neon" aria-hidden="true">Open</span>
+  </section>
+
+  <section class="case" aria-labelledby="signed-title">
+    <header class="head">
+      <h2 id="signed-title"><small>The Glass Case</small>Signed and Numbered</h2>
+      <p>Made for your order, sent to The Rubber Duck, signed and numbered by hand, then mailed on to you.</p>
+    </header>
+    <div class="glass">
+      <span class="brass">Hand-signed by The Rubber Duck</span>
+      <div class="grid g3">
+<article class="item signed" data-slug="signed-dad-hat" style="--a:#d9b45a;--b:#a97c2b">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Signed Dad Hat card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-dad-hat_black_product.webp" type="image/webp"><img src="store-img/duck-dad-hat_black_product.jpg" alt="Signed Dad Hat - Black" width="800" height="800" loading="eager" decoding="async"></picture><span class="seal" aria-hidden="true"><b>Signed</b><i>and</i><b>Numbered</b></span><span class="auto" aria-hidden="true">TRD</span><span class="serial"><i>No.</i> ___ <b>/500</b></span></div>
+          <span class="pos" aria-hidden="true">CAP</span>
+          <span class="cno" aria-hidden="true"><i>S1</i></span>
+          <div class="plate"><span class="team">Autograph Series</span><span class="nm">Signed Dad Hat</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. S1</span><span class="bk-nm">Signed Dad Hat</span><span class="bk-pos">CAP</span></div>
+          <ul class="bio"><li><b>Made</b><span>Cotton dad hat</span></li><li><b>Front</b><span>Duck, stitched</span></li><li><b>Strap</b><span>Red pill, stitched</span></li><li><b>Signed</b><span>Numbered under the brim</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$45</td><td>$8.95</td><td>One</td><td>6</td></tr></tbody></table>
+          <p class="bk-ship">Ships in about 2 to 3 weeks</p>
+          <div class="fact has-pic"><picture><source srcset="store-img/signed-brim-11of500.webp" type="image/webp"><img src="store-img/signed-brim-11of500.jpg" alt="The brim of a signed hat, marked 11/500 TRD" width="800" height="800" loading="lazy" decoding="async"></picture><p>Signed and numbered under the brim, out of 500.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$45</td><td>$8.95</td><td>2-3 wks</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color <b class="cname">Black</b></span><div class="sws" role="group" aria-label="Color"><button type="button" class="sw on" data-color="Black" data-img="duck-dad-hat_black_product" aria-label="Black" aria-pressed="true" title="Black" style="--sa:#111;--sb:#111"></button><button type="button" class="sw" data-color="Navy" data-img="duck-dad-hat_navy_product" aria-label="Navy" aria-pressed="false" title="Navy" style="--sa:#1f2a44;--sb:#1f2a44"></button><button type="button" class="sw" data-color="Charcoal" data-img="duck-dad-hat_charcoal_product" aria-label="Charcoal" aria-pressed="false" title="Charcoal" style="--sa:#3d3d3f;--sb:#3d3d3f"></button><button type="button" class="sw" data-color="Light Blue" data-img="duck-dad-hat_light-blue_product" aria-label="Light Blue" aria-pressed="false" title="Light Blue" style="--sa:#bcd6e6;--sb:#bcd6e6"></button><button type="button" class="sw" data-color="Pink" data-img="duck-dad-hat_pink_product" aria-label="Pink" aria-pressed="false" title="Pink" style="--sa:#f2b6c6;--sb:#f2b6c6"></button><button type="button" class="sw" data-color="White" data-img="duck-dad-hat_white_product" aria-label="White" aria-pressed="false" title="White" style="--sa:#fff;--sb:#fff"></button></div><select class="csel" aria-label="Color"><option value="Black" data-img="duck-dad-hat_black_product">Black</option><option value="Navy" data-img="duck-dad-hat_navy_product">Navy</option><option value="Charcoal" data-img="duck-dad-hat_charcoal_product">Charcoal</option><option value="Light Blue" data-img="duck-dad-hat_light-blue_product">Light Blue</option><option value="Pink" data-img="duck-dad-hat_pink_product">Pink</option><option value="White" data-img="duck-dad-hat_white_product">White</option></select></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">One size, adjustable</p></div>
+      <a class="buy" href="https://buy.stripe.com/dRmbJ175yawUc91eUf9IQ0J" data-base="https://buy.stripe.com/dRmbJ175yawUc91eUf9IQ0J">Buy the signed one</a>
+    </div>
+</article>
+<article class="item signed" data-slug="signed-trucker-hat" style="--a:#d9b45a;--b:#a97c2b">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Signed Trucker card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-trucker-hat_black-white.webp" type="image/webp"><img src="store-img/duck-trucker-hat_black-white.jpg" alt="Signed Trucker - Black / White" width="800" height="800" loading="eager" decoding="async"></picture><span class="seal" aria-hidden="true"><b>Signed</b><i>and</i><b>Numbered</b></span><span class="auto" aria-hidden="true">TRD</span><span class="serial"><i>No.</i> ___ <b>/500</b></span></div>
+          <span class="pos" aria-hidden="true">CAP</span>
+          <span class="cno" aria-hidden="true"><i>S2</i></span>
+          <div class="plate"><span class="team">Autograph Series</span><span class="nm">Signed Trucker</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. S2</span><span class="bk-nm">Signed Trucker</span><span class="bk-pos">CAP</span></div>
+          <ul class="bio"><li><b>Made</b><span>Mesh trucker hat</span></li><li><b>Front</b><span>Duck, stitched</span></li><li><b>Back</b><span>Mesh, snapback</span></li><li><b>Signed</b><span>Numbered under the brim</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$48</td><td>$8.95</td><td>One</td><td>3</td></tr></tbody></table>
+          <p class="bk-ship">Ships in about 2 to 3 weeks</p>
+          <div class="fact"><p><b>Duck Fact:</b> Made for your order, then signed and numbered by The Rubber Duck.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$48</td><td>$8.95</td><td>2-3 wks</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color <b class="cname">Black / White</b></span><div class="sws" role="group" aria-label="Color"><button type="button" class="sw on" data-color="Black / White" data-img="duck-trucker-hat_black-white" aria-label="Black / White" aria-pressed="true" title="Black / White" style="--sa:#111;--sb:#fff"></button><button type="button" class="sw" data-color="Charcoal / Black" data-img="duck-trucker-hat_charcoal-black" aria-label="Charcoal / Black" aria-pressed="false" title="Charcoal / Black" style="--sa:#555;--sb:#111"></button><button type="button" class="sw" data-color="Heather Grey / Black" data-img="duck-trucker-hat_heather-grey-black" aria-label="Heather Grey / Black" aria-pressed="false" title="Heather Grey / Black" style="--sa:#a7a7a7;--sb:#111"></button></div><select class="csel" aria-label="Color"><option value="Black / White" data-img="duck-trucker-hat_black-white">Black / White</option><option value="Charcoal / Black" data-img="duck-trucker-hat_charcoal-black">Charcoal / Black</option><option value="Heather Grey / Black" data-img="duck-trucker-hat_heather-grey-black">Heather Grey / Black</option></select></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">One size, snapback</p></div>
+      <a class="buy" href="https://buy.stripe.com/cNi5kDgG85cA0qj5jF9IQ0K" data-base="https://buy.stripe.com/cNi5kDgG85cA0qj5jF9IQ0K">Buy the signed one</a>
+    </div>
+</article>
+<article class="item signed" data-slug="signed-tee" style="--a:#d9b45a;--b:#a97c2b">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Signed Duck Tee card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-tee_black.webp" type="image/webp"><img src="store-img/duck-tee_black.jpg" alt="Signed Duck Tee - Black" width="800" height="800" loading="eager" decoding="async"></picture><span class="seal" aria-hidden="true"><b>Signed</b><i>and</i><b>Numbered</b></span><span class="auto" aria-hidden="true">TRD</span><span class="serial"><i>No.</i> ___ <b>/500</b></span></div>
+          <span class="pos" aria-hidden="true">TEE</span>
+          <span class="cno" aria-hidden="true"><i>S3</i></span>
+          <div class="plate"><span class="team">Autograph Series</span><span class="nm">Signed Duck Tee</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. S3</span><span class="bk-nm">Signed Duck Tee</span><span class="bk-pos">TEE</span></div>
+          <ul class="bio"><li><b>Made</b><span>Soft cotton tee</span></li><li><b>Front</b><span>Duck on the red pill</span></li><li><b>Sizes</b><span>S to 3XL</span></li><li><b>Signed</b><span>By hand, numbered</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$40</td><td>$8.95</td><td>S-3XL</td><td>5</td></tr></tbody></table>
+          <p class="bk-ship">Ships in about 2 to 3 weeks</p>
+          <div class="fact"><p><b>Duck Fact:</b> Made for your order, then signed and numbered by The Rubber Duck.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$40</td><td>$8.95</td><td>2-3 wks</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color <b class="cname">Black</b></span><div class="sws" role="group" aria-label="Color"><button type="button" class="sw on" data-color="Black" data-img="duck-tee_black" aria-label="Black" aria-pressed="true" title="Black" style="--sa:#111;--sb:#111"></button><button type="button" class="sw" data-color="Navy" data-img="duck-tee_navy" aria-label="Navy" aria-pressed="false" title="Navy" style="--sa:#1f2a44;--sb:#1f2a44"></button><button type="button" class="sw" data-color="Pink" data-img="duck-tee_pink" aria-label="Pink" aria-pressed="false" title="Pink" style="--sa:#f4b8c8;--sb:#f4b8c8"></button><button type="button" class="sw" data-color="Light Blue" data-img="duck-tee_light-blue" aria-label="Light Blue" aria-pressed="false" title="Light Blue" style="--sa:#cfe3ea;--sb:#cfe3ea"></button><button type="button" class="sw" data-color="White" data-img="duck-tee_white" aria-label="White" aria-pressed="false" title="White" style="--sa:#fff;--sb:#fff"></button></div><select class="csel" aria-label="Color"><option value="Black" data-img="duck-tee_black">Black</option><option value="Navy" data-img="duck-tee_navy">Navy</option><option value="Pink" data-img="duck-tee_pink">Pink</option><option value="Light Blue" data-img="duck-tee_light-blue">Light Blue</option><option value="White" data-img="duck-tee_white">White</option></select></div>
+      <label class="opt"><span class="lbl">Size</span><select class="size" aria-label="Size"><option value="S" data-link="https://buy.stripe.com/aFa5kD2Pi0Wkdd56nJ9IQ0L" data-price="4000">S</option><option value="M" data-link="https://buy.stripe.com/aFa5kD2Pi0Wkdd56nJ9IQ0L" data-price="4000">M</option><option value="L" data-link="https://buy.stripe.com/aFa5kD2Pi0Wkdd56nJ9IQ0L" data-price="4000" selected>L</option><option value="XL" data-link="https://buy.stripe.com/aFa5kD2Pi0Wkdd56nJ9IQ0L" data-price="4000">XL</option><option value="2XL" data-link="https://buy.stripe.com/eVq6oH9dGbAY7SLfYj9IQ0M" data-price="4200">2XL (+$2)</option><option value="3XL" data-link="https://buy.stripe.com/6oUbJ12Pi48w4GzeUf9IQ0N" data-price="4400">3XL (+$4)</option></select></label>
+      <a class="buy" href="https://buy.stripe.com/aFa5kD2Pi0Wkdd56nJ9IQ0L" data-base="https://buy.stripe.com/aFa5kD2Pi0Wkdd56nJ9IQ0L">Buy the signed one</a>
+    </div>
+</article>
+      </div>
+    </div>
+  </section>
+
+  <section class="counter" aria-labelledby="counter-title">
+    <header class="head">
+      <h2 id="counter-title"><small>Under the Counter</small>Caps, Tees and Mugs</h2>
+      <p>Made to order and shipped straight to your door.</p>
+    </header>
+    <div class="felt"><div class="grid g4">
+<article class="item counter" data-slug="duck-tee" style="--a:#c8202b;--b:#e3a82b">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Duck and Red Pill Tee card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-tee_black.webp" type="image/webp"><img src="store-img/duck-tee_black.jpg" alt="Duck and Red Pill Tee - Black" width="800" height="800" loading="eager" decoding="async"></picture></div>
+          <span class="pos" aria-hidden="true">TEE</span>
+          <span class="cno" aria-hidden="true"><i>01</i></span>
+          <div class="plate"><span class="team">Rubber Ducks</span><span class="nm">Red Pill Tee</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. 01</span><span class="bk-nm">Duck and Red Pill Tee</span><span class="bk-pos">TEE</span></div>
+          <ul class="bio"><li><b>Made</b><span>Soft cotton tee</span></li><li><b>Front</b><span>Duck on the red pill</span></li><li><b>Sizes</b><span>S to 3XL</span></li><li><b>Printed</b><span>To order</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$25</td><td>$4.95</td><td>S-3XL</td><td>5</td></tr></tbody></table>
+          <p class="bk-ship">Ships in 3-8 business days</p>
+          <div class="fact"><p><b>Duck Fact:</b> 2XL and 3XL cost a little more to make, so they carry a small bump.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$25</td><td>$4.95</td><td>3-8 days</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color <b class="cname">Black</b></span><div class="sws" role="group" aria-label="Color"><button type="button" class="sw on" data-color="Black" data-img="duck-tee_black" aria-label="Black" aria-pressed="true" title="Black" style="--sa:#111;--sb:#111"></button><button type="button" class="sw" data-color="Navy" data-img="duck-tee_navy" aria-label="Navy" aria-pressed="false" title="Navy" style="--sa:#1f2a44;--sb:#1f2a44"></button><button type="button" class="sw" data-color="Pink" data-img="duck-tee_pink" aria-label="Pink" aria-pressed="false" title="Pink" style="--sa:#f4b8c8;--sb:#f4b8c8"></button><button type="button" class="sw" data-color="Light Blue" data-img="duck-tee_light-blue" aria-label="Light Blue" aria-pressed="false" title="Light Blue" style="--sa:#cfe3ea;--sb:#cfe3ea"></button><button type="button" class="sw" data-color="White" data-img="duck-tee_white" aria-label="White" aria-pressed="false" title="White" style="--sa:#fff;--sb:#fff"></button></div><select class="csel" aria-label="Color"><option value="Black" data-img="duck-tee_black">Black</option><option value="Navy" data-img="duck-tee_navy">Navy</option><option value="Pink" data-img="duck-tee_pink">Pink</option><option value="Light Blue" data-img="duck-tee_light-blue">Light Blue</option><option value="White" data-img="duck-tee_white">White</option></select></div>
+      <label class="opt"><span class="lbl">Size</span><select class="size" aria-label="Size"><option value="S" data-link="https://buy.stripe.com/00w8wP89C20oeh9eUf9IQ0G" data-price="2500">S</option><option value="M" data-link="https://buy.stripe.com/00w8wP89C20oeh9eUf9IQ0G" data-price="2500">M</option><option value="L" data-link="https://buy.stripe.com/00w8wP89C20oeh9eUf9IQ0G" data-price="2500" selected>L</option><option value="XL" data-link="https://buy.stripe.com/00w8wP89C20oeh9eUf9IQ0G" data-price="2500">XL</option><option value="2XL" data-link="https://buy.stripe.com/fZu8wP75y6gEdd5h2n9IQ0H" data-price="2700">2XL (+$2)</option><option value="3XL" data-link="https://buy.stripe.com/6oUcN5fC4bAYeh9dQb9IQ0I" data-price="2900">3XL (+$4)</option></select></label>
+      <a class="buy" href="https://buy.stripe.com/00w8wP89C20oeh9eUf9IQ0G" data-base="https://buy.stripe.com/00w8wP89C20oeh9eUf9IQ0G">Buy it</a>
+    </div>
+</article>
+<article class="item counter" data-slug="duck-dad-hat" style="--a:#1f57a5;--b:#e2652a">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Duck Dad Hat card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-dad-hat_black_product.webp" type="image/webp"><img src="store-img/duck-dad-hat_black_product.jpg" alt="Duck Dad Hat - Black" width="800" height="800" loading="eager" decoding="async"></picture></div>
+          <span class="pos" aria-hidden="true">CAP</span>
+          <span class="cno" aria-hidden="true"><i>02</i></span>
+          <div class="plate"><span class="team">Rubber Ducks</span><span class="nm">Duck Dad Hat</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. 02</span><span class="bk-nm">Duck Dad Hat</span><span class="bk-pos">CAP</span></div>
+          <ul class="bio"><li><b>Made</b><span>Cotton dad hat</span></li><li><b>Front</b><span>Duck, stitched</span></li><li><b>Strap</b><span>Red pill, stitched</span></li><li><b>Fit</b><span>One size, adjustable</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$28</td><td>$4.75</td><td>One</td><td>6</td></tr></tbody></table>
+          <p class="bk-ship">Ships in 3-8 business days</p>
+          <div class="fact has-pic"><picture><source srcset="store-img/duck-dad-hat_black_product-back.webp" type="image/webp"><img src="store-img/duck-dad-hat_black_product-back.jpg" alt="Back of the dad hat with the red pill on the strap" width="800" height="800" loading="lazy" decoding="async"></picture><p>The red pill rides on the back strap.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$28</td><td>$4.75</td><td>3-8 days</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color <b class="cname">Black</b></span><div class="sws" role="group" aria-label="Color"><button type="button" class="sw on" data-color="Black" data-img="duck-dad-hat_black_product" aria-label="Black" aria-pressed="true" title="Black" style="--sa:#111;--sb:#111"></button><button type="button" class="sw" data-color="Navy" data-img="duck-dad-hat_navy_product" aria-label="Navy" aria-pressed="false" title="Navy" style="--sa:#1f2a44;--sb:#1f2a44"></button><button type="button" class="sw" data-color="Charcoal" data-img="duck-dad-hat_charcoal_product" aria-label="Charcoal" aria-pressed="false" title="Charcoal" style="--sa:#3d3d3f;--sb:#3d3d3f"></button><button type="button" class="sw" data-color="Light Blue" data-img="duck-dad-hat_light-blue_product" aria-label="Light Blue" aria-pressed="false" title="Light Blue" style="--sa:#bcd6e6;--sb:#bcd6e6"></button><button type="button" class="sw" data-color="Pink" data-img="duck-dad-hat_pink_product" aria-label="Pink" aria-pressed="false" title="Pink" style="--sa:#f2b6c6;--sb:#f2b6c6"></button><button type="button" class="sw" data-color="White" data-img="duck-dad-hat_white_product" aria-label="White" aria-pressed="false" title="White" style="--sa:#fff;--sb:#fff"></button></div><select class="csel" aria-label="Color"><option value="Black" data-img="duck-dad-hat_black_product">Black</option><option value="Navy" data-img="duck-dad-hat_navy_product">Navy</option><option value="Charcoal" data-img="duck-dad-hat_charcoal_product">Charcoal</option><option value="Light Blue" data-img="duck-dad-hat_light-blue_product">Light Blue</option><option value="Pink" data-img="duck-dad-hat_pink_product">Pink</option><option value="White" data-img="duck-dad-hat_white_product">White</option></select></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">One size, adjustable</p></div>
+      <a class="buy" href="https://buy.stripe.com/7sY14ndtW0Wkb4X7rN9IQ0E" data-base="https://buy.stripe.com/7sY14ndtW0Wkb4X7rN9IQ0E">Buy it</a>
+    </div>
+</article>
+<article class="item counter" data-slug="duck-trucker-hat" style="--a:#1f7a4c;--b:#e3a82b">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Duck Trucker Hat card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-trucker-hat_black-white.webp" type="image/webp"><img src="store-img/duck-trucker-hat_black-white.jpg" alt="Duck Trucker Hat - Black / White" width="800" height="800" loading="eager" decoding="async"></picture><span class="rookie">Rookie Card</span></div>
+          <span class="pos" aria-hidden="true">CAP</span>
+          <span class="cno" aria-hidden="true"><i>03</i></span>
+          <div class="plate"><span class="team">Rubber Ducks</span><span class="nm">Trucker Hat</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. 03</span><span class="bk-nm">Duck Trucker Hat</span><span class="bk-pos">CAP</span></div>
+          <ul class="bio"><li><b>Made</b><span>Mesh trucker hat</span></li><li><b>Front</b><span>Duck, stitched</span></li><li><b>Back</b><span>Mesh, snapback</span></li><li><b>Fit</b><span>One size, snapback</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$32</td><td>$4.75</td><td>One</td><td>4</td></tr></tbody></table>
+          <p class="bk-ship">Ships in 3-8 business days</p>
+          <div class="fact"><p><b>Duck Fact:</b> New to the lineup: mesh back, structured front.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$32</td><td>$4.75</td><td>3-8 days</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color <b class="cname">Black / White</b></span><div class="sws" role="group" aria-label="Color"><button type="button" class="sw on" data-color="Black / White" data-img="duck-trucker-hat_black-white" aria-label="Black / White" aria-pressed="true" title="Black / White" style="--sa:#111;--sb:#fff"></button><button type="button" class="sw" data-color="Charcoal / Black" data-img="duck-trucker-hat_charcoal-black" aria-label="Charcoal / Black" aria-pressed="false" title="Charcoal / Black" style="--sa:#555;--sb:#111"></button><button type="button" class="sw" data-color="Heather Grey / Black" data-img="duck-trucker-hat_heather-grey-black" aria-label="Heather Grey / Black" aria-pressed="false" title="Heather Grey / Black" style="--sa:#a7a7a7;--sb:#111"></button><button type="button" class="sw" data-color="Heather Grey / White" data-img="duck-trucker-hat_heather-grey-white" aria-label="Heather Grey / White" aria-pressed="false" title="Heather Grey / White" style="--sa:#a7a7a7;--sb:#fff"></button></div><select class="csel" aria-label="Color"><option value="Black / White" data-img="duck-trucker-hat_black-white">Black / White</option><option value="Charcoal / Black" data-img="duck-trucker-hat_charcoal-black">Charcoal / Black</option><option value="Heather Grey / Black" data-img="duck-trucker-hat_heather-grey-black">Heather Grey / Black</option><option value="Heather Grey / White" data-img="duck-trucker-hat_heather-grey-white">Heather Grey / White</option></select></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">One size, snapback</p></div>
+      <a class="buy" href="https://buy.stripe.com/5kQdR9fC4gVic915jF9IQ0F" data-base="https://buy.stripe.com/5kQdR9fC4gVic915jF9IQ0F">Buy it</a>
+    </div>
+</article>
+<article class="item counter" data-slug="duck-mug" style="--a:#e2652a;--b:#7a4a24">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Duck Coffee Mug card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-mug_white.webp" type="image/webp"><img src="store-img/duck-mug_white.jpg" alt="Duck Coffee Mug - White" width="800" height="800" loading="lazy" decoding="async"></picture><span class="rookie">Rookie Card</span></div>
+          <span class="pos" aria-hidden="true">MUG</span>
+          <span class="cno" aria-hidden="true"><i>04</i></span>
+          <div class="plate"><span class="team">Rubber Ducks</span><span class="nm">Duck Coffee Mug</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. 04</span><span class="bk-nm">Duck Coffee Mug</span><span class="bk-pos">MUG</span></div>
+          <ul class="bio"><li><b>Made</b><span>Ceramic mug</span></li><li><b>Print</b><span>Duck on the red pill</span></li><li><b>Size</b><span>11 oz</span></li><li><b>Care</b><span>Dishwasher safe</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$16</td><td>$6.75</td><td>11 oz</td><td>1</td></tr></tbody></table>
+          <p class="bk-ship">Ships in 3-8 business days</p>
+          <div class="fact"><p><b>Duck Fact:</b> Morning coffee, duck on the red pill.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$16</td><td>$6.75</td><td>3-8 days</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color</span><p class="fix">White</p></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">11 oz</p></div>
+      <a class="buy" href="https://buy.stripe.com/3cI8wPblO9sQ5KD4fB9IQ0D" data-base="https://buy.stripe.com/3cI8wPblO9sQ5KD4fB9IQ0D">Buy it</a>
+    </div>
+</article>
+    </div></div>
+  </section>
+
+  <section class="wax" aria-labelledby="wax-title">
+    <header class="head">
+      <h2 id="wax-title"><small>The Wax Pack Bin</small>Small Stuff, Small Prices</h2>
+      <p>Patches, koozies, magnets and stickers, from $5.</p>
+    </header>
+    <div class="bin">
+      <span class="wrapper">Wax Packs</span>
+      <div class="grid g4">
+<article class="item wax" data-slug="duck-patch" style="--a:#7a4a24;--b:#c8202b">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Duck Patch card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-patch_black-red-border.webp" type="image/webp"><img src="store-img/duck-patch_black-red-border.jpg" alt="Duck Patch - Black, red border" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+          <span class="pos" aria-hidden="true">PCH</span>
+          <span class="cno" aria-hidden="true"><i>05</i></span>
+          <div class="plate"><span class="team">Rubber Ducks</span><span class="nm">Duck Patch</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. 05</span><span class="bk-nm">Duck Patch</span><span class="bk-pos">PCH</span></div>
+          <ul class="bio"><li><b>Made</b><span>Embroidered patch</span></li><li><b>Edge</b><span>Red stitched border</span></li><li><b>Size</b><span>About 3 in</span></li><li><b>Good for</b><span>Jackets, bags</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$18</td><td>$4.50</td><td>About 3 in</td><td>1</td></tr></tbody></table>
+          <p class="bk-ship">Ships in 3-8 business days</p>
+          <div class="fact"><p><b>Duck Fact:</b> Stitched edge, sews onto any jacket or bag.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$18</td><td>$4.50</td><td>3-8 days</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color</span><p class="fix">Black, red border</p></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">About 3 in</p></div>
+      <a class="buy" href="https://buy.stripe.com/4gM14nblOfRe4Gz27t9IQ0C" data-base="https://buy.stripe.com/4gM14nblOfRe4Gz27t9IQ0C">Buy it</a>
+    </div>
+</article>
+<article class="item wax" data-slug="duck-koozie" style="--a:#d99a1e;--b:#1f7a4c">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Duck Koozie card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-koozie_black.webp" type="image/webp"><img src="store-img/duck-koozie_black.jpg" alt="Duck Koozie - Black" width="800" height="800" loading="lazy" decoding="async"></picture><span class="rookie">Rookie Card</span></div>
+          <span class="pos" aria-hidden="true">KOZ</span>
+          <span class="cno" aria-hidden="true"><i>06</i></span>
+          <div class="plate"><span class="team">Rubber Ducks</span><span class="nm">Duck Koozie</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. 06</span><span class="bk-nm">Duck Koozie</span><span class="bk-pos">KOZ</span></div>
+          <ul class="bio"><li><b>Made</b><span>Neoprene cooler</span></li><li><b>Print</b><span>Duck on the red pill</span></li><li><b>Fits</b><span>12 oz can</span></li><li><b>Good for</b><span>Cookouts</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$9</td><td>$4.75</td><td>12 oz can</td><td>1</td></tr></tbody></table>
+          <p class="bk-ship">Ships in 3-8 business days</p>
+          <div class="fact"><p><b>Duck Fact:</b> Keeps a 12 oz can cold at the cookout.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$9</td><td>$4.75</td><td>3-8 days</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color</span><p class="fix">Black</p></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">12 oz can</p></div>
+      <a class="buy" href="https://buy.stripe.com/6oUaEX9dG48w5KDfYj9IQ0B" data-base="https://buy.stripe.com/6oUaEX9dG48w5KDfYj9IQ0B">Buy it</a>
+    </div>
+</article>
+<article class="item wax" data-slug="duck-magnet" style="--a:#11808a;--b:#c8202b">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Duck Magnet card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-magnet_red-pill.webp" type="image/webp"><img src="store-img/duck-magnet_red-pill.jpg" alt="Duck Magnet - Red pill" width="800" height="800" loading="lazy" decoding="async"></picture><span class="rookie">Rookie Card</span></div>
+          <span class="pos" aria-hidden="true">MAG</span>
+          <span class="cno" aria-hidden="true"><i>07</i></span>
+          <div class="plate"><span class="team">Rubber Ducks</span><span class="nm">Duck Magnet</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. 07</span><span class="bk-nm">Duck Magnet</span><span class="bk-pos">MAG</span></div>
+          <ul class="bio"><li><b>Made</b><span>Die-cut magnet</span></li><li><b>Art</b><span>Duck on the red pill</span></li><li><b>Size</b><span>3 x 3 in</span></li><li><b>Good for</b><span>Fridge, toolbox</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$8</td><td>$4.75</td><td>3 x 3 in</td><td>1</td></tr></tbody></table>
+          <p class="bk-ship">Ships in 3-8 business days</p>
+          <div class="fact"><p><b>Duck Fact:</b> Die-cut to the shape of the duck and the pill.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$8</td><td>$4.75</td><td>3-8 days</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color</span><p class="fix">Red pill</p></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">3 x 3 in</p></div>
+      <a class="buy" href="https://buy.stripe.com/bJeaEX9dGfRe1un13p9IQ0A" data-base="https://buy.stripe.com/bJeaEX9dGfRe1un13p9IQ0A">Buy it</a>
+    </div>
+</article>
+<article class="item wax" data-slug="duck-sticker" style="--a:#6b3fa0;--b:#e3a82b">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="Duck Sticker card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="store-img/duck-sticker_duck.webp" type="image/webp"><img src="store-img/duck-sticker_duck.jpg" alt="Duck Sticker - The duck" width="800" height="800" loading="lazy" decoding="async"></picture></div>
+          <span class="pos" aria-hidden="true">STK</span>
+          <span class="cno" aria-hidden="true"><i>08</i></span>
+          <div class="plate"><span class="team">Rubber Ducks</span><span class="nm">Duck Sticker</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">No. 08</span><span class="bk-nm">Duck Sticker</span><span class="bk-pos">STK</span></div>
+          <ul class="bio"><li><b>Made</b><span>Glossy vinyl</span></li><li><b>Art</b><span>The duck</span></li><li><b>Size</b><span>3 x 3 in</span></li><li><b>Good for</b><span>Laptop, bottle</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
+            <tbody><tr><td class="amt">$5</td><td>$4.50</td><td>3 x 3 in</td><td>1</td></tr></tbody></table>
+          <p class="bk-ship">Ships in 3-8 business days</p>
+          <div class="fact"><p><b>Duck Fact:</b> The cheapest way to fly the duck.</p></div>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Ship<span class="us"> (US)</span></th><th>Ships in</th></tr></thead>
+        <tbody><tr><td class="amt">$5</td><td>$4.50</td><td>3-8 days</td></tr></tbody></table>
+      <div class="opt"><span class="lbl">Color</span><p class="fix">The duck</p></div>
+      <div class="opt"><span class="lbl">Size</span><p class="fix">3 x 3 in</p></div>
+      <a class="buy" href="https://buy.stripe.com/fZufZhgG80Wk7SL7rN9IQ0z" data-base="https://buy.stripe.com/fZufZhgG80Wk7SL7rN9IQ0z">Buy it</a>
+    </div>
+</article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><span class="copy">&copy; The Rubber Duck&trade;</span><span class="sep"> &nbsp;|&nbsp; </span><a href="/ledger.html">The Drop Ledger</a><span class="sep"> | </span><a href="/album.html">The Red Pill Album</a><span class="sep"> | </span><a href="https://x.com/TheRubberDuck79">Order questions: @TheRubberDuck79</a></footer>
+
+<script>
+
+(function(){
+  function slug(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+  function money(c){c=+c;return '$'+(c%100?(c/100).toFixed(2):c/100)}
+  document.querySelectorAll('.item').forEach(function(card){
+    var s=card.getAttribute('data-slug'),buy=card.querySelector('.buy'),size=card.querySelector('select.size'),tc=card.querySelector('.tc'),
+        img=card.querySelector('.photo img'),src=card.querySelector('.photo source'),cname=card.querySelector('.cname'),amts=card.querySelectorAll('.amt'),
+        name=card.querySelector('.bk-nm').textContent,color=null,csel=card.querySelector('select.csel');
+    var on=card.querySelector('.sw.on'); if(on)color=on.getAttribute('data-color');
+    function flip(){var f=tc.classList.toggle('flipped');tc.setAttribute('aria-pressed',f?'true':'false')}
+    tc.addEventListener('click',flip);
+    tc.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}});
+    function sync(){
+      var link=buy.getAttribute('data-base');
+      if(size){var o=size.options[size.selectedIndex];link=o.getAttribute('data-link');amts.forEach(function(a){a.textContent=money(o.getAttribute('data-price'))})}
+      var ref=[s];if(color)ref.push(slug(color));if(size)ref.push(slug(size.value));else if(color)ref.push('one-size');
+      buy.href=link+(link.indexOf('?')<0?'?':'&')+'client_reference_id='+encodeURIComponent(ref.join('_'));
+    }
+    function pick(c,k){
+      color=c;card.querySelectorAll('.sw').forEach(function(x){var m=x.getAttribute('data-color')===c;x.classList.toggle('on',m);x.setAttribute('aria-pressed',m?'true':'false')});
+      if(cname)cname.textContent=c;if(csel&&csel.value!==c)csel.value=c;
+      src.srcset='store-img/'+k+'.webp';img.src='store-img/'+k+'.jpg';img.alt=name+' - '+c;
+      if(tc.classList.contains('flipped'))flip();
+      sync();
+    }
+    card.querySelectorAll('.sw').forEach(function(b){b.addEventListener('click',function(){pick(b.getAttribute('data-color'),b.getAttribute('data-img'))})});
+    if(csel)csel.addEventListener('change',function(){var o=csel.options[csel.selectedIndex];pick(o.value,o.getAttribute('data-img'))});
+    if(size)size.addEventListener('change',sync);
+    sync();
+  });
+})();
+/* The store only: the floating album player starts minimized (the pill) so it never sits on the cards.
+   Whatever view the visitor had is put back when they leave this page, unless they changed it here. */
+(function(){
+  var done=false,prev=null;
+  function here(){return /\/merch\.html$/i.test(location.pathname)}
+  function restore(){if(done||prev===null)return;done=true;try{if(window.trdPod&&trdPod.view()==='pill')trdPod.view(prev)}catch(e){}}
+  function shrink(){
+    var p=window.trdPod;if(!p||!document.getElementById('trd-pod')||!here())return false;
+    var v=p.view();if(v==='pill')return true;
+    prev=v;p.view('pill');
+    window.addEventListener('click',function(e){
+      if(done||!here())return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a)return;
+      var u;try{u=new URL(a.href,location.href)}catch(x){return}
+      if(u.origin===location.origin&&!/\/merch\.html$/i.test(u.pathname))restore();
+    },true);
+    window.addEventListener('pagehide',restore);
+    window.addEventListener('popstate',function(){if(!here())restore()},true);
+    return true;
+  }
+  if(!shrink()){
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(shrink,0)});
+    else setTimeout(shrink,0);
+  }
+})();
+
+</script>
+<!-- trd-support -->
+<style>
+.trd-sup{position:fixed;right:14px;bottom:14px;z-index:2147483000;display:flex;align-items:flex-end;gap:8px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.trd-sup[hidden]{display:none}
+.trd-sup-duck{flex:none;width:84px;height:84px;border:0;padding:6px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.55) 0%,rgba(255,255,255,.18) 55%,rgba(255,255,255,0) 72%);cursor:pointer;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6)) drop-shadow(0 0 1px rgba(255,255,255,.9));transition:transform .2s ease}
+.trd-sup-duck:hover{transform:translateY(-3px) rotate(-4deg)}
+.trd-sup-duck img{width:100%;height:100%;object-fit:contain;display:block}
+.trd-sup-bub{position:relative;max-width:180px;margin-bottom:40px;background:#fff;color:#111;border-radius:16px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.55);opacity:0;transform:translateY(8px) scale(.96);transform-origin:bottom right;pointer-events:none;transition:opacity .3s ease,transform .3s ease}
+.trd-sup.open .trd-sup-bub{opacity:1;transform:none;pointer-events:auto}
+.trd-sup-bub:after{content:"";position:absolute;right:-8px;bottom:16px;border:9px solid transparent;border-left-color:#fff;border-right:0}
+.trd-sup-bub p{margin:0 16px 8px 0;font-size:12.5px;line-height:1.32}
+.trd-sup-bub b{color:#c10500}
+.trd-sup-go{display:inline-block;background:#e10600;color:#fff!important;text-decoration:none!important;font-weight:700;font-size:12.5px;padding:6px 11px;border-radius:999px}
+.trd-sup-go:hover{background:#ff2a1f}
+.trd-sup-x{position:absolute;top:4px;right:4px;width:20px;height:20px;border:0;border-radius:50%;background:#eee;color:#333;font-size:14px;line-height:20px;cursor:pointer;padding:0}
+.trd-sup-x:hover{background:#ddd}
+@media (max-width:480px){.trd-sup{right:8px;bottom:8px}.trd-sup-duck{width:68px;height:68px;padding:5px}.trd-sup-bub{max-width:165px;margin-bottom:32px;padding:9px 11px}.trd-sup-bub p{font-size:12px}}
+.trd-sup.wig:not(.open) .trd-sup-duck{animation:trdWig 5s ease-in-out 1.5s infinite;transform-origin:50% 85%}
+@keyframes trdWig{0%,76%,100%{transform:rotate(0) translateY(0)}79%{transform:rotate(-12deg) translateY(-4px)}82%{transform:rotate(10deg) translateY(-4px)}85%{transform:rotate(-8deg) translateY(-2px)}88%{transform:rotate(6deg)}91%{transform:rotate(-3deg)}94%{transform:rotate(0)}}
+@media (prefers-reduced-motion:reduce){.trd-sup.wig .trd-sup-duck{animation:none}}
+@media print{.trd-sup{display:none}}
+</style>
+<div class="trd-sup" id="trdSup">
+  <div class="trd-sup-bub" role="dialog" aria-label="Support The Rubber Duck">
+    <button class="trd-sup-x" type="button" aria-label="Close">&times;</button>
+    <p>The site is free, and <b>the site is me</b>. Help keep the Duck flying.</p>
+    <a class="trd-sup-go" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Support the Duck</a>
+  </div>
+  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.png" alt=""></button>
+</div>
+<script>
+(function(){var w=document.getElementById('trdSup');if(!w)return;w.classList.add('wig');
+function quack(){try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}try{var A=window.AudioContext||window.webkitAudioContext;if(A){var c=window._trdAC||(window._trdAC=new A()),t=c.currentTime,o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o.type='sawtooth';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(330,t+.16);f.type='bandpass';f.frequency.value=1100;f.Q.value=4;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.18);o.connect(f);f.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.2)}}catch(e){}}
+w.querySelector('.trd-sup-duck').addEventListener('click',function(){if(w.classList.contains('open')){w.hidden=true;return}w.classList.remove('wig');w.classList.add('open');quack()});
+w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true});
+})();
+</script>
+<!-- /trd-support -->
+</body>
+</html>
