@@ -1,0 +1,141 @@
+/* The Book Banner: a slim, quiet strip under the site header advertising the book.
+   Self-contained; every rule is scoped to #trd-book so page styles and these never collide.
+   Larger (still calm) version: #trd-book.trb-big (set per page in bookbanner.js CONFIG.BIG).
+   Include once per page, in <head>, before duckpod:
+     <link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
+     <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
+   Sizes: desktop ~60px tall, landscape phone ~48px, portrait phone <=110px.          */
+
+@font-face{font-family:'TRB Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'TRB Courier';src:url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+
+#trd-book{
+  --trb-red:#C8241C; --trb-red-txt:#E0473F; --trb-red-mute:#A8423B; --trb-line:#4A0E0A;
+  --trb-cream:#EFE6CF; --trb-mute:#8C8475;
+  --trb-display:'TRB Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;
+  --trb-mono:'TRB Courier','Courier Prime','Courier New',Courier,monospace;
+  --trb-ease:cubic-bezier(.16,1,.3,1);
+  --trb-fit:line; --trb-max:21px; --trb-min:14px;   /* read by bookbanner.js: title sized to its line, never above --trb-max (modest, no big auto-fit) */
+  position:relative; z-index:150; display:block; clear:both; flex:none; grid-column:1/-1;
+  width:100%; max-width:none; margin:0; padding:0;
+  background:#111;
+  border-top:1px solid #1c1c1c; border-bottom:1px solid var(--trb-line);
+  font-family:var(--trb-mono); color:var(--trb-cream); text-align:left; line-height:1.2;
+}
+#trd-book *,#trd-book *::before,#trd-book *::after{box-sizing:border-box}
+
+#trd-book .trb-in{
+  display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:22px;
+  width:min(1080px,100%); margin:0 auto; padding:8px 28px; min-height:60px;
+  color:inherit; text-decoration:none; cursor:pointer;
+}
+#trd-book .trb-in:focus-visible{outline:1px solid var(--trb-red-txt); outline-offset:-3px}
+
+/* ---------- the book: a small cover thumbnail built from the site's chrome duck ---------- */
+#trd-book .trb-book{
+  font-size:4.4px; display:block; position:relative; width:7.6em; height:10.2em; flex:none;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.8));
+}
+#trd-book .trb-book::after{
+  content:""; position:absolute; top:.3em; bottom:.3em; right:-.5em; width:.5em; border-radius:0 .2em .2em 0;
+  background:#d9cfb4; opacity:.75;
+}
+#trd-book .trb-cover{
+  position:absolute; inset:0; overflow:hidden; border-radius:.3em .5em .5em .3em;
+  display:flex; flex-direction:column; align-items:center;
+  background:radial-gradient(circle at 50% 46%,rgba(200,36,28,.45),transparent 58%),linear-gradient(160deg,#250504,#0a0101 70%);
+  border:1px solid #3d0d09; box-shadow:inset .5em 0 0 #120101;
+  padding:.55em .35em 0 .9em;
+}
+#trd-book .trb-c-top{
+  position:relative; z-index:2; font-family:var(--trb-display); font-weight:700; text-transform:uppercase;
+  font-size:.82em; line-height:.95; letter-spacing:.06em; color:var(--trb-cream); text-align:center;
+}
+#trd-book .trb-c-q{position:relative; z-index:1; font-family:var(--trb-display); font-weight:700; font-size:4.6em; line-height:.82; color:var(--trb-red); margin-top:.04em}
+#trd-book .trb-c-duck{position:absolute; z-index:2; left:52%; top:48%; width:5.4em; height:auto; transform:translate(-50%,0)}
+#trd-book .trb-c-by{
+  position:absolute; z-index:3; left:.5em; right:0; bottom:0; padding:.3em .2em .32em;
+  background:var(--trb-red); color:#fff; text-align:center;
+  font-family:var(--trb-display); font-weight:700; text-transform:uppercase; font-size:.78em; letter-spacing:.08em; line-height:1;
+}
+
+/* ---------- the line: label, title, price ---------- */
+#trd-book .trb-copy{display:flex; flex-direction:column; justify-content:center; gap:3px; min-width:0}
+#trd-book .trb-line{
+  display:flex; align-items:baseline; justify-content:center; gap:14px; min-width:0; white-space:nowrap;
+}
+#trd-book .trb-k{
+  flex:none; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--trb-mute);
+}
+#trd-book .trb-k b{font-weight:700; color:var(--trb-red-mute); margin-right:.35em}
+#trd-book .trb-t{
+  flex:0 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;
+  font-family:var(--trb-display); font-weight:700; font-size:21px; line-height:1.05;
+  letter-spacing:.02em; color:var(--trb-cream);
+}
+#trd-book .trb-p{flex:none; font-weight:700; font-size:15px; letter-spacing:.03em; color:var(--trb-red-txt)}
+#trd-book .trb-d{display:none; font-size:13px; color:var(--trb-mute); text-align:center}
+
+#trd-book .trb-cta{
+  flex:none; font-weight:700; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; white-space:nowrap;
+  color:var(--trb-red-txt); background:transparent; padding:8px 13px 7px; border-radius:3px;
+  border:1px solid rgba(200,36,28,.55);
+  transition:background .25s var(--trb-ease),border-color .25s var(--trb-ease),color .25s var(--trb-ease);
+}
+#trd-book .trb-cta-s{display:none}
+#trd-book .trb-in:hover .trb-cta,#trd-book .trb-in:focus-visible .trb-cta{background:rgba(200,36,28,.12); border-color:var(--trb-red-txt); color:#f06a62}
+#trd-book .trb-in:hover .trb-t{color:#fff6e0}
+
+/* ---------- the store page: slightly larger, still calm ---------- */
+#trd-book.trb-big{--trb-max:26px; border-top-color:var(--trb-line); background:#121010}
+#trd-book.trb-big .trb-in{min-height:80px; padding:10px 30px; gap:24px}
+#trd-book.trb-big .trb-book{font-size:5.8px}
+#trd-book.trb-big .trb-copy{gap:6px}
+#trd-book.trb-big .trb-k{font-size:12px}
+#trd-book.trb-big .trb-p{font-size:17px}
+#trd-book.trb-big .trb-d{display:block}
+#trd-book.trb-big .trb-cta{font-size:12.5px; padding:9px 15px 8px}
+
+/* ---------- smaller screens ---------- */
+@media (max-width:900px){
+  #trd-book .trb-in{gap:16px; padding:8px 20px}
+  #trd-book.trb-big .trb-in{padding:10px 20px; gap:18px}
+}
+/* landscape phone: one short line, ~48px */
+@media (max-width:950px) and (max-height:500px){
+  #trd-book{--trb-max:20px; --trb-min:13px}
+  #trd-book .trb-in{min-height:46px; padding:5px 20px; gap:14px}
+  #trd-book .trb-book{font-size:3.4px}
+  #trd-book .trb-k{font-size:10px}
+  #trd-book .trb-p{font-size:13px}
+  #trd-book .trb-cta{font-size:11px; padding:6px 10px 5px}
+  #trd-book.trb-big{--trb-max:22px}
+  #trd-book.trb-big .trb-in{min-height:58px; padding:6px 20px}
+  #trd-book.trb-big .trb-book{font-size:4px}
+  #trd-book.trb-big .trb-d{display:none}
+}
+
+/* ---------- portrait phones: just the title (two lines) and "$19.99 ›"; the whole strip is the link ---------- */
+@media (max-width:600px){
+  #trd-book,#trd-book.trb-big{--trb-fit:none}
+  #trd-book .trb-in{gap:12px; padding:10px 14px; min-height:0}
+  #trd-book .trb-book{font-size:5.6px}
+  #trd-book .trb-copy{gap:4px}
+  #trd-book .trb-line{display:flex; flex-direction:column; align-items:center; gap:3px; white-space:normal; text-align:center}
+  #trd-book .trb-k{display:none}
+  #trd-book .trb-t{font-size:17px; line-height:1.1; white-space:normal; text-wrap:balance; overflow:visible;
+    display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2}
+  #trd-book .trb-p{display:none}
+  #trd-book .trb-cta{font-size:12px; letter-spacing:.04em; padding:8px 10px 7px; align-self:center}
+  #trd-book .trb-cta-l{display:none}
+  #trd-book .trb-cta-s{display:inline}
+  #trd-book.trb-big .trb-in{padding:12px 14px; gap:12px}
+  #trd-book.trb-big .trb-book{font-size:6.4px}
+  #trd-book.trb-big .trb-t{font-size:19px}
+  #trd-book.trb-big .trb-d{display:none}
+  #trd-book.trb-big .trb-cta{font-size:13px}
+}
+@media (max-width:360px){
+  #trd-book .trb-t{font-size:15.5px}
+}
+@media (prefers-reduced-motion:reduce){#trd-book .trb-cta{transition:none}}
