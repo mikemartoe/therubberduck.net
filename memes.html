@@ -140,6 +140,27 @@ option{background:var(--surface-1);color:var(--text)}
 .quick{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:12px}
 .quick .ql{font-family:var(--body);font-weight:700;font-size:var(--step--1);color:var(--head);margin-right:4px}
 .quick .ql.note{font-weight:400;color:var(--muted);margin-left:4px}
+.people{align-items:flex-start;margin-top:10px;padding-top:12px;border-top:1px solid var(--rule)}
+.people .phead{display:flex;align-items:center;gap:10px;width:100%;flex-wrap:wrap}
+.people .ql .pn{color:var(--accent-text);font-weight:700;margin-left:4px}
+.psearch{position:relative;flex:1 1 180px;max-width:260px}
+.psearch input{width:100%;height:32px;background:var(--well);border:1px solid #474e56;border-radius:3px;color:#fff;
+  font-family:var(--body);font-weight:600;font-size:var(--step--1);padding:0 10px 0 30px;outline:none}
+.psearch input::placeholder{color:#7d868f;font-weight:400}
+.psearch input:focus{border-color:var(--accent-hover);box-shadow:0 0 0 2px rgba(47,127,209,.25)}
+.psearch svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:14px;height:14px;fill:none;stroke:#8a939c;stroke-width:2.4;stroke-linecap:round}
+.people .pclear{background:none;border:0;color:var(--accent-text);font-family:var(--body);font-weight:700;font-size:var(--step--1);padding:0 2px;cursor:pointer}
+.people .pclear[hidden]{display:none}
+.pchips{display:flex;flex-wrap:wrap;gap:7px;width:100%;max-height:118px;overflow-y:auto;padding:2px 6px 2px 0;
+  scrollbar-width:thin;scrollbar-color:#4a5159 transparent}
+.pchips::-webkit-scrollbar{width:8px}
+.pchips::-webkit-scrollbar-thumb{background:#4a5159;border-radius:4px}
+.pchips .chip{padding:5px 10px}
+.pchips .chip[hidden]{display:none}
+.pchips .pnone{font-family:var(--body);font-size:var(--step--1);color:var(--muted)}
+.lbtags button.person{border-color:#2f7fd1;color:#fff}
+.lbtags button.person::before{content:"\1F464\FE0E";margin-right:5px;opacity:.7}
+@media(max-width:430px){.people .ql{margin-right:auto}.psearch{max-width:none;flex-basis:100%;order:3}.pchips{max-height:112px}}
 .didyou{margin-top:8px;font-family:var(--body);font-size:var(--step--1);color:var(--muted)}
 .didyou button{background:none;border:0;color:var(--accent-text);text-decoration:underline;padding:0 2px;font-size:inherit;font-weight:600}
 .topicgrp{grid-column:1/-1}
@@ -317,6 +338,14 @@ footer.site b{color:#c4cad0;font-weight:700}
     <button class="clear" id="clearq" aria-label="Clear search"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </div>
   <div class="quick" id="facequick" hidden><span class="ql">Faces</span></div>
+  <div class="quick people" id="peoplequick" hidden>
+    <div class="phead">
+      <span class="ql">People<span class="pn" id="pnames"></span></span>
+      <span class="psearch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg><input id="pq" type="search" placeholder="find a name…" aria-label="Find a person by name" autocomplete="off"></span>
+      <button type="button" class="pclear" id="pclear" hidden>clear people</button>
+    </div>
+    <div class="pchips" id="pchips" role="group" aria-label="Filter by person"></div>
+  </div>
   <div class="didyou" id="didyou" hidden></div>
   <div class="countline">
     <span><b id="shown">0</b> of <b id="total">0</b> showing</span>
@@ -424,7 +453,7 @@ function boot(){
   if(/^seed=/.test(fromHash)){seed=fromHash.slice(5)} else {seed=newSeed()}
   $('seedlabel').textContent=seed;
   $('total').textContent=DATA.length;
-  buildIndex(); buildFaceQuick(); buildPanel(); apply(); bind();
+  buildIndex(); buildFaceQuick(); buildPeopleQuick(); buildPanel(); apply(); bind();
   if(fromHash && !/^seed=/.test(fromHash)){ setTimeout(function(){openById(fromHash)},150) }
 }
 
@@ -448,7 +477,7 @@ var CATS=[
   ['topics','Topics']
 ];
 var MULTI={topics:1,textWords:1,people:1};
-var SPAN={topics:1,textWords:1};
+var SPAN={topics:1,textWords:1,people:1};
 var CHIPCAP={topics:80,textWords:60};
 var ORDER={
   typeTag:['meme','clip','gif'],
@@ -663,6 +692,67 @@ function buildFaceQuick(){
     syncChips(); apply();
   });
 }
+/* ---------- People: named public figures (hand-confirmed), chip row + name finder ---------- */
+var PEOPLE=[];
+function buildPeopleQuick(){
+  var cnt={};
+  DATA.forEach(function(it){(it.people||[]).forEach(function(p){cnt[p]=(cnt[p]||0)+1})});
+  PEOPLE=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a]||a.localeCompare(b)});
+  var box=$('peoplequick'); if(!PEOPLE.length){box.hidden=true;return}
+  box.hidden=false;
+  $('pnames').textContent=PEOPLE.length;
+  $('pchips').innerHTML=PEOPLE.map(function(p){
+    return '<button class="chip" data-cat="people" data-val="'+esc(p)+'" data-pn="'+esc(norm(p))+'" aria-pressed="false">'+esc(p)+' <i>'+cnt[p]+'</i></button>'}).join('')+
+    '<span class="pnone" id="pnone" hidden>No name like that.</span>';
+  $('pchips').addEventListener('click',function(e){
+    var b=e.target.closest('.chip[data-cat="people"]'); if(!b)return;
+    togglePerson(b.dataset.val);
+  });
+  $('pq').addEventListener('input',filterPeopleChips);
+  $('pq').addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();var q=norm(this.value);if(!q)return;
+      var f=Array.prototype.find.call($('pchips').querySelectorAll('.chip'),function(c){return F.people.indexOf(c.dataset.val)===-1&&personHit(c.dataset.pn,q)});
+      if(f){togglePerson(f.dataset.val);this.value='';filterPeopleChips()}}
+    if(e.key==='Escape'){this.value='';filterPeopleChips()}
+  });
+  $('pclear').addEventListener('click',function(){F.people=[];$('pq').value='';filterPeopleChips();syncChips();apply()});
+}
+function togglePerson(p){
+  var i=F.people.indexOf(p); if(i>-1)F.people.splice(i,1); else F.people.push(p);
+  syncChips(); apply();
+}
+function personHit(pn,q){
+  if(!q)return true;
+  if(pn.indexOf(q)>-1)return true;
+  var qs=q.split(' '), ws=pn.split(' ');
+  return qs.every(function(t){return ws.some(function(w){return w.indexOf(t)===0||(t.length>=4&&lev(t,w.slice(0,t.length+1),1)<=1)})});
+}
+function filterPeopleChips(){
+  var q=norm($('pq').value), shown=0;
+  Array.prototype.forEach.call($('pchips').querySelectorAll('.chip'),function(c){
+    var on=F.people.indexOf(c.dataset.val)>-1, hit=on||personHit(c.dataset.pn,q);
+    c.hidden=!hit; if(hit)shown++;
+  });
+  $('pnone').hidden=shown>0;
+}
+function updatePeopleQuick(){
+  var box=$('peoplequick'); if(!box||box.hidden)return;
+  var cnt={};
+  DATA.forEach(function(it){if(matches(it,'people'))(it.people||[]).forEach(function(p){cnt[p]=(cnt[p]||0)+1})});
+  var host=$('pchips'), chips=Array.prototype.slice.call(host.querySelectorAll('.chip'));
+  chips.forEach(function(c){
+    var v=c.dataset.val, n=cnt[v]||0, on=F.people.indexOf(v)>-1;
+    c.querySelector('i').textContent=n; c.classList.toggle('zero',n===0&&!on);
+    c.setAttribute('aria-pressed',on?'true':'false');
+  });
+  // selected names first, then by live count
+  chips.sort(function(a,b){
+    var sa=F.people.indexOf(a.dataset.val)>-1?1:0, sb=F.people.indexOf(b.dataset.val)>-1?1:0;
+    return (sb-sa)||((cnt[b.dataset.val]||0)-(cnt[a.dataset.val]||0))||(PEOPLE.indexOf(a.dataset.val)-PEOPLE.indexOf(b.dataset.val));
+  }).forEach(function(c){host.insertBefore(c,$('pnone'))});
+  $('pclear').hidden=!F.people.length;
+  filterPeopleChips();
+}
 function updateFaceQuick(){
   var box=$('facequick'); if(!box||box.hidden)return;
   var pool=DATA.filter(function(it){return matches(it,'faceBucket')&&(!F.faceSize.length||matches(it,'faceSize'))});
@@ -762,7 +852,7 @@ function apply(){
   $('activefilters').textContent = snippet();
   shownN=0; $('grid').innerHTML=''; renderChunk();
   $('empty').hidden = view.length>0;
-  updateCounts(); updateFaceQuick(); didYouMean();
+  updateCounts(); updateFaceQuick(); updatePeopleQuick(); didYouMean();
 }
 function didYouMean(){
   var box=$('didyou'), q=norm($('q').value);
@@ -852,8 +942,9 @@ function openAt(i){
   if(it.faces&&typeof it.faces.count==='number'){
     rows.splice(2,0,['Faces',it.faces.count===0?'None detected':(it.faces.count+(it.faces.count===1?' face':' faces')+' · largest '+it.faces.largestPct+'% of frame')]);
   }
+  if(it.people&&it.people.length)rows.splice(3,0,['People',it.people.map(esc).join(', ')]);
   $('lbspecs').innerHTML=rows.map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>'}).join('');
-  $('lbtags').innerHTML=(it.topics||[]).map(function(t){return '<button data-tag="'+esc(t)+'">'+esc(t)+'</button>'}).join('')||'<span style="color:var(--muted)">none</span>';
+  $('lbtags').innerHTML=(it.people||[]).map(function(p){return '<button class="person" data-person="'+esc(p)+'">'+esc(p)+'</button>'}).join('')+(it.topics||[]).map(function(t){return '<button data-tag="'+esc(t)+'">'+esc(t)+'</button>'}).join('')||'<span style="color:var(--muted)">none</span>';
   var ocr=(it.ocr||'').trim();
   $('lbocrwrap').hidden=!ocr;
   $('lbocr').textContent=ocr;
@@ -945,6 +1036,9 @@ function bind(){
   $('lbprev').addEventListener('click',function(){openAt(cur-1)});
   $('lbnext').addEventListener('click',function(){openAt(cur+1)});
   $('lbtags').addEventListener('click',function(e){
+    var pb=e.target.closest('button[data-person]');
+    if(pb){clearFilters(); F.people=[pb.dataset.person]; syncChips(); close(); apply();
+      window.scrollTo({top:0,behavior:'auto'}); toast('Filtered: '+pb.dataset.person); return}
     var b=e.target.closest('button[data-tag]'); if(!b)return;
     clearFilters(); F.topics=[b.dataset.tag]; syncChips(); close(); apply();
     window.scrollTo({top:0,behavior:'auto'}); toast('Filtered: '+b.dataset.tag);
@@ -982,7 +1076,7 @@ function setOpen(on){
   $('togglefilters').setAttribute('aria-expanded',on?'true':'false');
   if(on) updateCounts();
 }
-function clearFilters(){Object.keys(F).forEach(function(k){F[k]=[]});$('q').value='';if($('sort').value==='relevance')$('sort').value='random';$('prompt').classList.remove('has-value');syncChips()}
+function clearFilters(){Object.keys(F).forEach(function(k){F[k]=[]});if($('pq')){$('pq').value=''}$('q').value='';if($('sort').value==='relevance')$('sort').value='random';$('prompt').classList.remove('has-value');syncChips()}
 function syncChips(){
   document.querySelectorAll('.chip[data-cat]').forEach(function(c){
     c.setAttribute('aria-pressed', F[c.dataset.cat].indexOf(c.dataset.val)>-1?'true':'false');
