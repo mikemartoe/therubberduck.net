@@ -424,22 +424,23 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   .banner .wm{font-size:58px}
   .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
 }
-/* phones: logo duck becomes a soft watermark behind the wordmark; type fills the band */
+/* phones: logo duck = faint grayscale watermark behind bigger type */
 @media (max-width:480px){
   .banner-in{
     flex-direction:column;align-items:center;justify-content:center;
     gap:10px;padding:22px 56px 16px;min-height:168px;position:relative;overflow:hidden;
   }
-  .banner img{
-    position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
-    height:148px;width:auto;max-width:none;
-    opacity:.2;filter:brightness(.75) contrast(1.05);
+  /* only the logo in .banner-in — never the support duck or other imgs */
+  .banner-in > img{
+    position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+    height:132px;width:auto;max-width:none;
+    opacity:.1;filter:grayscale(1) brightness(1.35) contrast(.9);
     z-index:0;pointer-events:none;
   }
   .banner .wm{
     position:relative;z-index:1;font-size:clamp(52px,17vw,72px);
     text-align:center;line-height:.88;margin:0;
-    text-shadow:0 2px 18px rgba(0,0,0,.85);
+    text-shadow:0 2px 18px rgba(0,0,0,.9);
   }
   .banner .meta{
     position:relative;z-index:1;font-size:16px;gap:6px 16px;justify-content:center;
@@ -627,7 +628,12 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 @media (max-width:480px){
   header.banner>.trd-sup{position:absolute;right:8px;left:auto;top:auto;bottom:8px;z-index:210;align-items:flex-end}
   .trd-sup-duck{width:64px;height:64px;padding:4px;
-    filter:drop-shadow(0 3px 8px rgba(0,0,0,.55)) saturate(.45) brightness(1.08) hue-rotate(-8deg)}
+    filter:drop-shadow(0 3px 8px rgba(0,0,0,.55)) grayscale(.55) saturate(.35) brightness(1.12)}
+  /* keep support duck img from inheriting watermark rules */
+  header.banner .trd-sup-duck img{
+    position:static!important;transform:none!important;opacity:1!important;
+    height:100%!important;width:100%!important;filter:none!important;left:auto!important;top:auto!important;
+  }
   .trd-sup-bub{max-width:165px;margin:0 40px 0 0;padding:9px 11px;transform-origin:top right}
   .trd-sup-bub:after{right:12px;bottom:auto;top:-8px;border:9px solid transparent;border-bottom-color:#fff;border-top:0;border-left-color:transparent}
   .trd-sup-bub p{font-size:12px}
