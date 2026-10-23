@@ -252,6 +252,10 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 /* deck (Red Pill Album) upright Norelco face — same size language as spines */
 .deck{overflow:visible}
 .deck .spine-face{--sf-x:-50%;z-index:70;bottom:calc(100% + 10px);width:min(200px,48vw);max-width:220px}
+/* desktop / laptop: larger readable faces (~240–280px); after deck base so it wins */
+@media (hover:hover) and (pointer:fine) and (min-width:1024px){
+  .spine-face,.deck .spine-face{width:min(260px,28vw);max-width:280px}
+}
 @media (hover:hover) and (pointer:fine){
   .deck:hover .spine-face,.deck:focus-visible .spine-face{
     opacity:1;transform:translateX(calc(var(--sf-x) + var(--sf-clamp-x))) translateY(var(--sf-clamp-y)) perspective(920px) rotateY(-4deg) rotateX(3deg) translateY(0) scale(1)}
@@ -633,7 +637,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   document.addEventListener('trdpod:state',function(e){paint(e.detail);});
   paint(window.trdPod.state());
 })();
-/* upright Norelco faces: keep fully in-viewport; clear of PRESS PLAY / .deck */
+/* upright Norelco faces: keep fully inside the fixed homepage viewport */
 (function(){
   var MARGIN=10;
   function clampFace(host){
@@ -641,39 +645,80 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     if(!face)return;
     face.style.setProperty('--sf-clamp-x','0px');
     face.style.setProperty('--sf-clamp-y','0px');
+    /* two frames so :hover / .is-face-open size settles before measure */
     requestAnimationFrame(function(){
-      var r=face.getBoundingClientRect();
-      var dx=0,dy=0;
-      var vw=window.innerWidth||document.documentElement.clientWidth;
-      var vh=window.innerHeight||document.documentElement.clientHeight;
-      if(r.left<MARGIN)dx=MARGIN-r.left;
-      if(r.right>vw-MARGIN)dx=(vw-MARGIN)-r.right;
-      if(r.top<MARGIN)dy=MARGIN-r.top;
-      /* spine faces: never cover the cassette deck / PRESS PLAY keys */
-      var isDeck=host.classList&&host.classList.contains('deck');
-      var deck=document.querySelector('.deck');
-      if(deck&&!isDeck){
-        var d=deck.getBoundingClientRect();
-        var overlapX=Math.min(r.right+dx,d.right)-Math.max(r.left+dx,d.left);
-        var overlapY=Math.min(r.bottom+dy,d.bottom)-Math.max(r.top+dy,d.top);
-        if(overlapX>8&&overlapY>8){
-          var pushLeft=(d.left-MARGIN)-(r.right+dx);
-          if(r.left+dx+pushLeft>=MARGIN)dx+=pushLeft;
-          else dy=Math.min(dy,(d.top-MARGIN)-(r.bottom+dy));
+      requestAnimationFrame(function(){
+        var vw=window.innerWidth||document.documentElement.clientWidth;
+        var vh=window.innerHeight||document.documentElement.clientHeight;
+        var isDeck=host.classList&&host.classList.contains('deck');
+        var deck=document.querySelector('.deck');
+        var keys=deck&&deck.querySelector('.deck-keys');
+        var inStackB=!!(host.closest&&host.closest('.stack-b'));
+        var inStackA=!!(host.closest&&host.closest('.stack-a'));
+        var dx=0,dy=0;
+        function rect(){return face.getBoundingClientRect()}
+        function apply(){
+          face.style.setProperty('--sf-clamp-x',dx+'px');
+          face.style.setProperty('--sf-clamp-y',dy+'px');
         }
-      }
-      /* deck face: keep clear of PRESS PLAY keys — prefer above; nudge up if overlapping keys */
-      if(isDeck&&deck){
-        var keys=deck.querySelector('.deck-keys');
-        if(keys){
+        function overlaps(a,b){
+          if(!a||!b)return false;
+          return Math.min(a.right,b.right)-Math.max(a.left,b.left)>8 &&
+                 Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>8;
+        }
+        function clampViewport(){
+          var r=rect();
+          if(r.left<MARGIN)dx+=MARGIN-r.left;
+          if(r.right>vw-MARGIN)dx+=(vw-MARGIN)-r.right;
+          apply();
+          r=rect();
+          /* top clamp is sacred on the fixed 100vh homepage — never undo */
+          if(r.top<MARGIN)dy+=MARGIN-r.top;
+          if(r.bottom>vh-MARGIN)dy+=(vh-MARGIN)-r.bottom;
+          apply();
+        }
+        clampViewport();
+        var r=rect();
+        /* deck face on PRESS PLAY: slide sideways or further DOWN — never back above the fold */
+        if(isDeck&&keys){
           var k=keys.getBoundingClientRect();
-          var ox=Math.min(r.right+dx,k.right)-Math.max(r.left+dx,k.left);
-          var oy=Math.min(r.bottom+dy,k.bottom)-Math.max(r.top+dy,k.top);
-          if(ox>8&&oy>8)dy=Math.min(dy,(k.top-MARGIN)-(r.bottom+dy));
+          if(overlaps(r,k)){
+            var pushR=(k.right+MARGIN)-r.left;
+            var pushL=(k.left-MARGIN)-r.right;
+            var pushDown=(k.bottom+MARGIN)-r.top;
+            if(r.right+pushR<=vw-MARGIN)dx+=pushR;
+            else if(r.left+pushL>=MARGIN)dx+=pushL;
+            else if(r.bottom+pushDown<=vh-MARGIN)dy+=pushDown;
+            apply();
+            clampViewport();
+            r=rect();
+          }
         }
-      }
-      face.style.setProperty('--sf-clamp-x',dx+'px');
-      face.style.setProperty('--sf-clamp-y',dy+'px');
+        /* spine faces: clear deck / keys without escaping the viewport */
+        if(deck&&!isDeck){
+          var d=deck.getBoundingClientRect();
+          var k2=keys&&keys.getBoundingClientRect();
+          var hitKeys=k2&&overlaps(r,k2);
+          var hitDeck=overlaps(r,d);
+          if(hitKeys||hitDeck){
+            var box=hitKeys?k2:d;
+            var pushR2=(box.right+MARGIN)-r.left;
+            var pushL2=(box.left-MARGIN)-r.right;
+            var pushU=box.top-MARGIN-r.bottom;
+            var pushD=(box.bottom+MARGIN)-r.top;
+            if(inStackB&&r.right+pushR2<=vw-MARGIN)dx+=pushR2;
+            else if(inStackA&&r.left+pushL2>=MARGIN)dx+=pushL2;
+            else if(r.right+pushR2<=vw-MARGIN)dx+=pushR2;
+            else if(r.left+pushL2>=MARGIN)dx+=pushL2;
+            else if(r.top+pushU>=MARGIN)dy+=pushU;
+            else if(r.bottom+pushD<=vh-MARGIN)dy+=pushD;
+            apply();
+            clampViewport();
+          }
+        } else {
+          clampViewport();
+        }
+      });
     });
   }
   function bindHoverClamp(){
