@@ -238,7 +238,7 @@
     var w = tab.offsetWidth, h = tab.offsetHeight; if (!w || !h) return;
     /* phones: suggestion box top-left in the black header band; duck stays top-right via CSS */
     if (W.matchMedia && W.matchMedia('(max-width: 480px)').matches) {
-      fx.style.setProperty('--trs-l', '8px');
+      fx.style.setProperty('--trs-l', '10px');
       fx.style.setProperty('--trs-t', '10px');
       fx.style.removeProperty('--trs-r');
       fx.style.removeProperty('--trs-b');
