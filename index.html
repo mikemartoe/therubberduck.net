@@ -419,10 +419,33 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .banner .meta a{color:#ffe2a0}
 .banner .meta .handle{color:#b9ab8c}
 @media (max-width:760px){
-  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px;position:relative;justify-content:center;overflow:hidden}
   .banner img{height:62px}
   .banner .wm{font-size:58px}
   .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
+}
+/* phones: logo duck becomes a soft watermark behind the wordmark; type fills the band */
+@media (max-width:480px){
+  .banner-in{
+    flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;padding:22px 56px 16px;min-height:168px;position:relative;overflow:hidden;
+  }
+  .banner img{
+    position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+    height:148px;width:auto;max-width:none;
+    opacity:.2;filter:brightness(.75) contrast(1.05);
+    z-index:0;pointer-events:none;
+  }
+  .banner .wm{
+    position:relative;z-index:1;font-size:clamp(52px,17vw,72px);
+    text-align:center;line-height:.88;margin:0;
+    text-shadow:0 2px 18px rgba(0,0,0,.85);
+  }
+  .banner .meta{
+    position:relative;z-index:1;font-size:16px;gap:6px 16px;justify-content:center;
+  }
+  .banner .meta a{position:relative;z-index:1}
+  a.trd-shopsign{position:relative;z-index:2}
 }
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -601,8 +624,16 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .trd-sup-go:hover{background:#ff2a1f}
 .trd-sup-x{position:absolute;top:4px;right:4px;width:20px;height:20px;border:0;border-radius:50%;background:#eee;color:#333;font-size:14px;line-height:20px;cursor:pointer;padding:0}
 .trd-sup-x:hover{background:#ddd}
-@media (max-width:480px){header.banner>.trd-sup{position:absolute;right:8px;left:auto;top:auto;bottom:8px;z-index:210;align-items:flex-end}.trd-sup-duck{width:72px;height:72px;padding:5px}.trd-sup-bub{max-width:165px;margin:0 40px 0 0;padding:9px 11px;transform-origin:top right}.trd-sup-bub:after{right:12px;bottom:auto;top:-8px;border:9px solid transparent;border-bottom-color:#fff;border-top:0;border-left-color:transparent}.trd-sup-bub p{font-size:12px}}
+@media (max-width:480px){
+  header.banner>.trd-sup{position:absolute;right:8px;left:auto;top:auto;bottom:8px;z-index:210;align-items:flex-end}
+  .trd-sup-duck{width:64px;height:64px;padding:4px;
+    filter:drop-shadow(0 3px 8px rgba(0,0,0,.55)) saturate(.45) brightness(1.08) hue-rotate(-8deg)}
+  .trd-sup-bub{max-width:165px;margin:0 40px 0 0;padding:9px 11px;transform-origin:top right}
+  .trd-sup-bub:after{right:12px;bottom:auto;top:-8px;border:9px solid transparent;border-bottom-color:#fff;border-top:0;border-left-color:transparent}
+  .trd-sup-bub p{font-size:12px}
+}
 .trd-sup.wig:not(.open) .trd-sup-duck{animation:trdWig 5s ease-in-out 1.5s infinite;transform-origin:50% 85%}
+@media (max-width:480px){.trd-sup.wig:not(.open) .trd-sup-duck{animation:none}}
 @keyframes trdWig{0%,76%,100%{transform:rotate(0) translateY(0)}79%{transform:rotate(-12deg) translateY(-4px)}82%{transform:rotate(10deg) translateY(-4px)}85%{transform:rotate(-8deg) translateY(-2px)}88%{transform:rotate(6deg)}91%{transform:rotate(-3deg)}94%{transform:rotate(0)}}
 @media (prefers-reduced-motion:reduce){.trd-sup.wig .trd-sup-duck{animation:none}}
 @media print{.trd-sup{display:none}}
