@@ -115,10 +115,11 @@
 /* phones: a little smaller, like the duck */
 @media (max-width:480px){
   #trd-suggest-fx .trs-tab{
-    width:40px; height:54px;
+    /* larger mailbox so it reads clearly in the black header band */
+    width:58px; height:79px;
     left:var(--trs-l,8px);
     right:auto;
-    top:calc(var(--trs-t,10px) + env(safe-area-inset-top,0px));
+    top:calc(var(--trs-t,12px) + env(safe-area-inset-top,0px));
     bottom:auto;
   }
   /* tip below the tab when it sits in the header */
