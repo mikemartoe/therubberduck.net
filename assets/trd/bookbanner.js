@@ -16,7 +16,7 @@
      OFF:  pages that get no banner at all.                                */
   var CONFIG = {
     ON: false,   // anon mission banner off until Gumroad listing approved
-    URL: 'https://thebookofq.gumroad.com/l/egzhsa',
+    URL: 'https://rubberduck41.gumroad.com/l/ttmhx',
     LABEL: '',                             // optional tag before the kicker; empty = none
     KICKER: 'ORDER YOUR COPY',
     TITLE: 'anon mission',                 // the lead, all lowercase, exactly as Mike writes it

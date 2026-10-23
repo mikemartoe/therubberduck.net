@@ -329,6 +329,79 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 /* ---- the suggestion line (desktop band) ---- */
 .band{display:none}
 
+
+/* ============ ANON MISSION: sideways book in the under-header black band ============
+   At rest: book lying on its side (spine visible), sized near a cassette graphic.
+   Hover / tap: same #trd-face-portal focus as the room cassette faces.
+   Click → Gumroad Volume 1. Old #trd-book banner stays OFF (bookbanner.js CONFIG.ON). */
+#trd-ambook{
+  flex:none;position:relative;z-index:190;background:#000;
+  border-bottom:1px solid #2a1d10;
+  box-shadow:0 1px 0 rgba(255,200,100,.10);
+}
+#trd-ambook .trd-ambook-in{
+  max-width:1240px;margin:0 auto;padding:10px 24px;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  min-height:52px;
+}
+a.trd-ambook{
+  --off:0px;--rot:-.4deg;--lift:0px;
+  position:relative;display:block;flex:none;
+  width:min(300px,72vw);height:44px;
+  text-decoration:none;color:inherit;overflow:visible;
+  transform:translateX(var(--off)) translateY(var(--lift)) rotate(var(--rot));
+  transition:transform .25s var(--ease),filter .25s var(--ease);
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.55));
+}
+a.trd-ambook:hover,a.trd-ambook:focus-visible{
+  transform:translateX(calc(var(--off) + 6px)) translateY(var(--lift)) rotate(calc(var(--rot) * .35));
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.65)) drop-shadow(0 0 14px rgba(255,190,90,.22));
+}
+a.trd-ambook:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-radius:4px}
+.trd-ambook-shell{
+  position:absolute;inset:0;border-radius:2px;overflow:hidden;
+  background:#1a0a08;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14),0 2px 0 rgba(0,0,0,.45);
+}
+.trd-ambook-shell::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:38%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,0));
+}
+.trd-ambook-spine{
+  display:block;width:100%;height:100%;object-fit:cover;object-position:left center;
+}
+.trd-ambook-tag{
+  flex:none;display:flex;flex-direction:column;gap:2px;min-width:0;
+  font-family:var(--body),system-ui,sans-serif;pointer-events:none;
+}
+.trd-ambook-tag b{
+  font:700 11px/1.1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#c8241c;
+}
+.trd-ambook-tag span{
+  font:700 clamp(18px,4.2vw,26px)/1 'TRD Steelfish',var(--display),Impact,sans-serif;
+  letter-spacing:.02em;color:#fbf3e0;white-space:nowrap;
+}
+.trd-ambook-tag i{
+  font:400 12px/1.2 var(--mono),ui-monospace,monospace;font-style:normal;color:#9a8f7a;
+}
+@media (min-width:900px) and (min-height:500px){
+  body > #trd-ambook{flex:none}
+  #trd-ambook .trd-ambook-in{padding:8px 24px;min-height:56px}
+  a.trd-ambook{width:min(340px,28vw);height:52px}
+}
+@media (max-width:760px){
+  #trd-ambook .trd-ambook-in{padding:8px 16px;gap:12px;justify-content:flex-start}
+  a.trd-ambook{width:min(260px,58vw);height:40px}
+  .trd-ambook-tag span{font-size:20px}
+}
+@media (max-width:380px){
+  .trd-ambook-tag i{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  a.trd-ambook,a.trd-ambook:hover,a.trd-ambook:focus-visible{transition:none;transform:none}
+}
+
+
 :focus-visible{outline:3px solid #ffd77a;outline-offset:3px;border-radius:6px}
 
 /* ============ TABLETS / WIDE PHONES ============ */
@@ -345,7 +418,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
    (centre), the duck and the suggestion box (right). */
 @media (min-width:900px) and (min-height:500px){
   body{display:flex;flex-direction:column;height:100vh;height:100svh;overflow:hidden}
-  body > .banner,body > #trd-book{flex:none}
+  body > .banner,body > #trd-book,body > #trd-ambook{flex:none}
   #trd-suggest{display:none!important}
   #trdSup{display:none!important}
   #trd-pod{height:0!important}
@@ -515,6 +588,18 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   </div>
 </header>
 
+<aside id="trd-ambook" aria-label="anon mission Volume 1">
+  <div class="trd-ambook-in">
+    <a class="trd-ambook" href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener"
+       aria-label="anon mission Volume 1 by The Rubber Duck, $19.99. Hover or tap to see the cover. Opens Gumroad to buy.">
+      <span class="trd-ambook-shell" aria-hidden="true">
+        <img class="trd-ambook-spine" src="/assets/trd/img/anon-mission-book-spine-side.webp?v=1" srcset="/assets/trd/img/anon-mission-book-spine-side.webp?v=1 1x, /assets/trd/img/anon-mission-book-spine-side@2x.webp?v=1 2x" width="960" height="110" alt="" decoding="async">
+      </span>
+      <span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/anon-mission-book-face.webp?v=1" srcset="/assets/trd/img/anon-mission-book-face.webp?v=1 1x, /assets/trd/img/anon-mission-book-face@2x.webp?v=1 2x" width="560" height="872" alt="" decoding="async"></span>
+    </a>
+    <span class="trd-ambook-tag" aria-hidden="true"><b>New book</b><span>anon mission</span><i>Volume 1 · $19.99</i></span>
+  </div>
+</aside>
 
 <div class="room" aria-hidden="true">
   <picture>
@@ -716,7 +801,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     hidePortal();
   }
   function bind(){
-    document.querySelectorAll('a.spine, a.deck').forEach(function(el){
+    document.querySelectorAll('a.spine, a.deck, a.trd-ambook').forEach(function(el){
       var f=el.querySelector('.spine-face'); if(f)byHost.set(el,f);
       el.addEventListener('mouseenter',function(){placeFace(el)});
       el.addEventListener('focus',function(){placeFace(el)});
@@ -781,6 +866,11 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
         return;
       }
     }
+    /* book strip: keep Gumroad in a new tab (matches target=_blank on the link) */
+    if(host.classList.contains('trd-ambook')){
+      window.open(href,'_blank','noopener');
+      return;
+    }
     window.location.href=href;
   }
   document.addEventListener('click',function(e){
@@ -788,7 +878,8 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     var face=e.target.closest&&(e.target.closest('#trd-face-portal')||e.target.closest('.spine-face'));
     var spine=e.target.closest&&e.target.closest('a.spine');
     var deck=e.target.closest&&e.target.closest('a.deck');
-    var host=spine||deck;
+    var ambook=e.target.closest&&e.target.closest('a.trd-ambook');
+    var host=spine||deck||ambook;
     /* floated faces are on document.body — recover host from face._trdHost */
     if(!host&&face&&face._trdHost)host=face._trdHost;
     if(!host){if(open)closeFace();return}
