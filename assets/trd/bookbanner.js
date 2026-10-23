@@ -15,7 +15,7 @@
      BIG:  pages that get the larger, stronger version.
      OFF:  pages that get no banner at all.                                */
   var CONFIG = {
-    ON: true,
+    ON: false,   // anon mission banner off until Gumroad listing approved
     URL: 'https://thebookofq.gumroad.com/l/egzhsa',
     LABEL: '',                             // optional tag before the kicker; empty = none
     KICKER: 'ORDER YOUR COPY',
@@ -65,13 +65,17 @@
 
   function place() {
     var b = D.body; if (!b) return;
-    var off = !CONFIG.ON || (CONFIG.OFF && CONFIG.OFF.test(location.pathname));
-    if (off) { if (bar.parentNode) bar.parentNode.removeChild(bar); return; }
-    bar.classList.toggle('trb-big', !!(CONFIG.BIG && CONFIG.BIG.test(location.pathname)));
     var head = null;
     for (var n = b.firstElementChild; n; n = n.nextElementSibling) {
       if (n.nodeName === 'HEADER' && n.classList.contains('banner')) { head = n; break; }
     }
+    var off = !CONFIG.ON || (CONFIG.OFF && CONFIG.OFF.test(location.pathname));
+    if (off) {
+      if (bar.parentNode) bar.parentNode.removeChild(bar);
+      placeSign(head);
+      return;
+    }
+    bar.classList.toggle('trb-big', !!(CONFIG.BIG && CONFIG.BIG.test(location.pathname)));
     if (head) { if (head.nextElementSibling !== bar) b.insertBefore(bar, head.nextSibling); }
     else if (bar.parentNode !== b) b.insertBefore(bar, b.firstChild);
     placeSign(head);
