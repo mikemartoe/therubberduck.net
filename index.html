@@ -366,9 +366,11 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   .sp-ic{width:36px;height:36px}
 }
 
-/* ============ PHONES ============ */
+/* ============ PHONES ============
+   Stage padding-bottom clears the fixed duck + suggestion box when you scroll to the shop.
+   Deck/spine width reserve (so their chrome is not covered) is in the rules just below. */
 @media (max-width:599px){
-  .stage{padding:18px 14px 24px;gap:24px}
+  .stage{padding:18px 14px calc(100px + env(safe-area-inset-bottom,0px));gap:24px}
   .hello-k{font-size:26px}
   .hello-h{font-size:38px}
   .deck-well{height:auto;aspect-ratio:100/66}
@@ -380,6 +382,14 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   .shop{min-height:470px;margin:6px 2px 0}
   .shop-sign-name{font-size:24px}
   .room .duck{object-position:50% 50%;opacity:.14}
+}
+/* below the one-screen laptop layout: keep cassette deck and spines clear of the fixed duck +
+   suggestion box (reserve matches duck+box footprint; desktop ≥1024×620 uses the band instead) */
+@media (max-width:480px){
+  .deck,.stacks{width:calc(100% - 132px);max-width:100%;box-sizing:border-box}
+}
+@media (min-width:481px) and (max-width:1023px){
+  .deck,.stacks{width:calc(100% - 156px);max-width:100%;box-sizing:border-box}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}

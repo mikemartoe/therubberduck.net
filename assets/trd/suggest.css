@@ -74,11 +74,11 @@
    A small hand-painted Rubber Duck suggestion box (oxblood, cream/black pinstripes) beside the support duck,
    standing on the duck's baseline and never taller than the duck (64px tall on desktop, 54px on phones: the height of the duck's
    own picture plus its glow; the duck button is 84px / 68px).
-   Desktop (700px and wider): the box takes the bottom-right corner and the duck steps left of it
+   At every width the box takes the bottom-right corner and the duck steps left of it
    (html.trs-box-r moves .trd-sup; set by suggest.js only while the opener is shown).
-   Phones: the box stands just left of the duck, or above it if the album player or its
-   "Drag me anywhere" hint is in the way (suggest.js measures and sets --trs-r / --trs-b / --trs-lift).
-   Without a duck it sits in the corner. Tooltip on hover/focus; one soft glow on first load only. */
+   If the album player or its "Drag me anywhere" hint is in the way, suggest.js lifts the box above the duck
+   (measures and sets --trs-r / --trs-b / --trs-lift). Without a duck it sits in the corner.
+   Tooltip on hover/focus; one soft glow on first load only. */
 #trd-suggest-fx .trs-tab{
   position:fixed; z-index:2147482000;
   right:var(--trs-r,20px);
@@ -114,9 +114,10 @@
 @media (max-width:480px){
   #trd-suggest-fx .trs-tab{width:40px; height:54px}
 }
-/* desktop: the duck steps left so the box can stand in the corner (corner 14px + box 47px + 8px gap;
-   the duck's own 6px padding makes the visible gap ~14px, matching the corner margin) */
-@media (min-width:700px){html.trs-box-r .trd-sup{right:69px}}
+/* the duck steps left so the box can stand in the corner, right of the duck
+   (desktop: corner 14 + box 47 + gap 8 = 69; phones: corner 8 + box 40 + gap 8 = 56) */
+@media (min-width:481px){html.trs-box-r .trd-sup{right:69px}}
+@media (max-width:480px){html.trs-box-r .trd-sup{right:56px}}
 /* one gentle glow on first load, then still */
 #trd-suggest-fx.trs-hello .trs-tab img{animation:trs-hello 2.4s ease-in-out .9s 1 both}
 @keyframes trs-hello{

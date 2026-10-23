@@ -21,8 +21,8 @@
      Set ENDPOINT to '' to switch sending off (the card says the box is closed).
      SHOW_TAB: the "Suggestions" opener, a small hand-painted suggestion box beside the support duck
        on every page and at every width (never taller than the duck; a little smaller on phones).
-       Desktop (700px+): the box takes the bottom-right corner and the duck steps left of it.
-       Phones: the box stands left of the duck, or above it when the album player is in the way.  */
+       The box takes the bottom-right corner and the duck steps left of it at every width.
+       If the album player is in the way the box stands above the duck instead.  */
   var CONFIG = {
     ENDPOINT: 'https://formsubmit.co/ajax/therubberduk@gmail.com',
     SUBJECT: 'Suggestion Box: therubberduck.net',
@@ -185,7 +185,7 @@
 
   /* ================= the box opener: beside the duck, clear of the player, its hint and the duck ================= */
   var tab = q('.trs-tab', fx), fitQ = false, watched = [], ro = null, mo = null;
-  var wide = W.matchMedia ? W.matchMedia('(min-width: 700px)') : { matches: true };     // desktop: box in the corner, duck to its left
+  var wide = W.matchMedia ? W.matchMedia('(min-width: 481px)') : { matches: true };     // breakpoint for duck step distance (CSS); box stays right of duck either way
   function corner() {                                               // Duck Pod's soft navigation copies the new page's <html> class, so this is re-applied
     var h = D.documentElement, want = !!CONFIG.SHOW_TAB;
     if (h.classList.contains('trs-box-r') !== want) h.classList.toggle('trs-box-r', want);
@@ -249,10 +249,10 @@
         base += (img.clientHeight - ih) / 2 + ih * 0.03;                       // the duck's rounded base sits ~3% above its picture's edge
       }
       var dw = duck.offsetWidth, dh = duck.offsetHeight;
-      if (wide.matches && D.documentElement.classList.contains('trs-box-r')) {
-        cands.push({ r: Math.max(0, offR - w - 8), b: base });                    // desktop: in the corner, right of the (moved) duck, same baseline
+      if (D.documentElement.classList.contains('trs-box-r')) {
+        cands.push({ r: Math.max(0, offR - w - 8), b: base });                    // corner, right of the (moved) duck, same baseline
       } else {
-        cands.push({ r: offR + dw + 10, b: base });                               // phones: just left of the duck, same baseline
+        cands.push({ r: offR + dw + 10, b: base });                               // no corner claim: just left of the duck
       }
       cands.push({ r: offR + Math.round((dw - w) / 2), b: offB + dh + 8 });          // the player is in the way: stand on top of the duck
     } else {
