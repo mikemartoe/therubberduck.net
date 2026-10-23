@@ -89,7 +89,8 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 /* the cassette well (a size container, so the cassette keeps its shape at any size) */
 .deck-well{container-type:size;min-height:0;display:grid;place-items:center;border-radius:6px;padding:6px;
   background:linear-gradient(180deg,#1b1714,#2a2420);box-shadow:inset 0 3px 10px rgba(0,0,0,.8),inset 0 0 0 1px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.5)}
-.deck.tpd-detached .deck-well{outline:2px dashed rgba(227,168,43,.6);outline-offset:-4px}
+/* detached fly is momentary; deck stays the live player on this page */
+.deck.tpd-detached .deck-well{outline:none}
 
 /* the cassette: a standard Compact Cassette (100.4 x 63.8 mm), front view, worn from years in a glovebox.
    All positions are % of the shell; type is in cqw so it scales, also while it flies into the player.

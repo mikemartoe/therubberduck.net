@@ -521,7 +521,9 @@
   var launching = false, hintPending = false;
   function syncDoor() {
     if (!root) return;
-    var hide = !S.started && !launching && !!D.querySelector('[data-trd-pod-door]');
+    /* Homepage tape deck stands in for the floating strip whenever the door is on the page,
+       even after the album has started — so the white mini player does not float over the shop. */
+    var hide = !!D.querySelector('[data-trd-pod-door]') && !launching;
     var was = root.classList.contains('tp-doorhide');
     root.classList.toggle('tp-doorhide', hide);
     if (was && !hide && hintPending) { hintPending = false; maybeHint(); }
