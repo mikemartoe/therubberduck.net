@@ -5,14 +5,14 @@
   "files_pending_push": 0,
   "memes_web_pending_push": 0,
   "commits_ahead_of_origin": 0,
-  "HEAD": "ac03391",
-  "origin_main_local_ref": "ac03391",
+  "HEAD": "b6dffac",
+  "origin_main_local_ref": "b6dffac",
   "last_batch": "Family-photo purge: removed 71 catalog items matching deleted pics&memes sources; ingested 72 new media from TRD17 cleaned folder (5988 files); R2 web deletes 71 + uploads 72",
   "blocked_reason": null,
   "push_paused": false,
   "ingest_stopped": false,
   "scif_pdfs_local": 241,
-  "updated": "2026-10-23T03:17:00-04:00",
+  "updated": "2026-10-23T03:25:30-04:00",
   "media_host": "r2",
   "media_base": "https://memes.therubberduck.net/",
   "r2_bucket": "trd-memes",
@@ -37,5 +37,14 @@
     "skipped_sha_or_name_dupes": 48,
     "skipped_non_media": 26,
     "laptop_pics_memes_count": 5988
+  },
+  "pages_status": "built",
+  "pages_run": "39916649808",
+  "verify": {
+    "removed_duck_r2": 404,
+    "kept_ace_r2": 200,
+    "new_img_4739_2_r2": 200,
+    "live_catalog_duck": false,
+    "live_catalog_img_4739_2": true
   }
 }
