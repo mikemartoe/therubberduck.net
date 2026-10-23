@@ -82,8 +82,6 @@
 #trd-suggest-fx .trs-tab{
   position:fixed; z-index:2147482000;
   right:var(--trs-r,20px);
-  left:auto;
-  top:auto;
   bottom:calc(var(--trs-b,20px) + env(safe-area-inset-bottom,0px) + var(--trs-lift,0px));
   -webkit-appearance:none; appearance:none; margin:0; padding:0; cursor:pointer;
   display:block; width:47px; height:64px; border:0; border-radius:6px; background:none;
@@ -114,33 +112,12 @@
 #trd-suggest-fx.trs-behind .trs-tab{opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility 0s .2s}   /* the duck's own bubble is open */
 /* phones: a little smaller, like the duck */
 @media (max-width:480px){
-  /* pin box + duck in the black header side circles — balanced, fully opaque */
-  header.banner{position:relative}
-  header.banner .banner-in{padding-left:72px;padding-right:78px}
-  #trd-suggest-fx.trs-in-banner{position:static;inset:auto;pointer-events:none;z-index:210}
-  #trd-suggest-fx.trs-in-banner .trs-tab{
-    position:absolute!important;pointer-events:auto;
-    width:58px;height:78px;
-    left:6px;right:auto;top:50%;bottom:auto;
-    transform:translateY(-50%);
-    opacity:1!important;visibility:visible!important;
-  }
-  #trd-suggest-fx.trs-in-banner .trs-tab img{
-    opacity:1!important;
-    filter:drop-shadow(0 4px 8px rgba(0,0,0,.75)) drop-shadow(0 0 1px rgba(0,0,0,.8)) brightness(1.12) contrast(1.08)!important;
-  }
-  #trd-suggest-fx.trs-in-banner .trs-tip{
-    bottom:calc(100% + 8px);top:auto;transform:translate(-50%,4px);
-  }
-  #trd-suggest-fx.trs-in-banner .trs-tab:focus-visible .trs-tip{transform:translate(-50%,0)}
+  #trd-suggest-fx .trs-tab{width:40px; height:54px}
 }
-@media (hover:hover) and (max-width:480px){
-  #trd-suggest-fx.trs-in-banner .trs-tab:hover .trs-tip{opacity:1;transform:translate(-50%,0)}
-  #trd-suggest-fx .trs-tab:hover .trs-tip{opacity:1; transform:translate(-50%,0)}
-}
-/* the duck steps left so the box can stand in the corner, right of the duck (desktop/tablet only) */
+/* the duck steps left so the box can stand in the corner, right of the duck
+   (desktop: corner 14 + box 47 + gap 8 = 69; phones: corner 8 + box 40 + gap 8 = 56) */
 @media (min-width:481px){html.trs-box-r .trd-sup{right:69px}}
-@media (max-width:480px){html.trs-box-r .trd-sup{right:8px}}
+@media (max-width:480px){html.trs-box-r .trd-sup{right:56px}}
 /* one gentle glow on first load, then still */
 #trd-suggest-fx.trs-hello .trs-tab img{animation:trs-hello 2.4s ease-in-out .9s 1 both}
 @keyframes trs-hello{
