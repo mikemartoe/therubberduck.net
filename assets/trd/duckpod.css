@@ -39,6 +39,9 @@
 .tp-grip i{display:block;width:34px;height:5px;border-radius:3px;background:repeating-linear-gradient(90deg,#b9b9b9 0 2px,transparent 2px 4px);opacity:.9}
 .tp-tool{width:24px;height:24px;flex:none;display:grid;place-items:center;border:0;padding:0;border-radius:50%;background:transparent;color:#8a8a8a;cursor:pointer}
 .tp-tool:hover{color:#e10600;background:rgba(0,0,0,.05)}
+/* Bright red pill-minimize icon — always readable on the silver shell */
+.tp-tool.tp-to-pill{color:#ff1a1a}
+.tp-tool.tp-to-pill:hover{color:#ff4444;background:rgba(255,26,26,.12)}
 .tp-tool svg{width:14px;height:14px}
 .tp-tool:focus-visible,.tp-w:focus-visible,.tp-center:focus-visible,.tp-mini-btn:focus-visible,.tp-pill:focus-visible{outline:2px solid #e10600;outline-offset:2px}
 
@@ -137,12 +140,12 @@
 /* ---------- red pill (minimized) ---------- */
 .tp-pill{width:66px;height:66px;place-items:center;border:0;padding:0;background:transparent;cursor:pointer;touch-action:none}
 .tp-pill-cap{position:relative;width:58px;height:26px;border-radius:13px;transform:rotate(-28deg);
-  background:linear-gradient(90deg,#9e0400 0%,#e10600 49%,#ff3b41 51%,#c00500 100%);
-  box-shadow:0 8px 18px rgba(0,0,0,.6),inset 0 -3px 5px rgba(0,0,0,.35),inset 0 2px 2px rgba(255,255,255,.35);transition:transform .2s ease,box-shadow .2s ease}
+  background:linear-gradient(90deg,#ff0a0a 0%,#ff1a1a 42%,#ff4d55 52%,#e10600 100%);
+  box-shadow:0 8px 18px rgba(0,0,0,.6),0 0 14px rgba(255,26,26,.55),inset 0 -3px 5px rgba(0,0,0,.28),inset 0 2px 2px rgba(255,255,255,.45);transition:transform .2s ease,box-shadow .2s ease}
 .tp-pill-cap::before{content:"";position:absolute;left:8px;right:8px;top:4px;height:6px;border-radius:4px;background:linear-gradient(rgba(255,255,255,.75),rgba(255,255,255,0))}
 .tp-pill:hover .tp-pill-cap{transform:rotate(-20deg) scale(1.06)}
 #trd-pod.tp-playing .tp-pill-cap{animation:tp-glow 2.4s ease-in-out infinite}
-@keyframes tp-glow{0%,100%{box-shadow:0 8px 18px rgba(0,0,0,.6),0 0 0 0 rgba(225,6,0,.0),inset 0 -3px 5px rgba(0,0,0,.35)}50%{box-shadow:0 8px 18px rgba(0,0,0,.6),0 0 0 8px rgba(225,6,0,.22),inset 0 -3px 5px rgba(0,0,0,.35)}}
+@keyframes tp-glow{0%,100%{box-shadow:0 8px 18px rgba(0,0,0,.6),0 0 14px rgba(255,26,26,.45),0 0 0 0 rgba(255,26,26,.0),inset 0 -3px 5px rgba(0,0,0,.28)}50%{box-shadow:0 8px 18px rgba(0,0,0,.6),0 0 22px rgba(255,26,26,.7),0 0 0 10px rgba(255,26,26,.28),inset 0 -3px 5px rgba(0,0,0,.28)}}
 
 /* ---------- phones ---------- */
 @media (max-width:600px){
