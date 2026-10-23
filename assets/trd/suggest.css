@@ -114,25 +114,22 @@
 #trd-suggest-fx.trs-behind .trs-tab{opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility 0s .2s}   /* the duck's own bubble is open */
 /* phones: a little smaller, like the duck */
 @media (max-width:480px){
-  /* docked into the black header band (not the top of the phone screen) */
+  /* pin box + duck in the black header beside Collectibles — no extra empty strip */
   header.banner{position:relative}
-  header.banner .banner-in{padding-bottom:76px} /* black strip under Collectibles for the icons */
-  header.banner > #trd-suggest-fx{position:static; inset:auto; pointer-events:none}
-  header.banner > #trd-suggest-fx .trs-tab{
-    position:absolute; pointer-events:auto;
-    width:50px; height:68px;
-    left:10px; right:auto; top:auto; bottom:10px;
+  header.banner .banner-in{padding-left:56px;padding-right:78px}
+  #trd-suggest-fx.trs-in-banner{position:static;inset:auto;pointer-events:none;z-index:210}
+  #trd-suggest-fx.trs-in-banner .trs-tab{
+    position:absolute!important;pointer-events:auto;
+    width:48px;height:66px;
+    left:8px;right:auto;top:auto;bottom:10px;
   }
-  /* tip above the tab once it lives at the bottom of the band */
-  header.banner > #trd-suggest-fx .trs-tip{
-    bottom:calc(100% + 10px); top:auto; transform:translate(-50%,4px);
+  #trd-suggest-fx.trs-in-banner .trs-tip{
+    bottom:calc(100% + 8px);top:auto;transform:translate(-50%,4px);
   }
-  header.banner > #trd-suggest-fx .trs-tab:focus-visible .trs-tip{transform:translate(-50%,0)}
-  @media (hover:hover){
-    header.banner > #trd-suggest-fx .trs-tab:hover .trs-tip{opacity:1; transform:translate(-50%,0)}
-  }
+  #trd-suggest-fx.trs-in-banner .trs-tab:focus-visible .trs-tip{transform:translate(-50%,0)}
 }
 @media (hover:hover) and (max-width:480px){
+  #trd-suggest-fx.trs-in-banner .trs-tab:hover .trs-tip{opacity:1;transform:translate(-50%,0)}
   #trd-suggest-fx .trs-tab:hover .trs-tip{opacity:1; transform:translate(-50%,0)}
 }
 /* the duck steps left so the box can stand in the corner, right of the duck (desktop/tablet only) */

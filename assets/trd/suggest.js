@@ -171,21 +171,31 @@
   var dlgArt = q('.trs-inner > .trs-art'), slot = q('.trs-slot', dlgArt), busy = false, opener = null;
 
   /* ================= placement + soft-navigation survival ================= */
+  function dockPhone() {
+    var banner = D.querySelector('header.banner');
+    var phone = W.matchMedia && W.matchMedia('(max-width: 480px)').matches;
+    if (phone && banner) {
+      fx.classList.add('trs-in-banner');
+      if (fx.parentNode !== banner) banner.appendChild(fx);
+      var sup = D.getElementById('trdSup');
+      if (sup && sup.parentNode !== banner) banner.appendChild(sup);
+    } else {
+      fx.classList.remove('trs-in-banner');
+      if (banner && fx.parentNode === banner) {
+        var b = D.body, pod = D.getElementById('trd-pod'), ref = pod && pod.parentNode === b ? pod : null;
+        if (b) b.insertBefore(fx, ref);
+      }
+    }
+  }
   function place() {
     corner();
     var b = D.body; if (!b) return;
     var pod = D.getElementById('trd-pod'), ref = pod && pod.parentNode === b ? pod : null;
-    var banner = D.querySelector('header.banner');
-    var phone = W.matchMedia && W.matchMedia('(max-width: 480px)').matches;
     sec.classList.toggle('trs-nopod', !ref);
     fx.classList.toggle('trs-tab-off', !CONFIG.SHOW_TAB);
     if (sec.parentNode !== b) { if (dlg.open) resetAfterNav(); b.insertBefore(sec, ref); }
-    /* phones: park the suggestion tab inside the black header band; desktop stays on body */
-    if (phone && banner) {
-      if (fx.parentNode !== banner) banner.appendChild(fx);
-    } else if (fx.parentNode !== b) {
-      b.insertBefore(fx, ref);
-    }
+    dockPhone();
+    if (!fx.classList.contains('trs-in-banner') && fx.parentNode !== b) b.insertBefore(fx, ref);
     if (dlg.parentNode !== b) b.insertBefore(dlg, ref);
     fit();
   }
@@ -243,10 +253,9 @@
     var sup = D.getElementById('trdSup'), duck = D.querySelector('.trd-sup-duck');
     fx.classList.toggle('trs-behind', !!(sup && !sup.hidden && sup.classList.contains('open')));
     var w = tab.offsetWidth, h = tab.offsetHeight; if (!w || !h) return;
-    /* phones: CSS docks the tab in the banner; clear any leftover fixed-corner vars */
+    /* phones: stay docked in the black header beside Collectibles */
     if (W.matchMedia && W.matchMedia('(max-width: 480px)').matches) {
-      var banner = D.querySelector('header.banner');
-      if (banner && fx.parentNode !== banner) banner.appendChild(fx);
+      dockPhone();
       fx.style.removeProperty('--trs-l');
       fx.style.removeProperty('--trs-t');
       fx.style.removeProperty('--trs-r');
