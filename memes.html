@@ -448,6 +448,8 @@ footer.site b{color:#c4cad0;font-weight:700}
 (function(){
 'use strict';
 var SITE='https://therubberduck.net/memes.html';
+var MEDIA_BASE='https://memes.therubberduck.net/';
+function mediaUrl(p){if(!p)return p;if(/^https?:\/\//i.test(p))return p;return MEDIA_BASE+String(p).replace(/^\//,'')}
 var PAGE='memes.html', PER=12;
 var DATA=[], items=[], view=[], shownN=0, cur=-1, seed='', reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var F={typeTag:[],orientation:[],family:[],brightness:[],animated:[],faceBucket:[],faceSize:[],people:[],topics:[]};
@@ -913,9 +915,9 @@ function renderChunk(){
     el.setAttribute('aria-label',(it.title||it.id)+' — open');
     var media;
     if(it.kind==='video'){
-      media='<video src="'+it.file+'"'+(it.poster?' poster="'+it.poster+'"':'')+' muted loop playsinline preload="metadata" aria-hidden="true"></video>';
+      media='<video src="'+mediaUrl(it.file)+'"'+(it.poster?' poster="'+mediaUrl(it.poster)+'"':'')+' muted loop playsinline preload="metadata" aria-hidden="true"></video>';
     }else{
-      media='<img src="'+it.file+'" alt="'+(it.title||it.id)+'" loading="lazy" decoding="async" width="'+(it.width||600)+'" height="'+(it.height||400)+'">';
+      media='<img src="'+mediaUrl(it.file)+'" alt="'+(it.title||it.id)+'" loading="lazy" decoding="async" width="'+(it.width||600)+'" height="'+(it.height||400)+'">';
     }
     var tags=(it.topics||[]).slice(0,4).map(function(t){return '<span>'+esc(t)+'</span>'}).join('');
     var foot='<span class="tf"><b>'+esc(it.title||it.id)+'</b><span>'+(it.width&&it.height?it.width+' × '+it.height:Math.round((it.bytes||0)/1024)+' KB')+'</span></span>';
@@ -948,8 +950,8 @@ function openAt(i){
   cur=i; var it=view[i], lb=$('lb');
   var st=$('lbstage');
   st.innerHTML = it.kind==='video'
-    ? '<video src="'+it.file+'"'+(it.poster?' poster="'+it.poster+'"':'')+' controls autoplay muted loop playsinline></video>'
-    : '<img src="'+it.file+'" alt="'+esc(it.title)+'">';
+    ? '<video src="'+mediaUrl(it.file)+'"'+(it.poster?' poster="'+mediaUrl(it.poster)+'"':'')+' controls autoplay muted loop playsinline></video>'
+    : '<img src="'+mediaUrl(it.file)+'" alt="'+esc(it.title)+'">';
   $('lbid').textContent=typeTagOf(it).toUpperCase()+' · '+it.id;
   $('lbtitle').textContent=it.title||it.id;
   $('lbsrc').textContent='source file: '+(it.source||'—');
@@ -966,7 +968,7 @@ function openAt(i){
   var ocr=(it.ocr||'').trim();
   $('lbocrwrap').hidden=!ocr;
   $('lbocr').textContent=ocr;
-  $('dl').href=it.file;
+  $('dl').href=mediaUrl(it.file);
   $('dl').setAttribute('download', it.file.split('/').pop());
   lb.classList.add('open');
   document.body.style.overflow='hidden';

@@ -2,3 +2,6 @@
 # intake scratch
 memes/staging/
 .work/
+
+# R2-hosted meme binaries (do not push to GitHub Pages)
+memes/web/

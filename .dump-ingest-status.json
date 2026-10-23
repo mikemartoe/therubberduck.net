@@ -1,0 +1,23 @@
+{
+  "catalog_count": 7211,
+  "local_items": 7211,
+  "live_last_known": 6584,
+  "files_pending_push": 82,
+  "memes_web_pending_push": 79,
+  "commits_ahead_of_origin": 7,
+  "HEAD": "c12be8a",
+  "origin_main_local_ref": "ccce4e9",
+  "last_batch": "R2 cutover: all memes/web (7891) on trd-memes; catalog via MEDIA_BASE memes.therubberduck.net",
+  "blocked_reason": null,
+  "push_paused": false,
+  "ingest_stopped": true,
+  "scif_pdfs_local": 241,
+  "updated": "2026-10-23T02:14:54-04:00",
+  "media_host": "r2",
+  "media_base": "https://memes.therubberduck.net/",
+  "r2_bucket": "trd-memes",
+  "r2_public_r2dev": "https://pub-a54cf7b403374c8e8e7a3d6c99ed86f1.r2.dev/",
+  "r2_uploaded_web": 7891,
+  "r2_uploaded_bytes": 3072212378,
+  "r2_upload_complete_web": true
+}
