@@ -168,6 +168,13 @@ a{color:inherit}
 .search input:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(255,200,100,.18)}
 .sort{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:16px;color:#cbb994}
 .sort select{font-family:'Oswald',sans-serif;font-weight:600;font-size:17px;letter-spacing:.06em;height:48px;padding:0 12px;border:0;border-radius:4px;background:var(--cream);color:var(--red-dk);cursor:pointer}
+.sort-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.shuffle{font-family:'Oswald',sans-serif;font-weight:600;font-size:17px;letter-spacing:.08em;text-transform:uppercase;height:48px;padding:0 18px;border:0;cursor:pointer;border-radius:4px;
+  background:var(--cream);color:var(--red-dk);white-space:nowrap;
+  -webkit-mask:radial-gradient(circle 8px at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 8px at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle 8px at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat}
+.shuffle:hover{filter:brightness(1.06)}
+.shuffle[aria-pressed="true"]{background:var(--red);color:#fff4e2}
 .count{text-align:center;margin:-8px 0 22px;color:#cbb994;letter-spacing:.14em;text-transform:uppercase;font-size:15px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 28px;align-items:stretch;padding:0 0 30px}
 .ticket{display:flex;text-decoration:none;color:var(--ink);filter:drop-shadow(0 8px 14px rgba(0,0,0,.55));transition:transform .18s ease}
@@ -303,7 +310,8 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
   .controls{grid-template-columns:minmax(0,1fr);gap:12px}
   .controls .search{grid-row:auto}
   .tabs{gap:6px}.tab{flex:1 1 auto;padding:0 8px;font-size:14px;letter-spacing:.04em;height:46px}
-  .sort{justify-content:space-between}.sort select{flex:1}
+  .sort{justify-content:space-between;flex:1}.sort select{flex:1}
+  .sort-row{width:100%;justify-content:stretch}.shuffle{flex:none}
   .grid{grid-template-columns:1fr;gap:16px}
   .tk{display:grid;grid-template-columns:46% 1fr;grid-template-rows:1fr auto;-webkit-mask:none;mask:none}
   .tthumb{grid-column:1;grid-row:1 / span 2;margin:8px 0 8px 8px;align-self:center}
@@ -426,7 +434,10 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
         <button class="tab" type="button" data-f="live" aria-pressed="false">Livestreams <span id="tablive">—</span></button>
       </div>
       <label class="search"><input id="q" type="search" placeholder="Search titles and descriptions" aria-label="Search videos"></label>
-      <label class="sort">Sort <select id="sort"><option value="new">Newest</option><option value="old">Oldest</option><option value="views">Most viewed</option></select></label>
+      <div class="sort-row">
+        <label class="sort">Sort <select id="sort"><option value="new">Newest</option><option value="old">Oldest</option><option value="views">Most viewed</option></select></label>
+        <button class="shuffle" id="shuffle" type="button" aria-pressed="false" title="Shuffle the grid into a random order">Shuffle</button>
+      </div>
     </div>
     <p class="count" id="count"></p>
     <div class="grid" id="grid"></div>
@@ -488,7 +499,23 @@ function trackEvent(name, data) {
   } catch (e) {}
 }
 const linkify = s => esc(s).replace(/(https?:\/\/[^\s<]+[^\s<.,;:)\]'"])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
-let state = {f: 'all', q: '', sort: 'new'}, cur = null;
+let state = {f: 'all', q: '', sort: 'new', shuffled: false}, cur = null;
+/* Local archive cards use the vintage INTERMISSION / snack-center clip as a stand-in poster.
+   Treat that (and any missing th) as "no real thumbnail" so they sort after items with real thumbs. */
+const PLACEHOLDER_TH = '/assets/trd/clips/intermission-card.jpg';
+function hasRealThumb(v) {
+  const th = String(v && v.th || '').trim();
+  if (!th) return false;
+  if (th === PLACEHOLDER_TH || th.indexOf('intermission-card') !== -1) return false;
+  return true;
+}
+function shuffleInPlace(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr;
+}
 
 /* Site plays: MOCKUP ONLY. Counts plays in this browser's localStorage.
    The real site needs a server-side counter (an endpoint that increments a per-video
@@ -686,9 +713,17 @@ function ticket(v) {
 function render() {
   const q = state.q.trim().toLowerCase();
   const list = VIDS.filter(v => (state.f === 'all' || (state.f === 'live') === v.live) && (!q || (v.t + '\n' + v.desc).toLowerCase().includes(q)));
-  list.sort({new: (a, b) => b.ts - a.ts, old: (a, b) => a.ts - b.ts, views: (a, b) => b.vn - a.vn || b.ts - a.ts}[state.sort]);
+  if (state.shuffled) {
+    shuffleInPlace(list);
+  } else {
+    list.sort({new: (a, b) => b.ts - a.ts, old: (a, b) => a.ts - b.ts, views: (a, b) => b.vn - a.vn || b.ts - a.ts}[state.sort]);
+    /* Stable secondary sort: real posters first, intermission / no-thumb placeholders last. */
+    list.sort((a, b) => Number(hasRealThumb(b)) - Number(hasRealThumb(a)));
+  }
+  const sh = $('shuffle'); if (sh) sh.setAttribute('aria-pressed', state.shuffled ? 'true' : 'false');
   $('grid').innerHTML = list.map(ticket).join(''); $('grid').hidden = !list.length;
-  $('count').innerHTML = list.length ? 'Showing ' + list.length + ' of ' + VIDS.length + ' features' : '<span class="empty-state">No features match "' + esc(state.q) + '".</span>';
+  const note = state.shuffled ? ' · shuffled' : '';
+  $('count').innerHTML = list.length ? 'Showing ' + list.length + ' of ' + VIDS.length + ' features' + note : '<span class="empty-state">No features match "' + esc(state.q) + '".</span>';
   if (cur) { const c = document.querySelector('.ticket[data-id="' + cur.id + '"]'); if (c) c.classList.add('on'); }
 }
 document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () => {
@@ -698,7 +733,12 @@ document.querySelectorAll('.tab').forEach(b => b.addEventListener('click', () =>
 let qt; $('q').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { state.q = e.target.value; render(); }, 120);
   clearTimeout(qt2); qt2 = setTimeout(() => { if (state.q.trim()) trackEvent('search', {q: state.q.trim(), results: $('grid').children.length}); }, 700); });
 let qt2;
-$('sort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+$('sort').addEventListener('change', e => { state.sort = e.target.value; state.shuffled = false; render(); });
+$('shuffle').addEventListener('click', () => {
+  state.shuffled = true;
+  render();
+  trackEvent('shuffle', {results: $('grid').children.length});
+});
 $('replist').innerHTML = REPS.sort((a, b) => b.ts - a.ts).map(v => '<li><a href="#v=' + v.id + '" data-id="' + v.id + '">' + esc(v.t) + '</a><span>' +
   esc(v.d) + (v.dur ? ' | ' + esc(v.dur) : '') + (v.v ? ' | Rumble views: ' + esc(v.v) : '') + '</span></li>').join('');
 
