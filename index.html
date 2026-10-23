@@ -228,25 +228,29 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .spine-face{
   position:absolute;left:50%;bottom:calc(100% + 12px);z-index:60;
   width:min(168px,44vw);max-width:200px;aspect-ratio:70/109;
-  opacity:0;pointer-events:none;
+  opacity:0;visibility:hidden;pointer-events:none;
   transform:translateX(-50%) perspective(920px) rotateY(-8deg) rotateX(6deg) translateY(8px) scale(.92);
-  transition:opacity .22s var(--ease),transform .28s var(--ease);
+  /* opacity only fades IN — hide is instant so a restored face never ghosts */
+  transition:transform .28s var(--ease);
   filter:drop-shadow(0 16px 28px rgba(0,0,0,.65))}
 .spine-face img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px;
   box-shadow:0 0 0 1px rgba(255,255,255,.28),0 0 0 2px rgba(30,20,10,.35)}
 .spine-face.is-floating{
   position:fixed;left:0;top:0;bottom:auto;right:auto;
   z-index:2147483640; /* above .trd-sup duck (2147483000) + banner/shop */
-  opacity:1;max-width:none; /* JS sets width; ignore .spine-face max-width after reparent */
-  transform:perspective(920px) rotateY(-3deg) rotateX(2deg) scale(1)}
+  opacity:1;visibility:visible;max-width:none; /* JS sets width; ignore .spine-face max-width after reparent */
+  transform:perspective(920px) rotateY(-3deg) rotateX(2deg) scale(1);
+  transition:opacity .18s var(--ease),transform .28s var(--ease)}
 @media (hover:hover) and (pointer:fine){
-  .spine:hover .spine-face,.spine:focus-visible .spine-face,
-  .deck:hover .spine-face,.deck:focus-visible .spine-face{opacity:1}
+  /* only while still inside host — floated faces use .is-floating instead */
+  .spine:hover .spine-face:not(.is-floating),.spine:focus-visible .spine-face:not(.is-floating),
+  .deck:hover .spine-face:not(.is-floating),.deck:focus-visible .spine-face:not(.is-floating){
+    opacity:1;visibility:visible}
 }
 .spine.is-face-open .spine-face,
 .deck.is-face-open .spine-face,
 .spine-face.is-floating.is-face-open{
-  opacity:1;pointer-events:auto;cursor:pointer}
+  opacity:1;visibility:visible;pointer-events:auto;cursor:pointer}
 .stacks,.stack,.deck{overflow:visible}
 @media (min-width:900px) and (min-height:500px){
   .spine-face{width:min(230px,24vw);max-width:250px}
@@ -660,17 +664,37 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   }
   function clearFloat(face){
     if(!face)return;
+    /* hide instantly before restore — avoids a semi-transparent ghost at the spine */
+    face.style.transition='none';
+    face.style.opacity='0';
+    face.style.visibility='hidden';
     face.classList.remove('is-floating');
     face.classList.remove('is-face-open');
-    face.style.left='';face.style.top='';face.style.width='';
+    face.style.left='';face.style.top='';face.style.width='';face.style.maxWidth='';
     if(face.parentNode===document.body)restore(face);
+    /* next frame: clear inline hide so CSS hover/float can show again */
+    requestAnimationFrame(function(){
+      face.style.transition='';
+      face.style.opacity='';
+      face.style.visibility='';
+    });
+  }
+  function clearOtherFloats(keep){
+    document.querySelectorAll('.spine-face.is-floating').forEach(function(f){
+      if(f!==keep)clearFloat(f);
+    });
   }
   function placeFace(host){
     var face=faceFor(host);
     if(!face)return;
+    clearOtherFloats(face);
     remember(face);
     face._trdHost=host;
     byHost.set(host,face);
+    /* hide during reparent so no frame paints at absolute body coords */
+    face.style.transition='none';
+    face.style.opacity='0';
+    face.style.visibility='hidden';
     if(face.parentNode!==document.body)document.body.appendChild(face);
     function layout(){
       var vw=window.innerWidth||document.documentElement.clientWidth;
@@ -697,6 +721,10 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
       face.style.top=Math.round(top)+'px';
       face.classList.add('is-floating');
       if(host.classList.contains('is-face-open'))face.classList.add('is-face-open');
+      /* reveal only after left/top are set — no flash at 0,0 or absolute leftovers */
+      face.style.opacity='';
+      face.style.visibility='';
+      face.style.transition='';
     }
     layout();
     requestAnimationFrame(function(){requestAnimationFrame(layout);});
