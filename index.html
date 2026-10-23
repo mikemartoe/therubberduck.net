@@ -223,43 +223,39 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .stack-b .spine:nth-child(3){--off:8px;--rot:.5deg;--lift:-2px}
 
 /* ============ SPINE HOVER: upright aged Norelco J-card face (70×109) ============
-   Hidden by default. When shown (hover / .is-face-open), JS pins position:fixed so the
-   face paints above banner, shop, and stacks. Double-click / double-tap skips into the room. */
+   In-spine .spine-face stays hidden forever (source only). One #trd-face-portal on
+   body paints the face — no reparent, no CSS hover flash, no ghost leftovers.
+   Double-click / double-tap skips into the room. */
 .spine-face{
-  position:absolute;left:50%;bottom:calc(100% + 12px);z-index:60;
+  position:absolute;left:0;top:0;width:1px;height:1px;margin:0;padding:0;border:0;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  overflow:hidden;z-index:-1}
+.spine-face img{display:block;width:1px;height:1px}
+#trd-face-portal{
+  position:fixed;left:0;top:0;z-index:2147483640;
   width:min(168px,44vw);max-width:200px;aspect-ratio:70/109;
   opacity:0;visibility:hidden;pointer-events:none;
-  transform:translateX(-50%) perspective(920px) rotateY(-8deg) rotateX(6deg) translateY(8px) scale(.92);
-  /* opacity only fades IN — hide is instant so a restored face never ghosts */
-  transition:transform .28s var(--ease);
-  filter:drop-shadow(0 16px 28px rgba(0,0,0,.65))}
-.spine-face img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px;
-  box-shadow:0 0 0 1px rgba(255,255,255,.28),0 0 0 2px rgba(30,20,10,.35)}
-.spine-face.is-floating{
-  position:fixed;left:0;top:0;bottom:auto;right:auto;
-  z-index:2147483640; /* above .trd-sup duck (2147483000) + banner/shop */
-  opacity:1;visibility:visible;max-width:none; /* JS sets width; ignore .spine-face max-width after reparent */
-  transform:perspective(920px) rotateY(-3deg) rotateX(2deg) scale(1);
-  transition:opacity .18s var(--ease),transform .28s var(--ease)}
-@media (hover:hover) and (pointer:fine){
-  /* only while still inside host — floated faces use .is-floating instead */
-  .spine:hover .spine-face:not(.is-floating),.spine:focus-visible .spine-face:not(.is-floating),
-  .deck:hover .spine-face:not(.is-floating),.deck:focus-visible .spine-face:not(.is-floating){
-    opacity:1;visibility:visible}
-}
-.spine.is-face-open .spine-face,
-.deck.is-face-open .spine-face,
-.spine-face.is-floating.is-face-open{
-  opacity:1;visibility:visible;pointer-events:auto;cursor:pointer}
+  transform:perspective(920px) rotateY(-3deg) rotateX(2deg) scale(.96);
+  transition:opacity .18s var(--ease),transform .28s var(--ease);
+  filter:drop-shadow(0 16px 28px rgba(0,0,0,.65));
+  margin:0;padding:0;border:0;background:transparent}
+#trd-face-portal.is-on{
+  opacity:1;visibility:visible;
+  transform:perspective(920px) rotateY(-3deg) rotateX(2deg) scale(1)}
+#trd-face-portal.is-open{pointer-events:auto;cursor:pointer}
+#trd-face-portal img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.28),0 0 0 2px rgba(30,20,10,.35);
+  pointer-events:none}
 .stacks,.stack,.deck{overflow:visible}
 @media (min-width:900px) and (min-height:500px){
-  .spine-face{width:min(230px,24vw);max-width:250px}
-  .deck .spine-face{width:min(270px,28vw);max-width:290px}
+  #trd-face-portal{width:min(230px,24vw);max-width:250px}
+  #trd-face-portal.is-deck{width:min(270px,28vw);max-width:290px}
 }
 @media (max-width:720px), (hover:none), (pointer:coarse){
-  .spine-face{width:min(168px,44vw);max-width:200px}
-  .deck .spine-face{width:min(180px,48vw);max-width:210px}
+  #trd-face-portal{width:min(168px,44vw);max-width:200px}
+  #trd-face-portal.is-deck{width:min(180px,48vw);max-width:210px}
 }
+
 
 .shop{position:relative;display:flex;flex-direction:column;min-height:420px;border-radius:12px 12px 6px 6px;overflow:hidden;text-decoration:none;color:var(--brown);
   /* brick facade */
@@ -639,12 +635,26 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   document.addEventListener('trdpod:state',function(e){paint(e.detail);});
   paint(window.trdPod.state());
 })();
-/* upright Norelco faces: reparent to body + position:fixed so .spine/.deck transforms
-   cannot trap stacking — faces always paint above banner, shop, stacks, and .trd-sup */
+/* upright Norelco faces: single #trd-face-portal on body (never reparent in-spine faces) */
 (function(){
   var MARGIN=12;
-  var home=new WeakMap();   /* face -> {parent, next} */
-  var byHost=new WeakMap(); /* host -> face */
+  var byHost=new WeakMap();
+  var activeHost=null;
+  var portal=document.getElementById('trd-face-portal');
+  if(!portal){
+    portal=document.createElement('button');
+    portal.id='trd-face-portal';
+    portal.type='button';
+    portal.setAttribute('aria-hidden','true');
+    portal.tabIndex=-1;
+    var img=document.createElement('img');
+    img.alt='';
+    img.decoding='async';
+    portal.appendChild(img);
+    document.body.appendChild(portal);
+  }
+  var portalImg=portal.querySelector('img');
+
   function faceFor(host){
     if(!host)return null;
     var f=byHost.get(host);
@@ -653,84 +663,57 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     if(f)byHost.set(host,f);
     return f||null;
   }
-  function remember(face){
-    if(home.has(face))return;
-    home.set(face,{parent:face.parentNode, next:face.nextSibling});
+  function srcFor(host){
+    var face=faceFor(host);
+    if(!face)return '';
+    var im=face.querySelector('img');
+    return im?(im.currentSrc||im.src||''):'';
   }
-  function restore(face){
-    var h=home.get(face); if(!h||!h.parent)return;
-    if(h.next&&h.next.parentNode===h.parent)h.parent.insertBefore(face,h.next);
-    else h.parent.appendChild(face);
+  function hidePortal(){
+    portal.classList.remove('is-on','is-open','is-deck');
+    portal.style.left='';portal.style.top='';portal.style.width='';
+    portal._trdHost=null;
+    activeHost=null;
   }
-  function clearFloat(face){
-    if(!face)return;
-    /* hide instantly before restore — avoids a semi-transparent ghost at the spine */
-    face.style.transition='none';
-    face.style.opacity='0';
-    face.style.visibility='hidden';
-    face.classList.remove('is-floating');
-    face.classList.remove('is-face-open');
-    face.style.left='';face.style.top='';face.style.width='';face.style.maxWidth='';
-    if(face.parentNode===document.body)restore(face);
-    /* next frame: clear inline hide so CSS hover/float can show again */
-    requestAnimationFrame(function(){
-      face.style.transition='';
-      face.style.opacity='';
-      face.style.visibility='';
-    });
-  }
-  function clearOtherFloats(keep){
-    document.querySelectorAll('.spine-face.is-floating').forEach(function(f){
-      if(f!==keep)clearFloat(f);
-    });
+  function layout(host){
+    if(!host)return;
+    var vw=window.innerWidth||document.documentElement.clientWidth;
+    var vh=window.innerHeight||document.documentElement.clientHeight;
+    var hr=host.getBoundingClientRect();
+    var mob=window.matchMedia('(max-width:720px), (hover:none), (pointer:coarse)').matches;
+    var pc=window.matchMedia('(min-width:900px) and (min-height:500px)').matches;
+    var isDeck=host.classList.contains('deck');
+    var fw=pc?(isDeck?270:230):(mob?(isDeck?180:168):Math.min(200, Math.round(vw*0.44)));
+    var fh=Math.round(fw*109/70);
+    var left=hr.left+hr.width/2-fw/2;
+    var top=hr.top-fh-14;
+    if(top<MARGIN){
+      top=Math.min(hr.bottom+10, vh-fh-MARGIN);
+      if(top+fh>vh-MARGIN) top=MARGIN;
+    }
+    if(left<MARGIN)left=MARGIN;
+    if(left+fw>vw-MARGIN)left=vw-MARGIN-fw;
+    if(top+fh>vh-MARGIN)top=Math.max(MARGIN, vh-MARGIN-fh);
+    portal.style.width=fw+'px';
+    portal.style.left=Math.round(left)+'px';
+    portal.style.top=Math.round(top)+'px';
+    portal.classList.toggle('is-deck', isDeck);
   }
   function placeFace(host){
-    var face=faceFor(host);
-    if(!face)return;
-    clearOtherFloats(face);
-    remember(face);
-    face._trdHost=host;
-    byHost.set(host,face);
-    /* hide during reparent so no frame paints at absolute body coords */
-    face.style.transition='none';
-    face.style.opacity='0';
-    face.style.visibility='hidden';
-    if(face.parentNode!==document.body)document.body.appendChild(face);
-    function layout(){
-      var vw=window.innerWidth||document.documentElement.clientWidth;
-      var vh=window.innerHeight||document.documentElement.clientHeight;
-      var hr=host.getBoundingClientRect();
-      /* width must be set in JS: after reparent to body, .deck .spine-face CSS no longer matches */
-      var mob=window.matchMedia('(max-width:720px), (hover:none), (pointer:coarse)').matches;
-      var pc=window.matchMedia('(min-width:900px) and (min-height:500px)').matches;
-      var isDeck=host.classList.contains('deck');
-      var fw=pc?(isDeck?270:230):(mob?(isDeck?180:168):Math.min(200, Math.round(vw*0.44)));
-      var fh=Math.round(fw*109/70);
-      var left=hr.left+hr.width/2-fw/2;
-      var top=hr.top-fh-14;
-      if(top<MARGIN){
-        top=Math.min(hr.bottom+10, vh-fh-MARGIN);
-        if(top+fh>vh-MARGIN) top=MARGIN;
-      }
-      if(left<MARGIN)left=MARGIN;
-      if(left+fw>vw-MARGIN)left=vw-MARGIN-fw;
-      if(top+fh>vh-MARGIN)top=Math.max(MARGIN, vh-MARGIN-fh);
-      face.style.width=fw+'px';
-      face.style.maxWidth='none';
-      face.style.left=Math.round(left)+'px';
-      face.style.top=Math.round(top)+'px';
-      face.classList.add('is-floating');
-      if(host.classList.contains('is-face-open'))face.classList.add('is-face-open');
-      /* reveal only after left/top are set — no flash at 0,0 or absolute leftovers */
-      face.style.opacity='';
-      face.style.visibility='';
-      face.style.transition='';
-    }
-    layout();
-    requestAnimationFrame(function(){requestAnimationFrame(layout);});
+    var src=srcFor(host);
+    if(!src)return;
+    activeHost=host;
+    portal._trdHost=host;
+    if(portalImg.getAttribute('src')!==src)portalImg.src=src;
+    layout(host);
+    portal.classList.add('is-on');
+    if(host.classList.contains('is-face-open'))portal.classList.add('is-open');
+    else portal.classList.remove('is-open');
+    requestAnimationFrame(function(){if(activeHost===host)layout(host);});
   }
   function onLeave(host){
-    clearFloat(faceFor(host));
+    if(host && activeHost && host!==activeHost)return;
+    hidePortal();
   }
   function bind(){
     document.querySelectorAll('a.spine, a.deck').forEach(function(el){
@@ -744,12 +727,16 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);
   else bind();
   window.addEventListener('resize',function(){
-    var open=document.querySelector('a.spine.is-face-open, a.deck.is-face-open');
-    if(open)placeFace(open);
+    if(activeHost)layout(activeHost);
   });
   window.__trdClampFace=placeFace;
   window.__trdClearFace=onLeave;
-  window.__trdFaceFor=faceFor;
+  window.__trdFaceFor=function(host){
+    /* click handler expects a face node with _trdHost — use portal when showing */
+    if(portal.classList.contains('is-on') && (!host || portal._trdHost===host))return portal;
+    return faceFor(host);
+  };
+  window.__trdFacePortal=portal;
 })();
 /* faces: single click/tap shows face; double-click / double-tap skips straight into the room
    (PC + mobile). Touch also: tap open face to enter; retap host / elsewhere / 5s dismisses. */
@@ -776,7 +763,10 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     open=host;host.classList.add('is-face-open');
     if(window.__trdClampFace)window.__trdClampFace(host);
     var face=window.__trdFaceFor?window.__trdFaceFor(host):host.querySelector('.spine-face');
-    if(face)face.classList.add('is-face-open');
+    if(face){
+      if(face.id==='trd-face-portal')face.classList.add('is-open');
+      else face.classList.add('is-face-open');
+    }
     clearT();timer=setTimeout(closeFace,5000);
   }
   function go(host){
@@ -795,7 +785,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   }
   document.addEventListener('click',function(e){
     if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button)return;
-    var face=e.target.closest&&e.target.closest('.spine-face');
+    var face=e.target.closest&&(e.target.closest('#trd-face-portal')||e.target.closest('.spine-face'));
     var spine=e.target.closest&&e.target.closest('a.spine');
     var deck=e.target.closest&&e.target.closest('a.deck');
     var host=spine||deck;
@@ -823,7 +813,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     }
 
     /* touch: tap open face → enter (face may be on body, so navigate explicitly) */
-    if(face&&(host.classList.contains('is-face-open')||face.classList.contains('is-face-open'))){
+    if(face&&(host.classList.contains('is-face-open')||face.classList.contains('is-face-open')||face.classList.contains('is-open'))){
       e.preventDefault(); go(host); return;
     }
     e.preventDefault();
