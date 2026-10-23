@@ -244,7 +244,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .stack-a .spine-face{--sf-x:-42%}
 .stack-b .spine-face{--sf-x:-58%}
 @media (max-width:720px){
-  .spine-face{width:min(200px,50vw);bottom:calc(100% + 8px)}
+  .spine-face{width:min(168px,44vw);max-width:176px;bottom:calc(100% + 8px)}
   .stack-a .spine-face,.stack-b .spine-face{--sf-x:-50%}
 }
 .stacks,.stack{overflow:visible}
@@ -265,9 +265,20 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   opacity:1;pointer-events:auto;cursor:pointer;
   transform:translateX(calc(var(--sf-x) + var(--sf-clamp-x))) translateY(var(--sf-clamp-y)) perspective(920px) rotateY(-4deg) rotateX(3deg) translateY(0) scale(1)}
 @media (max-width:720px){
-  .deck .spine-face{width:min(200px,52vw);max-width:220px;bottom:calc(100% + 8px)}
+  .deck .spine-face{width:min(168px,44vw);max-width:176px;bottom:calc(100% + 8px)}
 }
 .top{overflow:visible}
+
+/* faces must paint above .banner (z=200) and support duck — stage is their stacking root */
+body:has(.spine.is-face-open) .stage,
+body:has(.deck.is-face-open) .stage,
+body:has(.spine:hover) .stage,
+body:has(.deck:hover) .stage{z-index:5000}
+.spine.is-face-open .spine-face,
+.deck.is-face-open .spine-face{z-index:60}
+@media (hover:hover) and (pointer:fine){
+  .spine:hover .spine-face,.deck:hover .spine-face{z-index:60}
+}
 
 
 /* ============ TRD COLLECTIBLES: a Main Street card shop entrance ============ */
