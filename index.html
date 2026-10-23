@@ -222,137 +222,31 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .stack-b .spine:nth-child(2){--off:-11px;--rot:-.9deg;--lift:5px}
 .stack-b .spine:nth-child(3){--off:8px;--rot:.5deg;--lift:-2px}
 
-/* ============ SPINE HOVER: aged 80s cassette face in a clear case ============ */
-.spine-face{--sf-x:-50%;position:absolute;left:50%;bottom:calc(100% + 20px);z-index:60;width:min(220px,52vw);aspect-ratio:100.4/63.8;
-  opacity:0;pointer-events:none;transform:translateX(var(--sf-x)) perspective(920px) rotateY(-10deg) rotateX(8deg) translateY(10px) scale(.9);
-  transition:opacity .22s var(--ease),transform .28s var(--ease);filter:drop-shadow(0 14px 22px rgba(0,0,0,.55))}
-.sf-case{position:relative;display:block;height:100%;padding:3.2% 2.6% 3.8%;border-radius:5%/7.5%;overflow:hidden;
-  background:
-    linear-gradient(118deg,rgba(255,255,255,.72) 0 6%,rgba(255,255,255,.18) 6% 16%,transparent 28%),
-    linear-gradient(210deg,rgba(255,228,160,.22),transparent 42%),
-    linear-gradient(160deg,rgba(255,255,255,.32),rgba(210,220,228,.12) 42%,rgba(160,170,180,.18));
-  border:1px solid rgba(255,255,255,.48);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(0,0,0,.14),0 0 0 1px rgba(30,20,10,.38)}
-/* case glare, faint fingerprints, scuffs on the clear plastic */
-.sf-case::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
-  background:
-    radial-gradient(18% 22% at 78% 28%,rgba(255,255,255,.22),transparent 70%),
-    radial-gradient(14% 18% at 22% 62%,rgba(255,255,255,.12),transparent 72%),
-    radial-gradient(40% 30% at 60% 80%,rgba(40,30,20,.08),transparent 70%),
-    url('/assets/trd/img/cas-scratch.webp') center/115% 115% no-repeat;
-  opacity:.48;mix-blend-mode:soft-light}
-.sf-shell{position:relative;display:block;height:100%;border-radius:2.8%/4.5%;overflow:hidden;
-  background:
-    url('/assets/trd/img/cas-scratch.webp') center/100% 100% no-repeat,
-    linear-gradient(160deg,#3a3633 0%,#211e1c 45%,#161412 100%);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),inset 0 2px 0 rgba(255,255,255,.08),inset 0 0 18px rgba(0,0,0,.35),0 2px 4px rgba(0,0,0,.45)}
-/* stronger shell scuffs + rubbed edges */
-.sf-shell::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
-  background:
-    linear-gradient(90deg,rgba(255,245,220,.1),transparent 10%,transparent 90%,rgba(255,245,220,.08)),
-    linear-gradient(180deg,rgba(255,255,255,.1),transparent 14%,transparent 86%,rgba(0,0,0,.22)),
-    url('/assets/trd/img/cas-scratch.webp') 20% 30%/140% 140% no-repeat;
-  opacity:.72;mix-blend-mode:overlay}
-.sf-label{position:absolute;left:5%;right:5%;top:6%;height:58%;border-radius:2px;padding:5% 5% 4%;overflow:hidden;z-index:2;
-  display:flex;flex-direction:column;justify-content:center;gap:3%;
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.34),inset 0 0 18px rgba(70,45,12,.42),0 0 0 1px rgba(255,255,255,.05);
-  /* deeper yellowed / scuffed ~45-year paper — must read at ~220px */
-  background:
-    url('/assets/trd/img/cas-scratch.webp') 15% 25%/135% 135% no-repeat,
-    url('/assets/trd/img/cas-scratch.webp') 85% 75%/175% 175% no-repeat,
-    radial-gradient(120% 80% at 88% 8%,rgba(255,236,170,.12),transparent 42%),
-    linear-gradient(115deg,transparent 58%,rgba(255,210,120,.28) 70%,transparent 88%),
-    linear-gradient(180deg,rgba(255,210,140,.22),rgba(90,55,15,.32)),
-    #b8924e}
-.sf-title{font-size:clamp(12px,2.6vw,16px);line-height:1.05;font-weight:900;letter-spacing:.01em;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 0 rgba(255,255,255,.18)}
-.sf-sub{font:400 clamp(8.5px,1.6vw,11px)/1.2 var(--body);opacity:.92;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sf-meta{margin-top:auto;font:700 7.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;opacity:.78}
-.sf-win{position:absolute;left:22%;width:56%;top:68%;height:18%;border-radius:999px;z-index:1;
-  background:linear-gradient(180deg,rgba(40,30,24,.92),rgba(15,12,10,.96));
-  box-shadow:inset 0 0 0 1px #2e1f13,0 0 0 1.5px rgba(10,8,6,.5);display:flex;align-items:center;justify-content:space-around;padding:0 8%}
-.sf-reel{width:22%;aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle,transparent 0 42%,#4a2c17 44% 100%),repeating-conic-gradient(#c8302b 0 30deg,#8a1a12 30deg 60deg);
-  box-shadow:0 0 0 1px #e8a89e;opacity:.9}
-.sf-foot{position:absolute;left:14%;right:14%;bottom:0;height:12%;z-index:1;
-  clip-path:polygon(7% 0,93% 0,100% 100%,0 100%);
-  background:linear-gradient(180deg,#2c2826,#1a1715);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
-/* theme personalities on the aged label — keep hues, force used paper */
-.t1 .sf-label{background:
-    url('/assets/trd/img/cas-scratch.webp') 18% 28%/130% 130% no-repeat,
-    url('/assets/trd/img/cas-scratch.webp') 72% 65%/185% 185% no-repeat,
-    linear-gradient(105deg,transparent 28%,rgba(255,255,255,.14) 29.5%,transparent 31%),
-    linear-gradient(72deg,transparent 52%,rgba(40,25,8,.22) 53.5%,transparent 55%),
-    linear-gradient(115deg,transparent 58%,rgba(190,140,40,.4) 70%,transparent),
-    linear-gradient(180deg,rgba(150,100,25,.4),rgba(70,45,12,.34)),
-    linear-gradient(180deg,#c4a056,#8a6a32);color:#1a1510}
-.t1 .sf-label::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(90deg,#c8302b 0 1.5px,transparent 1.5px 3px,#c8302b 3px 4px)}
-.t1 .sf-label::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:
-    linear-gradient(118deg,transparent 40%,rgba(60,35,10,.2) 41%,transparent 43%),
-    url('/assets/trd/img/cas-scratch.webp') 45% 40%/155% 155% no-repeat;
-  opacity:.62;mix-blend-mode:multiply}
-.t1 .sf-title{font-style:italic;text-transform:uppercase;position:relative;z-index:2}
-.t1 .sf-sub,.t1 .sf-meta{position:relative;z-index:2}
-.t1 .sf-sub{color:#3d2e1c}
-.t2 .sf-label{background:
-    url('/assets/trd/img/cas-scratch.webp') 35% 18%/155% 155% no-repeat,
-    url('/assets/trd/img/cas-scratch.webp') 70% 70%/200% 200% no-repeat,
-    linear-gradient(115deg,transparent 60%,rgba(255,210,140,.32) 72%,transparent),
-    linear-gradient(180deg,rgba(150,95,30,.28),rgba(80,50,15,.22)),
-    linear-gradient(180deg,#d4b878,#a88848);color:#b81822}
-.t2 .sf-label::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#c8202b}
-.t2 .sf-title{font-family:var(--retro);font-weight:400;font-size:clamp(10px,2.1vw,13.5px)}
-.t2 .sf-sub{color:#5c3c24}
-.t3 .sf-label{background:
-    url('/assets/trd/img/cas-scratch.webp') 20% 40%/150% 150% no-repeat,
-    url('/assets/trd/img/cas-scratch.webp') center/180% 180% no-repeat,
-    linear-gradient(180deg,rgba(255,220,150,.14),rgba(40,20,10,.28)),
-    linear-gradient(90deg,#3c1f63 0%,#8d2a77 28%,#d9483f 55%,#f08a2c 78%,#f6c945 100%);color:#fff}
-.t3 .sf-title{font-style:italic;text-shadow:0 1px 0 rgba(0,0,0,.45)}
-.t3 .sf-sub,.t3 .sf-meta{color:#fff3df;text-shadow:0 1px 2px rgba(0,0,0,.45)}
-.t4 .sf-label{background:
-    url('/assets/trd/img/cas-scratch.webp') 55% 35%/160% 160% no-repeat,
-    url('/assets/trd/img/cas-scratch.webp') 30% 70%/200% 200% no-repeat,
-    linear-gradient(180deg,rgba(255,210,120,.12),rgba(0,0,0,.32)),
-    linear-gradient(180deg,#1a1a1a,#080808);color:#ffd21f}
-.t4 .sf-title{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:clamp(13px,2.8vw,17px)}
-.t4 .sf-sub,.t4 .sf-meta{color:#efe5c8}
-.t5 .sf-label{background:
-    url('/assets/trd/img/cas-scratch.webp') 25% 50%/155% 155% no-repeat,
-    url('/assets/trd/img/cas-scratch.webp') 70% 30%/200% 200% no-repeat,
-    linear-gradient(180deg,rgba(255,200,140,.12),rgba(10,8,30,.32)),
-    linear-gradient(180deg,#1d2266,#121548);color:#ff5fae}
-.t5 .sf-title{font-family:var(--retro);font-weight:400;font-size:clamp(10px,2.1vw,13.5px);text-shadow:1px 1px 0 #23c3e6}
-.t5 .sf-sub,.t5 .sf-meta{color:#bfeeff}
-.t6 .sf-label{background:
-    url('/assets/trd/img/cas-scratch.webp') 22% 30%/128% 128% no-repeat,
-    url('/assets/trd/img/cas-scratch.webp') 78% 68%/180% 180% no-repeat,
-    linear-gradient(108deg,transparent 34%,rgba(255,255,255,.12) 35.5%,transparent 37%),
-    linear-gradient(68deg,transparent 48%,rgba(45,30,10,.24) 49.5%,transparent 51%),
-    linear-gradient(115deg,transparent 56%,rgba(180,130,35,.38) 68%,transparent),
-    linear-gradient(180deg,rgba(140,100,30,.38),rgba(65,42,12,.3)),
-    linear-gradient(180deg,#c6a45a,#8c6c36);color:#1a458c}
-.t6 .sf-label::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:
-    linear-gradient(90deg,transparent calc(100% - 5px),#c8302b calc(100% - 5px) calc(100% - 3px),#f0e6c8 calc(100% - 3px) calc(100% - 2px),#1f4fa0 calc(100% - 2px) 100%),
-    linear-gradient(122deg,transparent 44%,rgba(55,35,10,.18) 45%,transparent 47%),
-    url('/assets/trd/img/cas-scratch.webp') 50% 45%/150% 150% no-repeat;
-  opacity:.7;mix-blend-mode:multiply}
-.t6 .sf-title{font-family:var(--display);font-weight:700;letter-spacing:.03em;font-size:clamp(12px,2.6vw,16px);position:relative;z-index:2}
-.t6 .sf-sub,.t6 .sf-meta{color:#2e3644;position:relative;z-index:2}
+/* ============ SPINE HOVER: upright aged Norelco J-card face (70×109) ============ */
+.spine-face{--sf-x:-50%;--sf-clamp-x:0px;--sf-clamp-y:0px;position:absolute;left:50%;bottom:calc(100% + 12px);z-index:60;
+  width:min(200px,48vw);max-width:220px;aspect-ratio:70/109;
+  opacity:0;pointer-events:none;
+  transform:translateX(calc(var(--sf-x) + var(--sf-clamp-x))) translateY(var(--sf-clamp-y)) perspective(920px) rotateY(-8deg) rotateX(6deg) translateY(8px) scale(.92);
+  transition:opacity .22s var(--ease),transform .28s var(--ease);
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.55))}
+.spine-face img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.28),0 0 0 2px rgba(30,20,10,.35)}
 /* desktop fine pointer: hover/focus reveal (touch uses .is-face-open instead) */
 @media (hover:hover) and (pointer:fine){
   .spine:hover .spine-face,.spine:focus-visible .spine-face{
-    opacity:1;transform:translateX(var(--sf-x)) perspective(920px) rotateY(-6deg) rotateX(5deg) translateY(0) scale(1)}
+    opacity:1;transform:translateX(calc(var(--sf-x) + var(--sf-clamp-x))) translateY(var(--sf-clamp-y)) perspective(920px) rotateY(-4deg) rotateX(3deg) translateY(0) scale(1)}
 }
 /* touch/coarse: face open via JS class; face becomes the enter target */
 .spine.is-face-open .spine-face{
   opacity:1;pointer-events:auto;cursor:pointer;
-  transform:translateX(var(--sf-x)) perspective(920px) rotateY(-6deg) rotateX(5deg) translateY(0) scale(1)}
-/* clear Press Play / deck chrome: hang faces outward (left of spines), not over the deck */
-.stack-a .spine-face{left:0;--sf-x:-78%;bottom:calc(100% + 10px)}
-.stack-b .spine-face{left:0;--sf-x:-92%;bottom:calc(100% + 10px)}
+  transform:translateX(calc(var(--sf-x) + var(--sf-clamp-x))) translateY(var(--sf-clamp-y)) perspective(920px) rotateY(-4deg) rotateX(3deg) translateY(0) scale(1)}
+/* prefer centered above spine; JS clampFace keeps fully in-viewport. Hang slightly outward of deck. */
+.stack-a .spine-face{--sf-x:-42%}
+.stack-b .spine-face{--sf-x:-58%}
+@media (max-width:720px){
+  .spine-face{width:min(200px,50vw);bottom:calc(100% + 8px)}
+  .stack-a .spine-face,.stack-b .spine-face{--sf-x:-50%}
+}
 .stacks,.stack{overflow:visible}
 
 /* ============ TRD COLLECTIBLES: a Main Street card shop entrance ============ */
@@ -646,14 +540,14 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 
     <nav class="stacks" aria-label="Rooms">
       <div class="stack stack-a">
-      <a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Videos</span><span class="sp-s">Recorded shows and interviews</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">Videos</span><span class="sf-sub">Shows &amp; interviews</span><span class="sf-meta">TRD-001 · Side A</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
-      <a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">Listening Room</span><span class="sf-sub">Recordings + summaries</span><span class="sf-meta">TRD-002 · Type II</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
-      <a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">SCIF Reading Room</span><span class="sf-sub">Document library</span><span class="sf-meta">TRD-003 · Side A</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
+      <a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Videos</span><span class="sp-s">Recorded shows and interviews</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-videos.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-listening.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-scif.webp" width="560" height="872" alt="" decoding="async"></span></a>
       </div>
       <div class="stack stack-b">
-      <a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">Drop Ledger</span><span class="sf-sub">Every post, searchable</span><span class="sf-meta">TRD-004 · Type II</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
-      <a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">Meme Dump</span><span class="sf-sub">Images, catalogued</span><span class="sf-meta">TRD-005 · Side A</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
-      <a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.png" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">X Archive</span><span class="sf-sub">Past posts, one place</span><span class="sf-meta">TRD-006 · Type II</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
+      <a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-ledger.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-memes.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.png" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-x.webp" width="560" height="872" alt="" decoding="async"></span></a>
       </div>
     </nav>
   </div>
@@ -722,6 +616,54 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   document.addEventListener('trdpod:state',function(e){paint(e.detail);});
   paint(window.trdPod.state());
 })();
+/* upright Norelco faces: keep fully in-viewport; clear of PRESS PLAY / .deck */
+(function(){
+  var MARGIN=10;
+  function clampFace(spine){
+    var face=spine&&spine.querySelector('.spine-face');
+    if(!face)return;
+    face.style.setProperty('--sf-clamp-x','0px');
+    face.style.setProperty('--sf-clamp-y','0px');
+    /* measure after paint with face visible */
+    requestAnimationFrame(function(){
+      var r=face.getBoundingClientRect();
+      var dx=0,dy=0;
+      var vw=window.innerWidth||document.documentElement.clientWidth;
+      var vh=window.innerHeight||document.documentElement.clientHeight;
+      if(r.left<MARGIN)dx=MARGIN-r.left;
+      if(r.right>vw-MARGIN)dx=(vw-MARGIN)-r.right;
+      if(r.top<MARGIN)dy=MARGIN-r.top;
+      /* never cover the cassette deck / PRESS PLAY keys */
+      var deck=document.querySelector('.deck');
+      if(deck){
+        var d=deck.getBoundingClientRect();
+        var overlapX=Math.min(r.right+dx,d.right)-Math.max(r.left+dx,d.left);
+        var overlapY=Math.min(r.bottom+dy,d.bottom)-Math.max(r.top+dy,d.top);
+        if(overlapX>8&&overlapY>8){
+          /* push face left of deck, or up if that still clips */
+          var pushLeft=(d.left-MARGIN)-(r.right+dx);
+          if(r.left+dx+pushLeft>=MARGIN)dx+=pushLeft;
+          else dy=Math.min(dy,(d.top-MARGIN)-(r.bottom+dy));
+        }
+      }
+      face.style.setProperty('--sf-clamp-x',dx+'px');
+      face.style.setProperty('--sf-clamp-y',dy+'px');
+    });
+  }
+  function bindHoverClamp(){
+    document.querySelectorAll('a.spine').forEach(function(spine){
+      spine.addEventListener('mouseenter',function(){clampFace(spine)});
+      spine.addEventListener('focus',function(){clampFace(spine)});
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindHoverClamp);
+  else bindHoverClamp();
+  window.addEventListener('resize',function(){
+    var open=document.querySelector('a.spine.is-face-open');
+    if(open)clampFace(open);
+  });
+  window.__trdClampFace=clampFace;
+})();
 /* touch/coarse: first tap opens cassette face; tap face to enter; retap/elsewhere/5s dismisses */
 (function(){
   var fine=window.matchMedia('(hover:hover) and (pointer:fine)');
@@ -732,6 +674,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   function openFace(spine){
     if(open&&open!==spine)open.classList.remove('is-face-open');
     open=spine;spine.classList.add('is-face-open');
+    if(window.__trdClampFace)window.__trdClampFace(spine);
     clearT();timer=setTimeout(closeFace,5000);
   }
   document.addEventListener('click',function(e){
