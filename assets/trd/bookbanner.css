@@ -152,32 +152,6 @@
   #trd-book.trb-big .trb-book{font-size:6px}
   #trd-book.trb-big .trb-cta{font-size:14px; padding:9px 9px 8px}
 }
-/* phones: half-height book strip */
-@media (max-width:480px){
-  #trd-book .trb-in{gap:7px; padding:5px 14px; min-height:0}
-  #trd-book .trb-book{font-size:3.1px}
-  #trd-book .trb-copy{gap:2px}
-  #trd-book .trb-line{gap:2px}
-  #trd-book .trb-k{font-size:10px; letter-spacing:.05em}
-  #trd-book .trb-t{font-size:14px; line-height:1.05; -webkit-line-clamp:2}
-  #trd-book .trb-cta{font-size:12px; padding:5px 9px 4px}
-  #trd-book.trb-big .trb-in{padding:6px 14px; gap:7px}
-  #trd-book.trb-big .trb-book{font-size:3.5px}
-  #trd-book.trb-big .trb-k{font-size:10px}
-  #trd-book.trb-big .trb-t{font-size:14px}
-  #trd-book.trb-big .trb-cta{font-size:12px; padding:5px 9px 4px}
-}
-@media (max-width:360px){
-  #trd-book .trb-in{gap:6px; padding:4px 10px}
-  #trd-book .trb-book{font-size:2.8px}
-  #trd-book .trb-t{font-size:13px}
-  #trd-book .trb-cta{font-size:11px; padding:4px 8px 3px}
-  #trd-book.trb-big .trb-in{gap:6px; padding:5px 10px}
-  #trd-book.trb-big .trb-book{font-size:3px}
-  #trd-book.trb-big .trb-t{font-size:13px}
-  #trd-book.trb-big .trb-cta{font-size:11px; padding:4px 8px 3px}
-}
-
 @media (prefers-reduced-motion:reduce){#trd-book .trb-cta{transition:none}}
 
 /* ---------- the title card: "anon mission / or / all you need to know about q - and how they made you afraid to ask" ----------
