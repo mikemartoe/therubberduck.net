@@ -374,18 +374,18 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   .hello-k{font-size:26px}
   .hello-h{font-size:38px}
   .deck-well{height:auto;aspect-ratio:100/66}
-  .stacks{gap:9px;width:100%!important;max-width:100%}
-  /* mobile spines: ~half as thick, ~1/3 longer (full content width; duck reserve stays on the deck only) */
-  .spine{min-height:0;height:34px;padding:2px 3px}
-  .sp{min-height:0;height:100%;gap:7px;padding:1px 7px 1px 5px}
-  .sp-ic{width:24px;height:24px;border-radius:3px;box-shadow:0 0 0 1.5px currentColor,0 1px 3px rgba(0,0,0,.4)}
+  /* mobile spines: cassette-case proportion (~100x64 shell → ~2.5:1 bar), not full-bleed CD width */
+  .stacks{gap:9px;width:min(100%,288px)!important;max-width:100%;margin-inline:auto}
+  .spine{min-height:0;height:40px;padding:2px 3px}
+  .sp{min-height:0;height:100%;gap:6px;padding:1px 6px 1px 4px}
+  .sp-ic{width:26px;height:26px;border-radius:3px;box-shadow:0 0 0 1.5px currentColor,0 1px 3px rgba(0,0,0,.4)}
   .sp-cat{font-size:7.5px;letter-spacing:.1em}
-  .sp-n{font-size:13.5px}.t2 .sp-n,.t5 .sp-n{font-size:12px}.t4 .sp-n,.t6 .sp-n{font-size:16px}.t1 .sp-n,.t3 .sp-n{font-size:12.5px}
-  .sp-s{font-size:10.5px;-webkit-line-clamp:1}
+  .sp-n{font-size:13px}.t2 .sp-n,.t5 .sp-n{font-size:11.5px}.t4 .sp-n,.t6 .sp-n{font-size:15px}.t1 .sp-n,.t3 .sp-n{font-size:12px}
+  .sp-s{font-size:10px;-webkit-line-clamp:1}
   .sp-go{width:22px;height:22px}
   .sp-go svg{width:12px;height:12px}
   .sp-mk{display:none}
-  .start-tag{top:-9px;right:40px;padding:2px 7px 1px;font-size:9.5px}
+  .start-tag{top:-9px;right:28px;padding:2px 7px 1px;font-size:9.5px}
   .shop{min-height:470px;margin:6px 2px 0}
   .shop-sign-name{font-size:24px}
   .room .duck{object-position:50% 50%;opacity:.14}
