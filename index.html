@@ -247,6 +247,11 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   .spine-face{width:min(200px,50vw);bottom:calc(100% + 8px)}
   .stack-a .spine-face,.stack-b .spine-face{--sf-x:-50%}
 }
+/* face open/hover: lift stage above banner/chrome so J-cards paint on top */
+body:has(.spine.is-face-open) .stage,
+body:has(.deck.is-face-open) .stage,
+body:has(.spine:hover) .stage,
+body:has(.deck:hover) .stage{z-index:5000}
 .stacks,.stack{overflow:visible}
 
 /* deck (Red Pill Album) upright Norelco face — same size language as spines */
