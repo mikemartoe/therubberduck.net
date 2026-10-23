@@ -424,23 +424,23 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   .banner .wm{font-size:58px}
   .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
 }
-/* phones: logo duck = faint grayscale watermark behind bigger type */
+/* phones: big soft watermark duck behind type; side gutters for box + avatar */
 @media (max-width:480px){
   .banner-in{
     flex-direction:column;align-items:center;justify-content:center;
-    gap:10px;padding:22px 56px 16px;min-height:168px;position:relative;overflow:hidden;
+    gap:10px;padding:20px 72px 14px;min-height:176px;position:relative;overflow:hidden;
   }
-  /* only the logo in .banner-in — never the support duck or other imgs */
+  /* only the logo in .banner-in — never the support duck */
   .banner-in > img{
-    position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
-    height:132px;width:auto;max-width:none;
-    opacity:.1;filter:grayscale(1) brightness(1.35) contrast(.9);
+    position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);
+    height:min(210px,58vw);width:auto;max-width:none;
+    opacity:.34;filter:brightness(.9) contrast(1.05) saturate(.55);
     z-index:0;pointer-events:none;
   }
   .banner .wm{
     position:relative;z-index:1;font-size:clamp(52px,17vw,72px);
     text-align:center;line-height:.88;margin:0;
-    text-shadow:0 2px 18px rgba(0,0,0,.9);
+    text-shadow:0 2px 16px rgba(0,0,0,.95),0 0 2px rgba(0,0,0,.8);
   }
   .banner .meta{
     position:relative;z-index:1;font-size:16px;gap:6px 16px;justify-content:center;
@@ -626,10 +626,13 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .trd-sup-x{position:absolute;top:4px;right:4px;width:20px;height:20px;border:0;border-radius:50%;background:#eee;color:#333;font-size:14px;line-height:20px;cursor:pointer;padding:0}
 .trd-sup-x:hover{background:#ddd}
 @media (max-width:480px){
-  header.banner>.trd-sup{position:absolute;right:8px;left:auto;top:auto;bottom:8px;z-index:210;align-items:flex-end}
-  .trd-sup-duck{width:64px;height:64px;padding:4px;
-    filter:drop-shadow(0 3px 8px rgba(0,0,0,.55)) grayscale(.55) saturate(.35) brightness(1.12)}
-  /* keep support duck img from inheriting watermark rules */
+  /* right red-circle slot: avatar centered in the side band */
+  header.banner>.trd-sup{
+    position:absolute;right:4px;left:auto;top:50%;bottom:auto;
+    transform:translateY(-50%);z-index:210;align-items:flex-end;
+  }
+  .trd-sup-duck{width:72px;height:72px;padding:3px;
+    filter:drop-shadow(0 3px 8px rgba(0,0,0,.55)) saturate(.5) brightness(1.05) hue-rotate(-12deg)}
   header.banner .trd-sup-duck img{
     position:static!important;transform:none!important;opacity:1!important;
     height:100%!important;width:100%!important;filter:none!important;left:auto!important;top:auto!important;
