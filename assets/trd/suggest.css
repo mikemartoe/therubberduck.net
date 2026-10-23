@@ -114,19 +114,23 @@
 #trd-suggest-fx.trs-behind .trs-tab{opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility 0s .2s}   /* the duck's own bubble is open */
 /* phones: a little smaller, like the duck */
 @media (max-width:480px){
-  #trd-suggest-fx .trs-tab{
-    /* readable in the black band, with air above the title and above the banner rule */
+  /* docked into the black header band (not the top of the phone screen) */
+  header.banner{position:relative}
+  header.banner .banner-in{padding-bottom:76px} /* black strip under Collectibles for the icons */
+  header.banner > #trd-suggest-fx{position:static; inset:auto; pointer-events:none}
+  header.banner > #trd-suggest-fx .trs-tab{
+    position:absolute; pointer-events:auto;
     width:50px; height:68px;
-    left:var(--trs-l,10px);
-    right:auto;
-    top:calc(var(--trs-t,10px) + env(safe-area-inset-top,0px));
-    bottom:auto;
+    left:10px; right:auto; top:auto; bottom:10px;
   }
-  /* tip below the tab when it sits in the header */
-  #trd-suggest-fx .trs-tip{
-    bottom:auto; top:calc(100% + 10px); transform:translate(-50%,-4px);
+  /* tip above the tab once it lives at the bottom of the band */
+  header.banner > #trd-suggest-fx .trs-tip{
+    bottom:calc(100% + 10px); top:auto; transform:translate(-50%,4px);
   }
-  #trd-suggest-fx .trs-tab:focus-visible .trs-tip{transform:translate(-50%,0)}
+  header.banner > #trd-suggest-fx .trs-tab:focus-visible .trs-tip{transform:translate(-50%,0)}
+  @media (hover:hover){
+    header.banner > #trd-suggest-fx .trs-tab:hover .trs-tip{opacity:1; transform:translate(-50%,0)}
+  }
 }
 @media (hover:hover) and (max-width:480px){
   #trd-suggest-fx .trs-tab:hover .trs-tip{opacity:1; transform:translate(-50%,0)}

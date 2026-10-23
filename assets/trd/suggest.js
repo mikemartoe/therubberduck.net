@@ -175,10 +175,17 @@
     corner();
     var b = D.body; if (!b) return;
     var pod = D.getElementById('trd-pod'), ref = pod && pod.parentNode === b ? pod : null;
+    var banner = D.querySelector('header.banner');
+    var phone = W.matchMedia && W.matchMedia('(max-width: 480px)').matches;
     sec.classList.toggle('trs-nopod', !ref);
     fx.classList.toggle('trs-tab-off', !CONFIG.SHOW_TAB);
     if (sec.parentNode !== b) { if (dlg.open) resetAfterNav(); b.insertBefore(sec, ref); }
-    if (fx.parentNode !== b) b.insertBefore(fx, ref);
+    /* phones: park the suggestion tab inside the black header band; desktop stays on body */
+    if (phone && banner) {
+      if (fx.parentNode !== banner) banner.appendChild(fx);
+    } else if (fx.parentNode !== b) {
+      b.insertBefore(fx, ref);
+    }
     if (dlg.parentNode !== b) b.insertBefore(dlg, ref);
     fit();
   }
@@ -236,10 +243,12 @@
     var sup = D.getElementById('trdSup'), duck = D.querySelector('.trd-sup-duck');
     fx.classList.toggle('trs-behind', !!(sup && !sup.hidden && sup.classList.contains('open')));
     var w = tab.offsetWidth, h = tab.offsetHeight; if (!w || !h) return;
-    /* phones: suggestion box top-left in the black header band; duck stays top-right via CSS */
+    /* phones: CSS docks the tab in the banner; clear any leftover fixed-corner vars */
     if (W.matchMedia && W.matchMedia('(max-width: 480px)').matches) {
-      fx.style.setProperty('--trs-l', '10px');
-      fx.style.setProperty('--trs-t', '10px');
+      var banner = D.querySelector('header.banner');
+      if (banner && fx.parentNode !== banner) banner.appendChild(fx);
+      fx.style.removeProperty('--trs-l');
+      fx.style.removeProperty('--trs-t');
       fx.style.removeProperty('--trs-r');
       fx.style.removeProperty('--trs-b');
       fx.style.setProperty('--trs-lift', '0px');
