@@ -162,13 +162,13 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 /* ============ THE STACKS: every room as a cassette spine in its clear case ============ */
 .stacks{display:grid;grid-template-columns:1fr;gap:10px}
 .stack{display:grid;gap:10px;min-width:0}
-.spine{--off:0px;--rot:0deg;position:relative;display:block;min-width:0;min-height:62px;padding:4px 5px;border-radius:3px;text-decoration:none;
+.spine{--off:0px;--rot:0deg;--lift:0px;position:relative;display:block;min-width:0;min-height:62px;padding:4px 5px;border-radius:3px;text-decoration:none;overflow:visible;
   background:linear-gradient(180deg,rgba(255,255,255,.62) 0,rgba(255,255,255,.2) 3px,rgba(210,220,230,.10) 50%,rgba(255,255,255,.2) calc(100% - 3px),rgba(255,255,255,.55) 100%);
   border:1px solid rgba(255,255,255,.38);box-shadow:0 3px 0 rgba(0,0,0,.35),0 8px 16px rgba(0,0,0,.42);
-  transform:translateX(var(--off)) rotate(var(--rot));transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+  transform:translateX(var(--off)) translateY(var(--lift)) rotate(var(--rot));transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
 .spine::after{content:"";position:absolute;left:5px;right:5px;top:4px;height:30%;pointer-events:none;border-radius:1px;
   background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0))}
-.spine:hover,.spine:focus-visible{transform:translateX(calc(var(--off) + 12px)) rotate(0deg);
+.spine:hover,.spine:focus-visible{transform:translateX(calc(var(--off) + 16px)) translateY(var(--lift)) rotate(calc(var(--rot) * .35));
   box-shadow:0 3px 0 rgba(0,0,0,.35),0 12px 24px rgba(0,0,0,.5),0 0 0 2px var(--mustard),0 0 26px rgba(255,190,90,.3)}
 .sp{position:relative;display:flex;align-items:center;gap:12px;height:100%;min-height:52px;padding:4px 10px 4px 8px;border-radius:1px;overflow:hidden}
 .sp-cat{flex:none;writing-mode:vertical-rl;transform:rotate(180deg);font:700 9.5px/1 var(--body);letter-spacing:.12em;opacity:.85}
@@ -214,9 +214,79 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .t6 .sp::before{content:"";position:absolute;right:0;top:0;bottom:0;width:7px;background:linear-gradient(90deg,#c8302b 0 3px,#fff 3px 4px,#1f4fa0 4px 7px)}
 .t6 .sp-n{font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:.03em}
 .t6 .sp-s{color:#3d4656}.t6 .sp-go{background:#1f4fa0;color:#fff}
-/* hand-stacked, not machine-perfect */
-.stack-a .spine:nth-child(1){--off:0px;--rot:-.25deg}.stack-a .spine:nth-child(2){--off:9px;--rot:.2deg}.stack-a .spine:nth-child(3){--off:-3px;--rot:-.15deg}
-.stack-b .spine:nth-child(1){--off:6px;--rot:.2deg}.stack-b .spine:nth-child(2){--off:-4px;--rot:-.25deg}.stack-b .spine:nth-child(3){--off:3px;--rot:.15deg}
+/* hand-stacked, not machine-perfect — uneven offsets, slight lift, readable */
+.stack-a .spine:nth-child(1){--off:3px;--rot:-.7deg;--lift:3px}
+.stack-a .spine:nth-child(2){--off:14px;--rot:.85deg;--lift:-4px}
+.stack-a .spine:nth-child(3){--off:-9px;--rot:-.55deg;--lift:2px}
+.stack-b .spine:nth-child(1){--off:12px;--rot:.65deg;--lift:-3px}
+.stack-b .spine:nth-child(2){--off:-11px;--rot:-.9deg;--lift:5px}
+.stack-b .spine:nth-child(3){--off:8px;--rot:.5deg;--lift:-2px}
+
+/* ============ SPINE HOVER: aged 80s cassette face in a clear case ============ */
+.spine-face{position:absolute;left:50%;bottom:calc(100% + 12px);z-index:60;width:min(188px,46vw);aspect-ratio:100.4/63.8;
+  opacity:0;pointer-events:none;transform:translateX(-50%) perspective(920px) rotateY(-10deg) rotateX(8deg) translateY(10px) scale(.9);
+  transition:opacity .22s var(--ease),transform .28s var(--ease);filter:drop-shadow(0 14px 22px rgba(0,0,0,.55))}
+.sf-case{display:block;height:100%;padding:3.2% 2.6% 3.8%;border-radius:5%/7.5%;
+  background:
+    linear-gradient(125deg,rgba(255,255,255,.55) 0 8%,rgba(255,255,255,.08) 8% 22%,transparent 22%),
+    linear-gradient(200deg,rgba(255,236,180,.12),transparent 40%),
+    linear-gradient(160deg,rgba(255,255,255,.28),rgba(220,228,235,.1) 45%,rgba(180,190,200,.14));
+  border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(0,0,0,.12),0 0 0 1px rgba(30,20,10,.35)}
+.sf-shell{position:relative;display:block;height:100%;border-radius:2.8%/4.5%;overflow:hidden;
+  background:url('/assets/trd/img/cas-scratch.webp') center/100% 100% no-repeat,linear-gradient(160deg,#3a3633 0%,#211e1c 45%,#161412 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),inset 0 2px 0 rgba(255,255,255,.08),0 2px 4px rgba(0,0,0,.45)}
+.sf-label{position:absolute;left:5%;right:5%;top:6%;height:58%;border-radius:2px;padding:5% 5% 4%;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;gap:3%;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.22),inset 0 0 12px rgba(60,40,10,.28),0 0 0 1px rgba(255,255,255,.06);
+  /* yellowed / rubbed 45-year paper base — theme overrides below */
+  background:
+    radial-gradient(120% 80% at 90% 10%,rgba(255,255,255,.18),transparent 40%),
+    linear-gradient(115deg,transparent 68%,rgba(255,255,255,.14) 76%,transparent 88%),
+    linear-gradient(180deg,rgba(255,248,230,.2),rgba(120,80,30,.12)),
+    #d4c19a}
+.sf-title{font-size:clamp(11px,2.4vw,15px);line-height:1.05;font-weight:900;letter-spacing:.01em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 0 rgba(255,255,255,.15)}
+.sf-sub{font:400 clamp(8px,1.5vw,10px)/1.2 var(--body);opacity:.9;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sf-meta{margin-top:auto;font:700 7px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.sf-win{position:absolute;left:22%;width:56%;top:68%;height:18%;border-radius:999px;
+  background:linear-gradient(180deg,rgba(40,30,24,.92),rgba(15,12,10,.96));
+  box-shadow:inset 0 0 0 1px #2e1f13,0 0 0 1.5px rgba(10,8,6,.5);display:flex;align-items:center;justify-content:space-around;padding:0 8%}
+.sf-reel{width:22%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,transparent 0 42%,#4a2c17 44% 100%),repeating-conic-gradient(#c8302b 0 30deg,#8a1a12 30deg 60deg);
+  box-shadow:0 0 0 1px #e8a89e;opacity:.9}
+.sf-foot{position:absolute;left:14%;right:14%;bottom:0;height:12%;
+  clip-path:polygon(7% 0,93% 0,100% 100%,0 100%);
+  background:linear-gradient(180deg,#2c2826,#1a1715);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+/* theme personalities on the aged label */
+.t1 .sf-label{background:linear-gradient(115deg,transparent 72%,rgba(255,255,255,.2) 80%,transparent),linear-gradient(180deg,#ebe8e2,#c4c2bc);color:#141414}
+.t1 .sf-label::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(90deg,#c8302b 0 1.5px,transparent 1.5px 3px,#c8302b 3px 4px)}
+.t1 .sf-title{font-style:italic;text-transform:uppercase}
+.t1 .sf-sub{color:#3a3a3a}
+.t2 .sf-label{background:linear-gradient(115deg,transparent 70%,rgba(255,240,200,.25) 78%,transparent),linear-gradient(180deg,#f7ebd0,#e5d2a8);color:#c8202b}
+.t2 .sf-label::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#c8202b}
+.t2 .sf-title{font-family:var(--retro);font-weight:400;font-size:clamp(9px,2vw,12.5px)}
+.t2 .sf-sub{color:#5a3a22}
+.t3 .sf-label{background:linear-gradient(90deg,#3c1f63 0%,#8d2a77 28%,#d9483f 55%,#f08a2c 78%,#f6c945 100%);color:#fff}
+.t3 .sf-title{font-style:italic;text-shadow:0 1px 0 rgba(0,0,0,.4)}
+.t3 .sf-sub,.t3 .sf-meta{color:#fff3df;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.t4 .sf-label{background:linear-gradient(180deg,#1a1a1a,#080808);color:#ffd21f}
+.t4 .sf-title{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:clamp(12px,2.6vw,16px)}
+.t4 .sf-sub,.t4 .sf-meta{color:#efe5c8}
+.t5 .sf-label{background:linear-gradient(180deg,#1d2266,#121548);color:#ff5fae}
+.t5 .sf-title{font-family:var(--retro);font-weight:400;font-size:clamp(9px,2vw,12.5px);text-shadow:1px 1px 0 #23c3e6}
+.t5 .sf-sub,.t5 .sf-meta{color:#bfeeff}
+.t6 .sf-label{background:linear-gradient(180deg,#f7f5ee,#e0ddd4);color:#1f4fa0}
+.t6 .sf-label::after{content:"";position:absolute;right:0;top:0;bottom:0;width:5px;background:linear-gradient(90deg,#c8302b 0 2px,#fff 2px 3px,#1f4fa0 3px 5px)}
+.t6 .sf-title{font-family:var(--display);font-weight:700;letter-spacing:.03em;font-size:clamp(11px,2.4vw,15px)}
+.t6 .sf-sub,.t6 .sf-meta{color:#3d4656}
+@media (hover:hover) and (pointer:fine){
+  .spine:hover .spine-face,.spine:focus-visible .spine-face{
+    opacity:1;transform:translateX(-50%) perspective(920px) rotateY(-6deg) rotateX(5deg) translateY(0) scale(1)}
+}
+/* keep faces clear of the shop column on the right stack */
+.stack-b .spine-face{left:42%}
+.stacks,.stack{overflow:visible}
 
 /* ============ TRD COLLECTIBLES: a Main Street card shop entrance ============ */
 .shop{position:relative;display:flex;flex-direction:column;min-height:420px;border-radius:12px 12px 6px 6px;overflow:hidden;text-decoration:none;color:var(--brown);
@@ -315,18 +385,18 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     column-gap:clamp(28px,2.6vw,52px);row-gap:0}
   body > #trd-book .trb-in{width:min(clamp(1240px,84vw,1640px),100%)}
   .hall{gap:clamp(14px,2.2vh,26px);min-height:0}
-  .top{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) var(--deckw,minmax(0,1fr));gap:clamp(18px,1.8vw,30px)}
+  .top{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) var(--deckw,minmax(0,1fr));gap:clamp(18px,1.8vw,30px);align-items:center}
   .hello{justify-content:center}
   .hello-k{font-size:clamp(24px,3.3vh,36px)}
   .hello-h{font-size:clamp(30px,min(4.9vh,2.75vw),64px)}
   .hello-s{font-size:clamp(15px,min(2vh,1.15vw),20px);margin-top:clamp(6px,1.2vh,14px)}
   .hello-how{font-size:clamp(14px,min(1.85vh,1.05vw),18px);margin-top:clamp(8px,1.4vh,16px)}
-  .deck{min-height:0;padding:clamp(7px,1.1vh,14px) 14px clamp(9px,1.3vh,16px);gap:clamp(5px,.9vh,10px)}
-  .deck-well{height:auto}
+  .deck{align-self:center;height:fit-content;min-height:0;grid-template-rows:auto auto auto;padding:clamp(7px,1.1vh,14px) 14px clamp(9px,1.3vh,16px);gap:clamp(5px,.9vh,10px)}
+  .deck-well{height:auto;aspect-ratio:100.4/63.8;width:100%}
   .key{min-height:clamp(30px,4.4vh,48px)}
   .key-play{font-size:clamp(13.5px,1.8vh,17px)}
   .stacks{grid-template-columns:1fr 1fr;gap:clamp(18px,1.8vw,30px)}
-  .stack{gap:clamp(8px,1.2vh,14px)}
+  .stack{gap:clamp(10px,1.35vh,16px)}
   .spine{height:clamp(58px,7.8vh,96px);min-height:0}
   .sp{min-height:0}
   .sp-ic{width:clamp(38px,5.2vh,62px);height:clamp(38px,5.2vh,62px)}
@@ -356,7 +426,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 /* shorter laptop screens (768-820px tall): give the cassette more room so its label reads */
 @media (min-width:1024px) and (min-height:620px) and (max-height:920px){
   .deck-top{display:none}
-  .deck{grid-template-rows:minmax(0,1fr) auto;padding-top:9px}
+  .deck{grid-template-rows:auto auto;padding-top:9px}
   .deck-well{padding:4px}
   .spine{height:clamp(54px,6.9vh,64px)}
   .key{min-height:clamp(30px,3.8vh,36px)}
@@ -403,7 +473,8 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
-  .spine:hover,.spine:focus-visible,.deck:hover,.shop:hover{transform:translateX(var(--off,0px))}
+  .spine:hover,.spine:focus-visible{transform:translateX(var(--off,0px)) translateY(var(--lift,0px))}
+  .deck:hover,.shop:hover{transform:none}
 }
 
 /* ---- one rubber duck header — same as listening-room.html ---- */
@@ -508,14 +579,14 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 
     <nav class="stacks" aria-label="Rooms">
       <div class="stack stack-a">
-      <a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Videos</span><span class="sp-s">Recorded shows and interviews</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
-      <a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
-      <a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
+      <a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Videos</span><span class="sp-s">Recorded shows and interviews</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">Videos</span><span class="sf-sub">Shows &amp; interviews</span><span class="sf-meta">TRD-001 · Side A</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
+      <a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">Listening Room</span><span class="sf-sub">Recordings + summaries</span><span class="sf-meta">TRD-002 · Type II</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
+      <a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">SCIF Reading Room</span><span class="sf-sub">Document library</span><span class="sf-meta">TRD-003 · Side A</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
       </div>
       <div class="stack stack-b">
-      <a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
-      <a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
-      <a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.png" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a>
+      <a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">Drop Ledger</span><span class="sf-sub">Every post, searchable</span><span class="sf-meta">TRD-004 · Type II</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
+      <a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">Meme Dump</span><span class="sf-sub">Images, catalogued</span><span class="sf-meta">TRD-005 · Side A</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
+      <a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.png" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><span class="sf-case"><span class="sf-shell"><span class="sf-label"><span class="sf-title">X Archive</span><span class="sf-sub">Past posts, one place</span><span class="sf-meta">TRD-006 · Type II</span></span><span class="sf-win"><i class="sf-reel"></i><i class="sf-reel"></i></span><span class="sf-foot"></span></span></span></span></a>
       </div>
     </nav>
   </div>
