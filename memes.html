@@ -1072,9 +1072,9 @@ function bind(){
     window.scrollTo({top:0,behavior:'auto'}); toast('Filtered: '+b.dataset.tag);
   });
   $('dl').addEventListener('click',function(){var it=view[cur];if(it)ev('event/meme-download/'+it.id,'Meme downloaded: '+(it.title||it.id))});
-  $('copylink').addEventListener('click',function(){copy(permalink(view[cur]),'Permalink copied — memes.html#'+view[cur].id)});
+  $('copylink').addEventListener('click',function(){ev('event/meme-share/copylink','Meme link copied: '+view[cur].id);copy(permalink(view[cur]),'Permalink copied — memes.html#'+view[cur].id)});
   $('copyattr').addEventListener('click',function(){
-    var it=view[cur];
+    var it=view[cur];ev('event/meme-share/attribution','Meme attribution copied: '+it.id);
     copy((it.title||it.id)+' — The Rubber Duck™ Meme Dump · '+permalink(it),'Attribution copied');
   });
   Array.prototype.forEach.call(document.querySelectorAll('[data-sh]'),function(b){
