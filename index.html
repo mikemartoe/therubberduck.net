@@ -486,82 +486,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
 }
 
-/* ============ HOMEPAGE V2 (Oct 2026): book in the header, logo to X, two storefronts, two tapes ============ */
-/* header: the duck + wordmark go to X; the anon mission hardcover sits top-left */
-.banner a.logo-x{display:block;flex:none;border-radius:8px;transition:transform .25s var(--ease),filter .25s var(--ease)}
-.banner a.logo-x:hover,.banner a.logo-x:focus-visible{transform:translateY(-2px);filter:drop-shadow(0 0 12px rgba(255,215,122,.35))}
-.banner a.hb-book{order:-1;flex:none;display:block;position:relative;margin-right:clamp(6px,1.6vw,26px);border-radius:4px;
-  transform:rotate(-3deg);transition:transform .3s var(--ease),filter .3s var(--ease);
-  filter:drop-shadow(0 10px 12px rgba(0,0,0,.8)) drop-shadow(0 0 10px rgba(255,190,90,.12))}
-.banner a.hb-book img{display:block;height:118px;width:auto;margin:-12px 0 -10px}
-.banner a.hb-book:hover,.banner a.hb-book:focus-visible{transform:translateY(-6px) rotate(-1.5deg) scale(1.04);
-  filter:drop-shadow(0 18px 18px rgba(0,0,0,.85)) drop-shadow(0 0 18px rgba(255,190,90,.32))}
-@media (min-width:1200px){.banner a.hb-book{position:absolute;left:24px;top:50%;margin:0;transform:translateY(-50%) rotate(-3deg)}
-  .banner a.hb-book:hover,.banner a.hb-book:focus-visible{transform:translateY(calc(-50% - 6px)) rotate(-1.5deg) scale(1.04)}}
-@media (max-width:1199px) and (min-width:761px){.banner a.hb-book img{height:96px;margin:-6px 0 -4px}
-  .banner .banner-in{flex-wrap:wrap;row-gap:8px}
-  .banner a.trd-shopsign{position:relative;right:auto;top:auto;transform:none}
-  .banner a.trd-shopsign:hover,.banner a.trd-shopsign:focus-visible{transform:translateY(-2px)}}
-@media (max-width:760px){
-  .banner a.hb-book{order:10;margin:0 4px 0 0}
-  .banner a.hb-book img{height:64px;margin:-4px 0}
-  .banner a.trd-shopsign{order:11}
-}
-
-/* two storefronts, same size, same edges; both gently lit */
-.shops{display:grid;grid-template-columns:1fr;gap:24px;min-width:0;min-height:0}
-.shop{container-type:inline-size;animation:boxGlow 5.2s ease-in-out infinite}
-.shop-spon{animation-delay:-2.6s}
-@keyframes boxGlow{
-  0%,100%{box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 2px #3b2414,0 0 0 5px var(--mustard2),0 0 30px rgba(255,180,80,.14)}
-  50%{box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 2px #3b2414,0 0 0 5px #f0bf4c,0 0 0 8px rgba(255,215,122,.16),0 0 58px rgba(255,190,90,.34)}}
-.shop:hover,.shop:focus-visible{filter:brightness(1.06)}
-.shop-sign-name{font-size:min(27px,7.3cqw);white-space:nowrap}
-@media (min-width:1200px) and (max-width:1400px) and (min-height:500px){
-  .t1 .sp-n{font-size:clamp(15px,1.2vw,17px);letter-spacing:0}
-  .t3 .sp-n{font-size:clamp(14.5px,1.12vw,16px);letter-spacing:0}
-  .t2 .sp-n{font-size:clamp(13.5px,1.02vw,14.5px);letter-spacing:0}
-  .sp-s{font-size:clamp(11.5px,.92vw,12.5px)}
-  .t5 .sp-s{font-size:clamp(11px,.86vw,12px);letter-spacing:-.01em}}
-.shop-sign-pre{font-size:min(20px,7.4cqw)}
-.shop-step-l{font-size:min(14.5px,5.4cqw)}
-.shop-step-go{font-size:min(14px,5.2cqw)}
-@container (max-width:270px){
-  .shop-step{flex-direction:column;align-items:stretch;gap:7px;padding:9px 10px;text-align:center}
-  .shop-step-l{white-space:normal;font-size:min(15px,6.6cqw)}
-  .shop-step-go{justify-content:center;font-size:min(14px,6.2cqw)}}
-.shop-neon{font-size:min(26px,9cqw)}
-/* the sponsors storefront: same build, navy-cream-red awning, ad-space poster in the window */
-.shop-spon .shop-awning{background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 40%,rgba(255,255,255,.08) 70%,rgba(0,0,0,.12)),
-  repeating-linear-gradient(90deg,#1f4fa0 0 22px,#f1e3c2 22px 44px,#c8302b 44px 66px,#f1e3c2 66px 88px)}
-.shop-spon .shop-awning::after{background:radial-gradient(circle at 11px 0,#173c7a 10.5px,transparent 11px) 0 0/22px 11px repeat-x}
-.spon-window{background:radial-gradient(90% 70% at 50% 35%,#fff1c7 0%,#f2c873 45%,#9c5f22 100%)}
-.spon-neon{border-color:#7fc4ff;text-shadow:0 0 4px #fff,0 0 10px #5fb0ff,0 0 20px #2f8cff,0 0 34px #2f8cff;
-  box-shadow:0 0 8px #5fb0ff,0 0 18px rgba(47,140,255,.5),inset 0 0 8px rgba(95,176,255,.55);background:rgba(10,25,60,.3);letter-spacing:.04em}
-.spon-board{container-type:inline-size;position:absolute;z-index:1;left:12%;right:12%;top:27%;bottom:15%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5%;
-  padding:6% 6%;border-radius:4px;background:#fbf4e3;border:3px solid var(--mustard);outline:2px dashed rgba(200,48,43,.55);outline-offset:-10px;
-  box-shadow:0 6px 14px rgba(60,25,5,.55);transform:rotate(-2deg);text-align:center}
-.spon-board img{width:38%;height:auto;display:block;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
-.spon-board b{font-family:var(--retro);font-weight:400;font-size:min(22px,15cqw);line-height:1.05;color:#7a1d16;text-align:center}
-.spon-board i{font:700 min(11px,8.6cqw)/1.2 var(--body);font-style:normal;letter-spacing:.03em;white-space:nowrap;text-transform:uppercase;color:var(--brown2)}
-.spon-door{background:linear-gradient(90deg,#24467e,#2f5a9c 50%,#24467e);box-shadow:inset 0 0 0 3px #173564,inset 0 0 0 5px #3b2414}
-.spon-glass{background:radial-gradient(80% 60% at 50% 40%,#ffe6a8,#e6b45e 60%,#b5762a)}
-.spon-glass img{position:absolute;left:50%;top:58%;width:62%;height:auto;transform:translate(-50%,-50%);opacity:.55;filter:sepia(.6)}
-.spon-door .shop-door-panel{box-shadow:inset 0 0 0 2px #173564,inset 0 0 0 4px rgba(255,255,255,.12)}
-
-/* the tape shelf: the tape that is not in the deck waits here; click it to swap */
-.shelf{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;width:var(--shelfw,170px)}
-.shelf-slot{-webkit-appearance:none;appearance:none;position:relative;display:block;width:100%;aspect-ratio:100.4/63.8;padding:0;margin:0;border:0;background:none;cursor:pointer;
-  container-type:size;border-radius:6px;z-index:1}
-.shelf-slot .cas{width:100cqw;transform:translateY(-4%) rotate(-2.5deg);transition:transform .3s var(--ease),box-shadow .3s var(--ease),filter .3s var(--ease);
-  animation:tapeNudge 7s ease-in-out 2.5s infinite}
-.shelf-slot:hover .cas,.shelf-slot:focus-visible .cas{animation:none;transform:translateY(-14%) rotate(-1deg) scale(1.04);
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),0 0 0 2px var(--mustard),0 10px 22px rgba(0,0,0,.7),0 0 26px rgba(255,200,110,.55);filter:brightness(1.08)}
-.shelf-slot:focus-visible{outline:3px solid #ffd77a;outline-offset:4px}
-@keyframes tapeNudge{0%,84%,100%{transform:translateY(-4%) rotate(-2.5deg)}88%{transform:translateY(-13%) rotate(-4deg)}92%{transform:translateY(-6%) rotate(-1deg)}96%{transform:translateY(-9%) rotate(-2.5deg)}}
-.shelf-ledge{display:block;width:118%;height:14px;margin-top:-3px;border-radius:2px 2px 4px 4px;position:relative;z-index:2;
-  background:linear-gradient(180deg,#8a5a34,#5a3720 60%,#3b2414);box-shadow:0 6px 10px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,220,170,.35);
-  font:700 9.5px/14px var(--body);letter-spacing:.14em;text-transform:uppercase;text-align:center;color:#f3d48a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ============ HOMEPAGE V2b (Oct 2026): book + duck left, two equal signs right, playlist tape in its case spine ============ */
 /* the playlist tape: same aged shell, green-tinted label and mustard reels */
 .cas-pl .cas-label{background:linear-gradient(rgba(16,64,48,.5),rgba(16,64,48,.5)),url('/assets/trd/img/rpa-label-aged.webp') center/100% 100% no-repeat,#d9c9a3}
 .cas-pl .cas-art img{flex:none;display:block;width:8cqw;height:auto;filter:drop-shadow(0 1px 2px rgba(0,0,0,.7))}
@@ -579,27 +504,102 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .deck-spot iframe{display:block;width:100%;border:0}
 .deck-well{position:relative}
 
-@media (min-width:900px) and (min-height:500px){
-  .stage{max-width:clamp(1240px,94vw,1800px)}
-  .shops{grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:clamp(14px,1.6vh,20px)}
-  .band{justify-content:flex-start;align-items:center;gap:clamp(20px,2vw,36px);padding-bottom:4px}
-  .band .shelf{--shelfw:clamp(128px,min(14vh,11vw),176px);margin-left:var(--shelfx,0px)}
-  .band-r{flex:1;min-width:0;display:flex;justify-content:center}
-  .band-sug{max-width:100%}
+/* header: book + duck on the left, wordmark in the middle, two equal signs on the right */
+.banner .banner-in.hb2{max-width:clamp(1240px,84vw,1640px);display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;
+  gap:clamp(14px,1.6vw,30px);padding:12px clamp(18px,1.8vw,32px)}
+.banner .banner-in > a.trd-shopsign{display:none!important}
+.hb-left{display:flex;align-items:center;justify-content:space-evenly;gap:clamp(10px,1.4vw,26px);min-width:0}
+.hb-right{display:flex;align-items:center;justify-content:space-evenly;gap:clamp(10px,1vw,18px);min-width:0}
+.banner a.logo-x{flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;border-radius:8px;transition:transform .25s var(--ease),filter .25s var(--ease)}
+.banner a.logo-x img{height:86px}
+.banner a.logo-x:hover,.banner a.logo-x:focus-visible{transform:translateY(-2px);filter:drop-shadow(0 0 12px rgba(255,215,122,.35))}
+.hb-cap{font:700 11px/1 var(--body);letter-spacing:.06em;color:#d8c49a;white-space:nowrap}
+.banner a.logo-x:hover .hb-cap,.banner a.logo-x:focus-visible .hb-cap{color:#ffd77a}
+/* the hardcover: bigger, lifted, a warm glow behind it, slightly overhanging the header */
+.banner a.hb-book{flex:none;display:block;position:relative;z-index:2;border-radius:4px;
+  transform:rotate(-4deg);transition:transform .3s var(--ease),filter .3s var(--ease);
+  filter:drop-shadow(0 16px 14px rgba(0,0,0,.9)) drop-shadow(0 0 3px rgba(255,215,122,.55)) drop-shadow(0 0 18px rgba(255,180,80,.38))}
+.banner a.hb-book::before{content:"";position:absolute;left:-30%;right:-30%;top:-10%;bottom:-6%;z-index:-1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(255,196,96,.30),rgba(255,160,60,.10) 60%,rgba(0,0,0,0))}
+.banner a.hb-book img{display:block;height:150px;width:auto;margin:-10px 0 -44px}
+.banner a.hb-book:hover,.banner a.hb-book:focus-visible{transform:translateY(-6px) rotate(-2deg) scale(1.05);
+  filter:drop-shadow(0 24px 20px rgba(0,0,0,.9)) drop-shadow(0 0 4px rgba(255,215,122,.7)) drop-shadow(0 0 26px rgba(255,190,90,.55))}
+/* the two header signs: same box, same edges */
+.hb-sign{--sw:clamp(168px,12.6vw,214px);--sh:88px;position:relative;flex:none;box-sizing:border-box;width:var(--sw);height:var(--sh);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:13px 10px 7px;border-radius:8px;text-decoration:none;text-align:center;overflow:hidden;
+  background:linear-gradient(180deg,#4d2c15,#2a170b);border:2px solid #E3A82B;
+  box-shadow:0 6px 16px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,220,150,.25),0 0 14px rgba(255,180,80,.16);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.hb-sign::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;
+  background:repeating-linear-gradient(90deg,#C8302B 0 14px,#E2652A 14px 28px,#E3A82B 28px 42px,#7A4A24 42px 56px)}
+.hb-spon::before{background:repeating-linear-gradient(90deg,#1f4fa0 0 14px,#f1e3c2 14px 28px,#c8302b 28px 42px,#f1e3c2 42px 56px)}
+.hb-sign-k{font:400 17px/1 var(--script);color:#FFD77A;white-space:nowrap}
+.hb-sign-n{font:400 18px/1.06 var(--retro);white-space:nowrap;letter-spacing:.02em;color:#F6ECD4;text-shadow:0 2px 0 #8a1c14}
+.hb-sign:hover,.hb-sign:focus-visible{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,220,150,.3),0 0 0 2px #ffd77a,0 0 22px rgba(255,190,90,.4)}
+.hb-sign:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
+@media (min-width:1400px) and (min-height:850px){.banner a.hb-book img{height:172px;margin:-6px 0 -70px}}
+@media (min-width:900px) and (max-width:1279px){
+  .banner .wm{font-size:clamp(66px,7.2vw,90px)}
+  .banner a.logo-x img{height:74px}
+  .banner a.hb-book img{height:128px;margin:-8px 0 -38px}
+  .hb-sign{--sw:clamp(132px,12.8vw,164px);--sh:80px;padding:12px 7px 6px}
+  .hb-sign-k{font-size:15px}.hb-sign-n{font-size:14.5px}
 }
-@media (min-width:1200px) and (min-height:500px){
-  .stage{grid-template-columns:minmax(0,1fr) calc(2 * var(--shopw,clamp(212px,15.6vw,380px)) + clamp(14px,1.2vw,22px))}
-  .shops{grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:clamp(14px,1.2vw,22px)}
+/* phones and small tablets: duck + wordmark, then book + the two signs */
+@media (max-width:899px){
+  .banner .banner-in.hb2{display:grid;grid-template-columns:auto auto;grid-template-areas:"x w" "b r";justify-content:center;align-items:center;gap:8px 12px;padding:12px 14px 14px}
+  .hb-left{display:contents}
+  .banner a.logo-x{grid-area:x}.banner .wm{grid-area:w}.banner a.hb-book{grid-area:b;justify-self:center}.hb-right{grid-area:r;justify-content:space-between;gap:8px}
+  .banner a.logo-x img{height:58px}
+  .hb-cap{font-size:9px;letter-spacing:.03em}
+  .banner a.hb-book img{height:82px;margin:-2px 0 -6px}
+  .hb-sign{--sw:calc(50% - 4px);--sh:66px;flex:1 1 0;padding:10px 4px 5px;gap:3px}
+  .hb-sign-k{font-size:14px}.hb-sign-n{font-size:13px}
+}
+@media (min-width:600px) and (max-width:899px){
+  .banner .wm{font-size:78px}
+  .banner a.logo-x img{height:72px}
+  .banner a.hb-book img{height:100px}
+  .hb-sign{--sh:80px}.hb-sign-k{font-size:16px}.hb-sign-n{font-size:16px}
+}
+@media (max-width:374px){.banner .wm{font-size:52px}.hb-sign-n{font-size:11.5px}}
+
+/* the tape case spine: the tape that is not in the deck waits in its own case, on the left */
+button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;margin:0;width:100%}
+.hello .tcase{--off:0px;--rot:-.6deg;--lift:0px;margin-top:clamp(16px,2.4vh,26px);flex:none}
+.tc-hold{display:none}
+.tc-tag{right:auto;left:72px;background:#1d6b43}
+.tcase .sp-go svg{width:15px;height:15px}
+.tcase:hover .sp-go,.tcase:focus-visible .sp-go{transform:translateY(-2px)}
+.tcase:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
+/* 7 Personal Playlist: deep green case, mustard blocky letters */
+.tc-pl .sp{background:linear-gradient(180deg,#14503a,#0a2f21);color:#f3c443}
+.tc-pl .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(90deg,#e3a82b 0 2px,transparent 2px 4px,#e3a82b 4px 6px)}
+.tc-pl .sp-n{font-family:var(--retro);font-size:17px;letter-spacing:.01em}
+.tc-pl .sp-s{color:#d9eedd}.tc-pl .sp-go{background:#f3c443;color:#0a2f21}
+/* 8 The Red Pill Album: black case, red and white condensed letters */
+.tc-rp .sp{background:linear-gradient(180deg,#1b1414,#070505);color:#ff5148}
+.tc-rp .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(90deg,#c8302b 0 3px,#f2ece2 3px 4px,#c8302b 4px 6px)}
+.tc-rp .sp-n{font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:.04em;text-transform:uppercase}
+.tc-rp .sp-s{color:#efe5d8}.tc-rp .sp-go{background:#c8302b;color:#fff}
+.tc-rp .sp-ic{object-fit:contain;background:#0d0909;padding:3px;box-sizing:border-box}
+.tc-rp .tc-tag{background:#c8302b}
+.tcase.is-open .sp{filter:brightness(.72) saturate(.8)}
+.tcase.is-take{animation:caseTake .5s var(--ease)}
+@keyframes caseTake{0%{transform:translateX(0) rotate(var(--rot))}40%{transform:translateX(14px) rotate(0deg) scale(1.02)}100%{transform:translateX(0) rotate(var(--rot))}}
+@media (min-width:900px) and (min-height:500px){
+  .hello .tcase{max-width:var(--tcw,100%)}
 }
 @media (max-width:899px), (max-height:499px){
-  .top .shelf{align-self:flex-start;--shelfw:150px;margin:-4px 0 4px}
+  .hello .tcase{align-self:center;width:min(100%,288px);margin-top:16px}
 }
-@media (max-width:480px){ .top .shelf{margin-left:calc((100% - 132px - 150px)/2)} }
-@media (min-width:481px) and (max-width:899px){ .top .shelf{margin-left:calc((100% - 156px - 150px)/2)} }
+@media (max-width:599px){
+  .tc-pl .sp-n{font-size:12px}.tc-rp .sp-n{font-size:15px}
+  .tc-tag{left:40px}
+  .tcase .sp-cat{letter-spacing:0}
+}
 @media (prefers-reduced-motion:reduce){
-  .shop,.shelf-slot .cas{animation:none!important}
-  .shop{box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 2px #3b2414,0 0 0 5px #f0bf4c,0 0 40px rgba(255,190,90,.26)}
-  .banner a.hb-book,.banner a.hb-book:hover{transition:none}
+  .banner a.hb-book,.banner a.hb-book:hover,.hb-sign{transition:none}
+  .tcase.is-take{animation:none}
 }
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -638,15 +638,15 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 </head>
 <body>
 <header class="banner">
-  <div class="banner-in">
-    <a class="hb-book" href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener" aria-label="anon mission, Volume 1, the book by The Rubber Duck. Opens Gumroad in a new tab"><img src="/assets/trd/img/anon-mission-hardcover-3d.webp?v=1" srcset="/assets/trd/img/anon-mission-hardcover-3d.webp?v=1 1x, /assets/trd/img/anon-mission-hardcover-3d@2x.webp?v=1 2x" width="98" height="130" alt="" decoding="async"></a>
-    <a class="logo-x" href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener" aria-label="The Rubber Duck on X, @TheRubberDuck79. Opens in a new tab"><img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck"></a>
+  <div class="banner-in hb2">
+    <div class="hb-left">
+      <a class="hb-book" href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener" aria-label="anon mission, Volume 1, the hardcover book by The Rubber Duck. Opens Gumroad in a new tab"><img src="/assets/trd/img/anon-mission-hardcover-3d.webp?v=2" srcset="/assets/trd/img/anon-mission-hardcover-3d.webp?v=2 1x, /assets/trd/img/anon-mission-hardcover-3d@2x.webp?v=2 2x" width="127" height="168" alt="anon mission, the hardcover book" decoding="async"></a>
+      <a class="logo-x" href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener" aria-label="The Rubber Duck on X, @TheRubberDuck79. Opens in a new tab"><img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck"><span class="hb-cap" aria-hidden="true">to TRD's X feed, click</span></a>
+    </div>
     <h1 class="wm"><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener" aria-label="THE RUBBER DUCK on X, @TheRubberDuck79. Opens in a new tab">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
-    <div class="meta">
-      <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
-      <a href="/ledger.html">The Drop Ledger</a>
-      <a href="/album.html">The Red Pill Album</a>
-      <a href="/sponsor.html">Sponsor the Site</a>
+    <div class="hb-right">
+      <a class="hb-sign hb-spon" href="/sponsor.html" aria-label="Site Sponsors. Sponsor the Site: see the sponsor tiers"><span class="hb-sign-k">Sponsor the Site</span><span class="hb-sign-n">Site<br>Sponsors</span></a>
+      <a class="hb-sign hb-shop" href="/merch.html" aria-label="Visit TRD Collectibles, the store"><span class="hb-sign-k">Visit</span><span class="hb-sign-n">TRD<br>Collectibles</span></a>
     </div>
   </div>
 </header>
@@ -668,6 +668,19 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
         <h2 class="hello-h">An open archive. Come take a look around.</h2>
         <p class="hello-s">Shows, recordings, documents and the full record, organized so you can check the sources yourself.</p>
         <p class="hello-how"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M12 5v14M6 13l6 6 6-6"/></svg><span>New here? Start with the <b>Private Theater</b> tape below, or press play on the album.</span></p>
+        <button class="spine tcase tc-pl" id="tapeCase" type="button" aria-label="The Rubber Duck Personal Playlist. Load this tape into the deck"><span class="start-tag tc-tag">Swap tape</span><span class="sp"><span class="sp-cat" aria-hidden="true">SIDE B</span><img class="sp-ic" src="/assets/trd/img/duck-banner.png" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Personal Playlist</span><span class="sp-s">The Rubber Duck&trade; on Spotify</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 4l8 9H4z"/><rect x="4" y="16" width="16" height="3.2" rx="1" fill="currentColor"/></svg></span></span></span><span class="tc-hold" aria-hidden="true"><span class="cas cas-pl" id="plCas" aria-hidden="true">
+              <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
+              <span class="cas-label">
+                <span class="cas-head"><span class="cas-art"><span class="cas-t">Personal</span><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async"><span class="cas-t">Playlist</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">SPOTIFY</span></span></span>
+                <span class="cas-meta">The Rubber Duck&trade; &middot; Personal Playlist</span>
+                <span class="cas-side"><small>SIDE</small><b>B</b></span>
+                <span class="cas-by">Type II<br>C-90</span>
+                <span class="cas-list"><span>The Rubber Duck&trade; Personal Playlist</span><span>Plays on Spotify</span></span>
+              </span>
+              <span class="cas-peel"></span>
+              <span class="cas-win"><span class="reel l"><b></b></span><span class="cas-tape"></span><span class="reel r"><b></b></span></span>
+              <span class="cas-foot"><i></i><i></i><i></i><i></i></span>
+            </span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-playlist.webp?v=1" width="560" height="872" alt="" decoding="async"></span></button>
       </header>
 
       <a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album">
@@ -706,22 +719,6 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     </nav>
   </div>
 
-  <div class="shops">
-  <a class="shop shop-spon" href="/sponsor.html" aria-label="Site Sponsors. Sponsor the Site: see the sponsor tiers">
-    <span class="shop-cornice" aria-hidden="true"></span>
-    <span class="shop-sign" aria-hidden="true"><span class="shop-sign-pre">The Rubber Duck&trade;</span><span class="shop-sign-name">Site Sponsors</span></span>
-    <span class="shop-awning" aria-hidden="true"></span>
-    <span class="shop-front" aria-hidden="true">
-      <span class="shop-window spon-window">
-        <span class="shop-neon spon-neon">SPONSOR</span>
-        <span class="spon-board"><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async"><b>Your ad here</b><i>therubberduck.net</i></span>
-        <span class="shop-shelf"></span>
-      </span>
-      <span class="shop-door spon-door"><span class="shop-door-glass spon-glass"><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async"><span class="shop-hang">Welcome</span></span><span class="shop-door-panel"></span><span class="shop-knob"></span></span>
-    </span>
-    <span class="shop-step"><span class="shop-step-l">Sponsor the Site</span><span class="shop-step-go">See tiers <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-    <span class="shop-walk" aria-hidden="true"></span>
-  </a>
   <a class="shop" href="merch.html" aria-label="TRD Collectibles. Caps, tees and signed pieces. Step inside the store">
     <span class="shop-cornice" aria-hidden="true"></span>
     <span class="shop-sign" aria-hidden="true"><span class="shop-sign-pre">The Rubber Duck&trade; presents</span><span class="shop-sign-name">TRD Collectibles</span></span>
@@ -741,29 +738,9 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     <span class="shop-step"><span class="shop-step-l">Caps, tees, signed pieces</span><span class="shop-step-go">Step inside <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
     <span class="shop-walk" aria-hidden="true"></span>
   </a>
-  </div>
 
   <div class="band">
-    <div class="shelf" id="tapeShelf">
-      <button class="shelf-slot" id="shelfSlot" type="button" aria-label="The Rubber Duck Personal Playlist. Load this tape into the deck">
-        <span class="cas cas-pl" id="plCas" aria-hidden="true">
-              <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
-              <span class="cas-label">
-                <span class="cas-head"><span class="cas-art"><span class="cas-t">Personal</span><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async"><span class="cas-t">Playlist</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">SPOTIFY</span></span></span>
-                <span class="cas-meta">The Rubber Duck&trade; &middot; Personal Playlist</span>
-                <span class="cas-side"><small>SIDE</small><b>B</b></span>
-                <span class="cas-by">Type II<br>C-90</span>
-                <span class="cas-list"><span>The Rubber Duck&trade; Personal Playlist</span><span>Plays on Spotify</span></span>
-              </span>
-              <span class="cas-peel"></span>
-              <span class="cas-win"><span class="reel l"><b></b></span><span class="cas-tape"></span><span class="reel r"><b></b></span></span>
-              <span class="cas-foot"><i></i><i></i><i></i><i></i></span>
-            </span>
-        <span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-playlist.webp?v=1" width="560" height="872" alt="" decoding="async"></span>
-      </button>
-      <span class="shelf-ledge" aria-hidden="true">Personal Playlist</span>
-    </div>
-    <div class="band-r"><button class="band-sug" type="button" data-sug>Got an idea for the site? <b>Drop a card in the suggestion box</b><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    <button class="band-sug" type="button" data-sug>Got an idea for the site? <b>Drop a card in the suggestion box</b><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   </div>
 
 </main>
@@ -918,7 +895,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     hidePortal();
   }
   function bind(){
-    document.querySelectorAll('a.spine, a.deck, button.shelf-slot').forEach(function(el){
+    document.querySelectorAll('a.spine, a.deck, button.tcase').forEach(function(el){
       var f=el.querySelector('.spine-face'); if(f)byHost.set(el,f);
       el.addEventListener('mouseenter',function(){placeFace(el)});
       el.addEventListener('focus',function(){placeFace(el)});
@@ -973,8 +950,8 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   }
   function go(host){
     closeFace();
-    /* the tape on the shelf: load it into the deck */
-    if(host.classList.contains('shelf-slot')){if(window.__trdSwapTape)window.__trdSwapTape();return;}
+    /* the tape in its case spine: load it into the deck */
+    if(host.classList.contains('tcase')){if(window.__trdSwapTape)window.__trdSwapTape();return;}
     var href=host.getAttribute('href');
     if(!href)return;
     /* deck may launch player instead of navigating */
@@ -994,7 +971,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     var face=e.target.closest&&(e.target.closest('#trd-face-portal')||e.target.closest('.spine-face'));
     var spine=e.target.closest&&e.target.closest('a.spine');
     var deck=e.target.closest&&e.target.closest('a.deck');
-    var shelfT=e.target.closest&&e.target.closest('button.shelf-slot');
+    var shelfT=e.target.closest&&e.target.closest('button.tcase');
     if(deck&&deck.classList.contains('is-pl')&&!face)deck=null;
     var host=spine||deck||shelfT;
     /* floated faces are on document.body — recover host from face._trdHost */
@@ -1032,32 +1009,29 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 })();
 
 /* two tapes: The Red Pill Album (the site's own player) and The Rubber Duck Personal Playlist (Spotify).
-   The tape not in the deck waits on the shelf; choosing it ejects the deck tape down to the shelf and slides
-   the chosen one up into the deck. Only one source ever plays: the Spotify player is created only when the
-   playlist is loaded, and is removed when the Red Pill tape goes back in. */
+   The tape not in the deck waits in its own case spine on the left; choosing it slides that tape out of its
+   case and into the deck while the deck tape ejects and goes back into the case. Only one source ever plays:
+   the Spotify player is created only when the playlist is loaded, and is removed when the Red Pill tape goes back in. */
 (function(){
-  var deck=document.querySelector('a.deck[data-trd-pod-door]'),slot=document.getElementById('shelfSlot'),shelf=document.getElementById('tapeShelf');
-  if(!deck||!slot||!shelf)return;
-  var well=deck.querySelector('.deck-well'),top=deck.parentNode,band=document.querySelector('.band');
-  var ledge=shelf.querySelector('.shelf-ledge'),kpl=deck.querySelector('.kp-pl');
-  var deckFace=deck.querySelector('.spine-face img'),slotFace=slot.querySelector('.spine-face img');
+  var deck=document.querySelector('a.deck[data-trd-pod-door]'),cs=document.getElementById('tapeCase');
+  if(!deck||!cs)return;
+  var well=deck.querySelector('.deck-well'),hold=cs.querySelector('.tc-hold'),kpl=deck.querySelector('.kp-pl');
+  var deckFace=deck.querySelector('.spine-face img'),csFace=cs.querySelector('.spine-face img');
+  var csCat=cs.querySelector('.sp-cat'),csIc=cs.querySelector('.sp-ic'),csN=cs.querySelector('.sp-n'),csS=cs.querySelector('.sp-s');
   var HREF=deck.getAttribute('href'),LABEL=deck.getAttribute('aria-label');
   var PL_URI='spotify:playlist:4lWQJV4n3mnIvp0y4biUqZ',PL_EMBED='https://open.spotify.com/embed/playlist/4lWQJV4n3mnIvp0y4biUqZ?utm_source=generator';
   var FACE={rp:'/assets/trd/img/cassettes/face-redpill.webp?v=cleanblack1',pl:'/assets/trd/img/cassettes/face-playlist.webp?v=1'};
+  var TAPE={
+    pl:{cls:'tc-pl',cat:'SIDE B',ic:'/assets/trd/img/duck-banner.png',n:'Personal Playlist',s:'The Rubber Duck\u2122 on Spotify',label:'The Rubber Duck Personal Playlist. Load this tape into the deck'},
+    rp:{cls:'tc-rp',cat:'SIDE A',ic:'/assets/trd/img/rpa-pill.webp',n:'The Red Pill Album',s:'22 tracks, plays right here',label:'The Red Pill Album. Load this tape back into the deck'}};
   var mode='rp',busy=false,spot=null,ctl=null,spPlaying=false;
   var pc=window.matchMedia('(min-width:900px) and (min-height:500px)');
   var rm=window.matchMedia('(prefers-reduced-motion: reduce)'),fine=window.matchMedia('(hover:hover) and (pointer:fine)');
-  /* where the shelf lives: under the deck in the bottom band (PC room), or right under the deck (phones/tablets) */
-  function place(){
-    if(pc.matches&&band){if(shelf.parentNode!==band)band.insertBefore(shelf,band.firstChild);
-      shelf.style.setProperty('--shelfx','0px');
-      var br=band.getBoundingClientRect(),dr=deck.getBoundingClientRect(),sr=shelf.getBoundingClientRect(),z=br.width/(band.offsetWidth||br.width)||1;
-      var x=(dr.left+dr.width/2-br.left-sr.width/2)/z; shelf.style.setProperty('--shelfx',Math.max(0,Math.round(x))+'px');
-    }else{shelf.style.removeProperty('--shelfx');if(shelf.previousElementSibling!==deck)top.insertBefore(shelf,deck.nextSibling);}
-  }
-  place();var pt;window.addEventListener('resize',function(){clearTimeout(pt);pt=setTimeout(place,160);});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){setTimeout(place,60);});
-  setTimeout(place,400);
+  /* PC room: the case is exactly as wide as the room spines below it */
+  function fitCase(){var sp=document.querySelector('.stack-a .spine');
+    if(pc.matches&&sp){cs.style.setProperty('--tcw',sp.offsetWidth+'px');}else cs.style.removeProperty('--tcw');}
+  fitCase();var ft;window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fitCase,160);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitCase);
   function podPause(){try{if(window.trdPod&&window.trdPod.state().playing)window.trdPod.pause();}catch(e){}}
   function setPlaying(on){spPlaying=on;deck.classList.toggle('is-playing',on);if(kpl)kpl.textContent=on?'Pause':'Press play';}
   /* Spotify: the official embed, created on demand; the iFrame API (if it loads) lets the deck keys and the
@@ -1071,8 +1045,8 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   }
   var narrow=window.matchMedia('(max-width:899px), (max-height:499px)');
   function spotH(){if(narrow.matches)return 152;var h=well.clientHeight-12;return h>=352?352:152;}
-  /* phones: the deck is too small for the player, so it sits full width right under the tape shelf */
-  function spotHome(el){if(narrow.matches){el.classList.add('is-below');shelf.parentNode.insertBefore(el,shelf.nextSibling);setTimeout(function(){try{el.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'center'});}catch(e){}},350);}else{el.classList.remove('is-below');well.appendChild(el);}}
+  /* phones: the deck is too small for the player, so it sits full width right under the deck */
+  function spotHome(el){if(narrow.matches){el.classList.add('is-below');deck.parentNode.insertBefore(el,deck.nextSibling);setTimeout(function(){try{el.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'center'});}catch(e){}},350);}else{el.classList.remove('is-below');well.appendChild(el);}}
   function mountSpot(){
     if(spot)return; spot=document.createElement('div');spot.className='deck-spot';
     var h=spotH(); spot.style.height=h+'px'; var host=document.createElement('div'); spot.appendChild(host); spotHome(spot);
@@ -1093,53 +1067,66 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
     });
   }
   function unmountSpot(){if(ctl){try{ctl.pause();}catch(e){}try{ctl.destroy();}catch(e){}}ctl=null;if(spot&&spot.parentNode)spot.parentNode.removeChild(spot);spot=null;setPlaying(false);}
-  /* the swap itself: two fixed ghosts fly between the deck and the shelf, then the real tapes trade places */
+  /* the swap itself: two fixed ghosts, one sliding out of the case into the deck, one ejecting from the deck into the case */
   function rect(el){var r=el.getBoundingClientRect();return {l:r.left,t:r.top,w:r.width,h:r.height};}
-  function ghost(el,r){var g=el.cloneNode(true);g.removeAttribute('id');g.classList.add('cas-ghost');
+  function ghost(el,r){var g=el.cloneNode(true);g.removeAttribute('id');g.classList.add('cas-ghost');g.style.visibility='';
     g.style.left=r.l+'px';g.style.top=r.t+'px';g.style.width=r.w+'px';g.style.height=r.h+'px';document.body.appendChild(g);return g;}
+  function paintCase(){var t=TAPE[mode==='rp'?'pl':'rp'];
+    cs.classList.remove('tc-pl','tc-rp');cs.classList.add(t.cls);
+    csCat.textContent=t.cat;csIc.src=t.ic;csN.textContent=t.n;csS.textContent=t.s;cs.setAttribute('aria-label',t.label);
+    if(csFace)csFace.src=mode==='rp'?FACE.pl:FACE.rp;}
   function swap(){
-    if(busy)return; busy=true; window.__trdTapeBusy=true; if(fine.matches)slot.setAttribute('data-noface','');
+    if(busy)return; busy=true; window.__trdTapeBusy=true; if(fine.matches)cs.setAttribute('data-noface','');
     if(window.__trdClearFace)window.__trdClearFace();
-    var toPl=mode==='rp',inDeck=well.querySelector('.cas'),onShelf=slot.querySelector('.cas');
+    var toPl=mode==='rp',inDeck=well.querySelector('.cas'),inCase=hold.querySelector('.cas');
     if(toPl)podPause(); else unmountSpot();
-    var a0=rect(inDeck),b0=rect(onShelf);
-    well.insertBefore(onShelf,well.firstChild); slot.insertBefore(inDeck,slot.firstChild);
+    var a0=rect(inDeck),c=rect(cs);
+    well.insertBefore(inCase,well.firstChild); hold.appendChild(inDeck);
     mode=toPl?'pl':'rp'; paintMode();
-    var a1=rect(inDeck),b1=rect(onShelf);
-    function finish(){busy=false;window.__trdTapeBusy=false;if(mode==='pl')mountSpot();}
-    if(rm.matches||!document.body.animate||!a0.w){finish();return;}
-    var gOut=ghost(inDeck,a0),gIn=ghost(onShelf,b0);inDeck.style.visibility='hidden';onShelf.style.visibility='hidden';
-    var lift='0 0 0 2px #e3a82b,0 30px 50px -10px rgba(0,0,0,.85),0 0 30px rgba(255,200,110,.45)';
-    function kf(r){return {left:r.l+'px',top:r.t+'px',width:r.w+'px',height:r.h+'px'};}
+    var b1=rect(inCase);
+    function finish(){paintCase();cs.classList.remove('is-open');busy=false;window.__trdTapeBusy=false;if(mode==='pl')mountSpot();}
+    if(rm.matches||!document.body.animate||!a0.w||!c.w){finish();return;}
+    var gOut=ghost(inDeck,a0),gIn=ghost(inCase,c);inCase.style.visibility='hidden';
+    cs.classList.add('is-open');
+    var lift='0 0 0 2px #e3a82b,0 30px 50px -10px rgba(0,0,0,.85),0 0 30px rgba(255,200,110,.45)',rest='0 6px 16px rgba(0,0,0,.65)';
+    function kf(r,o,tr,sh,op){return {left:r.l+'px',top:r.t+'px',width:r.w+'px',height:r.h+'px',offset:o,transform:tr,boxShadow:sh,opacity:op};}
     function mix(p,q,k,dy){return {l:p.l+(q.l-p.l)*k,t:p.t+(q.t-p.t)*k+(dy||0),w:p.w+(q.w-p.w)*k,h:p.h+(q.h-p.h)*k};}
-    var D=1250,E='cubic-bezier(.45,0,.2,1)';
-    var o1=Object.assign(kf(a0),{transform:'rotate(0)',boxShadow:'0 6px 16px rgba(0,0,0,.65)',offset:0}),
-        o2=Object.assign(kf(mix(a0,a0,0,-a0.h*0.22)),{transform:'rotate(-2deg)',boxShadow:lift,offset:.22}),
-        o3=Object.assign(kf(mix(a0,a1,.55,-20)),{transform:'rotate(3deg)',boxShadow:lift,offset:.6}),
-        o4=Object.assign(kf(a1),{transform:'rotate(-2.5deg)',boxShadow:'0 6px 16px rgba(0,0,0,.65)',offset:1});
-    var i1=Object.assign(kf(b0),{transform:'rotate(-2.5deg)',boxShadow:'0 6px 16px rgba(0,0,0,.65)',offset:0}),
-        i2=Object.assign(kf(mix(b0,b0,0,-b0.h*0.3)),{transform:'rotate(-5deg)',boxShadow:lift,offset:.3}),
-        i3=Object.assign(kf(mix(b0,b1,.6,-24)),{transform:'rotate(-2deg)',boxShadow:lift,offset:.7}),
-        i4=Object.assign(kf(mix(b1,b1,0,-b1.h*0.06)),{transform:'rotate(0)',boxShadow:lift,offset:.88}),
-        i5=Object.assign(kf(b1),{transform:'rotate(0)',boxShadow:'0 6px 16px rgba(0,0,0,.65)',offset:1});
-    var A=gOut.animate([o1,o2,o3,o4],{duration:D,easing:E,fill:'forwards'});
-    gIn.animate([i1,i2,i3,i4,i5],{duration:D+150,easing:E,fill:'forwards'}).onfinish=function(){
-      gOut.remove();gIn.remove();inDeck.style.visibility='';onShelf.style.visibility='';finish();};
+    /* a cassette-shaped box sitting on the case: as tall as the tape would be if it stood just out of its case */
+    var th=Math.min(c.h*2.1,a0.h*.62),tw=th*1.5737,at={l:c.l+c.w*.5-tw/2,t:c.t+c.h/2-th/2,w:tw,h:th};
+    var up=Math.min(th*.9,90),above={l:at.l,t:at.t-(c.t>a0.t?up:-up*0)-(c.t>a0.t?0:0),w:tw,h:th};
+    if(c.t>a0.t)above.t=at.t-up; else above.t=at.t+up*.2;
+    var D=1350,E='cubic-bezier(.45,0,.2,1)';
+    /* deck tape: eject up, fly over to the case, slide down into it */
+    var A=gOut.animate([
+      kf(a0,0,'rotate(0)',rest,1),
+      kf(mix(a0,a0,0,-a0.h*.24),.2,'rotate(-2deg)',lift,1),
+      kf(mix(a0,above,.6,-24),.52,'rotate(3deg)',lift,1),
+      kf(above,.72,'rotate(0)',lift,1),
+      kf(at,.88,'rotate(0)',rest,1),
+      kf(c,1,'rotate(0)',rest,0)],{duration:D,easing:E,fill:'forwards'});
+    /* case tape: slide up out of its case, then over and down into the deck */
+    gIn.animate([
+      kf(c,0,'rotate(0)',rest,0),
+      kf(at,.14,'rotate(0)',rest,1),
+      kf(above,.32,'rotate(-3deg)',lift,1),
+      kf(mix(above,b1,.6,-28),.7,'rotate(-1.5deg)',lift,1),
+      kf(mix(b1,b1,0,-b1.h*.06),.88,'rotate(0)',lift,1),
+      kf(b1,1,'rotate(0)',rest,1)],{duration:D+150,easing:E,fill:'forwards'}).onfinish=function(){
+      gOut.remove();gIn.remove();inCase.style.visibility='';finish();
+      cs.classList.remove('is-take');void cs.offsetWidth;cs.classList.add('is-take');setTimeout(function(){cs.classList.remove('is-take');},600);};
     window.__trdSwapAnim=A;
   }
   function paintMode(){
     var pl=mode==='pl';
     deck.classList.toggle('is-pl',pl);
     if(pl){deck.removeAttribute('href');deck.classList.remove('is-live','is-playing');
-      deck.setAttribute('aria-label','The Rubber Duck Personal Playlist is in the deck. The Spotify player is in the tape window');
-      slot.setAttribute('aria-label','The Red Pill Album. Load this tape back into the deck');ledge.textContent='Red Pill Album';}
+      deck.setAttribute('aria-label','The Rubber Duck Personal Playlist is in the deck. The Spotify player is in the tape window');}
     else{deck.setAttribute('href',HREF);deck.setAttribute('aria-label',LABEL);
-      slot.setAttribute('aria-label','The Rubber Duck Personal Playlist. Load this tape into the deck');ledge.textContent='Personal Playlist';
       try{document.dispatchEvent(new CustomEvent('trdpod:repaint'));}catch(e){}}
-    if(deckFace)deckFace.src=pl?FACE.pl:FACE.rp; if(slotFace)slotFace.src=pl?FACE.rp:FACE.pl;
+    if(deckFace)deckFace.src=pl?FACE.pl:FACE.rp;
     deck.setAttribute('data-tape',mode);
   }
-  slot.addEventListener('click',function(e){if(e.defaultPrevented)return;e.preventDefault();
+  cs.addEventListener('click',function(e){if(e.defaultPrevented)return;e.preventDefault();
     if(window.trdTrack)window.trdTrack('click/tape-swap','Homepage: load '+(mode==='rp'?'Personal Playlist':'Red Pill Album'));swap();});
   /* deck keys while the playlist is in: play/pause and stop drive the Spotify player */
   deck.addEventListener('click',function(e){
