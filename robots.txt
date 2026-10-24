@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
+Disallow: /workers/
 
 Sitemap: https://therubberduck.net/sitemap.xml

@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://therubberduck.net/</loc><lastmod>2026-10-22</lastmod></url>
-  <url><loc>https://therubberduck.net/ledger.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://therubberduck.net/Qdrops/</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://therubberduck.net/videos.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://therubberduck.net/listening-room.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://therubberduck.net/memes.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://therubberduck.net/pdfs.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://therubberduck.net/album.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://therubberduck.net/merch.html</loc><lastmod>2026-10-22</lastmod></url>
-  <url><loc>https://therubberduck.net/process.html</loc><lastmod>2026-10-21</lastmod></url>
-  <url><loc>https://therubberduck.net/x/</loc><lastmod>2026-10-21</lastmod></url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap><loc>https://therubberduck.net/sitemaps/pages.xml</loc><lastmod>2026-10-23</lastmod></sitemap>
+  <sitemap><loc>https://therubberduck.net/sitemaps/shop.xml</loc><lastmod>2026-10-23</lastmod></sitemap>
+</sitemapindex>
