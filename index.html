@@ -484,6 +484,13 @@ a.trd-ambook:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-r
   .spine{height:clamp(54px,7.3vh,60px)}
   .sp-ic{width:36px;height:36px}
 }
+/* very short laptop screens (stage under 516px, i.e. under ~720px tall, e.g. 1366x657 with browser bars):
+   the script below adds html.trd-rz and --rz = innerHeight / (header + 516px). The header, the book band and
+   the room then lay out exactly as at 720 tall and scale down together, so nothing is crushed or overlaps. */
+@media (min-width:900px) and (min-height:500px){
+  html.trd-rz body > .banner,html.trd-rz body > #trd-book,html.trd-rz body > #trd-ambook,html.trd-rz .stage{zoom:var(--rz,1)}
+  html.trd-rz .stage{max-width:calc(clamp(1240px,84vw,1640px) / var(--rz,1))}
+}
 
 /* ============ PHONES ============
    Stage padding-bottom clears the fixed duck + suggestion box when you scroll to the shop.
@@ -686,6 +693,16 @@ a.trd-ambook:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-r
 /* desktop: size the deck column so its dark bay is exactly cassette-shaped (100.4 x 63.8), filled edge to edge */
 (function(){
   var mq=window.matchMedia('(min-width:900px) and (min-height:500px)');
+  var ROOM_H=516; /* stage height at 1280x720, the shortest screen the room is laid out for unscaled */
+  function fitRoom(){var de=document.documentElement,stage=document.querySelector('.stage');
+    de.classList.remove('trd-rz');de.style.removeProperty('--rz');
+    if(!stage||!mq.matches)return;
+    var H=window.innerHeight,z=1;
+    for(var i=0;i<3;i++){ /* the header can unwrap once scaled, so settle in a couple of passes */
+      var sh=stage.getBoundingClientRect().height/z, head=H/z-sh, nz=Math.min(1,Math.floor(H/(head+ROOM_H)*1000)/1000);
+      if(i===0&&sh>=ROOM_H-0.5)return; if(Math.abs(nz-z)<0.002)break; z=nz;
+      de.style.setProperty('--rz',String(z));de.classList.add('trd-rz');}
+  }
   function size(){var top=document.querySelector('.top'),deck=document.querySelector('.deck'),well=deck&&deck.querySelector('.deck-well');
     if(!top||!well)return; if(!mq.matches){top.style.removeProperty('--deckw');return;}
     if(top.hasAttribute('data-deckfit')){deck.style.removeProperty('width');deck.style.removeProperty('justify-self');top.removeAttribute('data-deckfit');} /* re-measure unscaled so a taller window grows it back */
@@ -705,9 +722,11 @@ a.trd-ambook:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-r
       deck.style.width=Math.max(0,fit)+'px';deck.style.justifySelf='center';top.setAttribute('data-deckfit','');}
   }
   /* on resize, start over from the unsized column (same two passes as a fresh load), so the deck matches a fresh load at the new size */
-  function resize(){var top=document.querySelector('.top');if(top)top.style.removeProperty('--deckw');size();size();}
-  size(); var t; window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(resize,100);});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
+  function resize(){var top=document.querySelector('.top'),deck=document.querySelector('.deck');if(top){top.style.removeProperty('--deckw');top.removeAttribute('data-deckfit');}
+    if(deck){deck.style.removeProperty('width');deck.style.removeProperty('justify-self');}fitRoom();size();size();}
+  fitRoom(); size(); var t; window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(resize,100);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){ /* header height depends on the web fonts */
+    var de=document.documentElement,was=de.classList.contains('trd-rz');fitRoom();if(was||de.classList.contains('trd-rz'))resize();else size();});
 })();
 /* the suggestion line in the desktop band opens the same card as the corner box */
 (function(){var b=document.querySelector('[data-sug]');if(b)b.addEventListener('click',function(e){if(window.trdSuggest)window.trdSuggest.open(e);});})();
