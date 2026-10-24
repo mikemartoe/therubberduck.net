@@ -502,6 +502,22 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .deck-spot.is-on{opacity:1}
 .deck-spot.is-below{position:relative;left:auto;right:auto;top:auto;transform:none;width:100%;flex:none;margin:-6px 0 0;box-shadow:0 10px 24px rgba(0,0,0,.45)}
 .deck-spot iframe{display:block;width:100%;border:0}
+/* v2d: a direct link to the playlist, part of the Spotify block (only exists while the playlist tape is in) */
+.deck-splink{display:flex;align-items:center;justify-content:center;gap:8px;height:30px;padding:0 12px;box-sizing:border-box;
+  background:linear-gradient(#2a1d12,#140e09);border-top:1px solid rgba(227,168,43,.55);color:#f6e3b4;text-decoration:none;
+  font:600 12.5px/1 'TRD Oswald','Roboto',system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;cursor:pointer;
+  transition:color .15s ease,background .15s ease}
+.deck-splink .sl-sp{width:17px;height:17px;flex:none;color:#1ed760}
+.deck-splink .sl-go{width:12px;height:12px;flex:none;color:#e3a82b;transition:transform .15s ease}
+.deck-splink span{overflow:hidden;text-overflow:ellipsis}
+.deck-splink:hover,.deck-splink:focus-visible{color:#ffd77a;background:linear-gradient(#3a2814,#1c130a)}
+.deck-splink:hover .sl-go{transform:translate(2px,-2px)}
+.deck-splink:focus-visible{outline:2px solid #e3a82b;outline-offset:-3px}
+.deck-spot.is-below .deck-splink{height:42px;font-size:14px;gap:10px}
+.deck-spot.is-below .deck-splink .sl-sp{width:20px;height:20px}
+.deck-splink .sl-s{display:none}
+@container (max-width:300px){.deck-well .deck-splink{gap:6px;padding:0 8px;font-size:12px;letter-spacing:.04em}.deck-well .deck-splink .sl-l{display:none}.deck-well .deck-splink .sl-s{display:inline}}
+@media (prefers-reduced-motion:reduce){.deck-splink,.deck-splink .sl-go{transition:none}.deck-splink:hover .sl-go{transform:none}}
 .deck-well{position:relative}
 
 /* header: book + duck on the left, wordmark in the middle, two equal signs on the right */
@@ -1081,19 +1097,27 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     sc.onerror=function(){if(!done){done=true;clearTimeout(t);cb(null);}};document.head.appendChild(sc);
   }
   var narrow=window.matchMedia('(max-width:899px), (max-height:499px)');
-  function spotH(){if(narrow.matches)return 152;var h=well.clientHeight-12;return h>=352?352:152;}
+  var PL_OPEN='https://open.spotify.com/playlist/4lWQJV4n3mnIvp0y4biUqZ',SL_BAR=30;
+  /* in the deck window the player and the playlist link share the tape window: the compact 80px player on small screens */
+  function spotH(){if(narrow.matches)return 152;var h=well.clientHeight-12-SL_BAR;return h>=352?352:(h>=152?152:80);}
+  function spotLink(){var a=document.createElement('a');a.className='deck-splink';a.href=PL_OPEN;a.target='_blank';a.rel='noopener';
+    a.setAttribute('aria-label','Open the full playlist on Spotify (opens in a new tab)');
+    a.innerHTML='<svg class="sl-sp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>'+
+      '<span class="sl-l">Open the full playlist on Spotify</span><span class="sl-s">Full playlist on Spotify</span><svg class="sl-go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14 3h7v7h-2.5V7.3l-8.6 8.6-1.8-1.8 8.6-8.6H14zM5 5h6v2.5H7.5v9h9V13H19v6H5z"/></svg>';
+    a.addEventListener('click',function(e){e.stopPropagation();if(window.trdTrack)window.trdTrack('click/playlist-spotify','Homepage: open the full playlist on Spotify');});
+    return a;}
   /* phones: the deck is too small for the player, so it sits full width right under the deck */
   function spotHome(el){if(narrow.matches){el.classList.add('is-below');deck.parentNode.insertBefore(el,deck.nextSibling);setTimeout(function(){try{el.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'center'});}catch(e){}},350);}else{el.classList.remove('is-below');well.appendChild(el);}}
   function mountSpot(){
     if(spot)return; spot=document.createElement('div');spot.className='deck-spot';
     plReset();loadList();if(POD)window.trdPod.useSource(PL);
-    var h=spotH(); spot.style.height=h+'px'; var host=document.createElement('div'); spot.appendChild(host); spotHome(spot);
+    var h=spotH(); var host=document.createElement('div'); host.style.height=h+'px'; spot.appendChild(host); spot.appendChild(spotLink()); spotHome(spot);
     var mine=spot; setTimeout(function(){mine.classList.add('is-on');},3000);
     loadApi(function(api){
       if(spot!==mine)return;
-      function plain(){if(spot!==mine)return;spot.innerHTML='';var f=document.createElement('iframe');
+      function plain(){if(spot!==mine)return;var old=spot.querySelector('iframe')||host;var f=document.createElement('iframe');
         f.src=PL_EMBED;f.width='100%';f.height=String(h);f.loading='lazy';f.title='The Rubber Duck Personal Playlist on Spotify';
-        f.allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';spot.appendChild(f);
+        f.allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';if(old&&old.parentNode===spot)spot.replaceChild(f,old);else spot.insertBefore(f,spot.firstChild);
         f.addEventListener('load',function(){mine.classList.add('is-on');});setTimeout(function(){mine.classList.add('is-on');},1500);}
       if(!api)return plain();
       try{api.createController(host,{uri:PL_URI,width:'100%',height:h},function(c){
