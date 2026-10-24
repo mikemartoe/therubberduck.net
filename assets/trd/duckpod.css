@@ -100,6 +100,7 @@
 .tp-list li.tp-cur span::before{content:"";display:inline-block;width:0;height:0;margin-right:4px;border-left:5px solid currentColor;border-top:4px solid transparent;border-bottom:4px solid transparent;vertical-align:0}
 .tp-list li.tp-sel{color:#fff;background:linear-gradient(#ff5a5e,#e10600 50%,#c00500)}
 .tp-list li.tp-sel em{color:#ffe1e1}
+.tp-list li.tp-off{opacity:.45}
 
 /* ---------- click wheel ---------- */
 .tp-wheel{position:relative;z-index:1;width:136px;height:136px;margin:14px auto 0;border-radius:50%;touch-action:none;

@@ -607,8 +607,8 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 <script src="/assets/trd/suggest.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
-<script src="/assets/trd/duckpod.js" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/duckpod.css?v=2c" data-trd-keep>
+<script src="/assets/trd/duckpod.js?v=2c" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="Welcome, curious minds. The Rubber Duck&#x27;s open archive of the Q era: every Q drop, videos, X Spaces, PDFs, memes and 61,225 X posts, plus TRD Collectibles and the book anon mission.">
@@ -1032,7 +1032,44 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     if(pc.matches&&sp){cs.style.setProperty('--tcw',sp.offsetWidth+'px');}else cs.style.removeProperty('--tcw');}
   fitCase();var ft;window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fitCase,160);});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitCase);
-  function podPause(){try{if(window.trdPod&&window.trdPod.state().playing)window.trdPod.pause();}catch(e){}}
+  function podPause(){try{var a=window.trdPod&&window.trdPod.audio;if(a&&!a.paused)a.pause();}catch(e){}}
+  /* The playlist tape turns into the same Duck Pod as the album: the pod shows this source (cover, track list,
+     now playing, progress) and its wheel drives the Spotify player through the iFrame API. Track names come
+     from a snapshot of the playlist (/assets/trd/playlist-trd.json); the Spotify player stays the sound source. */
+  var POD=!!(window.trdPod&&window.trdPod.useSource),plList=null,queue=false,nearEnd=false,armed=false,wantPlay=false;
+  function fmtLen(n){n=Math.max(0,Math.round(n||0));return Math.floor(n/60)+':'+('0'+n%60).slice(-2);}
+  var PL={id:'playlist',name:'Personal Playlist',artist:'The Rubber Duck',cover:'/assets/trd/img/playlist-cover-192.jpg',
+    intro:'Play the Playlist',sub:'The Rubber Duck on Spotify',tracks:[],i:0,playing:false,started:false,t:0,d:0,
+    play:function(){podPause();if(!ctl){wantPlay=true;nudgeSpot();return;}try{ctl.resume();}catch(e){}},
+    pause:function(){wantPlay=false;if(ctl){try{ctl.pause();}catch(e){}}},
+    toggle:function(){if(PL.playing)PL.pause();else PL.play();},
+    playIndex:function(i){var t=PL.tracks[i];if(!t||!t.uri)return PL.play();if(t.off)return;podPause();PL.i=i;PL.started=true;PL.t=0;PL.d=0;
+      if(!ctl){wantPlay=true;nudgeSpot();podRefresh();return;}
+      queue=true;nearEnd=false;armed=false;try{ctl.loadUri(t.uri);}catch(e){}
+      var tries=0;(function kick(){try{ctl.play();}catch(e){}if(++tries<3)setTimeout(function(){if(!PL.playing&&queue)kick();},700);})();podRefresh();},
+    next:function(){var n=PL.tracks.length;if(!n)return;for(var k=1;k<=n;k++){var j=(PL.i+k)%n;if(!PL.tracks[j].off)return PL.playIndex(j);}},
+    prev:function(){var n=PL.tracks.length;if(!n)return;if(PL.t>3&&ctl){try{ctl.restart();}catch(e){}return;}
+      for(var k=1;k<=n;k++){var j=(PL.i-k+n)%n;if(!PL.tracks[j].off)return PL.playIndex(j);}}};
+  function podRefresh(){if(POD){try{window.trdPod.refresh();}catch(e){}}}
+  function nudgeSpot(){if(spot&&narrow.matches){try{spot.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'center'});}catch(e){}}}
+  function loadList(){
+    if(plList){PL.tracks=plList;return;}
+    fetch('/assets/trd/playlist-trd.json',{credentials:'same-origin'}).then(function(r){return r.ok?r.json():null;}).then(function(j){
+      if(!j||!j.tracks)return;
+      plList=j.tracks.map(function(t){return {title:t.t,artist:t.a,uri:'spotify:track:'+t.u,secs:t.s,len:fmtLen(t.s),off:!t.p};});
+      if(mode==='pl'){PL.tracks=plList;if(POD)window.trdPod.useSource(PL);}
+    }).catch(function(){});
+  }
+  function plUpdate(d){
+    var was=PL.playing&&PL.t>PL.d-2;PL.playing=!d.isPaused;PL.t=(d.position||0)/1000;if(d.duration>0)PL.d=d.duration/1000;
+    if(d.playingURI&&PL.tracks.length){for(var k=0;k<PL.tracks.length;k++){if(PL.tracks[k].uri===d.playingURI){PL.i=k;break;}}}
+    if(PL.playing||PL.t>0)PL.started=true;
+    /* a single track loaded from the pod ends on its own: carry on down the list, like the album does */
+    if(PL.d>0&&PL.t>0.5&&PL.t<PL.d-2)armed=true;
+    if(queue&&armed&&!nearEnd&&PL.d>0&&(PL.t>=PL.d-0.4||(d.isPaused&&PL.t===0&&was))){nearEnd=true;setTimeout(function(){if(queue&&nearEnd)PL.next();},350);}
+    podRefresh();
+  }
+  function plReset(){PL.i=0;PL.playing=false;PL.started=false;PL.t=0;PL.d=0;queue=false;nearEnd=false;armed=false;wantPlay=false;}
   function setPlaying(on){spPlaying=on;deck.classList.toggle('is-playing',on);if(kpl)kpl.textContent=on?'Pause':'Press play';}
   /* Spotify: the official embed, created on demand; the iFrame API (if it loads) lets the deck keys and the
      site player pause it. Without the API the plain embed is used and is removed on swap. */
@@ -1049,6 +1086,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   function spotHome(el){if(narrow.matches){el.classList.add('is-below');deck.parentNode.insertBefore(el,deck.nextSibling);setTimeout(function(){try{el.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'center'});}catch(e){}},350);}else{el.classList.remove('is-below');well.appendChild(el);}}
   function mountSpot(){
     if(spot)return; spot=document.createElement('div');spot.className='deck-spot';
+    plReset();loadList();if(POD)window.trdPod.useSource(PL);
     var h=spotH(); spot.style.height=h+'px'; var host=document.createElement('div'); spot.appendChild(host); spotHome(spot);
     var mine=spot; setTimeout(function(){mine.classList.add('is-on');},3000);
     loadApi(function(api){
@@ -1061,12 +1099,13 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
       try{api.createController(host,{uri:PL_URI,width:'100%',height:h},function(c){
         if(spot!==mine){try{c.destroy();}catch(e){}return;}
         ctl=c;var f=spot.querySelector('iframe');if(f)f.title='The Rubber Duck Personal Playlist on Spotify';
-        c.addListener('ready',function(){mine.classList.add('is-on');});setTimeout(function(){mine.classList.add('is-on');},2500);
-        c.addListener('playback_update',function(e){var d=e&&e.data;if(!d)return;var on=!d.isPaused;setPlaying(on);if(on)podPause();});
+        c.addListener('ready',function(){mine.classList.add('is-on');if(wantPlay){wantPlay=false;if(PL.started&&PL.tracks[PL.i])PL.playIndex(PL.i);else PL.play();}});setTimeout(function(){mine.classList.add('is-on');},2500);
+        c.addListener('playback_update',function(e){var d=e&&e.data;if(!d)return;var on=!d.isPaused;setPlaying(on);if(on)podPause();plUpdate(d);});
       });}catch(e){plain();}
     });
   }
-  function unmountSpot(){if(ctl){try{ctl.pause();}catch(e){}try{ctl.destroy();}catch(e){}}ctl=null;if(spot&&spot.parentNode)spot.parentNode.removeChild(spot);spot=null;setPlaying(false);}
+  function unmountSpot(){if(ctl){try{ctl.pause();}catch(e){}try{ctl.destroy();}catch(e){}}ctl=null;if(spot&&spot.parentNode)spot.parentNode.removeChild(spot);spot=null;setPlaying(false);
+    plReset();if(POD)window.trdPod.dropSource(PL);}
   /* the swap itself: two fixed ghosts, one sliding out of the case into the deck, one ejecting from the deck into the case */
   function rect(el){var r=el.getBoundingClientRect();return {l:r.left,t:r.top,w:r.width,h:r.height};}
   function ghost(el,r){var g=el.cloneNode(true);g.removeAttribute('id');g.classList.add('cas-ghost');g.style.visibility='';
@@ -1131,12 +1170,12 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   /* deck keys while the playlist is in: play/pause and stop drive the Spotify player */
   deck.addEventListener('click',function(e){
     if(mode!=='pl')return; e.preventDefault();
-    if(!ctl)return; var k=e.target.closest&&e.target.closest('.key'); if(!k)return;
-    if(k.classList.contains('key-play')){try{ctl.togglePlay();}catch(x){}}
-    else if(k===deck.querySelector('.deck-keys .key:last-child')){try{ctl.pause();}catch(x){}}
+    var k=e.target.closest&&e.target.closest('.key'); if(!k)return; if(!ctl&&!k.classList.contains('key-play'))return;
+    if(k.classList.contains('key-play')){PL.toggle();}
+    else if(k===deck.querySelector('.deck-keys .key:last-child')){PL.pause();}
   });
   /* the site player starts while the playlist is loaded: pause Spotify (or, without the API, put the Red Pill tape back) */
-  document.addEventListener('trdpod:state',function(e){var st=e.detail;if(mode!=='pl'||!st||!st.playing)return;
+  document.addEventListener('trdpod:state',function(e){var st=e.detail;if(mode!=='pl'||!st||!st.playing||(st.src&&st.src!=='album'))return;
     if(ctl){try{ctl.pause();}catch(x){}setPlaying(false);}else if(spot){swap();}});
   window.__trdSwapTape=swap; window.__trdTapeMode=function(){return mode;};
 })();

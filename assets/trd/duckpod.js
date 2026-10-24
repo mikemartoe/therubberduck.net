@@ -107,6 +107,8 @@
   });
   function leavePage() {
     epoch++;
+    if (X) { var gone = X; X = null; try { gone.pause(); } catch (e) {} }
+    revealed = false;
     tracked.forEach(function (l) { try { remL.call(l[0], l[1], l[2], l[3]); } catch (e) {} });
     tracked = [];
     intervals.forEach(function (id) { _clearInterval(id); }); intervals = [];
@@ -183,6 +185,44 @@
     playIndex2(S.i - 1, !audio.paused || !S.started);
   }
   function playIndex2(i, autoplay) { S.started = true; loadTrack(i, 0); if (autoplay) play(); else render(); save(); }
+
+  /* ================= a page can lend the pod another source =================
+     The homepage Personal Playlist tape (Spotify) plays through the same pod: the page hands over an
+     object with tracks, state and play/pause/next/prev/playIndex/seek, and the pod shows and drives it
+     with the same skin. Only one source is ever live; the album pauses while another source is in. */
+  var X = null, revealed = false;
+  var ALB = { id: 'album', name: ALBUM, artist: ARTIST, cover: COVER, intro: 'Play The Red Pill Album', sub: '22 tracks by The Rubber Duck' };
+  function src() { return X || ALB; }
+  function srcTracks() { return X ? (X.tracks && X.tracks.length ? X.tracks : [{ title: X.name, len: '', secs: 30 }]) : TRACKS; }
+  function srcI() { var n = srcTracks().length; return X ? Math.max(0, Math.min(n - 1, X.i || 0)) : S.i; }
+  function srcPlaying() { return X ? !!X.playing : S.playing; }
+  function srcStarted() { return X ? !!X.started : S.started; }
+  function uPlay() { if (X) { X.play(); return; } play(); }
+  function uPause() { if (X) { X.pause(); return; } pause(); }
+  function uToggle() { if (X) { X.toggle(); return; } toggle(); }
+  function uNext() { if (X) { X.next(); return; } next(); }
+  function uPrev() { if (X) { X.prev(); return; } prev(); }
+  function uPlayIndex(i) { if (X) { X.playIndex(i); return; } playIndex(i); }
+  function uToggleIndex(i) { if (X) { if (X.started && i === X.i) X.toggle(); else X.playIndex(i); return; } toggleIndex(i); }
+  function useSource(x) {
+    if (!x) return;
+    var fresh = X !== x; X = x; revealed = true;
+    if (!audio.paused) audio.pause();
+    if (!root) return;
+    var hidden = root.classList.contains('tp-doorhide');
+    paintSource(fresh); render();
+    if (hidden && !root.classList.contains('tp-doorhide')) reveal();
+  }
+  function dropSource(x) {
+    if (!X || (x && x !== X)) return;
+    X = null; if (root) { paintSource(true); render(); }
+  }
+  function reveal() {
+    applyPos();
+    var rm = W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (rm || !dock.animate) return;
+    dock.animate([{ opacity: 0, transform: 'translateY(14px) scale(.96)' }, { opacity: 1, transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  }
   on(audio, 'play', function () { S.playing = true; render(); save(); countPlay(); });
   /* one GoatCounter event each time a track starts from the top (not on pause/resume or a resumed reload) */
   function countPlay() {
@@ -229,10 +269,10 @@
   }
   if ('mediaSession' in navigator) {
     try {
-      navigator.mediaSession.setActionHandler('play', play);
-      navigator.mediaSession.setActionHandler('pause', pause);
-      navigator.mediaSession.setActionHandler('previoustrack', prev);
-      navigator.mediaSession.setActionHandler('nexttrack', next);
+      navigator.mediaSession.setActionHandler('play', function () { uPlay(); });
+      navigator.mediaSession.setActionHandler('pause', function () { uPause(); });
+      navigator.mediaSession.setActionHandler('previoustrack', function () { uPrev(); });
+      navigator.mediaSession.setActionHandler('nexttrack', function () { uNext(); });
     } catch (e) {}
   }
 
@@ -260,7 +300,7 @@
             '<div class="tp-view tp-v-now">' +
               '<div class="tp-count"></div>' +
               '<div class="tp-np"><img class="tp-cover" src="' + COVER + '" alt="" width="52" height="52">' +
-                '<div class="tp-meta"><div class="tp-mq tp-title"><span></span></div><div class="tp-artist">The Rubber Duck</div><div class="tp-album">' + ALBUM + '</div></div></div>' +
+                '<div class="tp-meta"><div class="tp-mq tp-title"><span></span></div><div class="tp-artist">The Rubber Duck</div><div class="tp-album tp-album-n">' + ALBUM + '</div></div></div>' +
               '<div class="tp-progrow"><div class="tp-prog-wrap"><div class="tp-prog"><i></i><span class="tp-knob"></span></div>' +
                 '<div class="tp-times"><span class="tp-el">0:00</span><span class="tp-rem">-0:00</span></div></div>' +
                 '<div class="tp-volrow">' + svg(I.volLo) + '<div class="tp-prog"><i class="tp-voli"></i></div>' + svg(I.volHi) + '</div></div>' +
@@ -300,7 +340,9 @@
       st: q('.tp-st'), hdr: q('.tp-hdr-t'), count: q('.tp-count'), titles: qa('.tp-title'), titleSpans: qa('.tp-title span'),
       fill: q('.tp-prog-wrap .tp-prog i'), knob: q('.tp-knob'), el: q('.tp-el'), rem: q('.tp-rem'), voli: q('.tp-voli'),
       list: q('.tp-list'), lis: qa('.tp-list li'), clkv: q('.tp-clkv'), wheel: q('.tp-wheel'), center: q('.tp-center'),
-      miniBtn: q('.tp-mini-btn'), sAlbum: q('.tp-lcd .tp-album'), sfill: q('.tp-sprog i'), lcd: q('.tp-lcd')
+      miniBtn: q('.tp-mini-btn'), sAlbum: q('.tp-lcd .tp-album'), sfill: q('.tp-sprog i'), lcd: q('.tp-lcd'),
+      covers: qa('.tp-cover'), artist: q('.tp-v-now .tp-artist'), albumN: q('.tp-album-n'), introT: q('.tp-intro-t'), introS: q('.tp-intro-s'),
+      device: q('.tp-device'), strip: q('.tp-strip'), pillB: q('.tp-pill')
     };
     wire();
     D.body.appendChild(root);
@@ -308,6 +350,28 @@
     render();
     applyPos();
     maybeHint();
+  }
+  /* the skin stays; the screen, list and labels follow the source */
+  function listHTML(tr) {
+    return tr.map(function (t, i) { return '<li data-i="' + i + '" role="option"' + (t.off ? ' class="tp-off"' : '') + '><span>' + esc(t.title) + '</span><em>' + esc(t.len || '') + '</em></li>'; }).join('') +
+      '<li data-i="clicker" role="option"><span class="tp-clk">Clicker</span><em class="tp-clkv"></em></li>';
+  }
+  var paintedFor = null, paintedLen = -1;
+  function paintSource(force) {
+    var s = src(), tr = srcTracks();
+    if (!force && paintedFor === s && paintedLen === tr.length) return;
+    paintedFor = s; paintedLen = tr.length;
+    root.setAttribute('data-src', s.id);
+    els.list.innerHTML = listHTML(tr);
+    els.lis = [].slice.call(els.list.querySelectorAll('li')); els.clkv = els.list.querySelector('.tp-clkv');
+    els.list.setAttribute('aria-label', X ? s.name + ' tracks' : 'Tracks');
+    els.covers.forEach(function (im) { if (im.getAttribute('src') !== s.cover) im.setAttribute('src', s.cover); });
+    els.albumN.textContent = s.name; els.introT.textContent = s.intro; els.introS.textContent = s.sub;
+    els.device.setAttribute('aria-label', 'The Duck Pod: ' + s.name + ' player');
+    els.strip.setAttribute('aria-label', s.name + ' player');
+    els.pillB.setAttribute('aria-label', 'Open the ' + s.name + ' player');
+    lastTitle = '';
+    if (screen === 'menu') setScreen(srcStarted() ? 'now' : 'intro');
   }
   function attach() {
     if (!root) return;
@@ -322,13 +386,13 @@
   function setScreen(s) {
     screen = s; root.setAttribute('data-screen', s);
     scrub = false; root.classList.remove('tp-scrub');
-    if (s === 'menu') { sel = S.i; drawMenu(); }
+    if (s === 'menu') { sel = srcI(); drawMenu(); }
     renderHeader();
   }
 
   function renderHeader() {
-    els.hdr.textContent = screen === 'menu' ? ALBUM : (screen === 'intro' ? 'The Duck Pod' : 'Now Playing');
-    els.st.innerHTML = S.playing ? svg(I.play) : (S.started ? svg(I.pause) : '');
+    els.hdr.textContent = screen === 'menu' ? src().name : (screen === 'intro' ? 'The Duck Pod' : 'Now Playing');
+    els.st.innerHTML = srcPlaying() ? svg(I.play) : (srcStarted() ? svg(I.pause) : '');
   }
   function marquee() {
     els.titles.forEach(function (box) {
@@ -344,35 +408,39 @@
   var lastTitle = '';
   function render() {
     if (!root) return;
-    var t = TRACKS[S.i];
-    root.classList.toggle('tp-playing', S.playing);
-    if (!S.started && screen !== 'menu') setScreen('intro');
-    else if (S.started && screen === 'intro') setScreen('now');
+    paintSource(false);
+    var so = src(), tr = srcTracks(), ci = srcI(), n = tr.length, t = tr[ci], playing = srcPlaying(), started = srcStarted();
+    root.classList.toggle('tp-playing', playing);
+    if (!started && screen !== 'menu') setScreen('intro');
+    else if (started && screen === 'intro') setScreen('now');
     renderHeader();
-    var title = S.started ? t.title : 'Play The Red Pill Album';
+    var title = started ? t.title : so.intro;
     if (title !== lastTitle) { lastTitle = title; els.titleSpans.forEach(function (s) { s.textContent = title; }); _raf(marquee); }
-    els.count.textContent = (S.i + 1) + ' of ' + N;
-    els.sAlbum.textContent = S.started ? ALBUM + '  \u00b7  ' + (S.i + 1) + ' of ' + N : '22 tracks by The Rubber Duck';
-    els.miniBtn.innerHTML = svg(S.playing ? I.pause : I.play);
-    els.miniBtn.setAttribute('aria-label', S.playing ? 'Pause' : (S.started ? 'Play ' + t.title : 'Play The Red Pill Album'));
-    els.lis.forEach(function (li, i) { li.classList.toggle('tp-cur', S.started && i === S.i); });
+    els.count.textContent = (ci + 1) + ' of ' + n;
+    els.artist.textContent = X ? (t.artist || so.artist) : ARTIST;
+    els.sAlbum.textContent = started ? so.name + '  \u00b7  ' + (ci + 1) + ' of ' + n : so.sub;
+    els.miniBtn.innerHTML = svg(playing ? I.pause : I.play);
+    els.miniBtn.setAttribute('aria-label', playing ? 'Pause' : (started ? 'Play ' + t.title : so.intro));
+    els.lis.forEach(function (li, i) { li.classList.toggle('tp-cur', started && i === ci); });
     els.clkv.textContent = S.clicker ? 'On' : 'Off';
     syncDoor();
     tick();
     emit();
   }
-  function dur() { return isFinite(audio.duration) && audio.duration > 0 ? audio.duration : TRACKS[S.i].secs; }
-  function cur() { return pendingSeek != null ? pendingSeek : (audio.getAttribute('src') ? audio.currentTime : S.t); }
+  function dur() { if (X) return X.d > 0 ? X.d : (srcTracks()[srcI()].secs || 30); return isFinite(audio.duration) && audio.duration > 0 ? audio.duration : TRACKS[S.i].secs; }
+  function cur() { if (X) return Math.max(0, X.t || 0); return pendingSeek != null ? pendingSeek : (audio.getAttribute('src') ? audio.currentTime : S.t); }
   function tick() {
     if (!root) return;
     var d = dur(), c = cur(), pct = Math.min(100, (c / d) * 100) + '%';
-    els.fill.style.width = pct; els.knob.style.left = pct; els.sfill.style.width = S.started ? pct : '0%';
+    els.fill.style.width = pct; els.knob.style.left = pct; els.sfill.style.width = srcStarted() ? pct : '0%';
     els.el.textContent = fmt(c); els.rem.textContent = '-' + fmt(d - c);
     emitSoon();
   }
   var emitQueued = false;
   function emitSoon() { if (emitQueued) return; emitQueued = true; _raf(function () { emitQueued = false; emit(); }); }
-  function state() { return { i: S.i, title: TRACKS[S.i].title, playing: S.playing, started: S.started, t: cur(), d: dur(), view: S.view }; }
+  function albumState() { return { src: 'album', i: S.i, title: TRACKS[S.i].title, playing: S.playing, started: S.started,
+    t: pendingSeek != null ? pendingSeek : (audio.getAttribute('src') ? audio.currentTime : S.t), d: isFinite(audio.duration) && audio.duration > 0 ? audio.duration : TRACKS[S.i].secs, view: S.view }; }
+  function state() { if (!X) return albumState(); var ci = srcI(); return { src: X.id, i: ci, title: srcTracks()[ci].title, playing: srcPlaying(), started: srcStarted(), t: cur(), d: dur(), view: S.view }; }
   function emit() { try { D.dispatchEvent(new CustomEvent('trdpod:state', { detail: state() })); } catch (e) {} }
 
   function drawMenu() {
@@ -389,11 +457,13 @@
   function notch(dir) {
     clickSound('tick');
     if (screen === 'menu') { sel = Math.max(0, Math.min(els.lis.length - 1, sel + dir)); drawMenu(); return; }
-    if (scrub && S.started) {
+    if (scrub && srcStarted()) {
       var d = dur(), t = Math.max(0, Math.min(d - 0.5, cur() + dir * Math.max(3, d / 60)));
+      if (X) { if (X.seek) X.seek(t); tick(); return; }
       if (audio.getAttribute('src') && pendingSeek == null) audio.currentTime = t; else { S.t = t; pendingSeek = t; }
       tick(); return;
     }
+    if (X) return;   /* the Spotify player keeps its own volume */
     audio.volume = Math.max(0, Math.min(1, Math.round((audio.volume + dir * 0.0625) * 16) / 16));
     S.vol = audio.volume; save(); showVol();
   }
@@ -402,14 +472,15 @@
     if (screen === 'menu') {
       var li = els.lis[sel]; if (!li) return;
       if (li.getAttribute('data-i') === 'clicker') { S.clicker = !S.clicker; save(); render(); return; }
-      playIndex(+li.getAttribute('data-i')); setScreen('now'); return;
+      uPlayIndex(+li.getAttribute('data-i')); setScreen('now'); return;
     }
-    if (screen === 'intro') { play(); return; }
+    if (screen === 'intro') { uPlay(); return; }
+    if (X && !X.seek) return;          /* this source cannot scrub */
     scrub = !scrub; root.classList.toggle('tp-scrub', scrub);
   }
   function menu() {
     clickSound('press');
-    setScreen(screen === 'menu' ? (S.started ? 'now' : 'intro') : 'menu');
+    setScreen(screen === 'menu' ? (srcStarted() ? 'now' : 'intro') : 'menu');
   }
 
   /* ================= wiring ================= */
@@ -418,11 +489,11 @@
   function wire() {
     function bind(sel, fn) { [].forEach.call(root.querySelectorAll(sel), function (b) { on(b, 'click', guard(fn)); }); }
     bind('.tp-w-menu', menu);
-    bind('.tp-w-prev', function () { clickSound('press'); prev(); });
-    bind('.tp-w-next', function () { clickSound('press'); next(); });
-    bind('.tp-w-pp', function () { clickSound('press'); toggle(); });
+    bind('.tp-w-prev', function () { clickSound('press'); uPrev(); });
+    bind('.tp-w-next', function () { clickSound('press'); uNext(); });
+    bind('.tp-w-pp', function () { clickSound('press'); uToggle(); });
     bind('.tp-center', select);
-    bind('.tp-mini-btn', function () { clickSound('press'); toggle(); });
+    bind('.tp-mini-btn', function () { clickSound('press'); uToggle(); });
     bind('.tp-to-full', function () { clickSound('press'); setView('full'); });
     bind('.tp-to-mini', function () { clickSound('press'); setView('mini'); });
     bind('.tp-to-pill', function () { clickSound('press'); setView('pill'); });
@@ -534,9 +605,10 @@
   var launching = false, hintPending = false;
   function syncDoor() {
     if (!root) return;
-    /* Homepage tape deck stands in for the floating strip whenever the door is on the page,
-       even after the album has started — so the white mini player does not float over the shop. */
-    var hide = !!D.querySelector('[data-trd-pod-door]') && !launching;
+    /* The homepage tape deck stands in for the pod only until a tape has turned into the pod
+       (the album started, or the playlist tape loaded). After that the pod stays on screen:
+       swapping tapes only changes what it plays. */
+    var hide = !!D.querySelector('[data-trd-pod-door]') && !launching && !X && !revealed && !S.started;
     var was = root.classList.contains('tp-doorhide');
     root.classList.toggle('tp-doorhide', hide);
     if (was && !hide && hintPending) { hintPending = false; maybeHint(); }
@@ -754,7 +826,8 @@
   }
   if (D.readyState === 'loading') on(D, 'DOMContentLoaded', boot); else boot();
 
-  W.trdPod = { play: play, pause: pause, toggle: toggle, playIndex: playIndex, toggleIndex: toggleIndex, next: next, prev: prev,
-    state: state, tracks: TRACKS.map(function (t) { return { title: t.title, src: t.src, length: t.len }; }), audio: audio,
+  W.trdPod = { play: uPlay, pause: uPause, toggle: uToggle, playIndex: uPlayIndex, toggleIndex: uToggleIndex, next: uNext, prev: uPrev,
+    state: state, albumState: albumState, pauseAlbum: function () { if (!audio.paused) audio.pause(); },
+    useSource: useSource, dropSource: dropSource, refresh: function () { render(); }, source: function () { return X ? X.id : 'album'; }, tracks: TRACKS.map(function (t) { return { title: t.title, src: t.src, length: t.len }; }), audio: audio,
     view: function (v) { if (v) setView(v); return S.view; }, resetPosition: resetPos, launchFrom: launchFrom, navigate: function (h) { return go(h, true); } };
 })();
