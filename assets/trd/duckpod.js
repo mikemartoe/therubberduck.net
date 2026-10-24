@@ -516,6 +516,9 @@
       }
       if (e.type === 'pointercancel') return;
       if (d.onGrip) { var now = Date.now(); if (now - lastTap < 380) { lastTap = 0; resetPos(); } else lastTap = now; return; }
+      /* the tap's own click lands on whatever the new view puts under the finger (the mini play button
+         sits where the pill was): swallow it so expanding never toggles playback */
+      if (d.onLcd || d.onPill) suppressUntil = Date.now() + 400;
       if (d.onLcd) { clickSound('press'); setView('full'); }
       else if (d.onPill) { clickSound('press'); setView(S.back === 'full' ? 'full' : 'mini'); }
     }

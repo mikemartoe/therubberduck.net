@@ -40,8 +40,9 @@
 .tp-tool{width:24px;height:24px;flex:none;display:grid;place-items:center;border:0;padding:0;border-radius:50%;background:transparent;color:#8a8a8a;cursor:pointer}
 .tp-tool:hover{color:#e10600;background:rgba(0,0,0,.05)}
 /* Bright red pill-minimize icon — always readable on the silver shell */
-.tp-tool.tp-to-pill{color:#ff1a1a}
-.tp-tool.tp-to-pill:hover{color:#ff4444;background:rgba(255,26,26,.12)}
+/* #trd-pod prefix: must outrank the "#trd-pod button{color:inherit}" reset above, which otherwise turns it #111 */
+#trd-pod .tp-tool.tp-to-pill{color:#ff1a1a}
+#trd-pod .tp-tool.tp-to-pill:hover{color:#ff4444;background:rgba(255,26,26,.12)}
 .tp-tool svg{width:14px;height:14px}
 .tp-tool:focus-visible,.tp-w:focus-visible,.tp-center:focus-visible,.tp-mini-btn:focus-visible,.tp-pill:focus-visible{outline:2px solid #e10600;outline-offset:2px}
 
@@ -159,6 +160,10 @@
   .tp-lcd .tp-album{font-size:10.5px}
   .tp-sgrip{width:8px}
 }
+/* phones with the suggestion box shown: the support duck shifts left (suggest.css html.trs-box-r) and sat on top of
+   the strip's tools, hiding the red minimize pill; end the strip just short of the duck */
+@media (max-width:600px){html.trs-box-r .tp-strip{width:calc(100vw - 165px)}}
+@media (max-width:480px){html.trs-box-r .tp-strip{width:calc(100vw - 140px)}}
 @media (max-width:340px){.tp-lcd .tp-cover{display:none}}
 @media (prefers-reduced-motion:reduce){.tp-mq.tp-run span{animation:none}#trd-pod.tp-playing .tp-pill-cap{animation:none}.tp-shell,.tp-pill-cap{transition:none}}
 @media print{#trd-pod{display:none!important}}
