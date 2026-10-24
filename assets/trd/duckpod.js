@@ -155,9 +155,9 @@
   var audio = D.createElement('audio');
   audio.preload = 'none';
   audio.volume = Math.max(0, Math.min(1, S.vol));
-  var pendingSeek = null;
+  var pendingSeek = null, loadSeq = 0, countedSeq = -1;
   function loadTrack(i, t) {
-    S.i = (i + N) % N; S.t = t || 0;
+    S.i = (i + N) % N; S.t = t || 0; loadSeq++;
     audio.src = TRACKS[S.i].src;
     pendingSeek = S.t > 0 ? S.t : null;
     setMedia();
@@ -183,7 +183,17 @@
     playIndex2(S.i - 1, !audio.paused || !S.started);
   }
   function playIndex2(i, autoplay) { S.started = true; loadTrack(i, 0); if (autoplay) play(); else render(); save(); }
-  on(audio, 'play', function () { S.playing = true; render(); save(); });
+  on(audio, 'play', function () { S.playing = true; render(); save(); countPlay(); });
+  /* one GoatCounter event each time a track starts from the top (not on pause/resume or a resumed reload) */
+  function countPlay() {
+    try {
+      var at = pendingSeek != null ? pendingSeek : audio.currentTime;
+      if (countedSeq === loadSeq || at >= 2 || !W.trdTrack) return;
+      countedSeq = loadSeq;
+      var n = S.i + 1, t = TRACKS[S.i].title;
+      W.trdTrack('event/album-track/' + (n < 10 ? '0' : '') + n + '-' + W.trdTrack.slug(t, 40), 'Red Pill Album: ' + n + '. ' + t, 0);
+    } catch (e) {}
+  }
   on(audio, 'pause', function () { if (!audio.ended) { S.playing = false; S.t = audio.currentTime; render(); save(); } });
   on(audio, 'ended', function () {
     if (S.i + 1 < N) playIndex(S.i + 1);

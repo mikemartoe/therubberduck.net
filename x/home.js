@@ -46,8 +46,8 @@
   function go(p, scroll){ page = p; writeURL(true); render().then(() => { if(scroll) $('count').scrollIntoView({block: 'start'}); }); }
   $('pager').addEventListener('click', e => { const b = e.target.closest('button[data-p]'); if(b && !b.disabled) go(+b.dataset.p, true); });
   $('pager').addEventListener('change', e => { if(e.target.tagName === 'INPUT'){ const pages = Math.ceil(results.length / PER); go(Math.min(pages, Math.max(1, +e.target.value || 1)), true); } });
-  form.addEventListener('submit', e => { e.preventDefault(); fromForm(); page = 1; writeURL(true); run(); });
-  form.addEventListener('change', e => { if(e.target.tagName === 'SELECT' || e.target.type === 'date'){ fromForm(); page = 1; writeURL(true); run(); } });
+  form.addEventListener('submit', e => { e.preventDefault(); fromForm(); page = 1; writeURL(true); run(); trdEv('event/x-search', 'X archive: search'); });
+  form.addEventListener('change', e => { if(e.target.tagName === 'SELECT' || e.target.type === 'date'){ trdEv('event/x-filter/' + (e.target.id || e.target.name || 'field'), 'X archive: filter ' + (e.target.id || e.target.name || '')); fromForm(); page = 1; writeURL(true); run(); } });
   $('reset').addEventListener('click', () => { history.pushState(null, '', location.pathname); readURL(); run(); });
   window.addEventListener('popstate', () => { readURL(); run(); });
   document.addEventListener('click', e => {

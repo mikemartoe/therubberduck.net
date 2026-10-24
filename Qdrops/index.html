@@ -419,6 +419,7 @@ button{font:inherit;color:inherit;background:none;border:0}
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
 <script src="/assets/trd/duckpod.js" data-trd-keep></script>
+<script src="/assets/trd/track.js" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="What the Q drop archive holds, where the posts were made as the boards moved, and how each record was gathered and sourced. Search opens the ledger.">
 <link rel="canonical" href="https://therubberduck.net/Qdrops/">
@@ -884,17 +885,27 @@ button{font:inherit;color:inherit;background:none;border:0}
     if (live) live.textContent = res.length === 1 ? '1 drop matches ' + q.trim() : res.length.toLocaleString('en-GB') + ' drops match ' + q.trim();
   }
 
-  var deb;
+  var deb, evT;
+  function ev(path, title) { try { if (window.trdTrack) window.trdTrack(path, title); } catch (e) {} }
   input.addEventListener('input', function () {
     clearTimeout(deb);
     deb = setTimeout(render, 90);
+    clearTimeout(evT);
+    var qv = input.value.trim();
+    evT = setTimeout(function () { if (qv) ev('event/qdrops-search', 'Q drops: search'); }, 1500);
+  });
+  if (body) body.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a.res-row');
+    if (a) ev('click/qdrops/result', 'Q drops: open a search result in the ledger');
   });
 
   if (form) form.addEventListener('submit', function () {
+    if (input.value.trim()) ev('event/qdrops-search-ledger', 'Q drops: search sent to the ledger');
     if (!input.value.trim()) { input.focus(); }
   });
 
   var input2 = document.getElementById('q2');
+  if (input2 && input2.form) input2.form.addEventListener('submit', function () { if (input2.value.trim()) ev('event/qdrops-search-ledger', 'Q drops: search sent to the ledger'); });
   document.querySelectorAll('.chip').forEach(function (c) {
     c.addEventListener('click', function () {
       var v = c.getAttribute('data-q') || '';

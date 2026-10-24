@@ -562,6 +562,7 @@ a.trd-ambook:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-r
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
 <script src="/assets/trd/duckpod.js" data-trd-keep></script>
+<script src="/assets/trd/track.js" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="Welcome, curious minds. An open archive from The Rubber Duck: videos, recordings, Q drops, PDFs, memes, the X archive and TRD Collectibles.">
 <link rel="canonical" href="https://therubberduck.net/">
@@ -748,6 +749,7 @@ a.trd-ambook:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-r
     if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
     if(window.trdPod.state().started)return;          /* the site router opens album.html */
     e.preventDefault();
+    if(window.trdTrack)window.trdTrack('click/album-play','Homepage: PRESS PLAY on The Red Pill Album');
     window.trdPod.launchFrom(cas,deck.getAttribute('href'));
   });
   document.addEventListener('trdpod:state',function(e){paint(e.detail);});
@@ -895,10 +897,12 @@ a.trd-ambook:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-r
     if(host.classList.contains('deck')&&host.hasAttribute('data-trd-pod-door')&&window.trdPod){
       var cas=host.querySelector('.cas');
       if(cas&&!window.trdPod.state().started){
+        if(window.trdTrack)window.trdTrack('click/album-play','Homepage: PRESS PLAY on The Red Pill Album');
         window.trdPod.launchFrom(cas,href);
         return;
       }
     }
+    if(window.trdTrack)window.trdTrack.link(host);    /* the same event a plain click on this link counts */
     /* book strip: keep Gumroad in a new tab (matches target=_blank on the link) */
     if(host.classList.contains('trd-ambook')){
       window.open(href,'_blank','noopener');

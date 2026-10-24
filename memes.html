@@ -302,6 +302,7 @@ footer.site b{color:#c4cad0;font-weight:700}
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
 <script src="/assets/trd/duckpod.js" data-trd-keep></script>
+<script src="/assets/trd/track.js" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="The Rubber Duck's meme archive, shuffled fresh every visit. Filter by type, look or the words inside a meme, then download or share what you find.">
 <link rel="canonical" href="https://therubberduck.net/memes.html">
@@ -708,6 +709,7 @@ function buildFaceQuick(){
       if(k==='any')F.faceBucket=['one','two','crowd'];
       else if(k==='close-up')F.faceSize=['close-up'];
       else F.faceBucket=[k];
+      evFilter('faces',k);
     }
     syncChips(); apply();
   });
@@ -738,7 +740,7 @@ function buildPeopleQuick(){
   $('pclear').addEventListener('click',function(){F.people=[];$('pq').value='';filterPeopleChips();syncChips();apply()});
 }
 function togglePerson(p){
-  var i=F.people.indexOf(p); if(i>-1)F.people.splice(i,1); else F.people.push(p);
+  var i=F.people.indexOf(p); if(i>-1)F.people.splice(i,1); else {F.people.push(p);evFilter('people',p)}
   syncChips(); apply();
 }
 function personHit(pn,q){
@@ -814,7 +816,7 @@ function buildPanel(){
     var chip=e.target.closest('.chip');
     if(chip){
       var cat=chip.dataset.cat, v=chip.dataset.val, arr=F[cat], i=arr.indexOf(v);
-      if(i>-1){arr.splice(i,1);chip.setAttribute('aria-pressed','false')}else{arr.push(v);chip.setAttribute('aria-pressed','true')}
+      if(i>-1){arr.splice(i,1);chip.setAttribute('aria-pressed','false')}else{arr.push(v);chip.setAttribute('aria-pressed','true');evFilter(cat,v)}
       apply(); return;
     }
     if(e.target.id==='clearbtn'){ clearFilters(); apply(); }
@@ -944,10 +946,14 @@ function watch(){
   sentinel.observe($('morewrap'));
 }
 
+/* ---------- GoatCounter events (assets/trd/track.js; a no-op if it or GoatCounter is missing) ---------- */
+function ev(path,title){try{if(window.trdTrack)window.trdTrack(path,title)}catch(e){}}
+function evFilter(cat,v){ev('event/meme-filter/'+cat+'/'+(window.trdTrack?trdTrack.slug(v,40):v),'Meme filter: '+cat+' = '+v)}
 /* ---------- lightbox ---------- */
 function openAt(i){
   if(i<0||i>=view.length)return;
   cur=i; var it=view[i], lb=$('lb');
+  if(!lb.classList.contains('open'))ev('event/meme-open/'+it.id,'Meme opened: '+(it.title||it.id));
   var st=$('lbstage');
   st.innerHTML = it.kind==='video'
     ? '<video src="'+mediaUrl(it.file)+'"'+(it.poster?' poster="'+mediaUrl(it.poster)+'"':'')+' controls autoplay muted loop playsinline></video>'
@@ -1024,7 +1030,7 @@ function fallback(txt,msg){
 
 function bind(){
   $('shuffle').addEventListener('click',function(){
-    seed=newSeed(); $('seedlabel').textContent=seed;
+    seed=newSeed(); $('seedlabel').textContent=seed; ev('event/meme-shuffle','Meme dump: shuffle');
     if($('sort').value!=='random')$('sort').value='random';
     history.replaceState(null,'','#seed='+seed);
     apply(); window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});
@@ -1034,13 +1040,14 @@ function bind(){
     copy(location.href.split('#')[0]+'#seed='+seed,'Link to this arrangement copied');
   });
   $('sort').addEventListener('change',apply);
-  var t=null;
+  var t=null,qT=null;
   $('q').addEventListener('input',function(){
     $('prompt').classList.toggle('has-value',!!this.value);
     var srt=$('sort');
     if(this.value.trim()&&srt.value==='random')srt.value='relevance';
     if(!this.value.trim()&&srt.value==='relevance')srt.value='random';
     clearTimeout(t); t=setTimeout(apply,140);
+    clearTimeout(qT); var qv=this.value.trim(); qT=setTimeout(function(){if(qv)ev('event/meme-search','Meme dump: search')},1500);
   });
   $('didyou').addEventListener('click',function(e){var b=e.target.closest('[data-dy]');if(!b)return;$('q').value=b.dataset.dy;$('prompt').classList.add('has-value');if($('sort').value==='random')$('sort').value='relevance';apply()});
   $('clearq').addEventListener('click',function(){$('q').value='';if($('sort').value==='relevance')$('sort').value='random';$('prompt').classList.remove('has-value');apply();$('q').focus()});
@@ -1057,12 +1064,14 @@ function bind(){
   $('lbnext').addEventListener('click',function(){openAt(cur+1)});
   $('lbtags').addEventListener('click',function(e){
     var pb=e.target.closest('button[data-person]');
-    if(pb){clearFilters(); F.people=[pb.dataset.person]; syncChips(); close(); apply();
+    if(pb){evFilter('people',pb.dataset.person);clearFilters(); F.people=[pb.dataset.person]; syncChips(); close(); apply();
       window.scrollTo({top:0,behavior:'auto'}); toast('Filtered: '+pb.dataset.person); return}
     var b=e.target.closest('button[data-tag]'); if(!b)return;
+    evFilter('topics',b.dataset.tag);
     clearFilters(); F.topics=[b.dataset.tag]; syncChips(); close(); apply();
     window.scrollTo({top:0,behavior:'auto'}); toast('Filtered: '+b.dataset.tag);
   });
+  $('dl').addEventListener('click',function(){var it=view[cur];if(it)ev('event/meme-download/'+it.id,'Meme downloaded: '+(it.title||it.id))});
   $('copylink').addEventListener('click',function(){copy(permalink(view[cur]),'Permalink copied — memes.html#'+view[cur].id)});
   $('copyattr').addEventListener('click',function(){
     var it=view[cur];
@@ -1071,6 +1080,7 @@ function bind(){
   Array.prototype.forEach.call(document.querySelectorAll('[data-sh]'),function(b){
     b.addEventListener('click',function(){
       var it=view[cur], u=permalink(it), txt=shareText(it), href, w=680,h=560;
+      ev('event/meme-share/'+b.dataset.sh,'Meme shared to '+b.dataset.sh+': '+it.id);
       var url=encodeURIComponent(u), s=encodeURIComponent(txt);
       if(b.dataset.sh==='x') href='https://twitter.com/intent/tweet?text='+s;
       else if(b.dataset.sh==='fb') href='https://www.facebook.com/sharer/sharer.php?u='+url+'&quote='+s;

@@ -172,8 +172,18 @@ function failBox(el){
   box.replaceWith(a);
 }
 document.addEventListener('error', e => { const t = e.target; if(t && t.tagName === 'IMG' && t.closest && t.closest('.mi')) failBox(t); }, true);
+/* GoatCounter events (assets/trd/track.js; a no-op if it or GoatCounter is missing) */
+const trdEv = (path, title) => { try { if(window.trdTrack) window.trdTrack(path, title); } catch(e){} };
+document.addEventListener('click', e => {
+  if(e.defaultPrevented || (e.button && e.button !== 1)) return;
+  const a = e.target.closest && e.target.closest('a[href]'); if(!a) return;
+  const h = a.getAttribute('href') || '';
+  if(h.indexOf('/x/post.html?id=') === 0) trdEv('click/x/post-open', 'X archive: open a post');
+  else if(/^https:\/\/(x|twitter)\.com\/[^/]+\/status\//.test(h)) trdEv('click/x/open-on-x', 'X archive: open a post on X');
+});
 document.addEventListener('click', e => {
   const b = e.target.closest && e.target.closest('button.play'); if(!b) return;
+  trdEv('click/x/play-media', 'X archive: play a video or GIF');
   const box = b.closest('.mi'), img = box.querySelector('img'), keep = box.innerHTML;
   const v = document.createElement('video'); v.controls = true; v.autoplay = true; v.playsInline = true; if(b.dataset.g){ v.loop = true; v.muted = true; }
   if(img) v.poster = img.src; v.src = b.dataset.v;

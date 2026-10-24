@@ -298,6 +298,7 @@
   }
   function open(e) {
     opener = e && e.currentTarget || null;
+    if (W.trdTrack) W.trdTrack('click/suggestion-box', 'Suggestion box opened');
     if (!thanks.hidden) { form.reset(); freshCard(); }
     q('.trs-date').textContent = today();
     if (!dlg.open) { try { dlg.showModal(); } catch (x) { dlg.setAttribute('open', ''); } }
@@ -354,7 +355,7 @@
     e.preventDefault();
     if (busy || !valid()) return;
     busy = true; send.disabled = true; send.textContent = 'Posting...';
-    post().then(function () { return drop(); }, function (err) {
+    post().then(function () { if (W.trdTrack) W.trdTrack('event/suggestion-sent', 'Suggestion card sent'); return drop(); }, function (err) {
       busy = false; send.disabled = false; send.textContent = 'Drop it in the box';
       var why = err && err.message;
       msg.textContent = why === 'activation' || why === 'closed'

@@ -330,6 +330,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-ink);outline
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
 <script src="/assets/trd/duckpod.js" data-trd-keep></script>
+<script src="/assets/trd/track.js" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="The Red Pill Album by The Rubber Duck, 22 tracks released 30 April 2026. Play the whole record here, buy it on Apple Music or stream it on Spotify.">
 <link rel="canonical" href="https://therubberduck.net/album.html">
@@ -713,7 +714,7 @@ var yrEl=document.getElementById('yr'); if(yrEl) yrEl.textContent=new Date().get
   /* fallback if the player script is unavailable: play on this page */
   var audio=new Audio(); audio.preload='none'; var cur=-1;
   function st(){return {i:cur,started:cur>=0,playing:!audio.paused,t:audio.currentTime,d:isFinite(audio.duration)?audio.duration:0};}
-  function play(i){if(i===cur&&!audio.paused){audio.pause();return;}if(i!==cur){cur=i;audio.src=rows[i].dataset.preview;}var p=audio.play();if(p&&p.catch)p.catch(function(){paint(st());});}
+  function play(i){if(i===cur&&!audio.paused){audio.pause();return;}if(i!==cur){cur=i;audio.src=rows[i].dataset.preview;if(window.trdTrack)window.trdTrack('event/album-track/'+(i<9?'0':'')+(i+1)+'-'+window.trdTrack.slug(rows[i].dataset.title,40),'Red Pill Album: '+(i+1)+'. '+rows[i].dataset.title,0);}var p=audio.play();if(p&&p.catch)p.catch(function(){paint(st());});}
   rows.forEach(function(r,i){r.querySelector('.tr-btn').addEventListener('click',function(){play(i);});});
   ['play','pause','timeupdate'].forEach(function(ev){audio.addEventListener(ev,function(){paint(st());});});
   audio.addEventListener('ended',function(){if(cur+1<rows.length)play(cur+1);else{cur=-1;paint(st());}});
