@@ -688,11 +688,25 @@ a.trd-ambook:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-r
   var mq=window.matchMedia('(min-width:900px) and (min-height:500px)');
   function size(){var top=document.querySelector('.top'),deck=document.querySelector('.deck'),well=deck&&deck.querySelector('.deck-well');
     if(!top||!well)return; if(!mq.matches){top.style.removeProperty('--deckw');return;}
+    if(top.hasAttribute('data-deckfit')){deck.style.removeProperty('width');deck.style.removeProperty('justify-self');top.removeAttribute('data-deckfit');} /* re-measure unscaled so a taller window grows it back */
     var cs=getComputedStyle(well),ph=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom),pw=parseFloat(cs.paddingLeft)+parseFloat(cs.paddingRight);
     var h=well.clientHeight-ph, chrome=deck.offsetWidth-well.clientWidth+pw;
     var w=Math.round(h*1.5737+chrome), max=Math.round(top.clientWidth*.56);
-    top.style.setProperty('--deckw',Math.min(w,max)+'px');}
-  size(); var t; window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(size,100);});
+    top.style.setProperty('--deckw',Math.min(w,max)+'px');
+    /* short laptop screens (e.g. 1280x720): the deck is taller than its row and ran into the tape stacks,
+       covering PRESS PLAY. Scale the whole deck down proportionally, centred in its own column (the column,
+       the welcome text and the stacks keep their widths), so it may spill at most (gap - 8px) above and
+       below its row: never under the book band, never touching a tape. No-op wherever it already fits. */
+    var hall=top.parentNode,stage=hall&&hall.parentNode,gap=parseFloat(getComputedStyle(hall).rowGap)||0,
+        pad=stage?parseFloat(getComputedStyle(stage).paddingTop)||0:0,slack=Math.max(0,Math.min(gap,pad)-8),
+        wi=well.clientHeight-ph,vchrome=deck.offsetHeight-wi,dch=deck.offsetWidth-well.clientWidth+pw,
+        fit=Math.floor((top.clientHeight+2*slack-vchrome)*1.5737+dch);
+    if(deck.offsetHeight>top.clientHeight+2*slack&&fit<deck.offsetWidth){
+      deck.style.width=Math.max(0,fit)+'px';deck.style.justifySelf='center';top.setAttribute('data-deckfit','');}
+  }
+  /* on resize, start over from the unsized column (same two passes as a fresh load), so the deck matches a fresh load at the new size */
+  function resize(){var top=document.querySelector('.top');if(top)top.style.removeProperty('--deckw');size();size();}
+  size(); var t; window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(resize,100);});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
 })();
 /* the suggestion line in the desktop band opens the same card as the corner box */
