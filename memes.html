@@ -1010,9 +1010,10 @@ function openById(id){
   openAt(i);
 }
 function permalink(it){return SITE+'#'+it.id}
+function shareUrl(it){return 'https://therubberduck.net/memes/share/'+encodeURIComponent(it.id)+'.html'}
 function shareText(it){
   var t=(it.title||it.id)+(it.topics&&it.topics.length?' — '+it.topics.slice(0,4).join(', '):'');
-  return t+' | via The Rubber Duck™ '+SITE;
+  return t+' | via The Rubber Duck™ '+shareUrl(it);
 }
 
 /* ---------- actions ---------- */
@@ -1080,14 +1081,14 @@ function bind(){
     window.scrollTo({top:0,behavior:'auto'}); toast('Filtered: '+b.dataset.tag);
   });
   $('dl').addEventListener('click',function(){var it=view[cur];if(it)ev('event/meme-download/'+it.id,'Meme downloaded: '+(it.title||it.id))});
-  $('copylink').addEventListener('click',function(){ev('event/meme-share/copylink','Meme link copied: '+view[cur].id);copy(permalink(view[cur]),'Permalink copied — memes.html#'+view[cur].id)});
+  $('copylink').addEventListener('click',function(){ev('event/meme-share/copylink','Meme link copied: '+view[cur].id);copy(shareUrl(view[cur]),'Link copied — '+view[cur].id)});
   $('copyattr').addEventListener('click',function(){
     var it=view[cur];ev('event/meme-share/attribution','Meme attribution copied: '+it.id);
-    copy((it.title||it.id)+' — The Rubber Duck™ Meme Dump · '+permalink(it),'Attribution copied');
+    copy((it.title||it.id)+' — The Rubber Duck™ Meme Dump · '+shareUrl(it),'Attribution copied');
   });
   Array.prototype.forEach.call(document.querySelectorAll('[data-sh]'),function(b){
     b.addEventListener('click',function(){
-      var it=view[cur], u=permalink(it), txt=shareText(it), href, w=680,h=560;
+      var it=view[cur], u=shareUrl(it), txt=shareText(it), href, w=680,h=560;
       ev('event/meme-share/'+b.dataset.sh,'Meme shared to '+b.dataset.sh+': '+it.id);
       var url=encodeURIComponent(u), s=encodeURIComponent(txt);
       if(b.dataset.sh==='x') href='https://twitter.com/intent/tweet?text='+s;

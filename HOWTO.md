@@ -27,6 +27,7 @@ This file explains how the site works so anyone Duck trusts can keep it going wi
 2. Copy only the new files somewhere you can run Python. You need `pip install opencv-python pytesseract pillow` and Tesseract OCR.
 3. Run `tools/memes-intake.py` to make web copies in `memes/web/` and add records to `memes/data/memes.json`. Skip files that are already there.
 4. Run `python tools/clean_tags.py memes/data/memes.json` to strip junk tags.
+   Then run `python tools/meme-share-build.py`. It makes the share page for each meme (`memes/share/<id>.html`) and a letterboxed preview card (`memes/card/<id>.jpg`) for tall or square memes, so X, Facebook and Reddit show that meme instead of the generic card.
 5. Check `memes.html` locally (`python -m http.server`), then commit and push to `main`.
 - Never put people's names in meme tags.
 
