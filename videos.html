@@ -525,6 +525,8 @@ function hasRealThumb(v) {
   const th = String(v && v.th || '').trim();
   if (!th) return false;
   if (th === PLACEHOLDER_TH || th.indexOf('intermission-card') !== -1) return false;
+  /* Local archive reels now carry real R2 poster frames, but keep their place after the Rumble features. */
+  if (v.source === 'local') return false;
   return true;
 }
 function shuffleInPlace(arr) {
@@ -613,7 +615,7 @@ function showReel(v) {
   clearFeature();
 }
 function showPoster(v) {
-  $('stage').innerHTML = '<button class="poster" type="button" aria-label="Play ' + esc(v.t) + '"><img src="' + esc(v.th) + '" alt="">' +
+  $('stage').innerHTML = '<button class="poster" type="button" aria-label="Play ' + esc(v.t) + '"><img src="' + esc(v.th) + '" alt=""' + (v.source === 'local' ? ' onerror="this.onerror=null;this.src=\'/assets/trd/clips/intermission-card.jpg\'"' : '') + '>' +
     '<span class="grain"></span><span class="vignette"></span><span class="playbtn"></span>' +
     (v.dur ? '<span class="badge">' + esc(v.dur) + '</span>' : '') + '</button>';
   $('stage').firstChild.addEventListener('click', () => play(v));
@@ -779,7 +781,7 @@ $('copy').addEventListener('click', () => {
 
 function ticket(v) {
   return '<a class="ticket" href="#v=' + v.id + '" data-id="' + v.id + '" title="' + esc(v.t) + '"><span class="tk">' +
-    '<span class="tthumb"><img loading="lazy" src="' + esc(v.th) + '" alt="">' + (v.live ? '<span class="plate live">LIVE</span>' : '') +
+    '<span class="tthumb"><img loading="lazy" src="' + esc(v.th) + '" alt=""' + (v.source === 'local' ? ' onerror="this.onerror=null;this.src=\'/assets/trd/clips/intermission-card.jpg\'"' : '') + '>' + (v.live ? '<span class="plate live">LIVE</span>' : '') +
     (v.dur ? '<span class="badge">' + esc(v.dur) + '</span>' : '') + '</span>' +
     '<span class="tt">' + esc(v.t) + '</span><span class="perf"><b>ADMIT ONE</b></span>' +
     '<span class="stub"><span>' + esc(v.d) + '</span><span>' + (v.source === 'local' ? 'Local' : (v.v ? 'Rumble views: ' + esc(v.v) : '')) + '</span></span></span></a>';
