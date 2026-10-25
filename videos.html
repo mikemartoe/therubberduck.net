@@ -224,6 +224,12 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 .reelplay i:after{content:"";position:absolute;left:33px;top:24px;border-style:solid;border-width:18px 0 18px 28px;border-color:transparent transparent transparent var(--bulb)}
 .reelplay:hover i{background:rgba(160,36,24,.95)}
 .countdown{z-index:4;pointer-events:none;transition:opacity .25s ease}
+.reel.offair img{position:absolute;left:50%;top:0;height:100%;aspect-ratio:4/3;transform:translateX(-50%);object-fit:cover;display:block;opacity:.55}
+.offmsg{position:absolute;inset:auto 0 0 0;z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 18px 18px;text-align:center;color:var(--cream);background:linear-gradient(transparent,rgba(0,0,0,.85) 35%)}
+.offmsg b{font-size:26px;letter-spacing:.04em;color:var(--bulb)}
+.offmsg span{max-width:40rem;line-height:1.35;font-size:19px}
+.offmsg .offbtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+@media (max-width:760px){.offmsg{padding:10px 10px 12px;gap:6px}.offmsg b{font-size:16px}.offmsg span{font-size:12.5px}.offmsg .ticketbtn{padding:7px 12px;font-size:13px}}
 .countdown.out{opacity:0}
 /* drive-in speaker style sound toggle */
 .spk{display:inline-flex;align-items:center;gap:10px;height:42px;padding:0 14px 0 7px;border-radius:7px;cursor:pointer;
@@ -626,7 +632,7 @@ function play(v, auto) {   // auto: started by landing on the page, not by a cli
         '<p style="margin:0;max-width:28rem;line-height:1.35">This archive file (.' + esc(v.ext || 'bin') + ') may not play in the browser.</p>' +
         '<a class="ticketbtn" href="' + esc(v.mediaUrl || v.u) + '" target="_blank" rel="noopener">Open / download media file</a></div>';
     } else {
-      st.innerHTML = '<video class="feature" controls autoplay playsinline preload="metadata" src="' + esc(v.mediaUrl || v.u) + '" title="' + esc(v.t) + '"></video>';
+      st.innerHTML = '<video class="feature" controls autoplay playsinline preload="metadata"' + (v.th ? ' poster="' + esc(v.th) + '"' : '') + ' src="' + esc(v.mediaUrl || v.u) + '" title="' + esc(v.t) + '"></video>';
     }
   } else {
     st.innerHTML = '<iframe src="' + esc(embedSrc(v)) + '" title="' + esc(v.t) + '" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>';
@@ -643,6 +649,7 @@ function play(v, auto) {   // auto: started by landing on the page, not by a cli
     if (local) {
       player.addEventListener('playing', drop, {once: true});
       player.addEventListener('loadeddata', drop, {once: true});
+      watchLocal(v, player, drop, auto);
     } else {
       player.addEventListener('load', drop);
     }
@@ -652,6 +659,57 @@ function play(v, auto) {   // auto: started by landing on the page, not by a cli
   }
   nextCountdown = COUNTDOWNS.filter(c => c !== n)[Math.floor(Math.random() * (COUNTDOWNS.length - 1))]; warmCountdown();
   const p = $('plays'); if (p && !auto) p.textContent = addPlay(v.id);
+}
+/* ---------- local archive fallback ----------
+   Local features stream from media.therubberduck.net (the archive server). When that server is offline
+   (Cloudflare error 1033 / HTTP 530) or a file will not decode, the browser would leave a black player
+   with a crossed-out play icon. Instead: play the same film from Rumble when there is a Rumble copy,
+   otherwise show an Intermission card that rolls on to the next feature. */
+const LOCAL_TWINS = {   // local archive id -> the same film on Rumble
+  l08310cc280: 'v2bl20i', l989165aea5: 'v15q5if', l0236a06a24: 'v15q5qh', le8a6590d1e: 'v15q66b', l3818387e14: 'v15q6f7',
+  l0bafb6542c: 'v2k77ci', l7ac9cba42b: 'v2bn60i', l295a4d1bd0: 'v2bn1lm', leeee88c897: 'v2blbxq', l65fdb78479: 'v1zhulu',
+  l42646720c3: 'v2bky4i', l8b2528dffc: 'v1965qd', l7e56300f7c: 'v2mjyxi', lb1da774ff3: 'v2angje', l4eb2250a34: 'v2nihm6',
+  l59bb1eee7c: 'v1zw09k', lcb2aaaaa61: 'v2brew4', l0ba1142721: 'v2brigu', l7e8d7bffae: 'v2bkoac', l36e27345fa: 'v140lqd',
+  l0eb7b6a4fd: 'v1zvyxk', lc8a5d21d11: 'v2lht46', lf046f536af: 'v6ri9aj', l5788e7fac1: 'v2bre3s'
+};
+function watchLocal(v, player, drop, auto) {
+  let done = false;
+  const fail = why => {
+    if (done || cur !== v || !player.isConnected) return; done = true;
+    try { console.warn('[video-room] local feature failed:', why, v.mediaUrl || v.u); } catch (e) {}
+    drop(); localFailed(v, auto, why);
+  };
+  const ok = () => { done = true; };
+  player.addEventListener('loadedmetadata', ok, {once: true});
+  player.addEventListener('error', () => fail('error ' + (player.error ? player.error.code : '?')), {once: true});
+  setTimeout(() => { if (!done && player.readyState === 0) fail('timeout'); }, 15000);
+  const pr = player.play && player.play(); if (pr && pr.catch) pr.catch(() => {});   // autoplay refused: normal play button stays
+}
+function nextPlayable(v) {   // next feature in the grid that is not on the offline archive
+  const ids = [...document.querySelectorAll('#grid .ticket[data-id]')].map(a => a.dataset.id);
+  const list = (ids.length ? ids.map(id => BY[id]) : VIDS).filter(x => x && x.id !== v.id && x.source !== 'local' && x.e);
+  const i = ids.indexOf(v.id);
+  return list.find(x => ids.indexOf(x.id) > i) || BY[FEATURED_ID] || list[0];
+}
+function localFailed(v, auto, why) {
+  if (cur !== v) return;
+  const st = $('stage'), tw = BY[LOCAL_TWINS[v.id]];
+  if (tw && tw.e) {   // same film on Rumble: keep the marquee, just swap the projector
+    st.innerHTML = '<iframe src="' + esc(embedSrc(tw)) + '" title="' + esc(v.t) + '" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>';
+    const pr = $('prumble'); pr.href = tw.u; pr.textContent = 'Watch on Rumble'; pr.hidden = false;
+    return;
+  }
+  const nx = nextPlayable(v), secs = 8;
+  st.innerHTML = '<div class="reel offair"><span class="bg" style="background-image:url(' + CLIP + 'intermission-card.jpg)"></span>' +
+    '<img src="' + CLIP + 'intermission-card.jpg" alt=""><span class="grain"></span><span class="vignette"></span>' +
+    '<div class="offmsg"><b>This reel is off the projector</b><span>The archive copy of this feature is not reachable right now.' +
+    (nx ? ' Rolling on to <i>' + esc(nx.t) + '</i> in <em id="offn">' + secs + '</em>s.' : '') + '</span>' +
+    '<span class="offbtns">' + (nx ? '<button class="ticketbtn" type="button" id="offnext">Play next feature</button>' : '') +
+    '<a class="ticketbtn alt" href="' + esc(v.mediaUrl || v.u) + '" target="_blank" rel="noopener">Try the file</a></span></div></div>';
+  if (!nx) return;
+  let n = secs; const go = () => { clearInterval(t); if (cur === v) { history.replaceState(null, '', '#v=' + nx.id); select(nx, 'play'); } };
+  const t = setInterval(() => { if (cur !== v || !$('offn')) return clearInterval(t); n -= 1; $('offn').textContent = n; if (n <= 0) go(); }, 1000);
+  $('offnext').addEventListener('click', go);
 }
 function fitTitle() {
   const h = $('ptitle'), box = h.parentElement, small = innerWidth <= 760;
