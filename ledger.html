@@ -244,6 +244,56 @@ html[data-theme="dark"] .corr .go{color:#1A1710}
   .arc-chips{width:100%}
   .chip{flex:1 1 auto;min-height:40px}
 }
+
+/* ---- Drop Ledger: newcomer layer, Deltas and search notes (assets/trd/ledger-search.js) ---- */
+.lx-start{margin:30px 0 0;padding:18px 18px 16px;border:1px solid var(--border);border-radius:4px;background:color-mix(in srgb,var(--surface-1) 80%,transparent);position:relative}
+.lx-intro{margin:0 0 14px;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.lx-intro strong{color:var(--text);font-weight:600}
+.lx-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.chip.lx-btn{min-height:40px;padding:0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.chip.lx-btn[aria-expanded="true"]{border-color:var(--accent)!important;color:var(--accent)!important}
+.chip.lx-primary{border-color:rgba(0,255,65,.55)!important;color:var(--accent)!important}
+.lx-n{margin-left:8px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:0}
+.lx-panel{position:relative;margin-top:12px;padding:14px 40px 14px 14px;border:1px dashed var(--border);border-radius:4px;font-size:14px;color:var(--muted)}
+.lx-panel h3{font-size:1rem;color:var(--text);margin:0 0 6px}
+.lx-panel p{margin:0 0 10px;max-width:72ch}
+.lx-panel b{color:var(--text);font-weight:600}
+.lx-chips{display:flex;flex-wrap:wrap;gap:8px}
+.lx-chips .lx-more{display:contents}
+.lx-chips .lx-more[hidden]{display:none}
+.lx-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.lx-link{color:var(--accent);font-size:13px;text-decoration:none;border-bottom:1px solid rgba(0,255,65,.35)}
+.lx-close{position:absolute;top:6px;right:6px;width:32px;height:32px;border:0;background:transparent;color:var(--muted);font-size:20px;cursor:pointer;border-radius:4px}
+.lx-close:hover{color:var(--accent)}
+.lx-tips{margin:0;padding-left:18px}
+.lx-tips li{margin:4px 0}
+.lx-tips code,.lx-info code{font-family:var(--font-display);font-size:12.5px;color:var(--accent);background:var(--surface-2);padding:1px 5px;border-radius:3px}
+.lx-date{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.lx-date input{min-height:40px;padding:0 10px;border:1px solid var(--border);border-radius:3px;background:var(--surface-1);color:var(--text);font-family:var(--font-display);font-size:14px;color-scheme:dark}
+.lx-delta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 0}
+.lx-dlbl{font-family:var(--font-display);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.lx-dd{margin-left:7px;opacity:.75;letter-spacing:.04em}
+.lx-delta .chip{min-height:38px}
+.lx-info{margin:14px 0 0;font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.lx-info[hidden]{display:none}
+.lx-lbl{color:var(--text)}
+.lx-acts{display:inline-flex;flex-wrap:wrap;gap:8px}
+.lx-acts-empty{justify-content:center;margin-top:4px}
+.lx-act{min-height:34px;padding:0 12px;border:1px solid rgba(0,255,65,.4);border-radius:3px;background:transparent;color:var(--accent);font-family:var(--font-display);font-size:11.5px;letter-spacing:.03em;cursor:pointer}
+.lx-act:hover{background:rgba(0,255,65,.08);border-color:var(--accent)}
+.lx-act:focus-visible,.lx-close:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lx-cap{margin:0 0 10px;padding:8px 12px;border-left:2px solid var(--accent);background:rgba(0,255,65,.05);color:var(--text);font-size:14px}
+@media (max-width:860px){ .lx-grid{grid-template-columns:repeat(2,minmax(0,1fr))} .lx-start{padding:14px 12px 12px} }
+@media (max-width:520px){
+  .lx-delta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lx-dlbl{grid-column:1/-1}
+  .lx-delta .chip{flex:none;padding:0 6px;font-size:10px}
+  .lx-delta .lx-dd{display:block;margin:2px 0 0}
+  .lx-delta .lx-spread{grid-column:1/-1;min-height:34px}
+  .lx-intro{font-size:14px}
+  .chip.lx-btn{flex:none}
+  .lx-chips .chip.lx-btn{flex:1 1 auto}
+}
 </style>
 <style class="e3-vars">:root{--on-accent:#ffffff}</style>
 <style id="matrix-skin">
@@ -607,6 +657,8 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 .e3-footer-editorial form textarea{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface-1);color:var(--text);font:inherit;font-size:15px;resize:vertical}
 </style>
 <script src="data/drops.js"></script>
+<script src="assets/trd/ledger-search.js?v=20261024"></script>
+<script src="assets/trd/ledger-starter.js?v=20261024" defer></script>
 <script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Calendar","href":"#calendar"},{"label":"Chronology","href":"#chronology"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"Search the ledger","href":"#archive"}}</script>
 <script>
 (function(){
@@ -664,7 +716,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 @media(max-width:899px){.e3-hero-kinetic .k-wrap{grid-template-columns:1fr;padding-top:120px}.e3-hero-kinetic h1{max-width:none}}
 @media(prefers-reduced-motion:reduce){.e3-hero-kinetic *{animation:none!important;transition:none!important}.e3-hero-kinetic h1 .k-w,.e3-hero-kinetic .k-copy,.e3-hero-kinetic .k-ctas,.e3-hero-kinetic .k-card{opacity:1;transform:none}.e3-hero-kinetic .k-media img{transform:none}}
 </style>
-<script type="application/json" class="data">{"eyebrow":"4,966 records · 28 Oct 2017 – 28 Nov 2022","headline":"The whole run, kept in one ledger.","highlight":"one ledger","copy":"Search the drops by number, date, board or phrase. Every entry dated, every gap acknowledged, nothing ranked.","primary":{"label":"Search the archive","href":"#archive"},"secondary":null,"image":{"src":"images/hero.webp","alt":"A printed card catalogue with index tabs, photographed straight on and treated in green and black"},"caption":{"label":"Latest record · 28 Nov 2022","value":"#4,966","hint":"Search the run →"},"ring":true}</script>
+<script type="application/json" class="data">{"eyebrow":"4,966 records · 28 Oct 2017 – 27 Nov 2022","headline":"The whole run, kept in one ledger.","highlight":"one ledger","copy":"Search the drops by number, date, board or phrase. Every entry dated, every gap acknowledged, nothing ranked.","primary":{"label":"Search the archive","href":"#archive"},"secondary":null,"image":{"src":"images/hero.webp","alt":"A printed card catalogue with index tabs, photographed straight on and treated in green and black"},"caption":{"label":"Latest record · 27 Nov 2022","value":"#4,966","hint":"Search the run →"},"ring":true}</script>
 <div class="k-media"></div><div class="k-scrim"></div>
 <div class="k-wrap"><div class="k-text"></div><div class="k-side"></div></div>
 <div class="k-find-wrap">
@@ -773,7 +825,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
               <a class="front-link" id="startSearch" href="#archive">Search all 4,966<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg></a>
               <a class="front-link" href="#chronology">See the board timeline<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg></a>
             </nav>
-            <p class="front-meth"><b>An archive, not an argument.</b> Original posts are untouched; anything labelled commentary is separate and labelled. This page uses the extended set — 4,966 drops, #1–#4,966, through 28 Nov 2022; the shorter set in wide circulation ends at #4,953 on 8 Dec 2020.</p>
+            <p class="front-meth"><b>An archive, not an argument.</b> Original posts are untouched; anything labelled commentary is separate and labelled. This page uses the extended set — 4,966 drops, #1–#4,966, through 27 Nov 2022; the shorter set in wide circulation ends at #4,953 on 8 Dec 2020.</p>
           </div>
         </details>
       </div>
@@ -898,7 +950,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 .e3-contrib-heatmap .l1{background:color-mix(in srgb,var(--_a) 30%,transparent)}.e3-contrib-heatmap .l2{background:color-mix(in srgb,var(--_a) 55%,transparent)}.e3-contrib-heatmap .l3{background:color-mix(in srgb,var(--_a) 80%,transparent)}.e3-contrib-heatmap .l4{background:var(--_a);box-shadow:0 0 8px color-mix(in srgb,var(--_a) 60%,transparent)}
 .e3-contrib-heatmap footer{display:flex;align-items:center;justify-content:flex-end;gap:4px;font-size:11px;color:var(--_m);margin-top:10px}.e3-contrib-heatmap footer .d{cursor:default}
 </style>
-<header><div><h3>Drop density, day by day</h3><div class="k-sub">28 Oct 2017 – 28 Nov 2022 · <span data-total></span> records · 538 days with a drop</div></div><span class="k-chip" data-streak></span></header>
+<header><div><h3>Drop density, day by day</h3><div class="k-sub">28 Oct 2017 – 27 Nov 2022 · <span data-total></span> records · 533 days with a drop</div></div><span class="k-chip" data-streak></span></header>
 <div class="scroll"><div class="months"></div><div class="k-grid"></div></div>
 <footer>Less <span class="d"></span><span class="d l1"></span><span class="d l2"></span><span class="d l3"></span><span class="d l4"></span> More</footer>
 <script>
@@ -996,10 +1048,27 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
           <div><dt>Span</dt><dd>2017 – 2022</dd></div>
           <div><dt>Sites</dt><dd class="sites">4chan · 8chan · 8kun</dd></div>
           <div><dt>Board tags</dt><dd><span data-count="9">9</span></dd></div>
-          <div><dt>Days with a drop</dt><dd><span data-count="538">538</span></dd></div>
+          <div><dt>Days with a drop</dt><dd><span data-count="533">533</span></dd></div>
         </dl>
-        <p class="arc-note"><strong>The full run.</strong> All 4,966 numbered posts are held — #1 on 28 Oct 2017 through #4,966 on 28 Nov 2022. Three sites: 4chan (233), 8chan (3,337) and 8kun (1,396). Nine board tags across them: /pol, /cbts, /thestorm, /greatawakening, /qresearch and /patriotsfight on 8chan; /qresearch and /projectdcomms on 8kun; /pol on 4chan. Each row opens the full text and links back to the original post where the source archive still resolves.</p>
-        <p class="arc-note arc-prov"><strong>Corpus note.</strong> This page holds the expanded set — 4,966 records, #1–#4,966, running to 28 Nov 2022. A shorter 4,953-record set, ending at #4,953 in Dec 2020, is also in circulation; where the two differ, this page follows the expanded set.</p>
+        <p class="arc-note"><strong>The full run.</strong> All 4,966 numbered posts are held — #1 on 28 Oct 2017 through #4,966 on 27 Nov 2022. Three sites: 4chan (233), 8chan (3,337) and 8kun (1,396). Nine board tags across them: /pol, /cbts, /thestorm, /greatawakening, /qresearch and /patriotsfight on 8chan; /qresearch and /projectdcomms on 8kun; /pol on 4chan. Each row opens the full text and links back to the original post where the source archive still resolves.</p>
+        <p class="arc-note arc-prov"><strong>Corpus note.</strong> This page holds the expanded set — 4,966 records, #1–#4,966, running to 27 Nov 2022. A shorter 4,953-record set, ending at #4,953 in Dec 2020, is also in circulation; where the two differ, this page follows the expanded set.</p>
+      </div>
+
+      <div class="lx-start" id="lxStart">
+        <p class="lx-intro"><strong>New to the drops? You&rsquo;re in the right place.</strong> Every post is here, numbered and dated.<br>Tap a button to start small, or type a word, a date, or a drop number. You can&rsquo;t break anything.</p>
+        <div class="lx-grid" role="group" aria-label="Ways to start">
+          <button type="button" class="chip lx-btn lx-primary" data-lx-q="@start">Start here</button>
+          <button type="button" class="chip lx-btn" data-lx-panel="what" aria-expanded="false" aria-controls="lxPanel">What&rsquo;s a drop?</button>
+          <button type="button" class="chip lx-btn" data-lx-q="today">Today&rsquo;s Deltas</button>
+          <button type="button" class="chip lx-btn" data-lx-panel="phrases" aria-expanded="false" aria-controls="lxPanel">Famous phrases</button>
+          <button type="button" class="chip lx-btn" data-lx-panel="years" aria-expanded="false" aria-controls="lxPanel">Pick a year</button>
+          <button type="button" class="chip lx-btn" data-lx-panel="topics" aria-expanded="false" aria-controls="lxPanel">Pick a topic</button>
+          <button type="button" class="chip lx-btn" data-lx-panel="day" aria-expanded="false" aria-controls="lxPanel">On this day</button>
+          <button type="button" class="chip lx-btn" data-lx-random="1">Surprise me</button>
+          <button type="button" class="chip lx-btn" data-lx-q="@short">Shortest drops</button>
+          <button type="button" class="chip lx-btn" data-lx-panel="how" aria-expanded="false" aria-controls="lxPanel">How to search</button>
+        </div>
+        <div class="lx-panel" id="lxPanel" hidden></div>
       </div>
 
       <div class="arc-bar" role="search" aria-label="Filter the ledger">
@@ -1022,12 +1091,22 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         </select>
       </div>
 
+      <div class="lx-delta" id="lxDelta" role="group" aria-label="Deltas: drops posted on this day of the year, every year">
+        <span class="lx-dlbl">Deltas</span>
+        <button type="button" class="chip" data-delta="yesterday" aria-pressed="false">Yesterday<span class="lx-dd"></span></button>
+        <button type="button" class="chip" data-delta="today" aria-pressed="false">Today<span class="lx-dd"></span></button>
+        <button type="button" class="chip" data-delta="tomorrow" aria-pressed="false">Tomorrow<span class="lx-dd"></span></button>
+        <button type="button" class="chip lx-spread" data-spread="3" aria-pressed="false">± 3 days</button>
+      </div>
+      <p class="lx-info" id="arcInfo" aria-live="polite" hidden></p>
+
       <ol class="arc-list" id="arcList" aria-live="polite"></ol>
 
       <div class="arc-empty" id="arcEmpty" hidden>
         <h3 id="arcEmptyTitle">Nothing in the ledger answers to that.</h3>
         <p id="arcEmptyBody">Try a drop number, a month, or a board name.</p>
-        <button class="jump" id="arcJump" type="button">Go to the nearest number</button>
+        <div class="lx-acts lx-acts-empty" id="arcActs"></div>
+        <button class="jump" id="arcJump" type="button" hidden>Go to the nearest number</button>
       </div>
 
       <div class="arc-foot">
@@ -1102,7 +1181,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 </style>
 <figure class="sect-plate faq-plate"><img src="images/reading-room.webp" alt="A reading room in flat daylight — bone paper and charcoal metal, a bound index open on a desk" loading="lazy"><figcaption>The reading room — where the record is kept</figcaption></figure>
 <div class="k-in"></div>
-<script type="application/json" class="data">{"eyebrow":"Method","heading":"How the record is kept.","copy":"Sources, verification, gaps and corrections — the part that makes this an archive rather than a feed.","filterPlaceholder":"Search the method","noMatch":"Nothing here answers that — try “gaps”, “sources” or “corrections”.","image":{"src":"images/reading-room.webp","alt":"A reading room in flat daylight — bone paper and charcoal metal, a bound index open on a desk"},"items":[{"q":"What counts as a drop?","a":"A numbered post by the account the run is attributed to, published on the board it appeared on. Replies, reposts and cross-references are recorded against the number, never counted a second time."},{"q":"Which set of records does this page hold?","a":"The expanded set: 4,966 records, numbered #1–#4,966 and dated 28 Oct 2017 to 28 Nov 2022. A shorter set of 4,953 records, ending at #4953 on 8 Dec 2020, also circulates. Where the two differ, this page uses the expanded set."},{"q":"Where do the texts come from?","a":"From captures of the original threads taken while they were live, wherever those captures survive. Each record names the board it came from. The archive does not paraphrase in place of a text it actually holds."},{"q":"What happens when a thread expires?","a":"The board deletes it; the copy does not. Records are taken from captures made before expiry and checked against a second capture where one exists. Where only one capture survives, the record says so."},{"q":"Why are there gaps in the numbering?","a":"Because the run itself skipped numbers. A skip is recorded as a skip and never filled in. Where a number is known to exist but its text is missing, the ledger marks the number and leaves the record empty rather than guessing."},{"q":"How are corrections handled?","a":"A correction is filed against a number, logged, and shown beside the record it changes. The original reading stays visible; the archive keeps both rather than silently overwriting one with the other."},{"q":"What is deliberately not here?","a":"Interpretation. No theory, no commentary, no ranking of what matters. The ledger holds the record and its dates. What it means is a reader's work, not an archive's."}]}</script>
+<script type="application/json" class="data">{"eyebrow":"Method","heading":"How the record is kept.","copy":"Sources, verification, gaps and corrections — the part that makes this an archive rather than a feed.","filterPlaceholder":"Search the method","noMatch":"Nothing here answers that — try “gaps”, “sources” or “corrections”.","image":{"src":"images/reading-room.webp","alt":"A reading room in flat daylight — bone paper and charcoal metal, a bound index open on a desk"},"items":[{"q":"What counts as a drop?","a":"A numbered post by the account the run is attributed to, published on the board it appeared on. Replies, reposts and cross-references are recorded against the number, never counted a second time."},{"q":"Which set of records does this page hold?","a":"The expanded set: 4,966 records, numbered #1–#4,966 and dated 28 Oct 2017 to 27 Nov 2022. A shorter set of 4,953 records, ending at #4953 on 8 Dec 2020, also circulates. Where the two differ, this page uses the expanded set."},{"q":"Where do the texts come from?","a":"From captures of the original threads taken while they were live, wherever those captures survive. Each record names the board it came from. The archive does not paraphrase in place of a text it actually holds."},{"q":"What happens when a thread expires?","a":"The board deletes it; the copy does not. Records are taken from captures made before expiry and checked against a second capture where one exists. Where only one capture survives, the record says so."},{"q":"Why are there gaps in the numbering?","a":"Because the run itself skipped numbers. A skip is recorded as a skip and never filled in. Where a number is known to exist but its text is missing, the ledger marks the number and leaves the record empty rather than guessing."},{"q":"How are corrections handled?","a":"A correction is filed against a number, logged, and shown beside the record it changes. The original reading stays visible; the archive keeps both rather than silently overwriting one with the other."},{"q":"What is deliberately not here?","a":"Interpretation. No theory, no commentary, no ranking of what matters. The ledger holds the record and its dates. What it means is a reader's work, not an archive's."}]}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-faq-accordion'),D=JSON.parse(root.querySelector('script.data').textContent),esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});},uid='f'+Math.random().toString(36).slice(2,7);
@@ -1154,7 +1233,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 @media(max-width:480px){.e3-cta-split .k-row2{flex-direction:column}.e3-cta-split .k-go{width:100%}}
 @media(prefers-reduced-motion:reduce){.e3-cta-split input,.e3-cta-split .k-go,.e3-cta-split .k-alt{transition:none}}
 </style>
-<script type="application/json" class="data">{"mode":"buttons","kicker":"Start anywhere","title":"The ledger takes a number, a date, or a phrase.","lede":"There is no front page and no ranking. Type what you already know and the record answers with what it holds.","bullets":["Drop numbers #1 to #4,966, 28 Oct 2017 – 28 Nov 2022","Filter the record by board across 4chan, 8chan and 8kun — nine board tags in all"],"buttons":{"ask":"Two ways in — or search from the field at the top of the page.","primary":"#1061 — try a number","primaryHref":"#archive","secondary":"“October 2018” — try a date","secondaryHref":"#archive"}}</script>
+<script type="application/json" class="data">{"mode":"buttons","kicker":"Start anywhere","title":"The ledger takes a number, a date, or a phrase.","lede":"There is no front page and no ranking. Type what you already know and the record answers with what it holds.","bullets":["Drop numbers #1 to #4,966, 28 Oct 2017 – 27 Nov 2022","Filter the record by board across 4chan, 8chan and 8kun — nine board tags in all"],"buttons":{"ask":"Two ways in — or search from the field at the top of the page.","primary":"#1061 — try a number","primaryHref":"#archive","secondary":"“October 2018” — try a date","secondaryHref":"#archive"}}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-cta-split'),D=JSON.parse(root.querySelector('script.data').textContent),uid='e3cs'+Math.random().toString(36).slice(2,7);
@@ -1208,7 +1287,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 @media(prefers-reduced-motion:reduce){.e3-footer-editorial .k-dirs a::after,.e3-footer-editorial .k-social a,.e3-footer-editorial form button,.e3-footer-editorial .k-up svg{transition:none}}
 </style>
 <div class="k-in"></div>
-<script type="application/json" class="data">{"brand":"The Drop Ledger","tag":"Coverage 28 Oct 2017 – 28 Nov 2022 · 4,966 drops held, #1–#4,966 · three sites, nine boards · compiled 19 Oct 2026","credit":"Built by The Rubber Duck™️ and VK","owned":"Owned, operated and maintained by The Rubber Duck™","newsletter":{"heading":"One note when the record changes","copy":"This form is not connected yet — no mailing service is attached to the page, so nothing is collected.","placeholder":"you@example.com","button":"Keep me posted","error":"That email does not look right — check the @ and the domain.","done":"Nothing was sent — this form is not connected to a mailing service."},"columns":[{"heading":"The record","links":[["The ledger","#archive"],["Calendar","#calendar"],["Chronology","#chronology"],["Method","#method"]]},{"heading":"Reading","links":[["Drop numbers","#archive"],["Gaps in the run","#method"],["Corrections","#corrections"],["Board filters","#archive"]]},{"heading":"About","links":[["Coverage","#method"],["Sources","#method"],["File a correction","#corrections"]]}],"social":[],"legal":[["A reading room, not a fan page","#archive"]],"company":"The Drop Ledger"}</script>
+<script type="application/json" class="data">{"brand":"The Drop Ledger","tag":"Coverage 28 Oct 2017 – 27 Nov 2022 · 4,966 drops held, #1–#4,966 · three sites, nine boards · compiled 19 Oct 2026","credit":"Built by The Rubber Duck™️ and VK","owned":"Owned, operated and maintained by The Rubber Duck™","newsletter":{"heading":"One note when the record changes","copy":"This form is not connected yet — no mailing service is attached to the page, so nothing is collected.","placeholder":"you@example.com","button":"Keep me posted","error":"That email does not look right — check the @ and the domain.","done":"Nothing was sent — this form is not connected to a mailing service."},"columns":[{"heading":"The record","links":[["The ledger","#archive"],["Calendar","#calendar"],["Chronology","#chronology"],["Method","#method"]]},{"heading":"Reading","links":[["Drop numbers","#archive"],["Gaps in the run","#method"],["Corrections","#corrections"],["Board filters","#archive"]]},{"heading":"About","links":[["Coverage","#method"],["Sources","#method"],["File a correction","#corrections"]]}],"social":[],"legal":[["A reading room, not a fan page","#archive"]],"company":"The Drop Ledger"}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-footer-editorial'),D=JSON.parse(root.querySelector('script.data').textContent),esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});},N=D.newsletter||{};
@@ -1300,7 +1379,6 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 (function(){
   /* The full run: real records from data/drops.js — #1 to #4,966, one entry per numbered post. */
   function pad2(v){ return ('0'+v).slice(-2); }
-  function iso(ts){ var x=new Date(ts*1000); return x.getUTCFullYear()+'-'+pad2(x.getUTCMonth()+1)+'-'+pad2(x.getUTCDate()); }
   /* The drop as originally posted: every line break kept, no rewording, no trimming, no flattening.
      Presentation only — greentext lines and >>cross-references get a class, never a character change. */
   function escapeHTML(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
@@ -1341,63 +1419,73 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     }
     return s;
   }
-  var DATA=(window.QDROPS||[]).map(function(r){ return {n:r[0], t:r[1], d:iso(r[1]), b:r[2], bd:r[3], l:r[4], e:r[5]||''}; });
+  /* Every date in the ledger is US Eastern — the same as the 4,966 /drops/<n>/ pages.
+     The raw timestamps are zone-free Unix seconds, so this is an exact conversion. assets/trd/ledger-search.js does the work. */
+  var LX=window.TRDLedger;
+  var DATA=LX.records().map(function(r){ return {n:r.n, t:r.t, d:r.d_iso, time:r.time, b:r.b, bd:r.bd, l:r.l, e:r.e}; });
+  var BYN={}; DATA.forEach(function(r){ BYN[r.n]=r; });
 
   var ALL=DATA.slice().sort(function(a,b){return a.n-b.n;});
   var PER=12;
-  var state={q:'',board:'all',sort:'newest',page:1,jump:null,filtered:ALL.slice()};
+  var state={q:'',board:'all',sort:'newest',page:1,jump:null,filtered:ALL.slice(),res:null,noSyn:false,spread:0};
   var list=document.getElementById('arcList'),
       count=document.getElementById('arcCount'),
       pageEl=document.getElementById('arcPage'),
       prev=document.getElementById('arcPrev'),
       next=document.getElementById('arcNext'),
       empty=document.getElementById('arcEmpty'),
+      emptyTitle=document.getElementById('arcEmptyTitle'),
       emptyBody=document.getElementById('arcEmptyBody'),
+      emptyActs=document.getElementById('arcActs'),
       jump=document.getElementById('arcJump'),
+      info=document.getElementById('arcInfo'),
       query=document.getElementById('arcQuery'),
       clear=document.getElementById('arcClear'),
       wrap=document.getElementById('arcSearchWrap'),
       sort=document.getElementById('arcSort'),
-      chips=[].slice.call(document.querySelectorAll('.chip'));
+      chips=[].slice.call(document.querySelectorAll('.arc-chips .chip'));
 
-  var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var MONF=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MON=LX.MON, MONF=LX.MONF;
   function fmtDate(iso){ var p=iso.split('-'); return parseInt(p[2],10)+' '+MON[parseInt(p[1],10)-1]+' '+p[0]; }
-  function esc(s){ return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function nf(v){ return v.toLocaleString('en-US'); }
+  function btn(label,q,cls){ return '<button type="button" class="lx-act'+(cls?' '+cls:'')+'" data-lx-q="'+esc(q)+'">'+esc(label)+'</button>'; }
+  function mdq(m,d){ return MON[m-1]+' '+d; }
 
-  function searchPool(r){
-    var mi=parseInt(r.d.slice(5,7),10)-1, y=r.d.slice(0,4), mn=MON[mi], mf=MONF[mi];
-    return (r.n+' #'+r.n+' q'+r.n+' '+r.d+' '+r.d.replace(/-/g,' ')+' '+fmtDate(r.d)+' '+mn+' '+y+' '+mf+' '+y+' '+r.b+' '+r.bd+' '+(r.e||'')).toLowerCase();
-  }
-  /* A bare number — "1061", "#1061" or ">>1061" — is a jump to that drop, not a text search.
-     Without this, "1061" also matches every >>1061 reply quoted inside other drops, so the
-     drop itself is buried in eleven rows. Phrases and multi-word searches are untouched. */
-  function numJump(q){
-    var s=String(q||'').trim().toLowerCase().replace(/^>>/,'').replace(/^#/,'').replace(/^q(?=\d)/,'').trim();
-    return /^\d+$/.test(s) ? parseInt(s,10) : null;
-  }
   function apply(){
-    var q=state.q.trim().toLowerCase();
-    var jumpN=numJump(q);
-    state.jump=jumpN;
-    var out=ALL.filter(function(r){
-      if(state.board!=='all' && r.b!==state.board) return false;
-      if(jumpN!==null) return r.n===jumpN;
-      if(!q) return true;
-      var qq=q.replace(/^#/,'').replace(/^q(?=\d)/,'');
-      var pool=searchPool(r)+' '+searchPool(r).replace(/\s+/g,'');
-      return pool.indexOf(qq)>-1 || pool.indexOf(q)>-1;
-    });
-    if(state.sort==='newest') out.sort(function(a,b){return b.n-a.n;});
-    if(state.sort==='oldest') out.sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0;});
-    if(state.sort==='number') out.sort(function(a,b){return a.n-b.n;});
-    state.filtered=out;
-    var pages=Math.max(1,Math.ceil(out.length/PER));
+    var res=LX.search(state.q,{noSyn:state.noSyn});
+    state.res=res;
+    state.jump=(res.kind==='number' && res.rows.length===1)?res.jump:null;
+    var rows=res.rows.map(function(r){ return BYN[r.n]; });
+    if(state.board!=='all' && res.kind!=='number') rows=rows.filter(function(r){ return r.b===state.board; });
+    if(res.order!=='list'){
+      if(state.sort==='newest') rows.sort(function(a,b){return b.n-a.n;});
+      if(state.sort==='oldest') rows.sort(function(a,b){return a.t-b.t;});
+      if(state.sort==='number') rows.sort(function(a,b){return a.n-b.n;});
+    }
+    state.filtered=rows;
+    var pages=Math.max(1,Math.ceil(rows.length/PER));
     if(state.page>pages) state.page=pages;
     render();
+    syncDeltaRow();
+  }
+  function renderInfo(res, shown){
+    if(!res || !res.q){ info.hidden=true; info.innerHTML=''; return; }
+    var h='<span class="lx-lbl">'+esc(res.label||'')+'</span>';
+    if(state.board!=='all' && res.kind!=='number' && shown!==res.rows.length) h+=' <span class="lx-note">Showing '+esc(state.board)+' only ('+nf(shown)+' of '+nf(res.rows.length)+').</span>';
+    var acts='';
+    if(res.alt) acts+=btn(res.alt.label, res.alt.q);
+    if(res.kind==='delta' && res.rows.length && res.numberDeltas && res.numberDeltas.length){
+      acts+=res.numberDeltas.map(function(r){ return btn('Number delta #'+r.n+' ('+fmtDate(r.d_iso)+')','#'+r.n); }).join('');
+    }
+    if(res.used && res.used.length && !state.noSyn) acts+='<button type="button" class="lx-act" data-lx-nosyn="1">Exact word only</button>';
+    if(state.noSyn && res.kind==='text') acts+='<button type="button" class="lx-act" data-lx-nosyn="0">Include related names</button>';
+    info.innerHTML=h+(acts?'<span class="lx-acts">'+acts+'</span>':'');
+    info.hidden=false;
   }
   function render(){
-    var out=state.filtered, pages=Math.max(1,Math.ceil(out.length/PER));
+    var out=state.filtered, pages=Math.max(1,Math.ceil(out.length/PER)), res=state.res||{};
+    var caps=res.captions||{};
     var slice=out.slice((state.page-1)*PER,state.page*PER);
     list.innerHTML=slice.map(function(r){
       var body = r.e
@@ -1415,31 +1503,65 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       }
       src += '<a class="src src-qalerts" href="https://qalerts.app/?n='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on qalerts.app (the original boards are offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on qalerts.app</span><span class="src-host">qalerts.app</span></a>';
       src += '</span>';
+      var cap = caps[r.n] ? '<p class="lx-cap">'+esc(caps[r.n])+'</p>' : '';
       return '<li class="arc-row" id="drop-'+r.n+'">'+
         '<span class="n"><a href="#drop-'+r.n+'" aria-label="Permalink to drop '+r.n+'"><span>#</span>'+r.n+'</a></span>'+
-        '<span class="d">'+fmtDate(r.d)+'</span>'+
+        '<span class="d" title="'+esc(r.time)+' (US Eastern)">'+fmtDate(r.d)+'</span>'+
         '<span class="b">'+r.b+'<i>'+r.bd+'</i></span>'+
-        '<span class="e">'+body+src+'</span></li>';
+        '<span class="e">'+cap+body+src+'</span></li>';
     }).join('');
     empty.hidden = out.length>0;
     list.hidden = out.length===0;
     var from=out.length?((state.page-1)*PER+1):0, to=Math.min(state.page*PER,out.length);
-    var nf=function(v){ return v.toLocaleString('en-US'); };
     count.textContent = out.length ? ('Showing '+nf(from)+'–'+nf(to)+' of '+nf(out.length)+(out.length===ALL.length?' records':' matching records')) : 'No matching records';
     if(state.jump!==null && out.length===1) scheduleJump(out[0].n);
     pageEl.textContent=state.page+' / '+pages;
     prev.disabled=state.page<=1; next.disabled=state.page>=pages;
     wrap.classList.toggle('has-value', state.q.length>0);
-    if(out.length===0){
-      var m=state.q.match(/\d+/);
-      var near=m?nearest(parseInt(m[0],10)):ALL[ALL.length-1];
-      emptyBody.textContent = m
-        ? 'The ledger holds no drop #'+m[0]+'. The nearest number it holds is #'+near.n+' — '+fmtDate(near.d)+'.'
-        : 'Try a drop number, a month such as “Oct 2018”, a board name, or a phrase from a drop.';
-      jump.hidden = !m;
-      jump.textContent = m ? ('Show #'+near.n) : '';
-      jump.onclick=function(){ state.q='#'+near.n; query.value=state.q; state.page=1; apply(); };
+    renderInfo(res, out.length);
+    if(out.length===0) renderEmpty(res); else emptyActs.innerHTML='';
+  }
+  /* An empty result always says why, and always offers somewhere to go next. */
+  function renderEmpty(res){
+    var acts='';
+    jump.hidden=true;
+    if(res.rows && res.rows.length && state.board!=='all'){
+      emptyTitle.textContent='Nothing on '+state.board+' for that.';
+      emptyBody.textContent=nf(res.rows.length)+' drop'+(res.rows.length===1?'':'s')+' match on the other boards.';
+      emptyActs.innerHTML='<button type="button" class="lx-act" data-arc-board="all" data-lx-keep="1">Show all boards</button>';
+      return;
     }
+    if(res.kind==='delta'){
+      var md=res.md, nr=res.nearest||{};
+      emptyTitle.textContent=(md.which?(md.which.charAt(0).toUpperCase()+md.which.slice(1)+' — '):'')+mdq(md.m,md.d)+': no drops in any year.';
+      var parts=[];
+      function yrs(o){ return Object.keys(o.years).map(function(y){ return y+', '+o.years[y]+' drop'+(o.years[y]===1?'':'s'); }).join('; '); }
+      if(nr.before) parts.push(mdq(nr.before.m,nr.before.d)+' ('+yrs(nr.before)+')');
+      if(nr.after) parts.push(mdq(nr.after.m,nr.after.d)+' ('+yrs(nr.after)+')');
+      emptyBody.textContent='47 days of the calendar year have no drops in any year, and this is one of them. Nearest days with drops: '+parts.join(' · ')+'.';
+      if(nr.before) acts+=btn('← '+mdq(nr.before.m,nr.before.d), mdq(nr.before.m,nr.before.d));
+      if(nr.after) acts+=btn(mdq(nr.after.m,nr.after.d)+' →', mdq(nr.after.m,nr.after.d));
+      if(!md.spread) acts+=btn('Show ± 3 days', (md.which||mdq(md.m,md.d))+' ±3');
+      (res.numberDeltas||[]).forEach(function(r){ acts+=btn('Number delta #'+r.n,'#'+r.n); });
+    } else if(res.gap && (res.gap.before||res.gap.after)){
+      emptyTitle.textContent='No drops in that period.';
+      emptyBody.textContent=res.empty;
+      if(res.gap.before) acts+=btn('Last before: #'+res.gap.before.n+' ('+fmtDate(res.gap.before.d_iso)+')','#'+res.gap.before.n);
+      if(res.gap.after) acts+=btn('Next after: #'+res.gap.after.n+' ('+fmtDate(res.gap.after.d_iso)+')','#'+res.gap.after.n);
+    } else if(res.kind==='number'){
+      emptyTitle.textContent='No drop with that number.';
+      emptyBody.textContent=res.empty;
+      if(res.alt) acts+=btn(res.alt.label,res.alt.q);
+    } else if(res.date){
+      emptyTitle.textContent='No drops in that period.';
+      emptyBody.textContent=res.empty||'';
+      if(res.alt) acts+=btn(res.alt.label,res.alt.q);
+    } else {
+      emptyTitle.textContent='Nothing in the ledger answers to that.';
+      emptyBody.textContent=(res.empty?res.empty+' ':'')+'Try fewer words, a different spelling, a date like 10/22/2020 or Oct 2018, or a drop number like #1024.';
+      acts+=btn('Start here','@start')+btn('Future proves past','"future proves past"')+btn('Oct 2018','Oct 2018');
+    }
+    emptyActs.innerHTML=acts;
   }
   /* Land the reader on the drop they asked for: one short debounce so typing "1061" does not
      yank the page around at "1", "10" and "106". Only scrolls when the row is off-screen. */
@@ -1458,25 +1580,52 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       setTimeout(function(){ el.classList.remove('arc-hit'); },2600);
     },300);
   }
-  function nearest(n){
-    var best=ALL[0];
-    ALL.forEach(function(r){ if(Math.abs(r.n-n)<Math.abs(best.n-n)) best=r; });
-    return best;
-  }
 
-  /* A jump to a drop number is unambiguous, so it drops any board chip that would hide that drop;
-     the chip row moves to "All boards" rather than silently returning nothing. */
+  /* A jump to a drop number is unambiguous, so it drops any board chip that would hide that drop. */
   function clearChipsForJump(){
     if(state.board==='all') return;
     state.board='all';
     chips.forEach(function(o){o.setAttribute('aria-pressed', o.getAttribute('data-board')==='all'?'true':'false');});
   }
+  /* Keep the address bar shareable: ?q=… (or ?delta=today) — no reload, no history spam. */
+  var urlT=null;
+  function syncURL(){
+    clearTimeout(urlT);
+    urlT=setTimeout(function(){
+      try{
+        var u=new URL(location.href), q=state.q.trim();
+        u.searchParams.delete('q'); u.searchParams.delete('delta');
+        if(/^(today|yesterday|tomorrow)$/i.test(q)) u.searchParams.set('delta',q.toLowerCase());
+        else if(q) u.searchParams.set('q',q);
+        if(q && /^#drop-\d+$/.test(u.hash)) u.hash='';
+        if(u.href!==location.href) history.replaceState(history.state,'',u.href);
+      }catch(e){}
+    },400);
+  }
+  /* One way in for every button, link and box: set the query, run it, keep the URL in step. */
+  function setQuery(v, opts){
+    opts=opts||{};
+    state.q=v; state.page=1; state.noSyn=false;
+    if(query.value!==v) query.value=v;
+    if(LX.parseNumber(v)!==null) clearChipsForJump();
+    apply(); syncHero(v); syncURL();
+    if(opts.scroll) scrollToResults();
+  }
+  function scrollToResults(){
+    var bar=document.querySelector('.arc-bar'), target=document.getElementById('arcInfo');
+    var el=(target && !target.hidden)?target:list;
+    var off=(bar?bar.getBoundingClientRect().height:0)+96;
+    var y=el.getBoundingClientRect().top+window.pageYOffset-off;
+    var calm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(Math.abs(window.pageYOffset-y)>40) window.scrollTo({top:Math.max(0,y),behavior:calm?'auto':'smooth'});
+  }
+  var typeT=null;
   query.addEventListener('input',function(){
-    state.q=query.value; state.page=1; if(numJump(query.value)!==null) clearChipsForJump(); apply(); syncHero(query.value);
+    var v=query.value; clearTimeout(typeT);
+    typeT=setTimeout(function(){ setQuery(v); },150);
   });
-  clear.addEventListener('click',function(){
-    state.q=''; query.value=''; state.page=1; apply(); query.focus(); syncHero('');
-  });
+  query.addEventListener('keydown',function(e){ if(e.key==='Enter'){ clearTimeout(typeT); setQuery(query.value,{scroll:true}); } });
+  clear.addEventListener('click',function(){ clearTimeout(typeT); setQuery(''); query.focus(); });
   sort.addEventListener('change',function(){ state.sort=sort.value; state.page=1; apply(); });
   chips.forEach(function(c){
     c.addEventListener('click',function(){
@@ -1495,36 +1644,77 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     window.scrollTo({top:y,behavior:'smooth'});
   }
 
-  /* hero + heatmap hooks: anything carrying data-arc-query drives the ledger */
+  /* ---- Deltas: drops posted on this calendar day (US Eastern) in every year ---- */
+  var deltaRow=document.getElementById('lxDelta');
+  function labelDeltas(){
+    var t=LX.today();
+    [['yesterday',-1],['today',0],['tomorrow',1]].forEach(function(p){
+      var x=LX.addDays(t.y,t.m,t.d,p[1]), b=deltaRow.querySelector('[data-delta="'+p[0]+'"] .lx-dd');
+      if(b) b.textContent=mdq(x.m,x.d);
+    });
+  }
+  function syncDeltaRow(){
+    if(!deltaRow) return;
+    var res=state.res||{}, which=(res.md&&res.md.which)||null, spread=(res.md&&res.md.spread)||0;
+    [].slice.call(deltaRow.querySelectorAll('[data-delta]')).forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-delta')===which?'true':'false');
+    });
+    var sp=deltaRow.querySelector('[data-spread]');
+    if(sp){ sp.setAttribute('aria-pressed', spread?'true':'false'); }
+  }
+  if(deltaRow){
+    labelDeltas();
+    deltaRow.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      var res=state.res||{}, md=res.kind==='delta'?res.md:null;
+      if(b.hasAttribute('data-delta')){
+        var w=b.getAttribute('data-delta'), sp=(md&&md.spread)?' ±'+md.spread:'';
+        setQuery(w+sp,{scroll:true});
+      } else if(b.hasAttribute('data-spread')){
+        var base=md?(md.which||mdq(md.m,md.d)):'today';
+        setQuery(md&&md.spread?base:base+' ±3',{scroll:true});
+      }
+    });
+  }
+
+  /* ---- hero + heatmap + starter hooks: anything carrying data-arc-query / data-lx-q drives the ledger ---- */
   function syncHero(v){
-    [].slice.call(document.querySelectorAll('[data-arc-query]')).forEach(function(el){ if(el.value!==v) el.value=v; });
+    [].slice.call(document.querySelectorAll('[data-arc-query]')).forEach(function(el){ if(el.tagName==='INPUT' && el.value!==v) el.value=v; });
   }
   document.addEventListener('click',function(e){
+    var lx=e.target.closest('[data-lx-q],[data-lx-nosyn]');
+    if(lx){
+      if(lx.hasAttribute('data-lx-nosyn')){ state.noSyn=lx.getAttribute('data-lx-nosyn')==='1'; state.page=1; apply(); return; }
+      setQuery(lx.getAttribute('data-lx-q'),{scroll:true}); return;
+    }
     var el=e.target.closest('[data-arc-query],[data-arc-date],[data-arc-board]');
     if(!el) return;
     if(el.hasAttribute('data-arc-date')){
-      var d=el.getAttribute('data-arc-date');
-      state.q=fmtDate(d); query.value=state.q;
+      setQuery(fmtDate(el.getAttribute('data-arc-date')));
     } else if(el.hasAttribute('data-arc-board')){
       var b=el.getAttribute('data-arc-board');
       chips.forEach(function(o){o.setAttribute('aria-pressed', o.getAttribute('data-board')===b?'true':'false');});
-      state.board=b; query.value=''; state.q='';
+      state.board=b;
+      if(el.hasAttribute('data-lx-keep')){ state.page=1; apply(); return; }
+      setQuery('');
     } else {
-      var v=el.value||el.getAttribute('data-arc-query')||'';
-      if(el.tagName==='INPUT'){ /* typing handled by input event */ }
-      state.q=v; query.value=v; if(numJump(v)!==null) clearChipsForJump();
+      if(el.tagName==='INPUT') return; /* typing handled by the input event */
+      setQuery(el.value||el.getAttribute('data-arc-query')||'');
     }
-    state.page=1; apply();
     document.getElementById('archive').scrollIntoView({behavior:'smooth',block:'start'});
   });
   [].slice.call(document.querySelectorAll('[data-arc-query]')).forEach(function(el){
-    if(el.tagName==='INPUT'){ el.addEventListener('input',function(){ state.q=el.value; query.value=el.value; state.page=1; apply(); }); }
+    if(el.tagName==='INPUT'){ el.addEventListener('input',function(){ var v=el.value; clearTimeout(typeT); typeT=setTimeout(function(){ setQuery(v); },150); }); }
   });
+  window.TRDLedgerUI={setQuery:setQuery, state:state};
 
   (function deepLink(){
     var m=(location.hash||'').match(/^#drop-(\d+)$/), q=m?('#'+m[1]):'';
-    try{ q = q || (new URLSearchParams(location.search).get('q')||''); }catch(err){}
-    if(q){ state.q=q; query.value=q; }
+    try{
+      var sp=new URLSearchParams(location.search);
+      q = q || sp.get('q') || sp.get('delta') || '';
+    }catch(err){}
+    if(q){ state.q=q; query.value=q; syncHero(q); }
   })();
 
   apply();
