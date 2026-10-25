@@ -796,6 +796,38 @@ function localFailed(v, auto, why, url) {
   const t = setInterval(() => { if (cur !== v || !$('offn')) return clearInterval(t); n -= 1; $('offn').textContent = n; if (n <= 0) go(); }, 1000);
   $('offnext').addEventListener('click', go);
 }
+/* Double feature chapter strip under the screen: shows both reels, marks the one on the projector,
+   and lets the viewer jump to either file. Auto-advance (ended) and jumps both go through setReel. */
+function renderReels(v) {
+  const box = $('reels');
+  if (!v.reels) { if (!box.hidden) { box.hidden = true; box.innerHTML = ''; layout(); } return; }
+  box.innerHTML = '<div class="rl-head"><span class="neon">Double Feature</span><small>' + esc(v.part || '') + ' \u00b7 ' + esc(v.dur) + '</small></div>' +
+    v.reels.map((r, i) => '<button class="reel-btn" type="button" data-reel="' + i + '" aria-current="' + (i === curReel) + '" title="' + esc(r.t) + '">' +
+      '<span class="rn">' + r.n + '</span><span class="rt"><b>Chapter ' + r.n + '</b><span>' + esc(r.dur) + '<i>' + (i === curReel ? ' \u00b7 On screen' : i > curReel ? ' \u00b7 Up next' : ' \u00b7 Replay') + '</i></span></span></button>').join('');
+  box.hidden = false;
+  layout();
+}
+function setReel(v, i, why) {   // why: 'ended' (auto-advance) | 'pick' (viewer jumped)
+  if (cur !== v || !v.reels || !v.reels[i]) return;
+  curReel = i;
+  const r = v.reels[i];
+  renderReels(v);
+  history.replaceState(null, '', '#v=' + v.id + (i ? '&ch=' + r.n : ''));
+  const pr = $('prumble'); if (v.source === 'local') pr.href = r.u;
+  trackEvent('chapter', {id: v.id, chapter: r.n, how: why});
+  const player = $('stage').querySelector('video.feature');
+  if (player) {   // keep the same player: swap the src, re-arm the per-file fallback, play
+    player.poster = r.th || ''; player.title = v.t + ' (Chapter ' + r.n + ')';
+    player.src = r.u;
+    watchLocal(v, player, () => {}, false, r.u);
+  } else {
+    play(v);   // poster, reel card or off-the-projector card on screen: start this chapter fresh
+  }
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('#reels .reel-btn'); if (!b || !cur) return;
+  setReel(cur, +b.dataset.reel, 'pick');
+});
 function fitTitle() {
   const h = $('ptitle'), box = h.parentElement, small = innerWidth <= 760;
   let size = small ? 34 : 54; const min = small ? 15 : 22;
@@ -840,38 +872,6 @@ function select(v, mode, ch) {   // mode: 'play' | 'autoplay' | 'poster' | 'reel
   const c = document.querySelector('.ticket[data-id="' + v.id + '"]'); if (c) c.classList.add('on');
   mode === 'play' ? play(v) : mode === 'autoplay' ? play(v, true) : mode === 'reel' ? showReel(v) : showPoster(v);
 }
-/* Double feature chapter strip under the screen: shows both reels, marks the one on the projector,
-   and lets the viewer jump to either file. Auto-advance (ended) and jumps both go through setReel. */
-function renderReels(v) {
-  const box = $('reels');
-  if (!v.reels) { if (!box.hidden) { box.hidden = true; box.innerHTML = ''; layout(); } return; }
-  box.innerHTML = '<div class="rl-head"><span class="neon">Double Feature</span><small>' + esc(v.part || '') + ' \u00b7 ' + esc(v.dur) + '</small></div>' +
-    v.reels.map((r, i) => '<button class="reel-btn" type="button" data-reel="' + i + '" aria-current="' + (i === curReel) + '" title="' + esc(r.t) + '">' +
-      '<span class="rn">' + r.n + '</span><span class="rt"><b>Chapter ' + r.n + '</b><span>' + esc(r.dur) + '<i>' + (i === curReel ? ' \u00b7 On screen' : i > curReel ? ' \u00b7 Up next' : ' \u00b7 Replay') + '</i></span></span></button>').join('');
-  box.hidden = false;
-  layout();
-}
-function setReel(v, i, why) {   // why: 'ended' (auto-advance) | 'pick' (viewer jumped)
-  if (cur !== v || !v.reels || !v.reels[i]) return;
-  curReel = i;
-  const r = v.reels[i];
-  renderReels(v);
-  history.replaceState(null, '', '#v=' + v.id + (i ? '&ch=' + r.n : ''));
-  const pr = $('prumble'); if (v.source === 'local') pr.href = r.u;
-  trackEvent('chapter', {id: v.id, chapter: r.n, how: why});
-  const player = $('stage').querySelector('video.feature');
-  if (player) {   // keep the same player: swap the src, re-arm the per-file fallback, play
-    player.poster = r.th || ''; player.title = v.t + ' (Chapter ' + r.n + ')';
-    player.src = r.u;
-    watchLocal(v, player, () => {}, false, r.u);
-  } else {
-    play(v);   // poster, reel card or off-the-projector card on screen: start this chapter fresh
-  }
-}
-document.addEventListener('click', e => {
-  const b = e.target.closest('#reels .reel-btn'); if (!b || !cur) return;
-  setReel(cur, +b.dataset.reel, 'pick');
-});
 /* Short descriptions would leave the middle column half empty; fill it with the next newest features
    (as many as fit beside the other two columns, so all three keep the same top and bottom edges). */
 function fillAlso(v, long) {
