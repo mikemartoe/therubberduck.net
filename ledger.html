@@ -172,6 +172,8 @@ html[data-theme="dark"] .chip[aria-pressed="true"]{color:#1A1710}
 .arc-row .src .src-host{color:var(--muted);font-size:10.5px;letter-spacing:0}
 .arc-row .src-none{color:var(--muted);border-style:dashed;font-family:var(--font-body);font-size:12.5px;font-style:italic;letter-spacing:0;background:transparent}
 .arc-row .nobody{color:var(--muted);font-style:italic}
+.arc-row .src-share{display:flex;width:100%;justify-content:center;cursor:pointer;margin-top:10px;font-size:12.5px;padding:9px 11px}
+.arc-row .src-share[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
 .arc-row:target{background:color-mix(in srgb,var(--accent-2,var(--accent-hover)) 12%,transparent)}
 .arc-row .e{font-size:14.8px;line-height:1.55;color:var(--text)}
 .arc-row .e mark{background:color-mix(in srgb,var(--accent) 30%,transparent);color:inherit;border-radius:3px;padding:0 2px}
@@ -630,6 +632,10 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
 <script src="/assets/trd/duckpod.js" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
+<script src="/assets/trd/visit.js" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/share.css" data-trd-keep>
+<script src="/assets/trd/share.js" data-trd-keep></script>
+<script src="/data/drop-cards.js" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="Every numbered Q drop, #1 to #4,966, in order as originally posted. Search by number, date or phrase, with a way back to each original source.">
 <link rel="canonical" href="https://therubberduck.net/ledger.html">
@@ -1521,6 +1527,21 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       chips=[].slice.call(document.querySelectorAll('.arc-chips .chip'));
 
   var MON=LX.MON, MONF=LX.MONF;
+  /* Share a drop: the Share button opens a row of platform buttons (assets/trd/share.js).
+     The shared item is the drop's card image (R2: drops/card|og|ig) plus /drops/share/N.html,
+     a static page whose preview is the card and which sends people to #drop-N here. */
+  list.addEventListener('click',function(ev){
+    var b=ev.target.closest('.src-share'); if(!b||!window.trdShare) return;
+    var n=+b.getAttribute('data-share-drop'), cell=b.closest('.e'), open=cell.querySelector('.shr');
+    if(open){ open.remove(); b.setAttribute('aria-expanded','false'); return; }
+    var C=window.TRD_DROP_CARDS||{base:'https://memes.therubberduck.net/drops/',long:[]}, r=BYN[n];
+    try{ if(window.trdTrack) trdTrack('event/drop-share/open/'+n,'Q drop #'+n+' share opened',0); }catch(e){}
+    try{ if(window.trdVisit) trdVisit.event('share-open',{item:'drop-'+n}); }catch(e){}
+    cell.appendChild(trdShare.build({kind:'drop', id:String(n), page:'https://therubberduck.net/drops/share/'+n+'.html',
+      text:'Q drop #'+n+' \u00b7 '+(r?fmtDate(r.d):''), thumb:C.base+'og/'+n+'.jpg', file:C.base+'card/'+n+'.png',
+      igFile:(C.long.indexOf(n)>-1)?C.base+'ig/'+n+'.png':null, fileName:'q-drop-'+n+'.png'}));
+    b.setAttribute('aria-expanded','true');
+  });
   function fmtDate(iso){ var p=iso.split('-'); return parseInt(p[2],10)+' '+MON[parseInt(p[1],10)-1]+' '+p[0]; }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function nf(v){ return v.toLocaleString('en-US'); }
@@ -1578,6 +1599,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       }
       src += '<a class="src src-qalerts" href="https://qalerts.app/?n='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on qalerts.app (the original boards are offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on qalerts.app</span><span class="src-host">qalerts.app</span></a>';
       src += '</span>';
+      src += '<button type="button" class="src src-share" data-share-drop="'+r.n+'" aria-expanded="false"><span class="src-arrow" aria-hidden="true">⤴</span><span class="src-lbl">Share</span></button>';
       var cap = caps[r.n] ? '<p class="lx-cap">'+esc(caps[r.n])+'</p>' : '';
       return '<li class="arc-row" id="drop-'+r.n+'">'+
         '<span class="n"><a href="#drop-'+r.n+'" aria-label="Permalink to drop '+r.n+'"><span>#</span>'+r.n+'</a></span>'+

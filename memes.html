@@ -261,7 +261,9 @@ main{position:relative;z-index:1}
 .lbtags button:hover{background:var(--blue);border-color:var(--blue);color:#fff}
 .lbocr{margin:0;font-family:var(--body);font-size:13px;line-height:1.6;color:var(--text);background:var(--well);
   border:1px solid var(--border);border-radius:3px;padding:11px 13px;max-height:140px;overflow:auto;white-space:pre-wrap}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+#shrhost .shr-b{background:var(--well);border-color:#444b53;border-radius:3px}
+#shrhost .shr-b:hover{background:var(--blue);border-color:var(--blue);color:#fff}
 .actions .btn{padding:10px 12px;font-size:12px;font-weight:700;letter-spacing:.03em}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);z-index:120;
   background:var(--green);color:#fff;font-family:var(--body);font-weight:700;font-size:13px;
@@ -303,6 +305,9 @@ footer.site b{color:#c4cad0;font-weight:700}
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
 <script src="/assets/trd/duckpod.js" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
+<script src="/assets/trd/visit.js" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/share.css" data-trd-keep>
+<script src="/assets/trd/share.js" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="The Rubber Duck's meme archive, shuffled fresh every visit. Filter by type, look or the words inside a meme, then download or share what you find.">
 <link rel="canonical" href="https://therubberduck.net/memes.html">
@@ -439,12 +444,9 @@ footer.site b{color:#c4cad0;font-weight:700}
       <div class="lbtags" id="lbtags"></div>
       <div id="lbocrwrap"><h3>Text found in the meme</h3><p class="lbocr" id="lbocr"></p></div>
       <h3>Share &amp; keep</h3>
+      <div id="shrhost"></div>
       <div class="actions">
-        <button class="btn blue" id="copylink">COPY LINK</button>
         <a class="btn green" id="dl" download>DOWNLOAD</a>
-        <button class="btn orange x" data-sh="x">SHARE TO X</button>
-        <button class="btn orange x" data-sh="fb">SHARE TO FACEBOOK</button>
-        <button class="btn orange x" data-sh="rd">SHARE TO REDDIT</button>
         <button class="btn blue" id="copyattr">COPY ATTRIBUTION</button>
       </div>
     </aside>
@@ -982,6 +984,10 @@ function openAt(i){
   var ocr=(it.ocr||'').trim();
   $('lbocrwrap').hidden=!ocr;
   $('lbocr').textContent=ocr;
+  var host=$('shrhost'); host.innerHTML='';
+  if(window.trdShare) host.appendChild(trdShare.build({kind:'meme', id:it.id, page:shareUrl(it), noPic:true,
+    text:(it.title||it.id)+' \u00b7 The Meme Dump', thumb:mediaUrl(it.poster||it.file), file:mediaUrl(it.file), igFile:null,
+    fileName:it.file.split('/').pop()}));
   $('dl').href=mediaUrl(it.file);
   $('dl').setAttribute('download', it.file.split('/').pop());
   lb.classList.add('open');
@@ -1081,21 +1087,9 @@ function bind(){
     window.scrollTo({top:0,behavior:'auto'}); toast('Filtered: '+b.dataset.tag);
   });
   $('dl').addEventListener('click',function(){var it=view[cur];if(it)ev('event/meme-download/'+it.id,'Meme downloaded: '+(it.title||it.id))});
-  $('copylink').addEventListener('click',function(){ev('event/meme-share/copylink','Meme link copied: '+view[cur].id);copy(shareUrl(view[cur]),'Link copied — '+view[cur].id)});
   $('copyattr').addEventListener('click',function(){
     var it=view[cur];ev('event/meme-share/attribution','Meme attribution copied: '+it.id);
     copy((it.title||it.id)+' — The Rubber Duck™ Meme Dump · '+shareUrl(it),'Attribution copied');
-  });
-  Array.prototype.forEach.call(document.querySelectorAll('[data-sh]'),function(b){
-    b.addEventListener('click',function(){
-      var it=view[cur], u=shareUrl(it), txt=shareText(it), href, w=680,h=560;
-      ev('event/meme-share/'+b.dataset.sh,'Meme shared to '+b.dataset.sh+': '+it.id);
-      var url=encodeURIComponent(u), s=encodeURIComponent(txt);
-      if(b.dataset.sh==='x') href='https://twitter.com/intent/tweet?text='+s;
-      else if(b.dataset.sh==='fb') href='https://www.facebook.com/sharer/sharer.php?u='+url+'&quote='+s;
-      else href='https://www.reddit.com/submit?url='+url+'&title='+encodeURIComponent(txt);
-      window.open(href,'share','width='+w+',height='+h+',noopener');
-    });
   });
   document.addEventListener('keydown',function(e){
     if(!$('lb').classList.contains('open'))return;

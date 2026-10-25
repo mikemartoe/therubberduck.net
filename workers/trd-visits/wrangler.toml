@@ -1,0 +1,13 @@
+# NOT DEPLOYED. See README.md before running anything.
+name = "trd-visits"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+routes = [ { pattern = "therubberduck.net/api/v*", zone_name = "therubberduck.net" } ]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "trd-visits"
+database_id = "REPLACE_AFTER_wrangler_d1_create"
+
+[triggers]
+crons = ["17 7 * * *"]
