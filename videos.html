@@ -447,7 +447,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
         <div class="menu">
           <h3>On the bill</h3>
           <dl id="pfacts"></dl>
-          <div class="actions"><a class="ticketbtn" id="prumble" href="#" target="_blank" rel="noopener">Watch on Rumble</a><button class="ticketbtn alt" id="copy" type="button">Copy link</button></div>
+          <div class="actions"><a class="ticketbtn" id="prumble" href="#" target="_blank" rel="noopener">Watch on Rumble</a><button class="ticketbtn alt" id="copy" type="button" aria-controls="psharebar">Share</button></div>
         </div>
         <div class="feature">
           <h3>The feature</h3>
@@ -815,11 +815,13 @@ function fillAlso(v, long) {
 }
 addEventListener('resize', () => { if (cur) fillAlso(cur, $('pdesc').classList.contains('clamp') || !$('more').hidden); });
 $('more').addEventListener('click', () => { const closed = $('pdesc').classList.toggle('clamp'); $('more').textContent = closed ? 'More' : 'Less'; });
+/* "Share" in On the bill: no plain link copying here any more; it takes the visitor to the tracked share strip. */
 $('copy').addEventListener('click', () => {
-  const url = location.href.split('#')[0] + '#v=' + cur.id;
-  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(
-    () => { $('copy').textContent = 'Link copied'; setTimeout(() => $('copy').textContent = 'Copy link', 1600); },
-    () => prompt('Copy this link:', url));
+  const bar = $('psharebar'); if (!bar || !cur) return;
+  bar.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center'});
+  const first = bar.querySelector('.shr-b'); if (first) first.focus({preventScroll: true});
+  try { if (window.trdTrack) trdTrack('event/video-share/open/' + cur.id, 'Video ' + cur.id + ' share opened', 0); } catch (e) {}
+  try { if (window.trdVisit) trdVisit.event('share-open', {item: 'video-' + cur.id}); } catch (e) {}
 });
 
 function ticket(v) {
