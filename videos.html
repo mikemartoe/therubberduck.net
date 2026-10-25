@@ -773,7 +773,7 @@ function nextPlayable(v) {   // next feature in the grid that is not on the offl
   const ids = [...document.querySelectorAll('#grid .ticket[data-id]')].map(a => a.dataset.id);
   const list = (ids.length ? ids.map(id => BY[id]) : VIDS).filter(x => x && x.id !== v.id && x.source !== 'local' && x.e);
   const i = ids.indexOf(v.id);
-  return list.find(x => ids.indexOf(x.id) > i) || BY[FEATURED_ID] || list[0];
+  return list.find(x => ids.indexOf(x.id) > i) || BY[ROLL_ON_ID] || list[0];
 }
 function localFailed(v, auto, why, url) {
   url = url || v.mediaUrl || v.u;
@@ -942,9 +942,12 @@ document.addEventListener('click', e => {
   history.pushState(null, '', '#v=' + v.id); select(v, true);
   $('player').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start'});
 });
-/* Tonight's feature: what a visitor lands on with no #v= link. Loaded and started on arrival;
-   falls back to the newest feature if this id ever leaves the catalog. */
-const FEATURED_ID = 'v2hojm4';   // The Shackleford Tapes - FBI Raid On Epstein Island
+/* Tonight's feature: what a visitor lands on with no #v= link (falls back to the newest feature if this id
+   ever leaves the catalog). A Rumble feature is started on arrival; a local archive feature (the Ring of Power
+   double feature) lands on its poster + chapter strip and never autoplays, so nothing plays with sound and the
+   archive file is only fetched once the visitor presses play. */
+const FEATURED_ID = 'l1f8acc0e2c';   // Ring of Power: Double Feature, Part 1 of 2 (Mike, 2026-10-25)
+const ROLL_ON_ID = 'v2hojm4';        // off-the-projector fallback target: The Shackleford Tapes - FBI Raid On Epstein Island (Rumble)
 let landed = false;
 function fromHash(autoplay) {
   const m = location.hash.match(/v=([a-z0-9]+)/i);
@@ -959,7 +962,7 @@ function fromHash(autoplay) {
   const first = !landed; landed = true;
   if (v) { select(v, autoplay ? 'play' : 'poster', ch); return; }
   const f = VIDS.find(x => x.id === FEATURED_ID) || VIDS.slice().sort((a, b) => b.ts - a.ts)[0];
-  select(f, first ? 'autoplay' : 'poster');
+  select(f, first && f.source !== 'local' ? 'autoplay' : 'poster');
 }
 window.addEventListener('popstate', () => fromHash(false));
 window.addEventListener('hashchange', () => fromHash(false));
