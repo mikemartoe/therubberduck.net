@@ -345,6 +345,50 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
   .bulb{opacity:1}
   .ticket{transition:none}.ticket:hover{transform:none}
 }
+/* ---------- Double Feature: one card, two reels played back to back (no merged file) ---------- */
+.reels{position:relative;z-index:4;margin-top:14px;display:grid;grid-template-columns:minmax(200px,auto) 1fr 1fr;gap:12px;align-items:stretch;
+  background:linear-gradient(#8a2015,#6e170f);border-radius:8px;padding:12px;box-shadow:0 0 0 2px #23242c,0 10px 26px rgba(0,0,0,.55),inset 0 0 0 2px rgba(255,226,160,.25)}
+.reels[hidden]{display:none}
+.reels .rl-head{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:2px 8px}
+.reels .rl-head .neon{font-size:42px;line-height:1;white-space:nowrap}
+.reels .rl-head small{margin-top:6px;font-family:'Oswald',sans-serif;font-weight:600;font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--bulb);white-space:nowrap}
+.reel-btn{display:flex;align-items:center;gap:16px;min-width:0;padding:12px 18px;border:0;border-radius:4px;cursor:pointer;text-align:left;
+  background:linear-gradient(#fbf3df,#ecdcb6);color:#17110b;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18),inset 0 -3px 0 rgba(0,0,0,.08);font-family:'Oswald',sans-serif}
+.reel-btn:hover{filter:brightness(1.05)}
+.reel-btn .rn{flex:none;display:flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;background:var(--red-dk);color:var(--bulb);
+  font-family:'Bungee',Impact,sans-serif;font-size:26px;box-shadow:0 0 0 3px rgba(124,27,18,.25)}
+.reel-btn .rt{display:flex;flex-direction:column;min-width:0;line-height:1.1}
+.reel-btn .rt b{font-family:'Bungee',Impact,sans-serif;font-weight:400;font-size:30px;letter-spacing:.01em;white-space:nowrap}
+.reel-btn .rt span{margin-top:3px;font-weight:600;font-size:19px;letter-spacing:.12em;text-transform:uppercase;color:var(--red-dk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reel-btn .rt i{font-style:normal}
+.reel-btn[aria-current="true"]{background:linear-gradient(#fff8e6,#f6e3b0);box-shadow:0 0 0 3px var(--bulb),0 0 18px rgba(255,214,140,.7),inset 0 0 0 1px rgba(0,0,0,.18)}
+.reel-btn[aria-current="true"] .rn{background:var(--red);color:#fff4e2}
+.plate.df{border:1px solid var(--bulb);color:var(--bulb);background:rgba(20,10,6,.55)}
+.tthumb .plate.df{background:rgba(20,10,6,.82)}
+@media (max-width:1060px){
+  .reels{grid-template-columns:1fr 1fr}
+  .reels .rl-head{grid-column:1/-1;flex-direction:row;gap:14px;justify-content:center}
+  .reels .rl-head small{margin:0}
+}
+@media (max-width:760px){
+  .reels{grid-template-columns:1fr 1fr;gap:8px;padding:8px;margin-top:8px}
+  .reels .rl-head{grid-column:1/-1;flex-direction:row;gap:10px;justify-content:center;padding:0}
+  .reels .rl-head .neon{font-size:28px}
+  .reels .rl-head small{margin:0;font-size:13px;letter-spacing:.12em}
+  .reel-btn{gap:8px;padding:8px 9px}
+  .reel-btn .rn{width:32px;height:32px;font-size:16px}
+  .reel-btn .rt b{font-size:17px}
+  .reel-btn .rt span{margin-top:1px;font-size:13px;letter-spacing:.08em}
+  .reel-btn .rt i{display:none}   /* the lit border marks the reel on screen */
+}
+@media (max-width:400px){
+  .reels .rl-head{gap:8px}
+  .reels .rl-head .neon{font-size:24px;white-space:nowrap}
+  .reels .rl-head small{font-size:11.5px;letter-spacing:.08em}
+  .reel-btn{gap:6px;padding:7px 6px}
+  .reel-btn .rn{width:26px;height:26px;font-size:13px}
+  .reel-btn .rt b{font-size:14px}
+}
 </style>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css" data-trd-keep>
 <script src="/assets/trd/suggest.js" data-trd-keep></script>
@@ -410,6 +454,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
     <div class="mq-posts" aria-hidden="true"><span></span><span></span></div>
     <div class="screen" id="screen">
       <div class="frame"><div class="stage" id="stage"></div></div>
+      <div class="reels" id="reels" role="group" aria-label="Double feature chapters" hidden></div>
       <div class="screen-ctrl"><button class="spk clipsnd" type="button" aria-pressed="false"><span class="grille"></span><span class="lbl">Sound off</span></button></div>
     </div>
     <div class="legs" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -487,6 +532,38 @@ const ALL = [{"id":"v416nbw","t":"The News-Benders, (BBC - 1968)","u":"https://r
 if (Array.isArray(window.TRD_LOCAL_FEATURES) && window.TRD_LOCAL_FEATURES.length) {
   ALL.push.apply(ALL, window.TRD_LOCAL_FEATURES);
 }
+/* ---------- Double Feature ----------
+   Some archive films are split across several files. Each double feature is ONE card that plays its files
+   back to back in the same player (no merged file): when a reel ends the next reel's src is loaded.
+   The reel entries are taken out of the grid; their old ids stay valid as deep links (#v=<old id>
+   opens the double feature at that chapter). Running times are the probed file lengths (ffprobe, 2026-10-25). */
+const DOUBLE_FEATURES = [
+  {id: 'l1f8acc0e2c', t: 'Ring of Power: Double Feature, Part 1 of 2', mq: ['Ring of Power: Double Feature', 'Part 1 of 2'], part: 'Part 1 of 2',
+   reels: [{id: 'l1f8acc0e2c', n: 1, secs: 5220.02}, {id: 'le20acb3c20', n: 2, secs: 3405.205}]},
+  {id: 'lf2e5873b26', t: 'Ring of Power: Double Feature, Part 2 of 2', mq: ['Ring of Power: Double Feature', 'Part 2 of 2'], part: 'Part 2 of 2',
+   reels: [{id: 'lf2e5873b26', n: 3, secs: 4961.861}, {id: 'l594228280d', n: 4, secs: 4620.053}]}
+];
+const REEL_ALIAS = {};   // old per-file id -> [double feature id, chapter number]
+const hms = secs => { const t = Math.round(secs), h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), x = t % 60;
+  return (h ? h + ':' + String(m).padStart(2, '0') : String(m)) + ':' + String(x).padStart(2, '0'); };
+DOUBLE_FEATURES.forEach(df => {
+  const src = df.reels.map(r => ALL.find(x => x.id === r.id && x.source === 'local'));
+  if (src.some(x => !x)) return;   // a reel is missing from the archive data: leave the files as they are
+  const reels = df.reels.map((r, i) => ({n: r.n, id: r.id, t: src[i].t, u: src[i].mediaUrl || src[i].u, th: src[i].th, dur: r.secs ? hms(r.secs) : src[i].dur}));
+  const total = df.reels.reduce((a, r) => a + (r.secs || 0), 0);
+  const first = src[0], lines = reels.map(r => 'Chapter ' + r.n + ' \u00b7 ' + r.t + ' \u00b7 ' + r.dur);
+  const entry = Object.assign({}, first, {
+    id: df.id, t: df.t, mq: df.mq, part: df.part, reels: reels, u: reels[0].u, mediaUrl: reels[0].u, th: reels[0].th,
+    dur: total ? hms(total) : first.dur, ts: Math.max.apply(null, src.map(x => x.ts || 0)),
+    desc: 'Double Feature, ' + df.part + ': ' + reels.length + ' chapters played back to back on one screen.\n' + lines.join('\n') +
+      '\n\nFrom filename: Appears to be a video about Ring of Power.'
+  });
+  const at = ALL.indexOf(first);
+  for (let i = ALL.length - 1; i >= 0; i--) if (src.indexOf(ALL[i]) !== -1) ALL.splice(i, 1);
+  ALL.splice(Math.min(at, ALL.length), 0, entry);
+  reels.forEach(r => { REEL_ALIAS[r.id] = [df.id, r.n]; });
+});
+let curReel = 0;   // index into cur.reels of the chapter on the screen
 const VIDS = ALL.filter(v => !v.rp), REPS = ALL.filter(v => v.rp);
 const BY = Object.fromEntries(ALL.map(v => [v.id, v]));
 (function syncTabCounts() {
@@ -616,9 +693,10 @@ function showReel(v) {
   clearFeature();
 }
 function showPoster(v) {
-  $('stage').innerHTML = '<button class="poster" type="button" aria-label="Play ' + esc(v.t) + '"><img src="' + esc(v.th) + '" alt=""' + (v.source === 'local' ? ' onerror="this.onerror=null;this.src=\'/assets/trd/clips/intermission-card.jpg\'"' : '') + '>' +
+  const r = v.reels && v.reels[curReel], th = r ? r.th : v.th, dur = r ? 'Chapter ' + r.n + ' \u00b7 ' + r.dur : v.dur;
+  $('stage').innerHTML = '<button class="poster" type="button" aria-label="Play ' + esc(v.t) + (r ? ', chapter ' + r.n : '') + '"><img src="' + esc(th) + '" alt=""' + (v.source === 'local' ? ' onerror="this.onerror=null;this.src=\'/assets/trd/clips/intermission-card.jpg\'"' : '') + '>' +
     '<span class="grain"></span><span class="vignette"></span><span class="playbtn"></span>' +
-    (v.dur ? '<span class="badge">' + esc(v.dur) + '</span>' : '') + '</button>';
+    (dur ? '<span class="badge">' + esc(dur) + '</span>' : '') + '</button>';
   $('stage').firstChild.addEventListener('click', () => play(v));
   clearFeature();
 }
@@ -628,14 +706,16 @@ function play(v, auto) {   // auto: started by landing on the page, not by a cli
   // removed on iframe load / video playing, or after 3 s at most (pointer-events:none).
   stopClips();
   const st = $('stage');
-  const local = v.source === 'local' && (v.mediaUrl || v.u);
+  const reel = v.reels && v.reels[curReel];
+  const local = v.source === 'local' && (reel ? reel.u : (v.mediaUrl || v.u));
   if (local) {
     if (v.browserPlayable === false) {
       st.innerHTML = '<div class="poster" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:var(--cream);padding:24px;text-align:center">' +
         '<p style="margin:0;max-width:28rem;line-height:1.35">This archive file (.' + esc(v.ext || 'bin') + ') may not play in the browser.</p>' +
         '<a class="ticketbtn" href="' + esc(v.mediaUrl || v.u) + '" target="_blank" rel="noopener">Open / download media file</a></div>';
     } else {
-      st.innerHTML = '<video class="feature" controls autoplay playsinline preload="metadata"' + (v.th ? ' poster="' + esc(v.th) + '"' : '') + ' src="' + esc(v.mediaUrl || v.u) + '" title="' + esc(v.t) + '"></video>';
+      const pth = reel ? reel.th : v.th;
+      st.innerHTML = '<video class="feature" controls autoplay playsinline preload="metadata"' + (pth ? ' poster="' + esc(pth) + '"' : '') + ' src="' + esc(local) + '" title="' + esc(v.t) + (reel ? ' (Chapter ' + reel.n + ')' : '') + '"></video>';
     }
   } else {
     st.innerHTML = '<iframe src="' + esc(embedSrc(v)) + '" title="' + esc(v.t) + '" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>';
@@ -652,7 +732,10 @@ function play(v, auto) {   // auto: started by landing on the page, not by a cli
     if (local) {
       player.addEventListener('playing', drop, {once: true});
       player.addEventListener('loadeddata', drop, {once: true});
-      watchLocal(v, player, drop, auto);
+      watchLocal(v, player, drop, auto, local);
+      if (v.reels) {   // double feature: same player, next reel's src when this one ends
+        player.addEventListener('ended', () => { if (cur === v && curReel < v.reels.length - 1) setReel(v, curReel + 1, 'ended'); });
+      }
     } else {
       player.addEventListener('load', drop);
     }
@@ -671,12 +754,14 @@ function play(v, auto) {   // auto: started by landing on the page, not by a cli
 const LOCAL_TWINS = {   // local archive id -> the same film on Rumble
   lc8a5d21d11: 'v2lht46', lf046f536af: 'v6ri9aj'
 };
-function watchLocal(v, player, drop, auto) {
+function watchLocal(v, player, drop, auto, url) {
   let done = false;
+  url = url || v.mediaUrl || v.u;
+  const gen = player._gen = (player._gen || 0) + 1;   // a newer reel on the same player retires this watcher
   const fail = why => {
-    if (done || cur !== v || !player.isConnected) return; done = true;
-    try { console.warn('[video-room] local feature failed:', why, v.mediaUrl || v.u); } catch (e) {}
-    drop(); localFailed(v, auto, why);
+    if (done || cur !== v || !player.isConnected || player._gen !== gen) return; done = true;
+    try { console.warn('[video-room] local feature failed:', why, url); } catch (e) {}
+    drop(); localFailed(v, auto, why, url);
   };
   const ok = () => { done = true; };
   player.addEventListener('loadedmetadata', ok, {once: true});
@@ -690,7 +775,8 @@ function nextPlayable(v) {   // next feature in the grid that is not on the offl
   const i = ids.indexOf(v.id);
   return list.find(x => ids.indexOf(x.id) > i) || BY[FEATURED_ID] || list[0];
 }
-function localFailed(v, auto, why) {
+function localFailed(v, auto, why, url) {
+  url = url || v.mediaUrl || v.u;
   if (cur !== v) return;
   const st = $('stage'), tw = BY[LOCAL_TWINS[v.id]];
   if (tw && tw.e) {   // same film on Rumble: keep the marquee, just swap the projector
@@ -704,7 +790,7 @@ function localFailed(v, auto, why) {
     '<div class="offmsg"><b>This reel is off the projector</b><span>The archive copy of this feature is not reachable right now.' +
     (nx ? ' Rolling on to <i>' + esc(nx.t) + '</i> in <em id="offn">' + secs + '</em>s.' : '') + '</span>' +
     '<span class="offbtns">' + (nx ? '<button class="ticketbtn" type="button" id="offnext">Play next feature</button>' : '') +
-    '<a class="ticketbtn alt" href="' + esc(v.mediaUrl || v.u) + '" target="_blank" rel="noopener">Try the file</a></span></div></div>';
+    '<a class="ticketbtn alt" href="' + esc(url) + '" target="_blank" rel="noopener">Try the file</a></span></div></div>';
   if (!nx) return;
   let n = secs; const go = () => { clearInterval(t); if (cur === v) { history.replaceState(null, '', '#v=' + nx.id); select(nx, 'play'); } };
   const t = setInterval(() => { if (cur !== v || !$('offn')) return clearInterval(t); n -= 1; $('offn').textContent = n; if (n <= 0) go(); }, 1000);
@@ -718,20 +804,23 @@ function fitTitle() {
 }
 /* Marquee line breaks set by hand for titles that wrap awkwardly on the sign (same words, one line each). */
 const MQ_LINES = {v2hojm4: ['The Shackleford Tapes', 'FBI Raid On Epstein Island']};
-function select(v, mode) {   // mode: 'play' | 'autoplay' | 'poster' | 'reel' (legacy: true = play)
+function select(v, mode, ch) {   // mode: 'play' | 'autoplay' | 'poster' | 'reel' (legacy: true = play); ch: chapter number (double features)
   if (mode === true) mode = 'play'; if (!mode) mode = 'poster';
   cur = v;
-  const ml = MQ_LINES[v.id];
+  curReel = v.reels ? Math.max(0, v.reels.findIndex(r => r.n === +ch)) : 0;
+  renderReels(v);
+  const ml = v.mq || MQ_LINES[v.id];
   if (ml) $('ptitle').innerHTML = ml.map(l => '<span class="mq-l">' + esc(l) + '</span>').join('<span class="mq-sep"> - </span>');
   else $('ptitle').textContent = v.t;
-  $('mqtags').innerHTML = (v.live ? '<span class="plate live">LIVE</span>' : '') + (v.rp ? '<span class="plate rp">REPOST</span>' : '');
+  $('mqtags').innerHTML = (v.live ? '<span class="plate live">LIVE</span>' : '') + (v.rp ? '<span class="plate rp">REPOST</span>' : '') + (v.reels ? '<span class="plate df">DOUBLE FEATURE</span>' : '');
   fitTitle();
   const rows = [['Released', v.d]];
   if (v.dur) rows.push(['Running time', v.dur]);
+  if (v.reels) rows.push(['Chapters', v.reels.map(r => r.n).join(' + ') + ', back to back']);
   if (v.v) rows.push(['Rumble views', v.v]);
   if (v.source === 'local') rows.push(['Source', 'Local archive']);
   if (v.theme && v.theme !== '_root') rows.push(['Theme', v.theme]);
-  rows.push(['Format', v.rp ? 'Repost' : v.live ? 'Livestream' : (v.source === 'local' ? 'Local video' : 'Video')]);
+  rows.push(['Format', v.rp ? 'Repost' : v.live ? 'Livestream' : v.reels ? 'Double feature' : (v.source === 'local' ? 'Local video' : 'Video')]);
   rows.push(['Admission', 'Free']);
   rows.push(['Site plays', '<span id="plays">' + getPlays(v.id) + '</span>']);
   $('pfacts').innerHTML = rows.map(r => '<div class="row"><dt>' + r[0] + '</dt><dd>' + (r[0] === 'Site plays' ? r[1] : esc(r[1])) + '</dd></div>').join('');
@@ -743,7 +832,7 @@ function select(v, mode) {   // mode: 'play' | 'autoplay' | 'poster' | 'reel' (l
   $('more').hidden = !long; $('more').textContent = 'More';
   fillAlso(v, long);
   const pr = $('prumble');
-  pr.href = v.u;
+  pr.href = v.reels ? v.reels[curReel].u : v.u;
   pr.textContent = v.source === 'local' ? 'Open media file' : 'Watch on Rumble';
   pr.hidden = !v.u;
   document.title = v.t + ' | THE RUBBER DUCK\u2122 Drive-In';
@@ -751,6 +840,38 @@ function select(v, mode) {   // mode: 'play' | 'autoplay' | 'poster' | 'reel' (l
   const c = document.querySelector('.ticket[data-id="' + v.id + '"]'); if (c) c.classList.add('on');
   mode === 'play' ? play(v) : mode === 'autoplay' ? play(v, true) : mode === 'reel' ? showReel(v) : showPoster(v);
 }
+/* Double feature chapter strip under the screen: shows both reels, marks the one on the projector,
+   and lets the viewer jump to either file. Auto-advance (ended) and jumps both go through setReel. */
+function renderReels(v) {
+  const box = $('reels');
+  if (!v.reels) { if (!box.hidden) { box.hidden = true; box.innerHTML = ''; layout(); } return; }
+  box.innerHTML = '<div class="rl-head"><span class="neon">Double Feature</span><small>' + esc(v.part || '') + ' \u00b7 ' + esc(v.dur) + '</small></div>' +
+    v.reels.map((r, i) => '<button class="reel-btn" type="button" data-reel="' + i + '" aria-current="' + (i === curReel) + '" title="' + esc(r.t) + '">' +
+      '<span class="rn">' + r.n + '</span><span class="rt"><b>Chapter ' + r.n + '</b><span>' + esc(r.dur) + '<i>' + (i === curReel ? ' \u00b7 On screen' : i > curReel ? ' \u00b7 Up next' : ' \u00b7 Replay') + '</i></span></span></button>').join('');
+  box.hidden = false;
+  layout();
+}
+function setReel(v, i, why) {   // why: 'ended' (auto-advance) | 'pick' (viewer jumped)
+  if (cur !== v || !v.reels || !v.reels[i]) return;
+  curReel = i;
+  const r = v.reels[i];
+  renderReels(v);
+  history.replaceState(null, '', '#v=' + v.id + (i ? '&ch=' + r.n : ''));
+  const pr = $('prumble'); if (v.source === 'local') pr.href = r.u;
+  trackEvent('chapter', {id: v.id, chapter: r.n, how: why});
+  const player = $('stage').querySelector('video.feature');
+  if (player) {   // keep the same player: swap the src, re-arm the per-file fallback, play
+    player.poster = r.th || ''; player.title = v.t + ' (Chapter ' + r.n + ')';
+    player.src = r.u;
+    watchLocal(v, player, () => {}, false, r.u);
+  } else {
+    play(v);   // poster, reel card or off-the-projector card on screen: start this chapter fresh
+  }
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('#reels .reel-btn'); if (!b || !cur) return;
+  setReel(cur, +b.dataset.reel, 'pick');
+});
 /* Short descriptions would leave the middle column half empty; fill it with the next newest features
    (as many as fit beside the other two columns, so all three keep the same top and bottom edges). */
 function fillAlso(v, long) {
@@ -778,10 +899,10 @@ $('copy').addEventListener('click', () => {
 
 function ticket(v) {
   return '<a class="ticket" href="#v=' + v.id + '" data-id="' + v.id + '" title="' + esc(v.t) + '"><span class="tk">' +
-    '<span class="tthumb"><img loading="lazy" src="' + esc(v.th) + '" alt=""' + (v.source === 'local' ? ' onerror="this.onerror=null;this.src=\'/assets/trd/clips/intermission-card.jpg\'"' : '') + '>' + (v.live ? '<span class="plate live">LIVE</span>' : '') +
+    '<span class="tthumb"><img loading="lazy" src="' + esc(v.th) + '" alt=""' + (v.source === 'local' ? ' onerror="this.onerror=null;this.src=\'/assets/trd/clips/intermission-card.jpg\'"' : '') + '>' + (v.live ? '<span class="plate live">LIVE</span>' : '') + (v.reels ? '<span class="plate df">DOUBLE FEATURE</span>' : '') +
     (v.dur ? '<span class="badge">' + esc(v.dur) + '</span>' : '') + '</span>' +
     '<span class="tt">' + esc(v.t) + '</span><span class="perf"><b>ADMIT ONE</b></span>' +
-    '<span class="stub"><span>' + esc(v.d) + '</span><span>' + (v.source === 'local' ? 'Local' : (v.v ? 'Rumble views: ' + esc(v.v) : '')) + '</span></span></span></a>';
+    '<span class="stub"><span>' + esc(v.d) + '</span><span>' + (v.reels ? 'Local \u00b7 ' + v.reels.length + ' chapters' : v.source === 'local' ? 'Local' : (v.v ? 'Rumble views: ' + esc(v.v) : '')) + '</span></span></span></a>';
 }
 function render() {
   const q = state.q.trim().toLowerCase();
@@ -827,9 +948,16 @@ const FEATURED_ID = 'v2hojm4';   // The Shackleford Tapes - FBI Raid On Epstein 
 let landed = false;
 function fromHash(autoplay) {
   const m = location.hash.match(/v=([a-z0-9]+)/i);
-  const v = m && BY[m[1]];
+  let id = m && m[1], ch = (location.hash.match(/[&?]ch=(\d+)/) || [])[1];
+  const al = id && REEL_ALIAS[id];
+  if (al && (al[0] !== id || !BY[id] || !BY[id].reels)) { id = al[0]; ch = al[1]; }
+  if (al && BY[id] && BY[id].reels) {   // canonical form of the link
+    const c = BY[id].reels.findIndex(r => r.n === +ch), h = '#v=' + id + (c > 0 ? '&ch=' + BY[id].reels[c].n : '');
+    if (location.hash !== h) history.replaceState(null, '', h);
+  }
+  const v = id && BY[id];
   const first = !landed; landed = true;
-  if (v) { select(v, autoplay ? 'play' : 'poster'); return; }
+  if (v) { select(v, autoplay ? 'play' : 'poster', ch); return; }
   const f = VIDS.find(x => x.id === FEATURED_ID) || VIDS.slice().sort((a, b) => b.ts - a.ts)[0];
   select(f, first ? 'autoplay' : 'poster');
 }
