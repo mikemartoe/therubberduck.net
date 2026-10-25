@@ -147,7 +147,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <meta name="twitter:title" content="{E(full_title)}">
 <meta name="twitter:description" content="{E(desc)}">
 <meta name="twitter:image" content="{og_image}">
-<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="{CSS_HREF}">
 {extra_head}{ld_script(graph)}
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
