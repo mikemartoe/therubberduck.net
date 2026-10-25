@@ -115,7 +115,10 @@ CSS_HREF = '/assets/seo/archive.css?v=1'
 NAV = [('/', 'Home'), ('/ledger.html', 'Drop Ledger'), ('/videos.html', 'Video Room'), ('/listening-room.html', 'Listening Room'),
        ('/pdfs.html', 'SCIF Reading Room'), ('/x/', 'X Archive'), ('/memes.html', 'Meme Dump'), ('/album.html', 'Red Pill Album')]
 
-def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'):
+DROP_OG = 'https://memes.therubberduck.net/drops/og/%d.jpg'   # share-feature cards on R2 (tools/drop-cards)
+
+
+def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', og_desc=None, robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'):
     url = SITE + path
     full_title = title if title.endswith(BRAND) else title + ' | ' + BRAND
     graph = [{'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'url': SITE + '/', 'sameAs': SAME_AS[:3]}, {'@type': 'WebPage', '@id': url + '#page', 'url': url, 'name': full_title, 'description': desc,
@@ -139,13 +142,13 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="{E(BRAND)}">
 <meta property="og:title" content="{E(full_title)}">
-<meta property="og:description" content="{E(desc)}">
+<meta property="og:description" content="{E(og_desc or desc)}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{og_image}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TheRubberDuck79">
 <meta name="twitter:title" content="{E(full_title)}">
-<meta name="twitter:description" content="{E(desc)}">
+<meta name="twitter:description" content="{E(og_desc or desc)}">
 <meta name="twitter:image" content="{og_image}">
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="{CSS_HREF}">
@@ -210,7 +213,9 @@ def build_drops():
               'dateCreated': d['dt'].isoformat(), 'datePublished': d['dt'].isoformat(), 'author': {'@type': 'Person', 'name': 'Q'},
               'isPartOf': {'@id': SITE + '/drops/#archive'}, 'url': SITE + '/drops/%d/' % n}]
         write('drops/%d/index.html' % n, page('/drops/%d/' % n, title, desc, body, g,
-              [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('#%d' % n, '/drops/%d/' % n)], og_type='article'))
+              [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('#%d' % n, '/drops/%d/' % n)], og_type='article',
+              og_desc='Q drop #%d \u00b7 %s \u00b7 %s /%s/' % (n, d['dt'].strftime('%B %-d, %Y'), d['site'], d['board'].strip('/')),   # tease only
+              og_image=DROP_OG % n))
         add_sm('drops', '/drops/%d/' % n, lm)
 
     # per month

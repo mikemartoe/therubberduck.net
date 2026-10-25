@@ -21,14 +21,16 @@ ET = ZoneInfo('America/New_York')
 esc = lambda s: html.escape(s or '', quote=True)
 
 
+def tease(n, dt, site, board):
+    return 'Q drop #%d \u00b7 %s \u00b7 %s /%s/' % (n, dt.strftime('%B %-d, %Y'), site, board.strip('/'))
+
+
 def page(d):
     n, ts, site, board, _url, text = d
     dt = datetime.fromtimestamp(ts, ET)
     when = dt.strftime('%B %-d, %Y')
     title = 'Q Drop #%d, %s | The Drop Ledger | The Rubber Duck\u2122' % (n, when)
-    snippet = ' '.join(text.split())
-    snippet = (snippet[:150].rsplit(' ', 1)[0] + '\u2026') if len(snippet) > 150 else snippet
-    desc = 'Q drop #%d, %s on %s %s.%s' % (n, when, site, board.rstrip('/') + '/', (' "' + snippet + '"') if snippet else '')
+    desc = tease(n, dt, site, board)   # tease only (Mike, 2026-10-25): no drop text in previews
     img = MEDIA + 'og/%d.jpg' % n
     alt = 'Q drop #%d as originally posted on %s %s' % (n, site, board.rstrip('/') + '/')
     dest = '/ledger.html#drop-%d' % n

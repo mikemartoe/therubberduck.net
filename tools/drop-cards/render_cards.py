@@ -187,16 +187,21 @@ def crop_shot(br, n, css_w, css_h, scale, bar_h, cap_px, cap_pt, path, fmt):
     if fmt == "jpg": im.save(path, "JPEG", quality=86, optimize=True, progressive=True)
     else: im.save(path, "PNG", optimize=True)
 
-def main(nums, out):
+def main(nums, out, shard=None):
     for d in ("card", "og", "ig"): os.makedirs(os.path.join(out, d), exist_ok=True)
-    man_p = os.path.join(out, "manifest.json")
+    man_p = os.path.join(out, "manifest.json" if shard is None else f"manifest.shard{shard}.json")
+    err_p = os.path.join(out, "errors.txt" if shard is None else f"errors.shard{shard}.txt")
     man = json.load(open(man_p)) if os.path.exists(man_p) else {}
     t0 = time.time()
     with sync_playwright() as p:
         br = p.chromium.launch()
         pg = br.new_page(viewport={"width": 600, "height": 40}, device_scale_factor=2)
         for i, n in enumerate(nums):
-            pg.set_content(page(n)); pg.wait_for_timeout(60); check(pg, n)
+            if str(n) in man and os.path.exists(os.path.join(out, "card", f"{n}.png")): continue   # resumable
+            try:
+                pg.set_content(page(n)); pg.wait_for_timeout(60); check(pg, n)
+            except Exception as e:      # log and carry on; a drop with no image gets no share page
+                open(err_p, "a").write(f"{n}\t{e}\n"); print(f"ERROR #{n}: {e}", flush=True); continue
             cp = os.path.join(out, "card", f"{n}.png")
             Image.open(io.BytesIO(pg.screenshot(full_page=True))).save(cp, "PNG", optimize=True)
             w, h = Image.open(cp).size
@@ -205,23 +210,31 @@ def main(nums, out):
             if h <= 630:      # short: centre the whole card on the board colour
                 can = Image.new("RGB", (1200, 630), BG); can.paste(Image.open(cp).convert("RGB"), (0, (630 - h) // 2))
                 can.save(op, "JPEG", quality=86, optimize=True, progressive=True)
-            else:             # tall: top of the post, faded into the caption
+            try:
+              if h > 630:     # tall: top of the post, faded into the caption
                 crop_shot(br, n, 600, 315, 2, 70, 14, 8.5, op, "jpg")
-            if long_:
+              if long_:
                 crop_shot(br, n, 540, 675, 2, 90, 14, 8.5, os.path.join(out, "ig", f"{n}.png"), "png")
+            except Exception as e:
+                open(err_p, "a").write(f"{n}\t{e}\n"); print(f"ERROR #{n}: {e}", flush=True); continue
             man[str(n)] = {"w": w, "h": h, "long": long_, "card_bytes": os.path.getsize(cp), "og_bytes": os.path.getsize(op),
                            "ig_bytes": os.path.getsize(os.path.join(out, "ig", f"{n}.png")) if long_ else 0}
             if i % 50 == 0 or i == len(nums) - 1:
                 json.dump(man, open(man_p, "w"), indent=0, sort_keys=True)
                 print(f"{i+1}/{len(nums)} #{n} {w}x{h}{' long' if long_ else ''}  {time.time()-t0:.0f}s", flush=True)
+        json.dump(man, open(man_p, "w"), indent=0, sort_keys=True)
+        print(f"done {len(man)} in manifest  {time.time()-t0:.0f}s", flush=True)
         br.close()
 
 if __name__ == "__main__":
     a = sys.argv[1:]; out = os.path.join(ROOT, ".work", "drop-cards")
     if "--out" in a: i = a.index("--out"); out = a[i + 1]; del a[i:i + 2]
+    shard = None
+    if "--shard" in a: i = a.index("--shard"); k, K = map(int, a[i + 1].split("/")); shard = k; del a[i:i + 2]
     if "--all" in a:
         frm = int(a[a.index("--from") + 1]) if "--from" in a else 1
         nums = sorted(k for k in DROPS if k >= frm)
     else:
         nums = [int(x) for x in a] or [1, 134, 225, 513, 668, 4953, 4966, 520, 3709]
-    main(nums, out)
+    if shard is not None: nums = nums[k::K]
+    main(nums, out, shard)
