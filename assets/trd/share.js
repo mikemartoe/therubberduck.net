@@ -1,8 +1,9 @@
-/* TRD share row: one module for the Drop Ledger and the Meme Dump.
+/* TRD share row: one module for the Drop Ledger, the Meme Dump and the Video Room.
    window.trdShare.build(opts) returns a share row element:
-     opts = { kind:'drop'|'meme', id:'520', page:'https://therubberduck.net/drops/share/520.html',
+     opts = { kind:'drop'|'meme'|'video', id:'520', page:'https://therubberduck.net/drops/share/520.html',
               text:'Q drop #520', thumb:<preview image url>, file:<full image url>, igFile:<4:5 image url or null>,
-              fileName:'q-drop-520.png' }
+              fileName:'q-drop-520.png', hints:{ig:..., tiktok:...} (optional: replaces the default hint lines) }
+   Video Room: file/thumb are the poster frame, never the video, so a share tap never downloads a video.
    Every outbound link carries utm_source=<platform>&utm_medium=share&utm_campaign=<kind>-<id>.
    Every tap is counted: GoatCounter event (assets/trd/track.js) + the anonymous visit beacon (assets/trd/visit.js).
    What each button really does:
@@ -42,6 +43,9 @@
     link: 'Link copied.'
   };
 
+  /* GoatCounter event titles per kind (the event path is always event/<kind>-share/<platform>/<id>) */
+  var LABEL = { drop: 'Q drop #', meme: 'Meme ', video: 'Video ' };
+
   function tagged(page, p, camp) {
     var u = new URL(page, SITE);
     u.searchParams.set('utm_source', SRC[p]);
@@ -62,7 +66,7 @@
     }
   }
   function count(p, o) {
-    try { if (W.trdTrack) W.trdTrack('event/' + o.kind + '-share/' + SRC[p] + '/' + o.id, (o.kind === 'drop' ? 'Q drop #' : 'Meme ') + o.id + ' shared: ' + SRC[p], 0); } catch (e) {}
+    try { if (W.trdTrack) W.trdTrack('event/' + o.kind + '-share/' + SRC[p] + '/' + o.id, (LABEL[o.kind] || (o.kind + ' ')) + o.id + ' shared: ' + SRC[p], 0); } catch (e) {}
     try { if (W.trdVisit) W.trdVisit.event('share', { platform: SRC[p], item: o.kind + '-' + o.id }); } catch (e) {}
   }
   function copyText(t) {
@@ -92,7 +96,7 @@
         return '<button type="button" class="shr-b shr-' + p[0] + '" data-p="' + p[0] + '" aria-label="' + (p[0] === 'link' ? 'Copy link' : 'Share to ' + p[1]) + '">' + I[p[0]] + '<span>' + p[1] + '</span></button>';
       }).join('') + '</div>' +
       '<p class="shr-hint" role="status" aria-live="polite" hidden></p>';
-    var hint = row.querySelector('.shr-hint'), files = {};
+    var hint = row.querySelector('.shr-hint'), files = {}, H = o.hints ? Object.assign({}, HINT, o.hints) : HINT;
     function say(t) { hint.textContent = t; hint.hidden = !t; }
     /* fetch the image now so the share sheet can open inside the tap (iOS needs that) */
     function prep(url) { if (!files[url]) files[url] = fetchBlob(url).then(function (b) { files[url + ':b'] = b; return b; }, function () { files[url + ':b'] = null; return null; }); return files[url]; }
@@ -104,7 +108,7 @@
       count(p, o);
       if (p === 'x' || p === 'truth' || p === 'fb') { W.open(href, '_blank', 'noopener,width=680,height=640'); say(''); return; }
       if (p === 'email' || p === 'sms') { location.href = href; say(''); return; }
-      if (p === 'link') { copyText(href).then(function (ok) { say(ok ? HINT.link : href); }); return; }
+      if (p === 'link') { copyText(href).then(function (ok) { say(ok ? H.link : href); }); return; }
       /* tiktok / ig */
       copyText(href);
       var blob = files[pic + ':b'], name = o.fileName.replace(/\.(\w+)$/, (o.igFile ? '-4x5' : '') + '.$1');
@@ -112,11 +116,11 @@
         var f = new File([blob], name, { type: blob.type || 'image/png' });
         if (navigator.canShare({ files: [f] })) {
           navigator.share({ files: [f] }).catch(function () {});
-          say(HINT[p === 'ig' ? 'igShare' : 'tiktokShare']); return;
+          say(H[p === 'ig' ? 'igShare' : 'tiktokShare']); return;
         }
       }
       (blob ? Promise.resolve(blob) : fetchBlob(pic)).then(function (bb) { saveBlob(bb, name); }, function () { W.open(pic, '_blank', 'noopener'); });
-      say(HINT[p]);
+      say(H[p]);
     });
     return row;
   }
