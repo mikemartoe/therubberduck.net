@@ -294,6 +294,57 @@ html[data-theme="dark"] .corr .go{color:#1A1710}
   .chip.lx-btn{flex:none}
   .lx-chips .chip.lx-btn{flex:1 1 auto}
 }
+
+/* ---- Drop Ledger: path choice (New here / I know the drops) and the seven Start-here cards (assets/trd/ledger-path.js) ---- */
+.lx-path{margin:30px 0 0}
+.lx-path-ask{padding:26px 24px 24px;border:1px solid var(--border);border-radius:4px;background:color-mix(in srgb,var(--surface-1) 85%,transparent);text-align:center}
+.lx-path-ask h3{margin:0;font-family:var(--font-display);font-size:clamp(1.2rem,1rem+.8vw,1.6rem);line-height:1.2;color:var(--text);letter-spacing:-.01em}
+.lx-path-ask .lx-path-sub{margin:8px auto 20px;max-width:70ch;font-size:15px;line-height:1.5;color:var(--muted)}
+.lx-path-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch;margin:0}
+.lx-path-opt{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;height:100%;min-height:150px;padding:22px 22px;border:1px solid rgba(0,255,65,.35);border-radius:4px;background:var(--surface-1);color:var(--text);font:inherit;text-align:center;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+.lx-path-opt:hover{border-color:var(--accent);background:rgba(0,255,65,.06);transform:translateY(-1px)}
+.lx-path-opt:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.lx-path-opt b{font-family:var(--font-display);font-size:clamp(1.25rem,1.05rem+.7vw,1.6rem);font-weight:600;color:var(--accent);letter-spacing:-.01em;line-height:1.15}
+.lx-path-opt span{font-size:16.5px;line-height:1.5;color:var(--text);max-width:46ch}
+.lx-path-opt small{margin-top:4px;font-family:var(--font-display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lx-path-bar{display:none;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:10px 14px;border:1px solid var(--border);border-radius:4px;background:color-mix(in srgb,var(--surface-1) 85%,transparent)}
+.lx-path-bar .lx-path-lbl{font-family:var(--font-display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.lx-path-seg{display:inline-flex;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.lx-path-seg button{min-height:40px;padding:0 18px;border:0;background:transparent;color:var(--muted);font-family:var(--font-display);font-size:12.5px;letter-spacing:.04em;cursor:pointer}
+.lx-path-seg button+button{border-left:1px solid var(--border)}
+.lx-path-seg button:hover{color:var(--accent)}
+.lx-path-seg button[aria-pressed="true"]{background:var(--accent);color:#040705;font-weight:600}
+.lx-path-seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+#archive[data-lx-path="new"] .lx-path-ask,#archive[data-lx-path="know"] .lx-path-ask{display:none}
+#archive[data-lx-path="new"] .lx-path-bar,#archive[data-lx-path="know"] .lx-path-bar{display:flex}
+#archive:not([data-lx-path="new"]) #lxStart{display:none}
+#archive[data-lx-path="new"] #lxStart{margin-top:12px}
+.lx-seven{margin:0 0 16px}
+.lx-seven-h{margin:0 0 10px;font-family:var(--font-display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.lx-cards{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none}
+.lx-cards li{display:flex}
+.lx-card{display:flex;flex-direction:column;gap:6px;width:100%;padding:12px 12px 13px;border:1px solid var(--border);border-radius:4px;background:var(--surface-1);color:var(--text);font:inherit;text-align:left;cursor:pointer;transition:border-color .18s,background .18s}
+.lx-card:hover{border-color:var(--accent);background:rgba(0,255,65,.05)}
+.lx-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lx-card-n{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--accent);line-height:1}
+.lx-card-c{font-size:14px;line-height:1.4;color:var(--text);flex:1}
+.lx-card-d{font-family:var(--font-display);font-size:10.5px;letter-spacing:.08em;color:var(--muted)}
+.lx-cap{font-weight:600}
+@media (max-width:1100px){ .lx-cards{grid-template-columns:repeat(4,minmax(0,1fr))} .lx-cards li:last-child{grid-column:span 2} }
+@media (max-width:860px){
+  .lx-path-ask{padding:20px 14px 16px}
+  .lx-path-opts{grid-template-columns:1fr;gap:10px}
+  .lx-path-opt{min-height:0;padding:18px 16px}
+  .lx-cards{grid-template-columns:1fr;grid-auto-rows:1fr;gap:6px}
+  .lx-cards li:last-child{grid-column:auto}
+  .lx-card{display:grid;grid-template-columns:62px 1fr;grid-template-rows:auto auto;column-gap:10px;row-gap:2px;align-items:center;padding:10px 12px}
+  .lx-card-n{grid-row:1/3;font-size:1.05rem}
+  .lx-card-c{font-size:14.5px}
+  .lx-path-bar{padding:10px}
+  .lx-seven-tap{display:none}
+  .lx-path-seg{width:100%}
+  .lx-path-seg button{flex:1 1 50%;padding:0 8px}
+}
 </style>
 <style class="e3-vars">:root{--on-accent:#ffffff}</style>
 <style id="matrix-skin">
@@ -657,8 +708,9 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 .e3-footer-editorial form textarea{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface-1);color:var(--text);font:inherit;font-size:15px;resize:vertical}
 </style>
 <script src="data/drops.js"></script>
-<script src="assets/trd/ledger-search.js?v=20261024"></script>
-<script src="assets/trd/ledger-starter.js?v=20261024" defer></script>
+<script src="assets/trd/ledger-search.js?v=20261025"></script>
+<script src="assets/trd/ledger-starter.js?v=20261025" defer></script>
+<script src="assets/trd/ledger-path.js?v=20261025" defer></script>
 <script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Calendar","href":"#calendar"},{"label":"Chronology","href":"#chronology"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"Search the ledger","href":"#archive"}}</script>
 <script>
 (function(){
@@ -1054,10 +1106,33 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         <p class="arc-note arc-prov"><strong>Corpus note.</strong> This page holds the expanded set — 4,966 records, #1–#4,966, running to 27 Nov 2022. A shorter 4,953-record set, ending at #4,953 in Dec 2020, is also in circulation; where the two differ, this page follows the expanded set.</p>
       </div>
 
+      <div class="lx-path" id="lxPath">
+        <div class="lx-path-ask" role="group" aria-labelledby="lxPathQ">
+          <h3 id="lxPathQ">How would you like to start?</h3>
+          <p class="lx-path-sub">Pick whichever fits. There&rsquo;s no wrong answer, and you can switch any time.</p>
+          <div class="lx-path-opts">
+            <button type="button" class="lx-path-opt" data-lx-path="new"><b>New here</b><span>Show me around. Seven good drops to start with, plain-English help, and easy buttons.</span><small>Guided start</small></button>
+            <button type="button" class="lx-path-opt" data-lx-path="know"><b>I know the drops</b><span>Take me straight to the full ledger: all 4,966 drops, searchable by number, date or phrase.</span><small>Full ledger &amp; search</small></button>
+          </div>
+        </div>
+        <div class="lx-path-bar" role="group" aria-label="Choose how the ledger is shown">
+          <span class="lx-path-lbl">Your view</span>
+          <span class="lx-path-seg">
+            <button type="button" data-lx-path="new" aria-pressed="false">New here</button>
+            <button type="button" data-lx-path="know" aria-pressed="false">I know the drops</button>
+          </span>
+        </div>
+      </div>
+      <script>(function(){try{var v=localStorage.getItem('trd.ledgerPath');if(v==='new'||v==='know'){var a=document.getElementById('archive');a.setAttribute('data-lx-path',v);[].slice.call(a.querySelectorAll('.lx-path-seg [data-lx-path]')).forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lx-path')===v?'true':'false');});}}catch(e){}})();</script>
+
       <div class="lx-start" id="lxStart">
         <p class="lx-intro"><strong>New to the drops? You&rsquo;re in the right place.</strong> Every post is here, numbered and dated.<br>Tap a button to start small, or type a word, a date, or a drop number. You can&rsquo;t break anything.</p>
+        <div class="lx-seven" id="lxSeven" hidden>
+          <p class="lx-seven-h">Start with these seven<span class="lx-seven-tap"> &middot; tap one to read it</span></p>
+          <ol class="lx-cards" id="lxCards"></ol>
+        </div>
         <div class="lx-grid" role="group" aria-label="Ways to start">
-          <button type="button" class="chip lx-btn lx-primary" data-lx-q="@start">Start here</button>
+          <button type="button" class="chip lx-btn lx-primary" data-lx-q="@start">Read all seven</button>
           <button type="button" class="chip lx-btn" data-lx-panel="what" aria-expanded="false" aria-controls="lxPanel">What&rsquo;s a drop?</button>
           <button type="button" class="chip lx-btn" data-lx-q="today">Today&rsquo;s Deltas</button>
           <button type="button" class="chip lx-btn" data-lx-panel="phrases" aria-expanded="false" aria-controls="lxPanel">Famous phrases</button>

@@ -307,14 +307,15 @@
   }
 
   /* ---------- curated lists ---------- */
+  /* One plain line per drop, shown on each Start-here card. Checked against data/drops.js (US Eastern dates). */
   var START=[
-    {n:1,    c:'The very first drop, 28 Oct 2017 on 4chan. Where it all starts.'},
-    {n:134,  c:'The first time Q signs off with “Dark to light.”'},
-    {n:225,  c:'The first “Future proves past” — the idea that later events explain earlier drops.'},
-    {n:513,  c:'The first “Where we go one, we go all.”'},
-    {n:668,  c:'The first “Trust the plan.”'},
-    {n:4953, c:'The last drop of 2020 — a single video link, then 18 months of silence.'},
-    {n:4966, c:'The final drop, 27 Nov 2022.'}
+    {n:1,    c:'The very first post, Oct 28, 2017'},
+    {n:134,  c:'The first time “Dark to light” appears'},
+    {n:225,  c:'The first “Future proves past”'},
+    {n:513,  c:'The first “Where we go one, we go all” (WWG1WGA)'},
+    {n:668,  c:'The first “Trust the plan”'},
+    {n:4953, c:'The last post before the 18-month silence'},
+    {n:4966, c:'The final drop, Nov 27, 2022'}
   ];
 
   /* ---------- the main entry ---------- */
