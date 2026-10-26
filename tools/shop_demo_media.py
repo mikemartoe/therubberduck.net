@@ -134,7 +134,10 @@ def gallery_block(slug):
           'tabs.forEach(function(t){function pre(){if(t._p)return;t._p=1;var i=new Image();i.sizes=img.sizes;i.srcset=ss(base(t),"webp");}'
           't.addEventListener("pointerenter",pre);t.addEventListener("focus",pre);t.addEventListener("touchstart",pre,{passive:true});'
           't.addEventListener("click",function(){if(t.getAttribute("aria-selected")==="true")return;tabs.forEach(function(o){o.setAttribute("aria-selected",String(o===t));});'
-          'var p=base(t),l=t.getAttribute("data-l");src.srcset=ss(p,"webp");img.srcset=ss(p,"jpg");img.src=p+".jpg";img.alt=nm+" in "+l+", front and back";cap.textContent=l;});});});})();</script>')
+          'var p=base(t),l=t.getAttribute("data-l"),n=++x._n,i=new Image();cap.textContent=l;'
+          # decode the new photo first, then swap, so the frame never shows an empty gray box while it loads
+          'function sw(){if(n!==x._n)return;src.srcset=ss(p,"webp");img.srcset=ss(p,"jpg");img.src=p+".jpg";img.alt=nm+" in "+l+", front and back";}'
+          'i.sizes=img.sizes;i.srcset=ss(p,(img.currentSrc||"").slice(-5)===".webp"?"webp":"jpg");(i.decode?i.decode():Promise.reject()).then(sw,sw);});});x._n=0;});})();</script>')
     return (css + '<div class="tg" data-stem="%s" data-name="%s" data-w="%d">'
             '<div class="tg-tabs" role="tablist" aria-label="Tee color">%s</div>'
             '<figure class="tg-f">%s<figcaption><span class="tg-c">%s</span> &middot; front (left) and back (right). Mock-up shown in %s; '
