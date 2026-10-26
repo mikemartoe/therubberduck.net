@@ -41,7 +41,7 @@ DEMO_MEDIA = {
 MEDIA_SLUG = {'signed-dad-hat': 'duck-dad-hat', 'signed-trucker-hat': 'duck-trucker-hat'}
 
 # The small signed-brim preview (a real signed hat, No. 11 of 500) on the signed hat listings: a secondary tile, never the main photo.
-SIG_PREVIEW = {'signed-dad-hat', 'signed-trucker-hat'}
+SIG_PREVIEW = set()  # back-of-hat renderings removed on Mike's order; never re-add
 def sig_preview(slug):
     if slug not in SIG_PREVIEW:
         return ''

@@ -1,7 +1,7 @@
 """Signed hat card photos = the approved FRONT-view product photos of the regular hats (Mike, Oct 26 2026: front views only; the
 11/500 signature shows only as the small preview on the card back and the listing page). Usage, from the repo root:
     python3 tools/make_signed_hat_front_photos.py
-Dad hat: store-img/duck-dad-hat_<c>_product.{jpg,webp} copied byte for byte to store-img/signed-dad-hat_<c>.{jpg,webp}.
+Dad hat: store-img/duck-dad-hat_<c>_product.{jpg,webp} copied byte for byte to store-img/signed-dad-hat-f_<c>.{jpg,webp}.
 Trucker: Black = the real Printful mockup duck-trucker-hat_black-white (Richardson 112 Black / White, the variant sold as Black).
 White, Navy, Gold, Tiffany Blue and Hot Pink: Printful has no such Richardson 112 blank, so (same method as
 tools/make_dad_hat_special_photos.py) the real Printful Heather Grey/White mockup is recolored: only the front crown and bill fabric
