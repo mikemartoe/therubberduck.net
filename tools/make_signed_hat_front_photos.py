@@ -6,18 +6,18 @@ Trucker: Black = the real Printful mockup duck-trucker-hat_black-white (Richards
 White, Navy, Gold, Tiffany Blue and Hot Pink: Printful has no such Richardson 112 blank, so (same method as
 tools/make_dad_hat_special_photos.py) the real Printful Heather Grey/White mockup is recolored: only the front crown and bill fabric
 is re-tinted; the duck embroidery, mesh, eyelets, background and shadow are the mockup's own pixels, nothing moved or scaled.
-Colors are matched to the dad-hat photo of the same color so S1 and S2 line up."""
-import shutil, os
+Colors are matched to the dad-hat photo of the same color so S1 and S2 line up.
+All 12 then get the approved red pill on the bill (tools/signed_hat_pill.py; art tools/art/red-pill.png). The regular
+duck-dad-hat_<c>_product photos are read only, never changed."""
+import os
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'store-img')
-for c in ('black', 'white', 'navy', 'gold', 'tiffany', 'hotpink'):
-    for ext in ('jpg', 'webp'):
-        shutil.copyfile(os.path.join(D, 'duck-dad-hat_%s_product.%s' % (c, ext)), os.path.join(D, 'signed-dad-hat_%s.%s' % (c, ext)))
-for ext in ('jpg', 'webp'):
-    shutil.copyfile(os.path.join(D, 'duck-trucker-hat_black-white.%s' % ext), os.path.join(D, 'signed-trucker-hat_black.%s' % ext))
 import numpy as np, sys
 
 from PIL import Image, ImageFilter
 from scipy import ndimage as nd
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import signed_hat_pill as sp
+COLS = ('black', 'white', 'navy', 'gold', 'tiffany', 'hotpink')
 OUT = D
 L = lambda f: np.asarray(Image.open(os.path.join(D, f)).convert('RGB')).astype(float)
 A = L('duck-trucker-hat_heather-grey-white.jpg'); B = L('duck-trucker-hat_black-white.jpg')
@@ -52,6 +52,7 @@ tex = stitch
 REG = (slice(170, 260), slice(200, 300))              # left front panel, same spot on both hats
 dadS = {'white': 'duck-dad-hat_white_product.jpg', 'navy': 'duck-dad-hat_navy_product.jpg', 'gold': 'duck-dad-hat_gold_product.jpg',
         'tiffany': 'duck-dad-hat_tiffany_product.jpg', 'hotpink': 'duck-dad-hat_hotpink_product.jpg'}
+TRK = {'black': B}
 m = np.asarray(Image.fromarray((F * 255).astype('uint8')).filter(ImageFilter.GaussianBlur(0.7))).astype(float)[..., None] / 255
 for k, f in dadS.items():
     dad = L(f); want = np.median(dad[REG].reshape(-1, 3), 0)
@@ -59,7 +60,19 @@ for k, f in dadS.items():
     tgt = want / sreg
     rec = np.clip(tgt[None, None] * S[..., None] + 255 * 0.55 * tex[..., None] * (1 - tgt[None, None] / 290), 0, 255)
     out = A * (1 - m) + rec * m
-    im = Image.fromarray(out.round().astype('uint8'))
-    stem = os.path.join(OUT, 'signed-trucker-hat_%s' % k)
-    im.save(stem + '.jpg', quality=88, optimize=True, progressive=True); im.save(stem + '.webp', quality=84, method=6)
+    TRK[k] = out
     print(k, want.round(), tgt.round())
+
+# ---- red pill on the bill, all 12 (Mike, Oct 26 2026): placement measured per image, see tools/signed_hat_pill.py
+def finish(kind, stem, arrs):
+    ms = {c: sp.measure(arrs[c], kind) for c in COLS}
+    ref = {k: float(np.median([m[k] for m in ms.values()])) for k in ms['black']}
+    for c in COLS:
+        q = sp.place(sp.measure(arrs[c], kind, ref))
+        im = Image.fromarray(np.clip(sp.apply(arrs[c], q), 0, 255).round().astype('uint8'))
+        f = os.path.join(OUT, '%s_%s' % (stem, c))
+        im.save(f + '.jpg', quality=90, optimize=True, progressive=True); im.save(f + '.webp', quality=84, method=6)
+        print(stem, c, 'pill w/crown %.3f  ratio %.2f  seam:edge gap %.1f:%.1f = %.2f  tilt %.3f  arch %.1fpx  centre (%.1f, %.1f)' % (
+            q['W'] / q['CW'], q['W'] / q['H'], q['seam_gap'], q['edge_gap'], q['seam_gap'] / q['edge_gap'], q['tilt'], q['arch'], q['cx'], q['cy']))
+finish('dad', 'signed-dad-hat', {c: L('duck-dad-hat_%s_product.jpg' % c) for c in COLS})
+finish('trk', 'signed-trucker-hat', TRK)
