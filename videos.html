@@ -339,6 +339,25 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
   footer .sep{display:none}
   footer a{display:block;margin:6px 0}
 }
+/* Share this feature (assets/trd/share.js + share.css, themed for the snack-bar card) */
+.sharebar{grid-column:1/-1;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:22px;row-gap:10px;
+  padding:18px 24px 20px;border-top:2px dashed rgba(59,33,21,.35);
+  --border:rgba(59,33,21,.38);--surface-1:#fbf3df;--text:var(--brown);--accent:var(--red);--font-body:'Oswald',sans-serif}
+.sharebar h3{font-family:'Oswald',sans-serif;font-weight:700;font-size:16px;letter-spacing:.22em;text-transform:uppercase;color:var(--red-dk);margin:0;line-height:1.2}
+.sharebar h3 small{display:block;font-weight:500;font-size:12px;letter-spacing:.14em;color:rgba(28,19,12,.62);margin-top:3px}
+.sharebar .shr-btns{grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:auto}
+.sharebar .shr-b{min-height:60px;font-weight:600;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;border-radius:4px}
+.sharebar .shr-b svg{width:22px;height:22px}
+.sharebar .shr-b:hover,.sharebar .shr-b:focus-visible{background:#fff8e8}
+.sharebar .shr-hint{font-family:'Courier Prime',monospace;font-size:14px;color:var(--ink);padding-top:2px}
+@media (max-width:1060px){.sharebar{grid-template-columns:1fr}.sharebar h3 small{display:inline;margin:0 0 0 10px}}
+@media (max-width:760px){
+  .sharebar{padding:14px 18px 16px;border-top:0;border-bottom:2px dashed rgba(59,33,21,.35);order:0}
+  .feature{order:1}
+  .sharebar .shr-btns{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto auto}
+  .sharebar .shr-b{min-height:60px;font-size:11.5px;letter-spacing:.05em}
+  .sharebar h3 small{display:block;margin:3px 0 0}
+}
 @media (prefers-reduced-motion:reduce){
   .spk.clipsnd{display:none}
   .bulb,.stars .tw,.beam i,.screen:before,.grain,.vignette{animation:none!important}
@@ -398,6 +417,8 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 <script src="/assets/trd/duckpod.js" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/share.css?v=20261025v1" data-trd-keep>
+<script src="/assets/trd/share.js?v=20261025v1" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="The Rubber Duck&#39;s Private Theater: red pill clips, movies, shows and livestreams at a 70s-style drive-in. Pick a feature and watch it right here, or on Rumble.">
 <link rel="canonical" href="https://therubberduck.net/videos.html">
@@ -471,7 +492,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
         <div class="menu">
           <h3>On the bill</h3>
           <dl id="pfacts"></dl>
-          <div class="actions"><a class="ticketbtn" id="prumble" href="#" target="_blank" rel="noopener">Watch on Rumble</a><button class="ticketbtn alt" id="copy" type="button">Copy link</button></div>
+          <div class="actions"><a class="ticketbtn" id="prumble" href="#" target="_blank" rel="noopener">Watch on Rumble</a><button class="ticketbtn alt" id="copy" type="button" aria-controls="psharebar">Share</button></div>
         </div>
         <div class="feature">
           <h3>The feature</h3>
@@ -485,6 +506,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
             <div class="tv-panel"><span class="knobs" aria-hidden="true"><i></i><i></i></span><button class="spk clipsnd" type="button" aria-pressed="false"><span class="grille"></span><span class="lbl">Sound off</span></button></div></div>
           <p>Popcorn, candy and cold drinks</p>
         </div>
+        <div class="sharebar" id="psharebar"><h3>Share this feature<small>Link opens it in the Video Room</small></h3><div id="pshare"></div></div>
       </div>
     </div>
   </section>
@@ -870,7 +892,31 @@ function select(v, mode, ch) {   // mode: 'play' | 'autoplay' | 'poster' | 'reel
   document.title = v.t + ' | THE RUBBER DUCK\u2122 Drive-In';
   document.querySelectorAll('.ticket.on').forEach(c => c.classList.remove('on'));
   const c = document.querySelector('.ticket[data-id="' + v.id + '"]'); if (c) c.classList.add('on');
+  shareRow(v);
   mode === 'play' ? play(v) : mode === 'autoplay' ? play(v, true) : mode === 'reel' ? showReel(v) : showPoster(v);
+}
+/* Share this feature: same share row as the Drop Ledger and the Meme Dump (assets/trd/share.js).
+   The link is the static preview page /videos/share/<id>.html (og/twitter card), which sends people to
+   /videos.html?utm_...#v=<id>. TikTok / Instagram hand over the poster frame only; a share tap never loads the video.
+   Each tap counts as event/video-share/<platform>/<id>. */
+const SHARE_FALLBACK_IMG = 'https://therubberduck.net/images/brand/trd-share-2026.jpg';
+function shareImg(v) {
+  const th = String(v.th || '');
+  if (!th || th.indexOf('intermission-card') !== -1) return SHARE_FALLBACK_IMG;
+  return th;
+}
+function shareRow(v) {
+  const host = $('pshare'); if (!host) return;
+  host.innerHTML = '';
+  if (!window.trdShare) { $('psharebar').hidden = true; return; }
+  const img = shareImg(v);
+  host.appendChild(trdShare.build({kind: 'video', id: v.id, page: 'https://therubberduck.net/videos/share/' + v.id + '.html', noPic: true,
+    text: v.t + ' \u00b7 Video Room \u00b7 The Rubber Duck', thumb: img, file: img, igFile: null,
+    fileName: 'trd-video-' + v.id + '.jpg',
+    hints: {
+      ig: 'Poster saved + link copied. Post it on Instagram, paste the link in a story link sticker.',
+      tiktok: 'Poster saved + link copied. Post it on TikTok as a photo, paste the link in the caption.'
+    }}));
 }
 /* Short descriptions would leave the middle column half empty; fill it with the next newest features
    (as many as fit beside the other two columns, so all three keep the same top and bottom edges). */
@@ -890,11 +936,13 @@ function fillAlso(v, long) {
 }
 addEventListener('resize', () => { if (cur) fillAlso(cur, $('pdesc').classList.contains('clamp') || !$('more').hidden); });
 $('more').addEventListener('click', () => { const closed = $('pdesc').classList.toggle('clamp'); $('more').textContent = closed ? 'More' : 'Less'; });
+/* "Share" in On the bill: no plain link copying here any more; it takes the visitor to the tracked share strip. */
 $('copy').addEventListener('click', () => {
-  const url = location.href.split('#')[0] + '#v=' + cur.id;
-  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(
-    () => { $('copy').textContent = 'Link copied'; setTimeout(() => $('copy').textContent = 'Copy link', 1600); },
-    () => prompt('Copy this link:', url));
+  const bar = $('psharebar'); if (!bar || !cur) return;
+  bar.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center'});
+  const first = bar.querySelector('.shr-b'); if (first) first.focus({preventScroll: true});
+  try { if (window.trdTrack) trdTrack('event/video-share/open/' + cur.id, 'Video ' + cur.id + ' share opened', 0); } catch (e) {}
+  try { if (window.trdVisit) trdVisit.event('share-open', {item: 'video-' + cur.id}); } catch (e) {}
 });
 
 function ticket(v) {
