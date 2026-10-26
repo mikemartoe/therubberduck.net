@@ -86,11 +86,18 @@ def demo_block(slug):
 GALLERY_COLORS = [
     ('black', 'Black', '#141414'),
     ('white', 'White', '#f3f2ee'),
-    ('tiffany', 'Tiffany Blue', '#81d8d0'),
-    ('hotpink', 'Hot Pink', '#dd1e78'),
     ('navy', 'Navy', '#1f2a44'),
     ('gold', 'Gold', '#d9a50a'),
+    ('tiffany', 'Tiffany Blue', '#81d8d0'),
+    ('hotpink', 'Hot Pink', '#dd1e78'),
 ]
+# Oct 26 2026 (Mike): all six colors are sold. Tiffany Blue and Hot Pink are SPECIAL ORDERS (partner printer, about 1 extra week; card
+# authorized, not charged, until the printer confirms; hold released right away if it can't be made within the week) on their own
+# Stripe links (merch.html size options carry data-special-link). Keep in step with merch.html.
+SPECIAL_COLORS = {'tiffany', 'hotpink'}
+SPECIAL_NOTE = ('Tiffany Blue and Hot Pink are made by a partner printer: allow about 1 extra week. Your card is only authorized, not charged, '
+                'until the printer confirms. If we can&rsquo;t make it within that week, the hold is released right away and you pay nothing. '
+                'You&rsquo;ll be asked to agree at checkout.')
 # slug -> (product name for alt text, file stem under /store-img/demo/, width, height)
 GALLERY = {
     'duck-tee': ('Red Pill Tee', 'duck-tee', 1600, 982),
@@ -136,10 +143,39 @@ def gallery_block(slug):
           't.addEventListener("click",function(){if(t.getAttribute("aria-selected")==="true")return;tabs.forEach(function(o){o.setAttribute("aria-selected",String(o===t));});'
           'var p=base(t),l=t.getAttribute("data-l"),n=++x._n,i=new Image();cap.textContent=l;'
           # decode the new photo first, then swap, so the frame never shows an empty gray box while it loads
+          'if(x._pick)x._pick(t.getAttribute("data-c"),l);'
           'function sw(){if(n!==x._n)return;src.srcset=ss(p,"webp");img.srcset=ss(p,"jpg");img.src=p+".jpg";img.alt=nm+" in "+l+", front and back";}'
           'i.sizes=img.sizes;i.srcset=ss(p,(img.currentSrc||"").slice(-5)===".webp"?"webp":"jpg");(i.decode?i.decode():Promise.reject()).then(sw,sw);});});x._n=0;});})();</script>')
     return (css + '<div class="tg" data-stem="%s" data-name="%s" data-w="%d">'
             '<div class="tg-tabs" role="tablist" aria-label="Tee color">%s</div>'
-            '<figure class="tg-f">%s<figcaption><span class="tg-c">%s</span> &middot; front (left) and back (right). Mock-up shown in %s; '
-            'the colors you can order today are listed below.</figcaption></figure></div>'
+            '<figure class="tg-f">%s<figcaption><span class="tg-c">%s</span> &middot; front (left) and back (right). Sold in %s; '
+            'Tiffany Blue and Hot Pink are special orders (about 1 extra week).</figcaption></figure></div>'
             % (stem, html.escape(name), w, tabs, pic, html.escape(l0), html.escape(', '.join(names[:-1]) + ' and ' + names[-1]))) + js
+
+def order_block(slug, sizes):
+    """Red Pill Tee listing: color (follows the gallery tabs) + size + Buy, wired per color. sizes = [(size, link, cents, special_link)]."""
+    if slug not in GALLERY or not sizes:
+        return ''
+    k0, l0, _ = GALLERY_COLORS[0]
+    copts = ''.join('<option value="%s"%s>%s%s</option>' % (k, ' data-special="1"' if k in SPECIAL_COLORS else '', html.escape(l), ' (special order)' if k in SPECIAL_COLORS else '')
+                    for k, l, _ in GALLERY_COLORS)
+    def dol(c):
+        return '$' + ('%.2f' % (c / 100)).rstrip('0').rstrip('.')
+    sopts = ''.join('<option value="%s" data-link="%s" data-special-link="%s" data-price="%d"%s>%s %s</option>' % (
+        html.escape(z), html.escape(l), html.escape(sl or ''), c, ' selected' if z == 'L' else '', html.escape(z), dol(c)) for z, l, c, sl in sizes)
+    l_default = next((l for z, l, c, sl in sizes if z == 'L'), sizes[0][1])
+    css = ('<style>.tg-o{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 14px;margin:6px 0 14px}.tg-o label{display:flex;flex-direction:column;gap:4px;font:600 13px/1.2 system-ui,sans-serif;color:var(--muted)}'
+           '.tg-o select{font:16px system-ui,sans-serif;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:#111;min-width:9em}'
+           '.tg-o .btn{margin:0}.tg-n{flex-basis:100%;margin:0;padding:9px 12px;border:2px solid #c8202b;border-radius:8px;background:#fff4d6;color:#2a1a0a;font-size:14px;line-height:1.35}'
+           '.tg-n b{color:#c8202b}.tg-n[hidden]{display:none}</style>')
+    js = ('<script>(function(){var o=document.querySelector(".tg-o");if(!o)return;var c=o.querySelector(".tg-oc"),z=o.querySelector(".tg-oz"),b=o.querySelector(".tg-ob"),n=o.querySelector(".tg-n"),'
+          'g=document.querySelector(".tg");'
+          'function sl(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}'
+          'function sync(){var co=c.options[c.selectedIndex],so=z.options[z.selectedIndex],sp=co.hasAttribute("data-special"),'
+          'l=(sp&&so.getAttribute("data-special-link"))||so.getAttribute("data-link");n.hidden=!sp;'
+          'b.href=l+"?client_reference_id="+encodeURIComponent(["%s",sl(co.textContent.replace(" (special order)","")),sl(z.value)].join("_"));}'
+          'c.addEventListener("change",function(){var t=g&&g.querySelector(\'.tg-t[data-c="\'+c.value+\'"]\');if(t&&t.getAttribute("aria-selected")!=="true")t.click();sync();});'
+          'z.addEventListener("change",sync);if(g)g._pick=function(k){if(c.value!==k){c.value=k;}sync();};sync();})();</script>') % slug
+    return (css + '<div class="tg-o" aria-label="Order this tee"><label>Color<select class="tg-oc">%s</select></label>'
+            '<label>Size<select class="tg-oz">%s</select></label><a class="btn tg-ob" href="%s" rel="noopener">Buy now through Stripe</a>'
+            '<p class="tg-n" role="note" hidden><b>SPECIAL ORDER</b> %s</p></div>' % (copts, sopts, html.escape(l_default), SPECIAL_NOTE)) + js

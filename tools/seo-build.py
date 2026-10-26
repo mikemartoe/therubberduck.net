@@ -466,14 +466,15 @@ def parse_merch():
         shipin = html.unescape(g(r'<p class="bk-ship">(.*?)</p>'))
         colors = [html.unescape(c) for c in re.findall(r'<option value="([^"]+)" data-img=', b)]
         sizes = [(a, l, int(p)) for a, l, p in re.findall(r'<option value="([^"]+)" data-link="([^"]+)" data-price="(\d+)"', b)]
+        special = dict(re.findall(r'<option value="([^"]+)" data-link="[^"]+" data-price="\d+" data-special-link="([^"]+)"', b))
         fix = html.unescape(re.sub('<[^>]+>', '', g(r'<p class="fix">(.*?)</p>')))
         items.append({'slug': slug, 'signed': 'signed' in cls, 'name': name, 'price': price, 'ship': ship, 'img': img, 'alt': alt, 'buy': buy,
-                      'bio': bio, 'shipin': shipin, 'colors': colors, 'sizes': sizes, 'fix': fix})
+                      'bio': bio, 'shipin': shipin, 'colors': colors, 'sizes': sizes, 'fix': fix, 'special': special})
     return items
 
 def card_photo(src):
     """A store card image made only to fill the card frame (store-img/demo/*_card.jpg, the Red Pill Tee) -> the photo itself (*_mock.jpg)."""
-    return re.sub(r'(store-img/demo/[^"]+)_card\.jpg$', r'\1_mock.jpg', src)
+    return re.sub(r'(store-img/demo/[^"]+)_(card|front)\.jpg$', r'\1_mock.jpg', src)
 
 def product_ld(it, url):
     desc = '%s from TRD Collectibles by The Rubber Duck. %s.' % (it['name'], '; '.join('%s: %s' % b for b in it['bio']))
@@ -497,7 +498,7 @@ def product_ld(it, url):
 
 def build_shop():
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from shop_demo_media import demo_block, gallery_block, gallery_images
+    from shop_demo_media import demo_block, gallery_block, gallery_images, order_block
     items = parse_merch()
     lm = git_date('merch.html')
     for it in items:
@@ -518,13 +519,15 @@ def build_shop():
             ('<dt>Colors</dt><dd>%s</dd>' % E(', '.join(it['colors']))) if it['colors'] else '')
         # Listings with a color gallery (tools/shop_demo_media.py GALLERY) show it full width as the main photo, in place of the square store photo.
         gal, gimgs = gallery_block(it['slug']), gallery_images(it['slug'])
+        order = order_block(it['slug'], [(z, l, c, it['special'].get(z)) for z, l, c in it['sizes']]) if gal else ''
         pic = ('<picture><source srcset="%s" type="image/webp"><img class="prod" src="%s" alt="%s" width="800" height="800" decoding="async"></picture>'
                % (E(webp), E(img), E(it['alt'] or it['name']))) if not gal else ''
         body = ('<h1>%s</h1>%s<div class="doc%s">%s<div>'
-                '<p class="lede">%s%s</p>%s<p class="cta"><a class="btn" href="/merch.html">Choose color and size in the store</a> <a href="%s" rel="noopener">Buy now through Stripe</a></p>'
+                '<p class="lede">%s%s</p>%s%s'
                 '<p class="meta">%s. Made to order and paid securely through Stripe. Every order helps keep therubberduck.net free.</p></div></div>'
                 % (E(it['name']), gal, ' tg-doc' if gal else '', pic, E(it['name']), ', signed and numbered by hand out of 500.' if it['signed'] else ' from TRD Collectibles.',
-                   facts, E(it['buy']), E(it['shipin'] or 'Ships in 3 to 8 business days')))
+                   facts, order or '<p class="cta"><a class="btn" href="/merch.html">Choose color and size in the store</a> <a href="%s" rel="noopener">Buy now through Stripe</a></p>' % E(it['buy']),
+                   E(it['shipin'] or 'Ships in 3 to 8 business days')))
         body += demo_block(it['slug'])
         others = [o for o in items if o is not it]
         body += '<h2>More from TRD Collectibles</h2><ul class="list">%s</ul>' % ''.join('<li><a href="/shop/%s/">%s</a> <span class="n">$%s</span></li>' % (o['slug'], E(o['name']), o['price']) for o in others)
