@@ -2,7 +2,13 @@
 One color tab row per listing; tapping a color swaps the video and photo. Muted autoplay loop, Sound button.
 Files: /store-img/demo/<slug>_<color>_demo.{mp4,jpg,webp} (720x1280, 8 s).
 Used by tools/seo-build.py build_shop(); keep markup self-contained (archive.css is shared by every archive page)."""
-import html
+import html, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import umbrella_lineup as U
+
+def _and(xs):
+    xs = list(xs)
+    return ', '.join(xs[:-1]) + ' and ' + xs[-1] if len(xs) > 1 else xs[0]
 
 # The six demo colors (Mike, Oct 25 2026: show the full color set; colors are being added to the lineup).
 COLORS = [
@@ -35,7 +41,7 @@ def _figs(slug, kind, key, label, poster=None):
     pb = poster or b
     a = html.escape('%s, %s, lifted above the TRD box' % (kind, label))
     return ('<figure class="dm"><div class="dm-v"><video src="%s.mp4" poster="%s.jpg" width="720" height="1280" muted loop playsinline autoplay preload="metadata" aria-label="%s"></video>'
-            '<button type="button" class="dm-snd" aria-pressed="false" aria-label="Turn sound on">&#128263; Sound</button></div>'
+            '<button type="button" class="dm-snd" aria-pressed="false" aria-label="Turn sound on">Sound on</button></div>'
             '<figcaption><span class="dm-c">%s</span> &middot; video</figcaption></figure>'
             '<figure class="dm"><picture><source srcset="%s.webp" type="image/webp"><img src="%s.jpg" alt="%s" width="720" height="1280" loading="lazy" decoding="async"></picture>'
             '<figcaption><span class="dm-c">%s</span> &middot; photo</figcaption></figure>') % (b, pb, a, label, b, b, a, label)
@@ -66,15 +72,21 @@ def demo_block(slug):
           'document.querySelectorAll(".dmx").forEach(function(x){var s=x.getAttribute("data-slug"),v=x.querySelector("video"),b=x.querySelector(".dm-snd"),'
           'src=x.querySelector("source"),img=x.querySelector("img"),tabs=x.querySelectorAll(".dm-t");'
           'if(rm){v.removeAttribute("autoplay");v.pause();}'
-          'function setb(){b.setAttribute("aria-pressed",String(!v.muted));b.setAttribute("aria-label",v.muted?"Turn sound on":"Mute");b.innerHTML=v.muted?"&#128263; Sound":"&#128266; Mute";}'
+          'function setb(){b.setAttribute("aria-pressed",String(!v.muted));b.setAttribute("aria-label",v.muted?"Turn sound on":"Mute");b.textContent=v.muted?"Sound on":"Mute";}'
           'b.addEventListener("click",function(){v.muted=!v.muted;if(!v.muted){document.querySelectorAll(".dmx video").forEach(function(o){if(o!==v)o.muted=true;});v.play();}setb();});'
           'tabs.forEach(function(t){t.addEventListener("click",function(){if(t.getAttribute("aria-selected")==="true")return;'
           'tabs.forEach(function(o){o.setAttribute("aria-selected",String(o===t));});'
           'var c=t.getAttribute("data-c"),l=t.getAttribute("data-l"),p="/store-img/demo/"+s+"_"+c+"_demo",a=x.getAttribute("data-kind")+", "+l+", lifted above the TRD box";'
           'v.poster=t.getAttribute("data-p")||p+".jpg";v.src=p+".mp4";v.setAttribute("aria-label",a);src.srcset=p+".webp";img.src=p+".jpg";img.alt=a;'
           'x.querySelectorAll(".dm-c").forEach(function(e){e.textContent=l;});if(!rm||!v.muted)v.play().catch(function(){});});});});})();</script>')
-    cap = ('<p class="meta">The demo shows the %s in each color: %s. %sNew colors are being added to the lineup; the colors you can order today are listed above. '
-           'Demo music from The Red Pill Album (&ldquo;The Storm Is Upon Us&rdquo;).</p>') % (kind.lower(), html.escape(names_txt), extra)
+    # Signed listings sell the full six-color lineup (some as special orders, tools/umbrella_lineup.py); the unsigned hats don't yet.
+    sp = (U.SIGNED.get(slug) or {}).get('special')
+    if sp:
+        avail = 'Every color shown can be ordered; %s %s special orders (up to 7 extra days). ' % (html.escape(_and(sp)), 'is a' if len(sp) == 1 else 'are')
+    else:
+        avail = 'New colors are being added to the lineup; the colors you can order today are listed above. '
+    cap = ('<p class="meta">The demo shows the %s in each color: %s. %s%s'
+           'Demo music from The Red Pill Album (&ldquo;The Storm Is Upon Us&rdquo;).</p>') % (kind.lower(), html.escape(names_txt), extra, avail)
     return ('<h2>In the box</h2>' + css +
             '<div class="dmx" data-slug="%s" data-kind="%s"><div class="dm-tabs" role="tablist" aria-label="Demo color">%s</div><div class="dms">%s</div>%s</div>'
             % (slug, html.escape(kind), tabs, _figs(slug, kind, k0, l0, posters.get(k0)), cap) + js)
@@ -91,12 +103,12 @@ GALLERY_COLORS = [
     ('tiffany', 'Tiffany Blue', '#81d8d0'),
     ('hotpink', 'Hot Pink', '#dd1e78'),
 ]
-# Oct 26 2026 (Mike): all six colors are sold. Tiffany Blue and Hot Pink are SPECIAL ORDERS (partner printer, about 1 extra week; card
-# authorized, not charged, until the printer confirms; hold released right away if it can't be made within the week) on their own
-# Stripe links (merch.html size options carry data-special-link). Keep in step with merch.html.
+# Oct 26 2026 (Mike): all six colors are sold. Tiffany Blue and Hot Pink are SPECIAL ORDERS under the umbrella rule (tools/umbrella_lineup.py:
+# up to 7 extra days to source and make it; card authorized, not charged, until the maker confirms; hold released / every penny refunded
+# if it can't be made within those 7 days) on their own Stripe links (merch.html size options carry data-special-link). Keep in step with merch.html.
 SPECIAL_COLORS = {'tiffany', 'hotpink'}
-SPECIAL_NOTE = ('Tiffany Blue and Hot Pink are made by a partner printer: allow about 1 extra week. Your card is only authorized, not charged, '
-                'until the printer confirms. If we can&rsquo;t make it within that week, the hold is released right away and you pay nothing. '
+SPECIAL_NOTE = ('Tiffany Blue and Hot Pink are special orders: we take up to 7 extra days to source and make yours. Your card is only authorized, '
+                'not charged, until a maker confirms it. If we can&rsquo;t make it within those 7 days, the hold is released at once and you pay nothing. '
                 'You&rsquo;ll be asked to agree at checkout.')
 # slug -> (product name for alt text, file stem under /store-img/demo/, width, height)
 GALLERY = {
@@ -149,7 +161,7 @@ def gallery_block(slug):
     return (css + '<div class="tg" data-stem="%s" data-name="%s" data-w="%d">'
             '<div class="tg-tabs" role="tablist" aria-label="Tee color">%s</div>'
             '<figure class="tg-f">%s<figcaption><span class="tg-c">%s</span> &middot; front (left) and back (right). Sold in %s; '
-            'Tiffany Blue and Hot Pink are special orders (about 1 extra week).</figcaption></figure></div>'
+            'Tiffany Blue and Hot Pink are special orders (up to 7 extra days).</figcaption></figure></div>'
             % (stem, html.escape(name), w, tabs, pic, html.escape(l0), html.escape(', '.join(names[:-1]) + ' and ' + names[-1]))) + js
 
 def order_block(slug, sizes):
@@ -179,3 +191,24 @@ def order_block(slug, sizes):
     return (css + '<div class="tg-o" aria-label="Order this tee"><label>Color<select class="tg-oc">%s</select></label>'
             '<label>Size<select class="tg-oz">%s</select></label><a class="btn tg-ob" href="%s" rel="noopener">Buy now through Stripe</a>'
             '<p class="tg-n" role="note" hidden><b>SPECIAL ORDER</b> %s</p></div>' % (copts, sopts, html.escape(l_default), SPECIAL_NOTE)) + js
+
+# ---------------------------------------------------------------- the TRD Promise (umbrella special-order rule), on every listing
+PROMISE_CSS = ('<style>.trd-promise{margin:18px 0 22px;padding:14px 18px 15px;border:1px solid var(--gold);border-radius:8px;'
+               'box-shadow:inset 0 0 0 3px rgba(0,0,0,.25),inset 0 0 0 4px rgba(200,155,60,.45)}'
+               '.trd-promise h2{margin:0 0 6px;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}'
+               '.trd-promise p{margin:0;line-height:1.5}.trd-promise p+p{margin-top:8px}</style>')
+
+def promise_block(slug, special_colors, signed, has_gallery=False):
+    """The promise on a listing page. Listings with special-order colors also spell out the special-order terms."""
+    if special_colors:
+        sp = '<p><b>Special order.</b> %s</p>' % U.LISTING_SPECIAL.format(
+            colors=html.escape(_and(special_colors)), verb='is a' if len(special_colors) == 1 else 'are',
+            signed=', then it&rsquo;s signed and numbered by hand' if signed else '',
+            total='3 to 4 weeks' if signed else '2 to 3 weeks')
+        lead = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver. Every other color ships on the normal schedule above.')
+    else:
+        sp = ''
+        lead = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver. Every piece is made for your order. If anything ever stops us making yours, '
+                'we take up to 7 extra days to source it, and if we can&rsquo;t, every penny comes back to you.')
+    return (PROMISE_CSS + '<section class="trd-promise" aria-labelledby="pr-%s"><h2 id="pr-%s">%s</h2><p>%s</p>%s</section>'
+            % (slug, slug, U.PROMISE_TITLE, lead, sp))

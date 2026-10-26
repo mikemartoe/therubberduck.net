@@ -1,0 +1,74 @@
+"""The umbrella special-order rule (Mike, Oct 26 2026) and the six-color lineup for the signed listings.
+
+THE RULE: anything listed in the store is ours to deliver. A listed option that can't be mapped to a product our printer
+(Printful) can make today is a SPECIAL ORDER: its own Stripe link with manual capture (card authorized, not charged), never
+sent to Printful automatically; Mike gets alerts (new / day 4 / 24 h left / expired); we take up to 7 extra days to source
+and make it; the card is charged when a partner maker confirms; if nobody can make it within those 7 days the hold is
+released (or, if already charged, every penny is refunded) at once. The buyer agrees at checkout.
+
+This file is the single place that says which listed colors are special. tools/apply_umbrella_lineup.py writes it into
+merch.html; tools/build_shop_only.py then rebuilds the shop pages. The order forwarder (trd-merch, outside this repo)
+keeps its own copy of the same status in printful-map.json (_special / _retired) and must agree with this file.
+"""
+
+PROMISE_DAYS = 7          # extra days we give ourselves to source and make a special order (= Stripe's card-hold window)
+
+# (label, image key, swatch color) -- the new lineup, in display order
+LINEUP = [
+    ('Black', 'black', '#141414'),
+    ('White', 'white', '#f3f2ee'),
+    ('Navy', 'navy', '#1f2a44'),
+    ('Gold', 'gold', '#d9a50a'),
+    ('Tiffany Blue', 'tiffany', '#81d8d0'),
+    ('Hot Pink', 'hotpink', '#dd1e78'),
+]
+RETIRED = ['Pink', 'Light Blue']   # never offered again on the signed listings; the forwarder refuses them
+
+# Placeholder checkout links for special orders that don't exist in Stripe yet. A link containing '/PENDING-' is shown
+# as "Special order link not live yet" and can't be clicked (merch.html script); tools/check_umbrella_ready.py fails
+# the deploy while any remain. Replace each one with the real buy.stripe.com URL once Mike approves and it is created.
+def pending(name):
+    return 'https://buy.stripe.com/PENDING-' + name
+
+# Signed listings: which lineup colors are special orders today and why (Printful variant mapping, checked Oct 26 2026
+# against trd-merch/printful-map.json and the Printful catalog dumps).
+SIGNED = {
+    'signed-dad-hat': {
+        # Yupoong 6245CM in Printful has Black, White and Navy; it has no Gold, Tiffany Blue or Hot Pink.
+        'special': ['Gold', 'Tiffany Blue', 'Hot Pink'],
+        'special_link': pending('signed-dad-hat-special'),
+    },
+    'signed-trucker-hat': {
+        # Richardson 112 in Printful: only "Black / White" (black front, white mesh) matches the lineup, shown as Black.
+        'special': ['White', 'Navy', 'Gold', 'Tiffany Blue', 'Hot Pink'],
+        'special_link': pending('signed-trucker-hat-special'),
+    },
+    'signed-tee': {
+        # Bella+Canvas 3001 has Gold (the Red Pill Tee already sells it), but the Signed Tee's Printful product (483809952)
+        # has no Gold variants yet. Gold stays a NORMAL color here on the condition that those variants are added before
+        # deploy (DEPLOY.md step 2). If Mike says no, move 'Gold' into this list and rerun the two tools.
+        'special': ['Tiffany Blue', 'Hot Pink'],
+        'special_links': {'S': pending('signed-tee-special-s-xl'), 'M': pending('signed-tee-special-s-xl'),
+                          'L': pending('signed-tee-special-s-xl'), 'XL': pending('signed-tee-special-s-xl'),
+                          '2XL': pending('signed-tee-special-2xl'), '3XL': pending('signed-tee-special-3xl')},
+    },
+}
+
+# ---- wording (one place) ----
+PROMISE_TITLE = 'The TRD Promise'
+PROMISE_TEXT = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver. A few colors are special orders: we take up to 7 extra days '
+                'to source and make yours, and your card is only authorized, not charged, until a maker confirms it. If we can&rsquo;t '
+                'make it within those 7 days, every penny comes back to you.')
+# store card note (short) -- unsigned / signed
+NOTE_UNSIGNED = ('<b>Special order</b> Up to 7 extra days for us to source and make it. Card authorized, not charged, until the maker '
+                 'confirms. Not made within 7 days? Hold released at once, you pay nothing. You&rsquo;ll agree at checkout.')
+NOTE_SIGNED = ('<b>Special order</b> Up to 7 extra days for us to source and make it, then it&rsquo;s signed and numbered. Card authorized, '
+               'not charged, until the maker confirms. Not made within 7 days? Hold released at once, you pay nothing. You&rsquo;ll agree at checkout.')
+SHIP_SPECIAL = 'Special order: up to 7 extra days'
+SHIPIN_SPECIAL_UNSIGNED = '2-3 wks'
+SHIPIN_SPECIAL_SIGNED = '3-4 wks'
+# listing pages (long)
+LISTING_SPECIAL = ('{colors} {verb} special orders. We take up to 7 extra days to source and make yours{signed}. Your card is only '
+                   'authorized, not charged, until a maker confirms it. If we can&rsquo;t make it within those 7 days, the hold is released at '
+                   'once and you pay nothing; if you were already charged, every penny is refunded. Expect it in about {total} in all. '
+                   'You&rsquo;ll be asked to agree at checkout.')
