@@ -17,6 +17,7 @@ COLORS = [
 # slug -> (what the demo shows, extra caption sentence or '', list of color keys that have media)
 DEMO_MEDIA = {
     'duck-trucker-hat': ('Trucker hat', '', [c[0] for c in COLORS]),
+    'duck-dad-hat': ('Dad hat', '', [c[0] for c in COLORS]),
 }
 
 def _figs(slug, kind, key, label):
