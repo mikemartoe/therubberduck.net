@@ -331,6 +331,73 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
     <span class="neon" aria-hidden="true">Open</span>
   </section>
 
+<!-- hatreel:begin -->
+<style>
+/* ============ hat reel: the approved white trucker demo, looping at the head of the hats (Oct 26 2026) ============ */
+.hreel{margin:34px 0 0;position:relative;background:radial-gradient(120% 90% at 50% 0%,#1d1710 0%,#0b0907 60%,#050404 100%);border:1px solid #6d5426;border-radius:14px;
+  padding:28px;box-shadow:0 0 0 6px #0b0907,0 0 0 7px #8a6420,0 24px 50px rgba(0,0,0,.65);overflow:hidden}
+.hreel::before{content:"";position:absolute;inset:0;background-image:var(--noise);opacity:.18;pointer-events:none}
+.hr-in{position:relative;display:grid;grid-template-columns:340px minmax(0,1fr);gap:30px;align-items:stretch}
+.hr-v{position:relative;margin:0;border-radius:10px;overflow:hidden;background:#0a0807;aspect-ratio:9/16;
+  border:1px solid var(--gold2);box-shadow:inset 0 0 0 1px rgba(0,0,0,.6),0 0 0 4px #0c0a08,0 0 0 5px rgba(200,155,60,.55),0 14px 30px rgba(0,0,0,.55)}
+.hr-v video,.hr-v img{display:block;width:100%;height:100%;object-fit:contain}
+.hr-snd{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;gap:7px;padding:8px 12px 7px;border-radius:999px;cursor:pointer;
+  font-family:var(--mono);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#120d05;border:0;
+  background:linear-gradient(180deg,var(--gold1),var(--gold2));box-shadow:0 2px 10px rgba(0,0,0,.55);opacity:.92}
+.hr-snd:hover,.hr-snd:focus-visible{opacity:1}.hr-snd svg{width:16px;height:16px;flex:none}
+.hr-snd .on{display:none}.hr-snd[aria-pressed="true"] .on{display:block}.hr-snd[aria-pressed="true"] .off{display:none}
+.hr-r{display:flex;flex-direction:column;gap:22px;min-width:0}
+.hr-h{text-align:center}
+.hr-k{margin:0;font-family:var(--mono);font-weight:700;font-size:.92rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold2)}
+.hr-h h2{margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(2.3rem,4.4vw,3.5rem);line-height:1.05;letter-spacing:.04em;
+  background:linear-gradient(180deg,var(--gold1) 0%,var(--gold2) 55%,var(--gold3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hr-rule{display:block;width:140px;height:1px;margin:14px auto;background:linear-gradient(90deg,transparent,var(--gold2),transparent)}
+.hr-p{margin:0 auto;max-width:640px;color:#e2d6bb;font-size:1.28rem;line-height:1.55;text-wrap:balance}
+.hr-g{flex:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:16px}
+.hr-t{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:16px;padding:12px;border-radius:10px;text-decoration:none;
+  background:linear-gradient(180deg,#14100b,#0c0a08);border:1px solid #3e3019;transition:border-color .2s,transform .2s}
+.hr-t:hover,.hr-t:focus-visible{border-color:var(--gold2);transform:translateY(-2px)}
+.hr-t picture{display:block;height:100%;aspect-ratio:1/1;max-height:150px;border-radius:6px;overflow:hidden;border:1px solid #4a3a1c;background:#f4f4f2}
+.hr-t img{display:block;width:100%;height:100%;object-fit:cover}
+.hr-tx{display:flex;flex-direction:column;gap:5px;min-width:0}
+.hr-tx i{font-style:normal;font-family:var(--mono);font-weight:700;font-size:.84rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2)}
+.hr-tx b{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:1.72rem;line-height:1.15;white-space:nowrap;color:var(--gold1)}
+.hr-tx span{font-family:var(--mono);font-weight:700;font-size:1.25rem;color:#efe4c6}
+.hr-tx span em{font-style:normal;color:#b9a985;font-weight:400;font-size:1rem;margin-left:8px}
+@media(min-width:761px){.hr-r{contain:size}}
+@media(max-width:1100px) and (min-width:761px){.hr-in{grid-template-columns:340px minmax(0,1fr);gap:22px}.hr-r{gap:16px}.hr-h h2{font-size:2.3rem}.hr-rule{margin:10px auto}.hr-p{font-size:1.04rem}.hr-g{gap:12px}
+  .hr-t{grid-template-columns:1fr;justify-items:center;align-content:center;gap:8px;padding:10px;text-align:center}.hr-t picture{width:96px;height:96px;max-height:none}
+  .hr-tx{align-items:center;gap:2px}.hr-tx i{font-size:.66rem;letter-spacing:.18em}.hr-tx b{font-size:1.18rem}.hr-tx span{font-size:1rem}.hr-tx span em{display:none}}
+@media(max-width:760px){.hreel{padding:22px 14px}.hr-in{grid-template-columns:1fr;gap:18px}.hr-r{display:contents}.hr-h{order:-1}
+  .hr-v{width:100%;max-width:440px;margin:0 auto}.hr-p{font-size:1.04rem}.hr-g{gap:12px}
+  .hr-t{grid-template-columns:1fr;gap:9px;padding:10px;text-align:center}.hr-t picture{max-height:none;height:auto;width:100%}
+  .hr-tx{align-items:center;gap:3px}.hr-tx i{font-size:.66rem;letter-spacing:.18em}.hr-tx b{font-size:1.14rem}.hr-tx span{font-size:1rem}.hr-tx span em{display:none}}
+</style>
+  <section class="hreel" aria-labelledby="hreel-title">
+    <div class="hr-in">
+      <figure class="hr-v"><video src="/store-img/demo/hat-reel_white-trucker.mp4" poster="/store-img/demo/hat-reel_white-trucker.jpg" width="720" height="1280" muted loop playsinline autoplay preload="metadata" disablepictureinpicture aria-label="The Rubber Duck white trucker cap, lifted off its box and turned in the hand"></video>
+        <button type="button" class="hr-snd" aria-pressed="false" aria-label="Sound on"><svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m23 9-6 6"/><path d="m17 9 6 6"/></svg><svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg><span class="hr-sl">Sound</span></button></figure>
+      <div class="hr-r">
+        <header class="hr-h"><p class="hr-k">The Hat Rack</p><h2 id="hreel-title">The Duck Cap</h2><span class="hr-rule" aria-hidden="true"></span><p class="hr-p">The chrome duck, stitched front and center. Four caps on the rack, two of them signed and numbered by hand. Pick yours.</p></header>
+        <div class="hr-g">
+          <a class="hr-t" href="/shop/signed-dad-hat/"><picture><source srcset="/store-img/signed-dad-hat_black.webp" type="image/webp"><img src="/store-img/signed-dad-hat_black.jpg" alt="" width="800" height="800" loading="lazy" decoding="async"></picture><span class="hr-tx"><i>Signed</i><b>Signed Dad Hat</b><span>$45<em>No. /500</em></span></span></a>
+          <a class="hr-t" href="/shop/signed-trucker-hat/"><picture><source srcset="/store-img/signed-trucker-hat_black.webp" type="image/webp"><img src="/store-img/signed-trucker-hat_black.jpg" alt="" width="800" height="800" loading="lazy" decoding="async"></picture><span class="hr-tx"><i>Signed</i><b>Signed Trucker</b><span>$48<em>No. /500</em></span></span></a>
+          <a class="hr-t" href="/shop/duck-dad-hat/"><picture><source srcset="/store-img/duck-dad-hat_black_product.webp" type="image/webp"><img src="/store-img/duck-dad-hat_black_product.jpg" alt="" width="800" height="800" loading="lazy" decoding="async"></picture><span class="hr-tx"><i>On the rack</i><b>Duck Dad Hat</b><span>$28<em>6 colors</em></span></span></a>
+          <a class="hr-t" href="/shop/duck-trucker-hat/"><picture><source srcset="/store-img/duck-trucker-hat_black-white.webp" type="image/webp"><img src="/store-img/duck-trucker-hat_black-white.jpg" alt="" width="800" height="800" loading="lazy" decoding="async"></picture><span class="hr-tx"><i>On the rack</i><b>Trucker Hat</b><span>$32<em>4 colors</em></span></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+<script>(function(){var f=document.querySelector(".hr-v");if(!f)return;var v=f.querySelector("video"),b=f.querySelector(".hr-snd"),l=b.querySelector(".hr-sl");v.muted=true;
+function go(){var p=v.play();if(p&&p.catch)p.catch(function(){if(!v.muted){v.muted=true;sync();v.play().catch(function(){})}})}
+function sync(){var on=!v.muted;b.setAttribute("aria-pressed",on?"true":"false");b.setAttribute("aria-label",on?"Sound off":"Sound on");}
+b.addEventListener("click",function(e){e.preventDefault();v.muted=!v.muted;sync();go()});
+var vis=false,last=-1,st=0;setInterval(function(){if(!vis||document.hidden)return;if(v.currentTime===last&&!v.paused){if(++st>1){st=0;v.load()}else if(v.currentTime>0)v.currentTime=0}else st=0;if(v.paused)go();last=v.currentTime},1500);
+if("IntersectionObserver"in window){new IntersectionObserver(function(es){es.forEach(function(x){vis=x.isIntersecting;if(vis)go();else v.pause()})},{threshold:.15}).observe(v)}else{vis=true;go()}
+document.addEventListener("visibilitychange",function(){if(document.hidden)v.pause();else if(v.getBoundingClientRect().bottom>0&&v.getBoundingClientRect().top<innerHeight)go()});
+v.addEventListener("ended",function(){v.currentTime=0;go()});})();</script>
+<!-- hatreel:end -->
+
 <!-- premium:begin -->
 <style>
 /* ============ premium line: coming soon ============ */
