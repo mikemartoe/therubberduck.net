@@ -58,9 +58,7 @@ def _figs(slug, kind, key, label, poster=None):
     a = html.escape('%s, %s, lifted above the TRD box' % (kind, label))
     return ('<figure class="dm"><div class="dm-v"><video src="%s.mp4" poster="%s.jpg" width="720" height="1280" muted loop playsinline autoplay preload="metadata" aria-label="%s"></video>'
             '<button type="button" class="dm-snd" aria-pressed="false" aria-label="Turn sound on">Sound on</button></div>'
-            '<figcaption><span class="dm-c">%s</span> &middot; video</figcaption></figure>'
-            '<figure class="dm"><picture><source srcset="%s.webp" type="image/webp"><img src="%s.jpg" alt="%s" width="720" height="1280" loading="lazy" decoding="async"></picture>'
-            '<figcaption><span class="dm-c">%s</span> &middot; photo</figcaption></figure>') % (b, pb, a, label, b, b, a, label)
+            '<figcaption><span class="dm-c">%s</span></figcaption></figure>') % (b, pb, a, label)
 
 def demo_block(slug):
     entry = DEMO_MEDIA.get(slug)
@@ -80,21 +78,21 @@ def demo_block(slug):
            '.dm-t{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;font:600 14px/1 system-ui,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 13px 9px 9px;cursor:pointer;min-height:40px}'
            '.dm-t i{width:18px;height:18px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(128,128,128,.55)}'
            '.dm-t[aria-selected="true"]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}'
-           '.dms{display:flex;flex-wrap:wrap;gap:14px}.dm{margin:0;flex:1 1 220px;max-width:300px}'
+           '.dms{display:flex;flex-wrap:wrap;gap:14px}.dm{margin:0;flex:1 1 220px;max-width:340px}'
            '.dm video,.dm img{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:6px;border:1px solid var(--line);background:#111}'
            '.dm-v{position:relative}.dm-snd{position:absolute;right:8px;bottom:8px;font:700 13px/1 system-ui,sans-serif;color:#140e05;background:var(--gold);border:0;border-radius:999px;padding:8px 12px;cursor:pointer;opacity:.92}'
            '.dm-snd[aria-pressed="true"]{background:var(--ink)}.dm figcaption{color:var(--muted);font-size:13px;margin-top:6px}'
            '@media(max-width:640px){.dms{gap:10px}.dm{flex-basis:calc(50% - 5px)}}</style>')
     js = ('<script>(function(){var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;'
           'document.querySelectorAll(".dmx").forEach(function(x){var s=x.getAttribute("data-slug"),v=x.querySelector("video"),b=x.querySelector(".dm-snd"),'
-          'src=x.querySelector("source"),img=x.querySelector("img"),tabs=x.querySelectorAll(".dm-t");'
+          'tabs=x.querySelectorAll(".dm-t");'
           'if(rm){v.removeAttribute("autoplay");v.pause();}'
           'function setb(){b.setAttribute("aria-pressed",String(!v.muted));b.setAttribute("aria-label",v.muted?"Turn sound on":"Mute");b.textContent=v.muted?"Sound on":"Mute";}'
           'b.addEventListener("click",function(){v.muted=!v.muted;if(!v.muted){document.querySelectorAll(".dmx video").forEach(function(o){if(o!==v)o.muted=true;});v.play();}setb();});'
           'tabs.forEach(function(t){t.addEventListener("click",function(){if(t.getAttribute("aria-selected")==="true")return;'
           'tabs.forEach(function(o){o.setAttribute("aria-selected",String(o===t));});'
           'var c=t.getAttribute("data-c"),l=t.getAttribute("data-l"),p="/store-img/demo/"+s+"_"+c+"_demo",a=x.getAttribute("data-kind")+", "+l+", lifted above the TRD box";'
-          'v.poster=t.getAttribute("data-p")||p+".jpg";v.src=p+".mp4";v.setAttribute("aria-label",a);src.srcset=p+".webp";img.src=p+".jpg";img.alt=a;'
+          'v.poster=t.getAttribute("data-p")||p+".jpg";v.src=p+".mp4";v.setAttribute("aria-label",a);'
           'x.querySelectorAll(".dm-c").forEach(function(e){e.textContent=l;});if(!rm||!v.muted)v.play().catch(function(){});});});});})();</script>')
     # Signed listings sell the full six-color lineup (some as special orders, tools/umbrella_lineup.py); the unsigned hats don't yet.
     sp = (U.SIGNED.get(slug) or {}).get('special')
@@ -164,7 +162,7 @@ def gallery_block(slug):
            '<img src="%s.jpg" srcset="%s-900.jpg 900w, %s.jpg %dw" sizes="%s" alt="%s" width="%d" height="%d" decoding="async" fetchpriority="high"></picture></div>'
            % (stem, b, b, w, sizes, b, b, b, w, sizes, html.escape(_galt(name, l0)), w, h))
     js = ('<script>(function(){document.querySelectorAll(".tg").forEach(function(x){var st=x.getAttribute("data-stem"),nm=x.getAttribute("data-name"),w=x.getAttribute("data-w"),'
-          'src=x.querySelector("source"),img=x.querySelector("img"),cap=x.querySelector(".tg-c"),tabs=x.querySelectorAll(".tg-t");'
+          'cap=x.querySelector(".tg-c"),tabs=x.querySelectorAll(".tg-t");'
           'function base(t){return "/store-img/demo/"+st+"_"+t.getAttribute("data-c")+"_mock";}'
           'function ss(p,e){return p+"-900."+e+" 900w, "+p+"."+e+" "+w+"w";}'
           'tabs.forEach(function(t){function pre(){if(t._p)return;t._p=1;var i=new Image();i.sizes=img.sizes;i.srcset=ss(base(t),"webp");}'
