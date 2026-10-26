@@ -949,6 +949,7 @@ button{font:inherit;color:inherit;background:none;border:0}
 .trd-sup-go:hover{background:#ff2a1f}
 .trd-sup-x{position:absolute;top:4px;right:4px;width:20px;height:20px;border:0;border-radius:50%;background:#eee;color:#333;font-size:14px;line-height:20px;cursor:pointer;padding:0}
 .trd-sup-x:hover{background:#ddd}
+.trd-sup-x::after{content:"";position:absolute;inset:-12px}
 @media (max-width:480px){.trd-sup{right:8px;bottom:8px}.trd-sup-duck{width:68px;height:68px;padding:5px}.trd-sup-bub{max-width:165px;margin-bottom:32px;padding:9px 11px}.trd-sup-bub p{font-size:12px}}
 .trd-sup.wig:not(.open) .trd-sup-duck{animation:trdWig 5s ease-in-out 1.5s infinite;transform-origin:50% 85%}
 @keyframes trdWig{0%,76%,100%{transform:rotate(0) translateY(0)}79%{transform:rotate(-12deg) translateY(-4px)}82%{transform:rotate(10deg) translateY(-4px)}85%{transform:rotate(-8deg) translateY(-2px)}88%{transform:rotate(6deg)}91%{transform:rotate(-3deg)}94%{transform:rotate(0)}}
