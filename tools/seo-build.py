@@ -471,6 +471,10 @@ def parse_merch():
                       'bio': bio, 'shipin': shipin, 'colors': colors, 'sizes': sizes, 'fix': fix})
     return items
 
+def card_photo(src):
+    """A store card image made only to fill the card frame (store-img/demo/*_card.jpg, the Red Pill Tee) -> the photo itself (*_mock.jpg)."""
+    return re.sub(r'(store-img/demo/[^"]+)_card\.jpg$', r'\1_mock.jpg', src)
+
 def product_ld(it, url):
     desc = '%s from TRD Collectibles by The Rubber Duck. %s.' % (it['name'], '; '.join('%s: %s' % b for b in it['bio']))
     if it['signed']: desc += ' Hand-signed and numbered out of 500.'
@@ -486,7 +490,7 @@ def product_ld(it, url):
         offers = [offer('%.2f' % (p / 100), l, 'Size ' + s) for s, l, p in it['sizes']]
     else:
         offers = offer('%.2f' % float(it['price']), it['buy'])
-    imgs = [SITE + '/' + it['img'].lstrip('/')]
+    imgs = [SITE + '/' + card_photo(it['img']).lstrip('/')]
     return {'@type': 'Product', '@id': SITE + url + '#product', 'name': it['name'], 'description': desc, 'sku': 'TRD-' + it['slug'],
             'image': imgs, 'brand': {'@type': 'Brand', 'name': 'The Rubber Duck'}, 'url': SITE + url, 'offers': offers,
             **({'color': ', '.join(it['colors'])} if it['colors'] else {})}
@@ -526,7 +530,7 @@ def build_shop():
         body += '<h2>More from TRD Collectibles</h2><ul class="list">%s</ul>' % ''.join('<li><a href="/shop/%s/">%s</a> <span class="n">$%s</span></li>' % (o['slug'], E(o['name']), o['price']) for o in others)
         ld = product_ld(it, url)
         if gimgs:
-            ld['image'] = [SITE + u for u, _ in gimgs] + ld['image']
+            ld['image'] = [SITE + u for u, _ in gimgs] + [u for u in ld['image'] if u not in [SITE + g for g, _ in gimgs]]
         og = SITE + (gimgs[0][0] if gimgs else img)
         write('shop/%s/index.html' % it['slug'], page(url, title, desc, body, [ld],
               [('Home', '/'), ('TRD Collectibles', '/merch.html'), (it['name'], url)], og_image=og, og_type='product'))
@@ -675,7 +679,7 @@ def build_sitemaps():
         if f is None: continue
         imgs = []
         if f == 'merch.html':
-            imgs = [(SITE + '/store-img/' + os.path.basename(x), None) for x in sorted(set(re.findall(r'src="(store-img/[^"]+\.jpg)"', open(f).read())))]
+            imgs = [(SITE + '/' + (card_photo(x) if '/demo/' in x else 'store-img/' + os.path.basename(x)), None) for x in sorted(set(re.findall(r'src="(store-img/[^"]+\.jpg)"', open(f).read())))]
         if f == 'album.html':
             imgs = [(SITE + '/images/opt/album-cover-card.jpg', 'The Red Pill Album cover')]
         pages.append((SITE + p, git_date(f), imgs, []))
