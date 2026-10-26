@@ -178,7 +178,13 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 
 @media (max-width:1180px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.neon{display:none}}
 @media (max-width:1180px) and (min-width:700px){.g4 .item,.g3 .item{display:grid;grid-template-columns:52% minmax(0,1fr);gap:14px;align-items:stretch}
-  .g3{grid-template-columns:1fr}.g3 .item{grid-template-columns:44% minmax(0,1fr)}}
+  .g3{grid-template-columns:1fr}.g3 .item{grid-template-columns:44% minmax(0,1fr)}
+  .g4 .item,.g3 .item{container-type:inline-size}
+  .g4 .tc,.g3 .tc{aspect-ratio:auto;width:auto;min-width:0;height:auto;min-height:calc(52cqw * 1.15)}
+  .g3 .item{grid-template-columns:34% minmax(0,1fr)}.g3 .tc{min-height:clamp(300px,36cqw,320px)}
+  .g4 .line th,.g3 .line th{font-size:10px;letter-spacing:.02em;padding:3px 1px}.g4 .line td,.g3 .line td{font-size:13.5px;padding:3px 1px}.g4 .line td.amt,.g3 .line td.amt{font-size:1.35rem}
+  .g4 .line .us,.g3 .line .us{display:none}}
+@media (max-width:979px) and (min-width:700px){.g4{grid-template-columns:1fr;gap:20px}.g4 .item{grid-template-columns:34% minmax(0,1fr)}.g4 .tc{min-height:clamp(260px,36cqw,300px)}}
 @media (max-width:699px){
   .shop{padding:18px 12px 34px}
   .sign{padding:18px 14px 16px;gap:14px;border-width:3px;box-shadow:0 0 0 5px #140b05,0 0 0 8px var(--brown),0 16px 30px rgba(0,0,0,.6)}
