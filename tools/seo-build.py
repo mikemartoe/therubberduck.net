@@ -493,7 +493,7 @@ def product_ld(it, url):
 
 def build_shop():
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from shop_demo_media import demo_block
+    from shop_demo_media import demo_block, gallery_block, gallery_images
     items = parse_merch()
     lm = git_date('merch.html')
     for it in items:
@@ -512,17 +512,25 @@ def build_shop():
         facts = '<dl class="facts"><dt>Price</dt><dd>%s</dd><dt>US shipping</dt><dd>$%s</dd>%s%s%s</dl>' % (
             E(price_txt), E(it['ship']), ''.join('<dt>%s</dt><dd>%s</dd>' % (E(a), E(c)) for a, c in it['bio']), sizes,
             ('<dt>Colors</dt><dd>%s</dd>' % E(', '.join(it['colors']))) if it['colors'] else '')
-        body = ('<h1>%s</h1><div class="doc"><picture><source srcset="%s" type="image/webp"><img class="prod" src="%s" alt="%s" width="800" height="800" decoding="async"></picture><div>'
+        # Listings with a color gallery (tools/shop_demo_media.py GALLERY) show it full width as the main photo, in place of the square store photo.
+        gal, gimgs = gallery_block(it['slug']), gallery_images(it['slug'])
+        pic = ('<picture><source srcset="%s" type="image/webp"><img class="prod" src="%s" alt="%s" width="800" height="800" decoding="async"></picture>'
+               % (E(webp), E(img), E(it['alt'] or it['name']))) if not gal else ''
+        body = ('<h1>%s</h1>%s<div class="doc%s">%s<div>'
                 '<p class="lede">%s%s</p>%s<p class="cta"><a class="btn" href="/merch.html">Choose color and size in the store</a> <a href="%s" rel="noopener">Buy now through Stripe</a></p>'
                 '<p class="meta">%s. Made to order and paid securely through Stripe. Every order helps keep therubberduck.net free.</p></div></div>'
-                % (E(it['name']), E(webp), E(img), E(it['alt'] or it['name']), E(it['name']), ', signed and numbered by hand out of 500.' if it['signed'] else ' from TRD Collectibles.',
+                % (E(it['name']), gal, ' tg-doc' if gal else '', pic, E(it['name']), ', signed and numbered by hand out of 500.' if it['signed'] else ' from TRD Collectibles.',
                    facts, E(it['buy']), E(it['shipin'] or 'Ships in 3 to 8 business days')))
         body += demo_block(it['slug'])
         others = [o for o in items if o is not it]
         body += '<h2>More from TRD Collectibles</h2><ul class="list">%s</ul>' % ''.join('<li><a href="/shop/%s/">%s</a> <span class="n">$%s</span></li>' % (o['slug'], E(o['name']), o['price']) for o in others)
-        write('shop/%s/index.html' % it['slug'], page(url, title, desc, body, [product_ld(it, url)],
-              [('Home', '/'), ('TRD Collectibles', '/merch.html'), (it['name'], url)], og_image=SITE + img, og_type='product'))
-        add_sm('shop', url, lm, images=[(SITE + img, it['name'])])
+        ld = product_ld(it, url)
+        if gimgs:
+            ld['image'] = [SITE + u for u, _ in gimgs] + ld['image']
+        og = SITE + (gimgs[0][0] if gimgs else img)
+        write('shop/%s/index.html' % it['slug'], page(url, title, desc, body, [ld],
+              [('Home', '/'), ('TRD Collectibles', '/merch.html'), (it['name'], url)], og_image=og, og_type='product'))
+        add_sm('shop', url, lm, images=[(SITE + u, a) for u, a in gimgs] or [(SITE + img, it['name'])])
     return items
 
 def build_soon():

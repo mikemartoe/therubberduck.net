@@ -78,3 +78,65 @@ def demo_block(slug):
     return ('<h2>In the box</h2>' + css +
             '<div class="dmx" data-slug="%s" data-kind="%s"><div class="dm-tabs" role="tablist" aria-label="Demo color">%s</div><div class="dms">%s</div>%s</div>'
             % (slug, html.escape(kind), tabs, _figs(slug, kind, k0, l0, posters.get(k0)), cap) + js)
+
+# ---------------------------------------------------------------- listing gallery: one main photo per color with color tabs
+# Red Pill Tee: Mike's front + back mock (Oct 26 2026) in six colors, landscape 1600x982 (+900 w), made by tools/make_tee_mock_images.py.
+# Shown as the listing's main photo, full width above the facts; the frame has the photo's own aspect ratio, so nothing is cropped or letterboxed.
+# Not used on signed-tee (the mock has no signature). The colors you can order are still the ones in merch.html.
+GALLERY_COLORS = [
+    ('black', 'Black', '#141414'),
+    ('white', 'White', '#f3f2ee'),
+    ('tiffany', 'Tiffany Blue', '#81d8d0'),
+    ('hotpink', 'Hot Pink', '#dd1e78'),
+    ('navy', 'Navy', '#1f2a44'),
+    ('gold', 'Gold', '#d9a50a'),
+]
+# slug -> (product name for alt text, file stem under /store-img/demo/, width, height)
+GALLERY = {
+    'duck-tee': ('Red Pill Tee', 'duck-tee', 1600, 982),
+}
+
+def _galt(name, label):
+    return '%s in %s, front and back' % (name, label)
+
+def gallery_images(slug):
+    """[(url, alt)] for every gallery color, first color first; [] if the listing has no gallery."""
+    g = GALLERY.get(slug)
+    if not g:
+        return []
+    return [('/store-img/demo/%s_%s_mock.jpg' % (g[1], k), _galt(g[0], l)) for k, l, _ in GALLERY_COLORS]
+
+def gallery_block(slug):
+    g = GALLERY.get(slug)
+    if not g:
+        return ''
+    name, stem, w, h = g
+    k0, l0, _ = GALLERY_COLORS[0]
+    b = '/store-img/demo/%s_%s_mock' % (stem, k0)
+    sizes = '(max-width: 960px) calc(100vw - 36px), 924px'
+    tabs = ''.join('<button type="button" role="tab" class="tg-t" data-c="%s" data-l="%s" aria-selected="%s" aria-controls="tg-%s" style="--sw:%s"><i></i>%s</button>'
+                   % (k, html.escape(l), 'true' if i == 0 else 'false', stem, sw, html.escape(l)) for i, (k, l, sw) in enumerate(GALLERY_COLORS))
+    names = [c[1] for c in GALLERY_COLORS]
+    css = ('<style>.tg{margin:4px 0 18px}.tg-f{margin:0}.tg-p{display:block;position:relative;aspect-ratio:%d/%d;background:#666;border:1px solid var(--line);border-radius:8px;overflow:hidden}'
+           '.tg-p img{display:block;width:100%%;height:100%%;object-fit:contain}'
+           '.tg-tabs{display:flex;flex-wrap:wrap;gap:8px;padding:2px 2px 10px}'
+           '.tg-t{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;font:600 14px/1 system-ui,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 13px 9px 9px;cursor:pointer;min-height:40px}'
+           '.tg-t i{width:18px;height:18px;border-radius:50%%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(128,128,128,.55)}'
+           '.tg-t[aria-selected="true"]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}'
+           '.tg figcaption{color:var(--muted);font-size:13px;margin-top:6px}.doc.tg-doc{grid-template-columns:1fr}</style>') % (w, h)
+    pic = ('<div class="tg-p" id="tg-%s" role="tabpanel"><picture><source type="image/webp" srcset="%s-900.webp 900w, %s.webp %dw" sizes="%s">'
+           '<img src="%s.jpg" srcset="%s-900.jpg 900w, %s.jpg %dw" sizes="%s" alt="%s" width="%d" height="%d" decoding="async" fetchpriority="high"></picture></div>'
+           % (stem, b, b, w, sizes, b, b, b, w, sizes, html.escape(_galt(name, l0)), w, h))
+    js = ('<script>(function(){document.querySelectorAll(".tg").forEach(function(x){var st=x.getAttribute("data-stem"),nm=x.getAttribute("data-name"),w=x.getAttribute("data-w"),'
+          'src=x.querySelector("source"),img=x.querySelector("img"),cap=x.querySelector(".tg-c"),tabs=x.querySelectorAll(".tg-t");'
+          'function base(t){return "/store-img/demo/"+st+"_"+t.getAttribute("data-c")+"_mock";}'
+          'function ss(p,e){return p+"-900."+e+" 900w, "+p+"."+e+" "+w+"w";}'
+          'tabs.forEach(function(t){function pre(){if(t._p)return;t._p=1;var i=new Image();i.sizes=img.sizes;i.srcset=ss(base(t),"webp");}'
+          't.addEventListener("pointerenter",pre);t.addEventListener("focus",pre);t.addEventListener("touchstart",pre,{passive:true});'
+          't.addEventListener("click",function(){if(t.getAttribute("aria-selected")==="true")return;tabs.forEach(function(o){o.setAttribute("aria-selected",String(o===t));});'
+          'var p=base(t),l=t.getAttribute("data-l");src.srcset=ss(p,"webp");img.srcset=ss(p,"jpg");img.src=p+".jpg";img.alt=nm+" in "+l+", front and back";cap.textContent=l;});});});})();</script>')
+    return (css + '<div class="tg" data-stem="%s" data-name="%s" data-w="%d">'
+            '<div class="tg-tabs" role="tablist" aria-label="Tee color">%s</div>'
+            '<figure class="tg-f">%s<figcaption><span class="tg-c">%s</span> &middot; front (left) and back (right). Mock-up shown in %s; '
+            'the colors you can order today are listed below.</figcaption></figure></div>'
+            % (stem, html.escape(name), w, tabs, pic, html.escape(l0), html.escape(', '.join(names[:-1]) + ' and ' + names[-1]))) + js
