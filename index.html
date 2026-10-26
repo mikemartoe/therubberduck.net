@@ -613,6 +613,29 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   .tc-tag{left:40px}
   .tcase .sp-cat{letter-spacing:0}
 }
+/* 600-1279px wide (tablets, small laptops): tape titles were cut off ("PERSON...", "PRIVATE THEAT...").
+   Here only: drop the tiny brand mark (as on phones), tighten the gaps and let the title size follow the width.
+   Phones (under 600px) and 1280px+ are untouched. */
+@media (min-width:600px) and (max-width:1279px){
+  .spine .sp-mk{display:none}
+  .spine .sp-end{gap:0}
+}
+@media (min-width:600px) and (max-width:899px){
+  .hello .tcase{width:min(100%,360px)}
+  .spine .sp{gap:9px}
+  .stacks .sp-ic{width:38px;height:38px}
+  .stacks .sp-n{font-size:clamp(13px,2.3vw,20px)}
+  .stacks .t2 .sp-n,.stacks .t5 .sp-n{font-size:clamp(11.5px,1.9vw,17px)}
+  .stacks .t4 .sp-n,.stacks .t6 .sp-n{font-size:clamp(15px,2.9vw,25px)}
+  .stacks .t1 .sp-n,.stacks .t3 .sp-n{font-size:clamp(12px,2.15vw,20px)}
+}
+@media (min-width:900px) and (max-width:1279px) and (min-height:500px){
+  .spine .sp{gap:clamp(7px,.7vw,12px)}
+  .stacks .t2 .sp-n,.stacks .t5 .sp-n{font-size:clamp(12px,min(2.1vh,1.25vw),23px)}
+  .stacks .t1 .sp-n,.stacks .t3 .sp-n{font-size:clamp(13px,min(2.25vh,1.3vw),25px)}
+  .hello .tc-pl .sp-n{font-size:clamp(12px,min(2.5vh,1.4vw),17px)}
+  .spine .sp-ic{width:min(clamp(38px,5.2vh,62px),4.4vw);height:min(clamp(38px,5.2vh,62px),4.4vw)}
+}
 @media (prefers-reduced-motion:reduce){
   .banner a.hb-book,.banner a.hb-book:hover,.hb-sign{transition:none}
   .tcase.is-take{animation:none}
