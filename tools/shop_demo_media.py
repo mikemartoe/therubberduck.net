@@ -14,31 +14,44 @@ COLORS = [
     ('gold', 'Gold', '#c9a43a'),
 ]
 
-# slug -> (what the demo shows, extra caption sentence or '', list of color keys that have media)
+# Signed listings: the signature in the demo is the real one from a signed hat photo (No. 11 of 500), composited, never redrawn.
+_SIG = 'The signature under the brim in the demo is taken from a real signed hat (No. 11 of 500); yours carries its own hand-written number. '
+
+def _posters(base_slug, own):
+    """Poster per color: signed demo videos open on the same unsigned frame as the base listing's demo,
+    so they use that listing's photo as poster; colors in `own` open on the signed photo itself."""
+    return {c[0]: None if c[0] in own else '/store-img/demo/%s_%s_demo' % (base_slug, c[0]) for c in COLORS}
+
+# slug -> (what the demo shows, extra caption sentence or '', list of color keys that have media[, {color: poster base or None}])
 DEMO_MEDIA = {
     'duck-trucker-hat': ('Trucker hat', '', [c[0] for c in COLORS]),
     'duck-dad-hat': ('Dad hat', '', [c[0] for c in COLORS]),
+    'signed-dad-hat': ('Signed dad hat', _SIG, [c[0] for c in COLORS], _posters('duck-dad-hat', ['gold'])),
+    'signed-trucker-hat': ('Signed trucker hat', _SIG, [c[0] for c in COLORS], _posters('duck-trucker-hat', ['hotpink', 'gold'])),
 }
 
-def _figs(slug, kind, key, label):
+def _figs(slug, kind, key, label, poster=None):
     b = '/store-img/demo/%s_%s_demo' % (slug, key)
+    pb = poster or b
     a = html.escape('%s, %s, lifted above the TRD box' % (kind, label))
     return ('<figure class="dm"><div class="dm-v"><video src="%s.mp4" poster="%s.jpg" width="720" height="1280" muted loop playsinline autoplay preload="metadata" aria-label="%s"></video>'
             '<button type="button" class="dm-snd" aria-pressed="false" aria-label="Turn sound on">&#128263; Sound</button></div>'
             '<figcaption><span class="dm-c">%s</span> &middot; video</figcaption></figure>'
             '<figure class="dm"><picture><source srcset="%s.webp" type="image/webp"><img src="%s.jpg" alt="%s" width="720" height="1280" loading="lazy" decoding="async"></picture>'
-            '<figcaption><span class="dm-c">%s</span> &middot; photo</figcaption></figure>') % (b, b, a, label, b, b, a, label)
+            '<figcaption><span class="dm-c">%s</span> &middot; photo</figcaption></figure>') % (b, pb, a, label, b, b, a, label)
 
 def demo_block(slug):
     entry = DEMO_MEDIA.get(slug)
     if not entry:
         return ''
-    kind, extra, keys = entry
+    kind, extra, keys = entry[:3]
+    posters = entry[3] if len(entry) > 3 else {}
     cols = [c for c in COLORS if c[0] in keys]
     names = [c[1] for c in cols]
     names_txt = ', '.join(names[:-1]) + ' and ' + names[-1] if len(names) > 1 else names[0]
-    tabs = ''.join('<button type="button" role="tab" class="dm-t" data-c="%s" data-l="%s" aria-selected="%s" style="--sw:%s"><i></i>%s</button>'
-                   % (k, html.escape(l), 'true' if i == 0 else 'false', sw, html.escape(l)) for i, (k, l, sw) in enumerate(cols))
+    tabs = ''.join('<button type="button" role="tab" class="dm-t" data-c="%s" data-l="%s"%s aria-selected="%s" style="--sw:%s"><i></i>%s</button>'
+                   % (k, html.escape(l), (' data-p="%s.jpg"' % posters[k]) if posters.get(k) else '', 'true' if i == 0 else 'false', sw, html.escape(l))
+                   for i, (k, l, sw) in enumerate(cols))
     k0, l0, _ = cols[0]
     css = ('<style>.dmx{margin:6px 0 10px}.dm-tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}'
            '.dm-t{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;font:600 14px/1 system-ui,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 13px 9px 9px;cursor:pointer;min-height:40px}'
@@ -58,10 +71,10 @@ def demo_block(slug):
           'tabs.forEach(function(t){t.addEventListener("click",function(){if(t.getAttribute("aria-selected")==="true")return;'
           'tabs.forEach(function(o){o.setAttribute("aria-selected",String(o===t));});'
           'var c=t.getAttribute("data-c"),l=t.getAttribute("data-l"),p="/store-img/demo/"+s+"_"+c+"_demo",a=x.getAttribute("data-kind")+", "+l+", lifted above the TRD box";'
-          'v.poster=p+".jpg";v.src=p+".mp4";v.setAttribute("aria-label",a);src.srcset=p+".webp";img.src=p+".jpg";img.alt=a;'
+          'v.poster=t.getAttribute("data-p")||p+".jpg";v.src=p+".mp4";v.setAttribute("aria-label",a);src.srcset=p+".webp";img.src=p+".jpg";img.alt=a;'
           'x.querySelectorAll(".dm-c").forEach(function(e){e.textContent=l;});if(!rm||!v.muted)v.play().catch(function(){});});});});})();</script>')
     cap = ('<p class="meta">The demo shows the %s in each color: %s. %sNew colors are being added to the lineup; the colors you can order today are listed above. '
            'Demo music from The Red Pill Album (&ldquo;The Storm Is Upon Us&rdquo;).</p>') % (kind.lower(), html.escape(names_txt), extra)
     return ('<h2>In the box</h2>' + css +
             '<div class="dmx" data-slug="%s" data-kind="%s"><div class="dm-tabs" role="tablist" aria-label="Demo color">%s</div><div class="dms">%s</div>%s</div>'
-            % (slug, html.escape(kind), tabs, _figs(slug, kind, k0, l0), cap) + js)
+            % (slug, html.escape(kind), tabs, _figs(slug, kind, k0, l0, posters.get(k0)), cap) + js)
