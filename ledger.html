@@ -1661,17 +1661,43 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     emptyActs.innerHTML=acts;
   }
   /* Land the reader on the drop they asked for: one short debounce so typing "1061" does not
-     yank the page around at "1", "10" and "106". Only scrolls when the row is off-screen. */
-  var jumpT=null;
+     yank the page around at "1", "10" and "106". Only scrolls when the row is off-screen or tucked under the header. */
+  var jumpT=null, jumpN=0;
+  /* Bottom edge of whatever is pinned to the top of the screen (nav pill + search bar), so a drop is never tucked under it. */
+  function headerBottom(){
+    var b=0;
+    [].slice.call(document.querySelectorAll('.e3-nav-pill,.arc-bar')).forEach(function(h){
+      var cs=getComputedStyle(h); if(cs.position!=='sticky'&&cs.position!=='fixed') return;
+      /* where it will sit once pinned (its sticky top + its height), not where it is right now */
+      var r=h.getBoundingClientRect(), pin=(parseFloat(cs.top)||0)+r.height;
+      if(r.height&&pin>b&&pin<window.innerHeight/2) b=pin;
+    });
+    return b;
+  }
+  /* Every drop lands with its number and date just below the pinned header, so a long drop
+     starts at the top of the post instead of being centred with its head off-screen. */
+  function jumpTo(el,smooth){
+    var top=headerBottom()+12, r=el.getBoundingClientRect();
+    el.style.scrollMarginTop=top+'px';
+    var y=window.pageYOffset+r.top-top;
+    var calm=!smooth||(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    window.scrollTo({top:Math.max(0,Math.round(y)),behavior:calm?'auto':'smooth'});
+  }
   function scheduleJump(n){
     clearTimeout(jumpT);
     jumpT=setTimeout(function(){
       var el=document.getElementById('drop-'+n);
       if(!el) return;
-      var r=el.getBoundingClientRect();
-      if(r.top<96 || r.bottom>(window.innerHeight-8)){
-        var calm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        el.scrollIntoView({behavior:calm?'auto':'smooth',block:'center'});
+      var r=el.getBoundingClientRect(), first=!jumpN;
+      jumpN++;
+      if(first || r.top<headerBottom()+8 || r.bottom>(window.innerHeight-8)){
+        /* the first jump comes from a shared link: land instantly, then once more after load in case
+           the browser's own #anchor scroll or late images moved the page */
+        jumpTo(el,!first);
+        if(first){
+          var again=function(){ setTimeout(function(){ var e=document.getElementById('drop-'+n); if(e) jumpTo(e,false); },120); };
+          if(document.readyState==='complete') again(); else window.addEventListener('load',again,{once:true});
+        }
       }
       el.classList.add('arc-hit');
       setTimeout(function(){ el.classList.remove('arc-hit'); },2600);
@@ -1856,6 +1882,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 html[data-theme="dark"]{--on-accent:#171409;--btn:var(--accent);--btn-hover:var(--accent-hover)}
 html,body{background:var(--bg)}
 section[id],details[id]{scroll-margin-top:92px}
+.arc-row[id]{scroll-margin-top:170px}
 .e3-nav-pill .k-cta{border-radius:10px;background:var(--btn);border:1px solid var(--btn);color:var(--on-accent)}
 .e3-nav-pill .k-cta:hover{background:var(--btn-hover);border-color:var(--btn-hover)}
 .e3-hero-kinetic{color:var(--text);background:var(--bg);min-height:0;display:flex;flex-direction:column;align-items:stretch;padding:106px 0 clamp(72px,9vw,112px);overflow:hidden}
