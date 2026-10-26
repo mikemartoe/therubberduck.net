@@ -30,29 +30,44 @@ RETIRED = ['Pink', 'Light Blue']   # never offered again on the signed listings;
 def pending(name):
     return 'https://buy.stripe.com/PENDING-' + name
 
+# Live manual-capture special-order links, created Oct 26 2026 on acct_1NvT2xGC9fEXRvQS (see trd-merch/stripe-links.json)
+SIGNED_TEE_SP_SXL = 'https://buy.stripe.com/bJefZhahKgVi5KD6nJ9IQ1a'   # plink_1UUrumGC9fEXRvQSXijL69MJ
+SIGNED_TEE_SP_2XL = 'https://buy.stripe.com/14A8wPcpSbAY5KD9zV9IQ1b'   # plink_1UUrv4GC9fEXRvQSq9AYflZc
+SIGNED_TEE_SP_3XL = 'https://buy.stripe.com/4gM5kDblO7kI4Gz9zV9IQ1c'   # plink_1UUrvCGC9fEXRvQS3MjhbEb9
+
 # Signed listings: which lineup colors are special orders today and why (Printful variant mapping, checked Oct 26 2026
 # against trd-merch/printful-map.json and the Printful catalog dumps).
 SIGNED = {
     'signed-dad-hat': {
         # Yupoong 6245CM in Printful has Black, White and Navy; it has no Gold, Tiffany Blue or Hot Pink.
         'special': ['Gold', 'Tiffany Blue', 'Hot Pink'],
-        'special_link': pending('signed-dad-hat-special'),
+        'special_link': 'https://buy.stripe.com/8x2fZh9dG8oMdd5bI39IQ1d',  # plink_1UUrvKGC9fEXRvQSK5Zmr6An
     },
     'signed-trucker-hat': {
         # Richardson 112 in Printful: only "Black / White" (black front, white mesh) matches the lineup, shown as Black.
         'special': ['White', 'Navy', 'Gold', 'Tiffany Blue', 'Hot Pink'],
-        'special_link': pending('signed-trucker-hat-special'),
+        'special_link': 'https://buy.stripe.com/6oU9ATahKbAYdd56nJ9IQ1e',  # plink_1UUrvRGC9fEXRvQSdmlmIAGr
     },
     'signed-tee': {
         # Bella+Canvas 3001 has Gold (the Red Pill Tee already sells it), but the Signed Tee's Printful product (483809952)
-        # has no Gold variants yet. Gold stays a NORMAL color here on the condition that those variants are added before
-        # deploy (DEPLOY.md step 2). If Mike says no, move 'Gold' into this list and rerun the two tools.
+        # had no Gold variants; Gold S-3XL were added to it on Oct 26 2026 (sync variants 5597415939..5597416378), so Gold is NORMAL.
         'special': ['Tiffany Blue', 'Hot Pink'],
-        'special_links': {'S': pending('signed-tee-special-s-xl'), 'M': pending('signed-tee-special-s-xl'),
-                          'L': pending('signed-tee-special-s-xl'), 'XL': pending('signed-tee-special-s-xl'),
-                          '2XL': pending('signed-tee-special-2xl'), '3XL': pending('signed-tee-special-3xl')},
+        'special_links': {'S': SIGNED_TEE_SP_SXL, 'M': SIGNED_TEE_SP_SXL,
+                          'L': SIGNED_TEE_SP_SXL, 'XL': SIGNED_TEE_SP_SXL,
+                          '2XL': SIGNED_TEE_SP_2XL, '3XL': SIGNED_TEE_SP_3XL},
     },
 }
+
+# Unsigned listings in the same lineup (Mike approved Oct 26 2026: Duck Dad Hat moves to the new lineup; Light Blue, Pink and
+# Charcoal retired). Yupoong 6245CM in Printful has Black, White and Navy but no Gold, Tiffany Blue or Hot Pink -> special orders.
+UNSIGNED = {
+    'duck-dad-hat': {
+        'special': ['Gold', 'Tiffany Blue', 'Hot Pink'],
+        'img': 'duck-dad-hat_%s_product',
+        'special_link': 'https://buy.stripe.com/00wfZh2PidJ62yraDZ9IQ1f',  # plink_1UUrvYGC9fEXRvQSDH1GFaLj
+    },
+}
+RETIRED_UNSIGNED = {'duck-dad-hat': ['Light Blue', 'Pink', 'Charcoal']}
 
 # ---- wording (one place) ----
 PROMISE_TITLE = 'The TRD Promise'

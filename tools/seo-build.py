@@ -475,7 +475,8 @@ def parse_merch():
         special_colors = [html.unescape(c) for c, a in re.findall(r'<option value="([^"]+)" data-img=("[^>]*)>', b) if 'data-special="1"' in a]
         sizes = [(a, l, int(p)) for a, l, p in re.findall(r'<option value="([^"]+)" data-link="([^"]+)" data-price="(\d+)"', b)]
         special = dict(re.findall(r'<option value="([^"]+)" data-link="[^"]+" data-price="\d+" data-special-link="([^"]+)"', b))
-        fix = html.unescape(re.sub('<[^>]+>', '', g(r'<p class="fix">(.*?)</p>')))
+        # the fixed SIZE (the card's "Size" line), not the first fixed line (which is the color on one-color items: mug "White")
+        fix = html.unescape(re.sub('<[^>]+>', '', g(r'<span class="lbl">Size</span>\s*<p class="fix">(.*?)</p>')))
         items.append({'slug': slug, 'signed': 'signed' in cls, 'name': name, 'price': price, 'ship': ship, 'img': img, 'alt': alt, 'buy': buy,
                       'bio': bio, 'shipin': shipin, 'colors': colors, 'sizes': sizes, 'fix': fix, 'special': special,
                       'special_colors': special_colors})
@@ -519,12 +520,14 @@ def build_shop():
         desc = clip('%s from The Rubber Duck, %s plus $%s US shipping. %s%s Made to order. %s.' % (it['name'], price_txt, it['ship'],
                     '; '.join('%s: %s' % b for b in it['bio'][:3]) + '.', ' Hand-signed and numbered out of 500.' if it['signed'] else '', it['shipin'] or 'Ships in 3 to 8 business days'))
         sizes = ''
-        if it['sizes']:
+        bio = it['bio']
+        if it['sizes']:   # the per-size price row replaces the card's own "Sizes" line (no duplicate Sizes row)
+            bio = [(x, y) for x, y in bio if x not in ('Size', 'Sizes')]
             sizes = '<dt>Sizes</dt><dd>%s</dd>' % ', '.join('%s $%s' % (s, ('%.2f' % (p / 100)).rstrip('0').rstrip('.')) for s, _, p in it['sizes'])
-        elif it['fix']:
+        elif it['fix'] and not any(x in ('Size', 'Sizes', 'Fit', 'Fits') for x, _ in bio):
             sizes = '<dt>Size</dt><dd>%s</dd>' % E(it['fix'])
         facts = '<dl class="facts"><dt>Price</dt><dd>%s</dd><dt>US shipping</dt><dd>$%s</dd>%s%s%s</dl>' % (
-            E(price_txt), E(it['ship']), ''.join('<dt>%s</dt><dd>%s</dd>' % (E(a), E(c)) for a, c in it['bio']), sizes,
+            E(price_txt), E(it['ship']), ''.join('<dt>%s</dt><dd>%s</dd>' % (E(a), E(c)) for a, c in bio), sizes,
             (('<dt>Colors</dt><dd>%s</dd>' % E(', '.join(c for c in it['colors'] if c not in it['special_colors']))) +
              ('<dt>Special order</dt><dd>%s (up to 7 extra days)</dd>' % E(', '.join(it['special_colors'])) if it['special_colors'] else '')) if it['colors'] else '')
         # Listings with a color gallery (tools/shop_demo_media.py GALLERY) show it full width as the main photo, in place of the square store photo.

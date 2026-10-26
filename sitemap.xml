@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>https://therubberduck.net/sitemaps/pages.xml</loc><lastmod>2026-10-24</lastmod></sitemap>
-  <sitemap><loc>https://therubberduck.net/sitemaps/shop.xml</loc><lastmod>2026-10-23</lastmod></sitemap>
+  <sitemap><loc>https://therubberduck.net/sitemaps/pages.xml</loc><lastmod>2026-10-26</lastmod></sitemap>
+  <sitemap><loc>https://therubberduck.net/sitemaps/shop.xml</loc><lastmod>2026-10-26</lastmod></sitemap>
   <sitemap><loc>https://therubberduck.net/sitemaps/drops.xml</loc><lastmod>2026-10-21</lastmod></sitemap>
-  <sitemap><loc>https://therubberduck.net/sitemaps/media.xml</loc><lastmod>2026-10-23</lastmod></sitemap>
-  <sitemap><loc>https://therubberduck.net/sitemaps/library.xml</loc><lastmod>2026-10-23</lastmod></sitemap>
+  <sitemap><loc>https://therubberduck.net/sitemaps/media.xml</loc><lastmod>2026-10-26</lastmod></sitemap>
+  <sitemap><loc>https://therubberduck.net/sitemaps/library.xml</loc><lastmod>2026-10-26</lastmod></sitemap>
   <sitemap><loc>https://therubberduck.net/sitemaps/x.xml</loc><lastmod>2026-10-21</lastmod></sitemap>
 </sitemapindex>

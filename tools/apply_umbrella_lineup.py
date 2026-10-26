@@ -13,11 +13,11 @@ def card(slug):
     assert m, slug
     return m
 
-def color_opt(slug, spec):
+def color_opt(slug, spec, img_fmt=None):
     sp = set(spec['special'])
     sws, opts, sopts = [], [], []
     for i, (label, key, sw) in enumerate(U.LINEUP):
-        img = '%s_%s' % (slug, key)
+        img = (img_fmt % key) if img_fmt else '%s_%s' % (slug, key)
         s = label in sp
         t = label + (' (special order)' if s else '')
         sws.append('<button type="button" class="sw%s" data-color="%s" data-img="%s"%s aria-label="%s" aria-pressed="%s" title="%s" style="--sa:%s;--sb:%s"></button>'
@@ -54,6 +54,19 @@ for slug, spec in U.SIGNED.items():
     # the special-order note above the Buy button
     b = re.sub(r'\s*<p class="sp-note"[^>]*>.*?</p>', '', b, flags=re.S)
     b = b.replace('\n      <a class="buy"', '\n      <p class="sp-note" role="note" hidden>%s</p>\n      <a class="buy"' % U.NOTE_SIGNED, 1)
+    h = h[:m.start()] + b + h[m.end():]
+
+# Unsigned listings moved to the lineup (Duck Dad Hat): color picker, special link, special note and ship wording
+for slug, spec in U.UNSIGNED.items():
+    m = card(slug); b = m.group(0)
+    b = re.sub(r'(<article class="item counter" data-slug="%s")(?: data-sp-ship="[^"]*" data-sp-shipin="[^"]*")?' % slug,
+               r'\1 data-sp-ship="%s" data-sp-shipin="%s"' % (U.SHIP_SPECIAL, U.SHIPIN_SPECIAL_UNSIGNED), b, count=1)
+    b = b.replace('<td>3-8 days</td></tr>', '<td class="shipin">3-8 days</td></tr>', 1)
+    b = re.sub(r'(<td>(?:One|S-3XL)</td><td>)\d+(</td>)', r'\g<1>%d\2' % len(U.LINEUP), b, count=1)
+    b = re.sub(r'<div class="opt"><span class="lbl">Color .*?</select></div>', lambda _: color_opt(slug, spec, spec['img']), b, count=1, flags=re.S)
+    b = re.sub(r'(<a class="buy" href="[^"]+" data-base="[^"]+")(?: data-special-base="[^"]*")?', r'\1 data-special-base="%s"' % spec['special_link'], b, count=1)
+    b = re.sub(r'\s*<p class="sp-note"[^>]*>.*?</p>', '', b, flags=re.S)
+    b = b.replace('\n      <a class="buy"', '\n      <p class="sp-note" role="note" hidden>%s</p>\n      <a class="buy"' % U.NOTE_UNSIGNED, 1)
     h = h[:m.start()] + b + h[m.end():]
 
 # Red Pill Tee: same 7-day wording (its special links already exist in Stripe)
