@@ -178,8 +178,8 @@ a{color:inherit}
 .shuffle:hover{filter:brightness(1.06)}
 .shuffle[aria-pressed="true"]{background:var(--red);color:#fff4e2}
 .count{text-align:center;margin:-8px 0 22px;color:#cbb994;letter-spacing:.14em;text-transform:uppercase;font-size:15px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 28px;align-items:stretch;padding:0 0 30px}
-.ticket{display:flex;text-decoration:none;color:var(--ink);filter:drop-shadow(0 8px 14px rgba(0,0,0,.55));transition:transform .18s ease}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 28px;align-items:stretch;padding:0 0 30px}
+.ticket{display:flex;min-width:0;text-decoration:none;color:var(--ink);filter:drop-shadow(0 8px 14px rgba(0,0,0,.55));transition:transform .18s ease}
 .ticket:hover{transform:translateY(-3px)}
 .ticket.on{filter:drop-shadow(0 0 2px var(--amber)) drop-shadow(0 0 3px var(--amber)) drop-shadow(0 0 16px rgba(255,200,100,.55))}
 .tk{position:relative;flex:1;display:flex;flex-direction:column;background:linear-gradient(var(--cream),var(--cream2));border-radius:8px;
@@ -265,7 +265,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 .so-actions .ticketbtn{min-width:220px}
 @media (max-width:1180px){.moon{right:24px;top:24px;width:64px;height:64px}}
 @media (max-width:1060px){
-  .grid{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .controls{grid-template-columns:1fr auto}.controls .search{grid-column:1 / -1;grid-row:2}
   .card-body{grid-template-columns:300px 1fr 250px}
   .so-card{grid-template-columns:340px 1fr}
@@ -320,7 +320,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
   .tabs{gap:6px}.tab{flex:1 1 auto;padding:0 8px;font-size:14px;letter-spacing:.04em;height:46px}
   .sort{justify-content:space-between;flex:1}.sort select{flex:1}
   .sort-row{width:100%;justify-content:stretch}.shuffle{flex:none}
-  .grid{grid-template-columns:1fr;gap:16px}
+  .grid{grid-template-columns:minmax(0,1fr);gap:16px}
   .tk{display:grid;grid-template-columns:46% 1fr;grid-template-rows:1fr auto;-webkit-mask:none;mask:none}
   .tthumb{grid-column:1;grid-row:1 / span 2;margin:8px 0 8px 8px;align-self:center}
   .tt{grid-column:2;grid-row:1}
