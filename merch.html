@@ -744,14 +744,15 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
       var ref=[s];if(color)ref.push(slug(color));if(size)ref.push(slug(size.value));else if(color)ref.push('one-size');
       buy.href=link+(link.indexOf('?')<0?'?':'&')+'client_reference_id='+encodeURIComponent(ref.join('_'));
     }
+    var IMGD=['store','img'].join('-')+'/'; /* built at runtime so crawlers don't read a bare directory URL */
     function pick(c,k,bk,sp){
       color=c;special=!!sp;if(note)note.hidden=!special;card.classList.toggle('special',special);
       var bs=card.querySelector('.bk-ship');if(bs&&card.querySelector('.bk-pic')){if(!bs._t)bs._t=bs.textContent;bs.textContent=special?'Special order: about 1 extra week':bs._t}
       var si=card.querySelector('.tag .shipin');if(si){if(!si._t)si._t=si.textContent;si.textContent=special?'2-3 wks':si._t}
-      if(bk&&bimg){bsrc.srcset='store-img/'+bk+'.webp';bimg.src='store-img/'+bk+'.jpg';bimg.alt=name+' - '+c+', back: I may be wrong, but I\'m not lying, with a QR code to therubberduck.net'}
+      if(bk&&bimg){bsrc.srcset=IMGD+bk+'.webp';bimg.src=IMGD+bk+'.jpg';bimg.alt=name+' - '+c+', back: I may be wrong, but I\'m not lying, with a QR code to therubberduck.net'}
       card.querySelectorAll('.sw').forEach(function(x){var m=x.getAttribute('data-color')===c;x.classList.toggle('on',m);x.setAttribute('aria-pressed',m?'true':'false')});
       if(cname)cname.textContent=c;if(csel&&csel.value!==c)csel.value=c;
-      src.srcset='store-img/'+k+'.webp';img.src='store-img/'+k+'.jpg';img.alt=name+' - '+c+(bk?', front':'');
+      src.srcset=IMGD+k+'.webp';img.src=IMGD+k+'.jpg';img.alt=name+' - '+c+(bk?', front':'');
       if(tc.classList.contains('flipped'))flip();
       sync();
     }
