@@ -313,8 +313,14 @@ def build_library():
         topics.setdefault(d.get('topic') or 'Other', []).append(d)
     for d in docs:
         url = '/library/%s/' % d['slug']
-        pdf = '/' + d['file'].lstrip('/')
-        pdf_q = '/'.join(__import__('urllib.parse').parse.quote(x) for x in pdf.split('/'))
+        # Some DOCS entries are already %-encoded and a few are full https URLs (media host).
+        # Full URLs are used as is; everything else is decoded once, then encoded once.
+        if re.match(r'https?://', d['file']):
+            pdf_q = pdf_abs = d['file']
+        else:
+            pdf = '/' + __import__('urllib.parse').parse.unquote(d['file']).lstrip('/')
+            pdf_q = '/'.join(__import__('urllib.parse').parse.quote(x) for x in pdf.split('/'))
+            pdf_abs = SITE + pdf_q
         thumb = ('/' + d['thumb'].lstrip('/')) if d.get('thumb') else ''
         thumb_q = '/'.join(__import__('urllib.parse').parse.quote(x) for x in thumb.split('/')) if thumb else ''
         size = ('%d KB' % max(1, round(d['bytes'] / 1024))) if d['mb'] < 0.1 else '%.1f MB' % d['mb']
@@ -329,7 +335,7 @@ def build_library():
             body += '<h2>More on %s</h2><ul class="list">%s</ul>' % (E(d.get('topic')), ''.join('<li><a href="/library/%s/">%s</a></li>' % (x['slug'], E(x['title'])) for x in rel))
         g = [{'@type': 'DigitalDocument', 'name': d['title'], 'description': d.get('desc', ''), 'url': SITE + url, 'encodingFormat': 'application/pdf',
               'numberOfPages': d.get('pages'), 'contentSize': size, 'about': d.get('topic'), 'isAccessibleForFree': True,
-              'associatedMedia': {'@type': 'MediaObject', 'contentUrl': SITE + pdf_q, 'encodingFormat': 'application/pdf'},
+              'associatedMedia': {'@type': 'MediaObject', 'contentUrl': pdf_abs, 'encodingFormat': 'application/pdf'},
               **({'thumbnailUrl': SITE + thumb_q, 'image': SITE + thumb_q} if thumb else {})}]
         write('library/%s/index.html' % d['slug'], page(url, title, desc, body, g, [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('Library', '/library/'), (d['title'], url)],
               og_image=(SITE + thumb_q) if thumb else SHARE))
