@@ -4,30 +4,30 @@
    under the list and narrow inside a share panel. Uses the Ledger's own colour/font variables. */
 .lsb{container-type:inline-size;margin:30px 0 0}
 .lsb-in{position:relative;display:grid;grid-template-columns:auto minmax(360px,1fr);align-items:center;
-  gap:16px 34px;padding:20px 22px 20px 26px;border:1px solid var(--border,#13321F);border-radius:4px;
-  background:linear-gradient(180deg,var(--surface-2,#0B1410) 0%,var(--surface-1,#070D08) 100%);
-  box-shadow:inset 0 1px 0 rgba(0,255,65,.06),0 22px 44px -30px rgba(0,255,65,.30);overflow:hidden}
+  gap:16px 34px;padding:20px 22px 20px 26px;border:1px solid #3A1118;border-radius:4px;
+  background:linear-gradient(180deg,#150709 0%,#0A0405 100%);
+  box-shadow:inset 0 1px 0 rgba(214,40,60,.08),0 22px 44px -30px rgba(214,40,60,.34);overflow:hidden}
 /* hairline of light along the top edge */
 .lsb-in::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;
-  background:linear-gradient(90deg,transparent 0%,rgba(0,255,65,.65) 50%,transparent 100%)}
+  background:linear-gradient(90deg,transparent 0%,rgba(226,52,72,.75) 50%,transparent 100%)}
 .lsb-copy{margin:0;display:flex;align-items:center;gap:12px;min-width:0;
   font:600 clamp(15px,1.55cqi,18.5px)/1.35 var(--font-display,ui-monospace,monospace);letter-spacing:-.01em;
-  color:var(--text,#C8F5D2);text-wrap:balance}
-.lsb-copy::before{content:"";width:7px;height:7px;flex:none;background:var(--accent,#00FF41);box-shadow:0 0 10px rgba(0,255,65,.7)}
-.lsb-copy em{font-style:normal;color:var(--accent,#00FF41)}
+  color:#F3E6E4;text-wrap:balance}
+.lsb-copy::before{content:"";width:7px;height:7px;flex:none;animation:lsb-dot 2.6s ease-in-out infinite;background:#C8182E;box-shadow:0 0 10px rgba(226,52,72,.75)}
+.lsb-copy em{font-style:normal;color:#F0505F}
 .lsb-acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0}
 .lsb-b{display:flex;align-items:center;justify-content:center;gap:9px;min-height:50px;height:100%;padding:0 14px;
-  border:1px solid var(--accent,#00FF41);border-radius:3px;text-decoration:none;white-space:nowrap;
+  border:1px solid #C8182E;border-radius:3px;text-decoration:none;white-space:nowrap;
   font:700 12.5px/1 var(--font-display,ui-monospace,monospace);letter-spacing:.06em;text-transform:uppercase;
   transition:background-color .2s var(--ease,ease),color .2s var(--ease,ease),box-shadow .2s var(--ease,ease),transform .2s var(--ease,ease)}
 .lsb-b svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .22s var(--ease,ease)}
-.lsb-sup{background:var(--accent,#00FF41);color:var(--on-accent,#040705);box-shadow:0 0 22px -8px rgba(0,255,65,.65)}
-.lsb-sup:hover,.lsb-sup:focus-visible{background:var(--accent-hover,#38FF6E);border-color:var(--accent-hover,#38FF6E);box-shadow:0 0 28px -6px rgba(0,255,65,.75);transform:translateY(-1px)}
-.lsb-shop{background:rgba(0,255,65,.04);color:var(--accent,#00FF41)}
-.lsb-shop:hover,.lsb-shop:focus-visible{background:rgba(0,255,65,.10);transform:translateY(-1px)}
+.lsb-sup{animation:lsb-beat 2.6s ease-in-out infinite;background:#C8182E;color:#FFF6F4;box-shadow:0 0 22px -8px rgba(226,52,72,.6)}
+.lsb-sup:hover,.lsb-sup:focus-visible{background:#E23448;border-color:#E23448;box-shadow:0 0 28px -6px rgba(226,52,72,.8);transform:translateY(-1px)}
+.lsb-shop{background:rgba(200,24,46,.07);color:#F0505F}
+.lsb-shop:hover,.lsb-shop:focus-visible{background:rgba(200,24,46,.16);transform:translateY(-1px)}
 .lsb-b:hover svg,.lsb-b:focus-visible svg{transform:translate(2px,-2px)}
 .lsb-shop:hover svg,.lsb-shop:focus-visible svg{transform:translateX(3px)}
-.lsb-b:focus-visible{outline:2px solid var(--accent,#00FF41);outline-offset:3px}
+.lsb-b:focus-visible{outline:2px solid #C8182E;outline-offset:3px}
 /* narrow (phones, and inside a share panel): copy on top, centred; the two buttons side by side under it */
 @container (max-width:1179px){
   .lsb-in{grid-template-columns:1fr;gap:14px;padding:18px 16px 16px;text-align:center}
@@ -40,5 +40,8 @@
 }
 /* inside a drop's share panel: sits flush as the panel's last row */
 .shr > .lsb{grid-column:1/-1;margin:2px 0 0}
-.shr > .lsb .lsb-in{box-shadow:inset 0 1px 0 rgba(0,255,65,.06)}
-@media (prefers-reduced-motion:reduce){.lsb-b,.lsb-b svg{transition:none}.lsb-b:hover,.lsb-b:focus-visible{transform:none}}
+.shr > .lsb .lsb-in{box-shadow:inset 0 1px 0 rgba(214,40,60,.08)}
+/* heartbeat: a soft double pulse (lub-dub) then a rest, about 23 beats a minute */
+@keyframes lsb-beat{0%,34%,100%{box-shadow:0 0 22px -8px rgba(226,52,72,.55)}8%{box-shadow:0 0 30px -2px rgba(226,52,72,.95)}16%{box-shadow:0 0 22px -8px rgba(226,52,72,.55)}24%{box-shadow:0 0 34px 0 rgba(226,52,72,1)}}
+@keyframes lsb-dot{0%,34%,100%{transform:scale(1);opacity:.85}8%{transform:scale(1.5);opacity:1}16%{transform:scale(1);opacity:.85}24%{transform:scale(1.7);opacity:1}}
+@media (prefers-reduced-motion:reduce){.lsb-sup,.lsb-copy::before{animation:none}.lsb-b,.lsb-b svg{transition:none}.lsb-b:hover,.lsb-b:focus-visible{transform:none}}
