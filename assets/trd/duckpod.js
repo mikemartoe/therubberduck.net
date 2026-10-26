@@ -378,10 +378,44 @@
     if (root.parentNode !== D.body || root !== D.body.lastElementChild) D.body.appendChild(root);
   }
 
-  function setView(v, quiet) {
+  function setView(v, quiet, fx) {
+    var was = S.view, fromEl = (fx && !quiet && v === 'pill' && was !== 'pill') ? (was === 'full' ? els.device : els.strip) : null;
+    var fromR = fromEl && fromEl.offsetParent !== null ? fromEl.getBoundingClientRect() : null;
     if (v !== 'pill') S.back = v;
     S.view = v; root.setAttribute('data-view', v);
-    if (!quiet) { save(); _raf(applyPos); }
+    if (!quiet) { save(); applyPos(); }
+    if (quiet || !fx || reducedMotion()) return;   /* transitions only for a visitor's own tap */
+    if (fromR && fromR.width) collapseFx(fromEl, fromR);
+    else if (was === 'pill' && v !== 'pill' && dock.animate) {
+      /* from the pill: the player grows back out of the pill's corner */
+      dock.animate([{ opacity: 0, transform: 'scale(.35)', transformOrigin: dockCorner() }, { opacity: 1, transform: 'none', transformOrigin: dockCorner() }],
+        { duration: 380, easing: 'cubic-bezier(.2,.9,.25,1.15)' });
+    }
+  }
+  function reducedMotion() { return !!(W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  /* the dock grows from its corner nearest a screen corner (default spot: bottom left) */
+  function dockCorner() {
+    var r = dock.getBoundingClientRect(), vw = D.documentElement.clientWidth, vh = W.innerHeight;
+    return ((r.left + r.width / 2) > vw / 2 ? 'right ' : 'left ') + ((r.top + r.height / 2) > vh / 2 ? 'bottom' : 'top');
+  }
+  /* full player (or strip) -> red pill: a snapshot of the player shrinks into the pill, the pill pops in */
+  function collapseFx(fromEl, fromR) {
+    var to = els.pillB.getBoundingClientRect();
+    if (!to.width || !fromEl.animate) return;
+    var g = fromEl.cloneNode(true);
+    g.classList.add('tp-ghost', 'tp-collapse-ghost'); g.setAttribute('aria-hidden', 'true');
+    g.style.cssText = 'display:' + (fromEl === els.strip ? 'flex' : 'block') + ';left:' + fromR.left + 'px;top:' + fromR.top + 'px;width:' + fromR.width + 'px;height:' + fromR.height + 'px;transform-origin:0 0';
+    root.appendChild(g);
+    var s = Math.min(to.width / fromR.width, to.height / fromR.height);
+    var dx = to.left + to.width / 2 - (fromR.left + fromR.width * s / 2), dy = to.top + to.height / 2 - (fromR.top + fromR.height * s / 2);
+    var a = g.animate([
+      { transform: 'none', opacity: 1, borderRadius: '22px', filter: 'none' },
+      { transform: 'translate(' + (dx * .55) + 'px,' + (dy * .55) + 'px) scale(' + (0.35 + s * .65) + ')', opacity: 1, offset: 0.55, filter: 'saturate(1.4) hue-rotate(-12deg)' },
+      { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + s + ')', opacity: 0, borderRadius: '999px', filter: 'saturate(2) brightness(1.2)' }
+    ], { duration: 420, easing: 'cubic-bezier(.5,0,.75,0)', fill: 'forwards' });
+    a.onfinish = function () { g.remove(); };
+    els.pillB.animate([{ opacity: 0, transform: 'scale(.2)' }, { opacity: 0, transform: 'scale(.2)', offset: 0.5 }, { opacity: 1, transform: 'scale(1.18)', offset: 0.8 }, { opacity: 1, transform: 'none' }],
+      { duration: 700, easing: 'ease-out' });
   }
   function setScreen(s) {
     screen = s; root.setAttribute('data-screen', s);
@@ -496,9 +530,9 @@
     bind('.tp-mini-btn', function () { clickSound('press'); uToggle(); });
     bind('.tp-to-full', function () { clickSound('press'); setView('full'); });
     bind('.tp-to-mini', function () { clickSound('press'); setView('mini'); });
-    bind('.tp-to-pill', function () { clickSound('press'); setView('pill'); });
+    bind('.tp-to-pill', function () { clickSound('press'); setView('pill', false, true); });
     /* pointer taps on the pill are handled by the drag code; this covers the keyboard */
-    bind('.tp-pill', function (e) { if (e.detail !== 0) return; clickSound('press'); setView(S.back === 'full' ? 'full' : 'mini'); });
+    bind('.tp-pill', function (e) { if (e.detail !== 0) return; clickSound('press'); setView(S.back === 'full' ? 'full' : 'mini', false, true); });
     on(els.lcd, 'keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setView('full'); } });
     on(els.list, 'click', guard(function (e) {
       var li = e.target.closest('li'); if (!li) return;
@@ -591,7 +625,7 @@
          sits where the pill was): swallow it so expanding never toggles playback */
       if (d.onLcd || d.onPill) suppressUntil = Date.now() + 400;
       if (d.onLcd) { clickSound('press'); setView('full'); }
-      else if (d.onPill) { clickSound('press'); setView(S.back === 'full' ? 'full' : 'mini'); }
+      else if (d.onPill) { clickSound('press'); setView(S.back === 'full' ? 'full' : 'mini', false, true); }
     }
     on(dock, 'pointerup', end); on(dock, 'pointercancel', end);
     on(dock, 'dblclick', function (e) { if (e.target.closest('.tp-grip,.tp-sgrip')) { e.preventDefault(); } });
@@ -614,34 +648,59 @@
     if (was && !hide && hintPending) { hintPending = false; maybeHint(); }
   }
   /* Start the album from a page strip and fly that strip to the floating spot, then go to href. */
-  function launchFrom(src, href) {
+  function launchFrom(src, href, view) {
     if (launching || !root) return;
     launching = true;
     if (href) getPage(href).catch(function () {});
-    if (S.view !== 'mini') setView('mini', true);
+    view = view === 'full' ? 'full' : 'mini';
+    if (S.view !== view) setView(view, true);
     play();                                   /* inside the tap, so the browser allows it */
     var rm = W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches;
     root.classList.remove('tp-doorhide');
     var from = src.getBoundingClientRect(), to = dock.getBoundingClientRect();
+    /* a tape drawn with a lean (skew) in its door: fly its own box, starting from that same lean */
+    var tf0 = 'none';
+    try { tf0 = W.getComputedStyle(src).transform || 'none'; } catch (e) {}
+    if (tf0 !== 'none' && src.offsetWidth) {
+      from = { left: from.left + (from.width - src.offsetWidth) / 2, top: from.top + (from.height - src.offsetHeight) / 2, width: src.offsetWidth, height: src.offsetHeight };
+    }
+    /* the cassette keeps its own shape all the way: it lands centred on the player's screen (full view) */
+    var scr = view === 'full' && root.querySelector('.tp-device .tp-screen'), sr = scr && scr.getBoundingClientRect();
+    if (sr && sr.width && from.width) {
+      var tw = sr.width * 0.94, th = tw * (src.classList.contains('cas') ? 63.8 / 100.4 : from.height / from.width);
+      to = { left: sr.left + (sr.width - tw) / 2, top: sr.top + (sr.height - th) / 2, width: tw, height: th };
+    }
+    var clip = '';
+    try { clip = W.getComputedStyle(src).clipPath; } catch (e) {}
+    if (!clip || clip === 'none' || clip.indexOf('inset(') !== 0) clip = '';
+    var hostDoor = src.closest('[data-trd-pod-door]');
     function done() {
       launching = false; root.classList.remove('tp-arriving'); render(); applyPos();
-      if (href) go(new URL(href, location.href).href, true);
+      if (href) { go(new URL(href, location.href).href, true); return; }
+      /* staying on this page: the tape is back in the door, playing (reels turn) */
+      if (src.style.visibility === 'hidden') {
+        src.style.visibility = '';
+        if (!rm && src.animate) src.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 450, easing: 'ease-out' });
+      }
+      if (hostDoor) hostDoor.classList.remove('tpd-detached');
     }
     if (rm || !src.animate || !from.width) { done(); return; }
     root.classList.add('tp-arriving');   /* hidden until its fade animation takes over below */
     var ghost = src.cloneNode(true);
     ghost.classList.add('tp-ghost'); ghost.removeAttribute('id');
+    if (clip) ghost.style.clipPath = 'inset(0% 0% 0% 0% round 0px)';  /* frame 0 starts it as the part seen through the deck's window */
     ghost.style.left = from.left + 'px'; ghost.style.top = from.top + 'px';
     ghost.style.width = from.width + 'px'; ghost.style.height = from.height + 'px';
     root.appendChild(ghost);
     src.style.visibility = 'hidden';
-    var hostDoor = src.closest('[data-trd-pod-door]'); if (hostDoor) hostDoor.classList.add('tpd-detached');
+    if (hostDoor) hostDoor.classList.add('tpd-detached');
     var midL = (from.left + to.left) / 2, midT = Math.min(from.top, to.top) - Math.min(90, W.innerHeight * 0.12);
     var midW = (from.width + to.width) / 2, midH = (from.height + to.height) / 2;
+    function fx(k, c) { if (c) k.clipPath = c; return k; }
     var lift = '0 0 0 1px #8f8f8f,0 0 0 3px #e9e9e9,0 0 0 4px #9c9c9c,0 34px 60px -10px rgba(0,0,0,.85),0 10px 24px rgba(0,0,0,.5)';
     var a = ghost.animate([
-      { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', transform: 'translateY(0) scale(1) rotate(0)', opacity: 1, offset: 0 },
-      { left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', transform: 'translateY(-16px) scale(1.04) rotate(-1.5deg)', boxShadow: lift, opacity: 1, offset: 0.24 },
+      fx({ left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', transform: tf0 !== 'none' ? tf0 : 'translateY(0) scale(1) rotate(0)', opacity: 1, offset: 0 }, clip),
+      fx({ left: from.left + 'px', top: from.top + 'px', width: from.width + 'px', height: from.height + 'px', transform: 'translateY(-16px) scale(1.04) rotate(-1.5deg)', boxShadow: lift, opacity: 1, offset: 0.24 }, clip && 'inset(0% 0% 0% 0% round 0px)'),
       { left: midL + 'px', top: Math.max(8, midT) + 'px', width: midW + 'px', height: midH + 'px', transform: 'translateY(0) scale(1.03) rotate(1.5deg)', boxShadow: lift, opacity: 1, offset: 0.62 },
       { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', transform: 'translateY(0) scale(1) rotate(0)', opacity: 1, offset: 0.9 },
       { left: to.left + 'px', top: to.top + 'px', width: to.width + 'px', height: to.height + 'px', transform: 'none', opacity: 0, offset: 1 }
@@ -829,5 +888,5 @@
   W.trdPod = { play: uPlay, pause: uPause, toggle: uToggle, playIndex: uPlayIndex, toggleIndex: uToggleIndex, next: uNext, prev: uPrev,
     state: state, albumState: albumState, pauseAlbum: function () { if (!audio.paused) audio.pause(); },
     useSource: useSource, dropSource: dropSource, refresh: function () { render(); }, source: function () { return X ? X.id : 'album'; }, tracks: TRACKS.map(function (t) { return { title: t.title, src: t.src, length: t.len }; }), audio: audio,
-    view: function (v) { if (v) setView(v); return S.view; }, resetPosition: resetPos, launchFrom: launchFrom, navigate: function (h) { return go(h, true); } };
+    view: function (v, fx) { if (v) setView(v, false, !!fx); return S.view; }, resetPosition: resetPos, launchFrom: launchFrom, navigate: function (h) { return go(h, true); } };
 })();

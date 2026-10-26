@@ -631,8 +631,17 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 .deck:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
 /* dark smoked glass behind the tape */
 .deck-well::before{content:"";position:absolute;left:17.8%;width:48.5%;top:15.56%;height:40.48%;border-radius:.6cqw;background:#0e0d0f;z-index:0}
-/* the tape, centred in the window, fit to its width; top and bottom 6.5% of the shell stay behind the frame */
-.deck-well .cas{position:absolute;left:17.8%;top:8.29cqw;width:48.5cqw;z-index:1;clip-path:inset(6.6% 0 6.6% 0 round .5cqw)}
+/* the tape is as big as the player: it fills the Walkman's whole black door, from just under the lid's top edge
+   to the red body, uniformly scaled (never stretched); only ~1.1% of the shell's outer edge is trimmed each side.
+   It sits above the Walkman art, under a light glass smoke and sheen. Door in well units: y .8-40.4cqw. */
+.deck-well .cas{position:absolute;left:14.39cqw;top:.8cqw;width:62.32cqw;z-index:3;clip-path:inset(0 1.14% 0 1.14% round .8cqw)}
+/* the Walkman's black door, repainted plain above the art so the side labels don't peek out beside the tape */
+.deck-well::before{left:0;top:0;width:100%;height:100%;border-radius:0;z-index:3;
+  background:linear-gradient(180deg,#2b2b2e 0,#1c1c1f 14%,#151517 60%,#101012 100%);
+  clip-path:polygon(15.2% 1.2%,85.9% 1.2%,76.0% 60.6%,6.0% 60.6%)}
+/* glass over the tape: light smoke and one soft sheen, so it reads as inside the door, not stuck on top */
+.deck-well .cas::after{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(115deg,rgba(255,255,255,0) 0 30%,rgba(255,255,255,.07) 30% 44%,rgba(255,255,255,0) 44% 100%),linear-gradient(rgba(10,10,14,.12),rgba(10,10,14,.12))}
 .deck:hover .deck-well .cas,.deck:focus-visible .deck-well .cas{transform:none}
 /* the Walkman itself, glass window cut out (with a light smoke and sheen) */
 .deck-well::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:url(/walkman/walkman-window-1000.webp) center/100% 100% no-repeat}
@@ -641,14 +650,15 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 /* PREVIEW: the Spotify player sits in the Walkman's tape window (compact 80px player + link bar) */
 .deck-well .deck-spot{left:17.8%;right:auto;width:48.5%;top:15.56%;transform:none;border-radius:.6cqw}
 .deck-well .deck-spot .deck-splink{height:26px}
+.deck-well .deck-spot{z-index:4} /* above the (now door-sized) tape */
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css" data-trd-keep>
 <script src="/assets/trd/suggest.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/duckpod.css?v=2c" data-trd-keep>
-<script src="/assets/trd/duckpod.js?v=2c" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/duckpod.css?v=2d" data-trd-keep>
+<script src="/assets/trd/duckpod.js?v=2d" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
 <!-- SEO and share preview -->
@@ -845,11 +855,23 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   deck.addEventListener('click',function(e){
     if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
     if(deck.classList.contains('is-pl'))return;
-    if(window.trdPod.state().started)return;          /* the site router opens album.html */
     e.preventDefault();
-    if(window.trdTrack)window.trdTrack('click/album-play','Homepage: PRESS PLAY on The Red Pill Album');
-    window.trdPod.launchFrom(cas,deck.getAttribute('href'));
+    deckPlay();
   });
+  /* PRESS PLAY: the first press starts the album and the cassette flies out of the Walkman into the iPod player
+     (with its pulsing red pill, upper right, to shrink it to the floating pill). The page stays put. After that,
+     OPEN PLAYER brings the iPod player back up (out of the pill or the strip). The J-card face still opens album.html. */
+  function deckPlay(){
+    deck.setAttribute('data-noface','');if(window.__trdClearFace)window.__trdClearFace(deck);  /* no J-card over the player */
+    if(window.trdPod.state().started){
+      if(window.trdPod.view()!=='full')window.trdPod.view('full',true);
+      else{var dk=document.querySelector('#trd-pod .tp-dock');if(dk&&dk.animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches)dk.animate([{transform:'none'},{transform:'translateY(-8px) scale(1.03)'},{transform:'none'}],{duration:420,easing:'ease-out'});}
+      return;
+    }
+    if(window.trdTrack)window.trdTrack('click/album-play','Homepage: PRESS PLAY on The Red Pill Album');
+    window.trdPod.launchFrom(cas,null,'full');
+  }
+  window.__trdDeckPlay=deckPlay;
   document.addEventListener('trdpod:state',function(e){paint(e.detail);});
   document.addEventListener('trdpod:repaint',function(){paint(window.trdPod.state());});
   paint(window.trdPod.state());
@@ -1000,7 +1022,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
       var cas=host.querySelector('.cas');
       if(cas&&!window.trdPod.state().started){
         if(window.trdTrack)window.trdTrack('click/album-play','Homepage: PRESS PLAY on The Red Pill Album');
-        window.trdPod.launchFrom(cas,href);
+        window.trdPod.launchFrom(cas,null,'full');   /* into the iPod player; the page stays */
         return;
       }
     }
@@ -1018,6 +1040,9 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     /* floated faces are on document.body — recover host from face._trdHost */
     if(!host&&face&&face._trdHost)host=face._trdHost;
     if(!host){if(open)closeFace();return}
+    /* touch: the PLAY key is pressed, not previewed (no J-card first) */
+    if(deck&&!face&&isTouchUI()&&e.target.closest('.deck-keys .key-play')&&window.__trdDeckPlay){
+      e.preventDefault();e.stopPropagation();closeFace();window.__trdDeckPlay();return;}
 
     var now=Date.now();
     var isDbl=lastTap.host===host&&(now-lastTap.t)<DBL;
@@ -1156,7 +1181,9 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   function unmountSpot(){if(ctl){try{ctl.pause();}catch(e){}try{ctl.destroy();}catch(e){}}ctl=null;if(spot&&spot.parentNode)spot.parentNode.removeChild(spot);spot=null;setPlaying(false);
     plReset();if(POD)window.trdPod.dropSource(PL);}
   /* the swap itself: two fixed ghosts, one sliding out of the case into the deck, one ejecting from the deck into the case */
-  function rect(el){var r=el.getBoundingClientRect();return {l:r.left,t:r.top,w:r.width,h:r.height};}
+  function rect(el){var r=el.getBoundingClientRect(),t='none';try{t=getComputedStyle(el).transform||'none';}catch(e){}
+    if(t!=='none'&&el.offsetWidth)return {l:r.left+(r.width-el.offsetWidth)/2,t:r.top+(r.height-el.offsetHeight)/2,w:el.offsetWidth,h:el.offsetHeight,tf:t};
+    return {l:r.left,t:r.top,w:r.width,h:r.height};}
   function ghost(el,r){var g=el.cloneNode(true);g.removeAttribute('id');g.classList.add('cas-ghost');g.style.visibility='';
     g.style.left=r.l+'px';g.style.top=r.t+'px';g.style.width=r.w+'px';g.style.height=r.h+'px';document.body.appendChild(g);return g;}
   function paintCase(){var t=TAPE[mode==='rp'?'pl':'rp'];
@@ -1172,6 +1199,10 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     well.insertBefore(inCase,well.firstChild); hold.appendChild(inDeck);
     mode=toPl?'pl':'rp'; paintMode();
     var b1=rect(inCase);
+    /* the Walkman shows only part of the (cassette-sized) tape through its window: the ghosts start / end as that part */
+    var wc='';try{wc=getComputedStyle(inCase).clipPath;}catch(e){} if(!wc||wc.indexOf('inset(')!==0)wc='';
+    var z='inset(0% 0% 0% 0% round 0px)';
+    function clip(list,first,last){if(!wc)return list;list.forEach(function(k,i){k.clipPath=(i===0&&first)||(i===list.length-1&&last)?wc:z;});return list;}
     function finish(){paintCase();cs.classList.remove('is-open');busy=false;window.__trdTapeBusy=false;if(mode==='pl')mountSpot();}
     if(rm.matches||!document.body.animate||!a0.w||!c.w){finish();return;}
     var gOut=ghost(inDeck,a0),gIn=ghost(inCase,c);inCase.style.visibility='hidden';
@@ -1185,21 +1216,21 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     if(c.t>a0.t)above.t=at.t-up; else above.t=at.t+up*.2;
     var D=1350,E='cubic-bezier(.45,0,.2,1)';
     /* deck tape: eject up, fly over to the case, slide down into it */
-    var A=gOut.animate([
-      kf(a0,0,'rotate(0)',rest,1),
+    var A=gOut.animate(clip([
+      kf(a0,0,a0.tf||'rotate(0)',rest,1),
       kf(mix(a0,a0,0,-a0.h*.24),.2,'rotate(-2deg)',lift,1),
       kf(mix(a0,above,.6,-24),.52,'rotate(3deg)',lift,1),
       kf(above,.72,'rotate(0)',lift,1),
       kf(at,.88,'rotate(0)',rest,1),
-      kf(c,1,'rotate(0)',rest,0)],{duration:D,easing:E,fill:'forwards'});
+      kf(c,1,'rotate(0)',rest,0)],true,false),{duration:D,easing:E,fill:'forwards'});
     /* case tape: slide up out of its case, then over and down into the deck */
-    gIn.animate([
+    gIn.animate(clip([
       kf(c,0,'rotate(0)',rest,0),
       kf(at,.14,'rotate(0)',rest,1),
       kf(above,.32,'rotate(-3deg)',lift,1),
       kf(mix(above,b1,.6,-28),.7,'rotate(-1.5deg)',lift,1),
       kf(mix(b1,b1,0,-b1.h*.06),.88,'rotate(0)',lift,1),
-      kf(b1,1,'rotate(0)',rest,1)],{duration:D+150,easing:E,fill:'forwards'}).onfinish=function(){
+      kf(b1,1,b1.tf||'rotate(0)',rest,1)],false,true),{duration:D+150,easing:E,fill:'forwards'}).onfinish=function(){
       gOut.remove();gIn.remove();inCase.style.visibility='';finish();
       cs.classList.remove('is-take');void cs.offsetWidth;cs.classList.add('is-take');setTimeout(function(){cs.classList.remove('is-take');},600);};
     window.__trdSwapAnim=A;
