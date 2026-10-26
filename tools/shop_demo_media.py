@@ -109,7 +109,8 @@ def demo_block(slug):
 # ---------------------------------------------------------------- listing gallery: one main photo per color with color tabs
 # Red Pill Tee: Mike's front + back mock (Oct 26 2026) in six colors, landscape 1600x982 (+900 w), made by tools/make_tee_mock_images.py.
 # Shown as the listing's main photo, full width above the facts; the frame has the photo's own aspect ratio, so nothing is cropped or letterboxed.
-# Not used on signed-tee (the mock has no signature). The colors you can order are still the ones in merch.html.
+# Signed Duck Tee (Oct 26 2026, branch shirts-audit): same print front + back, so it reuses the same approved mock files; the caption says the
+# signature is added by hand (the mock shows the print only). The colors you can order are still the ones in merch.html.
 GALLERY_COLORS = [
     ('black', 'Black', '#141414'),
     ('white', 'White', '#f3f2ee'),
@@ -128,7 +129,10 @@ SPECIAL_NOTE = ('Tiffany Blue and Hot Pink are special orders: we take up to 7 e
 # slug -> (product name for alt text, file stem under /store-img/demo/, width, height)
 GALLERY = {
     'duck-tee': ('Red Pill Tee', 'duck-tee', 1600, 982),
+    'signed-tee': ('Signed Duck Tee', 'duck-tee', 1600, 982),
 }
+# extra caption text per listing
+GALLERY_NOTE = {'signed-tee': ' Print shown; yours is signed and numbered by hand.'}
 
 def _galt(name, label):
     return '%s in %s, front and back' % (name, label)
@@ -176,8 +180,8 @@ def gallery_block(slug):
     return (css + '<div class="tg" data-stem="%s" data-name="%s" data-w="%d">'
             '<div class="tg-tabs" role="tablist" aria-label="Tee color">%s</div>'
             '<figure class="tg-f">%s<figcaption><span class="tg-c">%s</span> &middot; front (left) and back (right). Sold in %s; '
-            'Tiffany Blue and Hot Pink are special orders (up to 7 extra days).</figcaption></figure></div>'
-            % (stem, html.escape(name), w, tabs, pic, html.escape(l0), html.escape(', '.join(names[:-1]) + ' and ' + names[-1]))) + js
+            'Tiffany Blue and Hot Pink are special orders (up to 7 extra days).%s</figcaption></figure></div>'
+            % (stem, html.escape(name), w, tabs, pic, html.escape(l0), html.escape(', '.join(names[:-1]) + ' and ' + names[-1]), GALLERY_NOTE.get(slug, ''))) + js
 
 def order_block(slug, sizes):
     """Red Pill Tee listing: color (follows the gallery tabs) + size + Buy, wired per color. sizes = [(size, link, cents, special_link)]."""
