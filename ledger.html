@@ -634,6 +634,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/share.css?v=20261025s1" data-trd-keep>
+<link rel="stylesheet" href="/assets/trd/support-banner.css?v=20261026sb1" data-trd-keep>
 <script src="/assets/trd/share.js?v=20261025s1" data-trd-keep></script>
 <script src="/data/drop-cards.js?v=20261025s1" data-trd-keep></script>
 <!-- SEO and share preview -->
@@ -1199,6 +1200,16 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         </div>
       </div>
 
+      <aside class="lsb" id="ledgerSupport" aria-label="Support the Ledger">
+        <div class="lsb-in">
+          <p class="lsb-copy">The Ledger is free to read, free to search, and fan-funded.</p>
+          <div class="lsb-acts">
+            <a class="lsb-b lsb-sup" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Support this archive<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+            <a class="lsb-b lsb-shop" href="/merch.html">Shop the merch<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </aside>
+
       <details class="corr" id="corrections">
         <summary><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M5 12h14m-7-7l7 7l-7 7"/></svg>File a correction</summary>
         <form id="corrForm" novalidate>
@@ -1537,9 +1548,13 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     var C=window.TRD_DROP_CARDS||{base:'https://memes.therubberduck.net/drops/',long:[]}, r=BYN[n];
     try{ if(window.trdTrack) trdTrack('event/drop-share/open/'+n,'Q drop #'+n+' share opened',0); }catch(e){}
     try{ if(window.trdVisit) trdVisit.event('share-open',{item:'drop-'+n}); }catch(e){}
-    cell.appendChild(trdShare.build({kind:'drop', id:String(n), page:'https://therubberduck.net/drops/share/'+n+'.html',
+    var row=trdShare.build({kind:'drop', id:String(n), page:'https://therubberduck.net/drops/share/'+n+'.html',
       text:'Q drop #'+n+' \u00b7 '+(r?fmtDate(r.d):''), thumb:C.base+'og/'+n+'.jpg', file:C.base+'card/'+n+'.png',
-      igFile:(C.long.indexOf(n)>-1)?C.base+'ig/'+n+'.png':null, fileName:'q-drop-'+n+'.png'}));
+      igFile:(C.long.indexOf(n)>-1)?C.base+'ig/'+n+'.png':null, fileName:'q-drop-'+n+'.png'});
+    /* the same support strip as the foot of the list, as the share panel's last row */
+    var sup=document.getElementById('ledgerSupport');
+    if(sup){ var sc=sup.cloneNode(true); sc.removeAttribute('id'); row.appendChild(sc); }
+    cell.appendChild(row);
     b.setAttribute('aria-expanded','true');
   });
   function fmtDate(iso){ var p=iso.split('-'); return parseInt(p[2],10)+' '+MON[parseInt(p[1],10)-1]+' '+p[0]; }
