@@ -617,6 +617,30 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   .banner a.hb-book,.banner a.hb-book:hover,.hb-sign{transition:none}
   .tcase.is-take{animation:none}
 }
+
+/* ===== PREVIEW ONLY (2026-10-26): red Sony WM-10 Super Walkman replaces the drawn tape deck visual.
+   The cassette (#podCas) still sits in .deck-well, seen through the Walkman's window, so the reels,
+   the PRESS PLAY flight to the player, the tape swap and the Spotify window all keep working. ===== */
+.deck{background:none;box-shadow:none;padding:0!important;border:0!important;border-radius:0;gap:clamp(6px,1vh,10px)}
+.deck::before,.deck::after{display:none}
+.deck-top{display:none}
+.deck:hover,.deck:focus-visible{box-shadow:none;transform:translateY(-3px)}
+.deck-well{position:relative;display:block;width:100%;height:auto!important;aspect-ratio:2000/1324!important;padding:0!important;border-radius:0;
+  background:none;box-shadow:none;filter:drop-shadow(0 14px 22px rgba(0,0,0,.55)) drop-shadow(0 3px 5px rgba(0,0,0,.45));transition:filter .25s var(--ease)}
+.deck:hover .deck-well,.deck:focus-visible .deck-well{filter:drop-shadow(0 18px 30px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(255,170,80,.28))}
+.deck:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
+/* dark smoked glass behind the tape */
+.deck-well::before{content:"";position:absolute;left:17.8%;width:48.5%;top:15.56%;height:40.48%;border-radius:.6cqw;background:#0e0d0f;z-index:0}
+/* the tape, centred in the window, fit to its width; top and bottom 6.5% of the shell stay behind the frame */
+.deck-well .cas{position:absolute;left:17.8%;top:8.29cqw;width:48.5cqw;z-index:1;clip-path:inset(6.6% 0 6.6% 0 round .5cqw)}
+.deck:hover .deck-well .cas,.deck:focus-visible .deck-well .cas{transform:none}
+/* the Walkman itself, glass window cut out (with a light smoke and sheen) */
+.deck-well::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:url(/walkman/walkman-window-1000.webp) center/100% 100% no-repeat}
+.deck-well .deck-spot{z-index:3}
+.deck-keys{position:relative;z-index:4} /* keep the keys above the Walkman's drop shadow */
+/* PREVIEW: the Spotify player sits in the Walkman's tape window (compact 80px player + link bar) */
+.deck-well .deck-spot{left:17.8%;right:auto;width:48.5%;top:15.56%;transform:none;border-radius:.6cqw}
+.deck-well .deck-spot .deck-splink{height:26px}
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css" data-trd-keep>
@@ -781,7 +805,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     if(top.hasAttribute('data-deckfit')){deck.style.removeProperty('width');deck.style.removeProperty('justify-self');top.removeAttribute('data-deckfit');} /* re-measure unscaled so a taller window grows it back */
     var cs=getComputedStyle(well),ph=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom),pw=parseFloat(cs.paddingLeft)+parseFloat(cs.paddingRight);
     var h=well.clientHeight-ph, chrome=deck.offsetWidth-well.clientWidth+pw;
-    var w=Math.round(h*1.5737+chrome), max=Math.round(top.clientWidth*.56);
+    var w=Math.round(h*1.5106+chrome), max=Math.round(top.clientWidth*.56);
     top.style.setProperty('--deckw',Math.min(w,max)+'px');
     /* short laptop screens (e.g. 1280x720): the deck is taller than its row and ran into the tape stacks,
        covering PRESS PLAY. Scale the whole deck down proportionally, centred in its own column (the column,
@@ -790,7 +814,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     var hall=top.parentNode,stage=hall&&hall.parentNode,gap=parseFloat(getComputedStyle(hall).rowGap)||0,
         pad=stage?parseFloat(getComputedStyle(stage).paddingTop)||0:0,slack=Math.max(0,Math.min(gap,pad)-8),
         wi=well.clientHeight-ph,vchrome=deck.offsetHeight-wi,dch=deck.offsetWidth-well.clientWidth+pw,
-        fit=Math.floor((top.clientHeight+2*slack-vchrome)*1.5737+dch);
+        fit=Math.floor((top.clientHeight+2*slack-vchrome)*1.5106+dch);
     if(deck.offsetHeight>top.clientHeight+2*slack&&fit<deck.offsetWidth){
       deck.style.width=Math.max(0,fit)+'px';deck.style.justifySelf='center';top.setAttribute('data-deckfit','');}
   }
@@ -1100,7 +1124,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   var narrow=window.matchMedia('(max-width:899px), (max-height:499px)');
   var PL_OPEN='https://open.spotify.com/playlist/4lWQJV4n3mnIvp0y4biUqZ',SL_BAR=30;
   /* in the deck window the player and the playlist link share the tape window: the compact 80px player on small screens */
-  function spotH(){if(narrow.matches)return 152;var h=well.clientHeight-12-SL_BAR;return h>=352?352:(h>=152?152:80);}
+  function spotH(){if(narrow.matches)return 152;var h=Math.round(well.clientHeight*.4048)-SL_BAR; /* PREVIEW: the Walkman's window, not the whole well */return h>=352?352:(h>=152?152:80);}
   function spotLink(){var a=document.createElement('a');a.className='deck-splink';a.href=PL_OPEN;a.target='_blank';a.rel='noopener';
     a.setAttribute('aria-label','Open the full playlist on Spotify (opens in a new tab)');
     a.innerHTML='<svg class="sl-sp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>'+
