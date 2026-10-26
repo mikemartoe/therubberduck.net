@@ -2,7 +2,8 @@
 """Build the static share pages for Q drops (same pattern as tools/meme-share-build.py).
 
 Reads data/drops.js and the card manifest written by tools/drop-cards/render_cards.py and writes:
-  drops/share/<N>.html  OG/Twitter tags (preview = R2 drops/og/N.jpg, 1200x630), canonical /drops/N/,
+  drops/share/<N>.html  OG/Twitter tags (preview = R2 drops/og2/N.jpg: right-sized card, 1200 wide, height per
+                        drop from tools/drop-cards/og2-sizes.json; old 1200x630 drops/og/ kept in R2 for rollback), canonical /drops/N/,
                         noindex; humans are sent on to /ledger.html#drop-N with the utm query kept.
   data/drop-cards.js    {base, long:[...]}: which drops have a 1080x1350 ig/ crop.
 Only drops present in the manifest get a page, so a page never points at an image not yet uploaded.
@@ -18,6 +19,9 @@ SITE = 'https://therubberduck.net'
 MEDIA = 'https://memes.therubberduck.net/drops/'
 OUT = os.path.join(ROOT, 'drops', 'share')
 ET = ZoneInfo('America/New_York')
+OG_DIR = 'og2'   # right-sized previews (tools/drop-cards/rightsize.py, 2026-10-26); 'og' = the old 1200x630 ones
+_SZ = os.path.join(ROOT, 'tools', 'drop-cards', 'og2-sizes.json')
+OG_H = {int(k): v for k, v in json.load(open(_SZ)).items()} if os.path.exists(_SZ) else {}
 esc = lambda s: html.escape(s or '', quote=True)
 
 
@@ -31,7 +35,7 @@ def page(d):
     when = dt.strftime('%B %-d, %Y')
     title = 'Q Drop #%d, %s | The Drop Ledger | The Rubber Duck\u2122' % (n, when)
     desc = tease(n, dt, site, board)   # tease only (Mike, 2026-10-25): no drop text in previews
-    img = MEDIA + 'og/%d.jpg' % n
+    img = MEDIA + '%s/%d.jpg' % (OG_DIR, n)
     alt = 'Q drop #%d as originally posted on %s %s' % (n, site, board.rstrip('/') + '/')
     dest = '/ledger.html#drop-%d' % n
     return '''<!doctype html>
@@ -50,7 +54,7 @@ def page(d):
 <meta property="og:image:secure_url" content="{i}">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:height" content="{h}">
 <meta property="og:image:alt" content="{a}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TheRubberDuck79">
@@ -64,7 +68,7 @@ def page(d):
 <style>body{{margin:0;background:#040705;color:#C8F5D2;font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}}a{{color:#00FF41}}</style>
 </head><body><p>Opening Q drop #{n} in <a href="{dest}">The Drop Ledger</a>.</p></body></html>
 '''.format(t=esc(title), d=esc(desc), u=esc('%s/drops/share/%d.html' % (SITE, n)), canon=esc('%s/drops/%d/' % (SITE, n)),
-           i=esc(img), a=esc(alt), dest=esc(dest), n=n)
+           i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=OG_H.get(n, 630))
 
 
 def main():

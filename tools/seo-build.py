@@ -116,7 +116,7 @@ CSS_HREF = '/assets/seo/archive.css?v=1'
 NAV = [('/', 'Home'), ('/ledger.html', 'Drop Ledger'), ('/videos.html', 'Video Room'), ('/listening-room.html', 'Listening Room'),
        ('/pdfs.html', 'SCIF Reading Room'), ('/x/', 'X Archive'), ('/memes.html', 'Meme Dump'), ('/album.html', 'Red Pill Album')]
 
-DROP_OG = 'https://memes.therubberduck.net/drops/og/%d.jpg'   # share-feature cards on R2 (tools/drop-cards)
+DROP_OG = 'https://memes.therubberduck.net/drops/og2/%d.jpg'   # right-sized share cards on R2 (tools/drop-cards/rightsize.py); old 1200x630 in drops/og/
 
 
 def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', og_desc=None, robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'):
