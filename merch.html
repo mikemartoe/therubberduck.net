@@ -311,6 +311,46 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
     <span class="neon" aria-hidden="true">Open</span>
   </section>
 
+<!-- premium:begin -->
+<style>
+/* ============ premium line: coming soon ============ */
+.vault{margin:34px 0 0;position:relative;background:radial-gradient(120% 90% at 50% 0%,#1d1710 0%,#0b0907 60%,#050404 100%);border:1px solid #6d5426;border-radius:14px;
+  padding:30px 28px 30px;box-shadow:0 0 0 6px #0b0907,0 0 0 7px #8a6420,0 24px 50px rgba(0,0,0,.65);overflow:hidden}
+.vault::before{content:"";position:absolute;inset:0;background-image:var(--noise);opacity:.18;pointer-events:none}
+.vault .vh{position:relative;text-align:center;margin:0 auto 22px;max-width:720px}
+.vault .vk{margin:0;font-family:var(--mono);font-weight:700;font-size:.82rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold2)}
+.vault h2{margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.05;letter-spacing:.04em;
+  background:linear-gradient(180deg,var(--gold1) 0%,var(--gold2) 55%,var(--gold3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.vault .vrule{display:block;width:120px;height:1px;margin:14px auto;background:linear-gradient(90deg,transparent,var(--gold2),transparent)}
+.vault .vp{margin:0;color:#d8ccb2;font-size:1.02rem;line-height:1.5;text-wrap:balance}
+.vgrid{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+.soon{position:relative;background:linear-gradient(180deg,#14100b,#0c0a08);border:1px solid #3e3019;border-radius:10px;padding:14px 14px 18px;display:flex;flex-direction:column;gap:12px}
+.soon .ph{position:relative;border-radius:6px;overflow:hidden;border:1px solid #4a3a1c;background:#111;aspect-ratio:9/16;max-height:620px}
+.soon .ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.soon .badge{position:absolute;top:12px;left:12px;font-family:var(--mono);font-weight:700;font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:#120d05;
+  background:linear-gradient(180deg,var(--gold1),var(--gold2));padding:7px 11px 6px;border-radius:3px;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+.soon .ttl{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.soon h3{margin:0;font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:1.55rem;letter-spacing:.03em;color:var(--gold1)}
+.soon .st{font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);border:1px solid #6d5426;padding:4px 8px 3px;border-radius:3px}
+.soon .tl{margin:0;color:#d8ccb2;font-size:.98rem;line-height:1.45}
+.soon .cl{font-family:var(--mono);font-size:.85rem;color:#b9a985;letter-spacing:.06em}
+.soon .cl b{color:#efe4c6;font-weight:700}
+.ps-sws{display:flex;flex-wrap:wrap;gap:8px}
+.ps-sw{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:7px 12px 7px 8px;border-radius:999px;border:1px solid #4a3a1c;background:transparent;color:#efe4c6;font:600 13px/1 var(--body);cursor:pointer}
+.ps-sw i{width:18px;height:18px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.ps-sw[aria-pressed="true"]{border-color:var(--gold2);box-shadow:0 0 0 1px var(--gold2) inset}
+.soon .more{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-top:2px}
+.soon .more a{color:var(--gold1);font-weight:700;text-decoration:none;border-bottom:1px solid #6d5426;padding-bottom:2px}
+.soon .more span{color:#8f826a;font-size:.88rem}
+@media(max-width:760px){.vault{padding:22px 14px 22px}.vgrid{grid-template-columns:1fr;gap:20px}.soon .ph{max-height:none}}
+</style>
+  <section class="vault" aria-labelledby="vault-title">
+    <header class="vh"><p class="vk">The Premium Line</p><h2 id="vault-title">Coming Soon</h2><span class="vrule" aria-hidden="true"></span><p class="vp">Real wool and real leather caps, embroidered the same way as the hats you know: the chrome duck front and centre, the red pill on the bill. Not on sale yet.</p></header>
+    <div class="vgrid"><article class="soon" data-soon="premium-wool-cap" data-kind="Premium Wool Cap" aria-label="Premium Wool Cap, coming soon"><div class="ph"><picture><source class="ps-src" srcset="/store-img/premium/premium-wool-cap_navy.webp" type="image/webp"><img class="ps-img" src="/store-img/premium/premium-wool-cap_navy.jpg" alt="Premium Wool Cap, Deep Navy, mockup, coming soon" width="720" height="1280" loading="lazy" decoding="async"></picture><span class="badge">Coming Soon</span></div><div class="ttl"><h3>Premium Wool Cap</h3><span class="st">Coming Soon</span></div><p class="tl">Real wool, felted and dense, with the chrome duck embroidered in raised thread.</p><p class="cl">Color <b class="ps-cn">Deep Navy</b></p><div class="ps-sws" role="group" aria-label="Color"><button type="button" class="ps-sw" data-c="navy" data-l="Deep Navy" aria-pressed="true" aria-label="Deep Navy" title="Deep Navy" style="--sw:#1e2740"><i></i><span>Deep Navy</span></button><button type="button" class="ps-sw" data-c="black" data-l="Black" aria-pressed="false" aria-label="Black" title="Black" style="--sw:#121212"><i></i><span>Black</span></button><button type="button" class="ps-sw" data-c="charcoal" data-l="Charcoal" aria-pressed="false" aria-label="Charcoal" title="Charcoal" style="--sw:#3b3b3d"><i></i><span>Charcoal</span></button><button type="button" class="ps-sw" data-c="ivory" data-l="Natural Cream" aria-pressed="false" aria-label="Natural Cream" title="Natural Cream" style="--sw:#d9ccb0"><i></i><span>Natural Cream</span></button><button type="button" class="ps-sw" data-c="burgundy" data-l="Burgundy" aria-pressed="false" aria-label="Burgundy" title="Burgundy" style="--sw:#5e1620"><i></i><span>Burgundy</span></button></div><p class="more"><a href="/shop/premium-wool-cap/">See the wool line</a><span>Not on sale yet. Price announced at launch.</span></p></article><article class="soon" data-soon="premium-leather-hat" data-kind="Premium Leather Hat" aria-label="Premium Leather Hat, coming soon"><div class="ph"><picture><source class="ps-src" srcset="/store-img/premium/premium-leather-hat_black.webp" type="image/webp"><img class="ps-img" src="/store-img/premium/premium-leather-hat_black.jpg" alt="Premium Leather Hat, Black, mockup, coming soon" width="720" height="1280" loading="lazy" decoding="async"></picture><span class="badge">Coming Soon</span></div><div class="ttl"><h3>Premium Leather Hat</h3><span class="st">Coming Soon</span></div><p class="tl">Full leather, top-stitched, with the chrome duck and the red pill embroidered the same way.</p><p class="cl">Color <b class="ps-cn">Black</b></p><div class="ps-sws" role="group" aria-label="Color"><button type="button" class="ps-sw" data-c="black" data-l="Black" aria-pressed="true" aria-label="Black" title="Black" style="--sw:#151313"><i></i><span>Black</span></button><button type="button" class="ps-sw" data-c="cognac" data-l="Cognac" aria-pressed="false" aria-label="Cognac" title="Cognac" style="--sw:#7a3f1d"><i></i><span>Cognac</span></button><button type="button" class="ps-sw" data-c="tan" data-l="Saddle Tan" aria-pressed="false" aria-label="Saddle Tan" title="Saddle Tan" style="--sw:#b88a55"><i></i><span>Saddle Tan</span></button></div><p class="more"><a href="/shop/premium-leather-hat/">See the leather line</a><span>Not on sale yet. Price announced at launch.</span></p></article></div>
+  </section>
+<script>(function(){document.querySelectorAll("[data-soon]").forEach(function(x){var s=x.getAttribute("data-soon"),k=x.getAttribute("data-kind"),img=x.querySelector("img.ps-img"),src=x.querySelector("source.ps-src"),nm=x.querySelector(".ps-cn"),bs=x.querySelectorAll(".ps-sw");bs.forEach(function(b){b.addEventListener("click",function(){var c=b.getAttribute("data-c"),l=b.getAttribute("data-l"),p="/store-img/premium/"+s+"_"+c;bs.forEach(function(o){o.setAttribute("aria-pressed",String(o===b));});src.srcset=p+".webp";img.src=p+".jpg";img.alt=k+", "+l+", mockup, coming soon";if(nm)nm.textContent=l;});});});})();</script>
+<!-- premium:end -->
+
   <section class="case" aria-labelledby="signed-title">
     <header class="head">
       <h2 id="signed-title"><small>The Glass Case</small>Signed and Numbered</h2>

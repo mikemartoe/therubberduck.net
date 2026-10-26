@@ -11,6 +11,7 @@ What it does (idempotent, safe to re-run after any data change):
        /watch/            Video Room: index and one page per video (VideoObject)
        /listen/           Listening Room: index and one page per volume
        /shop/<slug>/      one page per TRD Collectibles item (Product, real prices)
+                          plus coming-soon pages from tools/premium_soon.py (no prices, no checkout)
        /book/anon-mission/  the book (Book + Product, real Gumroad price)
   2. Injects JSON-LD and invisible head tags into the existing room pages, between
      <!-- seo:begin --> and <!-- seo:end --> markers (nothing in <body> is touched).
@@ -524,6 +525,12 @@ def build_shop():
         add_sm('shop', url, lm, images=[(SITE + img, it['name'])])
     return items
 
+def build_soon():
+    # Premium line, coming soon: pages + merch.html section, no prices or checkout (tools/premium_soon.py)
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from premium_soon import build_soon as _bs
+    _bs(page, write, add_sm, SITE, git_date('tools/premium_soon.py'))
+
 def build_book():
     url = '/book/anon-mission/'
     title = 'anon mission, Volume 1: All You Need to Know About Q ($19.99 PDF)'
@@ -703,6 +710,7 @@ if __name__ == '__main__':
     stats['watch'] = build_videos()
     stats['listen'] = build_listen()
     items = build_shop(); stats['shop'] = len(items)
+    build_soon()
     build_book()
     ensure_webp()
     build_rooms(items)
