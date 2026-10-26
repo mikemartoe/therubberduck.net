@@ -491,6 +491,8 @@ def product_ld(it, url):
             **({'color': ', '.join(it['colors'])} if it['colors'] else {})}
 
 def build_shop():
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from shop_demo_media import demo_block
     items = parse_merch()
     lm = git_date('merch.html')
     for it in items:
@@ -514,6 +516,7 @@ def build_shop():
                 '<p class="meta">%s. Made to order and paid securely through Stripe. Every order helps keep therubberduck.net free.</p></div></div>'
                 % (E(it['name']), E(webp), E(img), E(it['alt'] or it['name']), E(it['name']), ', signed and numbered by hand out of 500.' if it['signed'] else ' from TRD Collectibles.',
                    facts, E(it['buy']), E(it['shipin'] or 'Ships in 3 to 8 business days')))
+        body += demo_block(it['slug'])
         others = [o for o in items if o is not it]
         body += '<h2>More from TRD Collectibles</h2><ul class="list">%s</ul>' % ''.join('<li><a href="/shop/%s/">%s</a> <span class="n">$%s</span></li>' % (o['slug'], E(o['name']), o['price']) for o in others)
         write('shop/%s/index.html' % it['slug'], page(url, title, desc, body, [product_ld(it, url)],
