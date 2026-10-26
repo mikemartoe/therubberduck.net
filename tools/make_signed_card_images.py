@@ -1,7 +1,8 @@
 """Square store-card photos for the three signed listings in the new six-color lineup (Oct 26 2026, branch umbrella-special-orders).
 Signed tee: the Red Pill Tee front photo (store-img/demo/duck-tee_<c>_front.jpg, 800x1300), padded onto its own gray studio backdrop.
-Signed hats: a square crop of the signed demo still (store-img/demo/signed-<hat>_<c>_demo.jpg, 720x1280) around the hat, the real
-No. 11/500 signature under the brim and the TRD box. Output: store-img/signed-<item>_<c>.{jpg,webp}, 800x800."""
+Signed hats: NOT built here any more (Oct 26 2026, Mike: front views only). The old crop of the signed demo still showed a malformed
+held-up hat; the hat cards are now the approved front product photos, see tools/make_signed_hat_front_photos.py.
+Output: store-img/signed-tee_<c>.{jpg,webp}, 800x800."""
 from PIL import Image
 import os
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'store-img')
@@ -20,7 +21,4 @@ for c in COLORS:
         sq.paste(l, (0, y, (s - 800) // 2, y + 1)); sq.paste(r, ((s - 800) // 2 + 800, y, s, y + 1))
     sq.paste(crop, ((s - 800) // 2, 0))
     save(sq, 'signed-tee_%s' % c)
-    for hat in ('signed-dad-hat', 'signed-trucker-hat'):
-        h = Image.open(os.path.join(D, 'demo', '%s_%s_demo.jpg' % (hat, c))).convert('RGB')
-        save(h.crop((0, 165, 720, 885)), '%s_%s' % (hat, c))
 print('ok')

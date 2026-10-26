@@ -21,6 +21,7 @@ COLORS = [
 ]
 
 # Signed listings: the signature in the demo is the real one from a signed hat photo (No. 11 of 500), composited, never redrawn.
+_FRONT = 'The demo shows the front; your hat is signed and numbered by hand under the brim. '
 _SIG = 'The signature under the brim in the demo is taken from a real signed hat (No. 11 of 500); yours carries its own hand-written number. '
 
 def _posters(base_slug, own):
@@ -32,9 +33,24 @@ def _posters(base_slug, own):
 DEMO_MEDIA = {
     'duck-trucker-hat': ('Trucker hat', '', [c[0] for c in COLORS]),
     'duck-dad-hat': ('Dad hat', '', [c[0] for c in COLORS]),
-    'signed-dad-hat': ('Signed dad hat', _SIG, [c[0] for c in COLORS], _posters('duck-dad-hat', ['gold'])),
-    'signed-trucker-hat': ('Signed trucker hat', _SIG, [c[0] for c in COLORS], _posters('duck-trucker-hat', ['hotpink', 'gold'])),
+    # Oct 26 2026 (Mike): the signed hats show the FRONT only. The old signed demos (store-img/demo/signed-*_demo.*, a hat held up
+    # to show the brim) are no longer used anywhere; the signed listings play the regular hat's front demo instead (MEDIA_SLUG).
+    'signed-dad-hat': ('Dad hat', _FRONT, [c[0] for c in COLORS]),
+    'signed-trucker-hat': ('Trucker hat', _FRONT, [c[0] for c in COLORS]),
 }
+MEDIA_SLUG = {'signed-dad-hat': 'duck-dad-hat', 'signed-trucker-hat': 'duck-trucker-hat'}
+
+# The small signed-brim preview (a real signed hat, No. 11 of 500) on the signed hat listings: a secondary tile, never the main photo.
+SIG_PREVIEW = {'signed-dad-hat', 'signed-trucker-hat'}
+def sig_preview(slug):
+    if slug not in SIG_PREVIEW:
+        return ''
+    return ('<style>.sigp{display:flex;align-items:center;gap:12px;margin:4px 0 14px;max-width:420px}'
+            '.sigp picture{flex:0 0 auto}.sigp img{display:block;width:112px;height:112px;object-fit:cover;border-radius:8px;border:1px solid var(--gold,#c9a43a);box-shadow:0 2px 10px rgba(0,0,0,.35)}'
+            '.sigp figcaption{color:var(--muted);font-size:14px;line-height:1.4}</style>'
+            '<figure class="sigp"><picture><source srcset="/store-img/signed-brim-11of500.webp" type="image/webp">'
+            '<img src="/store-img/signed-brim-11of500.jpg" alt="The brim of a signed hat, marked 11/500 TRD" width="480" height="480" loading="lazy" decoding="async"></picture>'
+            '<figcaption>Signed and numbered under the brim, out of 500. Shown: No. 11; yours carries its own number.</figcaption></figure>')
 
 def _figs(slug, kind, key, label, poster=None):
     b = '/store-img/demo/%s_%s_demo' % (slug, key)
@@ -59,6 +75,7 @@ def demo_block(slug):
                    % (k, html.escape(l), (' data-p="%s.jpg"' % posters[k]) if posters.get(k) else '', 'true' if i == 0 else 'false', sw, html.escape(l))
                    for i, (k, l, sw) in enumerate(cols))
     k0, l0, _ = cols[0]
+    ms = MEDIA_SLUG.get(slug, slug)   # whose demo files to play
     css = ('<style>.dmx{margin:6px 0 10px}.dm-tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}'
            '.dm-t{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;font:600 14px/1 system-ui,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 13px 9px 9px;cursor:pointer;min-height:40px}'
            '.dm-t i{width:18px;height:18px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(128,128,128,.55)}'
@@ -89,7 +106,7 @@ def demo_block(slug):
            'Demo music from The Red Pill Album (&ldquo;The Storm Is Upon Us&rdquo;).</p>') % (kind.lower(), html.escape(names_txt), extra, avail)
     return ('<h2>In the box</h2>' + css +
             '<div class="dmx" data-slug="%s" data-kind="%s"><div class="dm-tabs" role="tablist" aria-label="Demo color">%s</div><div class="dms">%s</div>%s</div>'
-            % (slug, html.escape(kind), tabs, _figs(slug, kind, k0, l0, posters.get(k0)), cap) + js)
+            % (ms, html.escape(kind), tabs, _figs(ms, kind, k0, l0, posters.get(k0)), cap) + js)
 
 # ---------------------------------------------------------------- listing gallery: one main photo per color with color tabs
 # Red Pill Tee: Mike's front + back mock (Oct 26 2026) in six colors, landscape 1600x982 (+900 w), made by tools/make_tee_mock_images.py.

@@ -508,7 +508,7 @@ def product_ld(it, url):
 
 def build_shop():
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from shop_demo_media import demo_block, gallery_block, gallery_images, order_block, promise_block
+    from shop_demo_media import demo_block, gallery_block, gallery_images, order_block, promise_block, sig_preview
     items = parse_merch()
     lm = git_date('merch.html')
     for it in items:
@@ -539,7 +539,7 @@ def build_shop():
                 '<p class="lede">%s%s</p>%s%s'
                 '<p class="meta">%s. Made to order and paid securely through Stripe. Every order helps keep therubberduck.net free.</p></div></div>'
                 % (E(it['name']), gal, ' tg-doc' if gal else '', pic, E(it['name']), ', signed and numbered by hand out of 500.' if it['signed'] else ' from TRD Collectibles.',
-                   facts, order or '<p class="cta"><a class="btn" href="/merch.html">Choose color and size in the store</a> <a href="%s" rel="noopener">Buy now through Stripe</a></p>' % E(it['buy']),
+                   sig_preview(it['slug']) + facts, order or '<p class="cta"><a class="btn" href="/merch.html">Choose color and size in the store</a> <a href="%s" rel="noopener">Buy now through Stripe</a></p>' % E(it['buy']),
                    E(it['shipin'] or 'Ships in 3 to 8 business days')))
         # the umbrella special-order promise, on every listing (tools/umbrella_lineup.py)
         body += promise_block(it['slug'], it['special_colors'], it['signed'], bool(gal))
