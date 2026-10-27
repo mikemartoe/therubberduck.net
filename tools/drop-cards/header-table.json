@@ -26744,12 +26744,12 @@
 "poster_id": "cfcc74",
 "country": "",
 "subject": "",
-"files": "",
+"files": "8068d33e7f77d6004fc46647c9867141ebf4d59915450f2d1bd5df8bcfcd6630.png",
 "board_title": "",
 "tier": "B",
 "id_source": "qalerts/qanon.pub board-JSON scrape",
 "board_title_source": "UNVERIFIED: no primary capture reachable (Wayback excludes 8ch.net)",
-"flags": "file size/dimensions not in any source (filename only)"
+"flags": "file size/dimensions not in any source (filename only); file added 2026-10-27: QAGG media lists 1 PNG (591x1280) with filename \"BLANK FILE NAME\", qanon.pub filename null; shown by its 8chan file_store hash name"
 },
 {
 "drop": 1409,

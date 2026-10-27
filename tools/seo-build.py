@@ -117,6 +117,10 @@ NAV = [('/', 'Home'), ('/ledger.html', 'Drop Ledger'), ('/videos.html', 'Video R
        ('/pdfs.html', 'SCIF Reading Room'), ('/x/', 'X Archive'), ('/memes.html', 'Meme Dump'), ('/album.html', 'Red Pill Album')]
 
 DROP_OG = 'https://memes.therubberduck.net/drops/og2/%d.jpg'   # right-sized share cards on R2 (tools/drop-cards/rightsize.py); old 1200x630 in drops/og/
+_V2 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v2.json')   # drops re-rendered with their real attached images (2026-10-27)
+DROP_V2 = json.load(open(_V2)) if os.path.exists(_V2) else {'prefix': 'v2/', 'drops': {}}
+def drop_og(n):
+    return DROP_OG.replace('/drops/', '/drops/' + DROP_V2['prefix'], 1) % n if str(n) in DROP_V2['drops'] else DROP_OG % n
 
 
 def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', og_desc=None, robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'):
@@ -216,7 +220,7 @@ def build_drops():
         write('drops/%d/index.html' % n, page('/drops/%d/' % n, title, desc, body, g,
               [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('#%d' % n, '/drops/%d/' % n)], og_type='article',
               og_desc='Q drop #%d \u00b7 %s \u00b7 %s /%s/' % (n, d['dt'].strftime('%B %-d, %Y'), d['site'], d['board'].strip('/')),   # tease only
-              og_image=DROP_OG % n))
+              og_image=drop_og(n)))
         add_sm('drops', '/drops/%d/' % n, lm)
 
     # per month
