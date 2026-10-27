@@ -7,7 +7,9 @@ Ids and titles come from the same two sources the room uses:
 
 Each page is a tiny static page with og/twitter tags (tease only: title + 'Video Room · The Rubber Duck',
 plus running time) and the feature's poster as the preview image. Humans are sent on to
-/videos.html?<utm...>#v=<id>; the room then shows that feature on the big screen. No page ever
+/videos.html?<utm...>#v=<id> by a script redirect (no meta refresh: link-preview crawlers such as Facebook's can
+follow a meta refresh and would then read the room's generic card instead of this page's tags; crawlers do not
+run scripts, people without scripts get the plain link); the room then shows that feature on the big screen. No page ever
 references the video file itself, so a link preview never loads a video.
 
 Usage:
@@ -101,7 +103,6 @@ def page(v, img, meta):
 <meta name="twitter:image" content="{e(img)}">
 <meta name="twitter:image:alt" content="{e(alt)}">
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any">
-<meta http-equiv="refresh" content="0; url={dest}">
 <script>location.replace("/videos.html"+location.search+"#v={vid}");</script>
 <style>body{{margin:0;background:#04060d;color:#f3e6c8;font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;text-align:center;padding:0 20px}}a{{color:#ffc864}}</style>
 </head><body><p>Opening {e(t)} in <a href="{dest}">the Video Room</a>.</p></body></html>

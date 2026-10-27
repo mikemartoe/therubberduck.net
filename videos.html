@@ -352,7 +352,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
   --border:rgba(59,33,21,.38);--surface-1:#fbf3df;--text:var(--brown);--accent:var(--red);--font-body:'Oswald',sans-serif}
 .sharebar h3{font-family:'Oswald',sans-serif;font-weight:700;font-size:16px;letter-spacing:.22em;text-transform:uppercase;color:var(--red-dk);margin:0;line-height:1.2}
 .sharebar h3 small{display:block;font-weight:500;font-size:12px;letter-spacing:.14em;color:rgba(28,19,12,.62);margin-top:3px}
-.sharebar .shr-btns{grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:auto}
+.sharebar .shr-btns{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:auto}
 .sharebar .shr-b{min-height:60px;font-weight:600;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;border-radius:4px}
 .sharebar .shr-b svg{width:22px;height:22px}
 .sharebar .shr-b:hover,.sharebar .shr-b:focus-visible{background:#fff8e8}
@@ -361,7 +361,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 @media (max-width:760px){
   .sharebar{padding:14px 18px 16px;border-top:0;border-bottom:2px dashed rgba(59,33,21,.35);order:0}
   .feature{order:1}
-  .sharebar .shr-btns{grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto auto}
+  .sharebar .shr-btns{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto}
   .sharebar .shr-b{min-height:60px;font-size:11.5px;letter-spacing:.05em}
   .sharebar h3 small{display:block;margin:3px 0 0}
 }
@@ -904,7 +904,7 @@ function select(v, mode, ch) {   // mode: 'play' | 'autoplay' | 'poster' | 'reel
 }
 /* Share this feature: same share row as the Drop Ledger and the Meme Dump (assets/trd/share.js).
    The link is the static preview page /videos/share/<id>.html (og/twitter card), which sends people to
-   /videos.html?utm_...#v=<id>. TikTok / Instagram hand over the poster frame only; a share tap never loads the video.
+   /videos.html?utm_...#v=<id>. A share tap never loads the video.
    Each tap counts as event/video-share/<platform>/<id>. */
 const SHARE_FALLBACK_IMG = 'https://therubberduck.net/images/brand/trd-share-2026.jpg';
 function shareImg(v) {
@@ -912,18 +912,20 @@ function shareImg(v) {
   if (!th || th.indexOf('intermission-card') !== -1) return SHARE_FALLBACK_IMG;
   return th;
 }
+/* Only platforms that post the link as a real preview card (title + poster) get a button (Mike, Oct 27):
+   X, Truth Social, Facebook, plus Email and Text (title + link filled in) and Copy link.
+   TikTok and Instagram cannot take a link post from a web page, so they are not offered here. */
+const SHARE_OFF = ['tiktok', 'ig'];
 function shareRow(v) {
   const host = $('pshare'); if (!host) return;
   host.innerHTML = '';
   if (!window.trdShare) { $('psharebar').hidden = true; return; }
   const img = shareImg(v);
-  host.appendChild(trdShare.build({kind: 'video', id: v.id, page: 'https://therubberduck.net/videos/share/' + v.id + '.html', noPic: true,
+  const row = trdShare.build({kind: 'video', id: v.id, page: 'https://therubberduck.net/videos/share/' + v.id + '.html', noPic: true,
     text: v.t + ' \u00b7 Video Room \u00b7 The Rubber Duck', thumb: img, file: img, igFile: null,
-    fileName: 'trd-video-' + v.id + '.jpg',
-    hints: {
-      ig: 'Poster saved + link copied. Post it on Instagram, paste the link in a story link sticker.',
-      tiktok: 'Poster saved + link copied. Post it on TikTok as a photo, paste the link in the caption.'
-    }}));
+    fileName: 'trd-video-' + v.id + '.jpg'});
+  SHARE_OFF.forEach(p => row.querySelectorAll('.shr-b[data-p="' + p + '"]').forEach(b => b.remove()));
+  host.appendChild(row);
 }
 /* Short descriptions would leave the middle column half empty; fill it with the next newest features
    (as many as fit beside the other two columns, so all three keep the same top and bottom edges). */
@@ -953,8 +955,7 @@ $('copy').addEventListener('click', () => {
 });
 
 /* Share chip on every ticket. One tap: that video becomes the feature (poster only, nothing starts playing)
-   and the visitor lands on its share strip (same share.js row: X, Truth, Facebook, TikTok, Instagram, Email,
-   Text, Copy link; the link is /videos/share/<id>.html, which opens /videos.html#v=<id>). */
+   and the visitor lands on its share strip (same share.js row: X, Truth, Facebook, Email, Text, Copy link; the link is /videos/share/<id>.html, which opens /videos.html#v=<id>). */
 const TSHARE_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
 const TSHARE = v => '<span class="tshare" role="button" tabindex="0" data-share="' + v.id + '" aria-label="Share ' + esc(v.t) + '">' + TSHARE_ICO + '<span>Share</span></span>';
 function openShare(v) {
