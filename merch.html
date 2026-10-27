@@ -97,6 +97,14 @@ a{color:inherit}
 .item[data-slug="duck-tee"] .bk-pic,.item[data-slug="signed-tee"] .bk-pic{display:block;flex:1;min-height:0;border:3px solid var(--cream);border-radius:5px;background:#5c5b5c;overflow:hidden}
 .item[data-slug="duck-tee"] .bk-pic picture,.item[data-slug="duck-tee"] .bk-pic img,.item[data-slug="signed-tee"] .bk-pic picture,.item[data-slug="signed-tee"] .bk-pic img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
 .item[data-slug="duck-tee"] .back .bio,.item[data-slug="duck-tee"] .back .fact,.item[data-slug="duck-tee"] .back .bk-foot,.item[data-slug="signed-tee"] .back .bio,.item[data-slug="signed-tee"] .back .fact,.item[data-slug="signed-tee"] .back .bk-foot{display:none}
+/* Signed hats (Oct 26 2026, Mike): the back of the card shows his example photo of the hand-written number + signature (not the buyer's number) */
+.item[data-slug="signed-dad-hat"] .bk-sig,.item[data-slug="signed-trucker-hat"] .bk-sig{display:block;position:relative;flex:1;min-height:0;margin:0;border:3px solid var(--cream);border-radius:5px;background:#1b1d24;overflow:hidden;box-shadow:0 0 0 1px #a97c2b,0 3px 8px rgba(40,25,5,.35)}
+.bk-sig picture,.bk-sig img{display:block;width:100%;height:100%;object-fit:cover;object-position:42% 40%}
+.bk-sig figcaption{position:absolute;left:0;right:0;bottom:0;padding:18px 8px 7px;text-align:center;font-family:var(--mono);font-weight:700;font-size:12px;line-height:1.25;letter-spacing:.02em;color:#f6e3a1;background:linear-gradient(180deg,rgba(12,9,4,0),rgba(12,9,4,.78) 45%,rgba(12,9,4,.9));text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.bk-sig figcaption b{color:#fff;letter-spacing:.08em;text-transform:uppercase}
+.item[data-slug="signed-dad-hat"] .back .bk-foot,.item[data-slug="signed-trucker-hat"] .back .bk-foot{display:none}
+.bk-sig .sm{display:none}
+@container (max-width:300px){.item[data-slug="signed-dad-hat"] .bk-sig,.item[data-slug="signed-trucker-hat"] .bk-sig{display:flex;flex-direction:column}.bk-sig picture{flex:1;min-height:0;height:auto}.bk-sig figcaption{position:static;padding:4px 3px 5px;font-size:9px;line-height:1.2;letter-spacing:0;background:#14100a}.bk-sig .lg{display:none}.bk-sig .sm{display:inline}.item[data-slug="signed-dad-hat"] .back .bio,.item[data-slug="signed-trucker-hat"] .back .bio{display:none}}
 .sp-note{margin:-3px 0;padding:4px 6px;border:2px solid #c8202b;border-radius:6px;background:#fff4d6;color:#2a1a0a;font-size:11px;line-height:1.22}
 .sp-note b{color:#c8202b;letter-spacing:.04em;text-transform:uppercase;margin-right:2px}
 .sp-note[hidden]{display:none}
@@ -473,6 +481,7 @@ v.addEventListener("ended",function(){v.currentTime=0;go()});})();</script>
         <div class="face back">
           <div class="bk-top"><span class="bk-no">No. S1</span><span class="bk-nm">Signed Dad Hat</span><span class="bk-pos">CAP</span></div>
           <ul class="bio"><li><b>Made</b><span>Cotton dad hat</span></li><li><b>Front</b><span>Duck, stitched</span></li><li><b>Strap</b><span>Red pill, stitched</span></li><li><b>Signed</b><span>Numbered under the brim</span></li></ul>
+          <figure class="bk-pic bk-sig"><picture><source srcset="store-img/signature-example-11-500_360.webp 360w, store-img/signature-example-11-500_592.webp 592w" sizes="(max-width: 640px) 45vw, 320px" type="image/webp"><img src="store-img/signature-example-11-500_360.jpg" srcset="store-img/signature-example-11-500_360.jpg 360w, store-img/signature-example-11-500_592.jpg 592w" sizes="(max-width: 640px) 45vw, 320px" alt="Example of the hand-written number and signature: 11/500 -TRD in white marker under the brim of a navy hat" width="360" height="355" loading="lazy" decoding="async"></picture><figcaption><b>Example</b> <span class="lg">Your number and signature are written by hand, like this</span><span class="sm">Signed and numbered by hand, like this</span></figcaption></figure>
           <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
             <tbody><tr><td class="amt">$45</td><td>$8.95</td><td>One</td><td>6</td></tr></tbody></table>
           <p class="bk-ship">Ships in about 2 to 3 weeks</p>
@@ -502,6 +511,7 @@ v.addEventListener("ended",function(){v.currentTime=0;go()});})();</script>
         <div class="face back">
           <div class="bk-top"><span class="bk-no">No. S2</span><span class="bk-nm">Signed Trucker</span><span class="bk-pos">CAP</span></div>
           <ul class="bio"><li><b>Made</b><span>Mesh trucker hat</span></li><li><b>Front</b><span>Duck, stitched</span></li><li><b>Back</b><span>Mesh, snapback</span></li><li><b>Signed</b><span>Numbered under the brim</span></li></ul>
+          <figure class="bk-pic bk-sig"><picture><source srcset="store-img/signature-example-11-500_360.webp 360w, store-img/signature-example-11-500_592.webp 592w" sizes="(max-width: 640px) 45vw, 320px" type="image/webp"><img src="store-img/signature-example-11-500_360.jpg" srcset="store-img/signature-example-11-500_360.jpg 360w, store-img/signature-example-11-500_592.jpg 592w" sizes="(max-width: 640px) 45vw, 320px" alt="Example of the hand-written number and signature: 11/500 -TRD in white marker under the brim of a navy hat" width="360" height="355" loading="lazy" decoding="async"></picture><figcaption><b>Example</b> <span class="lg">Your number and signature are written by hand, like this</span><span class="sm">Signed and numbered by hand, like this</span></figcaption></figure>
           <table class="stat"><thead><tr><th>Price</th><th>Ship</th><th>Sizes</th><th>Colors</th></tr></thead>
             <tbody><tr><td class="amt">$48</td><td>$8.95</td><td>One</td><td>6</td></tr></tbody></table>
           <p class="bk-ship">Ships in about 2 to 3 weeks</p>

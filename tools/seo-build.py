@@ -514,7 +514,7 @@ def product_ld(it, url):
 
 def build_shop():
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from shop_demo_media import demo_block, gallery_block, gallery_images, order_block, promise_block, sig_preview
+    from shop_demo_media import demo_block, gallery_block, gallery_images, order_block, promise_block, sig_preview, sig_example_block
     items = parse_merch()
     lm = git_date('merch.html')
     for it in items:
@@ -548,6 +548,8 @@ def build_shop():
                    sig_preview(it['slug']) + facts, order or '<p class="cta"><a class="btn" href="/merch.html">Choose color and size in the store</a> <a href="%s" rel="noopener">Buy now through Stripe</a></p>' % E(it['buy']),
                    E(it['shipin'] or 'Ships in 3 to 8 business days')))
         # the umbrella special-order promise, on every listing (tools/umbrella_lineup.py)
+        # signed listings: Mike's example photo of the hand-written number + signature (tools/shop_demo_media.py SIG_EXAMPLE)
+        body += sig_example_block(it['slug'])
         body += promise_block(it['slug'], it['special_colors'], it['signed'], bool(gal))
         body += demo_block(it['slug'])
         others = [o for o in items if o is not it]

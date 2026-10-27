@@ -52,6 +52,41 @@ def sig_preview(slug):
             '<img src="/store-img/signed-brim-11of500.jpg" alt="The brim of a signed hat, marked 11/500 TRD" width="480" height="480" loading="lazy" decoding="async"></picture>'
             '<figcaption>Signed and numbered under the brim, out of 500. Shown: No. 11; yours carries its own number.</figcaption></figure>')
 
+# ---------------------------------------------------------------- signature example, on every signed listing (Oct 26 2026, Mike)
+# Mike's own photo of a real signed hat (white marker "11/500 -TRD" under a navy brim): shown ONLY as an example of what the hand-written
+# number and signature look like; the copy says so and never promises a number. Files: store-img/signature-example-11-500_{592,360}.{jpg,webp}
+# (592 = Mike's photo, pixels untouched, metadata stripped; 360 = downscale). This is a real photo, not one of the back-of-hat renderings
+# Mike had removed (SIG_PREVIEW above stays empty).
+SIG_EXAMPLE = {
+    'signed-dad-hat': ('Your hat is signed and numbered by hand under the brim, out of 500.',),
+    'signed-trucker-hat': ('Your hat is signed and numbered by hand under the brim, out of 500.',),
+    'signed-tee': ('Your tee is signed and numbered by hand too, out of 500. The photo shows the signature on a hat, as an example of the hand.',),
+}
+SIG_CSS = ('<style>.sigx{display:grid;grid-template-columns:minmax(0,296px) minmax(0,1fr);gap:24px;align-items:center;margin:20px 0 22px;padding:16px;'
+           'border:1px solid var(--gold);border-radius:8px;background:linear-gradient(135deg,rgba(201,164,58,.10),rgba(0,0,0,0) 55%);'
+           'box-shadow:inset 0 0 0 3px rgba(0,0,0,.25),inset 0 0 0 4px rgba(200,155,60,.45)}'
+           '.sigx-f{margin:0}.sigx-p{display:block;aspect-ratio:592/584;border:1px solid var(--gold);border-radius:6px;overflow:hidden;background:#1a1c22;'
+           'box-shadow:0 6px 18px rgba(0,0,0,.45)}.sigx-p img{display:block;width:100%;height:100%;object-fit:cover}'
+           '.sigx-k{margin:0 0 8px;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}'
+           '.sigx-t{margin:0 0 10px;font-size:1.22rem;line-height:1.35;color:var(--ink)}.sigx-t b{color:var(--gold)}'
+           '.sigx-d{margin:0;line-height:1.5;color:var(--muted)}.sigx-d+.sigx-d{margin-top:8px}'
+           '@media(max-width:640px){.sigx{grid-template-columns:1fr;gap:14px;padding:12px}.sigx-t{font-size:1.1rem}}</style>')
+
+def sig_example_block(slug):
+    e = SIG_EXAMPLE.get(slug)
+    if not e:
+        return ''
+    b = '/store-img/signature-example-11-500'
+    return (SIG_CSS + '<section class="sigx" aria-labelledby="sx-%s">'
+            '<figure class="sigx-f"><span class="sigx-p"><picture><source type="image/webp" srcset="%s_360.webp 360w, %s_592.webp 592w" sizes="(max-width: 640px) calc(100vw - 62px), 296px">'
+            '<img src="%s_592.jpg" srcset="%s_360.jpg 360w, %s_592.jpg 592w" sizes="(max-width: 640px) calc(100vw - 62px), 296px" '
+            'alt="Example of the hand-written number and signature: 11/500 -TRD in white marker under the brim of a navy hat" width="592" height="584" loading="lazy" decoding="async"></picture></span></figure>'
+            '<div><h2 class="sigx-k" id="sx-%s">Signed and numbered by hand</h2>'
+            '<p class="sigx-t"><b>Example:</b> your number and signature are written by hand, like this.</p>'
+            '<p class="sigx-d">%s</p>'
+            '<p class="sigx-d">Shown: No. 11 of 500, under the brim of a navy hat. It is an example only; yours carries its own hand-written number.</p></div></section>'
+            % (slug, b, b, b, b, b, slug, e[0]))
+
 def _figs(slug, kind, key, label, poster=None):
     b = '/store-img/demo/%s_%s_demo' % (slug, key)
     pb = poster or b
