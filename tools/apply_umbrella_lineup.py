@@ -75,7 +75,7 @@ b = re.sub(r'(<article class="item counter" data-slug="duck-tee")(?: data-sp-shi
            r'\1 data-sp-ship="%s" data-sp-shipin="%s"' % (U.SHIP_SPECIAL, U.SHIPIN_SPECIAL_UNSIGNED), b, count=1)
 b = re.sub(r'<p class="sp-note" role="note" hidden>.*?</p>', '<p class="sp-note" role="note" hidden>%s</p>' % U.NOTE_UNSIGNED, b, count=1, flags=re.S)
 b = re.sub(r'<div class="fact"><p><b>Duck Fact:</b> Tiffany Blue and Hot Pink are special orders:[^<]*</p></div>',
-           '<div class="fact"><p><b>Duck Fact:</b> Tiffany Blue and Hot Pink are special orders: up to 7 extra days, card authorized, not charged, until the maker confirms.</p></div>', b, count=1)
+           '<div class="fact"><p><b>Duck Fact:</b> Tiffany Blue and Hot Pink are special orders: standard shipping plus up to 7 extra days, card authorized, not charged, until we confirm your order.</p></div>', b, count=1)
 h = h[:m.start()] + b + h[m.end():]
 
 # The TRD Promise plate under the shop sign's plaques (same width as the plaques row, centered)

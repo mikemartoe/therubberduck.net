@@ -87,20 +87,30 @@ SPECIAL_SHIP = {'duck-dad-hat': '4.95', 'duck-trucker-hat': '4.95', 'signed-dad-
 RETIRED_UNSIGNED = {'duck-dad-hat': ['Light Blue', 'Pink', 'Charcoal']}
 
 # ---- wording (one place) ----
+# Oct 26 2026 (Mike): shipping time is the same standard time across the board; a special order adds UP TO 7 EXTRA DAYS on top of
+# the item's standard time. Public text never gives the reason for the 7 days (no "source", "partner" or "maker" wording).
+STD_SHIP_UNSIGNED = '3-8 business days'      # regular items
+STD_SHIP_SIGNED = 'about 2 to 3 weeks'       # signed pieces: hand-signed and numbered, then mailed (unchanged)
+EXTRA = 'up to 7 extra days'
+
+def special_when(signed):
+    """'Ships in 3-8 business days, plus up to 7 extra days' (signed: 'about 2 to 3 weeks, plus ...')."""
+    return 'Ships in %s, plus %s' % (STD_SHIP_SIGNED if signed else STD_SHIP_UNSIGNED, EXTRA)
+
 PROMISE_TITLE = 'The TRD Promise'
-PROMISE_TEXT = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver. A few colors are special orders: we take up to 7 extra days '
-                'to source and make yours, and your card is only authorized, not charged, until a maker confirms it. If we can&rsquo;t '
-                'make it within those 7 days, every penny comes back to you.')
+PROMISE_TEXT = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver. Everything ships in our standard time. A few colors are special '
+                'orders and may take up to 7 extra days; your card is only authorized, not charged, until we confirm your order. If we '
+                'can&rsquo;t fill it within those 7 days, every penny comes back to you.')
 # store card note (short) -- unsigned / signed
-NOTE_UNSIGNED = ('<b>Special order</b> Up to 7 extra days for us to source and make it. Card authorized, not charged, until the maker '
-                 'confirms. Not made within 7 days? Hold released at once, you pay nothing. You&rsquo;ll agree at checkout.')
-NOTE_SIGNED = ('<b>Special order</b> Up to 7 extra days for us to source and make it, then it&rsquo;s signed and numbered. Card authorized, '
-               'not charged, until the maker confirms. Not made within 7 days? Hold released at once, you pay nothing. You&rsquo;ll agree at checkout.')
+NOTE_UNSIGNED = ('<b>Special order</b> Ships in 3-8 business days, plus up to 7 extra days. Card authorized, not charged, until we confirm '
+                 'your order. Not filled within 7 days? Hold released at once, you pay nothing. You&rsquo;ll agree at checkout.')
+NOTE_SIGNED = ('<b>Special order</b> Ships in about 2 to 3 weeks (signed and numbered by hand), plus up to 7 extra days. Card authorized, '
+               'not charged, until we confirm your order. Not filled within 7 days? Hold released at once, you pay nothing. You&rsquo;ll agree at checkout.')
 SHIP_SPECIAL = 'Special order: up to 7 extra days'
-SHIPIN_SPECIAL_UNSIGNED = '2-3 wks'
-SHIPIN_SPECIAL_SIGNED = '3-4 wks'
+SHIPIN_SPECIAL_UNSIGNED = '3-8d +7d'
+SHIPIN_SPECIAL_SIGNED = '2-3w +7d'
 # listing pages (long)
-LISTING_SPECIAL = ('{colors} {verb} special orders. We take up to 7 extra days to source and make yours{signed}. Your card is only '
-                   'authorized, not charged, until a maker confirms it. If we can&rsquo;t make it within those 7 days, the hold is released at '
-                   'once and you pay nothing; if you were already charged, every penny is refunded. Expect it in about {total} in all. '
+LISTING_SPECIAL = ('{colors} {verb}. Special-order colors ship in {std}{signed}, plus up to 7 extra days. Your card is only '
+                   'authorized, not charged, until we confirm your order. If we can&rsquo;t fill it within those 7 days, the hold is released at '
+                   'once and you pay nothing; if you were already charged, every penny is refunded. '
                    'You&rsquo;ll be asked to agree at checkout.')

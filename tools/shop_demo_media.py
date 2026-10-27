@@ -159,11 +159,11 @@ GALLERY_COLORS = [
     ('hotpink', 'Hot Pink', '#dd1e78'),
 ]
 # Oct 26 2026 (Mike): all six colors are sold. Tiffany Blue and Hot Pink are SPECIAL ORDERS under the umbrella rule (tools/umbrella_lineup.py:
-# up to 7 extra days to source and make it; card authorized, not charged, until the maker confirms; hold released / every penny refunded
+# standard time plus up to 7 extra days; card authorized, not charged, until we confirm the order; hold released / every penny refunded
 # if it can't be made within those 7 days) on their own Stripe links (merch.html size options carry data-special-link). Keep in step with merch.html.
 SPECIAL_COLORS = {'tiffany', 'hotpink'}
-SPECIAL_NOTE = ('Tiffany Blue and Hot Pink are special orders: we take up to 7 extra days to source and make yours. Your card is only authorized, '
-                'not charged, until a maker confirms it. If we can&rsquo;t make it within those 7 days, the hold is released at once and you pay nothing. '
+SPECIAL_NOTE = ('Tiffany Blue and Hot Pink are special orders: they ship in the standard time, plus up to 7 extra days. Your card is only authorized, '
+                'not charged, until we confirm your order. If we can&rsquo;t fill it within those 7 days, the hold is released at once and you pay nothing. '
                 'You&rsquo;ll be asked to agree at checkout.')
 # slug -> (product name for alt text, file stem under /store-img/demo/, width, height)
 GALLERY = {
@@ -260,14 +260,14 @@ def promise_block(slug, special_colors, signed, has_gallery=False):
     """The promise on a listing page. Listings with special-order colors also spell out the special-order terms."""
     if special_colors:
         sp = '<p><b>Special order.</b> %s</p>' % U.LISTING_SPECIAL.format(
-            colors=html.escape(_and(special_colors)), verb='is a' if len(special_colors) == 1 else 'are',
-            signed=', then it&rsquo;s signed and numbered by hand' if signed else '',
-            total='3 to 4 weeks' if signed else '2 to 3 weeks')
+            colors=html.escape(_and(special_colors)), verb='is a special order' if len(special_colors) == 1 else 'are special orders',
+            signed=' (signed and numbered by hand)' if signed else '',
+            std=U.STD_SHIP_SIGNED if signed else U.STD_SHIP_UNSIGNED)
         lead = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver. Every other color ships on the normal schedule above.')
     else:
         sp = ''
-        lead = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver. Every piece is made for your order. If anything ever stops us making yours, '
-                'we take up to 7 extra days to source it, and if we can&rsquo;t, every penny comes back to you.')
+        lead = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver. Every piece is made for your order and ships in our standard time. If anything '
+                'ever holds up yours, it may take up to 7 extra days, and if we can&rsquo;t fill it, every penny comes back to you.')
     return (PROMISE_CSS + '<section class="trd-promise" aria-labelledby="pr-%s"><h2 id="pr-%s">%s</h2><p>%s</p>%s</section>'
             % (slug, slug, U.PROMISE_TITLE, lead, sp))
 
@@ -319,17 +319,17 @@ def hat_order_block(slug, it):
                 % ('true' if first else 'false', html.escape(lab), html.escape(img), _demo_key(slug, lab), ' data-sp="1"' if spc else '', sa, sb, html.escape(lab)))
     std = [s for s in sw if not s[2]]; spc = [s for s in sw if s[2]]
     groups = '<div class="ho-g"><span class="ho-gl">%s</span><div class="ho-sw" role="radiogroup" aria-label="Regular colors">%s</div></div>' % (
-        'Regular colors &middot; ships in 3-8 business days', ''.join(pill(s, i == 0) for i, s in enumerate(std)))
+        'Regular colors &middot; ships in %s' % (U.STD_SHIP_SIGNED if signed else U.STD_SHIP_UNSIGNED), ''.join(pill(s, i == 0) for i, s in enumerate(std)))
     if spc:
         if not it.get('special_base'):
             raise SystemExit('hat listing %s has special colors but no data-special-base link' % slug)
-        groups += ('<div class="ho-g"><span class="ho-gl">Special order &middot; up to 7 extra days &middot; about %s in all</span>'
+        groups += ('<div class="ho-g"><span class="ho-gl">Special order &middot; ships in %s, plus up to 7 extra days</span>'
                    '<div class="ho-sw" role="radiogroup" aria-label="Special-order colors">%s</div></div>') % (
-            '3 to 4 weeks' if signed else '2 to 3 weeks', ''.join(pill(s, False) for s in spc))
-    note = ('<b>SPECIAL ORDER</b> <span class="ho-nc"></span> is a special order: we take up to 7 extra days to source and make yours%s. '
-            'Your card is only authorized, not charged, until a maker confirms it. If we can&rsquo;t make it within those 7 days, the hold is released '
-            'at once and you pay nothing. Expect it in about %s in all. You&rsquo;ll be asked to agree at checkout.') % (
-        ', then it&rsquo;s signed and numbered by hand' if signed else '', '3 to 4 weeks' if signed else '2 to 3 weeks')
+            U.STD_SHIP_SIGNED if signed else U.STD_SHIP_UNSIGNED, ''.join(pill(s, False) for s in spc))
+    note = ('<b>SPECIAL ORDER</b> <span class="ho-nc"></span> is a special order: it ships in %s%s, plus up to 7 extra days. '
+            'Your card is only authorized, not charged, until we confirm your order. If we can&rsquo;t fill it within those 7 days, the hold is released '
+            'at once and you pay nothing. You&rsquo;ll be asked to agree at checkout.') % (
+        U.STD_SHIP_SIGNED if signed else U.STD_SHIP_UNSIGNED, ' (signed and numbered by hand)' if signed else '')
     label = 'Buy the signed one through Stripe' if signed else 'Buy now through Stripe'
     # runs after the page is parsed: the demo block (.dmx) comes after this block in the page
     js = ('<script>(function(){function init(){document.querySelectorAll(".ho").forEach(function(o){var s=o.getAttribute("data-slug"),nm=o.getAttribute("data-name"),'
@@ -362,7 +362,7 @@ def hat_order_block(slug, it):
             '<p class="ho-n" role="note" hidden>%s</p>'
             '<p class="ho-w"><span class="ho-wt">%s</span> &middot; One size, %s. <a href="/merch.html">See it in the store</a></p></section>'
             % (slug, slug, html.escape(it['name']), it['price'], it['ship'], sp_ship, html.escape(it['buy']), html.escape(it.get('special_base') or it['buy']),
-               'Ships in 3-8 business days', 'Special order: about %s in all' % ('3 to 4 weeks' if signed else '2 to 3 weeks'),
+               'Ships in ' + (U.STD_SHIP_SIGNED if signed else U.STD_SHIP_UNSIGNED), U.special_when(signed),
                slug, html.escape(first[0]), groups, it['price'], it['ship'], ('%.2f' % tot), html.escape(it['buy']),
                '%s_%s_one-size' % (slug, re.sub(r'[^a-z0-9]+', '-', first[0].lower()).strip('-')), label, note,
-               'Ships in 3-8 business days', 'snapback' if 'trucker' in slug else 'adjustable')) + js
+               'Ships in ' + (U.STD_SHIP_SIGNED if signed else U.STD_SHIP_UNSIGNED), 'snapback' if 'trucker' in slug else 'adjustable')) + js

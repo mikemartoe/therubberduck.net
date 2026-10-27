@@ -28,8 +28,8 @@ LINES = [
 BIO = lambda ln: [('Made of', ln['made']), ('Front', 'Chrome duck, embroidered'), ('Bill', 'Red pill, embroidered'),
                   ('Price', 'Announced at launch'), ('Status', 'Coming soon')]
 PROMISE = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver, and that will hold for this line too. It isn&rsquo;t on sale yet. '
-           'When it launches, every cap is made for your order, and if anything ever stops us making yours, we take up to 7 extra days '
-           'to source it, and if we can&rsquo;t, every penny comes back to you.')
+           'When it launches, every cap is made for your order and ships in our standard time. If anything ever holds up yours, it may '
+           'take up to 7 extra days, and if we can&rsquo;t fill it, every penny comes back to you.')
 
 def img(slug, key, ext='jpg', small=False):
     return '/store-img/premium/%s_%s%s.%s' % (slug, key, '-512' if small else '', ext)
