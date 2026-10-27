@@ -189,6 +189,11 @@ a{color:inherit}
 .tthumb img{width:100%;height:100%;object-fit:cover;display:block}
 .tthumb .badge{position:absolute;right:7px;bottom:7px;background:rgba(0,0,0,.82);color:var(--bulb);font-weight:600;font-size:15px;letter-spacing:.05em;padding:1px 8px}
 .tthumb .plate{position:absolute;left:7px;top:7px;font-size:13px}
+/* Share chip on every ticket: features that video (poster, no autoplay) and opens its share strip */
+.tshare{position:absolute;right:7px;top:7px;display:inline-flex;align-items:center;gap:5px;padding:4px 9px 3px 8px;border-radius:3px;background:rgba(20,10,6,.82);color:var(--bulb);box-shadow:inset 0 0 0 1px rgba(255,200,100,.55);font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;line-height:1.1;text-transform:uppercase;cursor:pointer;transition:background .15s ease,color .15s ease}
+.tshare:after{content:"";position:absolute;inset:-8px}   /* bigger tap area, same look */
+.tshare svg{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.tshare:hover,.tshare:focus-visible{background:var(--bulb);color:#1c130c;outline:none}
 .tt{font-family:'Oswald',sans-serif;font-weight:600;font-size:21px;line-height:1.22;margin:12px 16px 14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .perf{position:relative;margin:auto 14px 0;border-top:2px dashed rgba(59,33,21,.38);height:0}
 .perf b{position:absolute;left:50%;top:-9px;transform:translateX(-50%);background:var(--cream2);padding:0 10px;font-size:11px;line-height:16px;letter-spacing:.3em;color:var(--red);font-weight:700;white-space:nowrap}
@@ -331,6 +336,8 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
   .stub{flex-direction:column;align-items:flex-start;gap:0;padding:0 12px 9px 16px;font-size:13px;line-height:1.3}
   .tthumb .badge{font-size:12px;right:4px;bottom:4px;padding:0 5px}
   .tthumb .plate{left:4px;top:4px;font-size:10px;padding:2px 5px 1px 6px}
+  .tshare{right:4px;top:4px;padding:2px 6px 1px 5px;gap:4px;font-size:10px;letter-spacing:.1em}
+  .tshare svg{width:10px;height:10px}
   .lboard{padding:16px 16px 8px;border-width:7px}
   .lboard ul{columns:1}
   .lboard a{font-size:16px}
@@ -945,9 +952,33 @@ $('copy').addEventListener('click', () => {
   try { if (window.trdVisit) trdVisit.event('share-open', {item: 'video-' + cur.id}); } catch (e) {}
 });
 
+/* Share chip on every ticket. One tap: that video becomes the feature (poster only, nothing starts playing)
+   and the visitor lands on its share strip (same share.js row: X, Truth, Facebook, TikTok, Instagram, Email,
+   Text, Copy link; the link is /videos/share/<id>.html, which opens /videos.html#v=<id>). */
+const TSHARE_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
+const TSHARE = v => '<span class="tshare" role="button" tabindex="0" data-share="' + v.id + '" aria-label="Share ' + esc(v.t) + '">' + TSHARE_ICO + '<span>Share</span></span>';
+function openShare(v) {
+  if (!v) return;
+  if (cur !== v) { history.pushState(null, '', '#v=' + v.id); select(v, 'poster'); }
+  const bar = $('psharebar'); if (!bar) return;
+  bar.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center'});
+  const first = bar.querySelector('.shr-b'); if (first) first.focus({preventScroll: true});
+  try { if (window.trdTrack) trdTrack('event/video-share/open/' + v.id, 'Video ' + v.id + ' share opened', 0); } catch (e) {}
+  try { if (window.trdVisit) trdVisit.event('share-open', {item: 'video-' + v.id, from: 'ticket'}); } catch (e) {}
+}
+document.addEventListener('click', e => {
+  const s = e.target.closest('.tshare[data-share]'); if (!s) return;
+  e.preventDefault(); e.stopImmediatePropagation(); openShare(BY[s.dataset.share]);
+}, true);
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const s = e.target.closest && e.target.closest('.tshare[data-share]'); if (!s) return;
+  e.preventDefault(); e.stopPropagation(); openShare(BY[s.dataset.share]);
+});
+
 function ticket(v) {
   return '<a class="ticket" href="#v=' + v.id + '" data-id="' + v.id + '" title="' + esc(v.t) + '"><span class="tk">' +
-    '<span class="tthumb"><img loading="lazy" src="' + esc(v.th) + '" alt=""' + (v.source === 'local' ? ' onerror="this.onerror=null;this.src=\'/assets/trd/clips/intermission-card.jpg\'"' : '') + '>' + (v.live ? '<span class="plate live">LIVE</span>' : '') + (v.reels ? '<span class="plate df">DOUBLE FEATURE</span>' : '') +
+    '<span class="tthumb"><img loading="lazy" src="' + esc(v.th) + '" alt=""' + (v.source === 'local' ? ' onerror="this.onerror=null;this.src=\'/assets/trd/clips/intermission-card.jpg\'"' : '') + '>' + TSHARE(v) + (v.live ? '<span class="plate live">LIVE</span>' : '') + (v.reels ? '<span class="plate df">DOUBLE FEATURE</span>' : '') +
     (v.dur ? '<span class="badge">' + esc(v.dur) + '</span>' : '') + '</span>' +
     '<span class="tt">' + esc(v.t) + '</span><span class="perf"><b>ADMIT ONE</b></span>' +
     '<span class="stub"><span>' + esc(v.d) + '</span><span>' + (v.reels ? 'Local \u00b7 ' + v.reels.length + ' chapters' : v.source === 'local' ? 'Local' : (v.v ? 'Rumble views: ' + esc(v.v) : '')) + '</span></span></span></a>';
@@ -1008,7 +1039,7 @@ function fromHash(autoplay) {
   }
   const v = id && BY[id];
   const first = !landed; landed = true;
-  if (v) { select(v, autoplay ? 'play' : 'poster', ch); return; }
+  if (v) { select(v, autoplay ? 'play' : first && v.source !== 'local' ? 'autoplay' : 'poster', ch); return; }   // arriving on a shared #v= link starts that video, like the landing feature
   const f = VIDS.find(x => x.id === FEATURED_ID) || VIDS.slice().sort((a, b) => b.ts - a.ts)[0];
   select(f, first && f.source !== 'local' ? 'autoplay' : 'poster');
 }
