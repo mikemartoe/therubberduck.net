@@ -63,3 +63,30 @@ h2{font-size:20px;margin:28px 0 8px}
 .join-points b{display:block;color:var(--gold)}
 @media(max-width:640px){.join-points{grid-template-columns:1fr}}
 .join-more{color:var(--muted);font-size:15px;margin:16px 0 0}
+
+/* Context (witness) blocks on drop pages, side-by-side layout (tools/witness-blocks/). */
+.ctx{border-top:2px solid var(--gold);padding:16px 18px}
+.ctx-h{margin:0;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.ctx-t{margin:2px 0 12px;font-size:18px;font-weight:700;color:var(--ink)}
+.ctx-q{margin:0 0 12px;padding:10px 14px;border-left:3px solid var(--gold);background:#0d0b08;border-radius:0 6px 6px 0;color:#e8dcc0;font-style:italic}
+.ctx-q p{margin:0}
+.ctx .facts{margin:0 0 12px;font-size:15px}
+.ctx-list{margin:0;padding:12px 0 0 18px;border-top:1px solid var(--line);font-size:15px}
+.ctx-list li{margin:0 0 8px}.ctx-list li:last-child{margin-bottom:0}
+.ctx-src{display:block;margin-top:2px;font-size:13px;color:var(--muted)}
+.ctx-src a{overflow-wrap:anywhere}
+.ctx-h.c,.ctx-t.c{text-align:center}
+.sbs{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch;margin:6px 0 10px}
+.sbs-col{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:#110e09}
+.sbs-col.comms{border-color:var(--gold)}
+.sbs-hd{margin:0 0 2px;text-align:center;font-size:14px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.sbs-sub{margin:0 0 10px;text-align:center;font-size:12.5px;color:var(--muted)}
+.sbs-body{flex:1;display:flex;flex-direction:column;gap:10px}
+.sbs-q{margin:0;padding:8px 12px;border-left:3px solid var(--line);font-size:16px;line-height:1.5;color:var(--ink);flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
+.comms .sbs-q{border-left-color:var(--gold);font-size:var(--rq,19.5px)}
+.said .sbs-q{font-size:var(--lq,16px)}
+.sbs-q p{margin:0}.sbs-q footer{margin-top:4px;font-size:12.5px;color:var(--muted)}.sbs-q footer a{overflow-wrap:anywhere}
+.sbs-none{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;padding:12px;font-size:17px;line-height:1.5;color:var(--muted);border:1px dashed var(--line);border-radius:6px}
+.sbs-terms{margin:0 0 8px;font-size:14px;color:var(--ink);text-align:center}.sbs-terms span{font-size:12.5px;color:var(--muted)}
+.sbs-note{margin:0;font-size:12.5px;color:var(--muted);text-align:center}
+@media (max-width:720px){.sbs{grid-template-columns:1fr}.sbs-q,.comms .sbs-q,.said .sbs-q{font-size:15.5px}.sbs-none{font-size:15.5px}}

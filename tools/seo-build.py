@@ -240,7 +240,11 @@ def build_drops():
         pn = '<nav class="pn">%s%s</nav>' % (
             ('<a rel="prev" href="/drops/%d/">&lsaquo; Previous: Q drop #%d, %s</a>' % (prev['n'], prev['n'], prev['dt'].strftime('%B %-d, %Y'))) if prev else '<span></span>',
             ('<a rel="next" href="/drops/%d/">Next: Q drop #%d, %s &rsaquo;</a>' % (nxt['n'], nxt['n'], nxt['dt'].strftime('%B %-d, %Y'))) if nxt else '<span></span>')
-        body = ('<h1>Q Drop #%d</h1>' % n + drop_card(d, own_link=False) +
+        # Context (witness) block, if one exists: tools/witness-blocks/<n>.html goes right after the drop card.
+        # Rollback: delete that file and re-run --only drops.
+        wpath = 'tools/witness-blocks/%d.html' % n
+        witness = open(wpath, encoding='utf-8').read().strip() if os.path.exists(wpath) else ''
+        body = ('<h1>Q Drop #%d</h1>' % n + drop_card(d, own_link=False) + witness +
                 '<ul class="links"><li><a href="/ledger.html#drop-%d">Open Q drop #%d in The Drop Ledger</a></li>' % (n, n) +
                 '<li><a href="https://qalerts.app/?n=%d" rel="nofollow noopener" target="_blank">Q drop #%d on qalerts.app</a></li>' % (n, n) +
                 ('<li><a href="%s" rel="nofollow noopener" target="_blank">%s</a></li>' % (E(d['link']), E(source_label(d))) if d['link'] else '') +
