@@ -346,6 +346,15 @@ def build_library():
         while s in used: s = '%s-%d' % (base, k); k += 1
         used.add(s); d['slug'] = s
         topics.setdefault(d.get('topic') or 'Other', []).append(d)
+    # Real document names (work order step 6): tools/library-names.json maps catalog id -> the name read from the PDF itself
+    # (JSTOR cover page, report cover, PDF metadata or page 1 text; the 'source' field says which). Slugs/URLs above are
+    # computed from the original title first, so no URL changes. Rollback: delete tools/library-names.json and re-run --only library.
+    _names = os.path.join(ROOT, 'tools', 'library-names.json')
+    names = json.load(open(_names, encoding='utf-8')) if os.path.exists(_names) else {}
+    for d in docs:
+        nm = names.get(d['id'])
+        if nm:
+            d['title'] = nm['title']; d['about'] = nm['about']
     for d in docs:
         url = '/library/%s/' % d['slug']
         # Some DOCS entries are already %-encoded and a few are full https URLs (media host).
@@ -360,7 +369,7 @@ def build_library():
         thumb_q = '/'.join(__import__('urllib.parse').parse.quote(x) for x in thumb.split('/')) if thumb else ''
         size = ('%d KB' % max(1, round(d['bytes'] / 1024))) if d['mb'] < 0.1 else '%.1f MB' % d['mb']
         title = '%s (PDF)' % d['title']
-        desc = clip('%s %s Free to read or download: %s pages, %s.' % (d['title'] + '.', d.get('desc', ''), d.get('pages', '?'), size), 158)
+        desc = clip('%s %s Free to read or download: %s pages, %s.' % (d['title'] + ('' if d['title'].endswith(('.', '?', '!')) else '.'), d.get('about') or d.get('desc', ''), d.get('pages', '?'), size), 158)
         img = '<img class="thumb" src="%s" alt="First page of %s" width="240" height="310" loading="lazy" decoding="async">' % (thumb_q, E(d['title'])) if thumb else ''
         body = ('<h1>%s</h1><div class="doc">%s<div><p class="lede">%s</p><dl class="facts"><dt>Topic</dt><dd>%s</dd><dt>Pages</dt><dd>%s</dd><dt>Size</dt><dd>%s</dd><dt>File</dt><dd>%s</dd><dt>Catalog no.</dt><dd>%s</dd></dl>'
                 '<p class="cta"><a class="btn" href="%s">Read or download this PDF (%s, %s)</a> <a href="/pdfs.html">Search every document in the SCIF Reading Room</a></p></div></div>'
@@ -369,7 +378,7 @@ def build_library():
         rel = [x for x in topics[d.get('topic') or 'Other'] if x is not d][:12]
         if rel:
             body += '<h2>More on %s</h2><ul class="list">%s</ul>' % (E(d.get('topic')), ''.join('<li><a href="/library/%s/">%s</a></li>' % (x['slug'], E(x['title'])) for x in rel))
-        g = [{'@type': 'DigitalDocument', 'name': d['title'], 'description': d.get('desc', ''), 'url': SITE + url, 'encodingFormat': 'application/pdf',
+        g = [{'@type': 'DigitalDocument', 'name': d['title'], 'description': d.get('about') or d.get('desc', ''), 'url': SITE + url, 'encodingFormat': 'application/pdf',
               'numberOfPages': d.get('pages'), 'contentSize': size, 'about': d.get('topic'), 'isAccessibleForFree': True,
               'associatedMedia': {'@type': 'MediaObject', 'contentUrl': pdf_abs, 'encodingFormat': 'application/pdf'},
               **({'thumbnailUrl': SITE + thumb_q, 'image': SITE + thumb_q} if thumb else {})}]
