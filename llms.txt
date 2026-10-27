@@ -1,0 +1,39 @@
+# The Rubber Duck™
+
+> therubberduck.net is The Rubber Duck's open archive of the Q era. It has every numbered Q drop (#1 to #4,966, October 2017 to November 2022) with full text, dates and links to the original sources; a library of 243 public documents and books in PDF; an archive of The Rubber Duck's own posts on X (@TheRubberDuck79); videos, X Spaces and an album; and a small merch store and book. Everything in the archive is free to read.
+
+The site presents source material and leaves interpretation to the reader. Q drop pages reproduce the posted text and link to the original board posts (4plebs archive or 8kun) and to qalerts.app. Library documents are public records, papers and books as published by their authors; a library page's summary describes the document, it does not endorse it.
+
+## Q drops
+
+- [The Drop Ledger](https://therubberduck.net/ledger.html): every numbered Q drop in one searchable page, by number, date or phrase
+- [Q drops by month](https://therubberduck.net/drops/): one page per drop (/drops/1/ to /drops/4966/) and one page per month, with full text and original source links
+- [The Process](https://therubberduck.net/process.html): a plain-language explanation of how drops were discussed and worked ("dough, crumbs, bakers, bread")
+
+## Library
+
+- [PDF library](https://therubberduck.net/library/): 243 documents grouped by topic (PSYOP and military doctrine, Q drop compilations, Epstein-related records and more), each with its own page, title, page count and file size
+- [The SCIF Reading Room](https://therubberduck.net/pdfs.html): search, read or download any library file
+
+## X archive
+
+- [The X Archive](https://therubberduck.net/x/): searchable archive of posts by The Rubber Duck (@TheRubberDuck79) on X
+- [X posts by month](https://therubberduck.net/x/archive/): 14,955 original posts and quote posts, June 2020 to September 2026, one page per month
+
+## Video and audio
+
+- [Videos and livestreams](https://therubberduck.net/watch/): 84 features, each with a summary and a link to Rumble
+- [X Spaces and shows](https://therubberduck.net/listen/): 81 Listening Room volumes, each with a written summary
+- [The Red Pill Album](https://therubberduck.net/album.html): 22 tracks by The Rubber Duck
+- [The Meme Dump](https://therubberduck.net/memes.html): the site's meme, GIF and clip archive
+
+## Shop, book and sponsorship
+
+- [TRD Collectibles](https://therubberduck.net/merch.html): caps, tees, mugs, patches, stickers and hand-numbered signed items; product pages under /shop/
+- [anon mission, Volume 1](https://therubberduck.net/book/anon-mission/): a book by The Rubber Duck, sold as a PDF on Gumroad
+- [Sponsor the site](https://therubberduck.net/sponsor.html): how to sponsor the site with a business-card-size digital ad on the Sponsors page, and its price
+
+## Optional
+
+- [Email updates](https://therubberduck.net/join.html): double opt-in email list for notes when something new is added
+- [Sitemap](https://therubberduck.net/sitemap.xml): full list of indexable URLs
