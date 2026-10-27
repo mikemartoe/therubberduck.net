@@ -20,7 +20,7 @@ The rooms themselves are not changed visually; the new pages are separate URLs.
 """
 import html, json, os, re, subprocess, sys, datetime
 from zoneinfo import ZoneInfo
-from collections import OrderedDict, defaultdict
+from collections import OrderedDict, defaultdict, Counter as collections_counter
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 os.chdir(ROOT)
@@ -203,6 +203,14 @@ def add_sm(name, path, lastmod=TODAY, images=None, videos=None):
     SITEMAPS[name].append((SITE + path, lastmod, images or [], videos or []))
 
 # ---------------------------------------------------------------- 1. Q drops
+def source_label(d):
+    """Plain-language label for a drop's original-source link (work order step 5): says which board and which host it points to."""
+    host = re.sub(r'^https?://([^/]+)/.*$', r'\1', d['link'])
+    board = '/%s/' % d['board'].strip('/')
+    if host == 'archive.4plebs.org':
+        return 'Q drop #%d in the 4plebs archive of %s %s' % (d['n'], d['site'], board)
+    return 'Original %s %s link for Q drop #%d (%s)' % (d['site'], board, d['n'], host)
+
 def build_drops():
     src = open('data/drops.js', encoding='utf-8').read()
     arr = json.loads(src[src.index('['):src.rindex(']') + 1])
@@ -230,18 +238,18 @@ def build_drops():
         desc = clip('Q drop #%d, posted %s on %s %s. %s' % (n, d['dt'].strftime('%B %-d, %Y'), d['site'], d['board'], ('"' + clip(first, 110) + '"') if first else 'Full text, date and the original source.'))
         prev = drops[i - 1] if i else None; nxt = drops[i + 1] if i + 1 < len(drops) else None
         pn = '<nav class="pn">%s%s</nav>' % (
-            ('<a rel="prev" href="/drops/%d/">&lsaquo; Q drop #%d</a>' % (prev['n'], prev['n'])) if prev else '<span></span>',
-            ('<a rel="next" href="/drops/%d/">Q drop #%d &rsaquo;</a>' % (nxt['n'], nxt['n'])) if nxt else '<span></span>')
+            ('<a rel="prev" href="/drops/%d/">&lsaquo; Previous: Q drop #%d, %s</a>' % (prev['n'], prev['n'], prev['dt'].strftime('%B %-d, %Y'))) if prev else '<span></span>',
+            ('<a rel="next" href="/drops/%d/">Next: Q drop #%d, %s &rsaquo;</a>' % (nxt['n'], nxt['n'], nxt['dt'].strftime('%B %-d, %Y'))) if nxt else '<span></span>')
         body = ('<h1>Q Drop #%d</h1>' % n + drop_card(d, own_link=False) +
-                '<ul class="links"><li><a href="/ledger.html#drop-%d">Open #%d in The Drop Ledger</a></li>' % (n, n) +
-                '<li><a href="https://qalerts.app/?n=%d" rel="nofollow noopener" target="_blank">See #%d on qalerts.app</a></li>' % (n, n) +
-                ('<li><a href="%s" rel="nofollow noopener" target="_blank">Original board archive</a></li>' % E(d['link']) if d['link'] else '') +
+                '<ul class="links"><li><a href="/ledger.html#drop-%d">Open Q drop #%d in The Drop Ledger</a></li>' % (n, n) +
+                '<li><a href="https://qalerts.app/?n=%d" rel="nofollow noopener" target="_blank">Q drop #%d on qalerts.app</a></li>' % (n, n) +
+                ('<li><a href="%s" rel="nofollow noopener" target="_blank">%s</a></li>' % (E(d['link']), E(source_label(d))) if d['link'] else '') +
                 '<li><a href="/drops/%s/">All Q drops from %s</a></li></ul>' % (mk, mname) + pn)
         g = [{'@type': 'CreativeWork', '@id': SITE + '/drops/%d/#drop' % n, 'name': 'Q drop #%d' % n, 'text': d['text'][:5000],
               'dateCreated': d['dt'].isoformat(), 'datePublished': d['dt'].isoformat(), 'author': {'@type': 'Person', 'name': 'Q'},
               'isPartOf': {'@id': SITE + '/drops/#archive'}, 'url': SITE + '/drops/%d/' % n}]
         write('drops/%d/index.html' % n, page('/drops/%d/' % n, title, desc, body, g,
-              [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('#%d' % n, '/drops/%d/' % n)], og_type='article', signup=True,
+              [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('Q drop #%d' % n, '/drops/%d/' % n)], og_type='article', signup=True,
               og_desc='Q drop #%d \u00b7 %s \u00b7 %s /%s/' % (n, d['dt'].strftime('%B %-d, %Y'), d['site'], d['board'].strip('/')),   # tease only
               og_image=drop_og(n)))
         add_sm('drops', '/drops/%d/' % n, lm)
@@ -252,8 +260,8 @@ def build_drops():
         title = 'Q Drops, %s: #%d to #%d, Full Text' % (mname, ds[0]['n'], ds[-1]['n'])
         desc = clip('All %d Q drops posted in %s (#%d to #%d), in order, with full text, dates, boards and a link to each original source.' % (len(ds), mname, ds[0]['n'], ds[-1]['n']))
         pn = '<nav class="pn">%s%s</nav>' % (
-            ('<a rel="prev" href="/drops/%s/">&lsaquo; %s</a>' % (mkeys[j - 1], months[mkeys[j - 1]][0]['dt'].strftime('%B %Y'))) if j else '<span></span>',
-            ('<a rel="next" href="/drops/%s/">%s &rsaquo;</a>' % (mkeys[j + 1], months[mkeys[j + 1]][0]['dt'].strftime('%B %Y'))) if j + 1 < len(mkeys) else '<span></span>')
+            ('<a rel="prev" href="/drops/%s/">&lsaquo; Q drops from %s</a>' % (mkeys[j - 1], months[mkeys[j - 1]][0]['dt'].strftime('%B %Y'))) if j else '<span></span>',
+            ('<a rel="next" href="/drops/%s/">Q drops from %s &rsaquo;</a>' % (mkeys[j + 1], months[mkeys[j + 1]][0]['dt'].strftime('%B %Y'))) if j + 1 < len(mkeys) else '<span></span>')
         body = ('<h1>Q Drops, %s</h1><p class="lede">%d drops, #%d to #%d, as originally posted. Search them all in <a href="/ledger.html">The Drop Ledger</a>.</p>' % (mname, len(ds), ds[0]['n'], ds[-1]['n'])
                 + pn + ''.join(drop_card(d) for d in ds) + pn)
         g = [{'@type': 'CollectionPage', '@id': SITE + '/drops/%s/#c' % mk, 'name': title, 'url': SITE + '/drops/%s/' % mk, 'isPartOf': {'@id': SITE + '/drops/#archive'}}]
@@ -268,7 +276,7 @@ def build_drops():
     DROP_RANGE = (drops[0]['dt'], drops[-1]['dt'])
     body = ('<h1>Every Q Drop, by Month</h1><p class="lede">All %s numbered drops, #1 to #%d, as originally posted. Each month has its own page, and every drop has its own page. For search and filters, open <a href="/ledger.html">The Drop Ledger</a>; for how a drop was worked, read <a href="/process.html">The Process</a>.</p>' % (format(len(drops), ','), drops[-1]['n'])
             + '<ul class="months">' + rows + '</ul>'
-            + '<h2>Jump to a drop</h2><p class="jump">' + ' '.join('<a href="/drops/%d/">#%d</a>' % (k, k) for k in [1, 2, 3, 4, 34, 100, 500, 1000, 1061, 1500, 2000, 2500, 3000, 3500, 4000, 4500, drops[-1]['n']] if k <= drops[-1]['n']) + '</p>')
+            + '<h2>Jump to a drop</h2><p class="jump">' + ' &middot; '.join('<a href="/drops/%d/">Q drop #%d</a>' % (k, k) for k in [1, 2, 3, 4, 34, 100, 500, 1000, 1061, 1500, 2000, 2500, 3000, 3500, 4000, 4500, drops[-1]['n']] if k <= drops[-1]['n']) + '</p>')
     g = [{'@type': 'CollectionPage', '@id': SITE + '/drops/#archive', 'name': 'Every Q drop, #1 to #%d' % drops[-1]['n'], 'url': SITE + '/drops/', 'about': 'Q drops'}]
     write('drops/index.html', page('/drops/', title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/')]))
     add_sm('drops', '/drops/', lm)
@@ -298,18 +306,30 @@ def build_x():
                 kinds = {'p': 'photo', 'v': 'video', 'g': 'GIF'}
                 ks = sorted(set(kinds.get(m[0], 'media') for m in p['m']))
                 media = ' &middot; with ' + ' and '.join(ks)
-            items.append('<article class="item" id="p%s"><p class="meta"><time datetime="%s">%s</time>%s%s &middot; <a href="/x/post.html?id=%s">Open post</a> &middot; <a href="https://x.com/TheRubberDuck79/status/%s" rel="nofollow noopener" target="_blank">On X</a></p><div class="text">%s</div></article>'
+            items.append('<article class="item" id="p%s"><p class="meta"><time datetime="%s">%s</time>%s%s &middot; <a href="/x/post.html?id=%s">Open this post in the X Archive</a> &middot; <a href="https://x.com/TheRubberDuck79/status/%s" rel="nofollow noopener" target="_blank">View this post on X</a></p><div class="text">%s</div></article>'
                          % (p['i'], dt.isoformat(), dt.strftime('%B %-d, %Y, %-I:%M %p ET'), ' &middot; quote post' if p['y'] == 'q' else '', media, p['i'], p['i'], linkify(p['x'])))
         pn = '<nav class="pn">%s%s</nav>' % (
-            ('<a rel="prev" href="/x/archive/%s/">&lsaquo; %s</a>' % (keep_months[j - 1][0], datetime.date(int(keep_months[j - 1][0][:4]), int(keep_months[j - 1][0][5:]), 1).strftime('%B %Y'))) if j else '<span></span>',
-            ('<a rel="next" href="/x/archive/%s/">%s &rsaquo;</a>' % (keep_months[j + 1][0], datetime.date(int(keep_months[j + 1][0][:4]), int(keep_months[j + 1][0][5:]), 1).strftime('%B %Y'))) if j + 1 < len(keep_months) else '<span></span>')
-        title = '@TheRubberDuck79 Posts, %s: X Archive' % mname
+            ('<a rel="prev" href="/x/archive/%s/">&lsaquo; X posts from %s</a>' % (keep_months[j - 1][0], datetime.date(int(keep_months[j - 1][0][:4]), int(keep_months[j - 1][0][5:]), 1).strftime('%B %Y'))) if j else '<span></span>',
+            ('<a rel="next" href="/x/archive/%s/">X posts from %s &rsaquo;</a>' % (keep_months[j + 1][0], datetime.date(int(keep_months[j + 1][0][:4]), int(keep_months[j + 1][0][5:]), 1).strftime('%B %Y'))) if j + 1 < len(keep_months) else '<span></span>')
+        # Work order step 7: each month's title and description lead with what is unique to it (month, post count,
+        # first and last post dates, most-used hashtags), so no two month pages share a title or description pattern.
+        title = '@TheRubberDuck79 on X, %s: %s Posts, X Archive' % (mname, format(len(sel), ','))
         first = clip(re.sub(r'https?://\S+', '', sel[0]['x']), 80)
-        desc = clip('%d original posts by The Rubber Duck (@TheRubberDuck79) on X in %s, with full text and dates. First: "%s"' % (len(sel), mname, first))
+        dts = sorted(datetime.datetime.fromisoformat(p['c'].replace('Z', '+00:00')).astimezone(ET) for p in sel)
+        if dts[0].date() == dts[-1].date(): span = dts[0].strftime('%B %-d, %Y')
+        elif dts[0].year != dts[-1].year: span = '%s to %s' % (dts[0].strftime('%B %-d, %Y'), dts[-1].strftime('%B %-d, %Y'))
+        else: span = '%s to %s' % (dts[0].strftime('%B %-d'), dts[-1].strftime('%B %-d, %Y'))
+        raw = [t for p in sel for t in re.findall(r'#(\w{2,})', p.get('x', ''))]
+        tags = collections_counter(t.lower() for t in raw)
+        top = [collections_counter(r for r in raw if r.lower() == t).most_common(1)[0][0] for t, _ in tags.most_common(3)]
+        desc = '%s posts and quote posts by The Rubber Duck on X (@TheRubberDuck79), %s.%s' % (
+            format(len(sel), ','), span, (' Top hashtags: ' + ', '.join('#' + t for t in top) + '.') if top else '')
+        if first and len(desc) + len(first) + 10 <= 155: desc += ' First: "%s"' % first
+        desc = clip(desc)
         body = ('<h1>@TheRubberDuck79 on X, %s</h1><p class="lede">%d original posts and quote posts from %s, oldest first. Replies and reposts are in the full, searchable <a href="/x/">X Archive</a>.</p>' % (mname, len(sel), mname)
                 + pn + ''.join(items) + pn)
         g = [{'@type': 'CollectionPage', 'name': title, 'url': SITE + '/x/archive/%s/' % mk, 'about': {'@id': ORG_ID}, 'author': {'@id': ORG_ID}}]
-        write('x/archive/%s/index.html' % mk, page('/x/archive/%s/' % mk, title, desc, body, g, [('Home', '/'), ('X Archive', '/x/'), ('By month', '/x/archive/'), (mname, '/x/archive/%s/' % mk)]))
+        write('x/archive/%s/index.html' % mk, page('/x/archive/%s/' % mk, title, desc, body, g, [('Home', '/'), ('X Archive', '/x/'), ('X posts by month', '/x/archive/'), (mname, '/x/archive/%s/' % mk)]))
         add_sm('x', '/x/archive/%s/' % mk, lm)
     rows = ''.join('<li><a href="/x/archive/%s/">%s</a> <span class="n">%s posts</span></li>' % (mk, datetime.date(int(mk[:4]), int(mk[5:]), 1).strftime('%B %Y'), format(counts[mk], ',')) for mk, _ in keep_months)
     total = sum(counts.values())
@@ -317,7 +337,7 @@ def build_x():
     desc = clip('Every original post by The Rubber Duck (@TheRubberDuck79) on X, %s to %s, by month with full text. %s posts in all, out of %s in the searchable archive.' % (
         datetime.date(int(keep_months[0][0][:4]), int(keep_months[0][0][5:]), 1).strftime('%B %Y'), datetime.date(int(keep_months[-1][0][:4]), int(keep_months[-1][0][5:]), 1).strftime('%B %Y'), format(total, ','), format(meta['n'], ',')))
     body = '<h1>The X Archive, by Month</h1><p class="lede">%s original posts and quote posts by @TheRubberDuck79, one page per month. Search all %s posts, including replies and reposts, in <a href="/x/">The X Archive</a>.</p><ul class="months">%s</ul>' % (format(total, ','), format(meta['n'], ','), rows)
-    write('x/archive/index.html', page('/x/archive/', title, desc, body, [], [('Home', '/'), ('X Archive', '/x/'), ('By month', '/x/archive/')]))
+    write('x/archive/index.html', page('/x/archive/', title, desc, body, [], [('Home', '/'), ('X Archive', '/x/'), ('X posts by month', '/x/archive/')]))
     add_sm('x', '/x/archive/', lm)
     return total, len(keep_months)
 
@@ -338,6 +358,15 @@ def build_library():
         while s in used: s = '%s-%d' % (base, k); k += 1
         used.add(s); d['slug'] = s
         topics.setdefault(d.get('topic') or 'Other', []).append(d)
+    # Real document names (work order step 6): tools/library-names.json maps catalog id -> the name read from the PDF itself
+    # (JSTOR cover page, report cover, PDF metadata or page 1 text; the 'source' field says which). Slugs/URLs above are
+    # computed from the original title first, so no URL changes. Rollback: delete tools/library-names.json and re-run --only library.
+    _names = os.path.join(ROOT, 'tools', 'library-names.json')
+    names = json.load(open(_names, encoding='utf-8')) if os.path.exists(_names) else {}
+    for d in docs:
+        nm = names.get(d['id'])
+        if nm:
+            d['title'] = nm['title']; d['about'] = nm['about']
     for d in docs:
         url = '/library/%s/' % d['slug']
         # Some DOCS entries are already %-encoded and a few are full https URLs (media host).
@@ -352,26 +381,27 @@ def build_library():
         thumb_q = '/'.join(__import__('urllib.parse').parse.quote(x) for x in thumb.split('/')) if thumb else ''
         size = ('%d KB' % max(1, round(d['bytes'] / 1024))) if d['mb'] < 0.1 else '%.1f MB' % d['mb']
         title = '%s (PDF)' % d['title']
-        desc = clip('%s %s Free to read or download: %s pages, %s.' % (d['title'] + '.', d.get('desc', ''), d.get('pages', '?'), size), 158)
+        desc = clip('%s %s Free to read or download: %s pages, %s.' % (d['title'] + ('' if d['title'].endswith(('.', '?', '!')) else '.'), d.get('about') or d.get('desc', ''), d.get('pages', '?'), size), 158)
         img = '<img class="thumb" src="%s" alt="First page of %s" width="240" height="310" loading="lazy" decoding="async">' % (thumb_q, E(d['title'])) if thumb else ''
         body = ('<h1>%s</h1><div class="doc">%s<div><p class="lede">%s</p><dl class="facts"><dt>Topic</dt><dd>%s</dd><dt>Pages</dt><dd>%s</dd><dt>Size</dt><dd>%s</dd><dt>File</dt><dd>%s</dd><dt>Catalog no.</dt><dd>%s</dd></dl>'
-                '<p class="cta"><a class="btn" href="%s">Read or download the PDF</a> <a href="/pdfs.html">Open the SCIF Reading Room</a></p></div></div>'
-                % (E(d['title']), img, E(d.get('desc', '')), E(d.get('topic', '')), E(d.get('pages', '')), size, E(d['name']), E(d['id']), pdf_q))
+                '<p class="cta"><a class="btn" href="%s">Read or download this PDF (%s, %s)</a> <a href="/pdfs.html">Search every document in the SCIF Reading Room</a></p></div></div>'
+                % (E(d['title']), img, E(d.get('about') or d.get('desc', '')), E(d.get('topic', '')), E(d.get('pages', '')), size, E(d['name']), E(d['id']), pdf_q,
+                   ('1 page' if str(d.get('pages')) == '1' else '%s pages' % E(d.get('pages', '?'))), size))
         rel = [x for x in topics[d.get('topic') or 'Other'] if x is not d][:12]
         if rel:
             body += '<h2>More on %s</h2><ul class="list">%s</ul>' % (E(d.get('topic')), ''.join('<li><a href="/library/%s/">%s</a></li>' % (x['slug'], E(x['title'])) for x in rel))
-        g = [{'@type': 'DigitalDocument', 'name': d['title'], 'description': d.get('desc', ''), 'url': SITE + url, 'encodingFormat': 'application/pdf',
+        g = [{'@type': 'DigitalDocument', 'name': d['title'], 'description': d.get('about') or d.get('desc', ''), 'url': SITE + url, 'encodingFormat': 'application/pdf',
               'numberOfPages': d.get('pages'), 'contentSize': size, 'about': d.get('topic'), 'isAccessibleForFree': True,
               'associatedMedia': {'@type': 'MediaObject', 'contentUrl': pdf_abs, 'encodingFormat': 'application/pdf'},
               **({'thumbnailUrl': SITE + thumb_q, 'image': SITE + thumb_q} if thumb else {})}]
-        write('library/%s/index.html' % d['slug'], page(url, title, desc, body, g, [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('Library', '/library/'), (d['title'], url)],
+        write('library/%s/index.html' % d['slug'], page(url, title, desc, body, g, [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('PDF library', '/library/'), (d['title'], url)],
               og_image=(SITE + thumb_q) if thumb else SHARE, signup=True))
         add_sm('library', url, lm, images=[(SITE + thumb_q, d['title'])] if thumb else [])
     secs = ''.join('<h2>%s</h2><ul class="list">%s</ul>' % (E(t), ''.join('<li><a href="/library/%s/">%s</a> <span class="n">%s pages</span></li>' % (d['slug'], E(d['title']), d.get('pages', '?')) for d in ds)) for t, ds in topics.items())
     title = 'The SCIF Reading Room Library: %d Free PDFs' % len(docs)
     desc = clip('%d public documents and books to read or download free: PSYOP doctrine, Q drops, the Epstein files and more, grouped by topic, each with a summary.' % len(docs))
     body = '<h1>The SCIF Reading Room Library</h1><p class="lede">%d documents, grouped by topic. Each has its own page with a summary. Search and read them all in <a href="/pdfs.html">The SCIF Reading Room</a>.</p>%s' % (len(docs), secs)
-    write('library/index.html', page('/library/', title, desc, body, [], [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('Library', '/library/')], signup=True))
+    write('library/index.html', page('/library/', title, desc, body, [], [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('PDF library', '/library/')], signup=True))
     add_sm('library', '/library/', lm)
     return len(docs)
 
@@ -785,7 +815,7 @@ def build_join():
             '<p class="lede">One short note when something new lands on The Rubber Duck: new drops in the archive, videos, books and collectibles. Nothing else.</p>'
             '<div class="signup-box join-box">' + signup_form('join-email') + '</div>'
             '<ul class="join-points"><li><b>One field.</b> Just your email address.</li><li><b>Confirm first.</b> We send one email to make sure it is really you.</li><li><b>Leave any time.</b> Every email has a one-click unsubscribe link.</li></ul>'
-            '<p class="join-more">Not ready? Browse <a href="/drops/">every Q drop by month</a>, the <a href="/library/">PDF library</a> or <a href="/watch/">the videos</a>.</p>'
+            '<p class="join-more">Not ready? Browse <a href="/drops/">every Q drop by month</a>, the <a href="/library/">PDF library</a> or <a href="/watch/">the video archive</a>.</p>'
             '</section>')
     write('join.html', page('/join.html', 'Get The Rubber Duck updates by email',
           'Sign up for short email updates from The Rubber Duck when something new lands. One field, confirm by email, unsubscribe any time. We never sell or share your email.',
