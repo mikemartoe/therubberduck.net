@@ -201,7 +201,7 @@ def gallery_block(slug):
            '<img src="%s.jpg" srcset="%s-900.jpg 900w, %s.jpg %dw" sizes="%s" alt="%s" width="%d" height="%d" decoding="async" fetchpriority="high"></picture></div>'
            % (stem, b, b, w, sizes, b, b, b, w, sizes, html.escape(_galt(name, l0)), w, h))
     js = ('<script>(function(){document.querySelectorAll(".tg").forEach(function(x){var st=x.getAttribute("data-stem"),nm=x.getAttribute("data-name"),w=x.getAttribute("data-w"),'
-          'cap=x.querySelector(".tg-c"),tabs=x.querySelectorAll(".tg-t");'
+          'src=x.querySelector("source"),img=x.querySelector("img"),cap=x.querySelector(".tg-c"),tabs=x.querySelectorAll(".tg-t");'
           'function base(t){return "/store-img/demo/"+st+"_"+t.getAttribute("data-c")+"_mock";}'
           'function ss(p,e){return p+"-900."+e+" 900w, "+p+"."+e+" "+w+"w";}'
           'tabs.forEach(function(t){function pre(){if(t._p)return;t._p=1;var i=new Image();i.sizes=img.sizes;i.srcset=ss(base(t),"webp");}'
