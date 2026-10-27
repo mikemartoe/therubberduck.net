@@ -475,11 +475,15 @@ def parse_merch():
         special_colors = [html.unescape(c) for c, a in re.findall(r'<option value="([^"]+)" data-img=("[^>]*)>', b) if 'data-special="1"' in a]
         sizes = [(a, l, int(p)) for a, l, p in re.findall(r'<option value="([^"]+)" data-link="([^"]+)" data-price="(\d+)"', b)]
         special = dict(re.findall(r'<option value="([^"]+)" data-link="[^"]+" data-price="\d+" data-special-link="([^"]+)"', b))
+        # hat listings (Oct 26 2026): every swatch on the card = (label, image key, special?, swatch colors) + the special-order link
+        swatches = [(html.unescape(c), k, bool(sp), a, z) for c, k, sp, a, z in re.findall(
+            r'<button type="button" class="sw(?: on)?" data-color="([^"]+)" data-img="([^"]+)"( data-special="1")?[^>]*style="--sa:([^;]+);--sb:([^"]+)"', b)]
+        special_base = g(r'<a class="buy"[^>]*data-special-base="([^"]+)"')
         # the fixed SIZE (the card's "Size" line), not the first fixed line (which is the color on one-color items: mug "White")
         fix = html.unescape(re.sub('<[^>]+>', '', g(r'<span class="lbl">Size</span>\s*<p class="fix">(.*?)</p>')))
         items.append({'slug': slug, 'signed': 'signed' in cls, 'name': name, 'price': price, 'ship': ship, 'img': img, 'alt': alt, 'buy': buy,
                       'bio': bio, 'shipin': shipin, 'colors': colors, 'sizes': sizes, 'fix': fix, 'special': special,
-                      'special_colors': special_colors})
+                      'special_colors': special_colors, 'swatches': swatches, 'special_base': special_base})
     return items
 
 def card_photo(src):
@@ -514,7 +518,8 @@ def product_ld(it, url):
 
 def build_shop():
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from shop_demo_media import demo_block, gallery_block, gallery_images, order_block, promise_block, sig_preview, sig_example_block
+    from shop_demo_media import demo_block, gallery_block, gallery_images, order_block, promise_block, sig_preview, sig_example_block, hat_order_block
+    import umbrella_lineup as U
     items = parse_merch()
     lm = git_date('merch.html')
     for it in items:
@@ -532,19 +537,23 @@ def build_shop():
             sizes = '<dt>Sizes</dt><dd>%s</dd>' % ', '.join('%s $%s' % (s, ('%.2f' % (p / 100)).rstrip('0').rstrip('.')) for s, _, p in it['sizes'])
         elif it['fix'] and not any(x in ('Size', 'Sizes', 'Fit', 'Fits') for x, _ in bio):
             sizes = '<dt>Size</dt><dd>%s</dd>' % E(it['fix'])
-        facts = '<dl class="facts"><dt>Price</dt><dd>%s</dd><dt>US shipping</dt><dd>$%s</dd>%s%s%s</dl>' % (
-            E(price_txt), E(it['ship']), ''.join('<dt>%s</dt><dd>%s</dd>' % (E(a), E(c)) for a, c in bio), sizes,
+        sp_ship = U.SPECIAL_SHIP.get(it['slug']) if it['special_colors'] else None
+        ship_txt = '$' + it['ship'] + ('; special orders $%s' % sp_ship if sp_ship and sp_ship != it['ship'] else '')
+        facts = '<dl class="facts"><dt>Price</dt><dd>%s</dd><dt>US shipping</dt><dd>%s</dd>%s%s%s</dl>' % (
+            E(price_txt), E(ship_txt), ''.join('<dt>%s</dt><dd>%s</dd>' % (E(a), E(c)) for a, c in bio), sizes,
             (('<dt>Colors</dt><dd>%s</dd>' % E(', '.join(c for c in it['colors'] if c not in it['special_colors']))) +
              ('<dt>Special order</dt><dd>%s (up to 7 extra days)</dd>' % E(', '.join(it['special_colors'])) if it['special_colors'] else '')) if it['colors'] else '')
         # Listings with a color gallery (tools/shop_demo_media.py GALLERY) show it full width as the main photo, in place of the square store photo.
         gal, gimgs = gallery_block(it['slug']), gallery_images(it['slug'])
         order = order_block(it['slug'], [(z, l, c, it['special'].get(z)) for z, l, c in it['sizes']]) if gal else ''
+        hat = hat_order_block(it['slug'], it) if not gal else ''   # hat listings: color picker + the right Stripe link per color
+        order = order or hat
         pic = ('<picture><source srcset="%s" type="image/webp"><img class="prod" src="%s" alt="%s" width="800" height="800" decoding="async"></picture>'
                % (E(webp), E(img), E(it['alt'] or it['name']))) if not gal else ''
-        body = ('<h1>%s</h1>%s<div class="doc%s">%s<div>'
+        body = ('<h1>%s</h1>%s<div class="doc%s%s">%s<div>'
                 '<p class="lede">%s%s</p>%s%s'
                 '<p class="meta">%s. Made to order and paid securely through Stripe. Every order helps keep therubberduck.net free.</p></div></div>'
-                % (E(it['name']), gal, ' tg-doc' if gal else '', pic, E(it['name']), ', signed and numbered by hand out of 500.' if it['signed'] else ' from TRD Collectibles.',
+                % (E(it['name']), gal, ' tg-doc' if gal else '', ' ho-doc' if hat else '', pic, E(it['name']), ', signed and numbered by hand out of 500.' if it['signed'] else ' from TRD Collectibles.',
                    sig_preview(it['slug']) + facts, order or '<p class="cta"><a class="btn" href="/merch.html">Choose color and size in the store</a> <a href="%s" rel="noopener">Buy now through Stripe</a></p>' % E(it['buy']),
                    E(it['shipin'] or 'Ships in 3 to 8 business days')))
         # the umbrella special-order promise, on every listing (tools/umbrella_lineup.py)

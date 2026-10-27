@@ -2,7 +2,7 @@
 One color tab row per listing; tapping a color swaps the video and photo. Muted autoplay loop, Sound button.
 Files: /store-img/demo/<slug>_<color>_demo.{mp4,jpg,webp} (720x1280, 8 s).
 Used by tools/seo-build.py build_shop(); keep markup self-contained (archive.css is shared by every archive page)."""
-import html, os, sys
+import html, os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import umbrella_lineup as U
 
@@ -101,7 +101,8 @@ def demo_block(slug):
         return ''
     kind, extra, keys = entry[:3]
     posters = entry[3] if len(entry) > 3 else {}
-    cols = [c for c in COLORS if c[0] in keys]
+    lab = (U.TRUCKER.get(slug) or {}).get('demo_label', {})   # e.g. the trucker's black demo IS the Black / White hat
+    cols = [(k, lab.get(k, l), sw) for k, l, sw in COLORS if k in keys]
     names = [c[1] for c in cols]
     names_txt = ', '.join(names[:-1]) + ' and ' + names[-1] if len(names) > 1 else names[0]
     tabs = ''.join('<button type="button" role="tab" class="dm-t" data-c="%s" data-l="%s"%s aria-selected="%s" style="--sw:%s"><i></i>%s</button>'
@@ -128,13 +129,16 @@ def demo_block(slug):
           'tabs.forEach(function(o){o.setAttribute("aria-selected",String(o===t));});'
           'var c=t.getAttribute("data-c"),l=t.getAttribute("data-l"),p="/store-img/demo/"+s+"_"+c+"_demo",a=x.getAttribute("data-kind")+", "+l+", lifted above the TRD box";'
           'v.poster=t.getAttribute("data-p")||p+".jpg";v.src=p+".mp4";v.setAttribute("aria-label",a);'
-          'x.querySelectorAll(".dm-c").forEach(function(e){e.textContent=l;});if(!rm||!v.muted)v.play().catch(function(){});});});});})();</script>')
+          'x.querySelectorAll(".dm-c").forEach(function(e){e.textContent=l;});if(x._pick)x._pick(c);if(!rm||!v.muted)v.play().catch(function(){});});});});})();</script>')
     # Signed listings sell the full six-color lineup (some as special orders, tools/umbrella_lineup.py); the unsigned hats don't yet.
-    sp = (U.SIGNED.get(slug) or {}).get('special')
+    # Every color in the demo can be ordered (Oct 26 2026, hat colors): the special-order ones per tools/umbrella_lineup.py.
+    sp = (U.SIGNED.get(slug) or U.UNSIGNED.get(slug) or U.TRUCKER.get(slug) or {}).get('special')
     if sp:
-        avail = 'Every color shown can be ordered; %s %s special orders (up to 7 extra days). ' % (html.escape(_and(sp)), 'is a' if len(sp) == 1 else 'are')
+        avail = 'Every color shown can be ordered above; %s %s special orders (up to 7 extra days). ' % (html.escape(_and(sp)), 'is a' if len(sp) == 1 else 'are')
+        if lab.get('black'):
+            avail = 'Black is the %s (black front, white mesh). ' % html.escape(lab['black']) + avail
     else:
-        avail = 'New colors are being added to the lineup; the colors you can order today are listed above. '
+        avail = 'The colors you can order are listed above. '
     cap = ('<p class="meta">The demo shows the %s in each color: %s. %s%s'
            'Demo music from The Red Pill Album (&ldquo;The Storm Is Upon Us&rdquo;).</p>') % (kind.lower(), html.escape(names_txt), extra, avail)
     return ('<h2>In the box</h2>' + css +
@@ -266,3 +270,99 @@ def promise_block(slug, special_colors, signed, has_gallery=False):
                 'we take up to 7 extra days to source it, and if we can&rsquo;t, every penny comes back to you.')
     return (PROMISE_CSS + '<section class="trd-promise" aria-labelledby="pr-%s"><h2 id="pr-%s">%s</h2><p>%s</p>%s</section>'
             % (slug, slug, U.PROMISE_TITLE, lead, sp))
+
+# ---------------------------------------------------------------- hat listings: buy any color shown, on the right link (Oct 26 2026)
+# Every color on a hat card in merch.html is buyable from the listing itself: regular colors on the regular Stripe link, special-order
+# colors (data-special="1", tools/umbrella_lineup.py) on the hat's special-order link (card hold, consent at checkout). The client_reference_id
+# is <slug>_<color>_one-size, exactly what the store card sends. Picking a color swaps the listing photo (the card's own photo for that
+# color) and the demo video tab when the demo has that color; picking a demo tab picks the color here.
+HAT_SLUGS = ('duck-dad-hat', 'duck-trucker-hat', 'signed-dad-hat', 'signed-trucker-hat')
+
+def _demo_key(slug, label):
+    lab = (U.TRUCKER.get(slug) or {}).get('demo_label', {})
+    for k, l, _ in COLORS:
+        if lab.get(k, l) == label:
+            return k
+    return ''
+
+HAT_CSS = ('<style>.doc.ho-doc{grid-template-columns:minmax(0,400px) 1fr;gap:28px}.ho-doc img.prod{width:100%;max-width:400px;background:#efece4}'
+           '.ho{margin:16px 0 14px;padding:16px 18px 14px;border:1px solid var(--gold);border-radius:10px;'
+           'background:linear-gradient(160deg,rgba(227,168,43,.09),rgba(0,0,0,0) 60%);box-shadow:inset 0 0 0 3px rgba(0,0,0,.25),inset 0 0 0 4px rgba(200,155,60,.4)}'
+           '.ho-k{margin:0 0 4px;font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}'
+           '.ho-sel{margin:0 0 10px;font-size:1.15rem}.ho-sel b{color:var(--ink)}'
+           '.ho-tag{display:inline-block;margin-left:8px;padding:3px 8px;border-radius:999px;background:#c8202b;color:#fff;font:700 11px/1.2 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;vertical-align:2px}'
+           '.ho-tag[hidden]{display:none}.ho-g{margin:0 0 10px}.ho-gl{display:block;margin:0 0 6px;color:var(--muted);font-size:13px}'
+           '.ho-sw{display:flex;flex-wrap:wrap;gap:8px}'
+           '.ho-c{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 system-ui,sans-serif;color:var(--ink);background:rgba(0,0,0,.18);border:1px solid var(--line);'
+           'border-radius:999px;padding:8px 13px 8px 8px;min-height:40px;cursor:pointer}'
+           '.ho-c i{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--sa) 50%,var(--sb) 50%);box-shadow:inset 0 0 0 1px rgba(128,128,128,.6)}'
+           '.ho-c:hover{border-color:#8a6a2a}.ho-c[aria-checked="true"]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset;background:rgba(227,168,43,.12)}'
+           '.ho-c:focus-visible{outline:2px solid var(--gold);outline-offset:2px}'
+           '.ho-buy{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line)}'
+           '.ho-p{margin:0;line-height:1.3}.ho-amt{font-size:1.5rem;font-weight:800;color:var(--ink)}.ho-sh{color:var(--muted);font-size:14px}'
+           '.ho-t{display:block;color:var(--muted);font-size:13px}.ho .btn{margin:0;padding:12px 20px;font-size:1rem}'
+           '.ho-n{margin:12px 0 0;padding:9px 12px;border:2px solid #c8202b;border-radius:8px;background:#fff4d6;color:#2a1a0a;font-size:14px;line-height:1.4}'
+           '.ho-n b{color:#c8202b}.ho-n[hidden]{display:none}.ho-w{margin:10px 0 0;color:var(--muted);font-size:13px}.ho-w a{color:var(--muted)}'
+           '@media(max-width:640px){.doc.ho-doc{grid-template-columns:1fr;gap:14px}.ho-doc img.prod{max-width:100%}.ho{padding:14px 12px 12px}'
+           '.ho-buy{flex-direction:column;align-items:stretch}.ho .btn{text-align:center}}</style>')
+
+def hat_order_block(slug, it):
+    """it = parse_merch() item (needs swatches, special_base, price, ship, signed, shipin, name)."""
+    sw = it.get('swatches') or []
+    if slug not in HAT_SLUGS or not sw:
+        return ''
+    signed = it['signed']
+    sp_ship = U.SPECIAL_SHIP.get(slug, it['ship'])
+    def pill(s, first):
+        lab, img, spc, sa, sb = s
+        return ('<button type="button" role="radio" class="ho-c" aria-checked="%s" data-l="%s" data-img="%s" data-d="%s"%s style="--sa:%s;--sb:%s"><i></i>%s</button>'
+                % ('true' if first else 'false', html.escape(lab), html.escape(img), _demo_key(slug, lab), ' data-sp="1"' if spc else '', sa, sb, html.escape(lab)))
+    std = [s for s in sw if not s[2]]; spc = [s for s in sw if s[2]]
+    groups = '<div class="ho-g"><span class="ho-gl">%s</span><div class="ho-sw" role="radiogroup" aria-label="Regular colors">%s</div></div>' % (
+        'Regular colors &middot; ships in 3-8 business days', ''.join(pill(s, i == 0) for i, s in enumerate(std)))
+    if spc:
+        if not it.get('special_base'):
+            raise SystemExit('hat listing %s has special colors but no data-special-base link' % slug)
+        groups += ('<div class="ho-g"><span class="ho-gl">Special order &middot; up to 7 extra days &middot; about %s in all</span>'
+                   '<div class="ho-sw" role="radiogroup" aria-label="Special-order colors">%s</div></div>') % (
+            '3 to 4 weeks' if signed else '2 to 3 weeks', ''.join(pill(s, False) for s in spc))
+    note = ('<b>SPECIAL ORDER</b> <span class="ho-nc"></span> is a special order: we take up to 7 extra days to source and make yours%s. '
+            'Your card is only authorized, not charged, until a maker confirms it. If we can&rsquo;t make it within those 7 days, the hold is released '
+            'at once and you pay nothing. Expect it in about %s in all. You&rsquo;ll be asked to agree at checkout.') % (
+        ', then it&rsquo;s signed and numbered by hand' if signed else '', '3 to 4 weeks' if signed else '2 to 3 weeks')
+    label = 'Buy the signed one through Stripe' if signed else 'Buy now through Stripe'
+    # runs after the page is parsed: the demo block (.dmx) comes after this block in the page
+    js = ('<script>(function(){function init(){document.querySelectorAll(".ho").forEach(function(o){var s=o.getAttribute("data-slug"),nm=o.getAttribute("data-name"),'
+          'b=o.querySelector(".ho-b"),cn=o.querySelector(".ho-cn"),tg=o.querySelector(".ho-tag"),n=o.querySelector(".ho-n"),nc=o.querySelector(".ho-nc"),'
+          'sh=o.querySelector(".ho-sh"),tt=o.querySelector(".ho-t"),w=o.querySelector(".ho-wt"),ps=o.querySelectorAll(".ho-c"),'
+          'pr=parseFloat(o.getAttribute("data-price")),im=document.querySelector(".ho-doc img.prod"),so=im&&im.parentNode.querySelector("source"),x=document.querySelector(".dmx");'
+          'function sl(v){return String(v).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}'
+          'function m(v){return "$"+(v%1?v.toFixed(2):String(v))}'
+          'function pick(p,fd){ps.forEach(function(q){q.setAttribute("aria-checked",String(q===p))});var l=p.getAttribute("data-l"),sp=p.hasAttribute("data-sp"),'
+          'k=p.getAttribute("data-img"),d=p.getAttribute("data-d"),h=parseFloat(o.getAttribute(sp?"data-sp-ship":"data-ship")),'
+          'lk=o.getAttribute(sp?"data-sp-base":"data-base");'
+          'b.href=lk+"?client_reference_id="+encodeURIComponent([s,sl(l),"one-size"].join("_"));b.setAttribute("data-link",lk);'
+          'cn.textContent=l;nc.textContent=l;tg.hidden=!sp;n.hidden=!sp;sh.textContent="+ "+m(h)+" US shipping"+(sp?" (special order)":"");'
+          'tt.textContent="Total "+m(Math.round((pr+h)*100)/100)+" with shipping";w.textContent=o.getAttribute(sp?"data-sp-when":"data-when");'
+          'if(im&&k){so.srcset="/store-img/"+k+".webp";im.src="/store-img/"+k+".jpg";im.alt=nm+" - "+l}'
+          'if(!fd&&d&&x){var t=x.querySelector(\'.dm-t[data-c="\'+d+\'"]\');if(t&&t.getAttribute("aria-selected")!=="true")t.click();}}'
+          'ps.forEach(function(p){p.addEventListener("click",function(){pick(p)});p.addEventListener("keydown",function(e){var a=[].slice.call(ps),i=a.indexOf(p),j=-1;'
+          'if(e.key==="ArrowRight"||e.key==="ArrowDown")j=(i+1)%a.length;if(e.key==="ArrowLeft"||e.key==="ArrowUp")j=(i-1+a.length)%a.length;if(j>=0){e.preventDefault();a[j].focus();pick(a[j]);}})});'
+          'if(x)x._pick=function(c){var p=o.querySelector(\'.ho-c[data-d="\'+c+\'"]\');if(p&&p.getAttribute("aria-checked")!=="true")pick(p,1)};'
+          'pick(o.querySelector(\'.ho-c[aria-checked="true"]\')||ps[0],1);});}'
+          'if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();})();</script>')
+    first = (std or spc)[0]
+    tot = float(it['price']) + float(it['ship'])
+    return (HAT_CSS + '<section class="ho" aria-labelledby="ho-%s" data-slug="%s" data-name="%s" data-price="%s" data-ship="%s" data-sp-ship="%s" '
+            'data-base="%s" data-sp-base="%s" data-when="%s" data-sp-when="%s">'
+            '<h2 class="ho-k" id="ho-%s">Choose your color</h2>'
+            '<p class="ho-sel">Color: <b class="ho-cn">%s</b><span class="ho-tag" hidden>Special order</span></p>%s'
+            '<div class="ho-buy"><p class="ho-p"><span class="ho-amt">$%s</span> <span class="ho-sh">+ $%s US shipping</span><span class="ho-t">Total $%s with shipping</span></p>'
+            '<a class="btn ho-b" href="%s?client_reference_id=%s" rel="noopener">%s</a></div>'
+            '<p class="ho-n" role="note" hidden>%s</p>'
+            '<p class="ho-w"><span class="ho-wt">%s</span> &middot; One size, %s. <a href="/merch.html">See it in the store</a></p></section>'
+            % (slug, slug, html.escape(it['name']), it['price'], it['ship'], sp_ship, html.escape(it['buy']), html.escape(it.get('special_base') or it['buy']),
+               'Ships in 3-8 business days', 'Special order: about %s in all' % ('3 to 4 weeks' if signed else '2 to 3 weeks'),
+               slug, html.escape(first[0]), groups, it['price'], it['ship'], ('%.2f' % tot), html.escape(it['buy']),
+               '%s_%s_one-size' % (slug, re.sub(r'[^a-z0-9]+', '-', first[0].lower()).strip('-')), label, note,
+               'Ships in 3-8 business days', 'snapback' if 'trucker' in slug else 'adjustable')) + js

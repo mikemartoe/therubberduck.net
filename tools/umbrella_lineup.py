@@ -67,6 +67,23 @@ UNSIGNED = {
         'special_link': 'https://buy.stripe.com/00wfZh2PidJ62yraDZ9IQ1f',  # plink_1UUrvYGC9fEXRvQSDH1GFaLj
     },
 }
+# Unsigned Trucker Hat (Oct 26 2026, hat colors): the listing's demo shows the six lineup colors, so all six are sold.
+# Richardson 112 in Printful has four two-tones (Black / White, Charcoal / Black, Heather Grey / Black, Heather Grey / White), all
+# NORMAL; the demo's "Black" IS Black / White (black front, white mesh). White, Navy, Gold, Tiffany Blue and Hot Pink have no
+# Richardson 112 blank in Printful -> special orders on their own link. Kept out of UNSIGNED on purpose: tools/apply_umbrella_lineup.py
+# would rewrite the card to the six-color lineup and drop the two-tones. tools/apply_trucker_lineup.py writes this into merch.html.
+TRUCKER = {
+    'duck-trucker-hat': {
+        'special': ['White', 'Navy', 'Gold', 'Tiffany Blue', 'Hot Pink'],
+        'img': 'duck-trucker-hat-sp_%s',     # tools/make_trucker_special_photos.py (recolored Printful mockup, no pill)
+        'special_link': 'https://buy.stripe.com/aFa5kD61uawUb4XdQb9IQ1h',  # plink_1UUzh0GC9fEXRvQS7z44aKlu
+        'demo_label': {'black': 'Black / White'},
+    },
+}
+# US shipping on the special-order links (Stripe shipping rates, read back Oct 26 2026): unsigned $4.95 (shr_1UUtZq), signed $8.95
+# (shr_1UUtjw). The regular hat links charge $4.75 (unsigned) / $8.95 (signed).
+SPECIAL_SHIP = {'duck-dad-hat': '4.95', 'duck-trucker-hat': '4.95', 'signed-dad-hat': '8.95', 'signed-trucker-hat': '8.95'}
+
 RETIRED_UNSIGNED = {'duck-dad-hat': ['Light Blue', 'Pink', 'Charcoal']}
 
 # ---- wording (one place) ----
