@@ -113,6 +113,29 @@ def book_ld():
 
 # ---------------------------------------------------------------- page shell for generated pages
 CSS_HREF = '/assets/seo/archive.css?v=1'
+
+# ---------------------------------------------------------------- email signup (MailerLite "TRD signup", double opt-in)
+# One field, one promise. Plain HTML POST works without JavaScript (opens MailerLite's reply in a new tab);
+# /assets/seo/signup.js (deferred, no MailerLite scripts) upgrades it to an inline "check your inbox" message.
+# Rollback: set SIGNUP_ON = False and re-run (or git revert the newsletter-signup commit).
+SIGNUP_ON = True
+SIGNUP_ACTION = 'https://assets.mailerlite.com/jsonp/2747950/forms/202511556768958088/subscribe'
+SIGNUP_JS = '<script src="/assets/seo/signup.js?v=1" defer></script>\n'
+def signup_form(uid, big=False):
+    return ('<form class="signup-form" action="%s" method="post" target="_blank" accept-charset="utf-8">'
+            '<label class="sr" for="%s">Email address</label>'
+            '<input id="%s" type="email" name="fields[email]" placeholder="you@example.com" autocomplete="email" required maxlength="254">'
+            '<input type="hidden" name="ml-submit" value="1"><input type="hidden" name="anticsrf" value="true">'
+            '<button type="submit">Join the list</button></form>'
+            '<p class="signup-msg" role="status" aria-live="polite"></p>'
+            '<p class="signup-fine">We use your email only to send The Rubber Duck updates; unsubscribe any time with one click; we never sell or share it. You will get a confirmation email first.</p>'
+            ) % (SIGNUP_ACTION, uid, uid)
+def signup_block():
+    if not SIGNUP_ON: return ''
+    return ('<aside class="wrap signup" aria-labelledby="signup-h"><div class="signup-box">'
+            '<p class="signup-h" id="signup-h">Get The Rubber Duck updates by email</p>'
+            '<p class="signup-p">One short note when something new lands: drops, videos, books and collectibles.</p>'
+            + signup_form('signup-email') + '</div></aside>\n')
 NAV = [('/', 'Home'), ('/ledger.html', 'Drop Ledger'), ('/videos.html', 'Video Room'), ('/listening-room.html', 'Listening Room'),
        ('/pdfs.html', 'SCIF Reading Room'), ('/x/', 'X Archive'), ('/memes.html', 'Meme Dump'), ('/album.html', 'Red Pill Album')]
 
@@ -123,7 +146,7 @@ def drop_og(n):
     return DROP_OG.replace('/drops/', '/drops/' + DROP_V2['prefix'], 1) % n if str(n) in DROP_V2['drops'] else DROP_OG % n
 
 
-def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', og_desc=None, robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'):
+def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', og_desc=None, signup=False, robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'):
     url = SITE + path
     full_title = title if title.endswith(BRAND) else title + ' | ' + BRAND
     graph = [{'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'url': SITE + '/', 'sameAs': SAME_AS[:3]}, {'@type': 'WebPage', '@id': url + '#page', 'url': url, 'name': full_title, 'description': desc,
@@ -157,7 +180,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <meta name="twitter:image" content="{og_image}">
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="{CSS_HREF}">
-{extra_head}{ld_script(graph)}
+{extra_head}{SIGNUP_JS if signup and SIGNUP_ON else ''}{ld_script(graph)}
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
@@ -167,7 +190,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <nav class="crumbs" aria-label="Breadcrumb">{crumb_html}</nav>
 {body}
 </main>
-<aside class="wrap support" aria-label="Support the archive">
+{signup_block() if signup else ''}<aside class="wrap support" aria-label="Support the archive">
 <p><b>The archive stays free.</b> Keep it running: pick up a signed cap or tee at <a href="/merch.html">TRD Collectibles</a>, or get the book <a href="/book/anon-mission/">anon mission, Volume 1</a> ($19.99 on Gumroad).</p>
 </aside>
 <footer class="wrap foot"><p>{E(BRAND)} &middot; <a href="/">therubberduck.net</a> &middot; <a href="https://x.com/TheRubberDuck79" rel="me">@TheRubberDuck79</a> &middot; <a href="https://x.com/TheRubberDuck78" rel="me">@TheRubberDuck78</a> &middot; <a href="https://rumble.com/user/TheRubberDuck78" rel="me">Rumble</a> &middot; <a href="/drops/">Q drops by month</a> &middot; <a href="/x/archive/">X posts by month</a> &middot; <a href="/library/">PDF library</a> &middot; <a href="/watch/">Videos</a> &middot; <a href="/listen/">Spaces and shows</a></p></footer>
@@ -218,7 +241,7 @@ def build_drops():
               'dateCreated': d['dt'].isoformat(), 'datePublished': d['dt'].isoformat(), 'author': {'@type': 'Person', 'name': 'Q'},
               'isPartOf': {'@id': SITE + '/drops/#archive'}, 'url': SITE + '/drops/%d/' % n}]
         write('drops/%d/index.html' % n, page('/drops/%d/' % n, title, desc, body, g,
-              [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('#%d' % n, '/drops/%d/' % n)], og_type='article',
+              [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('#%d' % n, '/drops/%d/' % n)], og_type='article', signup=True,
               og_desc='Q drop #%d \u00b7 %s \u00b7 %s /%s/' % (n, d['dt'].strftime('%B %-d, %Y'), d['site'], d['board'].strip('/')),   # tease only
               og_image=drop_og(n)))
         add_sm('drops', '/drops/%d/' % n, lm)
@@ -342,13 +365,13 @@ def build_library():
               'associatedMedia': {'@type': 'MediaObject', 'contentUrl': pdf_abs, 'encodingFormat': 'application/pdf'},
               **({'thumbnailUrl': SITE + thumb_q, 'image': SITE + thumb_q} if thumb else {})}]
         write('library/%s/index.html' % d['slug'], page(url, title, desc, body, g, [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('Library', '/library/'), (d['title'], url)],
-              og_image=(SITE + thumb_q) if thumb else SHARE))
+              og_image=(SITE + thumb_q) if thumb else SHARE, signup=True))
         add_sm('library', url, lm, images=[(SITE + thumb_q, d['title'])] if thumb else [])
     secs = ''.join('<h2>%s</h2><ul class="list">%s</ul>' % (E(t), ''.join('<li><a href="/library/%s/">%s</a> <span class="n">%s pages</span></li>' % (d['slug'], E(d['title']), d.get('pages', '?')) for d in ds)) for t, ds in topics.items())
     title = 'The SCIF Reading Room Library: %d Free PDFs' % len(docs)
     desc = clip('%d public documents and books to read or download free: PSYOP doctrine, Q drops, the Epstein files and more, grouped by topic, each with a summary.' % len(docs))
     body = '<h1>The SCIF Reading Room Library</h1><p class="lede">%d documents, grouped by topic. Each has its own page with a summary. Search and read them all in <a href="/pdfs.html">The SCIF Reading Room</a>.</p>%s' % (len(docs), secs)
-    write('library/index.html', page('/library/', title, desc, body, [], [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('Library', '/library/')]))
+    write('library/index.html', page('/library/', title, desc, body, [], [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('Library', '/library/')], signup=True))
     add_sm('library', '/library/', lm)
     return len(docs)
 
@@ -753,8 +776,29 @@ def build_sitemaps():
     write('sitemaps/all-urls.txt', '\n'.join(allurls) + '\n')
     return {n: len(SITEMAPS[n]) for n in names}
 
+def build_join():
+    """/join.html: standalone email signup page. Not added to the sitemap."""
+    if not SIGNUP_ON: return 0
+    body = ('<section class="join" aria-labelledby="join-h">'
+            '<img class="join-duck" src="/images/brand/duck-hero-soft.webp" alt="" width="160" height="160" decoding="async">'
+            '<h1 id="join-h">Get The Rubber Duck updates by email</h1>'
+            '<p class="lede">One short note when something new lands on The Rubber Duck: new drops in the archive, videos, books and collectibles. Nothing else.</p>'
+            '<div class="signup-box join-box">' + signup_form('join-email') + '</div>'
+            '<ul class="join-points"><li><b>One field.</b> Just your email address.</li><li><b>Confirm first.</b> We send one email to make sure it is really you.</li><li><b>Leave any time.</b> Every email has a one-click unsubscribe link.</li></ul>'
+            '<p class="join-more">Not ready? Browse <a href="/drops/">every Q drop by month</a>, the <a href="/library/">PDF library</a> or <a href="/watch/">the videos</a>.</p>'
+            '</section>')
+    write('join.html', page('/join.html', 'Get The Rubber Duck updates by email',
+          'Sign up for short email updates from The Rubber Duck when something new lands. One field, confirm by email, unsubscribe any time. We never sell or share your email.',
+          body, [], [('Home', '/'), ('Join the list', '/join.html')], extra_head=SIGNUP_JS))
+    return 1
+
 if __name__ == '__main__':
     stats = {}
+    if '--only' in sys.argv:   # e.g. --only drops,library,join  (regenerates just those; rooms and sitemaps untouched)
+        parts = sys.argv[sys.argv.index('--only') + 1].split(',')
+        fns = {'drops': build_drops, 'x': build_x, 'library': build_library, 'watch': build_videos, 'listen': build_listen, 'join': build_join}
+        for k in parts: stats[k] = fns[k]()
+        print(json.dumps(stats, indent=1)); sys.exit(0)
     stats['drops'] = build_drops()
     stats['x'] = build_x()
     stats['library'] = build_library()
@@ -763,6 +807,7 @@ if __name__ == '__main__':
     items = build_shop(); stats['shop'] = len(items)
     build_soon()
     build_book()
+    stats['join'] = build_join()
     ensure_webp()
     build_rooms(items)
     stats['sitemaps'] = build_sitemaps()
