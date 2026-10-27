@@ -20,7 +20,7 @@ The rooms themselves are not changed visually; the new pages are separate URLs.
 """
 import html, json, os, re, subprocess, sys, datetime
 from zoneinfo import ZoneInfo
-from collections import OrderedDict, defaultdict
+from collections import OrderedDict, defaultdict, Counter as collections_counter
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 os.chdir(ROOT)
@@ -311,9 +311,21 @@ def build_x():
         pn = '<nav class="pn">%s%s</nav>' % (
             ('<a rel="prev" href="/x/archive/%s/">&lsaquo; X posts from %s</a>' % (keep_months[j - 1][0], datetime.date(int(keep_months[j - 1][0][:4]), int(keep_months[j - 1][0][5:]), 1).strftime('%B %Y'))) if j else '<span></span>',
             ('<a rel="next" href="/x/archive/%s/">X posts from %s &rsaquo;</a>' % (keep_months[j + 1][0], datetime.date(int(keep_months[j + 1][0][:4]), int(keep_months[j + 1][0][5:]), 1).strftime('%B %Y'))) if j + 1 < len(keep_months) else '<span></span>')
-        title = '@TheRubberDuck79 Posts, %s: X Archive' % mname
+        # Work order step 7: each month's title and description lead with what is unique to it (month, post count,
+        # first and last post dates, most-used hashtags), so no two month pages share a title or description pattern.
+        title = '@TheRubberDuck79 on X, %s: %s Posts, X Archive' % (mname, format(len(sel), ','))
         first = clip(re.sub(r'https?://\S+', '', sel[0]['x']), 80)
-        desc = clip('%d original posts by The Rubber Duck (@TheRubberDuck79) on X in %s, with full text and dates. First: "%s"' % (len(sel), mname, first))
+        dts = sorted(datetime.datetime.fromisoformat(p['c'].replace('Z', '+00:00')).astimezone(ET) for p in sel)
+        if dts[0].date() == dts[-1].date(): span = dts[0].strftime('%B %-d, %Y')
+        elif dts[0].year != dts[-1].year: span = '%s to %s' % (dts[0].strftime('%B %-d, %Y'), dts[-1].strftime('%B %-d, %Y'))
+        else: span = '%s to %s' % (dts[0].strftime('%B %-d'), dts[-1].strftime('%B %-d, %Y'))
+        raw = [t for p in sel for t in re.findall(r'#(\w{2,})', p.get('x', ''))]
+        tags = collections_counter(t.lower() for t in raw)
+        top = [collections_counter(r for r in raw if r.lower() == t).most_common(1)[0][0] for t, _ in tags.most_common(3)]
+        desc = '%s posts and quote posts by The Rubber Duck on X (@TheRubberDuck79), %s.%s' % (
+            format(len(sel), ','), span, (' Top hashtags: ' + ', '.join('#' + t for t in top) + '.') if top else '')
+        if first and len(desc) + len(first) + 10 <= 155: desc += ' First: "%s"' % first
+        desc = clip(desc)
         body = ('<h1>@TheRubberDuck79 on X, %s</h1><p class="lede">%d original posts and quote posts from %s, oldest first. Replies and reposts are in the full, searchable <a href="/x/">X Archive</a>.</p>' % (mname, len(sel), mname)
                 + pn + ''.join(items) + pn)
         g = [{'@type': 'CollectionPage', 'name': title, 'url': SITE + '/x/archive/%s/' % mk, 'about': {'@id': ORG_ID}, 'author': {'@id': ORG_ID}}]
