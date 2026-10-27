@@ -15,7 +15,8 @@ How: the same replica HTML as render_cards.py (same text check against data/drop
     blow the text up to a silly size), and the page rendered at pixel ratio 1200/W -> 1200 px wide output.
     Zoom is uniform and vector (Chrome re-renders the text at that ratio): never stretched, never resampled.
     The duck is rasterised from the source PNG at the final pixel size, aspect kept.
-  - 2-4 attached files (105 drops) sit side by side in a row (file names ellipsised) instead of stacked.
+  - attached files are real thumbnails (2026-10-27, box THUMB): 1 file floats left with the text beside it as on the
+    board; 2-4 files (105 drops) sit side by side in a row (file names ellipsised) with the text below.
   - Height = content. If the content would be taller than H_CAP (1.91:1 at 1200 wide), the post text is cut
     after the last WHOLE line that fits (no half-cut letters), that last line fades out, and the box bottom
     edge and caption strip follow as normal.
@@ -41,6 +42,8 @@ W_FIT = 640      # a post too tall for H_CAP at its header width is widened (sma
 H_CAP = 630      # max output height (1200x630 = 1.91:1, the og standard)
 M_OUT = 20       # even outer margin in output px (CSS px = M_OUT / pixel ratio)
 MR = 34          # right margin of the post text inside the box (4chan native 40)
+THUMB = 150      # attached-image thumbnail box in the preview (CSS px; card/ uses rc.THUMB = 250): with the zoom
+                 # (1200/W, about 1.9-2.6) it is 280-390 px in the 1200-wide image, leaving room for the text beside it
 
 EXTRA = """<style>
 html,body{margin:0 !important}
@@ -55,21 +58,19 @@ div.thread{margin:0}
 .postInfo,p.intro{white-space:nowrap}
 p.intro{margin-top:.3em}
 .cap{margin:%(m)spx 0 0 !important;padding:%(m)spx 0 0 !important}
-/* 2-4 files: side by side in a row as on the board (names ellipsised), not stacked */
-:has(> .file + .file) > .file{display:inline-block;vertical-align:top;width:145px}
-:has(> .file + .file) > .file p.fileinfo{margin-left:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-:has(> .file + .file) > .file .thumbph{margin-right:0}
-.post.op > .postInfo + .file{margin-top:.4em}
+/* files: real thumbnails (render_cards.files_html); 1 file floats left with the text beside it,
+   2-4 files sit side by side in one row (names ellipsised), text below */
+.post.op > .postInfo + .files{margin-top:.4em}
 .pre.cut{overflow:hidden;position:relative}
 .pre.cut .fade{position:absolute;left:0;right:0;pointer-events:none}
 </style>"""
 
 # OP posts are posted file-first; in the preview the header row goes on top, the file(s) right under it
 OP_HDR_FIRST = """<script>for(const op of document.querySelectorAll('.post.op')){const i=op.querySelector('.postInfo,p.intro');
-const fs=[...(op.closest('.thread')||op).querySelectorAll('.file')];if(!i||!fs.length)continue;let a=i;for(const f of fs){a.after(f);a=f}}</script>"""
+const fs=[...(op.closest('.thread')||op).querySelectorAll('.files')];if(!i||!fs.length)continue;let a=i;for(const f of fs){a.after(f);a=f}}</script>"""
 
 def html_for(n, css_w, scale, m_for=None):
-    h = rc.page(n, width=css_w, footer=True, scale=scale)
+    h = rc.page(n, width=css_w, footer=True, scale=scale, thumb=THUMB)
     m = round(M_OUT * (m_for or css_w) / W_OUT, 2)          # same ~20 px margin in the 1200-wide image whatever the zoom
     return h.replace("</head>", (EXTRA % {"m": m, "mr": MR}) + "</head>", 1).replace("</body>", OP_HDR_FIRST + "</body>", 1)
 

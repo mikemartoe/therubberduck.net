@@ -636,7 +636,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <link rel="stylesheet" href="/assets/trd/share.css?v=20261025s1" data-trd-keep>
 <link rel="stylesheet" href="/assets/trd/support-banner.css?v=20261026sb1" data-trd-keep>
 <script src="/assets/trd/share.js?v=20261025s1" data-trd-keep></script>
-<script src="/data/drop-cards.js?v=20261025s1" data-trd-keep></script>
+<script src="/data/drop-cards.js?v=20261027i1" data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="Every numbered Q drop, #1 to #4,966, in order as originally posted. Search by number, date or phrase, with a way back to each original source.">
 <link rel="canonical" href="https://therubberduck.net/ledger.html">
@@ -1545,12 +1545,13 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     var b=ev.target.closest('.src-share'); if(!b||!window.trdShare) return;
     var n=+b.getAttribute('data-share-drop'), cell=b.closest('.e'), open=cell.querySelector('.shr');
     if(open){ open.remove(); b.setAttribute('aria-expanded','false'); return; }
-    var C=window.TRD_DROP_CARDS||{base:'https://memes.therubberduck.net/drops/',long:[]}, r=BYN[n];
+    var C=window.TRD_DROP_CARDS||{base:'https://memes.therubberduck.net/drops/',long:[]}, r=BYN[n],
+        B=(C.v2&&C.v2.indexOf(n)>-1)?C.v2base:C.base;   /* drops with attached images: re-rendered cards under drops/v2/ */
     try{ if(window.trdTrack) trdTrack('event/drop-share/open/'+n,'Q drop #'+n+' share opened',0); }catch(e){}
     try{ if(window.trdVisit) trdVisit.event('share-open',{item:'drop-'+n}); }catch(e){}
     var row=trdShare.build({kind:'drop', id:String(n), page:'https://therubberduck.net/drops/share/'+n+'.html',
-      text:'Q drop #'+n+' \u00b7 '+(r?fmtDate(r.d):''), thumb:C.base+'og/'+n+'.jpg', file:C.base+'card/'+n+'.png',
-      igFile:(C.long.indexOf(n)>-1)?C.base+'ig/'+n+'.png':null, fileName:'q-drop-'+n+'.png'});
+      text:'Q drop #'+n+' \u00b7 '+(r?fmtDate(r.d):''), thumb:B+'og/'+n+'.jpg', file:B+'card/'+n+'.png',
+      igFile:(C.long.indexOf(n)>-1)?B+'ig/'+n+'.png':null, fileName:'q-drop-'+n+'.png'});
     /* the same support strip as the foot of the list, as the share panel's last row */
     var sup=document.getElementById('ledgerSupport');
     if(sup){ var sc=sup.cloneNode(true); sc.removeAttribute('id'); row.appendChild(sc); }

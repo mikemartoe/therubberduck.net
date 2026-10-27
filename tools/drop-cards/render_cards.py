@@ -11,6 +11,8 @@ Outputs (default OUT = <repo>/.work/drop-cards, git-ignored; upload to R2 trd-me
   og/N.jpg    1200x630 link-preview image (short: centred; long: top crop + caption)
   ig/N.png    1080x1350 phone/Instagram top crop, ONLY for long drops (caption only, no extra line)
 Every render asserts the rendered post text == drops.js text (wide spaces normalised).
+Attached files (2026-10-27): the real images from .work/drop-images/ (see cards_v2.py), shown as board thumbnails
+(box THUMB=250 CSS px, "File:" line kept); a drop whose image is missing is logged as an error, never rendered with a placeholder.
 
 Usage:  python3 tools/drop-cards/render_cards.py 1 134 225          # some drops
         python3 tools/drop-cards/render_cards.py --all [--from N]     # all 4,966 (resumable)
@@ -96,6 +98,7 @@ blockquote.postMessage{{display:block;margin:13px 40px;white-space:pre-wrap;over
 blockquote > span.quote{{color:#789922}}
 a.quotelink{{color:#D00;text-decoration:underline}}
 .fileText{{margin-left:20px}}.fileText a{{text-decoration:underline;color:#34345C}}
+.fileThumb,.thumb{{margin:3px 20px 5px 20px}}
 .thumbph{{display:inline-block;margin:3px 20px 5px 20px;background:#c9cde6;border:1px dashed #8a93b8;color:#4b5375;font-size:8pt;text-align:center}}
 .foot{{clear:both;margin-top:8px;color:#5a5a7a;font-size:8pt;text-align:right}}.foot b{{color:#34345C}}"""
 
@@ -118,18 +121,72 @@ div.post.reply div.body a{{color:#D00}}
 .quote{{color:#789922}}
 a.quotelink,a.url{{text-decoration:underline}}
 p.fileinfo{{display:block;margin:0 0 0 20px}}
+.thumb{{margin:5px 20px 10px 20px}}
 .thumbph{{display:inline-block;margin:5px 20px 10px 20px;background:#c9cde6;border:1px dashed #8a93b8;color:#4b5375;font-size:8pt;text-align:center}}
 .foot{{clear:both;margin-top:8px;color:#5a5a7a;font-size:8pt;text-align:right}}.foot b{{color:#34345C}}"""
 
-def files_html(h, site):
-    if not h["files"]: return ""
-    out = []
-    for f in h["files"].split("; "):
-        out.append(f'<div class="file"><{"div class=fileText" if site=="4chan" else "p class=fileinfo"}>File: {esc(f)}</{"div" if site=="4chan" else "p"}>'
-                   f'<span class="thumbph" style="width:125px;height:125px;line-height:125px">image</span></div>')
-    return "".join(out)
+IMG_DIR = os.environ.get("TRD_DROP_IMAGES", os.path.join(ROOT, ".work", "drop-images"))   # <drop>_<i>.<ext> + manifest.json
+THUMB_DIR = os.path.join(ROOT, ".work", "drop-thumbs")                                       # resized cache
+THUMB = 250          # thumbnail box (CSS px, longest side), as on the boards (8chan 255, 4chan OP 250)
+THUMB_PX = 760       # stored pixels on the longest side (sharp up to pixel ratio ~3 at THUMB)
+_IMGMAN = None
+def img_manifest():
+    global _IMGMAN
+    if _IMGMAN is None:
+        mp = os.path.join(IMG_DIR, "manifest.json")
+        _IMGMAN = json.load(open(mp)) if os.path.exists(mp) else {}
+    return _IMGMAN
 
-def page(n, width=600, footer=True, scale=2):
+def thumb_uri(n, i):
+    """the i-th (1-based) attached image of drop n as a data: URI (first frame, longest side <= THUMB_PX, never upscaled);
+    None if it was not fetched. Alpha kept (PNG), else JPEG."""
+    r = img_manifest().get(f"{n}_{i}")
+    if not r or not r.get("ok"): return None
+    os.makedirs(THUMB_DIR, exist_ok=True)
+    cache = os.path.join(THUMB_DIR, f"{n}_{i}_{r['sha256'][:12]}")
+    for ext, mt in ((".jpg", "image/jpeg"), (".png", "image/png")):
+        if os.path.exists(cache + ext):
+            im = Image.open(cache + ext); w, h = im.size
+            return f"data:{mt};base64," + base64.b64encode(open(cache + ext, "rb").read()).decode(), w, h
+    Image.MAX_IMAGE_PIXELS = None
+    im = Image.open(os.path.join(IMG_DIR, r["file"])); im.seek(0)
+    alpha = im.mode in ("RGBA", "LA", "PA") or (im.mode == "P" and "transparency" in im.info)
+    im = im.convert("RGBA" if alpha else "RGB")
+    im.thumbnail((THUMB_PX, THUMB_PX), Image.LANCZOS)
+    if alpha and im.getchannel("A").getextrema()[0] == 255: im = im.convert("RGB"); alpha = False
+    if alpha: im.save(cache + ".png", "PNG", optimize=True); ext, mt = ".png", "image/png"
+    else: im.save(cache + ".jpg", "JPEG", quality=88, optimize=True); ext, mt = ".jpg", "image/jpeg"
+    return f"data:{mt};base64," + base64.b64encode(open(cache + ext, "rb").read()).decode(), im.width, im.height
+
+def files_html(h, site, n=None, thumb=None):
+    """the post's attached files as on the board: 'File: name' line + real thumbnail.
+    1 file: thumbnail floats left and the post text runs beside it (board layout, no empty band);
+    2-4 files: one row, each file an equal share of the width (box <= thumb), names ellipsised, text below."""
+    if not h["files"]: return ""
+    thumb = thumb or THUMB
+    names = h["files"].split("; "); k = len(names)
+    tag, cls = ("div", "fileText") if site == "4chan" else ("p", "fileinfo")
+    out = []
+    for i, f in enumerate(names, 1):
+        t = thumb_uri(n if n is not None else h["drop"], i)
+        if t:
+            uri, w, hh = t; s = min(thumb / w, thumb / hh)
+            img = (f'<img class="thumb" src="{uri}" alt="" style="width:{w*s:.2f}px;height:{hh*s:.2f}px;'
+                   f'aspect-ratio:{w}/{hh}">')
+        else:            # not fetched: the old placeholder (logged by the caller via MISSING)
+            MISSING.add((h["drop"], i))
+            img = f'<span class="thumbph" style="width:{thumb//2}px;height:{thumb//2}px;line-height:{thumb//2}px">image</span>'
+        out.append(f'<div class="file"><{tag} class="{cls}">File: {esc(f)}</{tag}>{img}</div>')
+    return f'<div class="files {"single" if k == 1 else "multi"}" style="--k:{k}">{"".join(out)}</div>'
+MISSING = set()
+
+FILES_CSS = """.files.single .thumb{float:left;display:block}
+.files.multi{display:flex;align-items:flex-start;gap:14px;clear:both;padding:0 20px}
+.files.multi .file{flex:1 1 0;min-width:0}
+.files.multi .fileText,.files.multi p.fileinfo{margin-left:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.files.multi .thumb{display:block;margin-left:0;margin-right:0;max-width:100%;height:auto !important}
+div.post::after,div.thread::after,div.postContainer::after{content:"";display:block;clear:both}"""
+def page(n, width=600, footer=True, scale=2, thumb=None):
     num, ts, site, board, url, text = DROPS[n]; h = HDR[n]; text = norm(text)
     b = board.strip("/"); t = datetime.fromtimestamp(ts, ET)
     if site == "4chan":
@@ -146,9 +203,9 @@ def page(n, width=600, footer=True, scale=2):
         msg = f'<blockquote class="postMessage pre">{body(text, site)}</blockquote>'
         title = h["board_title"] or f"/{b}/"
         if h["op"]:
-            post = f'<div class="post op">{files_html(h, site)}{info}{msg}</div>'
+            post = f'<div class="post op">{files_html(h, site, n, thumb)}{info}{msg}</div>'
         else:
-            post = f'<div class="postContainer"><div class="sideArrows">&gt;&gt;</div><div class="post reply">{info}{files_html(h, site)}{msg}</div></div>'
+            post = f'<div class="postContainer"><div class="sideArrows">&gt;&gt;</div><div class="post reply">{info}{files_html(h, site, n, thumb)}{msg}</div></div>'
         top = ''
         css = CSS_4CH
     else:
@@ -159,13 +216,13 @@ def page(n, width=600, footer=True, scale=2):
                 f'<time>{t.strftime("%m/%d/%y (%a) %H:%M:%S")}</time></label>{pid}&nbsp;<a class="post_no">No.</a><a class="post_no">{esc(h["post_no"])}</a></p>')
         msg = f'<div class="body pre">{body(text, site)}</div>'
         if h["op"]:
-            post = f'<div class="thread">{files_html(h, site)}<div class="post op">{info}{msg}</div></div>'
+            post = f'<div class="thread">{files_html(h, site, n, thumb)}<div class="post op">{info}{msg}</div></div>'
         else:
-            post = f'<div class="post reply">{info}{files_html(h, site)}{msg}</div>'
+            post = f'<div class="post reply">{info}{files_html(h, site, n, thumb)}{msg}</div>'
         top = ''
         css = CSS_VICHAN
     foot = caption_html(n, scale) if footer else ""
-    css = css + CAP_CSS % {"pt": 9.5}
+    css = css + CAP_CSS % {"pt": 9.5} + FILES_CSS
     return f'<!doctype html><html><head><meta charset="utf-8"><style>{css.replace("%WIDTH%", str(width - 10 if site=="4chan" else width - 16))}</style></head><body>{top}{post}{foot}</body></html>'
 
 def check(pg, n):
@@ -200,6 +257,8 @@ def main(nums, out, shard=None):
             if str(n) in man and os.path.exists(os.path.join(out, "card", f"{n}.png")): continue   # resumable
             try:
                 pg.set_content(page(n)); pg.wait_for_timeout(60); check(pg, n)
+                miss = sorted(i for d, i in MISSING if d == n)
+                if miss: raise RuntimeError(f"attached image(s) {miss} not in {IMG_DIR} (no placeholder cards)")
             except Exception as e:      # log and carry on; a drop with no image gets no share page
                 open(err_p, "a").write(f"{n}\t{e}\n"); print(f"ERROR #{n}: {e}", flush=True); continue
             cp = os.path.join(out, "card", f"{n}.png")

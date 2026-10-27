@@ -5,7 +5,10 @@ Reads data/drops.js and the card manifest written by tools/drop-cards/render_car
   drops/share/<N>.html  OG/Twitter tags (preview = R2 drops/og2/N.jpg: right-sized card, 1200 wide, height per
                         drop from tools/drop-cards/og2-sizes.json; old 1200x630 drops/og/ kept in R2 for rollback), canonical /drops/N/,
                         noindex; humans are sent on to /ledger.html#drop-N with the utm query kept.
-  data/drop-cards.js    {base, long:[...]}: which drops have a 1080x1350 ig/ crop.
+  data/drop-cards.js    {base, long:[...], v2base, v2:[...]}: which drops have a 1080x1350 ig/ crop, and which drops'
+                        images live under the v2/ prefix (cards with the real attached images, 2026-10-27).
+Drops listed in tools/drop-cards/cards-v2.json (written by tools/drop-cards/cards_v2.py) use R2 drops/v2/{card,og,og2,ig}/
+(new keys, so the immutable 1-year cache on the old keys does not matter); their og:image:height and long flag come from it.
 Only drops present in the manifest get a page, so a page never points at an image not yet uploaded.
 
 Usage: python3 tools/drop-share-build.py [--manifest .work/drop-cards/manifest.json]
@@ -22,6 +25,9 @@ ET = ZoneInfo('America/New_York')
 OG_DIR = 'og2'   # right-sized previews (tools/drop-cards/rightsize.py, 2026-10-26); 'og' = the old 1200x630 ones
 _SZ = os.path.join(ROOT, 'tools', 'drop-cards', 'og2-sizes.json')
 OG_H = {int(k): v for k, v in json.load(open(_SZ)).items()} if os.path.exists(_SZ) else {}
+_V2 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v2.json')
+V2 = json.load(open(_V2)) if os.path.exists(_V2) else {'prefix': 'v2/', 'drops': {}}
+V2D = {int(k): v for k, v in V2['drops'].items()}
 esc = lambda s: html.escape(s or '', quote=True)
 
 
@@ -35,7 +41,7 @@ def page(d):
     when = dt.strftime('%B %-d, %Y')
     title = 'Q Drop #%d, %s | The Drop Ledger | The Rubber Duck\u2122' % (n, when)
     desc = tease(n, dt, site, board)   # tease only (Mike, 2026-10-25): no drop text in previews
-    img = MEDIA + '%s/%d.jpg' % (OG_DIR, n)
+    img = MEDIA + (V2['prefix'] if n in V2D else '') + '%s/%d.jpg' % (OG_DIR, n)
     alt = 'Q drop #%d as originally posted on %s %s' % (n, site, board.rstrip('/') + '/')
     dest = '/ledger.html#drop-%d' % n
     return '''<!doctype html>
@@ -68,7 +74,15 @@ def page(d):
 <style>body{{margin:0;background:#040705;color:#C8F5D2;font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}}a{{color:#00FF41}}</style>
 </head><body><p>Opening Q drop #{n} in <a href="{dest}">The Drop Ledger</a>.</p></body></html>
 '''.format(t=esc(title), d=esc(desc), u=esc('%s/drops/share/%d.html' % (SITE, n)), canon=esc('%s/drops/%d/' % (SITE, n)),
-           i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=OG_H.get(n, 630))
+           i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=V2D[n]['og2_h'] if n in V2D else OG_H.get(n, 630))
+
+
+def drop_cards_js(ns, man):
+    longs = [n for n in ns if (V2D[n]['long'] if n in V2D else man[str(n)]['long'])]
+    v2 = sorted(n for n in V2D if n in set(ns))
+    return ('/* written by tools/drop-share-build.py: drop share images on R2 (trd-memes, drops/ prefix; drops in v2 use drops/v2/) */\n'
+            'window.TRD_DROP_CARDS={base:%s,long:%s,v2base:%s,v2:%s};\n' % (json.dumps(MEDIA), json.dumps(longs, separators=(',', ':')),
+            json.dumps(MEDIA + V2['prefix']), json.dumps(v2, separators=(',', ':'))))
 
 
 def main():
@@ -81,10 +95,7 @@ def main():
     ns = sorted(int(k) for k in man if int(k) in drops)
     for n in ns:
         open(os.path.join(OUT, '%d.html' % n), 'w', encoding='utf-8').write(page(drops[n]))
-    longs = [n for n in ns if man[str(n)]['long']]
-    open(os.path.join(ROOT, 'data', 'drop-cards.js'), 'w').write(
-        '/* written by tools/drop-share-build.py: drop share images on R2 (trd-memes, drops/ prefix) */\n'
-        'window.TRD_DROP_CARDS={base:%s,long:%s};\n' % (json.dumps(MEDIA), json.dumps(longs, separators=(',', ':'))))
+    open(os.path.join(ROOT, 'data', 'drop-cards.js'), 'w').write(drop_cards_js(ns, man))
     print('share pages: %d  long (ig crop): %d' % (len(ns), len(longs)))
 
 
