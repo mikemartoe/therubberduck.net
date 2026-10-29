@@ -7,9 +7,9 @@
 <meta name="theme-color" content="#040705">
 <style>
 /* ---------- faces (local files only — no external font requests) ---------- */
-@font-face{font-family:'JBMono';src:url('fonts/JetBrainsMono.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:'RDSans';src:url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'RDSans';src:url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'JBMono';src:url('/fonts/JetBrainsMono.woff2') format('woff2'),url('fonts/JetBrainsMono.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'RDSans';src:url('/fonts/Roboto-Regular.woff2') format('woff2'),url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'RDSans';src:url('/fonts/Roboto-Bold.woff2') format('woff2'),url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
 
 :root{
   --bg:#040705; --surface-1:#070D08; --surface-2:#0B1410;
@@ -321,8 +321,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 }
 
 /* ---- one rubber duck header — same as listening-room.html ---- */
-@font-face{font-family:'TRD Steelfish';src:url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
-@font-face{font-family:'TRD Courier';src:url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'TRD Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'TRD Courier';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2'),url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 .banner{background:#000;color:#fff;position:relative;z-index:200;border-bottom:1px solid #2a1d10;box-shadow:0 1px 0 rgba(255,200,100,.18),0 10px 30px rgba(0,0,0,.7)}
 .banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
 .banner img{height:92px;width:auto;display:block}
@@ -377,7 +377,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 <body>
 <header class="banner">
   <div class="banner-in">
-    <img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck">
+    <img src="/assets/trd/img/duck-banner.webp" alt="The Rubber Duck">
     <h1 class="wm"><a href="/">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
     <div class="meta">
       <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
@@ -613,7 +613,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
     <p>The site is free, and <b>the site is me</b>. Help keep the Duck flying.</p>
     <a class="trd-sup-go" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Support the Duck</a>
   </div>
-  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.png" alt=""></button>
+  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.webp" alt=""></button>
 </div>
 <script>
 (function(){var w=document.getElementById('trdSup');if(!w)return;w.classList.add('wig');

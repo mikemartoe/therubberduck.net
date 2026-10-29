@@ -5,19 +5,21 @@
 <!-- e3:plan-override: This page is not the Drop Ledger (ledger.html keeps that plan). The homepage is a one-screen front room by explicit request: a welcome line, two stacks of cassette doors, the album as a cassette deck and the TRD Collectibles shop entrance, with no scroll on a laptop or PC. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" as="image" href="/images/brand/duck-hero-soft.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="/assets/trd/fonts/Steelfish-Bd.woff2" crossorigin>
 <title>The Rubber Duck&trade; | Q Drops Archive, Videos, X Spaces, Merch and Books</title>
 <meta name="theme-color" content="#1a120c">
 <!-- Icons: Lucide — ISC — https://github.com/lucide-icons/lucide -->
 <style>
 /* ============ FACES (self-hosted, no CDN) ============ */
-@font-face{font-family:'Steelfish';src:url('fonts/Steelfish%20Bd.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:'Roboto';src:url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'Roboto';src:url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:'Roboto';src:url('fonts/Roboto-Black.ttf') format('truetype');font-weight:900;font-style:normal;font-display:swap}
-@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:'TRD Oswald';src:url('/assets/trd/fonts/Oswald-VariableFont_wght.ttf') format('truetype');font-weight:200 700;font-display:swap}
-@font-face{font-family:'TRD Courier B';src:url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
-@font-face{font-family:'Yellowtail';src:url('/assets/trd/fonts/Yellowtail-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('fonts/Steelfish%20Bd.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('/fonts/Roboto-Regular.woff2') format('woff2'),url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('/fonts/Roboto-Bold.woff2') format('woff2'),url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('/fonts/Roboto-Black.woff2') format('woff2'),url('fonts/Roboto-Black.ttf') format('truetype');font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'TRD Oswald';src:url('/assets/trd/fonts/Oswald-VariableFont_wght.woff2') format('woff2'),url('/assets/trd/fonts/Oswald-VariableFont_wght.ttf') format('truetype');font-weight:200 700;font-display:swap}
+@font-face{font-family:'TRD Courier B';src:url('/assets/trd/fonts/CourierPrime-Bold.woff2') format('woff2'),url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Yellowtail';src:url('/assets/trd/fonts/Yellowtail-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Yellowtail-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 
 /* ============ TOKENS: warm, welcoming, vintage ============ */
 :root{
@@ -468,8 +470,8 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 }
 
 /* ---- one rubber duck header — same as listening-room.html ---- */
-@font-face{font-family:'TRD Steelfish';src:url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
-@font-face{font-family:'TRD Courier';src:url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'TRD Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'TRD Courier';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2'),url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 .banner{background:#000;color:#fff;position:relative;z-index:200;border-bottom:1px solid #2a1d10;box-shadow:0 1px 0 rgba(255,200,100,.18),0 10px 30px rgba(0,0,0,.7)}
 .banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
 .banner img{height:92px;width:auto;display:block}
@@ -715,7 +717,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   <div class="banner-in hb2">
     <div class="hb-left">
       <a class="hb-book" href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener" aria-label="anon mission, Volume 1, the hardcover book by The Rubber Duck. Opens Gumroad in a new tab"><img src="/assets/trd/img/anon-mission-hardcover-3d.webp?v=2" srcset="/assets/trd/img/anon-mission-hardcover-3d.webp?v=2 1x, /assets/trd/img/anon-mission-hardcover-3d@2x.webp?v=2 2x" width="127" height="168" alt="anon mission, the hardcover book" decoding="async"></a>
-      <a class="logo-x" href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener" aria-label="The Rubber Duck on X, @TheRubberDuck79. Opens in a new tab"><img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck"><span class="hb-cap" aria-hidden="true">to TRD's X feed, click</span></a>
+      <a class="logo-x" href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener" aria-label="The Rubber Duck on X, @TheRubberDuck79. Opens in a new tab"><img src="/assets/trd/img/duck-banner.webp" alt="The Rubber Duck" width="268" height="230"><span class="hb-cap" aria-hidden="true">to TRD's X feed, click</span></a>
     </div>
     <h1 class="wm"><a href="/" aria-label="THE RUBBER DUCK, back to the homepage">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
     <div class="hb-right">
@@ -742,10 +744,10 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
         <h2 class="hello-h">An open archive. Come take a look around.</h2>
         <p class="hello-s">Shows, recordings, documents and the full record, organized so you can check the sources yourself.</p>
         <p class="hello-how"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M12 5v14M6 13l6 6 6-6"/></svg><span>New here? Start with the <b>Private Theater</b> tape below, or press play on the album.</span></p>
-        <button class="spine tcase tc-pl" id="tapeCase" type="button" aria-label="The Rubber Duck Personal Playlist. Load this tape into the deck"><span class="start-tag tc-tag">Swap tape</span><span class="sp"><span class="sp-cat" aria-hidden="true">SIDE B</span><img class="sp-ic" src="/assets/trd/img/duck-banner.png" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Personal Playlist</span><span class="sp-s">The Rubber Duck&trade; on Spotify</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 4l8 9H4z"/><rect x="4" y="16" width="16" height="3.2" rx="1" fill="currentColor"/></svg></span></span></span><span class="tc-hold" aria-hidden="true"><span class="cas cas-pl" id="plCas" aria-hidden="true">
+        <button class="spine tcase tc-pl" id="tapeCase" type="button" aria-label="The Rubber Duck Personal Playlist. Load this tape into the deck"><span class="start-tag tc-tag">Swap tape</span><span class="sp"><span class="sp-cat" aria-hidden="true">SIDE B</span><img class="sp-ic" src="/assets/trd/img/duck-banner.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Personal Playlist</span><span class="sp-s">The Rubber Duck&trade; on Spotify</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 4l8 9H4z"/><rect x="4" y="16" width="16" height="3.2" rx="1" fill="currentColor"/></svg></span></span></span><span class="tc-hold" aria-hidden="true"><span class="cas cas-pl" id="plCas" aria-hidden="true">
               <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
               <span class="cas-label">
-                <span class="cas-head"><span class="cas-art"><span class="cas-t">Personal</span><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async"><span class="cas-t">Playlist</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">SPOTIFY</span></span></span>
+                <span class="cas-head"><span class="cas-art"><span class="cas-t">Personal</span><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" decoding="async"><span class="cas-t">Playlist</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">SPOTIFY</span></span></span>
                 <span class="cas-meta">The Rubber Duck&trade; &middot; Personal Playlist</span>
                 <span class="cas-side"><small>SIDE</small><b>B</b></span>
                 <span class="cas-by">Type II<br>C-90</span>
@@ -754,7 +756,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
               <span class="cas-peel"></span>
               <span class="cas-win"><span class="reel l"><b></b></span><span class="cas-tape"></span><span class="reel r"><b></b></span></span>
               <span class="cas-foot"><i></i><i></i><i></i><i></i></span>
-            </span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-playlist.webp?v=1" width="560" height="872" alt="" decoding="async"></span></button>
+            </span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-playlist.webp?v=1" width="560" height="872" alt="" decoding="async"></span></button>
       </header>
 
       <a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album">
@@ -763,7 +765,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
             <span class="cas" id="podCas" aria-hidden="true">
               <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
               <span class="cas-label">
-                <span class="cas-head"><span class="cas-art"><span class="cas-t">Red Pill</span><img class="cas-pill" src="/assets/trd/img/rpa-pill.webp" width="784" height="274" alt="" decoding="async"><span class="cas-t">Album</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.png" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">TRD-022</span></span></span>
+                <span class="cas-head"><span class="cas-art"><span class="cas-t">Red Pill</span><img class="cas-pill" src="/assets/trd/img/rpa-pill-160.webp" width="160" height="56" alt="" decoding="async"><span class="cas-t">Album</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">TRD-022</span></span></span>
                 <span class="cas-meta">Side A &middot; 22 tracks</span>
                 <span class="cas-side"><small>SIDE</small><b>A</b></span>
                 <span class="cas-by">Type II<br>C-90</span>
@@ -775,20 +777,20 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
             </span>
         </span>
         <span class="deck-keys" aria-hidden="true"><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11 6v12l-8.5-6zM21 6v12l-8.5-6z"/></svg></span><span class="key key-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><span class="kp-off">Press play</span><span class="kp-on">Open player</span><span class="kp-pl">Press play</span></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13 6v12l8.5-6zM3 6v12l8.5-6z"/></svg></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor"/></svg></span></span>
-        <span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-redpill.webp?v=cleanblack1" width="560" height="872" alt="" decoding="async"></span>
+        <span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-redpill.webp?v=cleanblack1" width="560" height="872" alt="" decoding="async"></span>
       </a>
     </div>
 
     <nav class="stacks" aria-label="Rooms">
       <div class="stack stack-a">
-      <a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Private Theater</span><span class="sp-s">Red pill clips, movies, shows</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-private-theater.webp" width="560" height="872" alt="" decoding="async"></span></a>
-      <a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-listening.webp" width="560" height="872" alt="" decoding="async"></span></a>
-      <a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-scif.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Private Theater</span><span class="sp-s">Red pill clips, movies, shows</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-private-theater.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-listening.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-scif.webp" width="560" height="872" alt="" decoding="async"></span></a>
       </div>
       <div class="stack stack-b">
-      <a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-ledger.webp" width="560" height="872" alt="" decoding="async"></span></a>
-      <a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-memes.webp" width="560" height="872" alt="" decoding="async"></span></a>
-      <a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.png" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.png" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img src="/assets/trd/img/cassettes/face-x.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-ledger.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-memes.webp" width="560" height="872" alt="" decoding="async"></span></a>
+      <a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-x.webp" width="560" height="872" alt="" decoding="async"></span></a>
       </div>
     </nav>
   </div>
@@ -800,10 +802,10 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     <span class="shop-front" aria-hidden="true">
       <span class="shop-window">
         <span class="shop-neon">OPEN</span>
-        <img class="shop-in" src="assets/trd/img/shop-interior.webp" srcset="assets/trd/img/shop-interior.webp 480w, assets/trd/img/shop-interior@2x.webp 800w" sizes="(min-width:761px) 22vw, 60vw" alt="" decoding="async">
+        <img class="shop-in" src="assets/trd/img/shop-interior.webp" srcset="assets/trd/img/shop-interior.webp 480w, assets/trd/img/shop-interior@2x.webp 800w" sizes="(min-width:761px) 22vw, 60vw" width="480" height="480" alt="" loading="lazy" decoding="async">
         <span class="shop-cards">
-          <span class="card c1" data-name="Cap"><img src="store-img/duck-dad-hat_black_product.webp" alt="" decoding="async"></span>
-          <span class="card c2" data-name="Mug"><img src="store-img/duck-mug_white.webp" alt="" decoding="async"></span>
+          <span class="card c1" data-name="Cap"><img src="store-img/duck-dad-hat_black_product-128.webp" width="128" height="128" alt="" loading="lazy" decoding="async"></span>
+          <span class="card c2" data-name="Mug"><img src="store-img/duck-mug_white-128.webp" width="128" height="128" alt="" loading="lazy" decoding="async"></span>
         </span>
         <span class="shop-shelf"></span>
       </span>
@@ -931,7 +933,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     var face=faceFor(host);
     if(!face)return '';
     var im=face.querySelector('img');
-    return im?(im.currentSrc||im.src||''):'';
+    return im?(im.currentSrc||im.src||im.getAttribute('data-src')||''):'';
   }
   function hidePortal(){
     portal.classList.remove('is-on','is-open','is-deck');
@@ -1111,7 +1113,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   var PL_URI='spotify:playlist:4lWQJV4n3mnIvp0y4biUqZ',PL_EMBED='https://open.spotify.com/embed/playlist/4lWQJV4n3mnIvp0y4biUqZ?utm_source=generator';
   var FACE={rp:'/assets/trd/img/cassettes/face-redpill.webp?v=cleanblack1',pl:'/assets/trd/img/cassettes/face-playlist.webp?v=1'};
   var TAPE={
-    pl:{cls:'tc-pl',cat:'SIDE B',ic:'/assets/trd/img/duck-banner.png',n:'Personal Playlist',s:'The Rubber Duck\u2122 on Spotify',label:'The Rubber Duck Personal Playlist. Load this tape into the deck'},
+    pl:{cls:'tc-pl',cat:'SIDE B',ic:'/assets/trd/img/duck-banner.webp',n:'Personal Playlist',s:'The Rubber Duck\u2122 on Spotify',label:'The Rubber Duck Personal Playlist. Load this tape into the deck'},
     rp:{cls:'tc-rp',cat:'SIDE A',ic:'/assets/trd/img/rpa-pill.webp',n:'The Red Pill Album',s:'22 tracks, plays right here',label:'The Red Pill Album. Load this tape back into the deck'}};
   var mode='rp',busy=false,spot=null,ctl=null,spPlaying=false;
   var pc=window.matchMedia('(min-width:900px) and (min-height:500px)');
@@ -1313,7 +1315,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     <p>The site is free, and <b>the site is me</b>. Help keep the Duck flying.</p>
     <a class="trd-sup-go" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Support the Duck</a>
   </div>
-  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.png" alt=""></button>
+  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.webp" alt="" width="268" height="230" loading="lazy" decoding="async"></button>
 </div>
 <script>
 (function(){var w=document.getElementById('trdSup');if(!w)return;w.classList.add('wig');
@@ -1323,5 +1325,6 @@ w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true}
 })();
 </script>
 <!-- /trd-support -->
+<script>/* cassette faces: fetched after the page has loaded (they only show on hover/tap) */(function(){function w(){[].forEach.call(document.querySelectorAll('.spine-face img[data-src]'),function(i){if(!i.getAttribute('src'))i.src=i.getAttribute('data-src');});}if(document.readyState==='complete')setTimeout(w,1500);else window.addEventListener('load',function(){setTimeout(w,1500);});})();</script>
 </body>
 </html>

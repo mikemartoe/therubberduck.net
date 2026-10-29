@@ -6,8 +6,8 @@
      <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
    Sizes: desktop ~84px tall, landscape phone ~56px, portrait phone ~90px. Contents flush left.          */
 
-@font-face{font-family:'TRB Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:'TRB Courier';src:url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'TRB Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('/assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'TRB Courier';src:url('/assets/trd/fonts/CourierPrime-Bold.woff2') format('woff2'),url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
 
 #trd-book{
   --trb-red:#C8241C; --trb-red-txt:#FF5A4F; --trb-red-mute:#C9554C; --trb-line:#4A0E0A;
@@ -203,8 +203,8 @@
 /* ---------- TRD Collectibles: a small vintage shop sign in the site header, every page ----------
    Placed by bookbanner.js into header.banner .banner-in (not on merch.html itself).
    Wide screens: pinned to the header's right edge. Narrow: its own small row under the links. */
-@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:'Yellowtail';src:url('/assets/trd/fonts/Yellowtail-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Yellowtail';src:url('/assets/trd/fonts/Yellowtail-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Yellowtail-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 .banner .banner-in{position:relative}
 a.trd-shopsign{flex:none; position:relative; display:inline-flex; flex-direction:column; align-items:center; text-decoration:none;
   padding:0 0 8px; border-radius:6px 6px 4px 4px; overflow:hidden; line-height:1;

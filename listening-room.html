@@ -7,12 +7,12 @@
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <style>
 /* Fonts: Steelfish + Courier Prime (site); Cinzel, EB Garamond, Oswald (SIL Open Font License, Google Fonts, subset to Latin) */
-@font-face{font-family:'Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:block}
-@font-face{font-family:'Courier Prime';src:url('/assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:block}
-@font-face{font-family:'Cinzel';src:url('/assets/trd/fonts/Cinzel-var.ttf') format('truetype');font-weight:400 900;font-display:block}
-@font-face{font-family:'EB Garamond';src:url('/assets/trd/fonts/EBGaramond-var.ttf') format('truetype');font-weight:400 800;font-display:block}
-@font-face{font-family:'EB Garamond';src:url('/assets/trd/fonts/EBGaramond-Italic-var.ttf') format('truetype');font-weight:400 800;font-style:italic;font-display:block}
-@font-face{font-family:'Oswald';src:url('/assets/trd/fonts/Oswald-VariableFont_wght.ttf') format('truetype');font-weight:200 700;font-display:block}
+@font-face{font-family:'Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('/assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:block}
+@font-face{font-family:'Courier Prime';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2'),url('/assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:block}
+@font-face{font-family:'Cinzel';src:url('/assets/trd/fonts/Cinzel-var.woff2') format('woff2'),url('/assets/trd/fonts/Cinzel-var.ttf') format('truetype');font-weight:400 900;font-display:block}
+@font-face{font-family:'EB Garamond';src:url('/assets/trd/fonts/EBGaramond-var.woff2') format('woff2'),url('/assets/trd/fonts/EBGaramond-var.ttf') format('truetype');font-weight:400 800;font-display:block}
+@font-face{font-family:'EB Garamond';src:url('/assets/trd/fonts/EBGaramond-Italic-var.woff2') format('woff2'),url('/assets/trd/fonts/EBGaramond-Italic-var.ttf') format('truetype');font-weight:400 800;font-style:italic;font-display:block}
+@font-face{font-family:'Oswald';src:url('/assets/trd/fonts/Oswald-VariableFont_wght.woff2') format('woff2'),url('/assets/trd/fonts/Oswald-VariableFont_wght.ttf') format('truetype');font-weight:200 700;font-display:block}
 :root{
   --room:#120a06; --wood:#2c180e; --wood2:#3d2213; --wood-hi:#6b4126; --paper:#f3e7cc; --paper2:#e8d8b4; --ink:#2a1c12; --ink2:#5b4632;
   --gold:#d8b25e; --gold-hi:#f4e1a0; --gold-dk:#9a7330; --brass:#c79a45; --green:#1d5a3c; --lamp:#ffd894;
@@ -318,7 +318,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 <body>
 <header class="banner">
   <div class="banner-in">
-    <img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck">
+    <img src="/assets/trd/img/duck-banner.webp" alt="The Rubber Duck">
     <h1 class="wm"><a href="/">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
     <div class="meta">
       <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
@@ -605,7 +605,7 @@ function decorHTML(space, key) {
   if (space < 40) return ['', ''];
   if (space < 150) return ['<span class="bookend"></span>', '<span class="bookend"></span>'];
   const cols = ['#1e3d2c', '#5c1a1d', '#8c6b45'], w = Math.min(150, space - 50);
-  const stack = '<span class="stack" style="width:' + w + 'px">' + (space > 150 ? '<img src="/assets/trd/img/duck-banner.png" alt="">' : '') +
+  const stack = '<span class="stack" style="width:' + w + 'px">' + (space > 150 ? '<img src="/assets/trd/img/duck-banner.webp" alt="">' : '') +
     cols.map((c, i) => '<span class="flat" style="--bc:' + c + ';width:' + (w - i * 10) + 'px"></span>').join('') + '</span>';
   return ['<span class="bookend"></span>', '<span class="bookend"></span>' + stack];
 }
@@ -731,7 +731,7 @@ addEventListener('hashchange', () => { const m = location.hash.match(/vol=([A-Za
     <p>The site is free, and <b>the site is me</b>. Help keep the Duck flying.</p>
     <a class="trd-sup-go" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Support the Duck</a>
   </div>
-  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.png" alt=""></button>
+  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.webp" alt=""></button>
 </div>
 <script>
 (function(){var w=document.getElementById('trdSup');if(!w)return;w.classList.add('wig');
