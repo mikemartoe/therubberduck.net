@@ -338,6 +338,42 @@ a.tcase{display:block;color:inherit}
 .shop:hover .shop-step-go,.shop:focus-visible .shop-step-go{background:#e04a2c}
 .shop-walk{flex:none;height:10px;background:linear-gradient(180deg,#5c5148,#3a332d)}
 
+
+/* ---- Support the archive (after the room; on PC below the first screen) ---- */
+.support{position:relative;z-index:2;padding:40px 16px 48px;background:linear-gradient(180deg,rgba(14,10,7,0),rgba(14,10,7,.88) 60px,rgba(14,10,7,.94));}
+.sup-in{max-width:1240px;margin:0 auto}
+.sup-head{text-align:center;max-width:640px;margin:0 auto 26px}
+.sup-k{margin:0;font:400 26px/1 var(--script);color:var(--mustard)}
+.sup-h{margin:6px 0 0;font:700 44px/1 var(--display);letter-spacing:.01em;color:#fff}
+.sup-s{margin:10px 0 0;font-size:16px;line-height:1.45;color:var(--ink-soft,#d8cbb2)}
+.sup-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.sup-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:20px 14px 16px;border-radius:10px;text-decoration:none;color:#f6ecd4;overflow:hidden;
+  background:linear-gradient(180deg,#4d2c15,#2a170b);border:2px solid #e3a82b;box-shadow:0 8px 20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,220,150,.25);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.sup-card::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:repeating-linear-gradient(90deg,#C8302B 0 14px,#E2652A 14px 28px,#E3A82B 28px 42px,#7A4A24 42px 56px)}
+.sc-spon::before{background:repeating-linear-gradient(90deg,#1f4fa0 0 14px,#f1e3c2 14px 28px,#c8302b 28px 42px,#f1e3c2 42px 56px)}
+.sup-card:hover,.sup-card:focus-visible{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.7),0 0 0 2px #ffd77a,0 0 22px rgba(255,190,90,.35)}
+.sup-card:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
+.sc-art{height:104px;display:flex;align-items:center;justify-content:center;gap:6px;margin:4px 0 8px}
+.sc-art img{height:100%;width:auto;filter:drop-shadow(0 8px 10px rgba(0,0,0,.7))}
+.sc-shop .sc-art img{height:84px;border-radius:8px;background:#f3ead8}
+.sc-book .sc-art img{transform:rotate(-4deg)}
+.sc-bmc .sc-art img{height:88px}
+.sc-sign{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:150px;height:84px;border-radius:8px;border:2px solid #e3a82b;background:#2a170b;box-shadow:inset 0 0 0 3px #4d2c15}
+.sc-sign small{font:400 15px/1 var(--script);color:#ffd77a}
+.sc-sign b{font:400 15px/1.05 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14;text-transform:uppercase}
+.sc-k{font:400 18px/1.1 var(--script);color:#ffd77a}
+.sc-n{font:400 19px/1.1 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14}
+.sc-s{font:400 14.5px/1.35 var(--body);color:#e9dcc0;min-height:2.7em}
+.sc-go{margin-top:auto;padding-top:10px;font:700 14px/1 var(--body);color:#ffd77a;letter-spacing:.02em}
+.sc-go i{font-style:normal;display:inline-block;transition:transform .2s var(--ease)}
+.sup-card:hover .sc-go i{transform:translateX(3px)}
+@media (min-width:600px) and (max-width:899px){.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:599px){.support{padding:32px 16px 40px}.sup-h{font-size:38px}.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .sup-card{padding:16px 8px 14px}.sc-art{height:80px;margin-bottom:6px}.sc-shop .sc-art img{height:60px}.sc-bmc .sc-art img{height:68px}
+  .sc-sign{width:118px;height:66px}.sc-sign small{font-size:12px}.sc-sign b{font-size:12px}.sc-k{font-size:16px}.sc-n{font-size:15px}.sc-s{font-size:13px}.sc-go{font-size:13px}}
+@media (min-width:900px) and (min-height:500px){.support{padding:56px 0 64px}.sup-in{max-width:clamp(1240px,84vw,1640px);padding:0 24px;box-sizing:border-box}}
+@media (min-width:900px) and (max-width:1100px) and (min-height:500px){.sup-in{padding:0 16px}}
+@media (prefers-reduced-motion:reduce){.sup-card,.sc-go i{transition:none}.sup-card:hover{transform:none}}
 /* ---- the suggestion line (desktop band) ---- */
 .band{display:none}
 
@@ -360,12 +396,12 @@ a.tcase{display:block;color:inherit}
    the height of the support duck: the floating player's resting spot (left), the suggestion line
    (centre), the duck and the suggestion box (right). */
 @media (min-width:900px) and (min-height:500px){
-  body{display:flex;flex-direction:column;height:100vh;height:100svh;overflow:hidden}
+  body{display:flex;flex-direction:column;min-height:100vh;min-height:100svh}
+  body > .support,body > .site-foot{flex:none}
   body > .banner,body > #trd-book,body > .trd-nav{flex:none}
   #trd-suggest{display:none!important}
-  #trdSup{display:none!important}
   #trd-pod{height:0!important}
-  .stage{flex:1;min-height:0;max-width:clamp(1240px,84vw,1640px);padding:clamp(16px,2.6vh,34px) 24px 0;
+  .stage{flex:none;height:calc(100vh - 170px);height:calc(100svh - 170px);min-height:0;max-width:clamp(1240px,84vw,1640px);padding:clamp(16px,2.6vh,34px) 24px 0;
     grid-template-columns:minmax(0,1fr) clamp(330px,23.5vw,480px);grid-template-rows:minmax(0,1fr) clamp(114px,12.5vh,134px);
     column-gap:clamp(28px,2.6vw,52px);row-gap:0}
   body > #trd-book .trb-in{width:min(clamp(1240px,84vw,1640px),100%)}
@@ -844,19 +880,62 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 
 </main>
 
+<section class="support" id="support" aria-labelledby="support-h">
+  <div class="sup-in">
+    <header class="sup-head">
+      <p class="sup-k">Keep the tape rolling</p>
+      <h2 class="sup-h" id="support-h">Support the archive</h2>
+      <p class="sup-s">The archive is free to use and carries no ads. It runs on sponsors, the shop, the book and the odd coffee.</p>
+    </header>
+    <div class="sup-grid">
+      <a class="sup-card sc-spon" href="/sponsor.html">
+        <span class="sc-art" aria-hidden="true"><span class="sc-sign"><small>Sponsor the Site</small><b>Site<br>Sponsors</b></span></span>
+        <span class="sc-k">Sponsor the site</span>
+        <span class="sc-n">$50 a month</span>
+        <span class="sc-s">or $500 one time for 12 months</span>
+        <span class="sc-go">See sponsorship <i aria-hidden="true">&rsaquo;</i></span>
+      </a>
+      <a class="sup-card sc-shop" href="/merch.html">
+        <span class="sc-art" aria-hidden="true"><img src="/store-img/duck-dad-hat_black_product-128.webp" width="128" height="128" alt="" loading="lazy" decoding="async"><img src="/store-img/duck-mug_white-128.webp" width="128" height="128" alt="" loading="lazy" decoding="async"></span>
+        <span class="sc-k">TRD Collectibles</span>
+        <span class="sc-n">The shop</span>
+        <span class="sc-s">Caps, tees, mugs and signed pieces</span>
+        <span class="sc-go">Visit the shop <i aria-hidden="true">&rsaquo;</i></span>
+      </a>
+      <a class="sup-card sc-book" href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener" aria-label="The book: anon mission, Volume 1, hardcover. Opens Gumroad in a new tab">
+        <span class="sc-art" aria-hidden="true"><img src="/assets/trd/img/anon-mission-hardcover-3d.webp?v=2" srcset="/assets/trd/img/anon-mission-hardcover-3d.webp?v=2 1x, /assets/trd/img/anon-mission-hardcover-3d@2x.webp?v=2 2x" width="127" height="168" alt="" loading="lazy" decoding="async"></span>
+        <span class="sc-k">The book</span>
+        <span class="sc-n">anon mission, Vol. 1</span>
+        <span class="sc-s">The hardcover, on Gumroad</span>
+        <span class="sc-go">Get the book <i aria-hidden="true">&rsaquo;</i></span>
+      </a>
+      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Buy Me a Coffee: tip The Rubber Duck any amount. Opens in a new tab">
+        <span class="sc-art" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" loading="lazy" decoding="async"></span>
+        <span class="sc-k">Buy Me a Coffee</span>
+        <span class="sc-n">Tip the Duck</span>
+        <span class="sc-s">Any amount, one time</span>
+        <span class="sc-go">Buy a coffee <i aria-hidden="true">&rsaquo;</i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <script>
 /* desktop: size the deck column so its dark bay is exactly cassette-shaped (100.4 x 63.8), filled edge to edge */
 (function(){
   var mq=window.matchMedia('(min-width:900px) and (min-height:500px)');
   var ROOM_H=516; /* stage height at 1280x720, the shortest screen the room is laid out for unscaled */
   function fitRoom(){var de=document.documentElement,stage=document.querySelector('.stage');
-    de.classList.remove('trd-rz');de.style.removeProperty('--rz');
+    de.classList.remove('trd-rz');de.style.removeProperty('--rz');if(stage)stage.style.removeProperty('height');
     if(!stage||!mq.matches)return;
     var H=window.innerHeight,z=1;
+    /* the room is exactly the rest of the first screen (the Support section and footer sit below it) */
+    function fill(){var t=stage.getBoundingClientRect().top+(window.scrollY||0);stage.style.height=Math.max(0,(H-t)/z)+'px';}
+    fill();
     for(var i=0;i<3;i++){ /* the header can unwrap once scaled, so settle in a couple of passes */
       var sh=stage.getBoundingClientRect().height/z, head=H/z-sh, nz=Math.min(1,Math.floor(H/(head+ROOM_H)*1000)/1000);
       if(i===0&&sh>=ROOM_H-0.5)return; if(Math.abs(nz-z)<0.002)break; z=nz;
-      de.style.setProperty('--rz',String(z));de.classList.add('trd-rz');}
+      de.style.setProperty('--rz',String(z));de.classList.add('trd-rz');fill();}
   }
   function size(){var top=document.querySelector('.top'),deck=document.querySelector('.deck'),well=deck&&deck.querySelector('.deck-well');
     if(!top||!well)return; if(!mq.matches){top.style.removeProperty('--deckw');return;}
@@ -1331,45 +1410,6 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 })();
 
 </script>
-<!-- trd-support -->
-<style>
-.trd-sup{position:fixed;right:14px;bottom:14px;z-index:2147483000;display:flex;align-items:flex-end;gap:8px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-.trd-sup[hidden]{display:none}
-.trd-sup-duck{flex:none;width:84px;height:84px;border:0;padding:6px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.55) 0%,rgba(255,255,255,.18) 55%,rgba(255,255,255,0) 72%);cursor:pointer;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6)) drop-shadow(0 0 1px rgba(255,255,255,.9));transition:transform .2s ease}
-.trd-sup-duck:hover{transform:translateY(-3px) rotate(-4deg)}
-.trd-sup-duck img{width:100%;height:100%;object-fit:contain;display:block}
-.trd-sup-bub{position:relative;max-width:180px;margin-bottom:40px;background:#fff;color:#111;border-radius:16px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.55);opacity:0;transform:translateY(8px) scale(.96);transform-origin:bottom right;pointer-events:none;transition:opacity .3s ease,transform .3s ease}
-.trd-sup.open .trd-sup-bub{opacity:1;transform:none;pointer-events:auto}
-.trd-sup-bub:after{content:"";position:absolute;right:-8px;bottom:16px;border:9px solid transparent;border-left-color:#fff;border-right:0}
-.trd-sup-bub p{margin:0 16px 8px 0;font-size:12.5px;line-height:1.32}
-.trd-sup-bub b{color:#c10500}
-.trd-sup-go{display:inline-block;background:#e10600;color:#fff!important;text-decoration:none!important;font-weight:700;font-size:12.5px;padding:6px 11px;border-radius:999px}
-.trd-sup-go:hover{background:#ff2a1f}
-.trd-sup-x{position:absolute;top:4px;right:4px;width:20px;height:20px;border:0;border-radius:50%;background:#eee;color:#333;font-size:14px;line-height:20px;cursor:pointer;padding:0}
-.trd-sup-x:hover{background:#ddd}
-.trd-sup-x::after{content:"";position:absolute;inset:-12px}
-@media (max-width:480px){.trd-sup{right:8px;bottom:8px}.trd-sup-duck{width:68px;height:68px;padding:5px}.trd-sup-bub{max-width:165px;margin-bottom:32px;padding:9px 11px}.trd-sup-bub p{font-size:12px}}
-.trd-sup.wig:not(.open) .trd-sup-duck{animation:trdWig 5s ease-in-out 1.5s infinite;transform-origin:50% 85%}
-@keyframes trdWig{0%,76%,100%{transform:rotate(0) translateY(0)}79%{transform:rotate(-12deg) translateY(-4px)}82%{transform:rotate(10deg) translateY(-4px)}85%{transform:rotate(-8deg) translateY(-2px)}88%{transform:rotate(6deg)}91%{transform:rotate(-3deg)}94%{transform:rotate(0)}}
-@media (prefers-reduced-motion:reduce){.trd-sup.wig .trd-sup-duck{animation:none}}
-@media print{.trd-sup{display:none}}
-</style>
-<div class="trd-sup" id="trdSup">
-  <div class="trd-sup-bub" role="dialog" aria-label="Support The Rubber Duck">
-    <button class="trd-sup-x" type="button" aria-label="Close">&times;</button>
-    <p>The site is free, and <b>the site is me</b>. Help keep the Duck flying.</p>
-    <a class="trd-sup-go" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Support the Duck</a>
-  </div>
-  <button class="trd-sup-duck" type="button" aria-label="Support The Rubber Duck"><img src="/assets/trd/img/duck-banner.webp" alt="" width="268" height="230" loading="lazy" decoding="async"></button>
-</div>
-<script>
-(function(){var w=document.getElementById('trdSup');if(!w)return;w.classList.add('wig');
-function quack(){try{navigator.vibrate&&navigator.vibrate(25)}catch(e){}try{var A=window.AudioContext||window.webkitAudioContext;if(A){var c=window._trdAC||(window._trdAC=new A()),t=c.currentTime,o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();o.type='sawtooth';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(330,t+.16);f.type='bandpass';f.frequency.value=1100;f.Q.value=4;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.18);o.connect(f);f.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.2)}}catch(e){}}
-w.querySelector('.trd-sup-duck').addEventListener('click',function(){if(w.classList.contains('open')){w.hidden=true;return}w.classList.remove('wig');w.classList.add('open');quack()});
-w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true});
-})();
-</script>
-<!-- /trd-support -->
 <script>/* cassette faces: fetched after the page has loaded (they only show on hover/tap) */(function(){function w(){[].forEach.call(document.querySelectorAll('.spine-face img[data-src]'),function(i){if(!i.getAttribute('src'))i.src=i.getAttribute('data-src');});}if(document.readyState==='complete')setTimeout(w,1500);else window.addEventListener('load',function(){setTimeout(w,1500);});})();</script>
 </body>
 </html>
