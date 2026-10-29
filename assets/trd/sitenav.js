@@ -114,5 +114,20 @@
   var MO = W.MutationObserver; try { var pr = new MO(function () {}); if (pr.constructor) MO = pr.constructor; pr.disconnect(); } catch (x) {}
   function watch() { if (D.body) new MO(current).observe(D.body, { childList: true }); }
   if (D.readyState === 'loading') on(D, 'DOMContentLoaded', function () { current(); watch(); }); else watch();
+  /* the site footer is always the last thing on the page: the suggestion section (suggest.js) and anything
+     else added to the end of <body> goes above it */
+  function footLast() {
+    var f = D.querySelector('footer.site-foot'), b = D.body; if (!f || !b) return;
+    var sg = D.getElementById('trd-suggest');
+    if (f.parentNode !== b) { b.insertBefore(f, sg && sg.parentNode === b ? sg.nextSibling : null); return; }
+    if (sg && sg.parentNode === b && (f.compareDocumentPosition(sg) & 4)) b.insertBefore(f, sg.nextSibling);
+  }
+  if (D.body) { footLast(); new MO(footLast).observe(D.body, { childList: true }); }
+  else on(D, 'DOMContentLoaded', function () { footLast(); new MO(footLast).observe(D.body, { childList: true }); });
+  /* footer: 'Suggestion box' opens the same card as the corner box (suggest.js); without it, go to the X profile */
+  on(D, 'click', function (e) {
+    var b = e.target && e.target.closest && e.target.closest('[data-sug-open]'); if (!b) return;
+    if (W.trdSuggest && W.trdSuggest.open) { e.preventDefault(); W.trdSuggest.open(e); }
+  });
   W.trdNav = { load: load, run: run };
 })();

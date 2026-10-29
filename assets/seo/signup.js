@@ -35,12 +35,12 @@
 (function () {
   var wrap = document.querySelector('header.top .wrap');
   if (!wrap || document.getElementById('tn-q')) return;
-  var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/assets/trd/sitenav.css?v=1'; document.head.appendChild(css);
+  var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/assets/trd/sitenav.css?v=2'; document.head.appendChild(css);
   var f = document.createElement('form');
   f.className = 'tn-search'; f.id = 'tn-form'; f.setAttribute('role', 'search'); f.action = '/x/'; f.method = 'get';
   f.innerHTML = '<svg class="tn-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>' +
     '<input class="tn-q" id="tn-q" name="q" type="search" placeholder="Search the archive" aria-label="Search the whole archive" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="tn-res" aria-autocomplete="list">' +
     '<div class="tn-res" id="tn-res" role="listbox" aria-label="Search results" hidden></div>';
   wrap.appendChild(f);
-  if (!window.trdNav) { var s = document.createElement('script'); s.src = '/assets/trd/sitenav.js?v=1'; document.head.appendChild(s); }
+  if (!window.trdNav) { var s = document.createElement('script'); s.src = '/assets/trd/sitenav.js?v=2'; document.head.appendChild(s); }
 })();
