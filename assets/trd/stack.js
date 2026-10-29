@@ -90,7 +90,7 @@
     var slots = '';
     for (var i = 0; i < MAX; i++) {
       var it = items[i];
-      slots += it ? '<span class="stk-slot"><button type="button" class="stk-th" aria-label="Open stack: ' + esc(it.label) + '"><img src="' + esc(it.thumb) + '" alt="" loading="lazy"></button>' +
+      slots += it ? '<span class="stk-slot"><button type="button" class="stk-th" aria-label="Open stack: ' + esc(it.label) + '"><img crossorigin="anonymous" src="' + esc(it.thumb) + '" alt="" loading="lazy"></button>' +
         '<button type="button" class="stk-x" data-stk-x="' + esc(k(it)) + '" aria-label="Remove ' + esc(it.label) + ' from the stack">&times;</button></span>' : '<span class="stk-slot stk-empty" aria-hidden="true"></span>';
     }
     t.innerHTML = '<span class="stk-slots">' + slots + '</span><span class="stk-count">Stack ' + items.length + ' / ' + MAX + '</span>' +
@@ -129,7 +129,7 @@
     } else {
       body = '<ol class="stk-steps"><li>Get the images, then attach them to your post.</li><li>Post: the links are already in it, one per line, in this order. Add your own words.</li></ol>' +
         '<ol class="stk-grid">' + items.map(function (it, i) {
-          return '<li><a class="stk-img" href="' + esc(it.img) + '" target="_blank" rel="noopener"><img src="' + esc(it.img) + '" alt="' + esc(it.label) + '" loading="lazy"><b>' + (i + 1) + '</b></a>' +
+          return '<li><a class="stk-img" href="' + esc(it.img) + '" target="_blank" rel="noopener"><img crossorigin="anonymous" src="' + esc(it.img) + '" alt="' + esc(it.label) + '" loading="lazy"><b>' + (i + 1) + '</b></a>' +
             '<span class="stk-cap">' + esc(it.label) + '</span><button type="button" class="stk-rm" data-stk-x="' + esc(k(it)) + '">Remove</button></li>';
         }).join('') + '</ol>' +
         '<pre class="stk-links" aria-label="The links that go in your post">' + esc(links()) + '</pre>' +
@@ -146,7 +146,9 @@
       '<h2 id="stkTitle">Your stack: ' + n + ' ' + what + (n < MAX && n ? ' <small>(room for ' + (MAX - n) + ' more)</small>' : '') + '</h2>' + body + '</div>';
   }
   function say(t) { var m = sheet && sheet.querySelector('.stk-msg'); if (m) m.textContent = t; }
-  function fetchBlob(u) { return fetch(u, { mode: 'cors', credentials: 'omit' }).then(function (r) { if (!r.ok) throw 0; return r.blob(); }); }
+  function get(u, c) { return fetch(u, { mode: 'cors', credentials: 'omit', cache: c }).then(function (r) { if (!r.ok) throw 0; return r.blob(); }); }
+  /* the page may already hold the picture from a plain <img> load (no CORS headers in that cached copy), so retry past the cache */
+  function fetchBlob(u) { return get(u, 'default').catch(function () { return get(u, 'reload'); }); }
   function saveBlob(b, name) { var a = D.createElement('a'), u = URL.createObjectURL(b); a.href = u; a.download = name; D.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 5000); }
   function fname(it, b) { var n = it.name || (it.kind + '-' + it.id); if (!/\.\w{2,4}$/.test(n)) n += '.' + ((b && b.type.split('/')[1]) || 'png'); return n; }
   function download() {
