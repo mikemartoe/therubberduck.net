@@ -42,5 +42,5 @@
     '<input class="tn-q" id="tn-q" name="q" type="search" placeholder="Search the archive" aria-label="Search the whole archive" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="tn-res" aria-autocomplete="list">' +
     '<div class="tn-res" id="tn-res" role="listbox" aria-label="Search results" hidden></div>';
   wrap.appendChild(f);
-  if (!window.trdNav) { var s = document.createElement('script'); s.src = '/assets/trd/sitenav.js?v=2'; document.head.appendChild(s); }
+  if (!window.trdNav) { var s = document.createElement('script'); s.src = '/assets/trd/sitenav.js?v=3'; document.head.appendChild(s); }
 })();
