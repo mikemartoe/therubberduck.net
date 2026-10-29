@@ -308,6 +308,10 @@ footer.site b{color:#c4cad0;font-weight:700}
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/share.css?v=20261025s1" data-trd-keep>
 <script src="/assets/trd/share.js?v=20261025s1" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/stack.css?v=20261029" data-trd-keep>
+<script src="/assets/trd/stack.js?v=20261029" data-trd-keep></script>
+<style data-trd-keep>.stk-add,.stk-tray,.stk-sheet{--font-display:var(--body)}.stk-open,.stk-a.stk-primary,.stk-btn:hover{color:#fff!important}</style>
+
 <!-- SEO and share preview -->
 <meta name="description" content="The Rubber Duck's meme archive, shuffled fresh every visit. Filter by type, look or the words inside a meme, then download or share what you find.">
 <link rel="canonical" href="https://therubberduck.net/memes.html">
@@ -1019,7 +1023,7 @@ function openAt(i){
   $('lbocrwrap').hidden=!ocr;
   $('lbocr').textContent=ocr;
   var host=$('shrhost'); host.innerHTML='';
-  if(window.trdShare) host.appendChild(trdShare.build({kind:'meme', id:it.id, page:shareUrl(it), noPic:true,
+  if(window.trdShare) host.appendChild(trdShare.build({kind:'meme', id:it.id, label:(it.title||it.id), page:shareUrl(it), noPic:true,
     text:(it.title||it.id)+' \u00b7 The Meme Dump', thumb:mediaUrl(it.poster||it.file), file:mediaUrl(it.file), igFile:null,
     fileName:it.file.split('/').pop()}));
   $('dl').href=mediaUrl(it.file);
@@ -1151,5 +1155,6 @@ function syncChips(){
 }
 })();
 </script>
+<script>(function(){ if(window.trdStack) trdStack.mount(document.querySelector('.bar-in')); })();</script>
 </body>
 </html>
