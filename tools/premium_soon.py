@@ -1,7 +1,7 @@
 """Premium line, COMING SOON (refresh: branch hat-lines-coming-soon, Oct 26 2026; not live until Mike approves the screenshots).
 Two lines, no prices and no buy buttons: they are announced, not sold.
-  /shop/premium-wool-cap/     real wool baseball cap, chrome duck embroidered front center, red pill embroidered on the bill
-  /shop/premium-leather-hat/  full-grain leather baseball cap, same embroidery
+  /shop/premium-wool-cap/     wool-blend cap, chrome duck embroidered front center (pill on the bill in mockups is artwork only)
+  /shop/premium-leather-hat/  leather cap, chrome duck front; leather type/maker/price confirmed at launch (no Printful leather cap exists)
 Also writes the "Coming Soon" section of merch.html between <!-- premium:begin --> and <!-- premium:end -->.
 Images: /store-img/premium/<slug>_<color>.{jpg,webp} 1024x1024 studio mockups on dark surfaces, plus -512 copies for thumbnails.
 The real duck and pill art is composited (uniform scale and rotation only, never redrawn or stretched); see
@@ -12,20 +12,22 @@ E = lambda s: html.escape(str(s), quote=True)
 
 LINES = [
     {'slug': 'premium-wool-cap', 'name': 'Premium Wool Cap', 'kind': 'Wool cap', 'short': 'Wool',
-     'made': 'Real wool, structured crown',
-     'tagline': 'Real wool, felted and dense, with the chrome duck embroidered in raised thread.',
-     'lede': ('A structured baseball cap cut from real wool, felted and dense, with the chrome duck embroidered front and center in raised '
-              'thread and the red pill stitched on the bill, the same way as the hats you already know.'),
+     'cap': 'Concept mockup. The finished cap carries the embroidered chrome duck on the front; the pill shown on the bill is artwork only.',
+     'desc': 'Premium Wool Cap from The Rubber Duck, coming soon: a wool-blend cap with the chrome duck embroidered on the front. Planned colors: Deep Navy, Black, Charcoal, Natural Cream, Burgundy. Not on sale yet; materials and price confirmed at launch.',
+     'made': 'Wool blend, structured crown',
+     'tagline': 'A structured wool-blend cap with the chrome duck embroidered on the front.',
+     'lede': 'A structured six-panel cap in a wool blend, with the chrome duck embroidered front and center. Raised (3D puff) stitching is the plan. The exact blend, the final colors and the price are confirmed at launch.',
      'colors': [('navy', 'Deep Navy', '#1e2740'), ('black', 'Black', '#121212'), ('charcoal', 'Charcoal', '#46464a'),
                 ('ivory', 'Natural Cream', '#d9ccb0'), ('burgundy', 'Burgundy', '#5e1620')]},
     {'slug': 'premium-leather-hat', 'name': 'Premium Leather Hat', 'kind': 'Leather hat', 'short': 'Leather',
-     'made': 'Full-grain leather',
-     'tagline': 'Full-grain leather, top-stitched, with the chrome duck and the red pill embroidered the same way.',
-     'lede': ('A baseball cap made entirely of full-grain leather, top-stitched along every seam, with the chrome duck embroidered front and '
-              'center and the red pill stitched on the bill. It softens and darkens with wear, so no two age the same.'),
+     'cap': 'Concept mockup. The finished cap carries the chrome duck on the front; the pill shown on the bill is artwork only.', 'front': 'Chrome duck',
+     'desc': 'Premium Leather Hat from The Rubber Duck, coming soon: a leather cap with the chrome duck on the front. Planned colors: Black, Cognac, Saddle Tan. Not on sale yet; materials and price confirmed at launch.',
+     'made': 'Leather (type confirmed at launch)',
+     'tagline': 'A leather cap with the chrome duck on the front. The leather, the stitching and the price are confirmed at launch.',
+     'lede': 'A leather baseball cap with the chrome duck front and center. We are still choosing the maker, so the type of leather, how the duck is applied and the price will be confirmed here before launch. Black, Cognac and Saddle Tan are the planned colors.',
      'colors': [('black', 'Black', '#151313'), ('cognac', 'Cognac', '#7a3f1d'), ('tan', 'Saddle Tan', '#b88a55')]},
 ]
-BIO = lambda ln: [('Made of', ln['made']), ('Front', 'Chrome duck, embroidered'), ('Bill', 'Red pill, embroidered'),
+BIO = lambda ln: [('Made of', ln['made']), ('Front', ln.get('front', 'Chrome duck, embroidered')),
                   ('Price', 'Announced at launch'), ('Status', 'Coming soon')]
 PROMISE = ('If it&rsquo;s listed here, it&rsquo;s ours to deliver, and that will hold for this line too. It isn&rsquo;t on sale yet. '
            'When it launches, every cap is made for your order and ships in our standard time. If anything ever holds up yours, it may '
@@ -98,7 +100,7 @@ def merch_section():
     return ('<!-- premium:begin -->\n' + MERCH_CSS +
             '\n  <section class="vault" aria-labelledby="vault-title">\n    <header class="vh"><p class="vk">The Premium Line</p>'
             '<h2 id="vault-title">Coming Soon</h2><span class="vrule" aria-hidden="true"></span>'
-            '<p class="vp">Real wool and real leather caps, embroidered the same way as the hats you know: the chrome duck front and center, the red pill on the bill. Not on sale yet.</p></header>\n'
+            '<p class="vp">Wool-blend and leather caps with the chrome duck front and center. Concept mockups; not on sale yet.</p></header>\n'
             '    <div class="vgrid">' + ''.join(cards) + '</div>\n  </section>\n' + SWAP_JS + '\n<!-- premium:end -->')
 
 def update_merch(path='merch.html'):
@@ -173,7 +175,7 @@ def build_soon(page, write, add_sm, site, lastmod):
         k0, l0, _ = ln['colors'][0]
         cols = ', '.join(c[1] for c in ln['colors'])
         title = '%s, Coming Soon | TRD Collectibles' % ln['name']
-        desc = '%s from The Rubber Duck, coming soon: the chrome duck embroidered on the front, the red pill embroidered on the bill. Colors: %s. Not on sale yet; price announced at launch.' % (ln['name'], cols)
+        desc = ln['desc']
         facts = '<dl class="facts">%s</dl>' % ''.join('<dt>%s</dt><dd>%s</dd>' % (E(a), E(b)) for a, b in BIO(ln))
         other = [o for o in LINES if o is not ln][0]
         n = len(ln['colors'])
@@ -185,7 +187,8 @@ def build_soon(page, write, add_sm, site, lastmod):
         body = (PAGE_CSS + '<div class="lx" data-soon="%s" data-kind="%s">'
                 '<header class="lx-h"><p class="lx-k">The Premium Line</p><h1>%s</h1><span class="lx-rule" aria-hidden="true"></span><span class="lx-badge">Coming Soon</span><p class="lx-sub">%s</p></header>'
                 '<div class="lx-hero"><figure class="lx-main"><picture><source class="ps-src" srcset="%s" type="image/webp">'
-                '<img class="ps-img" src="%s" alt="%s, %s, mockup, coming soon" width="1024" height="1024" decoding="async"></picture></figure>'
+                '<img class="ps-img" src="%s" alt="%s, %s, mockup, coming soon" width="1024" height="1024" decoding="async"></picture>'
+                '<figcaption class="lx-cap" style="font-size:.8rem;opacity:.75;margin-top:.5rem;text-align:center">%s</figcaption></figure>'
                 '<div class="lx-panel">%s'
                 '<div><p class="lx-cl">Color <b class="ps-cn">%s</b></p><div class="ps-sws" role="group" aria-label="Color">%s</div></div>'
                 '<p class="lx-note"><b>Coming soon.</b> This line is not on sale yet, so there is no checkout here. The price is announced at launch.</p></div></div>'
@@ -194,7 +197,7 @@ def build_soon(page, write, add_sm, site, lastmod):
                 '<aside class="lx-next" aria-label="Also coming soon"><picture><source srcset="%s" type="image/webp"><img src="%s" alt="%s, %s, mockup" width="512" height="512" loading="lazy" decoding="async"></picture>'
                 '<div><p class="lx-k">Also coming soon</p><h3>%s</h3><p>%s</p><p class="cta"><a class="btn" href="/merch.html">Shop what&rsquo;s available now</a> <a href="/shop/%s/">See the %s</a></p></div></aside>'
                 '</div>'
-                % (ln['slug'], E(ln['name']), E(ln['name']), E(ln['lede']), img(ln['slug'], k0, 'webp'), img(ln['slug'], k0), E(ln['name']), E(l0),
+                % (ln['slug'], E(ln['name']), E(ln['name']), E(ln['lede']), img(ln['slug'], k0, 'webp'), img(ln['slug'], k0), E(ln['name']), E(l0), ln['cap'],
                    facts, E(l0), swatches(ln), ln['slug'], ln['slug'], n, n, gal, ln['slug'], ln['slug'], PROMISE,
                    img(other['slug'], ok0, 'webp', True), img(other['slug'], ok0, 'jpg', True), E(other['name']), E(ol0),
                    E(other['name']), E(other['tagline']), other['slug'], E(other['name']))) + SWAP_JS
