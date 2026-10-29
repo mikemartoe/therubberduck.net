@@ -1697,7 +1697,14 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     el.style.scrollMarginTop=top+'px';
     var y=window.pageYOffset+r.top-top;
     var calm=!smooth||(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    window.scrollTo({top:Math.max(0,Math.round(y)),behavior:calm?'auto':'smooth'});
+    if(calm){
+      /* "auto" would inherit the page's CSS smooth scrolling, and on phones a smooth scroll can be cut short
+         (toolbar collapse, a second jump), leaving a long drop opened mid-post. Land instantly instead. */
+      var de=document.documentElement, was=de.style.scrollBehavior;
+      de.style.scrollBehavior='auto';
+      window.scrollTo(0,Math.max(0,Math.round(y)));
+      de.style.scrollBehavior=was;
+    } else window.scrollTo({top:Math.max(0,Math.round(y)),behavior:'smooth'});
   }
   function scheduleJump(n){
     clearTimeout(jumpT);
@@ -1711,8 +1718,23 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
            the browser's own #anchor scroll or late images moved the page */
         jumpTo(el,!first);
         if(first){
-          var again=function(){ setTimeout(function(){ var e=document.getElementById('drop-'+n); if(e) jumpTo(e,false); },120); };
+          /* Shared links land on the drop's number and date. Keep re-pinning it for a few seconds while fonts,
+             images and the phone toolbar settle, and stop the moment the visitor scrolls or taps. */
+          var held=true, until=Date.now()+4000;
+          var letGo=function(){ held=false; };
+          ['wheel','touchstart','keydown','mousedown'].forEach(function(ev){ window.addEventListener(ev,letGo,{once:true,passive:true}); });
+          var pin=function(){
+            if(!held||Date.now()>until) return;
+            var e=document.getElementById('drop-'+n); if(!e) return;
+            var hb=headerBottom()+12, t=e.getBoundingClientRect().top;
+            if(Math.abs(t-hb)>4) jumpTo(e,false);
+          };
+          var again=function(){ [120,400,900,1600,2600,3600].forEach(function(ms){ setTimeout(pin,ms); }); };
           if(document.readyState==='complete') again(); else window.addEventListener('load',again,{once:true});
+          [150,700].forEach(function(ms){ setTimeout(pin,ms); });
+          if(document.fonts&&document.fonts.ready) document.fonts.ready.then(pin);
+          if(window.visualViewport) window.visualViewport.addEventListener('resize',pin);
+          window.addEventListener('resize',pin);
         }
       }
       el.classList.add('arc-hit');
