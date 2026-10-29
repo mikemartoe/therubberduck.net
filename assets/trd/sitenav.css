@@ -82,3 +82,10 @@ footer.site-foot a.sf-x:hover,footer.site-foot a.sf-x:focus-visible{border-color
 @media (max-width:420px){.sf-in{grid-template-columns:1fr 1fr}.sf-col:last-child{grid-column:1/-1}.sf-legal p:last-child{white-space:normal}}
 footer.site-foot ul li{margin:0;padding:0;list-style:none}
 footer.site-foot .sf-col a,footer.site-foot .sf-col .sf-btn{display:inline;padding:0;margin:0;font-size:14px;line-height:1.5;background:none}
+/* t1964u mobile tap targets: footer room links and the banner links get ~32px tall touch rows (same look) */
+@media (max-width:760px){
+  footer.site-foot .sf-col ul{gap:0}
+  footer.site-foot .sf-col a,footer.site-foot .sf-col .sf-btn{display:inline-block;padding:6px 0}
+  .banner .meta{row-gap:0}
+  .banner .meta a{display:inline-block;padding:7px 0}
+}

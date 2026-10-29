@@ -109,6 +109,13 @@
   }
   listen.call(D, 'click', onClick, false);
   listen.call(D, 'auxclick', onClick, false);
+  /* form-submit counts (t1964u): the archive search in the header (never the words searched) */
+  listen.call(D, 'submit', function (e) {
+    try {
+      var f = e.target;
+      if (f && f.id === 'tn-form') { var q = f.querySelector('input'); if (q && q.value.trim()) track('event/form/site-search', 'Form: archive search (header)'); }
+    } catch (x) {}
+  }, true);
 
   track.link = link;
   track.forLink = forLink;

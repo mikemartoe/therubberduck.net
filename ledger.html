@@ -1851,6 +1851,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     var ok=false; try{ localStorage.setItem(KEY,JSON.stringify(all)); ok=true; }catch(err){ ok=false; }
     var text='THE DROP LEDGER — CORRECTION\nDrop #'+n+'\nSaved: '+new Date(rec.savedAt).toLocaleString()+'\n\n'+body+(rec.email?'\n\nReply to: '+rec.email:'');
     pre.textContent=text; out.hidden=false;
+    try{ if(window.trdTrack) trdTrack('event/form/ledger-correction','Form: Ledger correction filled in (saved on device, not sent)'); if(window.trdVisit) trdVisit.event('form',{name:'ledger-correction'}); }catch(e3){}
     if(ok){ say('Saved on this device only. Nothing has been sent. Stored in this browser under '+KEY+' — copy the block below and send it on.',false); }
     else { say('This browser refused local storage, so nothing was saved. Copy the block below and keep it yourself.',true); }
   });
@@ -2008,6 +2009,8 @@ w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true}
 </script>
 <!-- /trd-support -->
 <style id="ldock-css">
+@media (max-width:760px){.banner .meta{row-gap:0}.banner .meta a{display:inline-block;padding:7px 0}}
+
 /* t1964u: one pinned search + filter bar for the Q drops, at the top of the room wherever you scroll */
 .e3-nav-pill{position:relative!important;top:auto!important}
 .ldock{position:sticky;top:0;z-index:58;background:rgba(4,7,5,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);box-shadow:0 10px 24px -18px #000}

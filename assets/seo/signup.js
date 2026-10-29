@@ -4,11 +4,20 @@
 (function () {
   if (!window.fetch || !window.FormData || !window.URLSearchParams) return;
   var forms = document.querySelectorAll('form.signup-form');
+  /* form-submit counts (t1964u): GoatCounter event, through trdTrack where the page has it */
+  function ev(r, t) {
+    var path = 'event/form/newsletter-' + r, title = 'Form: newsletter signup ' + t + ' (' + location.pathname + ')';
+    try {
+      if (window.trdTrack) window.trdTrack(path, title, 0);
+      else if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true });
+      if (window.trdVisit) window.trdVisit.event('form', { name: 'newsletter', result: r });
+    } catch (e) {}
+  }
   for (var i = 0; i < forms.length; i++) (function (f) {
     var msg = f.nextElementSibling, btn = f.querySelector('button');
     function say(t, err) { msg.textContent = t; msg.className = 'signup-msg' + (err ? ' err' : ''); }
     f.addEventListener('submit', function (e) {
-      if (f.getAttribute('data-native')) return;           // fallback after a network error: plain POST
+      if (f.getAttribute('data-native')) { ev('native', 'sent by plain POST'); return; }  // fallback after a network error: plain POST
       e.preventDefault();
       var body = new URLSearchParams(new FormData(f)); body.append('ajax', '1');
       btn.disabled = true; say('Sending\u2026');
@@ -16,14 +25,14 @@
         .then(function (r) { return r.json(); })
         .then(function (j) {
           btn.disabled = false;
-          if (j && j.success) { f.hidden = true; say('Check your inbox to confirm your email. The confirmation link finishes your signup.'); }
+          if (j && j.success) { ev('sent', 'sent'); f.hidden = true; say('Check your inbox to confirm your email. The confirmation link finishes your signup.'); }
           else {
-            var m = j && j.errors && j.errors.fields && j.errors.fields.email;
+            ev('refused', 'refused'); var m = j && j.errors && j.errors.fields && j.errors.fields.email;
             say((m && m[0]) || 'That did not go through. Please check the address and try again.', true);
           }
         })
         .catch(function () {
-          btn.disabled = false; f.setAttribute('data-native', '1');
+          ev('unreachable', 'could not reach the service'); btn.disabled = false; f.setAttribute('data-native', '1');
           say('Could not reach the signup service. Press Join the list again to open it in a new tab.', true);
         });
     });
