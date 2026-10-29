@@ -1978,6 +1978,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
  figure.sect-plate img{height:clamp(190px,46vw,300px)}
 }
 @media(prefers-reduced-motion:reduce){.k-find-row button{transition:none}.e3-hero-kinetic .k-media img{animation:none!important;transform:none!important}}
+/* Readability (Mike t1957u #4): larger drop text, more line spacing, brighter labels and a lighter
+   scanline veil. Same colours, fonts and layout; nothing else restyled. */
+.arc-row .e{font-size:17px!important;line-height:1.72!important}
+.arc-row .e .ex{max-width:74ch}
+.arc-row .d{font-size:13.5px!important;color:#9CCBA8!important}
+.arc-row .b{font-size:11.5px!important;color:#9CCBA8!important}
+.arc-row .b i{font-size:12px;color:#9CCBA8;opacity:1}
+.arc-row .gt{color:#9BCB7F}
+.arc-row .src{font-size:12.5px}
+.arc-row .src .src-host{font-size:11.5px;color:#9CCBA8}
+body::before{opacity:.18}
+@media (max-width:700px){.arc-row .e{font-size:16.5px!important;line-height:1.68!important}}
 </style>
 <script>
 (function(){
