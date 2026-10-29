@@ -42,8 +42,9 @@
     var v=b.getAttribute('data-lx-path'), fromAsk=!!e.target.closest('.lx-path-ask');
     save(v); show(v);
     if(v==='know'){
-      var bar=document.querySelector('.arc-bar'), q=document.getElementById('arcQuery');
-      if(bar) scrollTo(bar,90);
+      /* the search field is pinned at the top of the page: bring the list up just under it */
+      var bar=document.getElementById('arcList'), q=document.getElementById('arcQuery'), dk=document.getElementById('ldock');
+      if(bar) scrollTo(bar,(dk?dk.offsetHeight:74)+16);
       if(q && fromAsk){ try{ q.focus({preventScroll:true}); }catch(err){ q.focus(); } }
     } else if(fromAsk){
       scrollTo(box,90);

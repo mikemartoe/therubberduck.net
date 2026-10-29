@@ -717,8 +717,8 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script src="data/drops.js"></script>
 <script src="assets/trd/ledger-search.js?v=20261025"></script>
 <script src="assets/trd/ledger-starter.js?v=20261025" defer></script>
-<script src="assets/trd/ledger-path.js?v=20261025" defer></script>
-<script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Calendar","href":"#calendar"},{"label":"Chronology","href":"#chronology"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"Search the ledger","href":"#archive"}}</script>
+<script src="assets/trd/ledger-path.js?v=20261029" defer></script>
+<script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Calendar","href":"#calendar"},{"label":"Chronology","href":"#chronology"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"New? Start here","href":"#start-here"}}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-nav-pill'),D=JSON.parse(root.querySelector('script.data').textContent),esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
@@ -738,6 +738,39 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script class="e3-fill">(function(){var root=document.currentScript.parentNode;var I={"lucide:arrow-right":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M5 12h14m-7-7l7 7l-7 7\"/></svg>","lucide:wallet":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\"><path d=\"M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1\"/><path d=\"M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4\"/></g></svg>"};var A={};var L={};function fill(){root.querySelectorAll("[data-icon]").forEach(function(el){if(el.childElementCount)return;var s=I[(el.getAttribute("data-set")||"lucide")+":"+el.getAttribute("data-icon")];if(s)el.innerHTML=s;});root.querySelectorAll("[data-logo]").forEach(function(el){if(el.childElementCount)return;var s=L[el.getAttribute("data-logo")];if(s)el.innerHTML=s;});root.querySelectorAll("[data-avatar]").forEach(function(el){if(el.childElementCount)return;var p=A[el.getAttribute("data-avatar")];if(p){var im=document.createElement("img");im.src=p;im.alt=el.getAttribute("data-avatar");im.loading="lazy";im.style.cssText="width:100%;height:100%;display:block;object-fit:cover";el.appendChild(im);}});}fill();if(window.MutationObserver)new MutationObserver(fill).observe(root,{childList:true,subtree:true});})();</script>
 </section>
 
+<div class="ldock" id="ldock" role="search" aria-label="Search and filter the Q drops">
+<div class="ldock-in">
+      <div class="arc-bar">
+        <div class="arc-search" id="arcSearchWrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="m21 21l-4.34-4.34"/><circle cx="11" cy="11" r="8"/></g></svg>
+          <input id="arcQuery" type="search" placeholder="Search the Q drops: #number, date or phrase" autocomplete="off" aria-label="Search the ledger">
+          <button class="arc-clear" id="arcClear" type="button" aria-label="Clear search"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <button class="ldock-opt" id="ldockOpt" type="button" aria-expanded="false" aria-controls="ldockMore"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M7 12h10M10 18h4"/></svg><span>Filters</span><i class="ldock-dot" aria-hidden="true"></i></button>
+        <div class="ldock-more" id="ldockMore">
+<div class="arc-chips" role="group" aria-label="Filter by board">
+          <button class="chip" type="button" data-board="all" aria-pressed="true">All boards</button>
+          <button class="chip" type="button" data-board="4chan" aria-pressed="false">4chan</button>
+          <button class="chip" type="button" data-board="8chan" aria-pressed="false">8chan</button>
+          <button class="chip" type="button" data-board="8kun" aria-pressed="false">8kun</button>
+        </div>
+        <label for="arcSort" class="sr-only" style="position:absolute;left:-9999px">Sort</label>
+        <select class="arc-sort" id="arcSort" aria-label="Sort the ledger">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="number">By number</option>
+        </select>
+      <div class="lx-delta" id="lxDelta" role="group" aria-label="Deltas: drops posted on this day of the year, every year">
+        <span class="lx-dlbl">Deltas <small>this date, every year</small></span>
+        <button type="button" class="chip" data-delta="yesterday" aria-pressed="false">Yesterday<span class="lx-dd"></span></button>
+        <button type="button" class="chip" data-delta="today" aria-pressed="false">Today<span class="lx-dd"></span></button>
+        <button type="button" class="chip" data-delta="tomorrow" aria-pressed="false">Tomorrow<span class="lx-dd"></span></button>
+        <button type="button" class="chip lx-spread" data-spread="3" aria-pressed="false">± 3 days</button>
+      </div>
+        </div>
+      </div>
+</div>
+</div>
 <main id="main">
   <section class="e3 e3-hero-kinetic" aria-label="Hero">
 <style>
@@ -775,20 +808,9 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 @media(max-width:899px){.e3-hero-kinetic .k-wrap{grid-template-columns:1fr;padding-top:120px}.e3-hero-kinetic h1{max-width:none}}
 @media(prefers-reduced-motion:reduce){.e3-hero-kinetic *{animation:none!important;transition:none!important}.e3-hero-kinetic h1 .k-w,.e3-hero-kinetic .k-copy,.e3-hero-kinetic .k-ctas,.e3-hero-kinetic .k-card{opacity:1;transform:none}.e3-hero-kinetic .k-media img{transform:none}}
 </style>
-<script type="application/json" class="data">{"eyebrow":"4,966 records · 28 Oct 2017 – 27 Nov 2022","headline":"The whole run, kept in one ledger.","highlight":"one ledger","copy":"Search the drops by number, date, board or phrase. Every entry dated, every gap acknowledged, nothing ranked.","primary":{"label":"Search the archive","href":"#archive"},"secondary":null,"image":{"src":"images/hero.webp","alt":"A printed card catalogue with index tabs, photographed straight on and treated in green and black"},"caption":{"label":"Latest record · 27 Nov 2022","value":"#4,966","hint":"Search the run →"},"ring":true}</script>
+<script type="application/json" class="data">{"eyebrow":"4,966 records · 28 Oct 2017 – 27 Nov 2022","headline":"The whole run, kept in one ledger.","highlight":"one ledger","copy":"New here? Use the search bar at the top: type a drop number, a date or a phrase. It stays with you as you scroll.","primary":{"label":"Read the drops","href":"#archive"},"secondary":null,"image":{"src":"images/hero.webp","alt":"A printed card catalogue with index tabs, photographed straight on and treated in green and black"},"caption":{"label":"Latest record · 27 Nov 2022","value":"#4,966","hint":"Search the run →"},"ring":true}</script>
 <div class="k-media"></div><div class="k-scrim"></div>
 <div class="k-wrap"><div class="k-text"></div><div class="k-side"></div></div>
-<div class="k-find-wrap">
-  <form class="k-find-card" id="heroFind" role="search" aria-label="Search the drop ledger">
-    <label class="k-find-lbl" for="heroQuery">Search the ledger</label>
-    <div class="k-find-row">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="m21 21l-4.34-4.34"/><circle cx="11" cy="11" r="8"/></g></svg>
-      <input id="heroQuery" type="search" name="q" placeholder="Search 4,966 drops…" autocomplete="off" data-arc-query>
-      <button type="submit">Open the ledger</button>
-    </div>
-    <p class="k-find-hint">Try <button type="button" data-arc-query="1061">#1061</button>, <button type="button" data-arc-query="October 2018">October 2018</button>, or <button type="button" data-arc-query="map">“map”</button></p>
-  </form>
-</div>
 <div class="k-cue" aria-hidden="true"></div>
 <script>
 (function(){
@@ -909,7 +931,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   // the filter bar is sticky under the nav, so a row scrolled to the plain offset lands
   // behind it — measure the bar rather than guess, so mobile's shorter bar works too
   function clearOfBar(){
-    var bar=document.querySelector('.arc-bar'), nav=document.querySelector('.e3-nav-pill');
+    var bar=document.querySelector('.ldock'), nav=null;
     if(!bar) return 110;
     var navB=nav?nav.getBoundingClientRect().bottom:0;
     // the bar sticks at its own top (84px desktop, 66px phone), which is not always
@@ -934,11 +956,8 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     if(!q) return; // no ledger field on the page — let the plain #archive anchor do the work
     e.preventDefault();
     clearFilters();
-    // land on the filter bar itself, not the section top — the field has to be on screen
-    var bar=document.querySelector('.arc-bar')||archive;
-    var r=bar.getBoundingClientRect(), nav=document.querySelector('.e3-nav-pill');
-    var ceiling=nav?nav.getBoundingClientRect().bottom:0;
-    if(r.top<ceiling||r.top>window.innerHeight-160){ to(bar, clearOfBar()); }
+    // the field is pinned at the top of the page, so just bring the list up under it
+    to(document.getElementById('arcList')||archive, clearOfBar());
     try{ q.focus({preventScroll:true}); }catch(err){ q.focus(); }
   });
 
@@ -1153,33 +1172,6 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         <div class="lx-panel" id="lxPanel" hidden></div>
       </div>
 
-      <div class="arc-bar" role="search" aria-label="Filter the ledger">
-        <div class="arc-search" id="arcSearchWrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><path d="m21 21l-4.34-4.34"/><circle cx="11" cy="11" r="8"/></g></svg>
-          <input id="arcQuery" type="search" placeholder="Drop number, date, board or phrase" autocomplete="off" aria-label="Search the ledger">
-          <button class="arc-clear" id="arcClear" type="button" aria-label="Clear search"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M18 6L6 18M6 6l12 12"/></svg></button>
-        </div>
-        <div class="arc-chips" role="group" aria-label="Filter by board">
-          <button class="chip" type="button" data-board="all" aria-pressed="true">All boards</button>
-          <button class="chip" type="button" data-board="4chan" aria-pressed="false">4chan</button>
-          <button class="chip" type="button" data-board="8chan" aria-pressed="false">8chan</button>
-          <button class="chip" type="button" data-board="8kun" aria-pressed="false">8kun</button>
-        </div>
-        <label for="arcSort" class="sr-only" style="position:absolute;left:-9999px">Sort</label>
-        <select class="arc-sort" id="arcSort" aria-label="Sort the ledger">
-          <option value="newest">Newest first</option>
-          <option value="oldest">Oldest first</option>
-          <option value="number">By number</option>
-        </select>
-      </div>
-
-      <div class="lx-delta" id="lxDelta" role="group" aria-label="Deltas: drops posted on this day of the year, every year">
-        <span class="lx-dlbl">Deltas</span>
-        <button type="button" class="chip" data-delta="yesterday" aria-pressed="false">Yesterday<span class="lx-dd"></span></button>
-        <button type="button" class="chip" data-delta="today" aria-pressed="false">Today<span class="lx-dd"></span></button>
-        <button type="button" class="chip" data-delta="tomorrow" aria-pressed="false">Tomorrow<span class="lx-dd"></span></button>
-        <button type="button" class="chip lx-spread" data-spread="3" aria-pressed="false">± 3 days</button>
-      </div>
       <p class="lx-info" id="arcInfo" aria-live="polite" hidden></p>
 
       <ol class="arc-list" id="arcList" aria-live="polite"></ol>
@@ -1277,69 +1269,18 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-faq-accordion'),D=JSON.parse(root.querySelector('script.data').textContent),esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});},uid='f'+Math.random().toString(36).slice(2,7);
-  root.querySelector('.k-in').innerHTML='<div class="k-side"><span class="k-eyebrow">'+esc(D.eyebrow)+'</span><h2>'+esc(D.heading)+'</h2><p>'+esc(D.copy)+'</p><label class="k-find"><span class="k-icon" data-icon="search"></span><input type="search" placeholder="'+esc(D.filterPlaceholder)+'" aria-label="'+esc(D.filterPlaceholder)+'"></label><p class="k-none" aria-live="polite">'+esc(D.noMatch)+'</p></div><ul class="k-qs">'+(D.items||[]).map(function(it,i){var id=uid+i;return '<li><h3><button class="k-q" type="button" aria-expanded="'+(i===0)+'" aria-controls="'+id+'" id="'+id+'b"><span class="k-n">'+(i<9?'0':'')+(i+1)+'</span><span>'+esc(it.q)+'</span><span class="k-icon" data-icon="chevron-down"></span></button></h3><div class="k-a" id="'+id+'" role="region" aria-labelledby="'+id+'b"><div><p>'+esc(it.a)+'</p></div></div></li>';}).join('')+'</ul>';
+  root.querySelector('.k-in').innerHTML='<div class="k-side"><span class="k-eyebrow">'+esc(D.eyebrow)+'</span><h2>'+esc(D.heading)+'</h2><p>'+esc(D.copy)+'</p></div><ul class="k-qs">'+(D.items||[]).map(function(it,i){var id=uid+i;return '<li><h3><button class="k-q" type="button" aria-expanded="'+(i===0)+'" aria-controls="'+id+'" id="'+id+'b"><span class="k-n">'+(i<9?'0':'')+(i+1)+'</span><span>'+esc(it.q)+'</span><span class="k-icon" data-icon="chevron-down"></span></button></h3><div class="k-a" id="'+id+'" role="region" aria-labelledby="'+id+'b"><div><p>'+esc(it.a)+'</p></div></div></li>';}).join('')+'</ul>';
   var qs=[].slice.call(root.querySelectorAll('.k-q'));
   qs.forEach(function(b){b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';qs.forEach(function(x){x.setAttribute('aria-expanded','false');});if(!o)b.setAttribute('aria-expanded','true');});});
   var inp=root.querySelector('input'),none=root.querySelector('.k-none'),lis=[].slice.call(root.querySelectorAll('.k-qs li'));
-  inp.addEventListener('input',function(){var q=inp.value.trim().toLowerCase(),n=0;lis.forEach(function(li,i){var hit=!q||(D.items[i].q+' '+D.items[i].a).toLowerCase().indexOf(q)>-1;li.hidden=!hit;if(hit)n++;});none.classList.toggle('k-show',!n);});
+  if(inp)inp.addEventListener('input',function(){var q=inp.value.trim().toLowerCase(),n=0;lis.forEach(function(li,i){var hit=!q||(D.items[i].q+' '+D.items[i].a).toLowerCase().indexOf(q)>-1;li.hidden=!hit;if(hit)n++;});none.classList.toggle('k-show',!n);});
   /* FAQPage structured data from the same items (the context URL is split so the preset ships no literal third-party URL) */
   var ld=document.createElement('script');ld.type='application/ld+json';ld.textContent=JSON.stringify({'@context':'https:/'+'/schema.org','@type':'FAQPage','mainEntity':(D.items||[]).map(function(it){return {'@type':'Question','name':it.q,'acceptedAnswer':{'@type':'Answer','text':it.a}};})});root.appendChild(ld);
 })();
 </script>
 <script class="e3-fill">(function(){var root=document.currentScript.parentNode;var I={"lucide:search":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\"><path d=\"m21 21l-4.34-4.34\"/><circle cx=\"11\" cy=\"11\" r=\"8\"/></g></svg>","lucide:chevron-down":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"m6 9l6 6l6-6\"/></svg>"};var A={};var L={};function fill(){root.querySelectorAll("[data-icon]").forEach(function(el){if(el.childElementCount)return;var s=I[(el.getAttribute("data-set")||"lucide")+":"+el.getAttribute("data-icon")];if(s)el.innerHTML=s;});root.querySelectorAll("[data-logo]").forEach(function(el){if(el.childElementCount)return;var s=L[el.getAttribute("data-logo")];if(s)el.innerHTML=s;});root.querySelectorAll("[data-avatar]").forEach(function(el){if(el.childElementCount)return;var p=A[el.getAttribute("data-avatar")];if(p){var im=document.createElement("img");im.src=p;im.alt=el.getAttribute("data-avatar");im.loading="lazy";im.style.cssText="width:100%;height:100%;display:block;object-fit:cover";el.appendChild(im);}});}fill();if(window.MutationObserver)new MutationObserver(fill).observe(root,{childList:true,subtree:true});})();</script>
 </section>
-  <section class="e3 e3-cta-split" id="search" aria-label="Search the ledger">
-<style>
-.e3-cta-split{--_a:var(--accent,var(--primary,var(--brand,#7f8c9f)));--_a2:var(--accent-2,var(--accent-hover,var(--secondary,#c8a97e)));--_s:var(--surface-1,var(--surface,var(--card,#15181d)));--_s2:var(--surface-2,var(--surface-1,var(--surface,#1d2127)));--_b:var(--border,var(--line,#2c323b));--_t:var(--text,var(--ink,var(--foreground,#e9ebef)));--_m:var(--muted,var(--text-muted,var(--muted-foreground,#9aa2ad)));--_bg:var(--bg,var(--background,#0f1115));--_f:var(--font-display,'Space Grotesk',Inter,sans-serif);padding:clamp(40px,6vw,80px) 0;color:var(--_t)}
-.e3-cta-split .k-wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,5vw,40px)}
-.e3-cta-split .k-panel{display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--_b);border-radius:28px;overflow:hidden;background:var(--_s)}
-.e3-cta-split .k-say{padding:clamp(32px,5vw,64px)}
-.e3-cta-split .k-kick{margin:0 0 14px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--_a)}
-.e3-cta-split h2{margin:0;font:600 clamp(28px,3.8vw,46px)/1.05 var(--_f);letter-spacing:-.03em;text-wrap:balance}
-.e3-cta-split .k-lede{margin:16px 0 0;font-size:16px;line-height:1.6;color:var(--_m);max-width:44ch}
-.e3-cta-split .k-proof{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:12px}
-.e3-cta-split .k-proof li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5}
-.e3-cta-split .k-proof .k-icon{flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--_a) 14%,transparent);color:var(--_a);margin-top:1px}
-.e3-cta-split .k-proof svg{width:14px;height:14px}
-.e3-cta-split .k-act{position:relative;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:clamp(32px,5vw,64px);background:color-mix(in srgb,var(--_a) 14%,var(--_s));isolation:isolate}
-.e3-cta-split .k-act::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,transparent 0 14px,color-mix(in srgb,var(--_a) 9%,transparent) 14px 15px);-webkit-mask:linear-gradient(180deg,transparent,#000 40%);mask:linear-gradient(180deg,transparent,#000 40%)}
-.e3-cta-split .k-ask{margin:0;font:600 20px/1.3 var(--_f);letter-spacing:-.01em}
-.e3-cta-split form{display:flex;flex-direction:column;gap:16px}
-.e3-cta-split label{display:block;font-size:13px;font-weight:600;color:var(--_m);margin-bottom:-8px}
-.e3-cta-split .k-row2{display:flex;gap:10px}
-.e3-cta-split input{flex:1;min-width:0;height:52px;padding:0 16px;border-radius:14px;border:1px solid color-mix(in srgb,var(--_a) 30%,var(--_b));background:var(--_bg);color:var(--_t);font:inherit;font-size:15px;transition:border-color .2s,box-shadow .2s}
-.e3-cta-split input:focus{outline:0;border-color:var(--_a);box-shadow:0 0 0 4px color-mix(in srgb,var(--_a) 22%,transparent)}
-.e3-cta-split .k-go,.e3-cta-split .k-alt{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;border-radius:14px;border:1px solid var(--_a);background:var(--_a);color:var(--_bg);font-weight:600;font-size:15px;font-family:inherit;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .2s,filter .2s}
-.e3-cta-split .k-go:hover,.e3-cta-split .k-alt:hover{transform:translateY(-1px);filter:brightness(1.06)}
-.e3-cta-split .k-go svg,.e3-cta-split .k-alt svg{width:16px;height:16px}
-.e3-cta-split .k-alt{background:transparent;color:var(--_t);border-color:color-mix(in srgb,var(--_t) 25%,transparent)}
-.e3-cta-split .k-btns{display:flex;flex-wrap:wrap;gap:10px}
-.e3-cta-split .k-err{min-height:18px;margin:0;font-size:13px;color:var(--_a2);font-weight:500}
-.e3-cta-split .k-fine{margin:0;font-size:13px;color:var(--_m)}
-.e3-cta-split .k-done{display:none;align-items:center;gap:12px;font:600 17px/1.3 var(--_f)}
-.e3-cta-split .k-done .k-icon{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--_a);color:var(--_bg);flex:none}
-.e3-cta-split .k-done svg{width:18px;height:18px}
-.e3-cta-split form.k-sent .k-row2,.e3-cta-split form.k-sent label,.e3-cta-split form.k-sent .k-err,.e3-cta-split form.k-sent .k-ask{display:none}
-.e3-cta-split form.k-sent .k-done{display:flex}
-@media(max-width:820px){.e3-cta-split .k-panel{grid-template-columns:1fr}}
-@media(max-width:480px){.e3-cta-split .k-row2{flex-direction:column}.e3-cta-split .k-go{width:100%}}
-@media(prefers-reduced-motion:reduce){.e3-cta-split input,.e3-cta-split .k-go,.e3-cta-split .k-alt{transition:none}}
-</style>
-<script type="application/json" class="data">{"mode":"buttons","kicker":"Start anywhere","title":"The ledger takes a number, a date, or a phrase.","lede":"There is no front page and no ranking. Type what you already know and the record answers with what it holds.","bullets":["Drop numbers #1 to #4,966, 28 Oct 2017 – 27 Nov 2022","Filter the record by board across 4chan, 8chan and 8kun — nine board tags in all"],"buttons":{"ask":"Two ways in — or search from the field at the top of the page.","primary":"#1061 — try a number","primaryHref":"#archive","secondary":"“October 2018” — try a date","secondaryHref":"#archive"}}</script>
-<script>
-(function(){
-  var root=document.currentScript.closest('.e3-cta-split'),D=JSON.parse(root.querySelector('script.data').textContent),uid='e3cs'+Math.random().toString(36).slice(2,7);
-  var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
-  var F=D.form||{},B=D.buttons||{};
-  var act=D.mode==='buttons'?'<p class="k-ask">'+esc(B.ask)+'</p><div class="k-btns"><a class="k-go" href="'+esc(B.primaryHref||'#')+'">'+esc(B.primary)+'<span class="k-icon" data-icon="arrow-right"></span></a>'+(B.secondary?'<a class="k-alt" href="'+esc(B.secondaryHref||'#')+'">'+esc(B.secondary)+'</a>':'')+'</div>'+(F.fine?'<p class="k-fine">'+esc(F.fine)+'</p>':'')
-    :'<form novalidate><p class="k-ask">'+esc(F.ask)+'</p><label for="'+uid+'">'+esc(F.label)+'</label><div class="k-row2"><input id="'+uid+'" type="email" name="email" autocomplete="email" required placeholder="'+esc(F.placeholder)+'"><button class="k-go" type="submit">'+esc(F.button)+'<span class="k-icon" data-icon="arrow-right"></span></button></div><p class="k-err" aria-live="polite"></p><p class="k-done"><span class="k-icon" data-icon="check"></span><span>'+esc(F.success)+'</span></p>'+(F.fine?'<p class="k-fine">'+esc(F.fine)+'</p>':'')+'</form>';
-  root.insertAdjacentHTML('beforeend','<div class="k-wrap"><div class="k-panel"><div class="k-say"><p class="k-kick">'+esc(D.kicker)+'</p><h2>'+esc(D.title)+'</h2><p class="k-lede">'+esc(D.lede)+'</p><ul class="k-proof">'+(D.bullets||[]).map(function(b){return '<li><span class="k-icon" data-icon="check"></span><span>'+esc(b)+'</span></li>';}).join('')+'</ul></div><div class="k-act">'+act+'</div></div></div>');
-  var form=root.querySelector('form');if(!form)return;
-  form.addEventListener('submit',function(e){e.preventDefault();var inp=form.querySelector('input'),err=form.querySelector('.k-err'),ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(inp.value.trim());if(!ok){err.textContent=F.error||'Please enter a valid email.';inp.focus();return;}err.textContent='';form.classList.add('k-sent');form.dispatchEvent(new CustomEvent('e3:lead',{bubbles:true,detail:{email:inp.value.trim()}}));});
-})();
-</script>
-<script class="e3-fill">(function(){var root=document.currentScript.parentNode;var I={"lucide:arrow-right":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M5 12h14m-7-7l7 7l-7 7\"/></svg>","lucide:check":"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.75\" d=\"M20 6L9 17l-5-5\"/></svg>"};var A={};var L={};function fill(){root.querySelectorAll("[data-icon]").forEach(function(el){if(el.childElementCount)return;var s=I[(el.getAttribute("data-set")||"lucide")+":"+el.getAttribute("data-icon")];if(s)el.innerHTML=s;});root.querySelectorAll("[data-logo]").forEach(function(el){if(el.childElementCount)return;var s=L[el.getAttribute("data-logo")];if(s)el.innerHTML=s;});root.querySelectorAll("[data-avatar]").forEach(function(el){if(el.childElementCount)return;var p=A[el.getAttribute("data-avatar")];if(p){var im=document.createElement("img");im.src=p;im.alt=el.getAttribute("data-avatar");im.loading="lazy";im.style.cssText="width:100%;height:100%;display:block;object-fit:cover";el.appendChild(im);}});}fill();if(window.MutationObserver)new MutationObserver(fill).observe(root,{childList:true,subtree:true});})();</script>
-</section>
+
 </main>
 
 <section class="e3 e3-footer-editorial" aria-label="Footer">
@@ -1682,7 +1623,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   /* Bottom edge of whatever is pinned to the top of the screen (nav pill + search bar), so a drop is never tucked under it. */
   function headerBottom(){
     var b=0;
-    [].slice.call(document.querySelectorAll('.e3-nav-pill,.arc-bar')).forEach(function(h){
+    [].slice.call(document.querySelectorAll('.e3-nav-pill,.ldock')).forEach(function(h){
       var cs=getComputedStyle(h); if(cs.position!=='sticky'&&cs.position!=='fixed') return;
       /* where it will sit once pinned (its sticky top + its height), not where it is right now */
       var r=h.getBoundingClientRect(), pin=(parseFloat(cs.top)||0)+r.height;
@@ -1773,9 +1714,9 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     if(opts.scroll) scrollToResults();
   }
   function scrollToResults(){
-    var bar=document.querySelector('.arc-bar'), target=document.getElementById('arcInfo');
+    var target=document.getElementById('arcInfo');
     var el=(target && !target.hidden)?target:list;
-    var off=(bar?bar.getBoundingClientRect().height:0)+96;
+    var off=headerBottom()+16;
     var y=el.getBoundingClientRect().top+window.pageYOffset-off;
     var calm=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(Math.abs(window.pageYOffset-y)>40) window.scrollTo({top:Math.max(0,y),behavior:calm?'auto':'smooth'});
@@ -1783,16 +1724,21 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   var typeT=null;
   query.addEventListener('input',function(){
     var v=query.value; clearTimeout(typeT);
-    typeT=setTimeout(function(){ setQuery(v); },150);
+    typeT=setTimeout(function(){ setQuery(v,{scroll:!listInView()}); },150);
   });
+  function listInView(){
+    var a=document.getElementById('archive'), r=list.getBoundingClientRect();
+    if(!a) return true;
+    return r.top<window.innerHeight-80 && r.bottom>headerBottom()+40;
+  }
   query.addEventListener('keydown',function(e){ if(e.key==='Enter'){ clearTimeout(typeT); setQuery(query.value,{scroll:true}); } });
   clear.addEventListener('click',function(){ clearTimeout(typeT); setQuery(''); query.focus(); });
-  sort.addEventListener('change',function(){ state.sort=sort.value; state.page=1; apply(); });
+  sort.addEventListener('change',function(){ state.sort=sort.value; state.page=1; apply(); if(!listInView()) scrollToResults(); });
   chips.forEach(function(c){
     c.addEventListener('click',function(){
       chips.forEach(function(o){o.setAttribute('aria-pressed','false');});
       c.setAttribute('aria-pressed','true');
-      state.board=c.getAttribute('data-board'); state.page=1; apply();
+      state.board=c.getAttribute('data-board'); state.page=1; apply(); if(!listInView()) scrollToResults();
     });
   });
   prev.addEventListener('click',function(){ if(state.page>1){state.page--;render();scrollBar();} });
@@ -1801,8 +1747,8 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     if(state.page<pages){state.page++;render();scrollBar();}
   });
   function scrollBar(){
-    var y=document.querySelector('.arc-bar').getBoundingClientRect().top+window.pageYOffset-8;
-    window.scrollTo({top:y,behavior:'smooth'});
+    var y=list.getBoundingClientRect().top+window.pageYOffset-headerBottom()-16;
+    window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
   }
 
   /* ---- Deltas: drops posted on this calendar day (US Eastern) in every year ---- */
@@ -2058,5 +2004,81 @@ w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true}
 })();
 </script>
 <!-- /trd-support -->
+<style id="ldock-css">
+/* t1964u: one pinned search + filter bar for the Q drops, at the top of the room wherever you scroll */
+.e3-nav-pill{position:relative!important;top:auto!important}
+.ldock{position:sticky;top:0;z-index:58;background:rgba(4,7,5,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid var(--border);border-bottom:1px solid var(--border);box-shadow:0 10px 24px -18px #000}
+.ldock-in{max-width:var(--maxw);margin:0 auto;padding:8px clamp(14px,3vw,24px)}
+.ldock .arc-bar{position:static!important;top:auto!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.ldock .arc-search{min-height:42px}
+.ldock .arc-search input{min-height:40px}
+.ldock-more{display:contents}
+.ldock .arc-search input{min-width:0;width:100%}
+.ldock .arc-search input:focus,.ldock .arc-search input:focus-visible{outline:none!important;box-shadow:none!important;border:0!important}
+.ldock .arc-search{flex:1 1 220px}
+.ldock .lx-delta{display:flex;flex-wrap:nowrap;align-items:center}
+.ldock .lx-dlbl{margin-left:4px}
+.ldock .lx-dlbl small{font-size:inherit;opacity:.75;text-transform:none;letter-spacing:.02em}
+@media (min-width:761px){.ldock .lx-delta{flex:1 1 100%}.ldock .lx-delta .chip{flex:1 1 0}.ldock .lx-dlbl{flex:none;margin:0 6px 0 2px}}
+.ldock input[type=search]::-webkit-search-cancel-button,.ldock input[type=search]::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}
+.ldock .arc-chips{gap:6px}
+.ldock .chip{min-height:36px}
+.ldock .lx-delta{margin:0;gap:6px}
+.ldock .arc-sort{min-height:36px}
+.ldock-opt{display:none}
+section[id],details[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 14px)!important}
+.arc-row[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 12px)!important}
+.e3-hero-kinetic{padding-top:36px!important}
+.e3-hero-kinetic{padding-bottom:clamp(28px,4vw,48px)!important}
+.e3-hero-kinetic .k-media{height:clamp(170px,26vw,330px)!important;margin-top:clamp(18px,2.5vw,28px)!important}
+.e3-manifesto,.e3-contrib-heatmap{padding-top:clamp(36px,5vw,64px)!important;padding-bottom:clamp(36px,5vw,64px)!important}
+.e3-timeline-vertical{padding-top:clamp(32px,4.5vw,56px)!important;padding-bottom:clamp(28px,4vw,48px)!important}
+.e3-faq-accordion .k-in{padding-top:clamp(36px,5vw,64px)!important;padding-bottom:clamp(36px,5vw,64px)!important}
+.arc{padding-top:clamp(40px,5vw,64px)!important;padding-bottom:clamp(40px,5vw,64px)!important}
+@media (max-width:760px){
+  .e3-nav-pill{padding:8px 10px 6px!important}
+  .ldock-in{padding:7px 10px}
+  .ldock .arc-bar{flex-wrap:wrap;gap:8px}
+  .ldock .arc-search{flex:1 1 0;min-width:0;min-height:44px}
+  .ldock .arc-search input{font-size:16px!important}
+  .ldock-opt{display:inline-flex;align-items:center;gap:6px;flex:none;min-height:44px;padding:0 12px;border:1px solid var(--border);border-radius:4px;background:var(--surface-1);color:var(--accent-ink);font-family:var(--font-display);font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;position:relative}
+  .ldock-opt .icon{width:18px;height:18px}
+  .ldock.open .ldock-opt{border-color:var(--accent);color:var(--accent)}
+  .ldock-dot{display:none;position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .ldock.filtered .ldock-dot{display:block}
+  .ldock-more{display:none;flex-basis:100%;flex-direction:column;align-items:stretch;gap:8px;padding:2px 0 2px}
+  .ldock.open .ldock-more{display:flex}
+  .ldock .arc-chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .ldock .arc-chips .chip{padding:0 4px;min-height:44px}
+  .ldock .arc-sort{min-height:44px;width:100%}
+  .ldock .lx-delta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .ldock .lx-dlbl{grid-column:1/-1}
+  .ldock .lx-delta .chip{min-height:44px}
+  .e3-hero-kinetic{padding-top:22px!important}
+}
+</style>
+<script>
+(function(){
+  var d=document.getElementById('ldock'), b=document.getElementById('ldockOpt'); if(!d) return;
+  function h(){ document.documentElement.style.setProperty('--ldock-h',d.offsetHeight+'px'); }
+  h(); addEventListener('resize',h); if(window.ResizeObserver) new ResizeObserver(h).observe(d);
+  if(b) b.addEventListener('click',function(){
+    var o=!d.classList.contains('open'); d.classList.toggle('open',o); b.setAttribute('aria-expanded',o?'true':'false');
+  });
+  function mark(){
+    var st=window.TRDLedgerUI&&window.TRDLedgerUI.state; if(!st) return;
+    var res=st.res||{};
+    d.classList.toggle('filtered', st.board!=='all'||st.sort!=='newest'||res.kind==='delta');
+  }
+  /* phones: the Filters panel folds away once a choice is made, so the results are not hidden under it */
+  function fold(){ if(b && getComputedStyle(b).display!=='none' && d.classList.contains('open')){ d.classList.remove('open'); b.setAttribute('aria-expanded','false'); } }
+  d.addEventListener('click',function(e){ setTimeout(mark,0); if(e.target.closest('.ldock-more .chip')) setTimeout(fold,250); });
+  d.addEventListener('change',function(e){ setTimeout(mark,0); if(e.target.closest('.ldock-more')) setTimeout(fold,250); });
+  var q=document.getElementById('arcQuery'), long=q&&q.getAttribute('placeholder');
+  function ph(){ if(q) q.setAttribute('placeholder', innerWidth<760?'Search the Q drops':long); }
+  ph(); addEventListener('resize',ph);
+  setTimeout(mark,300);
+})();
+</script>
 </body>
 </html>
