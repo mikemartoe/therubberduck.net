@@ -17,11 +17,13 @@
 
   var BUILD={
     what:function(){
-      return '<h3>What&rsquo;s a drop?</h3>'+
-        '<p>&ldquo;Q&rdquo; was an anonymous poster who claimed to have inside knowledge of the US government. Each numbered post Q made is called a <b>drop</b>.</p>'+
-        '<p>There are 4,966 of them, from 28 Oct 2017 to 27 Nov 2022 &mdash; first on 4chan, then 8chan, then 8kun (after 8chan went offline in August 2019).</p>'+
-        '<p>Readers called themselves <b>anons</b> and treated each drop as a clue, or <b>crumb</b>. A <b>delta</b> is a date match &mdash; for example, a drop posted on the same day of the year as today.</p>'+
-        '<p class="lx-row">'+b('Show me 7 to start','@start')+'<a class="lx-link" href="Qdrops/index.html">More about the drops &rarr;</a></p>';
+      return '<h3>New words, explained</h3>'+
+        '<p><b>Drop:</b> a post made by the Q team on the Q boards. Each numbered post is one drop.</p>'+
+        '<p>There are 4,966 of them, from 28 Oct 2017 to 27 Nov 2022 &mdash; first on 4chan, then 8chan, then 8kun (after 8chan went offline in August 2019). Readers called themselves <b>anons</b> and treated each drop as a clue, or <b>crumb</b>.</p>'+
+        '<p><b>Delta:</b> a drop anniversary. Each year, anons look at the drops posted on this same date in the past (2017 to 2022) and ask whether they matter today. &ldquo;Future proves past.&rdquo;</p>'+
+        '<p><b>Proof:</b> a Delta becomes a proof when a drop from the past comes true in real life on its anniversary date.</p>'+
+        '<p><b>Q Proof:</b> a Q drop that Donald Trump (Q+) has confirmed publicly.</p>'+
+        '<p class="lx-row">'+b('Show me 7 to start','@start')+b('Today\u2019s Deltas','today')+'<a class="lx-link" href="Qdrops/index.html">More about the drops &rarr;</a></p>';
     },
     phrases:function(){
       return '<h3>Famous phrases</h3><p>The lines people have heard of. Each one finds that exact phrase.</p><div class="lx-chips">'+
