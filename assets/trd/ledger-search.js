@@ -216,7 +216,6 @@
       return false;
     }
     var w=tk[0];
-    if(r.btok.indexOf(w)>-1) return true;                /* board and site names: "8kun", "qresearch" */
     if(w.length<=2 || exact){ if(!r.tokset){ r.tokset={}; r.tok.forEach(function(x){ r.tokset[x]=1; }); } return !!r.tokset[w]; }
     for(var k=0;k<r.tok.length;k++){ if(r.tok[k].indexOf(w)===0) return true; }
     return false;
@@ -288,7 +287,7 @@
     return out;
   }
   var GAPS=[
-    {from:20190801, to:20191102, why:'8chan was offline'},
+    {from:20190801, to:20191102, why:'the posting site was offline'},
     {from:20201208, to:20220624, why:'Q’s long silence'},
     {from:20220629, to:20221106, why:'a quiet stretch'},
     {from:20181009, to:20181101, why:'a quiet stretch before the 2018 midterms'}

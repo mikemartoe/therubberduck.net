@@ -18,8 +18,8 @@
   var BUILD={
     what:function(){
       return '<h3>New words, explained</h3>'+
-        '<p><b>Drop:</b> a post made by the Q team on the Q boards. Each numbered post is one drop.</p>'+
-        '<p>There are 4,966 of them, from 28 Oct 2017 to 27 Nov 2022 &mdash; first on 4chan, then 8chan, then 8kun (after 8chan went offline in August 2019). Readers called themselves <b>anons</b> and treated each drop as a clue, or <b>crumb</b>.</p>'+
+        '<p><b>Drop:</b> a post made by the Q team. Each numbered post is one drop.</p>'+
+        '<p>There are 4,966 of them, from 28 Oct 2017 to 27 Nov 2022. Readers called themselves <b>anons</b> and treated each drop as a clue, or <b>crumb</b>.</p>'+
         '<p><b>Delta:</b> a drop anniversary. Each year, anons look at the drops posted on this same date in the past (2017 to 2022) and ask whether they matter today. &ldquo;Future proves past.&rdquo;</p>'+
         '<p><b>Proof:</b> a Delta becomes a proof when a drop from the past comes true in real life on its anniversary date.</p>'+
         '<p><b>Q Proof:</b> a Q drop that Donald Trump (Q+) has confirmed publicly.</p>'+

@@ -143,7 +143,7 @@ html[data-theme="dark"] .chip[aria-pressed="true"]{color:#1A1710}
 
 .arc-list{list-style:none;margin:0;padding:0}
 .arc-row{
-  display:grid;grid-template-columns:92px 132px 116px minmax(0,1fr);
+  display:grid;grid-template-columns:92px 132px minmax(0,1fr);
   gap:22px;align-items:baseline;
   padding:22px 10px;margin:0 -10px;
   border-bottom:1px solid var(--border);
@@ -157,11 +157,8 @@ html[data-theme="dark"] .chip[aria-pressed="true"]{color:#1A1710}
 }
 .arc-row .n span{font-size:.62em;opacity:.7;margin-right:1px}
 .arc-row .d{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.arc-row .b{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-  border:1px solid var(--border);border-radius:4px;padding:3px 7px;justify-self:start;white-space:nowrap}
 .arc-row .n a{color:inherit;text-decoration:none}
 .arc-row .n a:hover{text-decoration:underline;text-underline-offset:3px}
-.arc-row .b i{display:block;font-style:normal;font-size:11px;letter-spacing:.06em;color:var(--muted);opacity:.85;margin-top:2px}
 .arc-row .e .ex{display:block;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
 .arc-row .ln{display:inline}
 .arc-row .gt{color:#86B96B}
@@ -277,11 +274,11 @@ html[data-theme="dark"] .corr .go{color:#1A1710}
   .arc-row{grid-template-columns:76px minmax(0,1fr);gap:8px 16px;padding:20px 8px}
   .arc-row .n{font-size:1.25rem;grid-row:1}
   .arc-row .d{grid-column:2;grid-row:1;justify-self:end}
-  .arc-row .b{grid-column:1/-1;grid-row:2}
-  .arc-row .e{grid-column:1/-1;grid-row:3}
+  .arc-row .e{grid-column:1/-1;grid-row:2}
   .arc-title{font-size:clamp(2rem,8.5vw,2.9rem)}
-  .arc-figure{gap:12px 22px}
-  .arc-figure dd{font-size:1.25rem}
+  .arc-figure{display:grid;grid-template-columns:auto auto auto;justify-content:space-between;gap:12px 14px;align-items:end}
+  .arc-figure dt{letter-spacing:.1em}
+  .arc-figure dd{font-size:1.1rem;white-space:nowrap}
 }
 @media (max-width:520px){
   .arc-sort{flex:1 1 100%}
@@ -468,55 +465,6 @@ main,.e3,.arc{background-color:var(--bg)}
 .e3-contrib-heatmap .d:hover{outline:1px solid var(--accent)!important}
 .e3-contrib-heatmap .months,.e3-contrib-heatmap footer{font-family:var(--font-display);color:var(--muted)}
 
-/* chronology — timeline-vertical: one spine, platform markers, board moves as cards */
-.e3-timeline-vertical{background:var(--bg)!important;border-top:1px solid var(--border);color:var(--text);padding:clamp(46px,6.5vw,84px) 0 clamp(38px,5.5vw,68px)}
-.e3-timeline-vertical .k-wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,5vw,40px)}
-.e3-timeline-vertical .k-head{max-width:740px;margin:0 0 clamp(26px,3.4vw,34px)}
-.e3-timeline-vertical .k-kick{margin:0 0 12px;font:600 11px/1 var(--font-display);letter-spacing:.22em;text-transform:uppercase;color:var(--accent-ink)}
-.e3-timeline-vertical h2{margin:0;font:600 clamp(25px,3.4vw,40px)/1.07 var(--font-display);letter-spacing:-.035em;color:var(--text)}
-.e3-timeline-vertical .k-lede{margin:14px 0 0;color:var(--muted);font-size:15px;line-height:1.6;max-width:60ch}
-.e3-timeline-vertical .k-era{display:grid;grid-template-columns:170px minmax(0,1fr);gap:0 40px}
-.e3-timeline-vertical .k-year{align-self:start;padding:3px 0 32px}
-.e3-timeline-vertical .k-yr{font:600 21px/1.15 var(--font-display);letter-spacing:-.01em;color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums}
-.e3-timeline-vertical .k-ys{margin-top:9px;font:600 10px/1.6 var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
-.e3-timeline-vertical .k-list{position:relative;padding:0 0 34px}
-.e3-timeline-vertical .k-era:last-of-type .k-list{padding-bottom:0}
-.e3-timeline-vertical .k-list::before{content:"";position:absolute;left:5px;top:8px;bottom:0;width:1px;background:var(--border)}
-.e3-timeline-vertical .k-era:last-of-type .k-list::before{bottom:24px}
-.e3-timeline-vertical .k-ink{position:absolute;left:4px;top:8px;bottom:0;width:2px;background:var(--accent-ink);transform:scaleY(1);transform-origin:top;box-shadow:0 0 12px rgba(0,255,65,.3)}
-.e3-timeline-vertical .k-era:last-of-type .k-ink{bottom:24px}
-@supports (animation-timeline:view()){
-  .e3-timeline-vertical .k-ink{animation:k-tl-draw linear both;animation-timeline:view(block 80%);animation-range:cover 0% cover 55%}
-  @keyframes k-tl-draw{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-}
-.e3-timeline-vertical .k-ent{position:relative;margin:0 0 14px 34px;max-width:760px;padding:18px 22px 17px;background:var(--surface-1);border:1px solid var(--border);border-radius:4px;transition:border-color .22s var(--ease),background-color .22s var(--ease)}
-.e3-timeline-vertical .k-ent:last-child{margin-bottom:0}
-.e3-timeline-vertical .k-ent:hover{border-color:rgba(0,255,65,.38);background:var(--surface-2)}
-.e3-timeline-vertical .k-ent::before{content:"";position:absolute;left:-32px;top:23px;width:7px;height:7px;border-radius:50%;background:var(--accent-ink);box-shadow:0 0 0 4px var(--bg),0 0 10px rgba(0,255,65,.45)}
-.e3-timeline-vertical .k-ent::after{content:"";position:absolute;left:-25px;top:26px;width:25px;height:1px;background:var(--border)}
-.e3-timeline-vertical .k-dt{font:600 10.5px/1.4 var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
-.e3-timeline-vertical .k-tt{margin:8px 0 6px;font:600 19px/1.25 var(--font-display);letter-spacing:-.01em;color:var(--text)}
-.e3-timeline-vertical .k-cp{margin:0;font-family:var(--font-body);font-size:14.5px;line-height:1.55;color:var(--muted)}
-.e3-timeline-vertical .k-src{margin:13px 0 0;padding-top:9px;border-top:1px solid var(--border);font-family:var(--font-body);font-size:13.5px;line-height:1.45;color:var(--text)}
-.e3-timeline-vertical .k-src span{display:block;margin-bottom:2px;font:600 10px/1.6 var(--font-display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.e3-timeline-vertical .k-note{margin:9px 0 0;font-family:var(--font-body);font-size:13.5px;line-height:1.45;color:var(--duck-red);text-shadow:0 0 8px rgba(255,45,51,.35)}
-@media (max-width:900px){
-  .e3-timeline-vertical{padding:40px 0 34px}
-  .e3-timeline-vertical .k-era{grid-template-columns:1fr;gap:0}
-  .e3-timeline-vertical .k-year{display:flex;align-items:baseline;gap:10px;padding:0 0 14px}
-  .e3-timeline-vertical .k-yr{font-size:17px;letter-spacing:0}
-  .e3-timeline-vertical .k-ys{margin:0;font-size:9.5px;letter-spacing:.14em}
-  .e3-timeline-vertical .k-ent{margin:0 0 12px 28px;padding:16px 18px 15px}
-  .e3-timeline-vertical .k-ent::before{left:-26px;top:21px}
-  .e3-timeline-vertical .k-ent::after{left:-19px;top:24px;width:19px}
-  .e3-timeline-vertical .k-tt{font-size:17.5px}
-  .e3-timeline-vertical .k-src{margin-top:12px}
-}
-@media (prefers-reduced-motion:reduce){
-  .e3-timeline-vertical .k-ink{animation:none!important;transform:scaleY(1)!important}
-  .e3-timeline-vertical .k-ent{transition:none!important}
-}
-
 /* archive */
 .arc{background:var(--bg)!important;border-top:1px solid var(--border)!important}
 .arc-title{font-family:var(--font-display);letter-spacing:-.045em}
@@ -525,7 +473,6 @@ main,.e3,.arc{background-color:var(--bg)}
 .arc-figure{border-color:var(--border)!important}
 .arc-figure dt{font-family:var(--font-display);font-size:10px;letter-spacing:.18em}
 .arc-figure dd{font-family:var(--font-display);color:var(--accent-ink);font-size:1.3rem;letter-spacing:-.02em}
-.arc-figure dd.sites{font-family:var(--font-body);font-size:.9rem;color:var(--text);letter-spacing:.01em;line-height:1.35}
 .arc-note{display:block!important;color:var(--muted)!important;border-left:2px solid var(--border);padding-left:14px;margin-top:20px;font-size:13px;max-width:78ch}
 .arc-note strong{color:var(--text)}
 .arc-prov{margin-top:10px!important;font-size:12.5px!important;opacity:.92}
@@ -546,7 +493,6 @@ main,.e3,.arc{background-color:var(--bg)}
 .arc-row .n{font-family:var(--font-display)!important;font-size:1.12rem!important;color:var(--accent)!important;letter-spacing:-.02em}
 .arc-row .n a:hover{color:var(--accent-hover)!important;text-decoration:none!important;text-shadow:0 0 14px rgba(0,255,65,.45)}
 .arc-row .d{font-family:var(--font-display)!important;font-size:12px!important;letter-spacing:.01em}
-.arc-row .b{font-family:var(--font-display);font-size:10px!important;letter-spacing:.12em;border-radius:2px!important;border-color:var(--border)!important;color:var(--muted)!important;padding:3px 6px!important}
 .arc-row .e{font-family:var(--font-body)!important;font-size:15.5px!important;line-height:1.6!important;color:var(--text)!important}
 .arc-row .e mark{background:rgba(0,255,65,.25)!important;color:var(--text)!important;box-shadow:0 0 0 1px rgba(0,255,65,.35)}
 .arc-row .src{color:var(--text)!important;font-family:var(--font-display);font-size:11.5px;border-color:var(--border)!important;background:var(--surface-1)!important}
@@ -554,14 +500,6 @@ main,.e3,.arc{background-color:var(--bg)}
 .arc-row .src .src-host{color:var(--muted)!important}
 .arc-row .src.src-none{color:var(--muted)!important;border-style:dashed!important;font-family:var(--font-body);font-style:italic;background:transparent!important}
 /* Two links per row: the source post, and the reply thread it was posted in. */
-.arc-row .srcrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
-.arc-row .srcrow .src{margin-top:0;flex:0 0 auto;white-space:nowrap}
-@media (max-width:640px){.arc-row .srcrow .src{max-width:100%;white-space:normal;flex-wrap:wrap;row-gap:2px}.arc-row .srcrow .src .src-host{overflow-wrap:anywhere}}
-.arc-row .src-thread{color:var(--text)!important;font-family:var(--font-display);font-size:11.5px;border-color:color-mix(in srgb,var(--accent) 38%,var(--border))!important;background:transparent!important}
-.arc-row .src-thread:hover{color:var(--accent)!important;border-color:var(--accent)!important;background:rgba(0,255,65,.06)!important}
-.arc-row .src-thread .src-arrow{color:var(--muted)}
-.arc-row .src-thread:hover .src-arrow{color:var(--accent)}
-.arc-row .src-thread .src-host{color:var(--muted)!important}
 .arc-row .gt{color:#86B96B!important}
 .arc-row .qref{color:#79C7D4!important}
 .arc-count{font-family:var(--font-display);color:var(--muted)}
@@ -763,10 +701,10 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 </style>
 <script src="data/drops.js"></script>
 <script src="data/drop-images.js?v=20261030a"></script>
-<script src="assets/trd/ledger-search.js?v=20261025"></script>
-<script src="assets/trd/ledger-starter.js?v=20261029" defer></script>
+<script src="assets/trd/ledger-search.js?v=20261030"></script>
+<script src="assets/trd/ledger-starter.js?v=20261030" defer></script>
 <script src="assets/trd/ledger-path.js?v=20261029" defer></script>
-<script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Calendar","href":"#calendar"},{"label":"Chronology","href":"#chronology"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"New? Start here","href":"#start-here"}}</script>
+<script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Calendar","href":"#calendar"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"New? Start here","href":"#start-here"}}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-nav-pill'),D=JSON.parse(root.querySelector('script.data').textContent),esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
@@ -796,13 +734,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         </div>
         <button class="ldock-opt" id="ldockOpt" type="button" aria-expanded="false" aria-controls="ldockMore"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M7 12h10M10 18h4"/></svg><span>Filters</span><i class="ldock-dot" aria-hidden="true"></i></button>
         <div class="ldock-more" id="ldockMore">
-<div class="arc-chips" role="group" aria-label="Filter by board">
-          <button class="chip" type="button" data-board="all" aria-pressed="true">All boards</button>
-          <button class="chip" type="button" data-board="4chan" aria-pressed="false">4chan</button>
-          <button class="chip" type="button" data-board="8chan" aria-pressed="false">8chan</button>
-          <button class="chip" type="button" data-board="8kun" aria-pressed="false">8kun</button>
-        </div>
-        <label for="arcSort" class="sr-only" style="position:absolute;left:-9999px">Sort</label>
+<label for="arcSort" class="sr-only" style="position:absolute;left:-9999px">Sort</label>
         <select class="arc-sort" id="arcSort" aria-label="Sort the ledger">
           <option value="newest">Newest first</option>
           <option value="oldest">Oldest first</option>
@@ -944,15 +876,11 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
           </summary>
           <div class="front-grid">
             <div class="front-lead">
-            <p class="front-line">Every numbered Q drop from <b>#1</b> to <b>#4,966</b>, in order, as originally posted — each record carries a way back to its original source.</p>
-            <p class="front-path">
-              <span class="seg">4chan /pol/</span><span class="seg"><span class="ar" aria-hidden="true">→</span>8chan /cbts/</span><span class="seg"><span class="ar" aria-hidden="true">→</span>/thestorm/</span><span class="seg"><span class="ar" aria-hidden="true">→</span>/greatawakening/ + /qresearch/</span><span class="seg"><span class="ar" aria-hidden="true">→</span>8kun /qresearch/</span><span class="seg yr">(2017–2022)</span>
-            </p>
+            <p class="front-line">Every numbered Q drop from <b>#1</b> to <b>#4,966</b>, in order, as originally posted — each with its own page, date and share link.</p>
             </div>
             <nav class="front-jumps" aria-label="Newcomer path">
               <a class="front-link" id="beginAtOne" href="#archive">Read drop #1<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg></a>
               <a class="front-link" id="startSearch" href="#archive">Search all 4,966<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg></a>
-              <a class="front-link" href="#chronology">See the board timeline<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg></a>
             </nav>
             <p class="front-meth"><b>An archive, not an argument.</b> Original posts are untouched; anything labelled commentary is separate and labelled. This page uses the extended set — 4,966 drops, #1–#4,966, through 27 Nov 2022; the shorter set in wide circulation ends at #4,953 on 8 Dec 2020.</p>
           </div>
@@ -969,7 +897,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       archive=document.getElementById('archive'),
       q=document.getElementById('arcQuery'),
       sort=document.getElementById('arcSort'),
-      all=document.querySelector('.chip[data-board="all"]');
+      all=null;
   function to(el,offset){
     if(!el) return;
     var off=(typeof offset==='number')?offset:110;
@@ -1051,7 +979,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 @media(max-width:760px){.e3-manifesto .k-wrap{grid-template-columns:1fr}.e3-manifesto .k-kick{margin:0}}
 @media(prefers-reduced-motion:reduce){.e3-manifesto .k-w,.e3-manifesto .k-key::after{transition:none}.e3-manifesto .k-w{color:var(--_t);transform:none}.e3-manifesto .k-key{color:var(--_a)}.e3-manifesto .k-key::after{transform:none}}
 </style>
-<script type="application/json" class="data">{"kicker":"Why this exists","lines":["A drop is a **dated** thing.","It arrives in a thread that **expires**.","The board moves; the record should **not**.","So the whole run is kept **numbered, dated and searchable** — one place, in order."],"signature":"The Drop Ledger","role":"An archive, not a feed"}</script>
+<script type="application/json" class="data">{"kicker":"Why this exists","lines":["A drop is a **dated** thing.","It arrives in a thread that **expires**.","The post can vanish; the record should **not**.","So the whole run is kept **numbered, dated and searchable** — one place, in order."],"signature":"The Drop Ledger","role":"An archive, not a feed"}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-manifesto'),D=JSON.parse(root.querySelector('script.data').textContent),w=0;
@@ -1095,88 +1023,18 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 })();
 </script>
 </section>
-  <section class="e3 e3-timeline-vertical" id="chronology" aria-labelledby="chrono-title">
-    <div class="k-wrap">
-      <header class="k-head rv">
-        <p class="k-kick">Board history</p>
-        <h2 id="chrono-title">Where the posts were made.</h2>
-        <p class="k-lede">The run starts on 4chan, moves to 8chan, and moves again when 8chan goes offline in August 2019. Only the last board on this list is still live.</p>
-      </header>
-      <div class="k-era">
-        <div class="k-year">
-          <div class="k-yr">4chan</div>
-          <div class="k-ys">1 board</div>
-        </div>
-        <div class="k-list">
-          <span class="k-ink" aria-hidden="true"></span>
-          <article class="k-ent">
-            <div class="k-dt">Oct 2017</div>
-            <h3 class="k-tt">/pol/</h3>
-            <p class="k-cp">Original threads gone, 4chan threads expire.</p>
-            <p class="k-src"><span>Where to see it</span>third-party archive</p>
-          </article>
-        </div>
-      </div>
-      <div class="k-era">
-        <div class="k-year">
-          <div class="k-yr">8chan</div>
-          <div class="k-ys">3 boards</div>
-        </div>
-        <div class="k-list">
-          <span class="k-ink" aria-hidden="true"></span>
-          <article class="k-ent">
-            <div class="k-dt">late 2017</div>
-            <h3 class="k-tt">/cbts/</h3>
-            <p class="k-cp">Board retired.</p>
-            <p class="k-src"><span>Where to see it</span>archive</p>
-          </article>
-          <article class="k-ent">
-            <div class="k-dt">2017–18</div>
-            <h3 class="k-tt">/thestorm/</h3>
-            <p class="k-cp">Board retired.</p>
-            <p class="k-src"><span>Where to see it</span>archive</p>
-          </article>
-          <article class="k-ent">
-            <div class="k-dt">2018–19</div>
-            <h3 class="k-tt">/qresearch/</h3>
-            <p class="k-cp">Site went offline Aug 2019.</p>
-            <p class="k-src"><span>Where to see it</span>archive</p>
-          </article>
-        </div>
-      </div>
-      <div class="k-era">
-        <div class="k-year">
-          <div class="k-yr">8kun</div>
-          <div class="k-ys">1 board</div>
-        </div>
-        <div class="k-list">
-          <span class="k-ink" aria-hidden="true"></span>
-          <article class="k-ent">
-            <div class="k-dt">Nov 2019</div>
-            <h3 class="k-tt">/qresearch/</h3>
-            <p class="k-cp">Live.</p>
-            <p class="k-note"><span aria-hidden="true">↳</span> the one move that wasn’t a drop.</p>
-            <p class="k-src"><span>Where to see it</span>native site</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="arc" id="archive" aria-labelledby="arc-title">
     <div class="arc-wrap">
       <div class="arc-head rv">
         <p class="eyebrow"><span class="stamp"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8m-10 4h4"/></g></svg>Record</span> The ledger</p>
         <h2 class="arc-title" id="arc-title">Every drop, <em>in order.</em></h2>
-        <p class="arc-lede">Number, date, board, full text. Sorted, filterable, paged — the way a researcher actually reads a run, not the way a feed serves it.</p>
+        <p class="arc-lede">Number, date, full text and images. Searchable, sorted, paged — the way a researcher actually reads a run, not the way a feed serves it.</p>
         <dl class="arc-figure">
           <div><dt>Records held</dt><dd><span data-count="4966">4,966</span></dd></div>
           <div><dt>Span</dt><dd>2017 – 2022</dd></div>
-          <div><dt>Sites</dt><dd class="sites">4chan · 8chan · 8kun</dd></div>
-          <div><dt>Board tags</dt><dd><span data-count="9">9</span></dd></div>
           <div><dt>Days with a drop</dt><dd><span data-count="533">533</span></dd></div>
         </dl>
-        <p class="arc-note"><strong>The full run.</strong> All 4,966 numbered posts are held — #1 on 28 Oct 2017 through #4,966 on 27 Nov 2022. Three sites: 4chan (233), 8chan (3,337) and 8kun (1,396). Nine board tags across them: /pol, /cbts, /thestorm, /greatawakening, /qresearch and /patriotsfight on 8chan; /qresearch and /projectdcomms on 8kun; /pol on 4chan. Each row opens the full text and links back to the original post where the source archive still resolves.</p>
+        <p class="arc-note"><strong>The full run.</strong> All 4,966 numbered posts are held — #1 on 28 Oct 2017 through #4,966 on 27 Nov 2022. Each row shows the drop number, the date (US Eastern), the full text and any images, and opens the drop&rsquo;s own page.</p>
         <p class="arc-note arc-prov"><strong>Corpus note.</strong> This page holds the expanded set — 4,966 records, #1–#4,966, running to 27 Nov 2022. A shorter 4,953-record set, ending at #4,953 in Dec 2020, is also in circulation; where the two differ, this page follows the expanded set.</p>
       </div>
 
@@ -1232,7 +1090,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 
       <div class="arc-empty" id="arcEmpty" hidden>
         <h3 id="arcEmptyTitle">Nothing in the ledger answers to that.</h3>
-        <p id="arcEmptyBody">Try a drop number, a month, or a board name.</p>
+        <p id="arcEmptyBody">Try a drop number, a month, or a phrase.</p>
         <div class="lx-acts lx-acts-empty" id="arcActs"></div>
         <button class="jump" id="arcJump" type="button" hidden>Go to the nearest number</button>
       </div>
@@ -1319,7 +1177,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 </style>
 <figure class="sect-plate faq-plate"><img src="images/reading-room.webp" alt="A reading room in flat daylight — bone paper and charcoal metal, a bound index open on a desk" loading="lazy"><figcaption>The reading room — where the record is kept</figcaption></figure>
 <div class="k-in"></div>
-<script type="application/json" class="data">{"eyebrow":"Method","heading":"How the record is kept.","copy":"Sources, verification, gaps and corrections — the part that makes this an archive rather than a feed.","filterPlaceholder":"Search the method","noMatch":"Nothing here answers that — try “gaps”, “sources” or “corrections”.","image":{"src":"images/reading-room.webp","alt":"A reading room in flat daylight — bone paper and charcoal metal, a bound index open on a desk"},"items":[{"q":"What counts as a drop?","a":"A numbered post by the account the run is attributed to, published on the board it appeared on. Replies, reposts and cross-references are recorded against the number, never counted a second time."},{"q":"Which set of records does this page hold?","a":"The expanded set: 4,966 records, numbered #1–#4,966 and dated 28 Oct 2017 to 27 Nov 2022. A shorter set of 4,953 records, ending at #4953 on 8 Dec 2020, also circulates. Where the two differ, this page uses the expanded set."},{"q":"Where do the texts come from?","a":"From captures of the original threads taken while they were live, wherever those captures survive. Each record names the board it came from. The archive does not paraphrase in place of a text it actually holds."},{"q":"What happens when a thread expires?","a":"The board deletes it; the copy does not. Records are taken from captures made before expiry and checked against a second capture where one exists. Where only one capture survives, the record says so."},{"q":"Why are there gaps in the numbering?","a":"Because the run itself skipped numbers. A skip is recorded as a skip and never filled in. Where a number is known to exist but its text is missing, the ledger marks the number and leaves the record empty rather than guessing."},{"q":"How are corrections handled?","a":"A correction is filed against a number, logged, and shown beside the record it changes. The original reading stays visible; the archive keeps both rather than silently overwriting one with the other."},{"q":"What is deliberately not here?","a":"Interpretation. No theory, no commentary, no ranking of what matters. The ledger holds the record and its dates. What it means is a reader's work, not an archive's."}]}</script>
+<script type="application/json" class="data">{"eyebrow":"Method","heading":"How the record is kept.","copy":"Sources, verification, gaps and corrections — the part that makes this an archive rather than a feed.","filterPlaceholder":"Search the method","noMatch":"Nothing here answers that — try “gaps”, “sources” or “corrections”.","image":{"src":"images/reading-room.webp","alt":"A reading room in flat daylight — bone paper and charcoal metal, a bound index open on a desk"},"items":[{"q":"What counts as a drop?","a":"A numbered post by the account the run is attributed to, published in the thread it appeared in. Replies, reposts and cross-references are recorded against the number, never counted a second time."},{"q":"Which set of records does this page hold?","a":"The expanded set: 4,966 records, numbered #1–#4,966 and dated 28 Oct 2017 to 27 Nov 2022. A shorter set of 4,953 records, ending at #4953 on 8 Dec 2020, also circulates. Where the two differ, this page uses the expanded set."},{"q":"Where do the texts come from?","a":"From captures of the original threads taken while they were live, wherever those captures survive. Each record keeps its number and date. The archive does not paraphrase in place of a text it actually holds."},{"q":"What happens when a thread expires?","a":"The thread is deleted; the copy is not. Records are taken from captures made before expiry and checked against a second capture where one exists. Where only one capture survives, the record says so."},{"q":"Why are there gaps in the numbering?","a":"Because the run itself skipped numbers. A skip is recorded as a skip and never filled in. Where a number is known to exist but its text is missing, the ledger marks the number and leaves the record empty rather than guessing."},{"q":"How are corrections handled?","a":"A correction is filed against a number, logged, and shown beside the record it changes. The original reading stays visible; the archive keeps both rather than silently overwriting one with the other."},{"q":"What is deliberately not here?","a":"Interpretation. No theory, no commentary, no ranking of what matters. The ledger holds the record and its dates. What it means is a reader's work, not an archive's."}]}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-faq-accordion'),D=JSON.parse(root.querySelector('script.data').textContent),esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});},uid='f'+Math.random().toString(36).slice(2,7);
@@ -1374,7 +1232,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 @media(prefers-reduced-motion:reduce){.e3-footer-editorial .k-dirs a::after,.e3-footer-editorial .k-social a,.e3-footer-editorial form button,.e3-footer-editorial .k-up svg{transition:none}}
 </style>
 <div class="k-in"></div>
-<script type="application/json" class="data">{"brand":"The Drop Ledger","tag":"Coverage 28 Oct 2017 – 27 Nov 2022 · 4,966 drops held, #1–#4,966 · three sites, nine boards · compiled 19 Oct 2026","credit":"Built by The Rubber Duck™️ and VK","owned":"Owned, operated and maintained by The Rubber Duck™","newsletter":{"heading":"One note when the record changes","copy":"This form is not connected yet — no mailing service is attached to the page, so nothing is collected.","placeholder":"you@example.com","button":"Keep me posted","error":"That email does not look right — check the @ and the domain.","done":"Nothing was sent — this form is not connected to a mailing service."},"columns":[{"heading":"The record","links":[["The ledger","#archive"],["Calendar","#calendar"],["Chronology","#chronology"],["Method","#method"]]},{"heading":"Reading","links":[["Drop numbers","#archive"],["Gaps in the run","#method"],["Corrections","#corrections"],["Board filters","#archive"]]},{"heading":"About","links":[["Coverage","#method"],["Sources","#method"],["File a correction","#corrections"]]}],"social":[],"legal":[["A reading room, not a fan page","#archive"]],"company":"The Drop Ledger"}</script>
+<script type="application/json" class="data">{"brand":"The Drop Ledger","tag":"Coverage 28 Oct 2017 – 27 Nov 2022 · 4,966 drops held, #1–#4,966 · compiled 19 Oct 2026","credit":"Built by The Rubber Duck™️ and VK","owned":"Owned, operated and maintained by The Rubber Duck™","newsletter":{"heading":"One note when the record changes","copy":"This form is not connected yet — no mailing service is attached to the page, so nothing is collected.","placeholder":"you@example.com","button":"Keep me posted","error":"That email does not look right — check the @ and the domain.","done":"Nothing was sent — this form is not connected to a mailing service."},"columns":[{"heading":"The record","links":[["The ledger","#archive"],["Calendar","#calendar"],["Method","#method"]]},{"heading":"Reading","links":[["Drop numbers","#archive"],["Gaps in the run","#method"],["Corrections","#corrections"]]},{"heading":"About","links":[["Coverage","#method"],["Sources","#method"],["File a correction","#corrections"]]}],"social":[],"legal":[["A reading room, not a fan page","#archive"]],"company":"The Drop Ledger"}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-footer-editorial'),D=JSON.parse(root.querySelector('script.data').textContent),esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});},N=D.newsletter||{};
@@ -1478,33 +1336,6 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   }
   function fmtBlock(text){
     return String(text||'').split('\n').map(fmtLine).join('\n');
-  }
-  function hostOf(u){ try{ return new URL(u).hostname.replace(/^www\./,''); }catch(e){ return ''; } }
-  /* Label the link by what the URL actually is. An archive capture is never called "the original post". */
-  function srcLabel(u){
-    var h=hostOf(u);
-    if(h==='archive.4plebs.org'||/\.?4plebs\.org$/.test(h)) return 'See original drop now';
-    if(/archive\.(today|ph|li|is|vn|md)$/.test(h)) return 'archive.today capture';
-    if(/web\.archive\.org$/.test(h)) return 'Wayback Machine capture';
-    if(h==='8kun.top'||/\.8kun\.top$/.test(h)) return '8kun post';
-    if(h==='8ch.net'||/\.8ch\.net$/.test(h)) return '8chan post';
-    if(h==='4chan.org'||/\.4chan\.org$/.test(h)) return '4chan post';
-    if(/dchan/.test(h)) return 'dChan archive capture';
-    return h ? ('source: '+h) : 'source link';
-  }
-  /* The thread a drop was posted in, derived from its source URL by dropping the '#reply' fragment.
-     A 4plebs thread archive is normalised to end with '/'. Returns '' when nothing can be derived. */
-  function threadOf(u){
-    if(!u) return '';
-    var s=String(u).split('#')[0];
-    if(!s) return '';
-    var h=hostOf(s);
-    if(/\.?4plebs\.org$/i.test(h)){
-      var q=s.indexOf('?');
-      if(q>-1){ s=s.slice(0,q).replace(/\/?$/,'/')+s.slice(q); }
-      else if(!/\/$/.test(s)){ s+='/'; }
-    }
-    return s;
   }
   /* Every date in the ledger is US Eastern — the same as the 4,966 /drops/<n>/ pages.
      The raw timestamps are zone-free Unix seconds, so this is an exact conversion. assets/trd/ledger-search.js does the work. */
@@ -1647,7 +1478,6 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   function renderInfo(res, shown){
     if(!res || !res.q){ info.hidden=true; info.innerHTML=''; return; }
     var h='<span class="lx-lbl">'+esc(res.label||'')+'</span>';
-    if(state.board!=='all' && res.kind!=='number' && shown!==res.rows.length) h+=' <span class="lx-note">Showing '+esc(state.board)+' only ('+nf(shown)+' of '+nf(res.rows.length)+').</span>';
     var acts='';
     if(res.alt) acts+=btn(res.alt.label, res.alt.q);
     if(res.kind==='delta' && res.rows.length && res.numberDeltas && res.numberDeltas.length){
@@ -1663,24 +1493,11 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     var body = r.e
       ? '<div class="ex fmt">'+fmtBlock(r.e)+'</div>'+pics
       : (pics || '<span class="nobody">No body text in the capture — an image-only post.</span>');
-    var src = '<span class="srcrow">';
-    if(r.l){
-      src += '<a class="src src-post" href="'+esc(r.l)+'" target="_blank" rel="noopener noreferrer" title="The post this drop was made in, as captured"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">'+esc(srcLabel(r.l))+'</span><span class="src-host">'+esc(hostOf(r.l))+'</span></a>';
-      var th = threadOf(r.l);
-      if(th && th!==r.l){
-        src += '<a class="src src-thread" href="'+esc(th)+'" target="_blank" rel="noopener noreferrer" title="Open the whole reply thread this drop started"><span class="src-arrow" aria-hidden="true">⤷</span><span class="src-lbl">See original anon research</span><span class="src-host">'+esc(hostOf(th))+'</span></a>';
-      }
-    } else {
-      src += '<span class="src src-none">No source link captured for this drop.</span>';
-    }
-    src += '<a class="src src-qalerts" href="https://qalerts.app/?n='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on qalerts.app (the original boards are offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on qalerts.app</span><span class="src-host">qalerts.app</span></a>';
-    src += '</span>';
     var cap = caps[r.n] ? '<p class="lx-cap">'+esc(caps[r.n])+'</p>' : '';
     return '<li class="arc-row" id="drop-'+r.n+'">'+
       '<span class="n"><a href="#drop-'+r.n+'" aria-label="Permalink to drop '+r.n+'"><span>#</span>'+r.n+'</a></span>'+
       '<span class="d" title="'+esc(r.time)+' (US Eastern)">'+fmtDate(r.d)+'</span>'+
-      '<span class="b">'+r.b+'<i>'+r.bd+'</i></span>'+
-      '<span class="e'+(!r.e&&pics&&!cap?' e-pic':'')+'">'+cap+body+src+'</span></li>';
+            '<span class="e'+(!r.e&&pics&&!cap?' e-pic':'')+'">'+cap+body+'</span></li>';
   }
   /* Endless scroll (off by default, remembered on this device): the list grows by one page (PER drops)
      each time the reader nears its end. Off: the Prev / Next paging is unchanged. */
@@ -1741,12 +1558,6 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   function renderEmpty(res){
     var acts='';
     jump.hidden=true;
-    if(res.rows && res.rows.length && state.board!=='all'){
-      emptyTitle.textContent='Nothing on '+state.board+' for that.';
-      emptyBody.textContent=nf(res.rows.length)+' drop'+(res.rows.length===1?'':'s')+' match on the other boards.';
-      emptyActs.innerHTML='<button type="button" class="lx-act" data-arc-board="all" data-lx-keep="1">Show all boards</button>';
-      return;
-    }
     if(res.kind==='delta'){
       var md=res.md, nr=res.nearest||{};
       emptyTitle.textContent=(md.which?(md.which.charAt(0).toUpperCase()+md.which.slice(1)+' — '):'')+mdq(md.m,md.d)+': no drops in any year.';
@@ -2092,8 +1903,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .arc-row .e{font-size:17px!important;line-height:1.72!important}
 .arc-row .e .ex{max-width:74ch}
 .arc-row .d{font-size:13.5px!important;color:#9CCBA8!important}
-.arc-row .b{font-size:11.5px!important;color:#9CCBA8!important}
-.arc-row .b i{font-size:12px;color:#9CCBA8;opacity:1}
 .arc-row .gt{color:#9BCB7F}
 .arc-row .src{font-size:12.5px}
 .arc-row .src .src-host{font-size:11.5px;color:#9CCBA8}
