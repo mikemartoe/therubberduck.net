@@ -203,6 +203,34 @@ def add_sm(name, path, lastmod=TODAY, images=None, videos=None):
     SITEMAPS[name].append((SITE + path, lastmod, images or [], videos or []))
 
 # ---------------------------------------------------------------- 1. Q drops
+BOARD_HOSTS = r'(?:8kun\.top|8ch\.net|archive\.4plebs\.org|qalerts\.app|4chan\.org|4channel\.org)'
+POST_HEADER = re.compile(r'^&ldquo;(?:Anonymous|Q !)[^&]*?No\. \d+&rdquo;$')
+
+
+def strip_board_credit(w):
+    """No board credit (Mike, 2026-10-30): context blocks on drop pages keep their quotes but lose the
+    board names, the original-board / 4plebs / qalerts.app links, and quotes that are only a post header."""
+    if not w:
+        return w
+    w = re.sub(r'<br><span>Source: <a href="https?://qalerts\.app/[^"]*"[^>]*>.*?</a>.*?</span>', '', w)
+
+    def bq(m):
+        p, ft = m.group(1), m.group(2)
+        if not re.search(r'href="https?://(?:www\.)?' + BOARD_HOSTS, ft) and not re.search(r'8chan /|8kun /|4chan /', ft):
+            return m.group(0)
+        if POST_HEADER.match(p):
+            return ''            # a bare post header (ID, time, post number) is a board credit, nothing else
+        t = re.sub(r'\s*&middot;\s*<a href="https?://(?:www\.)?' + BOARD_HOSTS + r'[^"]*"[^>]*>.*?</a>', '', ft)
+        t = re.sub(r',?\s*(?:4plebs archive of )?(?:4chan|8chan|8kun) /\w+/(?: thread| post)?', '', t)
+        t = t.replace(', the original posting board', '')
+        t = re.sub(r'\(time in UTC; ', '(', t)
+        t = re.sub(r'^\s*,\s*', '', t).strip()
+        t = re.sub(r'^\(', 'Original post (', t)
+        t = re.sub(r'^No\. ', 'Post No. ', t)
+        return '<blockquote class="sbs-q"><p>%s</p><footer>%s</footer></blockquote>' % (p, t or 'Original post')
+    return re.sub(r'<blockquote class="sbs-q"><p>(.*?)</p><footer>(.*?)</footer></blockquote>', bq, w)
+
+
 def source_label(d):
     """Plain-language label for a drop's original-source link (work order step 5): says which board and which host it points to."""
     host = re.sub(r'^https?://([^/]+)/.*$', r'\1', d['link'])
@@ -227,7 +255,8 @@ def build_drops():
 
     def drop_card(d, own_link=True):
         h = ('<h2 id="drop-%d"><a href="/drops/%d/">Q drop #%d</a></h2>' % (d['n'], d['n'], d['n'])) if own_link else ''
-        meta = '<p class="meta"><time datetime="%s">%s</time> &middot; %s %s</p>' % (d['dt'].isoformat(), d['dt'].strftime('%B %-d, %Y, %-I:%M %p ET'), E(d['site']), E(d['board']))
+        # No board credit (Mike, 2026-10-30): the date line shows the date only, no site/board name.
+        meta = '<p class="meta"><time datetime="%s">%s</time></p>' % (d['dt'].isoformat(), d['dt'].strftime('%B %-d, %Y, %-I:%M %p ET'))
         return '<article class="item">%s%s<div class="text">%s</div></article>' % (h, meta, linkify(d['text']) or '<em>(image or link only)</em>')
 
     # per drop
@@ -235,7 +264,7 @@ def build_drops():
         n = d['n']; mk = d['dt'].strftime('%Y-%m'); mname = d['dt'].strftime('%B %Y')
         first = re.sub(r'\s+', ' ', re.sub(r'https?://\s?\S+', '', d['text'])).strip()
         title = 'Q Drop #%d, %s: Full Text' % (n, d['dt'].strftime('%B %-d, %Y'))
-        desc = clip('Q drop #%d, posted %s on %s %s. %s' % (n, d['dt'].strftime('%B %-d, %Y'), d['site'], d['board'], ('"' + clip(first, 110) + '"') if first else 'Full text, date and the original source.'))
+        desc = clip('Q drop #%d, posted %s. %s' % (n, d['dt'].strftime('%B %-d, %Y'), ('"' + clip(first, 110) + '"') if first else 'Full text and date.'))
         prev = drops[i - 1] if i else None; nxt = drops[i + 1] if i + 1 < len(drops) else None
         pn = '<nav class="pn">%s%s</nav>' % (
             ('<a rel="prev" href="/drops/%d/">&lsaquo; Previous: Q drop #%d, %s</a>' % (prev['n'], prev['n'], prev['dt'].strftime('%B %-d, %Y'))) if prev else '<span></span>',
@@ -244,17 +273,17 @@ def build_drops():
         # Rollback: delete that file and re-run --only drops.
         wpath = 'tools/witness-blocks/%d.html' % n
         witness = open(wpath, encoding='utf-8').read().strip() if os.path.exists(wpath) else ''
+        witness = strip_board_credit(witness)
         body = ('<h1>Q Drop #%d</h1>' % n + drop_card(d, own_link=False) + witness +
                 '<ul class="links"><li><a href="/ledger.html#drop-%d">Open Q drop #%d in The Drop Ledger</a></li>' % (n, n) +
-                '<li><a href="https://qalerts.app/?n=%d" rel="nofollow noopener" target="_blank">Q drop #%d on qalerts.app</a></li>' % (n, n) +
-                ('<li><a href="%s" rel="nofollow noopener" target="_blank">%s</a></li>' % (E(d['link']), E(source_label(d))) if d['link'] else '') +
+                # No board credit (Mike, 2026-10-30): no original-board, 4plebs or qalerts.app links on drop pages.
                 '<li><a href="/drops/%s/">All Q drops from %s</a></li></ul>' % (mk, mname) + pn)
         g = [{'@type': 'CreativeWork', '@id': SITE + '/drops/%d/#drop' % n, 'name': 'Q drop #%d' % n, 'text': d['text'][:5000],
               'dateCreated': d['dt'].isoformat(), 'datePublished': d['dt'].isoformat(), 'author': {'@type': 'Person', 'name': 'Q'},
               'isPartOf': {'@id': SITE + '/drops/#archive'}, 'url': SITE + '/drops/%d/' % n}]
         write('drops/%d/index.html' % n, page('/drops/%d/' % n, title, desc, body, g,
               [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('Q drop #%d' % n, '/drops/%d/' % n)], og_type='article', signup=True,
-              og_desc='Q drop #%d \u00b7 %s \u00b7 %s /%s/' % (n, d['dt'].strftime('%B %-d, %Y'), d['site'], d['board'].strip('/')),   # tease only
+              og_desc='Q drop #%d \u00b7 %s' % (n, d['dt'].strftime('%B %-d, %Y')),   # tease only
               og_image=drop_og(n)))
         add_sm('drops', '/drops/%d/' % n, lm)
 
@@ -262,7 +291,7 @@ def build_drops():
     for j, mk in enumerate(mkeys):
         ds = months[mk]; mname = ds[0]['dt'].strftime('%B %Y')
         title = 'Q Drops, %s: #%d to #%d, Full Text' % (mname, ds[0]['n'], ds[-1]['n'])
-        desc = clip('All %d Q drops posted in %s (#%d to #%d), in order, with full text, dates, boards and a link to each original source.' % (len(ds), mname, ds[0]['n'], ds[-1]['n']))
+        desc = clip('All %d Q drops posted in %s (#%d to #%d), in order, with full text and dates.' % (len(ds), mname, ds[0]['n'], ds[-1]['n']))
         pn = '<nav class="pn">%s%s</nav>' % (
             ('<a rel="prev" href="/drops/%s/">&lsaquo; Q drops from %s</a>' % (mkeys[j - 1], months[mkeys[j - 1]][0]['dt'].strftime('%B %Y'))) if j else '<span></span>',
             ('<a rel="next" href="/drops/%s/">Q drops from %s &rsaquo;</a>' % (mkeys[j + 1], months[mkeys[j + 1]][0]['dt'].strftime('%B %Y'))) if j + 1 < len(mkeys) else '<span></span>')
@@ -275,7 +304,7 @@ def build_drops():
     # index
     rows = ''.join('<li><a href="/drops/%s/">%s</a> <span class="n">%d drops &middot; #%d&ndash;#%d</span></li>' % (mk, months[mk][0]['dt'].strftime('%B %Y'), len(months[mk]), months[mk][0]['n'], months[mk][-1]['n']) for mk in mkeys)
     title = 'Every Q Drop by Month: #1 to #%d, Full Text Archive' % drops[-1]['n']
-    desc = clip('All %s numbered Q drops, %s to %s, by month and by number, with full text, dates and original sources. From The Rubber Duck.' % (format(len(drops), ','), drops[0]['dt'].strftime('%B %Y'), drops[-1]['dt'].strftime('%B %Y')))
+    desc = clip('All %s numbered Q drops, %s to %s, by month and by number, with full text and dates. From The Rubber Duck.' % (format(len(drops), ','), drops[0]['dt'].strftime('%B %Y'), drops[-1]['dt'].strftime('%B %Y')))
     global DROP_RANGE
     DROP_RANGE = (drops[0]['dt'], drops[-1]['dt'])
     body = ('<h1>Every Q Drop, by Month</h1><p class="lede">All %s numbered drops, #1 to #%d, as originally posted. Each month has its own page, and every drop has its own page. For search and filters, open <a href="/ledger.html">The Drop Ledger</a>; for how a drop was worked, read <a href="/process.html">The Process</a>.</p>' % (format(len(drops), ','), drops[-1]['n'])
@@ -721,7 +750,7 @@ def room_extra(f, info, merch_items):
                   'sameAs': ['https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4', 'https://music.apple.com/us/album/the-red-pill-album/1896233683'],
                   'track': [{'@type': 'MusicRecording', 'position': i + 1, 'name': html.unescape(t), 'duration': iso_dur(d), 'url': SITE + '/audio/' + s + '.mp3'} for i, (s, t, d) in enumerate(tracks)]})
     if f in ('ledger.html', 'Qdrops/index.html'):
-        g.append({'@type': 'Dataset', 'name': 'The Drop Ledger: every numbered Q drop, #1 to #4,966', 'description': 'Every numbered Q drop from %s to %s, in order, with dates, boards, full text and a link to each original source.' % (DROP_RANGE[0].strftime('%B %Y'), DROP_RANGE[1].strftime('%B %Y')),
+        g.append({'@type': 'Dataset', 'name': 'The Drop Ledger: every numbered Q drop, #1 to #4,966', 'description': 'Every numbered Q drop from %s to %s, in order, with dates and full text.' % (DROP_RANGE[0].strftime('%B %Y'), DROP_RANGE[1].strftime('%B %Y')),
                   'url': SITE + '/drops/', 'creator': {'@id': ORG_ID}, 'isAccessibleForFree': True, 'temporalCoverage': '%s/%s' % (DROP_RANGE[0].date().isoformat(), DROP_RANGE[1].date().isoformat()),
                   'distribution': {'@type': 'DataDownload', 'encodingFormat': 'application/javascript', 'contentUrl': SITE + '/data/drops.js'}})
     return g

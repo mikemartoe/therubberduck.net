@@ -30,7 +30,7 @@ LEDGER_DELTA = '/ledger.html?delta=today'
 DX_CSS = '<link rel="stylesheet" href="/assets/seo/dx.css?v=1">\n'
 RE_CSS = re.compile(r'<link rel="stylesheet" href="/assets/seo/dx\.css[^"]*">\n')
 IMG_BASE = 'https://memes.therubberduck.net/drops/img/'
-MISSING_IMAGES = {'1001_1'}   # listed in data/drop-images.js but not on R2 (404); left out until re-uploaded
+MISSING_IMAGES = set()   # keys listed in data/drop-images.js but not on R2 (404); 1001_1 uploaded 2026-10-30
 
 # ---------------------------------------------------------------- data
 src = open('data/drops.js', encoding='utf-8').read()
@@ -230,7 +230,10 @@ def images_for(n):
         if key in MISSING_IMAGES: continue
         t = ITEXT.get(key)
         if not t: continue
-        out.append((i, t))
+        # an entry is either one string (alt text = caption) or {"alt": ..., "caption": ...}
+        alt, cap = (t.get('alt', ''), t.get('caption') or t.get('alt', '')) if isinstance(t, dict) else (t, t)
+        if not alt: continue
+        out.append((i, alt, cap))
     return out
 
 def patch_drops():
@@ -244,18 +247,18 @@ def patch_drops():
         if imgs:
             with_img += 1; nimg += len(imgs)
             figs = ''
-            for j, (i, t) in enumerate(imgs):
+            for j, (i, t, cap) in enumerate(imgs):
                 full = IMG_BASE + i['src']; sm = IMG_BASE + i.get('sm', i['src'])
                 w, hh = i.get('sw') or i['w'], i.get('sh') or i['h']
                 srcset = (' srcset="%s %dw, %s %dw" sizes="(max-width:640px) 100vw, 460px"' % (E(sm), w, E(full), i['w'])) if i['w'] > w else ''
                 figs += ('<figure class="dimg"><a href="%s" target="_blank" rel="noopener"><img src="%s"%s width="%d" height="%d" alt="%s" loading="%s" decoding="async"></a>'
-                         '<figcaption>%s</figcaption></figure>' % (E(full), E(sm), srcset, w, hh, E(t), 'eager' if j == 0 else 'lazy', E(t)))
+                         '<figcaption>%s</figcaption></figure>' % (E(full), E(sm), srcset, w, hh, E(t), 'eager' if j == 0 else 'lazy', E(cap)))
             label = 'Image attached to this drop' if len(imgs) == 1 else '%d images attached to this drop' % len(imgs)
             c = len(imgs); cols = 'one' if c == 1 else ('c2' if c in (2, 4, 8) else 'c3')
             block = '<!-- seo-img:begin --><section class="dimgs %s" aria-label="%s"><h2 class="dimgs-h">%s</h2>%s</section><!-- seo-img:end -->' % (cols, label, label, figs)
             h = h.replace('</article>', '</article>' + block, 1)
             h = h.replace('<link rel="stylesheet" href="%s">\n' % S.CSS_HREF, '<link rel="stylesheet" href="%s">\n' % S.CSS_HREF + DX_CSS, 1)
-            sm_imgs[n] = [IMG_BASE + i['src'] for i, _ in imgs]
+            sm_imgs[n] = [IMG_BASE + i['src'] for i, _, _ in imgs]
         k = mmdd_key(d['dt'])
         xl = '<li class="xl"><a href="/deltas/%s/">Q drop deltas for %s: every drop posted on this date</a></li>' % (k, mmdd_name(k))
         if d in QPLUS:
@@ -270,7 +273,7 @@ def patch_drops():
                     node.pop('image', None)
                     if imgs:
                         node['image'] = [{'@type': 'ImageObject', 'contentUrl': IMG_BASE + i['src'], 'url': IMG_BASE + i['src'], 'width': i['w'], 'height': i['h'],
-                                          'thumbnailUrl': IMG_BASE + i.get('sm', i['src']), 'caption': t, 'description': t} for i, t in imgs]
+                                          'thumbnailUrl': IMG_BASE + i.get('sm', i['src']), 'caption': cap, 'description': t} for i, t, cap in imgs]
             s = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
             h = h[:m.start(1)] + s + h[m.end(1):]
         if h != h0:

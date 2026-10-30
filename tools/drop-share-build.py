@@ -32,7 +32,7 @@ esc = lambda s: html.escape(s or '', quote=True)
 
 
 def tease(n, dt, site, board):
-    return 'Q drop #%d \u00b7 %s \u00b7 %s /%s/' % (n, dt.strftime('%B %-d, %Y'), site, board.strip('/'))
+    return 'Q drop #%d \u00b7 %s' % (n, dt.strftime('%B %-d, %Y'))   # no board credit (Mike, 2026-10-30)
 
 
 def page(d):
@@ -42,7 +42,7 @@ def page(d):
     title = 'Q Drop #%d, %s | The Drop Ledger | The Rubber Duck\u2122' % (n, when)
     desc = tease(n, dt, site, board)   # tease only (Mike, 2026-10-25): no drop text in previews
     img = MEDIA + (V2['prefix'] if n in V2D else '') + '%s/%d.jpg' % (OG_DIR, n)
-    alt = 'Q drop #%d as originally posted on %s %s' % (n, site, board.rstrip('/') + '/')
+    alt = 'Q drop #%d as originally posted, %s' % (n, when)   # no board credit (Mike, 2026-10-30)
     dest = '/ledger.html#drop-%d' % n
     return '''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
