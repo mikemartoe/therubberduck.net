@@ -1,0 +1,29 @@
+{
+  "id": "/",
+  "name": "The Rubber Duck",
+  "short_name": "Rubber Duck",
+  "description": "Every Q drop, today's Deltas, Q Proofs, videos, recordings and the X archive.",
+  "start_url": "/app/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050A07",
+  "theme_color": "#050A07",
+  "lang": "en",
+  "categories": ["books", "education", "news"],
+  "icons": [
+    { "src": "/images/app/app-icon-48.png", "sizes": "48x48", "type": "image/png", "purpose": "any" },
+    { "src": "/images/app/app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/images/app/app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/images/app/app-icon-1024.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" },
+    { "src": "/images/app/app-icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/images/app/app-icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/images/app/app-icon-maskable-1024.png", "sizes": "1024x1024", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Drop Ledger", "url": "/ledger.html?source=pwa", "icons": [{ "src": "/images/app/app-icon-192.png", "sizes": "192x192" }] },
+    { "name": "Today's Deltas", "url": "/deltas/?source=pwa", "icons": [{ "src": "/images/app/app-icon-192.png", "sizes": "192x192" }] },
+    { "name": "Q Proofs", "url": "/q-proofs/?source=pwa", "icons": [{ "src": "/images/app/app-icon-192.png", "sizes": "192x192" }] },
+    { "name": "Get alerts", "url": "/alerts/?source=pwa", "icons": [{ "src": "/images/app/app-icon-192.png", "sizes": "192x192" }] }
+  ]
+}

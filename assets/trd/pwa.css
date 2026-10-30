@@ -1,0 +1,25 @@
+/* The Rubber Duck web app: install banner + alerts panel. Colors from the app pack (Ledger theme). */
+.trd-pwa-bar{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:2147483000;max-width:520px;margin:0 auto;box-sizing:border-box;display:grid;grid-template-columns:44px 1fr;gap:12px 12px;align-items:center;padding:16px;background:#0B140E;border:1px solid #34533D;border-left:4px solid #00ED39;color:#E8F4E9;font:15px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;box-shadow:0 10px 30px rgba(0,0,0,.55)}
+.trd-pwa-ico{width:44px;height:44px;border-radius:10px;display:block}
+.trd-pwa-txt{margin:0}.trd-pwa-txt b{display:block;color:#00ED39;font-size:15px;letter-spacing:.04em}.trd-pwa-txt span{display:block;color:#B4C6B7}
+.trd-pwa-acts{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.trd-pwa-acts>*{min-height:48px;display:flex;align-items:center;justify-content:center;font:700 15px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-decoration:none;cursor:pointer;border-radius:0}
+.trd-pwa-go{background:#00ED39;color:#050A07;border:0}
+.trd-pwa-x{background:transparent;color:#E8F4E9;border:1px solid #34533D}
+.trd-alerts{box-sizing:border-box;background:#0B140E;border:1px solid #34533D;border-left:4px solid #00ED39;color:#E8F4E9;padding:20px;font:17px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;max-width:720px;margin:0 auto}
+.trd-alerts .ta-h{margin:0 0 8px;color:#00ED39;font-size:26px;line-height:1.15;letter-spacing:.03em}
+.trd-alerts .ta-p{margin:0 0 16px;color:#B4C6B7;font-size:15px}
+.trd-alerts .ta-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 16px}
+@media (max-width:560px){.trd-alerts .ta-opts{grid-template-columns:1fr}}
+.trd-alerts .ta-opt{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;padding:16px;border:1px solid #34533D;background:#050A07;cursor:pointer;min-height:48px;box-sizing:border-box}
+.trd-alerts .ta-opt input{width:22px;height:22px;margin:2px 0 0;accent-color:#00ED39}
+.trd-alerts .ta-opt b{display:block;font-size:17px}.trd-alerts .ta-opt i{display:block;font-style:normal;color:#B4C6B7;font-size:15px}
+.trd-alerts .ta-acts{display:grid;grid-template-columns:1fr auto;gap:12px}
+.trd-alerts .ta-acts button{min-height:48px;padding:0 20px;font:700 16px/1 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;cursor:pointer;border-radius:0}
+.trd-alerts .ta-on{background:#00ED39;color:#050A07;border:0}.trd-alerts .ta-on[disabled]{opacity:.45;cursor:default}
+.trd-alerts .ta-off{background:transparent;color:#E8F4E9;border:1px solid #34533D}
+.trd-alerts .ta-acts .ta-off[hidden]{display:none}.trd-alerts .ta-acts:has(.ta-off[hidden]){grid-template-columns:1fr}
+.trd-alerts .ta-msg{margin:12px 0 0;min-height:1.5em;font-size:15px;color:#E8F4E9}.trd-alerts .ta-msg:empty{display:none}.trd-alerts .ta-msg.err{color:#ffb4a8}
+.trd-alerts .ta-mail{margin:12px 0 0;font-size:15px;color:#B4C6B7}.trd-alerts .ta-mail a{color:#00ED39}
+form.signup-form .ta-ml{display:flex;gap:8px;align-items:center;font-size:14px;flex-basis:100%}
+@media (prefers-reduced-motion:no-preference){.trd-pwa-bar{animation:trdPwaIn .25s ease-out}@keyframes trdPwaIn{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}}

@@ -29,6 +29,27 @@ ET = ZoneInfo('America/New_York')
 TODAY = datetime.date.today().isoformat()
 BRAND = 'The Rubber Duck\u2122'
 SHARE = SITE + '/images/brand/trd-share-2026.jpg'
+# Web app (PWA, Mike approved 2026-10-30): head tags for pages that offer install + alerts, and the two small
+# data files the push Worker (workers/trd-push.js) reads. Keep these in every rebuild.
+PWA_HEAD = ('<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes">'
+            '<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck">'
+            '<link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261030a" defer data-trd-keep></script>\n')
+def og_size(alt):
+    return '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="%s">\n' % E(alt)
+def ensure_pwa_head(h):
+    return h if 'rel="manifest"' in h else h.replace('</head>', PWA_HEAD + '</head>', 1)
+def write_pwa_data(arr):
+    """arr: [n, unix_ts, ...] rows from data/drops.js. Writes data/drops-latest.json (new-drop alerts) and
+    data/deltas-index.json (daily Deltas digest: MM-DD in New York time -> drop count and years)."""
+    last = max(arr, key=lambda r: r[0])
+    idx = {}
+    for r in arr:
+        dt = datetime.datetime.fromtimestamp(r[1], ET); k = dt.strftime('%m-%d')
+        e = idx.setdefault(k, {'n': 0, 'years': set()}); e['n'] += 1; e['years'].add(dt.year)
+    with open('data/deltas-index.json', 'w', encoding='utf-8') as f:
+        json.dump({k: {'n': v['n'], 'years': sorted(v['years'])} for k, v in sorted(idx.items())}, f, separators=(',', ':'))
+    with open('data/drops-latest.json', 'w', encoding='utf-8') as f:
+        json.dump({'n': last[0], 'ts': last[1], 'url': '/drops/%d/' % last[0]}, f)
 GUMROAD = 'https://rubberduck41.gumroad.com/l/ttmhx'
 BOOK_PRICE = '19.99'
 SAME_AS = [
@@ -242,6 +263,7 @@ def source_label(d):
 def build_drops():
     src = open('data/drops.js', encoding='utf-8').read()
     arr = json.loads(src[src.index('['):src.rindex(']') + 1])
+    write_pwa_data(arr)
     drops = []
     for n, ts, site, board, link, text in arr:
         dt = datetime.datetime.fromtimestamp(ts, ET)
@@ -685,7 +707,7 @@ def build_book():
 ROOMS = OrderedDict([
     ('index.html', {'path': '/', 'title': 'The Rubber Duck&trade; | Q Drops Archive, Videos, X Spaces, Merch and Books',
                     'desc': 'Welcome, curious minds. The Rubber Duck\'s open archive of the Q era: every Q drop, videos, X Spaces, PDFs, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.',
-                    'crumbs': [('Home', '/')], 'img': '/images/brand/trd-share-home-20261029.jpg'}),
+                    'crumbs': [('Home', '/')], 'img': '/images/brand/social-default-20261030.png'}),
     ('ledger.html', {'path': '/ledger.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Drop Ledger', '/ledger.html')], 'img': None}),
     ('Qdrops/index.html', {'path': '/Qdrops/', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('Q Drop Archive', '/Qdrops/')], 'img': None}),
     ('videos.html', {'path': '/videos.html', 'title': 'Videos and Livestreams | The Rubber Duck&trade; Drive-In on Rumble', 'desc': None,
@@ -708,7 +730,8 @@ PRECONNECT = {
     'memes.html': ['https://memes.therubberduck.net'],
     'x/index.html': ['https://pbs.twimg.com'],
 }
-IMG_ALT = {'/assets/trd/img/share-videos.jpg': 'The Rubber Duck Drive-In: a lit Now Showing marquee reading Videos and Livestreams above the screen, under a night sky with a full moon.',
+IMG_ALT = {'/images/brand/social-default-20261030.png': 'The Rubber Duck: Q drops archive. Search the drops. Read the record.',
+           '/assets/trd/img/share-videos.jpg': 'The Rubber Duck Drive-In: a lit Now Showing marquee reading Videos and Livestreams above the screen, under a night sky with a full moon.',
            '/assets/trd/img/share-listening.jpg': 'The Listening Room: an open book on the reading desk under a green lamp, above a shelf of numbered leather volumes.'}
 # Lossless WebP twins of the heaviest PNGs (pixel-identical), and the exact src strings to point at them.
 WEBP_SWAPS = {
@@ -759,6 +782,7 @@ def build_rooms(merch_items):
     for f, info in ROOMS.items():
         h = open(f, encoding='utf-8').read()
         h = re.sub(r'<!-- seo:begin -->.*?<!-- seo:end -->\n', '', h, flags=re.S)
+        if f in ('index.html', 'ledger.html'): h = ensure_pwa_head(h)
         if info['title']:
             h = set_tag(h, r'<title>[^<]*</title>', '<title>%s</title>' % info['title'])
             h = set_tag(h, r'<meta property="og:title" content="[^"]*">', '<meta property="og:title" content="%s">' % info['title'])

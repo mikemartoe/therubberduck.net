@@ -24,6 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 spec = importlib.util.spec_from_file_location('seob', os.path.join(HERE, 'seo-build.py'))
 S = importlib.util.module_from_spec(spec); spec.loader.exec_module(S)   # chdirs to repo root; main() not run
 E, SITE, ET, page, clip, ld_script = S.E, S.SITE, S.ET, S.page, S.clip, S.ld_script
+PWA_HEAD, og_size = S.PWA_HEAD, S.og_size
 TODAY = S.TODAY
 
 LEDGER_DELTA = '/ledger.html?delta=today'
@@ -178,12 +179,15 @@ def build_hub():
             '<h2>Pick a date</h2><p class="dx-note">%d dates have drops. Dates in gray have none.</p><div class="dx-cal">%s</div>' % (len(DAYS), months) +
             '<h2>Dates with the most drops</h2><ul class="months">%s</ul>' % ''.join('<li><a href="/deltas/%s/">%s</a> <span class="n">%d drops</span></li>' % (k, mmdd_name(k), len(BYDAY[k])) for k in busiest) +
             (('<h2>Recent #delta posts by The Rubber Duck</h2><ul class="dx-xl">%s</ul><p class="dx-more">More in <a href="/x/archive/">the X archive by month</a>.</p>' % ''.join(xpost_li(p) for p in dp[:16])) if dp else '') +
-            '<p class="dx-more">See also <a href="/q-proofs/">Q Proofs</a>, drops confirmed by President Trump, and <a href="/drops/">every Q drop by month</a>.</p>')
+            '<p class="dx-more">See also <a href="/q-proofs/">Q Proofs</a>, drops confirmed by President Trump, and <a href="/drops/">every Q drop by month</a>.</p>'
+            '<p class="dx-more">Get the daily Deltas digest on your phone: <a href="/alerts/">turn on alerts</a>.</p>')
     g = [{'@type': 'CollectionPage', '@id': SITE + '/deltas/#hub', 'name': title, 'url': SITE + '/deltas/', 'description': desc,
           'about': [{'@type': 'DefinedTerm', 'name': 'Delta', 'description': 'A Q drop\u2019s anniversary: the drops posted on the same calendar date in past years, read again to see their relevance today.'},
                     {'@type': 'DefinedTerm', 'name': 'Delta proof', 'description': 'A delta whose past drop proves true on its anniversary date.'}],
           'hasPart': [{'@type': 'CollectionPage', 'url': SITE + '/deltas/%s/' % k, 'name': 'Q drop deltas for %s' % mmdd_name(k)} for k in DAYS]}]
-    S.write('deltas/index.html', page('/deltas/', title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Deltas', '/deltas/')], extra_head=DX_CSS))
+    S.write('deltas/index.html', page('/deltas/', title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Deltas', '/deltas/')],
+                                     og_image=SITE + '/images/brand/social-deltas-20261030.png',
+                                     extra_head=og_size('Deltas: Q drop anniversaries, year by year. The Rubber Duck.') + DX_CSS + PWA_HEAD))
     SM.insert(0, ('/deltas/', TODAY))
 
 # ---------------------------------------------------------------- 3. q proofs
@@ -210,7 +214,9 @@ def build_proofs():
                     {'@type': 'DefinedTerm', 'name': 'Q+', 'description': 'The signature on drops attributed to President Trump.'},
                     {'@type': 'Person', 'name': 'Donald J. Trump'}],
           'mainEntity': {'@type': 'ItemList', 'name': 'Q drops signed Q+', 'numberOfItems': len(QPLUS), 'itemListElement': items}}]
-    S.write('q-proofs/index.html', page('/q-proofs/', title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Q Proofs', '/q-proofs/')], extra_head=DX_CSS))
+    S.write('q-proofs/index.html', page('/q-proofs/', title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Q Proofs', '/q-proofs/')],
+                                      og_image=SITE + '/images/brand/social-q-proofs-20261030.png',
+                                      extra_head=og_size('Q Proofs: explore the drops and public record. The Rubber Duck.') + DX_CSS + PWA_HEAD))
     SM.insert(1, ('/q-proofs/', TODAY))
 
 def drop_row_full(d):
@@ -314,6 +320,7 @@ def sitemaps(sm_imgs):
         S.write(allu, '\n'.join(u + [SITE + p for p, _ in SM]) + '\n')
 
 if __name__ == '__main__':
+    S.write_pwa_data([[d['n'], int(d['dt'].timestamp())] for d in DROPS])
     nd = build_days(); build_hub(); build_proofs()
     wi, ni, smi = patch_drops(); patch_index(); sitemaps(smi)
     print('deltas day pages: %d, hub: 1, q-proofs: 1 (Q+ drops: %d), x posts linked: %d' % (nd, len(QPLUS), len(XPOSTS)))
