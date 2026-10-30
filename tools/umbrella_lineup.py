@@ -46,7 +46,7 @@ SIGNED = {
     'signed-trucker-hat': {
         # Richardson 112 in Printful: only "Black / White" (black front, white mesh) matches the lineup, shown as Black.
         'special': ['White', 'Navy', 'Gold', 'Tiffany Blue', 'Hot Pink'],
-        'special_link': 'https://buy.stripe.com/PENDING-hold',  # trucker on hold (Mike t1957u): was 6oU9ATahKbAYdd56nJ9IQ1e;  # plink_1UUrvRGC9fEXRvQSdmlmIAGr
+        'special_link': 'https://buy.stripe.com/6oU9ATahKbAYdd56nJ9IQ1e',  # plink_1UUrvRGC9fEXRvQSdmlmIAGr
     },
     'signed-tee': {
         # Bella+Canvas 3001 has Gold (the Red Pill Tee already sells it), but the Signed Tee's Printful product (483809952)
@@ -76,7 +76,7 @@ TRUCKER = {
     'duck-trucker-hat': {
         'special': ['White', 'Navy', 'Gold', 'Tiffany Blue', 'Hot Pink'],
         'img': 'duck-trucker-hat-sp_%s',     # tools/make_trucker_special_photos.py (recolored Printful mockup, no pill)
-        'special_link': 'https://buy.stripe.com/PENDING-hold',  # trucker on hold (Mike t1957u): was aFa5kD61uawUb4XdQb9IQ1h;  # plink_1UUzh0GC9fEXRvQS7z44aKlu
+        'special_link': 'https://buy.stripe.com/aFa5kD61uawUb4XdQb9IQ1h',  # plink_1UUzh0GC9fEXRvQS7z44aKlu
         'demo_label': {'black': 'Black / White'},
     },
 }
