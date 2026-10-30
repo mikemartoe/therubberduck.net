@@ -656,7 +656,7 @@ def build_book():
 ROOMS = OrderedDict([
     ('index.html', {'path': '/', 'title': 'The Rubber Duck&trade; | Q Drops Archive, Videos, X Spaces, Merch and Books',
                     'desc': 'Welcome, curious minds. The Rubber Duck\'s open archive of the Q era: every Q drop, videos, X Spaces, PDFs, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.',
-                    'crumbs': [('Home', '/')], 'img': None}),
+                    'crumbs': [('Home', '/')], 'img': '/images/brand/trd-share-home-20261029.jpg'}),
     ('ledger.html', {'path': '/ledger.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Drop Ledger', '/ledger.html')], 'img': None}),
     ('Qdrops/index.html', {'path': '/Qdrops/', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('Q Drop Archive', '/Qdrops/')], 'img': None}),
     ('videos.html', {'path': '/videos.html', 'title': 'Videos and Livestreams | The Rubber Duck&trade; Drive-In on Rumble', 'desc': None,
