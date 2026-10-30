@@ -1,0 +1,16 @@
+/* Q proof pages (tools/seo-deltas-build.py). Loaded after dx.css. */
+.qp-grid{display:block;margin-top:8px}
+.qp-col>h2{margin-top:12px}
+.qp-col .dx-list{margin-top:0}
+.qp-tw{margin:0 0 16px;padding:16px 18px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:8px}
+.qp-tw blockquote{margin:0}
+.qp-tw blockquote p{margin:0;font-size:18px;line-height:1.55;color:#f3e9d2;overflow-wrap:anywhere}
+.qp-tw figcaption{margin-top:10px;font-size:14px;color:var(--muted)}
+.qp-gap{list-style:none;margin:12px 0 0;padding:10px 0 0;border-top:1px solid var(--line);font-size:15px}
+.qp-gap li{padding:2px 0}
+.qp-gap b{color:var(--gold)}
+.qp-note{font-size:15px;color:var(--muted);border-left:3px solid var(--line);padding-left:12px}
+.qp-src{font-size:14px;letter-spacing:.02em;color:var(--muted);margin-top:18px}
+.qp-index{columns:2 380px;column-gap:28px}
+.qp-index li{break-inside:avoid}
+@media (max-width:760px){.qp-tw blockquote p{font-size:17px}}

@@ -14,6 +14,8 @@ Idempotent. What it does:
                          (from data/drop-image-text.json), ImageObject JSON-LD, and links to the
                          date's delta page and, for Q+ drops, to /q-proofs/. Marked blocks only.
   5. /drops/             adds one line linking the two new sections (marked block).
+  7. /q-proofs/SLUG/    one page per verified proof from data/q-proofs.json (drop numbers, Trump's exact tweet words,
+                         date/time ET, gap), linked from /q-proofs/ and the drop pages; sitemaps/q-proofs.xml.
   6. sitemaps/deltas.xml (new) + sitemap.xml index entry; image entries on drop URLs in sitemaps/drops.xml.
 Rollback: git revert the commit, or delete /deltas/ /q-proofs/ and re-run tools/seo-build.py --only drops.
 """
@@ -91,6 +93,86 @@ DEF_HTML = ('<dl class="dx-def">'
             '<dt>Delta proof</dt><dd>A delta becomes a proof when the past drop proves true on its anniversary date.</dd>'
             '<dt>Q proof</dt><dd>A Q drop confirmed publicly by Donald Trump. Drops signed Q+ are attributed to President Trump.</dd>'
             '</dl>')
+
+
+# ---------------------------------------------------------------- Q proof pages (data/q-proofs.json)
+# One page per proof from The Book of Q Proofs v1.5 whose drop and @realDonaldTrump tweet could both be verified
+# (drop number and time from data/drops.js; tweet words and time from the X API). No board credits.
+QP = json.load(open('data/q-proofs.json', encoding='utf-8'))
+PROOFS = QP['proofs']
+QP_BYDROP = defaultdict(list)
+for _p in PROOFS:
+    for _n in _p['drops']: QP_BYDROP[_n].append(_p)
+QP_LM = S.git_date('data/q-proofs.json')
+QP_CSS = '<link rel="stylesheet" href="/assets/seo/qp.css?v=1">\n'
+QP_SRC = 'Compiled from The Book of Q Proofs v1.5'
+
+def tw_dt(t): return datetime.datetime.fromisoformat(t['created_at'].replace('Z', '+00:00')).astimezone(ET)
+def et_long(dt): return dt.strftime('%B %-d, %Y, %-I:%M:%S %p') + ' ET'
+def gap_text(sec):
+    a = int(abs(sec)); d, r = divmod(a, 86400); h, r = divmod(r, 3600); m, s_ = divmod(r, 60)
+    pl = lambda n, w: '%d %s%s' % (n, w, '' if n == 1 else 's')
+    if d >= 30: out = pl(d, 'day')
+    elif d: out = pl(d, 'day') + ((' ' + pl(h, 'hour')) if h else '')
+    elif h: out = pl(h, 'hour') + ((' ' + pl(m, 'minute')) if m else '')
+    elif m: out = pl(m, 'minute') + ((' ' + pl(s_, 'second')) if s_ else '')
+    else: out = pl(s_, 'second')
+    return out
+def drop_list(ns):
+    ns = ['#%d' % n for n in ns]
+    return ns[0] if len(ns) == 1 else (', '.join(ns[:-1]) + ' and ' + ns[-1])
+
+def build_proof_pages():
+    for i, p in enumerate(PROOFS):
+        url = '/q-proofs/%s/' % p['slug']
+        tws = p['tweets']; t0 = tws[0]; t0dt = tw_dt(t0)
+        drops = [BYN[n] for n in p['drops']]
+        dl = ''.join('<li><a href="/drops/%d/">Q drop #%d</a> <span class="n"><time datetime="%s">%s</time></span><span class="dx-q">%s</span></li>'
+                     % (d['n'], d['n'], d['dt'].isoformat(), et_long(d['dt']), E(clip(plain(d['text']), 240) if plain(d['text']) else clip(img_only(d), 240))) for d in drops)
+        tl = ''
+        for t in tws:
+            dt = tw_dt(t)
+            gaps = ''.join('<li>Q drop <a href="/drops/%d/">#%d</a> was posted <b>%s %s</b> this tweet.</li>'
+                           % (d['n'], d['n'], gap_text((dt - d['dt']).total_seconds()), 'before' if d['dt'] < dt else 'after') for d in drops)
+            tl += ('<figure class="qp-tw"><blockquote cite="%s"><p>%s</p></blockquote>'
+                   '<figcaption>Donald J. Trump (@realDonaldTrump) &middot; <time datetime="%s">%s</time> &middot; <a href="%s" target="_blank" rel="noopener">View on X</a>%s</figcaption>'
+                   '<ul class="qp-gap">%s</ul></figure>'
+                   % (E(t['url']), E(t['text']).replace('\n', '<br>'), dt.isoformat(), et_long(dt), E(t['url']),
+                      ' &middot; <span class="qp-media">link or media on X</span>' if t.get('has_media') else '', gaps))
+        title = 'Q Proof: %s' % p['title']
+        seo_title = '%s (Q Drop %s)' % (title, drop_list(p['drops']))
+        first_gap = (t0dt - drops[0]['dt']).total_seconds()
+        desc = clip('Q drop %s and President Trump\u2019s tweet of %s: \u201c%s\u201d Q drop #%d was posted %s %s the tweet. %s.'
+                    % (drop_list(p['drops']), t0dt.strftime('%B %-d, %Y'), clip(t0['text'], 90), drops[0]['n'], gap_text(first_gap), 'before' if first_gap > 0 else 'after', QP_SRC), 300)
+        nav = []
+        if i > 0: nav.append('Previous: <a href="/q-proofs/%s/">%s</a>' % (PROOFS[i - 1]['slug'], E(PROOFS[i - 1]['title'])))
+        if i < len(PROOFS) - 1: nav.append('Next: <a href="/q-proofs/%s/">%s</a>' % (PROOFS[i + 1]['slug'], E(PROOFS[i + 1]['title'])))
+        body = ('<h1>%s</h1>' % E(title) +
+                '<p class="lede">Q drop %s set beside President Trump&rsquo;s %s on X. Times are US Eastern.</p>'
+                % (', '.join('<a href="/drops/%d/">#%d</a>' % (n, n) for n in p['drops']), 'tweet' if len(tws) == 1 else '%d tweets' % len(tws)) +
+                '<div class="qp-grid"><section class="qp-col"><h2>The Q drop%s</h2><ol class="dx-list">%s</ol></section>' % ('' if len(drops) == 1 else 's', dl) +
+                '<section class="qp-col"><h2>President Trump&rsquo;s %s</h2>%s</section></div>' % ('tweet' if len(tws) == 1 else 'tweets', tl) +
+                ('<p class="qp-note">%s</p>' % E(p['note']) if p.get('note') else '') +
+                '<p class="qp-src">%s.</p>' % QP_SRC +
+                ('<p class="dx-more">%s</p>' % ' &middot; '.join(nav) if nav else '') +
+                '<p class="dx-more"><a href="/q-proofs/">All Q proofs</a> &middot; <a href="/ledger.html">The Drop Ledger</a> &middot; <a href="/deltas/">Deltas</a></p>')
+        g = [{'@type': 'CreativeWork', '@id': SITE + url + '#proof', 'name': title, 'url': SITE + url, 'description': desc, 'inLanguage': 'en',
+              'isPartOf': {'@id': SITE + '/q-proofs/#c'}, 'publisher': {'@id': S.ORG_ID},
+              'citation': {'@type': 'Book', 'name': 'The Book of Q Proofs', 'version': '1.5'},
+              'about': [{'@type': 'CreativeWork', '@id': SITE + '/drops/%d/#drop' % d['n'], 'name': 'Q drop #%d' % d['n'], 'url': SITE + '/drops/%d/' % d['n'], 'datePublished': d['dt'].isoformat()} for d in drops],
+              'mentions': [{'@type': 'SocialMediaPosting', 'url': t['url'], 'datePublished': tw_dt(t).isoformat(), 'text': t['text'],
+                            'author': {'@type': 'Person', 'name': 'Donald J. Trump', 'url': 'https://x.com/realDonaldTrump'}} for t in tws]}]
+        og = 'https://memes.therubberduck.net/drops/v3/og2/%d.jpg' % drops[0]['n']
+        S.write('q-proofs/%s/index.html' % p['slug'], page(url, seo_title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Q Proofs', '/q-proofs/'), (p['title'], url)],
+                                                         og_image=og, og_type='article', extra_head=og_size('Q drop #%d. The Rubber Duck.' % drops[0]['n']) + DX_CSS + QP_CSS + PWA_HEAD))
+    return len(PROOFS)
+
+def proofs_index_html():
+    li = ''.join('<li><a href="/q-proofs/%s/">%s</a> <span class="n">Q drop %s &middot; tweet <time datetime="%s">%s</time></span></li>'
+                 % (p['slug'], E(p['title']), drop_list(p['drops']), tw_dt(p['tweets'][0]).isoformat(), tw_dt(p['tweets'][0]).strftime('%B %-d, %Y')) for p in PROOFS)
+    return ('<h2>Q proofs, one by one</h2><p class="dx-note">%d proofs where both the drop and President Trump&rsquo;s tweet can be checked today. '
+            'Each page shows the drop numbers, the tweet&rsquo;s exact words with its date and time, and the time between them. %s.</p>'
+            '<ol class="dx-list qp-index">%s</ol>' % (len(PROOFS), QP_SRC, li))
 
 def mmdd_key(dt): return dt.strftime('%m-%d')
 def mmdd_name(k): return datetime.date(2020, int(k[:2]), int(k[3:])).strftime('%B %-d')   # 2020 is a leap year
@@ -199,10 +281,11 @@ def build_proofs():
     ctx = [(225, 'Trump&rsquo;s &ldquo;calm before the storm&rdquo; remark of October 5, 2017, set beside the drop'), (4948, 'context and sources set beside the drop')]
     ctx = [(n, t) for n, t in ctx if os.path.exists('tools/witness-blocks/%d.html' % n)]
     title = 'Q Proofs: Q Drops Confirmed by Donald Trump, and Q+ Drops'
-    desc = clip('Q proofs: Q drops confirmed publicly by Donald Trump. All %d drops signed Q+, with full text links, the Book of Q Proofs PDFs, and delta proofs from The Rubber Duck.' % len(QPLUS))
+    desc = clip('Q proofs: Q drops confirmed publicly by Donald Trump. %d proofs with the drop and the tweet side by side, all %d drops signed Q+, the Book of Q Proofs PDFs, and delta proofs from The Rubber Duck.' % (len(PROOFS), len(QPLUS)))
     body = ('<h1>Q Proofs</h1>'
             '<p class="lede">A Q proof is a Q drop confirmed publicly by Donald Trump. '
             'Drops signed Q+ are attributed to President Trump himself. A delta proof is a drop that proves true on its anniversary date; see <a href="/deltas/">Deltas</a>.</p>' + DEF_HTML +
+            proofs_index_html() +
             '<h2>Drops signed Q+</h2><p class="dx-note">%d drops carry the Q+ signature, oldest first.</p><ol class="dx-list">%s</ol>' % (len(QPLUS), rows) +
             (('<h2>Drops shown with their public record</h2><ul class="links">%s</ul>' % ''.join('<li><a href="/drops/%d/">Q drop #%d</a>: %s</li>' % (n, n, t) for n, t in ctx)) if ctx else '') +
             (('<h2>The Book of Q Proofs</h2><p>Proof collections in the SCIF Reading Room, each with its own page and PDF.</p><ul class="links">%s</ul>' % ''.join('<li><a href="/library/%s/">%s</a></li>' % (s, t) for s, t in pdfs)) if pdfs else '') +
@@ -213,10 +296,11 @@ def build_proofs():
           'about': [{'@type': 'DefinedTerm', 'name': 'Q proof', 'description': 'A Q drop confirmed publicly by Donald Trump.'},
                     {'@type': 'DefinedTerm', 'name': 'Q+', 'description': 'The signature on drops attributed to President Trump.'},
                     {'@type': 'Person', 'name': 'Donald J. Trump'}],
+          'hasPart': {'@type': 'ItemList', 'name': 'Q proofs, one by one', 'numberOfItems': len(PROOFS), 'itemListElement': [{'@type': 'ListItem', 'position': j + 1, 'url': SITE + '/q-proofs/%s/' % p['slug'], 'name': 'Q Proof: ' + p['title']} for j, p in enumerate(PROOFS)]},
           'mainEntity': {'@type': 'ItemList', 'name': 'Q drops signed Q+', 'numberOfItems': len(QPLUS), 'itemListElement': items}}]
     S.write('q-proofs/index.html', page('/q-proofs/', title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Q Proofs', '/q-proofs/')],
                                       og_image=SITE + '/images/brand/social-q-proofs-20261030.png',
-                                      extra_head=og_size('Q Proofs: explore the drops and public record. The Rubber Duck.') + DX_CSS + PWA_HEAD))
+                                      extra_head=og_size('Q Proofs: explore the drops and public record. The Rubber Duck.') + DX_CSS + QP_CSS + PWA_HEAD))
     SM.insert(1, ('/q-proofs/', TODAY))
 
 def drop_row_full(d):
@@ -267,6 +351,8 @@ def patch_drops():
             sm_imgs[n] = [IMG_BASE + i['src'] for i, _, _ in imgs]
         k = mmdd_key(d['dt'])
         xl = '<li class="xl"><a href="/deltas/%s/">Q drop deltas for %s: every drop posted on this date</a></li>' % (k, mmdd_name(k))
+        for p in QP_BYDROP.get(n, []):
+            xl += '<li class="xl"><a href="/q-proofs/%s/">Q Proof: %s</a></li>' % (p['slug'], E(p['title']))
         if d in QPLUS:
             xl += '<li class="xl"><a href="/q-proofs/">Q Proofs: this drop is signed Q+</a></li>'
         h = h.replace('<ul class="links">', '<ul class="links">' + xl, 1)
@@ -304,6 +390,11 @@ def sitemaps(sm_imgs):
     idx = open('sitemap.xml', encoding='utf-8').read()
     idx = re.sub(r'\n  <sitemap><loc>[^<]*/sitemaps/deltas\.xml</loc>.*?</sitemap>', '', idx)
     idx = idx.replace('</sitemapindex>', '  <sitemap><loc>%s/sitemaps/deltas.xml</loc><lastmod>%s</lastmod></sitemap>\n</sitemapindex>' % (SITE, max(lm for _, lm in SM)))
+    qp = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    qp += ['  <url><loc>%s/q-proofs/%s/</loc><lastmod>%s</lastmod></url>' % (SITE, p['slug'], QP_LM) for p in PROOFS]
+    S.write('sitemaps/q-proofs.xml', '\n'.join(qp + ['</urlset>\n']))
+    idx = re.sub(r'\n  <sitemap><loc>[^<]*/sitemaps/q-proofs\.xml</loc>.*?</sitemap>', '', idx)
+    idx = idx.replace('</sitemapindex>', '  <sitemap><loc>%s/sitemaps/q-proofs.xml</loc><lastmod>%s</lastmod></sitemap>\n</sitemapindex>' % (SITE, QP_LM))
     S.write('sitemap.xml', idx)
     lines = open('sitemaps/drops.xml', encoding='utf-8').read().split('\n')
     res = []
@@ -317,11 +408,12 @@ def sitemaps(sm_imgs):
     allu = 'sitemaps/all-urls.txt'
     if os.path.exists(allu):
         u = [x for x in open(allu).read().split('\n') if x and '/deltas/' not in x and '/q-proofs/' not in x]
-        S.write(allu, '\n'.join(u + [SITE + p for p, _ in SM]) + '\n')
+        S.write(allu, '\n'.join(u + [SITE + p for p, _ in SM] + [SITE + '/q-proofs/%s/' % p['slug'] for p in PROOFS]) + '\n')
 
 if __name__ == '__main__':
     S.write_pwa_data([[d['n'], int(d['dt'].timestamp())] for d in DROPS])
-    nd = build_days(); build_hub(); build_proofs()
+    nd = build_days(); build_hub(); build_proofs(); nqp = build_proof_pages()
     wi, ni, smi = patch_drops(); patch_index(); sitemaps(smi)
     print('deltas day pages: %d, hub: 1, q-proofs: 1 (Q+ drops: %d), x posts linked: %d' % (nd, len(QPLUS), len(XPOSTS)))
     print('drop pages with image text: %d (%d images)' % (wi, ni))
+    print('q proof pages: %d' % nqp)
