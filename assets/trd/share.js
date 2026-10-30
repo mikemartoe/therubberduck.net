@@ -87,13 +87,18 @@
   }
 
   function build(o) {
-    var row = D.createElement('div');
-    row.className = 'shr' + (o.noPic ? ' shr-nopic' : '');
+    /* o.only: optional list of platform keys to offer (e.g. ['x','truth','fb','email','sms','link']).
+       o.compact: icon-only inline row (label in aria-label + title), no preview picture. */
+    var row = D.createElement('div'), list = o.only ? P.filter(function (p) { return o.only.indexOf(p[0]) > -1; }) : P;
+    if (o.compact) o.noPic = true;
+    row.className = 'shr' + (o.noPic ? ' shr-nopic' : '') + (o.compact ? ' shr-compact' : '');
     row.setAttribute('data-share-kind', o.kind);
     row.innerHTML =
       (o.noPic ? '' : '<a class="shr-pic" href="' + o.file + '" target="_blank" rel="noopener"><img src="' + o.thumb + '" alt="" loading="lazy" decoding="async"></a>') +
-      '<div class="shr-btns" role="group" aria-label="Share">' + P.map(function (p) {
-        return '<button type="button" class="shr-b shr-' + p[0] + '" data-p="' + p[0] + '" aria-label="' + (p[0] === 'link' ? 'Copy link' : 'Share to ' + p[1]) + '">' + I[p[0]] + '<span>' + p[1] + '</span></button>';
+      (o.compact ? '<span class="shr-lbl" aria-hidden="true">Share</span>' : '') +
+      '<div class="shr-btns" role="group" aria-label="' + (o.groupLabel || 'Share') + '">' + list.map(function (p) {
+        var lab = (p[0] === 'link' ? 'Copy link' : 'Share to ' + p[1]);
+        return '<button type="button" class="shr-b shr-' + p[0] + '" data-p="' + p[0] + '" aria-label="' + lab + '"' + (o.compact ? ' title="' + lab + '"' : '') + '>' + I[p[0]] + (o.compact ? '' : '<span>' + p[1] + '</span>') + '</button>';
       }).join('') + '</div>' +
       '<p class="shr-hint" role="status" aria-live="polite" hidden></p>';
     var hint = row.querySelector('.shr-hint'), files = {}, H = o.hints ? Object.assign({}, HINT, o.hints) : HINT;
@@ -101,14 +106,14 @@
     /* fetch the image now so the share sheet can open inside the tap (iOS needs that) */
     function prep(url) { if (!files[url]) files[url] = fetchBlob(url).then(function (b) { files[url + ':b'] = b; return b; }, function () { files[url + ':b'] = null; return null; }); return files[url]; }
     var pic = (o.igFile || o.file);
-    if (navigator.canShare) prep(pic);
+    if (navigator.canShare && list.some(function (p) { return p[0] === 'ig' || p[0] === 'tiktok'; })) prep(pic);
     row.querySelector('.shr-btns').addEventListener('click', function (ev) {
       var b = ev.target.closest('[data-p]'); if (!b) return;
       var p = b.getAttribute('data-p'), href = hrefFor(p, o);
       count(p, o);
       if (p === 'x' || p === 'truth' || p === 'fb') { W.open(href, '_blank', 'noopener,width=680,height=640'); say(''); return; }
       if (p === 'email' || p === 'sms') { location.href = href; say(''); return; }
-      if (p === 'link') { copyText(href).then(function (ok) { say(ok ? H.link : href); }); return; }
+      if (p === 'link') { copyText(href).then(function (ok) { say(ok ? H.link : href); if (ok && o.compact) { clearTimeout(row._t); row._t = setTimeout(function () { say(''); }, 2600); } }); return; }
       /* tiktok / ig */
       copyText(href);
       var blob = files[pic + ':b'], name = o.fileName.replace(/\.(\w+)$/, (o.igFile ? '-4x5' : '') + '.$1');

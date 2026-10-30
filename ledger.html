@@ -172,8 +172,49 @@ html[data-theme="dark"] .chip[aria-pressed="true"]{color:#1A1710}
 .arc-row .src .src-host{color:var(--muted);font-size:10.5px;letter-spacing:0}
 .arc-row .src-none{color:var(--muted);border-style:dashed;font-family:var(--font-body);font-size:12.5px;font-style:italic;letter-spacing:0;background:transparent}
 .arc-row .nobody{color:var(--muted);font-style:italic}
-.arc-row .src-share{display:flex;width:100%;justify-content:center;cursor:pointer;margin-top:10px;font-size:12.5px;padding:9px 11px}
-.arc-row .src-share[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+/* drop images (data/drop-images.js, R2 memes.therubberduck.net/drops/img/): small in the list, full in the lightbox.
+   Tiles in one group share top and bottom edges: each tile's flex-grow is its aspect ratio, so heights come out equal. */
+.arc-row .dimg{display:flex;flex-wrap:nowrap;gap:8px;margin-top:12px;width:100%}
+.arc-row .ex+.dimg{margin-top:14px}
+.arc-row .e.e-pic{align-self:start}
+.arc-row .e.e-pic>.dimg:first-child{margin-top:0}
+.arc-row .dimg-g{display:flex;gap:8px;min-width:0}
+.arc-row .dimg-t{display:block;min-width:0;padding:0;margin:0;border:0;border-radius:4px;overflow:hidden;cursor:zoom-in;background:var(--surface-2);box-shadow:0 0 0 1px var(--border);transition:box-shadow .18s}
+.arc-row .dimg-t:hover,.arc-row .dimg-t:focus-visible{box-shadow:0 0 0 1px var(--accent),0 0 18px -6px rgba(0,255,65,.45);outline:none}
+.arc-row .dimg-t img{display:block;width:100%;height:auto}
+@media (max-width:640px){.arc-row .dimg.dimg-wrap{flex-wrap:wrap}.arc-row .dimg.dimg-wrap .dimg-g{flex-basis:100%!important}}
+.arc-top{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;margin:6px 0 4px;padding:0 0 10px;border-bottom:1px solid var(--border)}
+.arc-top .arc-count{margin:0}
+.arc-top[hidden]{display:none}
+.arc-endless{display:inline-flex;align-items:center;gap:10px;min-height:36px;padding:0 12px 0 10px;border:1px solid var(--border);border-radius:4px;background:var(--surface-1);color:var(--text);font:500 11.5px/1 var(--font-display);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:border-color .18s,color .18s}
+.arc-endless:hover,.arc-endless:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.arc-endless .sw{position:relative;flex:none;width:30px;height:16px;border-radius:9px;border:1px solid var(--muted);background:transparent;transition:background .18s,border-color .18s}
+.arc-endless .sw::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:var(--muted);transition:transform .18s,background .18s}
+.arc-endless[aria-checked="true"]{border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+.arc-endless[aria-checked="true"] .sw{border-color:var(--accent);background:rgba(0,255,65,.16)}
+.arc-endless[aria-checked="true"] .sw::after{transform:translateX(14px);background:var(--accent)}
+.arc-more{display:flex;justify-content:center;align-items:center;min-height:56px;font:500 11.5px/1 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.arc-more[hidden]{display:none}
+.arc-endless-on .arc-pager{display:none}
+/* lightbox */
+.dlb{position:fixed;inset:0;z-index:2147483100;display:flex;align-items:center;justify-content:center;padding:56px 64px 48px;background:rgba(2,5,3,.92);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.dlb[hidden]{display:none}
+.dlb-fig{margin:0;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:100%;max-height:100%}
+.dlb-img{display:block;width:auto;height:auto;max-width:min(1200px,calc(100vw - 128px));max-height:calc(100vh - 140px);max-height:calc(100dvh - 140px);border:1px solid var(--border);border-radius:4px;background:var(--surface-2);cursor:default}
+.dlb-cap{font:500 12px/1.2 var(--font-display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.dlb button{position:absolute;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--border);border-radius:4px;background:var(--surface-1);color:var(--text);cursor:pointer;transition:border-color .18s,color .18s}
+.dlb button:hover,.dlb button:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.dlb button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.dlb-x{top:10px;right:10px}
+.dlb-prev{left:10px;top:50%;transform:translateY(-50%)}
+.dlb-next{right:10px;top:50%;transform:translateY(-50%)}
+.dlb button[hidden]{display:none}
+@media (max-width:640px){
+  .dlb{padding:60px 8px 70px}
+  .dlb-img{max-width:calc(100vw - 16px);max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px)}
+  .dlb-prev,.dlb-next{top:auto;bottom:12px;transform:none}
+  .dlb-prev{left:calc(50% - 52px)}.dlb-next{right:calc(50% - 52px)}
+}
 .arc-row:target{background:color-mix(in srgb,var(--accent-2,var(--accent-hover)) 12%,transparent)}
 .arc-row .e{font-size:14.8px;line-height:1.55;color:var(--text)}
 .arc-row .e mark{background:color-mix(in srgb,var(--accent) 30%,transparent);color:inherit;border-radius:3px;padding:0 2px}
@@ -514,6 +555,7 @@ main,.e3,.arc{background-color:var(--bg)}
 /* Two links per row: the source post, and the reply thread it was posted in. */
 .arc-row .srcrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
 .arc-row .srcrow .src{margin-top:0;flex:0 0 auto;white-space:nowrap}
+@media (max-width:640px){.arc-row .srcrow .src{max-width:100%;white-space:normal;flex-wrap:wrap;row-gap:2px}.arc-row .srcrow .src .src-host{overflow-wrap:anywhere}}
 .arc-row .src-thread{color:var(--text)!important;font-family:var(--font-display);font-size:11.5px;border-color:color-mix(in srgb,var(--accent) 38%,var(--border))!important;background:transparent!important}
 .arc-row .src-thread:hover{color:var(--accent)!important;border-color:var(--accent)!important;background:rgba(0,255,65,.06)!important}
 .arc-row .src-thread .src-arrow{color:var(--muted)}
@@ -633,9 +675,9 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script src="/assets/trd/duckpod.js" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/share.css?v=20261025s1" data-trd-keep>
+<link rel="stylesheet" href="/assets/trd/share.css?v=20261030c" data-trd-keep>
 <link rel="stylesheet" href="/assets/trd/support-banner.css?v=20261026sb1" data-trd-keep>
-<script src="/assets/trd/share.js?v=20261025s1" data-trd-keep></script>
+<script src="/assets/trd/share.js?v=20261030c" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/stack.css?v=20261029b" data-trd-keep>
 <script src="/assets/trd/stack.js?v=20261029b" data-trd-keep></script>
 
@@ -718,6 +760,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 .e3-footer-editorial form textarea{width:100%;box-sizing:border-box;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--surface-1);color:var(--text);font:inherit;font-size:15px;resize:vertical}
 </style>
 <script src="data/drops.js"></script>
+<script src="data/drop-images.js?v=20261030a"></script>
 <script src="assets/trd/ledger-search.js?v=20261025"></script>
 <script src="assets/trd/ledger-starter.js?v=20261029" defer></script>
 <script src="assets/trd/ledger-path.js?v=20261029" defer></script>
@@ -1177,7 +1220,13 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 
       <p class="lx-info" id="arcInfo" aria-live="polite" hidden></p>
 
+      <div class="arc-top" id="arcTop">
+        <p class="arc-count" id="arcCountTop">4,966 records held</p>
+        <button type="button" class="arc-endless" id="arcEndless" role="switch" aria-checked="false" title="Load more drops automatically as you scroll"><span class="sw" aria-hidden="true"></span>Endless scroll</button>
+      </div>
+
       <ol class="arc-list" id="arcList" aria-live="polite"></ol>
+      <div class="arc-more" id="arcMore" hidden>Loading more drops</div>
 
       <div class="arc-empty" id="arcEmpty" hidden>
         <h3 id="arcEmptyTitle">Nothing in the ledger answers to that.</h3>
@@ -1482,25 +1531,93 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       chips=[].slice.call(document.querySelectorAll('.arc-chips .chip'));
 
   var MON=LX.MON, MONF=LX.MONF;
-  /* Share a drop: the Share button opens a row of platform buttons (assets/trd/share.js).
-     The shared item is the drop's card image (R2: drops/card|og|ig) plus /drops/share/N.html,
-     a static page whose preview is the card and which sends people to #drop-N here. */
+  /* Share a drop: a compact row of share icons under every drop (assets/trd/share.js, compact mode), no second screen.
+     Only platforms where a drop's link preview looks right get a button (X, Truth Social, Facebook); Email, Text and
+     Copy link cover the rest (TikTok and Instagram: Copy link). The shared page is /drops/share/N.html, whose
+     preview is the drop's card and which sends people to #drop-N here. */
+  var SHARE_ONLY=['x','truth','fb','email','sms','link'];
+  function addShare(li){
+    if(!window.trdShare||li.querySelector('.shr')) return;
+    var n=+li.id.replace('drop-',''), r=BYN[n], e=li.querySelector('.e'); if(!e) return;
+    e.appendChild(trdShare.build({kind:'drop', id:String(n), page:'https://therubberduck.net/drops/share/'+n+'.html',
+      text:'Q drop #'+n+' \u00b7 '+(r?fmtDate(r.d):''), fileName:'q-drop-'+n+'.png', compact:true, only:SHARE_ONLY,
+      groupLabel:'Share Q drop #'+n}));
+  }
+  /* Drop images: the small copy in the list (lazy, sized up front so nothing jumps), the full copy in the lightbox. */
+  var DI=window.TRD_DROP_IMAGES||null;
+  function imgsOf(n){ return (DI&&DI.d&&DI.d[n])||null; }
+  function imgsHTML(n){
+    var a=imgsOf(n); if(!a||!a.length) return '';
+    var k=a.length, MAXH=k>1?300:440, GAP=8;
+    var groups=k<=2?[a.map(function(x,i){return i;})]:(k===3?[[0,1],[2]]:[[0,1],[2,3]]);
+    var S=0, SW=0; a.forEach(function(im){ S+=im.sw/im.sh; SW+=im.sw; });
+    var maxW=Math.min(SW+GAP*(k-1), Math.round(MAXH*S+GAP*(k-1)));
+    return '<div class="dimg'+(k>2?' dimg-wrap':'')+'" style="max-width:'+maxW+'px">'+groups.map(function(g){
+      var gs=0; g.forEach(function(i){ gs+=a[i].sw/a[i].sh; });
+      return '<div class="dimg-g" style="flex:'+gs.toFixed(4)+' 1 '+(GAP*(g.length-1))+'px;max-width:'+Math.round(MAXH*gs+GAP*(g.length-1))+'px">'+g.map(function(i){
+        var im=a[i], ar=im.sw/im.sh, lab='Q drop #'+n+(k>1?', image '+(i+1)+' of '+k:', image');
+        return '<button type="button" class="dimg-t" data-dimg="'+n+'" data-i="'+i+'" style="flex:'+ar.toFixed(4)+' 1 0px" aria-label="Enlarge '+lab+'">'+
+          '<img src="'+esc(DI.base+im.sm)+'" width="'+im.sw+'" height="'+im.sh+'" loading="lazy" decoding="async" alt="'+lab+'"></button>';
+      }).join('')+'</div>';
+    }).join('')+'</div>';
+  }
+  var LB=null;
+  function lightbox(){
+    if(LB) return LB;
+    var ico=function(d){ return '<svg viewBox="0 0 24 24" aria-hidden="true">'+d+'</svg>'; };
+    var el=document.createElement('div');
+    el.className='dlb'; el.id='dropLightbox'; el.hidden=true;
+    el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label','Drop image');
+    el.innerHTML='<figure class="dlb-fig"><img class="dlb-img" alt=""><figcaption class="dlb-cap"></figcaption></figure>'+
+      '<button type="button" class="dlb-x" aria-label="Close" title="Close">'+ico('<path d="M18 6L6 18M6 6l12 12"/>')+'</button>'+
+      '<button type="button" class="dlb-prev" aria-label="Previous image" title="Previous image">'+ico('<path d="m15 18-6-6 6-6"/>')+'</button>'+
+      '<button type="button" class="dlb-next" aria-label="Next image" title="Next image">'+ico('<path d="m9 18 6-6-6-6"/>')+'</button>';
+    document.body.appendChild(el);
+    var img=el.querySelector('.dlb-img'), cap=el.querySelector('.dlb-cap'), bp=el.querySelector('.dlb-prev'), bn=el.querySelector('.dlb-next'), bx=el.querySelector('.dlb-x');
+    var cur={n:0,i:0,back:null,ov:''}, tok=0;
+    function show(n,i){
+      var a=imgsOf(n); if(!a) return;
+      i=(i+a.length)%a.length; cur.n=n; cur.i=i;
+      var im=a[i], t=++tok, lab='Q drop #'+n+(a.length>1?', image '+(i+1)+' of '+a.length:'');
+      img.src=DI.base+im.sm; img.alt=lab; cap.textContent=lab;
+      var full=new Image(); full.onload=function(){ if(t===tok) img.src=full.src; }; full.src=DI.base+im.src;
+      bp.hidden=bn.hidden=a.length<2;
+    }
+    function open(n,i,from){
+      cur.back=from||document.activeElement; show(n,i);
+      cur.ov=document.documentElement.style.overflow; document.documentElement.style.overflow='hidden';
+      el.hidden=false; bx.focus();
+      document.addEventListener('keydown',key,true);
+    }
+    function close(){
+      if(el.hidden) return;
+      el.hidden=true; tok++; img.removeAttribute('src');
+      document.documentElement.style.overflow=cur.ov;
+      document.removeEventListener('keydown',key,true);
+      if(cur.back&&cur.back.focus){ try{ cur.back.focus({preventScroll:true}); }catch(e){} }
+    }
+    function key(e){
+      if(e.key==='Escape'){ e.preventDefault(); close(); }
+      else if(e.key==='ArrowLeft'&&!bp.hidden){ e.preventDefault(); show(cur.n,cur.i-1); }
+      else if(e.key==='ArrowRight'&&!bn.hidden){ e.preventDefault(); show(cur.n,cur.i+1); }
+      else if(e.key==='Tab'){ /* keep focus inside the dialog */
+        var f=[bx,bp,bn].filter(function(b){ return !b.hidden; }), ix=f.indexOf(document.activeElement);
+        e.preventDefault(); f[(ix+(e.shiftKey?-1:1)+f.length)%f.length].focus();
+      }
+    }
+    el.addEventListener('click',function(e){
+      if(e.target.closest('.dlb-x')) return close();
+      if(e.target.closest('.dlb-prev')) return show(cur.n,cur.i-1);
+      if(e.target.closest('.dlb-next')) return show(cur.n,cur.i+1);
+      if(e.target===img) return;
+      close();   /* a tap anywhere outside the picture closes it */
+    });
+    LB={open:open,close:close};
+    return LB;
+  }
   list.addEventListener('click',function(ev){
-    var b=ev.target.closest('.src-share'); if(!b||!window.trdShare) return;
-    var n=+b.getAttribute('data-share-drop'), cell=b.closest('.e'), open=cell.querySelector('.shr');
-    if(open){ open.remove(); b.setAttribute('aria-expanded','false'); return; }
-    var C=window.TRD_DROP_CARDS||{base:'https://memes.therubberduck.net/drops/',long:[]}, r=BYN[n],
-        B=(C.v2&&C.v2.indexOf(n)>-1)?C.v2base:C.base;   /* drops with attached images: re-rendered cards under drops/v2/ */
-    try{ if(window.trdTrack) trdTrack('event/drop-share/open/'+n,'Q drop #'+n+' share opened',0); }catch(e){}
-    try{ if(window.trdVisit) trdVisit.event('share-open',{item:'drop-'+n}); }catch(e){}
-    var row=trdShare.build({kind:'drop', id:String(n), page:'https://therubberduck.net/drops/share/'+n+'.html',
-      text:'Q drop #'+n+' \u00b7 '+(r?fmtDate(r.d):''), thumb:B+'og/'+n+'.jpg', file:B+'card/'+n+'.png',
-      igFile:(C.long.indexOf(n)>-1)?B+'ig/'+n+'.png':null, fileName:'q-drop-'+n+'.png'});
-    /* the same support strip as the foot of the list, as the share panel's last row */
-    var sup=document.getElementById('ledgerSupport');
-    if(sup){ var sc=sup.cloneNode(true); sc.removeAttribute('id'); row.appendChild(sc); }
-    cell.appendChild(row);
-    b.setAttribute('aria-expanded','true');
+    var t=ev.target.closest('.dimg-t'); if(!t) return;
+    lightbox().open(+t.getAttribute('data-dimg'), +t.getAttribute('data-i'), t);
   });
   function fmtDate(iso){ var p=iso.split('-'); return parseInt(p[2],10)+' '+MON[parseInt(p[1],10)-1]+' '+p[0]; }
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
@@ -1539,45 +1656,85 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     info.innerHTML=h+(acts?'<span class="lx-acts">'+acts+'</span>':'');
     info.hidden=false;
   }
-  function render(){
+  function rowHTML(r, caps){
+    var pics = imgsHTML(r.n);
+    var body = r.e
+      ? '<div class="ex fmt">'+fmtBlock(r.e)+'</div>'+pics
+      : (pics || '<span class="nobody">No body text in the capture — an image-only post.</span>');
+    var src = '<span class="srcrow">';
+    if(r.l){
+      src += '<a class="src src-post" href="'+esc(r.l)+'" target="_blank" rel="noopener noreferrer" title="The post this drop was made in, as captured"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">'+esc(srcLabel(r.l))+'</span><span class="src-host">'+esc(hostOf(r.l))+'</span></a>';
+      var th = threadOf(r.l);
+      if(th && th!==r.l){
+        src += '<a class="src src-thread" href="'+esc(th)+'" target="_blank" rel="noopener noreferrer" title="Open the whole reply thread this drop started"><span class="src-arrow" aria-hidden="true">⤷</span><span class="src-lbl">See original anon research</span><span class="src-host">'+esc(hostOf(th))+'</span></a>';
+      }
+    } else {
+      src += '<span class="src src-none">No source link captured for this drop.</span>';
+    }
+    src += '<a class="src src-qalerts" href="https://qalerts.app/?n='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on qalerts.app (the original boards are offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on qalerts.app</span><span class="src-host">qalerts.app</span></a>';
+    src += '</span>';
+    var cap = caps[r.n] ? '<p class="lx-cap">'+esc(caps[r.n])+'</p>' : '';
+    return '<li class="arc-row" id="drop-'+r.n+'">'+
+      '<span class="n"><a href="#drop-'+r.n+'" aria-label="Permalink to drop '+r.n+'"><span>#</span>'+r.n+'</a></span>'+
+      '<span class="d" title="'+esc(r.time)+' (US Eastern)">'+fmtDate(r.d)+'</span>'+
+      '<span class="b">'+r.b+'<i>'+r.bd+'</i></span>'+
+      '<span class="e'+(!r.e&&pics&&!cap?' e-pic':'')+'">'+cap+body+src+'</span></li>';
+  }
+  /* Endless scroll (off by default, remembered on this device): the list grows by one page (PER drops)
+     each time the reader nears its end. Off: the Prev / Next paging is unchanged. */
+  var EKEY='trd.ledgerEndless', endlessBtn=document.getElementById('arcEndless'), moreEl=document.getElementById('arcMore'),
+      topEl=document.getElementById('arcTop'), countTop=document.getElementById('arcCountTop'), footEl=document.querySelector('.arc-foot');
+  state.endless=false; try{ state.endless=localStorage.getItem(EKEY)==='1'; }catch(e){}
+  var moreIO=null;
+  function syncEndless(){
+    if(endlessBtn) endlessBtn.setAttribute('aria-checked', state.endless?'true':'false');
+    if(footEl) footEl.classList.toggle('arc-endless-on', state.endless);
+  }
+  function countText(out, from, to){
+    return out.length ? ('Showing '+nf(from)+'–'+nf(to)+' of '+nf(out.length)+(out.length===ALL.length?' records':' matching records')) : 'No matching records';
+  }
+  function render(append){
     var out=state.filtered, pages=Math.max(1,Math.ceil(out.length/PER)), res=state.res||{};
     var caps=res.captions||{};
-    var slice=out.slice((state.page-1)*PER,state.page*PER);
-    list.innerHTML=slice.map(function(r){
-      var body = r.e
-        ? '<div class="ex fmt">'+fmtBlock(r.e)+'</div>'
-        : '<span class="nobody">No body text in the capture — an image-only post.</span>';
-      var src = '<span class="srcrow">';
-      if(r.l){
-        src += '<a class="src src-post" href="'+esc(r.l)+'" target="_blank" rel="noopener noreferrer" title="The post this drop was made in, as captured"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">'+esc(srcLabel(r.l))+'</span><span class="src-host">'+esc(hostOf(r.l))+'</span></a>';
-        var th = threadOf(r.l);
-        if(th && th!==r.l){
-          src += '<a class="src src-thread" href="'+esc(th)+'" target="_blank" rel="noopener noreferrer" title="Open the whole reply thread this drop started"><span class="src-arrow" aria-hidden="true">⤷</span><span class="src-lbl">See original anon research</span><span class="src-host">'+esc(hostOf(th))+'</span></a>';
-        }
-      } else {
-        src += '<span class="src src-none">No source link captured for this drop.</span>';
-      }
-      src += '<a class="src src-qalerts" href="https://qalerts.app/?n='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on qalerts.app (the original boards are offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on qalerts.app</span><span class="src-host">qalerts.app</span></a>';
-      src += '</span>';
-      src += '<button type="button" class="src src-share" data-share-drop="'+r.n+'" aria-expanded="false"><span class="src-arrow" aria-hidden="true">⤴</span><span class="src-lbl">Share</span></button>';
-      var cap = caps[r.n] ? '<p class="lx-cap">'+esc(caps[r.n])+'</p>' : '';
-      return '<li class="arc-row" id="drop-'+r.n+'">'+
-        '<span class="n"><a href="#drop-'+r.n+'" aria-label="Permalink to drop '+r.n+'"><span>#</span>'+r.n+'</a></span>'+
-        '<span class="d" title="'+esc(r.time)+' (US Eastern)">'+fmtDate(r.d)+'</span>'+
-        '<span class="b">'+r.b+'<i>'+r.bd+'</i></span>'+
-        '<span class="e">'+cap+body+src+'</span></li>';
-    }).join('');
+    var lo=state.endless?(append?(state.page-1)*PER:0):(state.page-1)*PER, hi=state.page*PER;
+    var html=out.slice(lo,hi).map(function(r){ return rowHTML(r,caps); }).join('');
+    var before=append?list.children.length:0;
+    if(append) list.insertAdjacentHTML('beforeend',html); else list.innerHTML=html;
+    [].slice.call(list.children,before).forEach(addShare);
     empty.hidden = out.length>0;
     list.hidden = out.length===0;
-    var from=out.length?((state.page-1)*PER+1):0, to=Math.min(state.page*PER,out.length);
-    count.textContent = out.length ? ('Showing '+nf(from)+'–'+nf(to)+' of '+nf(out.length)+(out.length===ALL.length?' records':' matching records')) : 'No matching records';
+    if(topEl) topEl.hidden = out.length===0;
+    var from=out.length?(state.endless?1:(state.page-1)*PER+1):0, to=Math.min(state.page*PER,out.length);
+    count.textContent = countText(out, from, to);
+    if(countTop) countTop.textContent = count.textContent;
     if(state.jump!==null && out.length===1) scheduleJump(out[0].n);
     pageEl.textContent=state.page+' / '+pages;
     prev.disabled=state.page<=1; next.disabled=state.page>=pages;
+    syncEndless(); watchMore(pages);
+    if(append) return;
     wrap.classList.toggle('has-value', state.q.length>0);
     renderInfo(res, out.length);
     if(out.length===0) renderEmpty(res); else emptyActs.innerHTML='';
   }
+  function watchMore(pages){
+    if(!moreEl) return;
+    var on=state.endless && state.page<pages;
+    moreEl.hidden=!on;
+    if(!('IntersectionObserver' in window)) return;
+    if(!moreIO) moreIO=new IntersectionObserver(function(en){
+      if(!en.some(function(x){ return x.isIntersecting; })) return;
+      var p=Math.max(1,Math.ceil(state.filtered.length/PER));
+      if(state.endless && state.page<p){ state.page++; render(true); }
+    },{rootMargin:'0px 0px 700px 0px'});
+    moreIO.unobserve(moreEl);
+    if(on) moreIO.observe(moreEl);   /* (re)observing fires again at once if the end is still in view */
+  }
+  if(endlessBtn) endlessBtn.addEventListener('click',function(){
+    state.endless=!state.endless;
+    try{ localStorage.setItem(EKEY, state.endless?'1':'0'); }catch(e){}
+    try{ if(window.trdTrack) trdTrack('event/ledger/endless-'+(state.endless?'on':'off'),'Ledger endless scroll '+(state.endless?'on':'off'),0); }catch(e){}
+    state.page=1; render();
+  });
   /* An empty result always says why, and always offers somewhere to go next. */
   function renderEmpty(res){
     var acts='';
