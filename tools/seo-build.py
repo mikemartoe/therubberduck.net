@@ -163,7 +163,10 @@ NAV = [('/', 'Home'), ('/ledger.html', 'Drop Ledger'), ('/videos.html', 'Video R
 DROP_OG = 'https://memes.therubberduck.net/drops/og2/%d.jpg'   # right-sized share cards on R2 (tools/drop-cards/rightsize.py); old 1200x630 in drops/og/
 _V2 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v2.json')   # drops re-rendered with their real attached images (2026-10-27)
 DROP_V2 = json.load(open(_V2)) if os.path.exists(_V2) else {'prefix': 'v2/', 'drops': {}}
+_V3 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v3.json')   # no-board previews (Mike, 2026-10-30)
+DROP_V3 = json.load(open(_V3)) if os.path.exists(_V3) else {'prefix': 'v3/', 'drops': {}}
 def drop_og(n):
+    if str(n) in DROP_V3['drops']: return DROP_OG.replace('/drops/', '/drops/' + DROP_V3['prefix'], 1) % n
     return DROP_OG.replace('/drops/', '/drops/' + DROP_V2['prefix'], 1) % n if str(n) in DROP_V2['drops'] else DROP_OG % n
 
 

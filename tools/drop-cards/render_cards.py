@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Q-drop share cards (approved v4 layout, 2026-10-25) for the share feature.
 
-Replica of the original post (name, trip, ID, Eastern date/time, post No.), no board banner,
+Replica of the original post body. No board anywhere (Mike, 2026-10-30): no banner, no name/trip/ID/post No. header;
+the header line is "Q drop #N  Month D, YYYY",
 wide Unicode spaces shown as ordinary spaces IN THE IMAGE ONLY (data/drops.js is never changed),
-caption under the post box: "Q drop #N · site /board/ · [duck] therubberduck.net".
+caption under the post box: "[duck] therubberduck.net".
 Duck = images/brand/duck-hero-soft.png (transparent background, no fill, no circle).
 
 Outputs (default OUT = <repo>/.work/drop-cards, git-ignored; upload to R2 trd-memes under drops/):
@@ -35,11 +36,14 @@ def duck_uri(px_h):
     b = io.BytesIO(); im.save(b, "PNG"); return "data:image/png;base64," + base64.b64encode(b.getvalue()).decode()
 SITE = {"4chan": "4chan", "8chan": "8chan", "8kun": "8kun"}
 def caption_html(n, scale, css_px=16, font_pt=9.5):
-    num, _, site, board = DROPS[n][:4]
+    # no board credit (Mike, 2026-10-30): the caption is the duck and the site name only
     w = round(css_px * DUCK_AR, 2)
-    return (f'<div class="cap"><span>Q drop #{num}</span><span class="dot">&middot;</span>'
-            f'<span>{SITE[site]} /{esc(board.strip("/"))}/</span><span class="dot">&middot;</span>'
-            f'<span class="site"><img class="duck" width="{w}" height="{css_px}" src="{duck_uri(round(css_px*scale))}" alt="">therubberduck.net</span></div>')
+    return (f'<div class="cap"><span class="site"><img class="duck" width="{w}" height="{css_px}" '
+            f'src="{duck_uri(round(css_px*scale))}" alt="">therubberduck.net</span></div>')
+def head_html(n, t, site):
+    # no board header (Mike, 2026-10-30): no name, trip, ID, flag, post No. or board; the drop number and the date only
+    inner = f'<span class="subject">Q drop #{n}</span> <span class="dateTime">{t.strftime("%B %-d, %Y")}</span>'
+    return f'<div class="postInfo">{inner}</div>' if site == "4chan" else f'<p class="intro">{inner}</p>'
 CAP_CSS = """.cap{clear:both;display:flex;justify-content:center;align-items:center;gap:0;margin:10px auto 2px;padding:7px 0 1px;
  border-top:1px solid #B7C5D9;font:%(pt)spt arial,"Liberation Sans",sans-serif;color:#34345C;line-height:1;white-space:nowrap}
 .cap .dot{margin:0 .6em;color:#7d84a8}.cap .site{display:inline-flex;align-items:center;font-weight:bold}
@@ -190,30 +194,16 @@ def page(n, width=600, footer=True, scale=2, thumb=None):
     num, ts, site, board, url, text = DROPS[n]; h = HDR[n]; text = norm(text)
     b = board.strip("/"); t = datetime.fromtimestamp(ts, ET)
     if site == "4chan":
-        uid = ""
-        if h["poster_id"]:
-            r, g, bb, fg = id_color(h["poster_id"])
-            uid = f' <span class="posteruid">(ID: <span class="hand" style="background-color:rgb({r},{g},{bb});color:{fg}">{esc(h["poster_id"])}</span>)</span>'
-        flag = f' <img class="flag" title="{COUNTRY.get(h["country"], h["country"])}" src="{FLAG[h["country"]]}">' if h["country"] in FLAG else ""
-        subj = f'<span class="subject">{esc(h["subject"])}</span> ' if h["subject"] else '<span class="subject"></span> '
-        trip = f' <span class="postertrip">{esc(h["trip"])}</span>' if h["trip"] else ""
-        info = (f'<div class="postInfo"><input type="checkbox"> {subj}<span class="nameBlock"><span class="name">{esc(h["name"])}</span>'
-                f'{trip}{uid}{flag} </span> <span class="dateTime">{t.strftime("%m/%d/%y(%a)%H:%M:%S")}</span> '
-                f'<span class="postNum"><a>No.</a><a>{esc(h["post_no"])}</a></span></div>')
+        info = head_html(num, t, site)
         msg = f'<blockquote class="postMessage pre">{body(text, site)}</blockquote>'
-        title = h["board_title"] or f"/{b}/"
         if h["op"]:
             post = f'<div class="post op">{files_html(h, site, n, thumb)}{info}{msg}</div>'
         else:
-            post = f'<div class="postContainer"><div class="sideArrows">&gt;&gt;</div><div class="post reply">{info}{files_html(h, site, n, thumb)}{msg}</div></div>'
+            post = f'<div class="postContainer"><div class="post reply">{info}{files_html(h, site, n, thumb)}{msg}</div></div>'
         top = ''
         css = CSS_4CH
     else:
-        subj = f'<span class="subject">{esc(h["subject"])}</span> ' if h["subject"] else ""
-        trip = f' <span class="trip">{esc(h["trip"])}</span>' if h["trip"] else ""
-        pid = f' <span class="poster_id">{esc(h["poster_id"])}</span>' if h["poster_id"] else ""
-        info = (f'<p class="intro"><input type="checkbox"> <label>{subj}<span class="name">{esc(h["name"])}</span>{trip}&nbsp; '
-                f'<time>{t.strftime("%m/%d/%y (%a) %H:%M:%S")}</time></label>{pid}&nbsp;<a class="post_no">No.</a><a class="post_no">{esc(h["post_no"])}</a></p>')
+        info = head_html(num, t, site)
         msg = f'<div class="body pre">{body(text, site)}</div>'
         if h["op"]:
             post = f'<div class="thread">{files_html(h, site, n, thumb)}<div class="post op">{info}{msg}</div></div>'

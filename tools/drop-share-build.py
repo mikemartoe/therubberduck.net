@@ -28,6 +28,9 @@ OG_H = {int(k): v for k, v in json.load(open(_SZ)).items()} if os.path.exists(_S
 _V2 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v2.json')
 V2 = json.load(open(_V2)) if os.path.exists(_V2) else {'prefix': 'v2/', 'drops': {}}
 V2D = {int(k): v for k, v in V2['drops'].items()}
+_V3 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v3.json')   # no-board previews (Mike, 2026-10-30): drops/v3/og2/N.jpg
+V3 = json.load(open(_V3)) if os.path.exists(_V3) else {'prefix': 'v3/', 'drops': {}}
+V3D = {int(k): v for k, v in V3['drops'].items()}
 esc = lambda s: html.escape(s or '', quote=True)
 
 
@@ -41,7 +44,7 @@ def page(d):
     when = dt.strftime('%B %-d, %Y')
     title = 'Q Drop #%d, %s | The Drop Ledger | The Rubber Duck\u2122' % (n, when)
     desc = tease(n, dt, site, board)   # tease only (Mike, 2026-10-25): no drop text in previews
-    img = MEDIA + (V2['prefix'] if n in V2D else '') + '%s/%d.jpg' % (OG_DIR, n)
+    img = MEDIA + (V3['prefix'] if n in V3D else V2['prefix'] if n in V2D else '') + '%s/%d.jpg' % (OG_DIR, n)
     alt = 'Q drop #%d as originally posted, %s' % (n, when)   # no board credit (Mike, 2026-10-30)
     dest = '/ledger.html#drop-%d' % n
     return '''<!doctype html>
@@ -74,7 +77,7 @@ def page(d):
 <style>body{{margin:0;background:#040705;color:#C8F5D2;font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}}a{{color:#00FF41}}</style>
 </head><body><p>Opening Q drop #{n} in <a href="{dest}">The Drop Ledger</a>.</p></body></html>
 '''.format(t=esc(title), d=esc(desc), u=esc('%s/drops/share/%d.html' % (SITE, n)), canon=esc('%s/drops/%d/' % (SITE, n)),
-           i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=V2D[n]['og2_h'] if n in V2D else OG_H.get(n, 630))
+           i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=V3D[n]['og2_h'] if n in V3D else V2D[n]['og2_h'] if n in V2D else OG_H.get(n, 630))
 
 
 def drop_cards_js(ns, man):
@@ -96,7 +99,7 @@ def main():
     for n in ns:
         open(os.path.join(OUT, '%d.html' % n), 'w', encoding='utf-8').write(page(drops[n]))
     open(os.path.join(ROOT, 'data', 'drop-cards.js'), 'w').write(drop_cards_js(ns, man))
-    print('share pages: %d  long (ig crop): %d' % (len(ns), len(longs)))
+    print('share pages: %d' % len(ns))
 
 
 if __name__ == '__main__':
