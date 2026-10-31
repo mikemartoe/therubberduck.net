@@ -274,7 +274,13 @@ def main():
     for i, v in enumerate(feats):
         fn = v['id'] + '.html'
         keep.add(fn)
-        others = [feats[(i + k) % len(feats)] for k in (1, 2, 3)]
+        others = []   # next three features with a different title (the parts of one multi-part feature share a title)
+        for k in range(1, len(feats)):
+            o = feats[(i + k) % len(feats)]
+            if o['t'] != v['t'] and all(o['t'] != q['t'] for q in others):
+                others.append(o)
+            if len(others) == 3:
+                break
         with open(os.path.join(outdir, fn), 'w', encoding='utf-8') as f:
             f.write(page(v, preview_img(v, base), meta, others))
     sitemap(feats)
