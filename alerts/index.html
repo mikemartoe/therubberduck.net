@@ -17,6 +17,7 @@ a{color:inherit}
 .menu summary{list-style:none;min-height:48px;min-width:84px;display:flex;align-items:center;justify-content:center;border:1px solid #34533D;background:#0B140E;cursor:pointer;font-size:15px;letter-spacing:.04em}
 .menu summary::-webkit-details-marker{display:none}
 .menu nav{position:absolute;right:0;top:56px;z-index:20;width:240px;background:#0B140E;border:1px solid #34533D;padding:8px 0}
+.menu nav{max-height:calc(100vh - 96px);max-height:calc(100dvh - 96px);overflow-y:auto;overscroll-behavior:contain}
 .menu nav a{display:flex;align-items:center;min-height:48px;padding:0 16px;text-decoration:none}
 .menu nav a:hover,.menu nav a:focus{background:#13241A;color:#00ED39}
 .stack{display:grid;gap:12px}
@@ -56,7 +57,7 @@ a{color:inherit}
 <header class="top">
 <a class="brand" href="/"><img src="/images/app/duck-white.svg" alt="" width="44" height="38"><span>THE RUBBER<br>DUCK</span></a>
 <details class="menu"><summary>MENU</summary><nav aria-label="Main">
-<a href="/">Home</a><a href="/ledger.html">Drop Ledger</a><a href="/deltas/">Deltas</a><a href="/q-proofs/">Q Proofs</a><a href="/videos.html">Videos</a><a href="/listening-room.html">Audio</a><a href="/pdfs.html">Docs</a><a href="/x/">X Archive</a><a href="/merch.html">Shop</a>
+<a href="/">Home</a><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html#hires=MAP_final">Q Map [the key]</a><a href="/ledger.html#hires=Great_Awakening">The Great Awakening</a><a href="/deltas/">Deltas</a><a href="/q-proofs/">Q Proofs</a><a href="/videos.html">Videos</a><a href="/listening-room.html">Audio</a><a href="/pdfs.html">Docs</a><a href="/x/">X Archive</a><a href="/merch.html">Shop</a>
 </nav></details>
 </header>
 <main class="stack">

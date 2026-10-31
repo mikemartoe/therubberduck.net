@@ -2,7 +2,8 @@
    The strip is plain HTML (each card links to the untouched original, so it works without JS).
    On click this file lazy-loads the vendored OpenSeadragon (BSD-3) and opens a full-screen viewer:
    hover lens at full-resolution pixels, wheel/click/pinch zoom, drag pan, keyboard (+ - 0 1 L arrows Esc),
-   and a "Download original" button that saves the original file byte-for-byte. */
+   and a "Download original" button that saves the original file byte-for-byte.
+   Deep link: #hires=<slug> opens a viewer on load or hashchange; closing clears the hash (replaceState). */
 (function () {
   var OSD_SRC = '/assets/trd/vendor/openseadragon-6.1.1.min.js';
   var BLOB_MAX = 150e6; // above this, let the browser handle the link itself instead of holding it in memory
@@ -136,7 +137,18 @@
     if (viewer) { viewer.destroy(); viewer = null; } if (lensViewer) { lensViewer.destroy(); lensViewer = null; }
     $('#hxvOsd').innerHTML = ''; $('#hxvZoom').textContent = '';
     if (lastFocus && lastFocus.focus) lastFocus.focus();
+    if (HASH.test(location.hash) && window.history && history.replaceState) history.replaceState(history.state, '', location.pathname + location.search);
   }
+  // Deep links: /ledger.html#hires=<slug> opens that viewer (used by the app menu); closing clears the hash without a reload.
+  var HASH = /^#hires=([A-Za-z0-9_-]+)$/;
+  function fromHash() {
+    var m = HASH.exec(location.hash); if (!m) return;
+    var it = items().filter(function (x) { return x.slug === m[1]; })[0]; if (!it) return;
+    if (root && !root.hidden && item === it) return;
+    open(it, document.querySelector('[data-hx="' + it.slug + '"]'));
+  }
+  window.addEventListener('hashchange', fromHash);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fromHash); else fromHash();
   document.addEventListener('click', function (e) {
     var c = e.target.closest && e.target.closest('[data-hx]'); if (!c || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
     var it = items().filter(function (x) { return x.slug === c.getAttribute('data-hx'); })[0]; if (!it) return;
