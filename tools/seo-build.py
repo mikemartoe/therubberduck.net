@@ -859,6 +859,12 @@ def build_sitemaps():
     for n in names:
         lm = max(u[1] for u in SITEMAPS[n])
         idx.append('  <sitemap><loc>%s/sitemaps/%s.xml</loc><lastmod>%s</lastmod></sitemap>' % (SITE, n, lm))
+    # Sitemaps written by other builders (tools/video-share-build.py): keep their index entry on every rebuild.
+    for extra in ('video-share',):
+        fp = os.path.join(ROOT, 'sitemaps', extra + '.xml')
+        if extra not in names and os.path.exists(fp):
+            elm = max(re.findall(r'<lastmod>([^<]+)</lastmod>', open(fp, encoding='utf-8').read()) or [TODAY])
+            idx.append('  <sitemap><loc>%s/sitemaps/%s.xml</loc><lastmod>%s</lastmod></sitemap>' % (SITE, extra, elm))
     idx.append('</sitemapindex>\n')
     write('sitemap.xml', '\n'.join(idx))
     write('robots.txt', 'User-agent: *\nAllow: /\nDisallow: /tools/\nDisallow: /workers/\n\nSitemap: %s/sitemap.xml\n' % SITE)
