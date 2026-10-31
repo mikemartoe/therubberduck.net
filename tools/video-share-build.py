@@ -164,7 +164,7 @@ def page(v, img, meta, others):
     bits = [b for b in [date, ('Running time ' + v['dur']) if v.get('dur') else ''] if b]
     lead = ' \u00b7 '.join(bits)
     desc = clip(n, 200) if n else ((lead + '. ') if lead else '') + 'Free to watch in the Video Room at therubberduck.net.'
-    shown = clip(n, 420) if n else ('Free to watch in The Rubber Duck Video Room. Tap the poster to play it on the big screen.')
+    shown = (n if v.get('fullDesc') else clip(n, 420)) if n else ('Free to watch in The Rubber Duck Video Room. Tap the poster to play it on the big screen.')
     url = SITE + '/videos/share/' + vid + '.html'
     room = '/videos.html#v=' + vid
     m = meta.get(img)
@@ -278,6 +278,19 @@ def main():
         with open(os.path.join(outdir, fn), 'w', encoding='utf-8') as f:
             f.write(page(v, preview_img(v, base), meta, others))
     sitemap(feats)
+    # Retired ids the room still opens through an alias (DOUBLE_FEATURES alias: {old id: part}): a share link made
+    # for the old id lands on the new feature's share page instead of a 404 (noindex, canonical to the new page).
+    src = open(os.path.join(ROOT, 'videos.html'), encoding='utf-8').read()
+    for d in re.finditer(r"\{id: '(\w+)', t: '[^']+'.*?alias: \{([^}]*)\}", src, re.S):
+        for old in re.findall(r'(\w+): \d+', d.group(2)):
+            if old + '.html' in keep:
+                continue
+            to = '/videos/share/%s.html' % d.group(1)
+            with open(os.path.join(outdir, old + '.html'), 'w', encoding='utf-8') as f:
+                f.write('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Video Room</title>'
+                        '<meta name="robots" content="noindex"><link rel="canonical" href="%s%s">'
+                        '<meta http-equiv="refresh" content="0;url=%s"></head><body><a href="%s">Video Room</a></body></html>\n' % (SITE, to, to, to))
+            keep.add(old + '.html')
     stale = [f for f in os.listdir(outdir) if f.endswith('.html') and f not in keep]
     for f in stale:
         os.remove(os.path.join(outdir, f))
