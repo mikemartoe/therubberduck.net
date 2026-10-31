@@ -40,9 +40,14 @@ def load_features():
     for d in re.finditer(r"\{id: '(\w+)', t: '([^']+)'.*?reels: \[(.*?)\]\}", blk.group(1) if blk else '', re.S):
         secs = sum(float(x) for x in re.findall(r'secs: ([\d.]+)', d.group(3)))
         t = int(round(secs)); dur = '%d:%02d:%02d' % (t // 3600, t % 3600 // 60, t % 60) if t >= 3600 else '%d:%02d' % (t // 60, t % 60)
-        for rid in re.findall(r"id: '(\w+)'", d.group(3)):
-            dfs[rid] = {'t': d.group(2), 'dur': dur if secs else None}
-    local = [dict(v, t=dfs[v['id']]['t'], dur=dfs[v['id']]['dur'] or v.get('dur')) if v['id'] in dfs else v for v in local]
+        per_part = 'partTitles: true' in d.group(0)   # series: each part's page carries its own title and running time
+        for rid, n, rs in re.findall(r"id: '(\w+)', n: (\d+)(?:, secs: ([\d.]+))?", d.group(3)):
+            if per_part:
+                pt = int(float(rs or 0)); pd = ('%d:%02d:%02d' % (pt // 3600, pt % 3600 // 60, pt % 60) if pt >= 3600 else '%d:%02d' % (pt // 60, pt % 60)) if pt else None
+                dfs[rid] = {'t': d.group(2) + ' Part ' + n, 'dur': pd, 'series': d.group(2)}
+            else:
+                dfs[rid] = {'t': d.group(2), 'dur': dur if secs else None}
+    local = [dict(v, t=dfs[v['id']]['t'], dur=dfs[v['id']]['dur'] or v.get('dur'), series=dfs[v['id']].get('series') or dfs[v['id']]['t']) if v['id'] in dfs else v for v in local]
     out, seen, dups = [], set(), []
     for v in rumble + local:
         if v['id'] in seen:      # same Rumble video listed as a feature and as a repost: one page (same id, same title)
@@ -277,7 +282,8 @@ def main():
         others = []   # next three features with a different title (the parts of one multi-part feature share a title)
         for k in range(1, len(feats)):
             o = feats[(i + k) % len(feats)]
-            if o['t'] != v['t'] and all(o['t'] != q['t'] for q in others):
+            sk = lambda x: x.get('series') or x['t']   # parts of one series/multi-part feature count once
+            if sk(o) != sk(v) and all(sk(o) != sk(q) for q in others):
                 others.append(o)
             if len(others) == 3:
                 break
@@ -287,7 +293,7 @@ def main():
     # Retired ids the room still opens through an alias (DOUBLE_FEATURES alias: {old id: part}): a share link made
     # for the old id lands on the new feature's share page instead of a 404 (noindex, canonical to the new page).
     src = open(os.path.join(ROOT, 'videos.html'), encoding='utf-8').read()
-    for d in re.finditer(r"\{id: '(\w+)', t: '[^']+'.*?alias: \{([^}]*)\}", src, re.S):
+    for d in re.finditer(r"\{id: '(\w+)', t: '[^']+'(?:(?!\n  \{id: ).)*?alias: \{([^}]*)\}", src, re.S):   # alias of this entry only
         for old in re.findall(r'(\w+): \d+', d.group(2)):
             if old + '.html' in keep:
                 continue
