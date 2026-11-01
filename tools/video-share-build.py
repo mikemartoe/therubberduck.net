@@ -62,9 +62,15 @@ def load_features():
 
 CARDS_BASE = 'https://memes.therubberduck.net/video-room/og'   # 1200x630 cards (tools/video-cards/render_video_cards.py)
 ET = None
+# Features with a supplied title card instead of a rendered poster-frame card (1200x630, R2 video-room/og/).
+# Ring of Power (RESTORED), all 4 parts: Duck's high-res RING OF POWER title screen (2026-11-01).
+CARD_OVERRIDE = {i: CARDS_BASE + '/ring-of-power-og-1200x630.jpg' for i in ('l0142c95181', 'l6e805d6dec', 'l5b5d8294d1', 'lba98b1b77d')}
+CARD_ALT = {i: 'Ring of Power: Empire of the City (RESTORED) title card: RING OF POWER in white metal letters above a ring on black' for i in CARD_OVERRIDE}
 
 
 def preview_img(v, cards_base):
+    if cards_base and v['id'] in CARD_OVERRIDE:
+        return CARD_OVERRIDE[v['id']]
     if cards_base:
         return cards_base.rstrip('/') + '/' + v['id'] + '.jpg'
     th = (v.get('th') or '').strip()
@@ -175,7 +181,7 @@ def page(v, img, meta, others):
     m = meta.get(img)
     w, h = (m['w'], m['h']) if m and m.get('w') else ((1200, 630) if '/video-room/og/' in img else (0, 0))
     size = ('<meta property="og:image:width" content="%d">\n<meta property="og:image:height" content="%d">\n' % (w, h)) if w else ''
-    alt = 'Video Room card for ' + t + ': poster frame, title and running time'
+    alt = CARD_ALT.get(v['id']) or 'Video Room card for ' + t + ': poster frame, title and running time'
     kick = 'Livestream' if v.get('live') else 'Now showing'
     src = v.get('u') or ''
     alt_btn = ('<a class="btn alt" href="%s" target="_blank" rel="noopener">Watch on Rumble</a>' % e(src)) if 'rumble.com' in src else ''
@@ -254,7 +260,7 @@ def sitemap(feats):
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
     for v in feats:
-        img = html.escape(CARDS_BASE + '/' + v['id'] + '.jpg')
+        img = html.escape(CARD_OVERRIDE.get(v['id']) or CARDS_BASE + '/' + v['id'] + '.jpg')
         out.append('  <url><loc>%s/videos/share/%s.html</loc><lastmod>%s</lastmod><image:image><image:loc>%s</image:loc></image:image></url>' % (SITE, v['id'], lm, img))
     open(os.path.join(ROOT, 'sitemaps', 'video-share.xml'), 'w', encoding='utf-8').write('\n'.join(out + ['</urlset>\n']))
     p = os.path.join(ROOT, 'sitemap.xml')
