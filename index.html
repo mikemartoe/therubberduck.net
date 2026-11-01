@@ -76,7 +76,6 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .hero-cta small{font:600 12px/1 var(--body);color:#ffe1a8;opacity:.9}
 .hero-cta:hover,.hero-cta:focus-visible{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.6),0 0 0 2px #ffd77a,0 0 22px rgba(255,190,90,.4)}
 .hero-cta:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
-a.tcase{display:block;color:inherit}
 @media (prefers-reduced-motion:reduce){.hero-cta{transition:none}.hero-cta:hover{transform:none}}
 
 /* ============ THE TAPE DECK: The Red Pill Album as a cassette; press play and it becomes the player ============ */
@@ -237,7 +236,8 @@ a.tcase{display:block;color:inherit}
 /* ============ SPINE HOVER: upright aged Norelco J-card face (70×109) ============
    In-spine .spine-face stays hidden forever (source only). One #trd-face-portal on
    body paints the face — no reparent, no CSS hover flash, no ghost leftovers.
-   Double-click / double-tap skips into the room. */
+   Desktop: the card is clickable (same as clicking its spine); touch: tap, tap again to enter.
+   A small badge on the card says what a click / tap does. Double-click / double-tap skips into the room. */
 .spine-face{
   position:absolute;left:0;top:0;width:1px;height:1px;margin:0;padding:0;border:0;
   opacity:0!important;visibility:hidden!important;pointer-events:none!important;
@@ -258,6 +258,29 @@ a.tcase{display:block;color:inherit}
 #trd-face-portal img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px;
   box-shadow:0 0 0 1px rgba(255,255,255,.28),0 0 0 2px rgba(30,20,10,.35);
   pointer-events:none}
+/* the card is a target too: on PC as soon as it shows, on touch once it is open */
+@media (hover:hover) and (pointer:fine){#trd-face-portal.is-on{pointer-events:auto;cursor:pointer}}
+/* an invisible bridge from the card's bottom edge down to its own spine, so the pointer can travel
+   from the spine to the card without brushing the neighbouring spine in between */
+#trd-face-portal::after{content:"";position:absolute;left:0;right:0;top:100%;height:var(--tfp-bridge,0px)}
+/* the badge: a mustard cassette-label pill hung on the card's bottom edge, centred */
+#trd-face-portal .tfp-badge{position:absolute;left:50%;bottom:0;transform:translate(-50%,50%);z-index:1;
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;box-sizing:border-box;max-width:calc(100% + 24px);
+  padding:7px 13px 7px 15px;border-radius:999px;white-space:nowrap;pointer-events:none;
+  background:linear-gradient(180deg,#f2c35a,#e3a82b 55%,#cf931c);color:#2e1f13;border:1.5px solid #2e1f13;
+  font:700 12px/1 var(--body);letter-spacing:.09em;text-transform:uppercase;
+  box-shadow:0 0 0 1.5px rgba(246,223,160,.6),0 6px 14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,240,200,.65)}
+#trd-face-portal .tfp-badge svg{width:13px;height:13px;flex:none;transition:transform .18s var(--ease)}
+#trd-face-portal:hover .tfp-badge{background:linear-gradient(180deg,#ffe08f,#ffd77a 55%,#e8b546)}
+#trd-face-portal:hover .tfp-badge svg{transform:translateX(2px)}
+@media (max-width:720px), (hover:none), (pointer:coarse){
+  #trd-face-portal .tfp-badge{font-size:11px;letter-spacing:.07em;padding:6px 11px 6px 13px;gap:6px}
+  #trd-face-portal .tfp-badge svg{width:12px;height:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  #trd-face-portal,#trd-face-portal.is-on{transition:none;transform:none}
+  #trd-face-portal .tfp-badge svg,#trd-face-portal:hover .tfp-badge svg{transition:none;transform:none}
+}
 .stacks,.stack,.deck{overflow:visible}
 @media (min-width:900px) and (min-height:500px){
   #trd-face-portal{width:min(230px,24vw);max-width:250px}
@@ -536,38 +559,7 @@ a.tcase{display:block;color:inherit}
   .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
 }
 
-/* ============ HOMEPAGE V2b (Oct 2026): book + duck left, two equal signs right, playlist tape in its case spine ============ */
-/* the playlist tape: same aged shell, green-tinted label and mustard reels */
-.cas-pl .cas-label{background:linear-gradient(rgba(16,64,48,.5),rgba(16,64,48,.5)),url('/assets/trd/img/rpa-label-aged.webp') center/100% 100% no-repeat,#d9c9a3}
-.cas-pl .cas-art img{flex:none;display:block;width:8cqw;height:auto;filter:drop-shadow(0 1px 2px rgba(0,0,0,.7))}
-.cas-pl .cas-list{grid-template-columns:1fr;text-align:center;font-size:2.8cqw}
-.cas-pl .reel b{background:radial-gradient(circle,#1a1a1a 0 18%,transparent 19%),repeating-conic-gradient(#e3a82b 0 30deg,#9c6a12 30deg 60deg);box-shadow:0 0 0 1.5px #f6dfa0}
-.cas-ghost{position:fixed!important;margin:0!important;z-index:2147483100;pointer-events:none;transform-origin:50% 50%;animation:none!important}
-/* playlist in the deck: the Spotify player sits in the deck's window */
-.deck .kp-pl{display:none}
-.deck.is-pl .kp-off,.deck.is-pl .kp-on{display:none!important}.deck.is-pl .kp-pl{display:inline}
-.deck.is-pl .key-play{animation:none}
-.deck.is-pl{cursor:default}
-.deck-spot{position:absolute;left:6px;right:6px;top:50%;transform:translateY(-50%);z-index:3;border-radius:12px;overflow:hidden;opacity:0;transition:opacity .4s ease;background:#121212}
-.deck-spot.is-on{opacity:1}
-.deck-spot.is-below{position:relative;left:auto;right:auto;top:auto;transform:none;width:100%;flex:none;margin:-6px 0 0;box-shadow:0 10px 24px rgba(0,0,0,.45)}
-.deck-spot iframe{display:block;width:100%;border:0}
-/* v2d: a direct link to the playlist, part of the Spotify block (only exists while the playlist tape is in) */
-.deck-splink{display:flex;align-items:center;justify-content:center;gap:8px;height:30px;padding:0 12px;box-sizing:border-box;
-  background:linear-gradient(#2a1d12,#140e09);border-top:1px solid rgba(227,168,43,.55);color:#f6e3b4;text-decoration:none;
-  font:600 12.5px/1 'TRD Oswald','Roboto',system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;cursor:pointer;
-  transition:color .15s ease,background .15s ease}
-.deck-splink .sl-sp{width:17px;height:17px;flex:none;color:#1ed760}
-.deck-splink .sl-go{width:12px;height:12px;flex:none;color:#e3a82b;transition:transform .15s ease}
-.deck-splink span{overflow:hidden;text-overflow:ellipsis}
-.deck-splink:hover,.deck-splink:focus-visible{color:#ffd77a;background:linear-gradient(#3a2814,#1c130a)}
-.deck-splink:hover .sl-go{transform:translate(2px,-2px)}
-.deck-splink:focus-visible{outline:2px solid #e3a82b;outline-offset:-3px}
-.deck-spot.is-below .deck-splink{height:42px;font-size:14px;gap:10px}
-.deck-spot.is-below .deck-splink .sl-sp{width:20px;height:20px}
-.deck-splink .sl-s{display:none}
-@container (max-width:300px){.deck-well .deck-splink{gap:6px;padding:0 8px;font-size:12px;letter-spacing:.04em}.deck-well .deck-splink .sl-l{display:none}.deck-well .deck-splink .sl-s{display:inline}}
-@media (prefers-reduced-motion:reduce){.deck-splink,.deck-splink .sl-go{transition:none}.deck-splink:hover .sl-go{transform:none}}
+/* ============ HOMEPAGE V2b (Oct 2026): book + duck left, two equal signs right ============ */
 .deck-well{position:relative}
 
 /* header: brand first. Wordmark centred, one sign each side (sponsor left, collectibles right) */
@@ -633,39 +625,8 @@ a.tcase{display:block;color:inherit}
 }
 @media (max-width:374px){.banner .wm{font-size:52px}.hb-sign-n{font-size:11.5px}}
 
-/* the tape case spine: the tape that is not in the deck waits in its own case, on the left */
+/* a spine may also be a <button> (an in-page action instead of a link): same look as the link spines */
 button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;margin:0;width:100%}
-.hello .tcase{--off:0px;--rot:-.6deg;--lift:0px;margin-top:clamp(16px,2.4vh,26px);flex:none}
-.tc-hold{display:none}
-.tc-tag{right:auto;left:72px;background:#1d6b43}
-.tcase .sp-go svg{width:15px;height:15px}
-.tcase:hover .sp-go,.tcase:focus-visible .sp-go{transform:translateY(-2px)}
-.tcase:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
-/* 7 Personal Playlist: deep green case, mustard blocky letters */
-.tc-pl .sp{background:linear-gradient(180deg,#14503a,#0a2f21);color:#f3c443}
-.tc-pl .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(90deg,#e3a82b 0 2px,transparent 2px 4px,#e3a82b 4px 6px)}
-.tc-pl .sp-n{font-family:var(--retro);font-size:17px;letter-spacing:.01em}
-.tc-pl .sp-s{color:#d9eedd}.tc-pl .sp-go{background:#f3c443;color:#0a2f21}
-/* 8 The Red Pill Album: black case, red and white condensed letters */
-.tc-rp .sp{background:linear-gradient(180deg,#1b1414,#070505);color:#ff5148}
-.tc-rp .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(90deg,#c8302b 0 3px,#f2ece2 3px 4px,#c8302b 4px 6px)}
-.tc-rp .sp-n{font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:.04em;text-transform:uppercase}
-.tc-rp .sp-s{color:#efe5d8}.tc-rp .sp-go{background:#c8302b;color:#fff}
-.tc-rp .sp-ic{object-fit:contain;background:#0d0909;padding:3px;box-sizing:border-box}
-.tc-rp .tc-tag{background:#c8302b}
-.tcase.is-open .sp{filter:brightness(.72) saturate(.8)}
-.tcase.is-take{animation:caseTake .5s var(--ease)}
-@keyframes caseTake{0%{transform:translateX(0) rotate(var(--rot))}40%{transform:translateX(14px) rotate(0deg) scale(1.02)}100%{transform:translateX(0) rotate(var(--rot))}}
-@media (min-width:900px) and (min-height:500px){
-  .hello .tcase{max-width:var(--tcw,100%)}
-}
-@media (max-width:899px), (max-height:499px){
-  .hello .tcase{align-self:center;width:min(100%,288px);margin-top:16px}
-}
-@media (max-width:599px){
-  .tc-pl .sp-n{font-size:12px}.tc-rp .sp-n{font-size:15px}
-  .tc-tag{left:40px}
-  .tcase .sp-cat{letter-spacing:0}
 }
 /* 600-1279px wide (tablets, small laptops): tape titles were cut off ("PERSON...", "PRIVATE THEAT...").
    Here only: drop the tiny brand mark (as on phones), tighten the gaps and let the title size follow the width.
@@ -675,7 +636,6 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   .spine .sp-end{gap:0}
 }
 @media (min-width:600px) and (max-width:899px){
-  .hello .tcase{width:min(100%,360px)}
   .spine .sp{gap:9px}
   .stacks .sp-ic{width:38px;height:38px}
   .stacks .sp-n{font-size:clamp(13px,2.3vw,20px)}
@@ -687,17 +647,15 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   .spine .sp{gap:clamp(7px,.7vw,12px)}
   .stacks .t2 .sp-n,.stacks .t5 .sp-n{font-size:clamp(12px,min(2.1vh,1.25vw),23px)}
   .stacks .t1 .sp-n,.stacks .t3 .sp-n{font-size:clamp(13px,min(2.25vh,1.3vw),25px)}
-  .hello .tc-pl .sp-n{font-size:clamp(12px,min(2.5vh,1.4vw),17px)}
   .spine .sp-ic{width:min(clamp(38px,5.2vh,62px),4.4vw);height:min(clamp(38px,5.2vh,62px),4.4vw)}
 }
 @media (prefers-reduced-motion:reduce){
   .banner a.hb-book,.banner a.hb-book:hover,.hb-sign{transition:none}
-  .tcase.is-take{animation:none}
 }
 
 /* ===== PREVIEW ONLY (2026-10-26): red Sony WM-10 Super Walkman replaces the drawn tape deck visual.
    The cassette (#podCas) still sits in .deck-well, seen through the Walkman's window, so the reels,
-   the PRESS PLAY flight to the player, the tape swap and the Spotify window all keep working. ===== */
+   the PRESS PLAY flight to the player keeps working. ===== */
 .deck{background:none;box-shadow:none;padding:0!important;border:0!important;border-radius:0;gap:clamp(6px,1vh,10px)}
 .deck::before,.deck::after{display:none}
 .deck-top{display:none}
@@ -722,12 +680,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 .deck:hover .deck-well .cas,.deck:focus-visible .deck-well .cas{transform:none}
 /* the Walkman itself, glass window cut out (with a light smoke and sheen) */
 .deck-well::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:url(/walkman/walkman-window-1000.webp) center/100% 100% no-repeat}
-.deck-well .deck-spot{z-index:3}
 .deck-keys{position:relative;z-index:4} /* keep the keys above the Walkman's drop shadow */
-/* PREVIEW: the Spotify player sits in the Walkman's tape window (compact 80px player + link bar) */
-.deck-well .deck-spot{left:17.8%;right:auto;width:48.5%;top:15.56%;transform:none;border-radius:.6cqw}
-.deck-well .deck-spot .deck-splink{height:26px}
-.deck-well .deck-spot{z-index:4} /* above the (now door-sized) tape */
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css" data-trd-keep>
@@ -805,19 +758,6 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
         <h2 class="hello-h">100,000+ Twitter/X posts. Every Q drop. One archive.</h2>
         <p class="hello-s">The shows, the X Space recordings, the PDFs and the full X archive, searchable, with the sources linked so you can check them yourself.</p>
         <p class="hello-cta"><a class="hero-cta" href="album.html" data-cta="album"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span>Play The Red Pill Album</span><small>22 tracks</small></a></p>
-        <a class="spine tcase tc-pl" href="https://open.spotify.com/playlist/4lWQJV4n3mnIvp0y4biUqZ" target="_blank" rel="noopener" aria-label="The Rubber Duck Personal Playlist on Spotify. Opens Spotify in a new tab"><span class="start-tag tc-tag">On Spotify</span><span class="sp"><span class="sp-cat" aria-hidden="true">SIDE B</span><img class="sp-ic" src="/assets/trd/img/duck-banner.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Personal Playlist</span><span class="sp-s">The Rubber Duck&trade; on Spotify</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 4l8 9H4z"/><rect x="4" y="16" width="16" height="3.2" rx="1" fill="currentColor"/></svg></span></span></span><span class="tc-hold" aria-hidden="true"><span class="cas cas-pl" id="plCas" aria-hidden="true">
-              <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
-              <span class="cas-label">
-                <span class="cas-head"><span class="cas-art"><span class="cas-t">Personal</span><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" decoding="async"><span class="cas-t">Playlist</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">SPOTIFY</span></span></span>
-                <span class="cas-meta">The Rubber Duck&trade; &middot; Personal Playlist</span>
-                <span class="cas-side"><small>SIDE</small><b>B</b></span>
-                <span class="cas-by">Type II<br>C-90</span>
-                <span class="cas-list"><span>The Rubber Duck&trade; Personal Playlist</span><span>Plays on Spotify</span></span>
-              </span>
-              <span class="cas-peel"></span>
-              <span class="cas-win"><span class="reel l"><b></b></span><span class="cas-tape"></span><span class="reel r"><b></b></span></span>
-              <span class="cas-foot"><i></i><i></i><i></i><i></i></span>
-            </span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-playlist.webp?v=1" width="560" height="872" alt="Cassette face for The Rubber Duck Personal Playlist" decoding="async"></span></a>
       </header>
 
       <a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album">
@@ -837,7 +777,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
               <span class="cas-foot"><i></i><i></i><i></i><i></i></span>
             </span>
         </span>
-        <span class="deck-keys" aria-hidden="true"><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11 6v12l-8.5-6zM21 6v12l-8.5-6z"/></svg></span><span class="key key-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><span class="kp-off">Press play</span><span class="kp-on">Open player</span><span class="kp-pl">Press play</span></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13 6v12l8.5-6zM3 6v12l8.5-6z"/></svg></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor"/></svg></span></span>
+        <span class="deck-keys" aria-hidden="true"><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11 6v12l-8.5-6zM21 6v12l-8.5-6z"/></svg></span><span class="key key-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><span class="kp-off">Press play</span><span class="kp-on">Open player</span></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13 6v12l8.5-6zM3 6v12l8.5-6z"/></svg></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor"/></svg></span></span>
         <span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-redpill.webp?v=cleanblack1" width="560" height="872" alt="Cassette face for the Red Pill Album, TRD-022" decoding="async"></span>
       </a>
     </div>
@@ -999,7 +939,6 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   var deck=document.querySelector('[data-trd-pod-door]'); if(!deck||!window.trdPod)return;
   var cas=document.getElementById('podCas')||deck.querySelector('.cas'), meta=cas.querySelector('.cas-meta');
   function paint(st){
-    if(deck.classList.contains('is-pl'))return;  /* the playlist tape is in: Spotify drives the deck */
     var live=!!(st&&st.started);
     deck.classList.toggle('is-live',live); deck.classList.toggle('is-playing',live&&!!st.playing);
     if(!live){meta.textContent='Side A \u00b7 22 tracks';deck.setAttribute('aria-label','The Red Pill Album, 22 tracks. Press play to start the album');return;}
@@ -1009,7 +948,6 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   }
   deck.addEventListener('click',function(e){
     if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
-    if(deck.classList.contains('is-pl'))return;
     e.preventDefault();
     deckPlay();
   });
@@ -1031,11 +969,17 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   document.addEventListener('trdpod:repaint',function(){paint(window.trdPod.state());});
   paint(window.trdPod.state());
 })();
-/* upright Norelco faces: single #trd-face-portal on body (never reparent in-spine faces) */
+/* upright Norelco faces: ONE #trd-face-portal on body (never reparent in-spine faces).
+   Desktop (fine pointer): one card at a time, tied to the spine under the cursor. A short intent delay before a
+   card appears, so sweeping across the stacks never flashes cards; moving onto another spine clears the old card
+   at once (no fade-out, no overlap). The card stays while the pointer is on its spine or on the card itself (a short
+   grace lets the pointer cross the gap), and clicking the card does what clicking its spine does. The badge on the
+   card says so ("Click to enter" / "Tap to enter"; the deck says what it does). */
 (function(){
-  var MARGIN=12;
+  var MARGIN=12,GAP=18,BADGE=16,INTENT=100,GRACE=150;
+  var fine=window.matchMedia('(hover:hover) and (pointer:fine)');
   var byHost=new WeakMap();
-  var activeHost=null;
+  var activeHost=null,overHost=null,overCard=false,showT=null,hideT=null,loadT=null;
   var portal=document.getElementById('trd-face-portal');
   if(!portal){
     portal=document.createElement('button');
@@ -1047,9 +991,13 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     img.alt='';
     img.decoding='async';
     portal.appendChild(img);
+    var bd=document.createElement('span');
+    bd.className='tfp-badge';
+    bd.innerHTML='<span class="tfp-bt">Click to enter</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    portal.appendChild(bd);
     document.body.appendChild(portal);
   }
-  var portalImg=portal.querySelector('img');
+  var portalImg=portal.querySelector('img'),badgeT=portal.querySelector('.tfp-bt');
 
   function faceFor(host){
     if(!host)return null;
@@ -1065,11 +1013,22 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     var im=face.querySelector('img');
     return im?(im.currentSrc||im.src||im.getAttribute('data-src')||''):'';
   }
+  /* the badge says exactly what a click / tap on the card does (see go() below) */
+  function badgeFor(host){
+    var w=fine.matches?'Click':'Tap';
+    if(host.classList.contains('deck')){
+      var st=null;try{st=window.trdPod&&window.trdPod.state();}catch(e){}
+      return st&&st.started?w+' to open album':w+' to play';
+    }
+    return w+' to enter';
+  }
+  function clearTimers(){clearTimeout(showT);clearTimeout(hideT);clearTimeout(loadT);showT=hideT=loadT=null;}
   function hidePortal(){
+    clearTimers();
     portal.classList.remove('is-on','is-open','is-deck');
-    portal.style.left='';portal.style.top='';portal.style.width='';
+    portal.style.left='';portal.style.top='';portal.style.width='';portal.style.removeProperty('--tfp-bridge');
     portal._trdHost=null;
-    activeHost=null;
+    activeHost=null;overCard=false;
   }
   function layout(host){
     if(!host)return;
@@ -1082,44 +1041,80 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     var fw=pc?(isDeck?270:230):(mob?(isDeck?180:168):Math.min(200, Math.round(vw*0.44)));
     var fh=Math.round(fw*109/70);
     var left=hr.left+hr.width/2-fw/2;
-    var top=hr.top-fh-14;
+    var top=hr.top-fh-GAP;                       /* the badge hangs into this gap, just above the spine */
     if(top<MARGIN){
-      top=Math.min(hr.bottom+10, vh-fh-MARGIN);
-      if(top+fh>vh-MARGIN) top=MARGIN;
+      top=Math.min(hr.bottom+10, vh-fh-MARGIN-BADGE);
+      if(top+fh>vh-MARGIN-BADGE) top=MARGIN;
     }
     if(left<MARGIN)left=MARGIN;
     if(left+fw>vw-MARGIN)left=vw-MARGIN-fw;
-    if(top+fh>vh-MARGIN)top=Math.max(MARGIN, vh-MARGIN-fh);
+    if(top+fh>vh-MARGIN-BADGE)top=Math.max(MARGIN, vh-MARGIN-BADGE-fh);
     portal.style.width=fw+'px';
     portal.style.left=Math.round(left)+'px';
     portal.style.top=Math.round(top)+'px';
+    var br=hr.top-(Math.round(top)+fh);          /* gap down to the spine (only when the card sits above it) */
+    portal.style.setProperty('--tfp-bridge',(br>0&&br<80?Math.ceil(br)+4:0)+'px');
     portal.classList.toggle('is-deck', isDeck);
   }
+  function reveal(host){
+    if(activeHost!==host)return;
+    clearTimeout(loadT);loadT=null;
+    badgeT.textContent=badgeFor(host);
+    layout(host);
+    portal.classList.add('is-on');
+    portal.classList.toggle('is-open',host.classList.contains('is-face-open'));
+    requestAnimationFrame(function(){if(activeHost===host)layout(host);});
+  }
   function placeFace(host){
-    if(window.__trdTapeBusy||(host&&host.hasAttribute('data-noface')))return;
+    if(!host||host.hasAttribute('data-noface'))return;
     var src=srcFor(host);
     if(!src)return;
+    clearTimeout(showT);showT=null;clearTimeout(hideT);hideT=null;
+    if(activeHost&&activeHost!==host)hidePortal();
     activeHost=host;
     portal._trdHost=host;
     if(portalImg.getAttribute('src')!==src)portalImg.src=src;
-    layout(host);
-    portal.classList.add('is-on');
-    if(host.classList.contains('is-face-open'))portal.classList.add('is-open');
-    else portal.classList.remove('is-open');
-    requestAnimationFrame(function(){if(activeHost===host)layout(host);});
+    /* no half-painted card: show it once its face image is ready (or after 400ms at the latest) */
+    if(portalImg.complete&&portalImg.naturalWidth)reveal(host);
+    else{
+      portalImg.onload=function(){reveal(host)};
+      clearTimeout(loadT);loadT=setTimeout(function(){reveal(host)},400);
+    }
   }
   function onLeave(host){
     if(host && activeHost && host!==activeHost)return;
     hidePortal();
   }
+  function maybeHide(){
+    clearTimeout(hideT);
+    hideT=setTimeout(function(){hideT=null;if(!overCard&&(!activeHost||overHost!==activeHost))hidePortal();},GRACE);
+  }
+  /* desktop pointer: intent delay in, instant swap between spines, grace out */
+  function enter(host){
+    overHost=host;
+    clearTimeout(hideT);hideT=null;
+    if(activeHost===host)return;                 /* back from its own card: keep it */
+    if(activeHost)hidePortal();                  /* another spine: the old card clears at once */
+    clearTimeout(showT);
+    showT=setTimeout(function(){showT=null;if(overHost===host)placeFace(host);},INTENT);
+  }
+  function leave(host){
+    if(overHost===host)overHost=null;
+    if(!activeHost){clearTimeout(showT);showT=null;return;}
+    if(activeHost===host)maybeHide();
+  }
   function bind(){
-    document.querySelectorAll('a.spine, a.deck, .tcase').forEach(function(el){
+    document.querySelectorAll('a.spine, a.deck').forEach(function(el){
       var f=el.querySelector('.spine-face'); if(f)byHost.set(el,f);
-      el.addEventListener('mouseenter',function(){placeFace(el)});
+      el.addEventListener('mouseenter',function(){if(fine.matches)enter(el)});
+      el.addEventListener('mouseleave',function(){el.removeAttribute('data-noface');if(fine.matches)leave(el)});
       el.addEventListener('focus',function(){placeFace(el)});
-      el.addEventListener('mouseleave',function(){el.removeAttribute('data-noface');if(!el.classList.contains('is-face-open'))onLeave(el)});
-      el.addEventListener('blur',function(){if(!el.classList.contains('is-face-open'))onLeave(el)});
+      el.addEventListener('blur',function(){if(el.classList.contains('is-face-open'))return;if(activeHost===el&&!overCard&&overHost!==el)hidePortal();});
     });
+    portal.addEventListener('mouseenter',function(){if(!fine.matches||!activeHost)return;overCard=true;clearTimeout(hideT);hideT=null;});
+    portal.addEventListener('mouseleave',function(){if(!fine.matches)return;overCard=false;maybeHide();});
+    /* pointer leaves the window: nothing stays behind */
+    document.documentElement.addEventListener('mouseleave',function(){if(fine.matches){overHost=null;overCard=false;hidePortal();}});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);
   else bind();
@@ -1129,14 +1124,16 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   window.__trdClampFace=placeFace;
   window.__trdClearFace=onLeave;
   window.__trdFaceFor=function(host){
-    /* click handler expects a face node with _trdHost — use portal when showing */
-    if(portal.classList.contains('is-on') && (!host || portal._trdHost===host))return portal;
+    /* click handler expects a face node with _trdHost: the portal whenever it belongs to this host */
+    if(portal._trdHost && (!host || portal._trdHost===host))return portal;
     return faceFor(host);
   };
   window.__trdFacePortal=portal;
 })();
-/* faces: single click/tap shows face; double-click / double-tap skips straight into the room
-   (PC + mobile). Touch also: tap open face to enter; retap host / elsewhere / 5s dismisses. */
+/* faces, clicks and taps.
+   PC: a click on a spine enters as a normal link; a click on its card enters the same way (same tracking event).
+   Touch: first tap shows the card; a second tap on the same spine or on the card enters; double-tap enters at once;
+   tapping elsewhere or 5s closes the card. The deck's PLAY key is pressed, not previewed. */
 (function(){
   var fine=window.matchMedia('(hover:hover) and (pointer:fine)');
   var open=null,timer=null;
@@ -1147,15 +1144,15 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   function closeFace(){
     clearT();
     if(open){
-      if(window.__trdClearFace)window.__trdClearFace(open);
       open.classList.remove('is-face-open');
+      if(window.__trdClearFace)window.__trdClearFace(open);
       open=null;
     }
   }
   function openFace(host){
     if(open&&open!==host){
-      if(window.__trdClearFace)window.__trdClearFace(open);
       open.classList.remove('is-face-open');
+      if(window.__trdClearFace)window.__trdClearFace(open);
     }
     open=host;host.classList.add('is-face-open');
     if(window.__trdClampFace)window.__trdClampFace(host);
@@ -1168,8 +1165,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   }
   function go(host){
     closeFace();
-    /* the tape in its case spine: load it into the deck */
-    if(host.classList.contains('tcase')&&window.__trdSwapTape){window.__trdSwapTape();return;}
+    if(window.__trdClearFace)window.__trdClearFace();
     var href=host.getAttribute('href');
     if(!href)return;
     /* deck may launch player instead of navigating */
@@ -1190,9 +1186,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     var face=e.target.closest&&(e.target.closest('#trd-face-portal')||e.target.closest('.spine-face'));
     var spine=e.target.closest&&e.target.closest('a.spine');
     var deck=e.target.closest&&e.target.closest('a.deck');
-    var shelfT=e.target.closest&&e.target.closest('button.tcase');
-    if(deck&&deck.classList.contains('is-pl')&&!face)deck=null;
-    var host=spine||deck||shelfT;
+    var host=spine||deck;
     /* floated faces are on document.body — recover host from face._trdHost */
     if(!host&&face&&face._trdHost)host=face._trdHost;
     if(!host){if(open)closeFace();return}
@@ -1212,27 +1206,24 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
       return;
     }
 
-    /* desktop fine pointer: hover already shows face; single click navigates normally */
+    /* desktop fine pointer: hover shows the card; a click on the spine is a normal link click,
+       a click on the card enters through go() */
     if(!isTouchUI()){
-      /* allow normal link click through (no preventDefault) except when clicking the floating face */
-      if(face){e.preventDefault();go(host)}
+      if(face){e.preventDefault();e.stopPropagation();go(host)}
       return;
     }
 
-    /* touch: tap open face → enter (face may be on body, so navigate explicitly) */
-    if(face&&(host.classList.contains('is-face-open')||face.classList.contains('is-face-open')||face.classList.contains('is-open'))){
-      e.preventDefault(); go(host); return;
-    }
+    /* touch: tap the open card, or tap its spine again → enter */
     e.preventDefault();
-    if(host.classList.contains('is-face-open'))closeFace();
-    else openFace(host);
+    if(face||host.classList.contains('is-face-open')){e.stopPropagation();go(host);return;}
+    openFace(host);
   },true);
-  fine.addEventListener('change',function(){if(fine.matches)closeFace()});
+  fine.addEventListener('change',function(){closeFace()});
 })();
 
 /* hero: the one primary button plays the album in the pocket player (same as pressing play on the deck);
-   without the player it is a plain link to album.html. The Spotify tape case is a normal link now:
-   keep it exactly as wide as the room spines on PC. */
+   without the player it is a plain link to album.html.
+   (The Spotify playlist tape case + tape swap were removed 2026-11-01: see /archive/spotify-cassette/README.md) */
 (function(){
   var cta=document.querySelector('.hero-cta'),deck=document.querySelector('a.deck[data-trd-pod-door]');
   if(cta)cta.addEventListener('click',function(e){
@@ -1244,197 +1235,6 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
       window.trdPod.launchFrom(cas,null,'full');
     }
   });
-  var cs=document.querySelector('.hello .tcase');if(!cs)return;
-  var pc=window.matchMedia('(min-width:900px) and (min-height:500px)');
-  function fitCase(){var sp=document.querySelector('.stack-a .spine');
-    if(pc.matches&&sp)cs.style.setProperty('--tcw',sp.offsetWidth+'px');else cs.style.removeProperty('--tcw');}
-  fitCase();var ft;window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fitCase,160);});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitCase);
-})();
-/* two tapes: The Red Pill Album (the site's own player) and The Rubber Duck Personal Playlist (Spotify).
-   The tape not in the deck waits in its own case spine on the left; choosing it slides that tape out of its
-   case and into the deck while the deck tape ejects and goes back into the case. Only one source ever plays:
-   the Spotify player is created only when the playlist is loaded, and is removed when the Red Pill tape goes back in. */
-(function(){
-  var deck=document.querySelector('a.deck[data-trd-pod-door]'),cs=document.getElementById('tapeCase');
-  if(!deck||!cs)return;
-  var well=deck.querySelector('.deck-well'),hold=cs.querySelector('.tc-hold'),kpl=deck.querySelector('.kp-pl');
-  var deckFace=deck.querySelector('.spine-face img'),csFace=cs.querySelector('.spine-face img');
-  var csCat=cs.querySelector('.sp-cat'),csIc=cs.querySelector('.sp-ic'),csN=cs.querySelector('.sp-n'),csS=cs.querySelector('.sp-s');
-  var HREF=deck.getAttribute('href'),LABEL=deck.getAttribute('aria-label');
-  var PL_URI='spotify:playlist:4lWQJV4n3mnIvp0y4biUqZ',PL_EMBED='https://open.spotify.com/embed/playlist/4lWQJV4n3mnIvp0y4biUqZ?utm_source=generator';
-  var FACE={rp:'/assets/trd/img/cassettes/face-redpill.webp?v=cleanblack1',pl:'/assets/trd/img/cassettes/face-playlist.webp?v=1'};
-  var TAPE={
-    pl:{cls:'tc-pl',cat:'SIDE B',ic:'/assets/trd/img/duck-banner.webp',n:'Personal Playlist',s:'The Rubber Duck\u2122 on Spotify',label:'The Rubber Duck Personal Playlist. Load this tape into the deck'},
-    rp:{cls:'tc-rp',cat:'SIDE A',ic:'/assets/trd/img/rpa-pill.webp',n:'The Red Pill Album',s:'22 tracks, plays right here',label:'The Red Pill Album. Load this tape back into the deck'}};
-  var mode='rp',busy=false,spot=null,ctl=null,spPlaying=false;
-  var pc=window.matchMedia('(min-width:900px) and (min-height:500px)');
-  var rm=window.matchMedia('(prefers-reduced-motion: reduce)'),fine=window.matchMedia('(hover:hover) and (pointer:fine)');
-  /* PC room: the case is exactly as wide as the room spines below it */
-  function fitCase(){var sp=document.querySelector('.stack-a .spine');
-    if(pc.matches&&sp){cs.style.setProperty('--tcw',sp.offsetWidth+'px');}else cs.style.removeProperty('--tcw');}
-  fitCase();var ft;window.addEventListener('resize',function(){clearTimeout(ft);ft=setTimeout(fitCase,160);});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitCase);
-  function podPause(){try{var a=window.trdPod&&window.trdPod.audio;if(a&&!a.paused)a.pause();}catch(e){}}
-  /* The playlist tape turns into the same Duck Pod as the album: the pod shows this source (cover, track list,
-     now playing, progress) and its wheel drives the Spotify player through the iFrame API. Track names come
-     from a snapshot of the playlist (/assets/trd/playlist-trd.json); the Spotify player stays the sound source. */
-  var POD=!!(window.trdPod&&window.trdPod.useSource),plList=null,queue=false,nearEnd=false,armed=false,wantPlay=false;
-  function fmtLen(n){n=Math.max(0,Math.round(n||0));return Math.floor(n/60)+':'+('0'+n%60).slice(-2);}
-  var PL={id:'playlist',name:'Personal Playlist',artist:'The Rubber Duck',cover:'/assets/trd/img/playlist-cover-192.jpg',
-    intro:'Play the Playlist',sub:'The Rubber Duck on Spotify',tracks:[],i:0,playing:false,started:false,t:0,d:0,
-    play:function(){podPause();if(!ctl){wantPlay=true;nudgeSpot();return;}try{ctl.resume();}catch(e){}},
-    pause:function(){wantPlay=false;if(ctl){try{ctl.pause();}catch(e){}}},
-    toggle:function(){if(PL.playing)PL.pause();else PL.play();},
-    playIndex:function(i){var t=PL.tracks[i];if(!t||!t.uri)return PL.play();if(t.off)return;podPause();PL.i=i;PL.started=true;PL.t=0;PL.d=0;
-      if(!ctl){wantPlay=true;nudgeSpot();podRefresh();return;}
-      queue=true;nearEnd=false;armed=false;try{ctl.loadUri(t.uri);}catch(e){}
-      var tries=0;(function kick(){try{ctl.play();}catch(e){}if(++tries<3)setTimeout(function(){if(!PL.playing&&queue)kick();},700);})();podRefresh();},
-    next:function(){var n=PL.tracks.length;if(!n)return;for(var k=1;k<=n;k++){var j=(PL.i+k)%n;if(!PL.tracks[j].off)return PL.playIndex(j);}},
-    prev:function(){var n=PL.tracks.length;if(!n)return;if(PL.t>3&&ctl){try{ctl.restart();}catch(e){}return;}
-      for(var k=1;k<=n;k++){var j=(PL.i-k+n)%n;if(!PL.tracks[j].off)return PL.playIndex(j);}}};
-  function podRefresh(){if(POD){try{window.trdPod.refresh();}catch(e){}}}
-  function nudgeSpot(){if(spot&&narrow.matches){try{spot.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'center'});}catch(e){}}}
-  function loadList(){
-    if(plList){PL.tracks=plList;return;}
-    fetch('/assets/trd/playlist-trd.json',{credentials:'same-origin'}).then(function(r){return r.ok?r.json():null;}).then(function(j){
-      if(!j||!j.tracks)return;
-      plList=j.tracks.map(function(t){return {title:t.t,artist:t.a,uri:'spotify:track:'+t.u,secs:t.s,len:fmtLen(t.s),off:!t.p};});
-      if(mode==='pl'){PL.tracks=plList;if(POD)window.trdPod.useSource(PL);}
-    }).catch(function(){});
-  }
-  function plUpdate(d){
-    var was=PL.playing&&PL.t>PL.d-2;PL.playing=!d.isPaused;PL.t=(d.position||0)/1000;if(d.duration>0)PL.d=d.duration/1000;
-    if(d.playingURI&&PL.tracks.length){for(var k=0;k<PL.tracks.length;k++){if(PL.tracks[k].uri===d.playingURI){PL.i=k;break;}}}
-    if(PL.playing||PL.t>0)PL.started=true;
-    /* a single track loaded from the pod ends on its own: carry on down the list, like the album does */
-    if(PL.d>0&&PL.t>0.5&&PL.t<PL.d-2)armed=true;
-    if(queue&&armed&&!nearEnd&&PL.d>0&&(PL.t>=PL.d-0.4||(d.isPaused&&PL.t===0&&was))){nearEnd=true;setTimeout(function(){if(queue&&nearEnd)PL.next();},350);}
-    podRefresh();
-  }
-  function plReset(){PL.i=0;PL.playing=false;PL.started=false;PL.t=0;PL.d=0;queue=false;nearEnd=false;armed=false;wantPlay=false;}
-  function setPlaying(on){spPlaying=on;deck.classList.toggle('is-playing',on);if(kpl)kpl.textContent=on?'Pause':'Press play';}
-  /* Spotify: the official embed, created on demand; the iFrame API (if it loads) lets the deck keys and the
-     site player pause it. Without the API the plain embed is used and is removed on swap. */
-  function loadApi(cb){
-    if(window.__trdSpApi)return cb(window.__trdSpApi);
-    var done=false,t=setTimeout(function(){if(!done){done=true;cb(null);}},4500);
-    window.onSpotifyIframeApiReady=function(api){window.__trdSpApi=api;if(!done){done=true;clearTimeout(t);cb(api);}};
-    var sc=document.createElement('script');sc.src='https://open.spotify.com/embed/iframe-api/v1';sc.async=true;
-    sc.onerror=function(){if(!done){done=true;clearTimeout(t);cb(null);}};document.head.appendChild(sc);
-  }
-  var narrow=window.matchMedia('(max-width:899px), (max-height:499px)');
-  var PL_OPEN='https://open.spotify.com/playlist/4lWQJV4n3mnIvp0y4biUqZ',SL_BAR=30;
-  /* in the deck window the player and the playlist link share the tape window: the compact 80px player on small screens */
-  function spotH(){if(narrow.matches)return 152;var h=Math.round(well.clientHeight*.4048)-SL_BAR; /* PREVIEW: the Walkman's window, not the whole well */return h>=352?352:(h>=152?152:80);}
-  function spotLink(){var a=document.createElement('a');a.className='deck-splink';a.href=PL_OPEN;a.target='_blank';a.rel='noopener';
-    a.setAttribute('aria-label','Open the full playlist on Spotify (opens in a new tab)');
-    a.innerHTML='<svg class="sl-sp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>'+
-      '<span class="sl-l">Open the full playlist on Spotify</span><span class="sl-s">Full playlist on Spotify</span><svg class="sl-go" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14 3h7v7h-2.5V7.3l-8.6 8.6-1.8-1.8 8.6-8.6H14zM5 5h6v2.5H7.5v9h9V13H19v6H5z"/></svg>';
-    a.addEventListener('click',function(e){e.stopPropagation();if(window.trdTrack)window.trdTrack('click/playlist-spotify','Homepage: open the full playlist on Spotify');});
-    return a;}
-  /* phones: the deck is too small for the player, so it sits full width right under the deck */
-  function spotHome(el){if(narrow.matches){el.classList.add('is-below');deck.parentNode.insertBefore(el,deck.nextSibling);setTimeout(function(){try{el.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'center'});}catch(e){}},350);}else{el.classList.remove('is-below');well.appendChild(el);}}
-  function mountSpot(){
-    if(spot)return; spot=document.createElement('div');spot.className='deck-spot';
-    plReset();loadList();if(POD)window.trdPod.useSource(PL);
-    var h=spotH(); var host=document.createElement('div'); host.style.height=h+'px'; spot.appendChild(host); spot.appendChild(spotLink()); spotHome(spot);
-    var mine=spot; setTimeout(function(){mine.classList.add('is-on');},3000);
-    loadApi(function(api){
-      if(spot!==mine)return;
-      function plain(){if(spot!==mine)return;var old=spot.querySelector('iframe')||host;var f=document.createElement('iframe');
-        f.src=PL_EMBED;f.width='100%';f.height=String(h);f.loading='lazy';f.title='The Rubber Duck Personal Playlist on Spotify';
-        f.allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';if(old&&old.parentNode===spot)spot.replaceChild(f,old);else spot.insertBefore(f,spot.firstChild);
-        f.addEventListener('load',function(){mine.classList.add('is-on');});setTimeout(function(){mine.classList.add('is-on');},1500);}
-      if(!api)return plain();
-      try{api.createController(host,{uri:PL_URI,width:'100%',height:h},function(c){
-        if(spot!==mine){try{c.destroy();}catch(e){}return;}
-        ctl=c;var f=spot.querySelector('iframe');if(f)f.title='The Rubber Duck Personal Playlist on Spotify';
-        c.addListener('ready',function(){mine.classList.add('is-on');if(wantPlay){wantPlay=false;if(PL.started&&PL.tracks[PL.i])PL.playIndex(PL.i);else PL.play();}});setTimeout(function(){mine.classList.add('is-on');},2500);
-        c.addListener('playback_update',function(e){var d=e&&e.data;if(!d)return;var on=!d.isPaused;setPlaying(on);if(on)podPause();plUpdate(d);});
-      });}catch(e){plain();}
-    });
-  }
-  function unmountSpot(){if(ctl){try{ctl.pause();}catch(e){}try{ctl.destroy();}catch(e){}}ctl=null;if(spot&&spot.parentNode)spot.parentNode.removeChild(spot);spot=null;setPlaying(false);
-    plReset();if(POD)window.trdPod.dropSource(PL);}
-  /* the swap itself: two fixed ghosts, one sliding out of the case into the deck, one ejecting from the deck into the case */
-  function rect(el){var r=el.getBoundingClientRect(),t='none';try{t=getComputedStyle(el).transform||'none';}catch(e){}
-    if(t!=='none'&&el.offsetWidth)return {l:r.left+(r.width-el.offsetWidth)/2,t:r.top+(r.height-el.offsetHeight)/2,w:el.offsetWidth,h:el.offsetHeight,tf:t};
-    return {l:r.left,t:r.top,w:r.width,h:r.height};}
-  function ghost(el,r){var g=el.cloneNode(true);g.removeAttribute('id');g.classList.add('cas-ghost');g.style.visibility='';
-    g.style.left=r.l+'px';g.style.top=r.t+'px';g.style.width=r.w+'px';g.style.height=r.h+'px';document.body.appendChild(g);return g;}
-  function paintCase(){var t=TAPE[mode==='rp'?'pl':'rp'];
-    cs.classList.remove('tc-pl','tc-rp');cs.classList.add(t.cls);
-    csCat.textContent=t.cat;csIc.src=t.ic;csN.textContent=t.n;csS.textContent=t.s;cs.setAttribute('aria-label',t.label);
-    if(csFace)csFace.src=mode==='rp'?FACE.pl:FACE.rp;}
-  function swap(){
-    if(busy)return; busy=true; window.__trdTapeBusy=true; if(fine.matches)cs.setAttribute('data-noface','');
-    if(window.__trdClearFace)window.__trdClearFace();
-    var toPl=mode==='rp',inDeck=well.querySelector('.cas'),inCase=hold.querySelector('.cas');
-    if(toPl)podPause(); else unmountSpot();
-    var a0=rect(inDeck),c=rect(cs);
-    well.insertBefore(inCase,well.firstChild); hold.appendChild(inDeck);
-    mode=toPl?'pl':'rp'; paintMode();
-    var b1=rect(inCase);
-    /* the Walkman shows only part of the (cassette-sized) tape through its window: the ghosts start / end as that part */
-    var wc='';try{wc=getComputedStyle(inCase).clipPath;}catch(e){} if(!wc||wc.indexOf('inset(')!==0)wc='';
-    var z='inset(0% 0% 0% 0% round 0px)';
-    function clip(list,first,last){if(!wc)return list;list.forEach(function(k,i){k.clipPath=(i===0&&first)||(i===list.length-1&&last)?wc:z;});return list;}
-    function finish(){paintCase();cs.classList.remove('is-open');busy=false;window.__trdTapeBusy=false;if(mode==='pl')mountSpot();}
-    if(rm.matches||!document.body.animate||!a0.w||!c.w){finish();return;}
-    var gOut=ghost(inDeck,a0),gIn=ghost(inCase,c);inCase.style.visibility='hidden';
-    cs.classList.add('is-open');
-    var lift='0 0 0 2px #e3a82b,0 30px 50px -10px rgba(0,0,0,.85),0 0 30px rgba(255,200,110,.45)',rest='0 6px 16px rgba(0,0,0,.65)';
-    function kf(r,o,tr,sh,op){return {left:r.l+'px',top:r.t+'px',width:r.w+'px',height:r.h+'px',offset:o,transform:tr,boxShadow:sh,opacity:op};}
-    function mix(p,q,k,dy){return {l:p.l+(q.l-p.l)*k,t:p.t+(q.t-p.t)*k+(dy||0),w:p.w+(q.w-p.w)*k,h:p.h+(q.h-p.h)*k};}
-    /* a cassette-shaped box sitting on the case: as tall as the tape would be if it stood just out of its case */
-    var th=Math.min(c.h*2.1,a0.h*.62),tw=th*1.5737,at={l:c.l+c.w*.5-tw/2,t:c.t+c.h/2-th/2,w:tw,h:th};
-    var up=Math.min(th*.9,90),above={l:at.l,t:at.t-(c.t>a0.t?up:-up*0)-(c.t>a0.t?0:0),w:tw,h:th};
-    if(c.t>a0.t)above.t=at.t-up; else above.t=at.t+up*.2;
-    var D=1350,E='cubic-bezier(.45,0,.2,1)';
-    /* deck tape: eject up, fly over to the case, slide down into it */
-    var A=gOut.animate(clip([
-      kf(a0,0,a0.tf||'rotate(0)',rest,1),
-      kf(mix(a0,a0,0,-a0.h*.24),.2,'rotate(-2deg)',lift,1),
-      kf(mix(a0,above,.6,-24),.52,'rotate(3deg)',lift,1),
-      kf(above,.72,'rotate(0)',lift,1),
-      kf(at,.88,'rotate(0)',rest,1),
-      kf(c,1,'rotate(0)',rest,0)],true,false),{duration:D,easing:E,fill:'forwards'});
-    /* case tape: slide up out of its case, then over and down into the deck */
-    gIn.animate(clip([
-      kf(c,0,'rotate(0)',rest,0),
-      kf(at,.14,'rotate(0)',rest,1),
-      kf(above,.32,'rotate(-3deg)',lift,1),
-      kf(mix(above,b1,.6,-28),.7,'rotate(-1.5deg)',lift,1),
-      kf(mix(b1,b1,0,-b1.h*.06),.88,'rotate(0)',lift,1),
-      kf(b1,1,b1.tf||'rotate(0)',rest,1)],false,true),{duration:D+150,easing:E,fill:'forwards'}).onfinish=function(){
-      gOut.remove();gIn.remove();inCase.style.visibility='';finish();
-      cs.classList.remove('is-take');void cs.offsetWidth;cs.classList.add('is-take');setTimeout(function(){cs.classList.remove('is-take');},600);};
-    window.__trdSwapAnim=A;
-  }
-  function paintMode(){
-    var pl=mode==='pl';
-    deck.classList.toggle('is-pl',pl);
-    if(pl){deck.removeAttribute('href');deck.classList.remove('is-live','is-playing');
-      deck.setAttribute('aria-label','The Rubber Duck Personal Playlist is in the deck. The Spotify player is in the tape window');}
-    else{deck.setAttribute('href',HREF);deck.setAttribute('aria-label',LABEL);
-      try{document.dispatchEvent(new CustomEvent('trdpod:repaint'));}catch(e){}}
-    if(deckFace)deckFace.src=pl?FACE.pl:FACE.rp;
-    deck.setAttribute('data-tape',mode);
-  }
-  cs.addEventListener('click',function(e){if(e.defaultPrevented)return;e.preventDefault();
-    if(window.trdTrack)window.trdTrack('click/tape-swap','Homepage: load '+(mode==='rp'?'Personal Playlist':'Red Pill Album'));swap();});
-  /* deck keys while the playlist is in: play/pause and stop drive the Spotify player */
-  deck.addEventListener('click',function(e){
-    if(mode!=='pl')return; e.preventDefault();
-    var k=e.target.closest&&e.target.closest('.key'); if(!k)return; if(!ctl&&!k.classList.contains('key-play'))return;
-    if(k.classList.contains('key-play')){PL.toggle();}
-    else if(k===deck.querySelector('.deck-keys .key:last-child')){PL.pause();}
-  });
-  /* the site player starts while the playlist is loaded: pause Spotify (or, without the API, put the Red Pill tape back) */
-  document.addEventListener('trdpod:state',function(e){var st=e.detail;if(mode!=='pl'||!st||!st.playing||(st.src&&st.src!=='album'))return;
-    if(ctl){try{ctl.pause();}catch(x){}setPlaying(false);}else if(spot){swap();}});
-  window.__trdSwapTape=swap; window.__trdTapeMode=function(){return mode;};
 })();
 
 </script>

@@ -1,0 +1,14 @@
+<!-- index.html lines 808-820 (inside <header class="hello">, right after <p class="hello-cta">), as of commit fa19b6f62 -->
+        <a class="spine tcase tc-pl" href="https://open.spotify.com/playlist/4lWQJV4n3mnIvp0y4biUqZ" target="_blank" rel="noopener" aria-label="The Rubber Duck Personal Playlist on Spotify. Opens Spotify in a new tab"><span class="start-tag tc-tag">On Spotify</span><span class="sp"><span class="sp-cat" aria-hidden="true">SIDE B</span><img class="sp-ic" src="/assets/trd/img/duck-banner.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Personal Playlist</span><span class="sp-s">The Rubber Duck&trade; on Spotify</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 4l8 9H4z"/><rect x="4" y="16" width="16" height="3.2" rx="1" fill="currentColor"/></svg></span></span></span><span class="tc-hold" aria-hidden="true"><span class="cas cas-pl" id="plCas" aria-hidden="true">
+              <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
+              <span class="cas-label">
+                <span class="cas-head"><span class="cas-art"><span class="cas-t">Personal</span><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" decoding="async"><span class="cas-t">Playlist</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">SPOTIFY</span></span></span>
+                <span class="cas-meta">The Rubber Duck&trade; &middot; Personal Playlist</span>
+                <span class="cas-side"><small>SIDE</small><b>B</b></span>
+                <span class="cas-by">Type II<br>C-90</span>
+                <span class="cas-list"><span>The Rubber Duck&trade; Personal Playlist</span><span>Plays on Spotify</span></span>
+              </span>
+              <span class="cas-peel"></span>
+              <span class="cas-win"><span class="reel l"><b></b></span><span class="cas-tape"></span><span class="reel r"><b></b></span></span>
+              <span class="cas-foot"><i></i><i></i><i></i><i></i></span>
+            </span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-playlist.webp?v=1" width="560" height="872" alt="Cassette face for The Rubber Duck Personal Playlist" decoding="async"></span></a>

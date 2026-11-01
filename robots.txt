@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /tools/
 Disallow: /workers/
+Disallow: /archive/
 
 Sitemap: https://therubberduck.net/sitemap.xml
