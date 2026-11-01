@@ -719,6 +719,180 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 <!-- seo:end -->
 <link rel="stylesheet" href="/assets/trd/sitenav.css?v=2">
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261030a" defer data-trd-keep></script>
+<style id="home-shelf-css">
+/* ===== The cassette tower: a matte black, 3D-printed open-front case (CSS only) =====
+   Viewed from slightly above and to the left: top surface + left side face visible, front is an open frame.
+   Cassettes in clear Norelco cases are stacked flat inside and stick out past the right end, staggered. */
+.tcase{--D:14px;--wall:16px;--lid:16px;--base:14px;--prot:24px;--sh:50px;--gap:4px;
+  position:relative;width:100%;margin:0 auto;padding:calc(var(--D) + var(--lid) + 6px) 0 calc(var(--base) + 4px) calc(var(--D) + var(--wall) - 6px);
+  isolation:isolate}
+.tcase .tc-shell{position:absolute;left:0;top:0;bottom:0;right:var(--prot);z-index:0;pointer-events:none;
+  filter:drop-shadow(0 22px 22px rgba(0,0,0,.6)) drop-shadow(0 4px 4px rgba(0,0,0,.5))}
+/* top surface, with faint print layer lines running front to back */
+.tc-top{position:absolute;left:0;top:0;right:0;height:var(--D);clip-path:polygon(0 0,calc(100% - var(--D)) 0,100% 100%,var(--D) 100%);
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.06) 0 1px,rgba(0,0,0,.12) 1px 2px),linear-gradient(180deg,#2c2c2e,#3a3a3d)}
+/* left side face (darkest: away from the light) */
+.tc-side{position:absolute;left:0;top:0;bottom:0;width:var(--D);clip-path:polygon(0 0,100% 100%,100% 100%,100% 100%,0 calc(100% - var(--D)));
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),linear-gradient(90deg,#0b0b0c,#18181a)}
+.tc-side{clip-path:polygon(0 0,100% var(--D),100% 100%,0 calc(100% - var(--D)))}
+/* the front: an open frame (lid, left wall, base) around the dark bay */
+.tc-front{position:absolute;left:var(--D);top:var(--D);right:0;bottom:0;border-radius:3px 4px 4px 3px;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 2.5px),linear-gradient(180deg,#232325,#141415 60%,#0e0e0f);
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.16),inset -1px -1px 0 rgba(0,0,0,.6)}
+.tc-bay{position:absolute;left:calc(var(--D) + var(--wall));top:calc(var(--D) + var(--lid));right:0;bottom:var(--base);
+  background:linear-gradient(180deg,#060606,#101011 70%,#1a1a1b);
+  box-shadow:inset 10px 10px 18px rgba(0,0,0,.9),inset 0 -2px 0 rgba(255,255,255,.05)}
+/* soft highlight along the lid's front edge and the wall's front edge (rounded print edges catching the lamp) */
+.tc-hl{position:absolute;left:var(--D);top:var(--D);right:0;height:3px;border-radius:3px;background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,236,200,.28) 30%,rgba(255,255,255,.08));filter:blur(.4px)}
+.tc-hl2{position:absolute;left:var(--D);top:var(--D);bottom:0;width:2px;background:linear-gradient(180deg,rgba(255,236,200,.25),rgba(255,255,255,.04))}
+.tc-hl3{position:absolute;left:calc(var(--D) + var(--wall));right:0;bottom:var(--base);height:1px;background:rgba(255,255,255,.12)}
+/* table shadow */
+.tcase::after{content:"";position:absolute;z-index:-1;left:2%;right:4%;bottom:-10px;height:24px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.65),transparent);pointer-events:none}
+
+/* the stack of tapes */
+.tc-tapes{position:relative;z-index:1;display:flex;flex-direction:column;gap:var(--gap)}
+.tcase .spine{--off:0px;--rot:0deg;--lift:0px;height:var(--sh);min-height:0;margin:0;padding:4px 18px 4px 6px;border-radius:2px;
+  background:linear-gradient(180deg,rgba(255,255,255,.7) 0,rgba(255,255,255,.22) 3px,rgba(200,215,230,.10) 50%,rgba(255,255,255,.18) calc(100% - 4px),rgba(255,255,255,.6) 100%);
+  border:1px solid rgba(255,255,255,.45);
+  box-shadow:0 2px 0 rgba(0,0,0,.55),0 6px 10px rgba(0,0,0,.55),inset 0 0 0 1px rgba(0,0,0,.25)}
+/* hinge end of the Norelco case: smoky clear plastic with the dark cassette shell behind it */
+.tcase .spine::before{content:"";position:absolute;right:2px;top:3px;bottom:3px;width:13px;border-radius:1px 2px 2px 1px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,.35) 0 1px,rgba(30,30,32,.85) 1px 45%,rgba(60,60,64,.8) 70%,rgba(255,255,255,.45) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.tcase .spine::after{left:6px;right:18px;top:4px;height:34%}
+.tcase .sp{min-height:0;height:100%;gap:9px;padding:2px 8px 2px 6px}
+.tcase .sp-ic{width:34px;height:34px;border-radius:4px;box-shadow:0 0 0 1.5px currentColor,0 1px 3px rgba(0,0,0,.4)}
+.tcase .sp-cat{font-size:8px;letter-spacing:.1em}
+.tcase .sp-t{gap:2px}
+.tcase .sp-n{font-size:17.5px}
+.tcase .t2 .sp-n,.tcase .t5 .sp-n{font-size:14.5px}
+.tcase .t4 .sp-n,.tcase .t6 .sp-n{font-size:22px}
+.tcase .t1 .sp-n,.tcase .t3 .sp-n{font-size:16px}
+.tcase .sp-s{font-size:12.5px;-webkit-line-clamp:1}
+.tcase .sp-mk{display:none}
+.tcase .sp-go{width:26px;height:26px}.tcase .sp-go svg{width:14px;height:14px}
+.tcase .start-tag{top:-10px;right:46px;padding:2px 8px 1px;font-size:10px;z-index:3}
+/* stacked by hand: each case sits a little in or out */
+.tc-tapes .spine:nth-child(1){--off:-3px}
+.tc-tapes .spine:nth-child(2){--off:-13px}
+.tc-tapes .spine:nth-child(3){--off:-1px}
+.tc-tapes .spine:nth-child(4){--off:-10px}
+.tc-tapes .spine:nth-child(5){--off:0px}
+.tc-tapes .spine:nth-child(6){--off:-7px}
+.tcase .spine:hover,.tcase .spine:focus-visible{transform:translateX(calc(var(--off) + 10px))}
+/* the slot caption under the case */
+.tc-cap{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;font:700 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#f3d48a}
+.tc-cap i{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(227,168,43,.6))}
+.tc-cap i:last-child{background:linear-gradient(90deg,rgba(227,168,43,.6),transparent)}
+
+/* wood tabletop the case stands on */
+.wood{background:
+   repeating-linear-gradient(92deg,rgba(60,30,10,.0) 0 18px,rgba(60,30,10,.18) 18px 19px,rgba(255,220,170,.05) 19px 31px,rgba(60,30,10,.12) 31px 32px),
+   repeating-linear-gradient(88deg,rgba(255,230,190,.06) 0 3px,transparent 3px 9px),
+   linear-gradient(180deg,#8a5a34,#6b4325 55%,#54331b)}
+
+/* homepage: the suggestion box sits on the shelf, so the footer box and the floating tab are hidden here (the card dialog still opens) */
+#trd-suggest-fx,#trd-suggest{display:none!important}
+.trd-mock-note{display:none}
+.mk .hello-h{text-wrap:balance}.mk .hello-s{text-wrap:pretty}
+
+/* ===== shared mock pieces ===== */
+.mk{position:relative;z-index:2;width:100%;margin:0 auto;padding:22px 14px 34px;display:flex;flex-direction:column;gap:26px}
+.mk .deck{width:100%;max-width:none}
+.mk-chip{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;padding:8px 13px 8px 14px;border-radius:999px;
+  background:linear-gradient(180deg,#f2c35a,#e3a82b 55%,#cf931c);color:#2e1f13;border:1.5px solid #2e1f13;
+  font:700 12.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;box-shadow:0 4px 10px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,240,200,.6)}
+.mk-chip svg{width:13px;height:13px}
+.mk-sug{-webkit-appearance:none;appearance:none;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 14px 10px 12px;text-align:left;
+  border-radius:16px;border:1.5px dashed rgba(227,168,43,.7);background:rgba(46,31,19,.82);color:var(--ink-soft);font-family:var(--body)}
+.mk-sug img{flex:none;width:48px;height:auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.5))}
+.mk-sug-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.mk-sug-t b{font:400 24px/1 var(--display);font-family:'Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;letter-spacing:.01em;color:#ffd77a}
+.mk-sug-t > span:not(.mk-chip){font-size:15px;line-height:1.25;color:var(--ink-soft)}
+.mk-sug .mk-chip{align-self:flex-start;margin-top:6px}
+.mk-sug img{width:64px}
+.mk-sug:hover,.mk-sug:focus-visible{background:rgba(70,46,26,.92);border-color:var(--mustard)}
+.mk-h2{margin:0 0 12px;text-align:center;font:700 34px/1 'Steelfish','Arial Narrow',Impact,sans-serif;letter-spacing:.02em;color:var(--ink)}
+.mk-h2 small{display:block;margin-bottom:4px;font:400 24px/1 var(--script);color:var(--mustard)}
+
+/* compact shop (half-width) */
+.mini .shop{min-height:0;height:100%;margin:0;border-radius:10px 10px 6px 6px}
+.mini .shop-cornice{height:9px}
+.mini .shop-sign{margin:8px 8px 0;padding:7px 4px 8px}
+.mini .shop-sign-pre{font-size:15px}
+.mini .shop-sign-name{font-size:14.5px;letter-spacing:0;white-space:normal;line-height:1.1}
+.mini .shop-awning{height:26px;margin-top:8px}
+.mini .shop-front{margin:14px 8px 0;padding:6px;gap:6px}
+.mini .shop-door{display:none}
+.mini .shop-neon{font-size:15px;padding:2px 7px 0}
+.mini .shop-cards{display:none}
+.mini .shop-step{margin:0 4px;padding:8px 6px;justify-content:center}
+.mini .shop-step-l{display:none}
+.mini .shop-step-go{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px}
+.mini .shop-walk{height:7px}
+/* tall suggestion card (half-width) */
+.mk-sugc{-webkit-appearance:none;appearance:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:8px;height:100%;width:100%;margin:0;
+  padding:14px 10px 14px;border-radius:10px;border:1.5px dashed rgba(227,168,43,.75);background:linear-gradient(180deg,rgba(70,46,26,.92),rgba(40,26,15,.92));
+  color:var(--ink-soft);font-family:var(--body);text-align:center}
+.mk-sugc img{width:96px;height:auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.55))}
+.mk-sugc b{font:700 27px/0.98 'Steelfish','Arial Narrow',Impact,sans-serif;color:#ffd77a;letter-spacing:.01em}
+.mk-sugc span.s{font-size:14.5px;line-height:1.25}
+.mk-sugc:hover,.mk-sugc:focus-visible{border-color:var(--mustard);background:linear-gradient(180deg,rgba(90,60,34,.95),rgba(50,32,18,.95))}
+
+
+/* B: HI-FI SHELF. A walnut shelf unit holds everything: deck shelf, tower shelf, shop + suggestion shelf. */
+.mk-b{gap:22px;padding:24px 8px 34px}
+.mk-b .hello{padding:0 6px}
+.b-bay2{padding-left:0;padding-right:2px}
+.mk-b .tcase{--D:11px;--wall:12px}
+.mk-b .tcase .sp-s{font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:clip;-webkit-line-clamp:none}
+.mk-b .tcase .sp-n{text-overflow:clip}
+.mk-b .tcase .sp{gap:8px}.mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:14px}.mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:15.5px}
+.mk-b .hello{text-align:center;align-items:center}
+.mk-b .hello-k{font-size:31px}
+.mk-b .hello-h{font-size:45px;line-height:.98}
+.mk-b .hello-s{font-size:17px;margin-top:12px}
+.mk-b .hello-cta{display:none}
+.b-unit{--post:10px;position:relative;margin:0 -2px;padding:0 var(--post);border-radius:8px;
+  background:linear-gradient(90deg,#4a2c17,#7a4c2c 40%,#5c3a20) left/var(--post) 100% no-repeat,linear-gradient(90deg,#5c3a20,#7a4c2c 60%,#4a2c17) right/var(--post) 100% no-repeat,#2a1b10;
+  box-shadow:0 0 0 2px #1d120a,0 22px 40px rgba(0,0,0,.6);border-top:12px solid #6b4325}
+.b-bay{position:relative;padding:18px 12px 20px;
+  background:radial-gradient(80% 70% at 50% 35%,rgba(255,196,110,.14),transparent 75%),linear-gradient(180deg,#24170d,#1a110a);
+  box-shadow:inset 0 10px 18px rgba(0,0,0,.55)}
+.b-bay::after{content:"";position:absolute;left:calc(-1 * var(--post));right:calc(-1 * var(--post));bottom:-1px;height:14px;z-index:3;
+  background:repeating-linear-gradient(92deg,rgba(60,30,10,0) 0 22px,rgba(60,30,10,.25) 22px 23px),linear-gradient(180deg,#9a6a3e,#6b4325 45%,#4a2c17);
+  box-shadow:0 4px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,220,170,.35)}
+.b-bay{padding-bottom:30px}
+.b-bay:last-child::after{border-radius:0 0 8px 8px}
+.b-plaque{margin:0 auto 12px;width:max-content;max-width:100%;padding:6px 14px 5px;border-radius:4px;text-align:center;
+  background:linear-gradient(180deg,#f2c35a,#c98a17);color:#2e1f13;font:700 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;box-shadow:0 2px 0 #6e4a0d,0 4px 8px rgba(0,0,0,.4)}
+.mk-b .deck{margin:0}
+.mk-b .tcase-wrap{margin:0}
+.mk-b .tc-cap{margin-top:12px}
+.b-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch;height:330px}
+@media (max-width:379px){.mk-b .mini .shop-sign-name{font-size:12.5px}}
+@media (min-width:900px){
+  .mk-b{max-width:1400px;padding:26px 36px 34px;gap:22px}
+  .mk-b .hello{max-width:1000px;margin:0 auto}
+  .mk-b .hello-h{font-size:50px}.mk-b .hello-s{font-size:18.5px}.mk-b .hello-k{font-size:30px}
+  .mk-b{padding-top:18px;gap:16px}
+  .mk-b .mini .shop-sign-name{font-size:24px}.mk-b .mini .shop-sign-pre{font-size:20px}.mk-b .mini .shop-door{display:block}.mk-b .mini .shop-awning{height:36px}
+  .b-unit{display:grid;grid-template-columns:1fr 1.05fr 0.8fr;column-gap:12px;--post:14px;
+    background:linear-gradient(90deg,#4a2c17,#7a4c2c 40%,#5c3a20) left/14px 100% no-repeat,linear-gradient(90deg,#5c3a20,#7a4c2c 60%,#4a2c17) right/14px 100% no-repeat,
+      linear-gradient(90deg,#5c3a20,#7a4c2c 50%,#5c3a20) calc(33.3% + 2px) 0/12px 100% no-repeat,#2a1b10}
+  .b-unit{background:#5c3a20}
+  .b-bay{display:flex;flex-direction:column;justify-content:center;padding:18px 20px 30px}
+  .b-bay::after{left:0;right:0}
+  .b-bay3 .b-pair{height:100%;grid-template-columns:1fr;grid-template-rows:1fr auto}
+  .mk-b .tcase{max-width:500px;--sh:54px;--gap:5px;--D:16px;--wall:20px;--lid:20px;--base:16px;--prot:34px}
+  .mk-b .tcase .sp-ic{width:44px;height:44px}
+  .mk-b .tcase .sp-n{font-size:22px}.mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:18px}.mk-b .tcase .t4 .sp-n,.mk-b .tcase .t6 .sp-n{font-size:28px}.mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:20px}
+  .mk-b .tcase .sp-s{font-size:14.5px}
+  .mk-b .mk-sugc{flex-direction:row;height:auto;padding:10px 14px;text-align:left}
+  .mk-b .mk-sugc img{width:54px}.mk-b .mk-sugc b{font-size:24px}.mk-b .mk-sugc span.s{display:none}
+}
+
+</style>
 </head>
 <body>
 <header class="trd-nav" id="trd-nav"><div class="tn-in">
@@ -749,18 +923,12 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   <span class="haze"></span>
 </div>
 
-<main class="stage">
-
-  <div class="hall">
-    <div class="top">
-      <header class="hello">
+<main class="mk mk-b"><header class="hello">
         <p class="hello-k">Welcome, curious minds</p>
         <h2 class="hello-h">100,000+ Twitter/X posts. Every Q drop. One archive.</h2>
         <p class="hello-s">The shows, the X Space recordings, the PDFs and the full X archive, searchable, with the sources linked so you can check them yourself.</p>
         <p class="hello-cta"><a class="hero-cta" href="album.html" data-cta="album"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span>Play The Red Pill Album</span><small>22 tracks</small></a></p>
-      </header>
-
-      <a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album">
+      </header><div class="b-unit"><div class="b-bay b-bay1"><p class="b-plaque">Side A &middot; The Red Pill Album</p><a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album">
         <span class="deck-top" aria-hidden="true"><b>TRD</b><span>Stereo cassette deck</span><span class="deck-led"><i></i>Play</span></span>
         <span class="deck-well">
             <span class="cas" id="podCas" aria-hidden="true">
@@ -779,24 +947,12 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
         </span>
         <span class="deck-keys" aria-hidden="true"><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11 6v12l-8.5-6zM21 6v12l-8.5-6z"/></svg></span><span class="key key-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><span class="kp-off">Press play</span><span class="kp-on">Open player</span></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13 6v12l8.5-6zM3 6v12l8.5-6z"/></svg></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor"/></svg></span></span>
         <span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-redpill.webp?v=cleanblack1" width="560" height="872" alt="Cassette face for the Red Pill Album, TRD-022" decoding="async"></span>
-      </a>
-    </div>
-
-    <nav class="stacks" aria-label="Rooms">
-      <div class="stack stack-a">
-      <a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Private Theater</span><span class="sp-s">Red pill clips, movies, shows</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-private-theater.webp" width="560" height="872" alt="Cassette face for TRD-001 Private Theater" decoding="async"></span></a>
-      <a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-listening.webp" width="560" height="872" alt="Cassette face for TRD-002 The Listening Room" decoding="async"></span></a>
-      <a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-scif.webp" width="560" height="872" alt="Cassette face for TRD-003 The SCIF Reading Room" decoding="async"></span></a>
-      </div>
-      <div class="stack stack-b">
-      <a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-ledger.webp" width="560" height="872" alt="Cassette face for TRD-004 The Drop Ledger" decoding="async"></span></a>
-      <a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-memes.webp" width="560" height="872" alt="Cassette face for TRD-005 The Meme Dump" decoding="async"></span></a>
-      <a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-x.webp" width="560" height="872" alt="Cassette face for TRD-006 Twitter / X Archive" decoding="async"></span></a>
-      </div>
-    </nav>
-  </div>
-
-  <a class="shop" href="merch.html" aria-label="TRD Collectibles. Caps, tees and signed pieces. Step inside the store">
+      </a></div><div class="b-bay b-bay2"><section class="tcase-wrap " aria-label="The rooms"><div class="tcase"><span class="tc-shell" aria-hidden="true"><span class="tc-side"></span><span class="tc-top"></span><span class="tc-front"></span><span class="tc-bay"></span><span class="tc-hl"></span><span class="tc-hl2"></span><span class="tc-hl3"></span></span><nav class="tc-tapes" aria-label="Rooms"><a class="spine t1" href="videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Private Theater</span><span class="sp-s">Red pill clips, movies, shows</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-private-theater.webp" width="560" height="872" alt="Cassette face for TRD-001 Private Theater" decoding="async"></span></a>
+<a class="spine t2" href="listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Listening Room</span><span class="sp-s">Recordings, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-listening.webp" width="560" height="872" alt="Cassette face for TRD-002 The Listening Room" decoding="async"></span></a>
+<a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The SCIF Reading Room</span><span class="sp-s">The document library (PDFs)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-scif.webp" width="560" height="872" alt="Cassette face for TRD-003 The SCIF Reading Room" decoding="async"></span></a>
+<a class="spine t4" href="ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-ledger.webp" width="560" height="872" alt="Cassette face for TRD-004 The Drop Ledger" decoding="async"></span></a>
+<a class="spine t5" href="memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-memes.webp" width="560" height="872" alt="Cassette face for TRD-005 The Meme Dump" decoding="async"></span></a>
+<a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X Archive</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-x.webp" width="560" height="872" alt="Cassette face for TRD-006 Twitter / X Archive" decoding="async"></span></a></nav></div><p class="tc-cap"><i></i><span>Six rooms &middot; Tap a tape to enter</span><i></i></p></section></div><div class="b-bay b-bay3 mini"><div class="b-pair"><a class="shop" href="merch.html" aria-label="TRD Collectibles. Caps, tees and signed pieces. Step inside the store">
     <span class="shop-cornice" aria-hidden="true"></span>
     <span class="shop-sign" aria-hidden="true"><span class="shop-sign-pre">The Rubber Duck&trade; presents</span><span class="shop-sign-name">TRD Collectibles</span></span>
     <span class="shop-awning" aria-hidden="true"></span>
@@ -812,15 +968,9 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
       </span>
       <span class="shop-door"><span class="shop-door-glass"><span class="shop-hang">Come in</span></span><span class="shop-door-panel"></span><span class="shop-knob"></span></span>
     </span>
-    <span class="shop-step"><span class="shop-step-l">Caps, tees, signed pieces</span><span class="shop-step-go">Step inside <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+    <span class="shop-step"><span class="shop-step-l">Caps, tees, signed pieces</span><span class="shop-step-go">Tap to enter <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
     <span class="shop-walk" aria-hidden="true"></span>
-  </a>
-
-  <div class="band">
-    <button class="band-sug" type="button" data-sug>Got an idea for the site? <b>Drop a card in the suggestion box</b><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-  </div>
-
-</main>
+  </a><button class="mk-sugc" type="button" data-sug><img src="/assets/trd/img/suggestion-box-trd.webp" srcset="/assets/trd/img/suggestion-box-trd.webp 1x, /assets/trd/img/suggestion-box-trd@2x.webp 2x" width="176" height="240" alt=""><b>Got an idea for the site?</b><span class="s">Drop a card in the suggestion box</span><span class="mk-chip">Tap to enter <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></button></div></div></div></main>
 
 <section class="support" id="support" aria-labelledby="support-h">
   <div class="sup-in">
@@ -851,10 +1001,10 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
         <span class="sc-s">The hardcover, on Gumroad</span>
         <span class="sc-go">Get the book <i aria-hidden="true">&rsaquo;</i></span>
       </a>
-      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Buy Me a Coffee: tip The Rubber Duck any amount. Opens in a new tab">
+      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Buy Me a Coffee: support my mission, any amount, one time. Opens in a new tab">
         <span class="sc-art" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" loading="lazy" decoding="async"></span>
         <span class="sc-k">Buy Me a Coffee</span>
-        <span class="sc-n">Tip the Duck</span>
+        <span class="sc-n">Support my mission</span>
         <span class="sc-s">Any amount, one time</span>
         <span class="sc-go">Buy a coffee <i aria-hidden="true">&rsaquo;</i></span>
       </a>
@@ -931,7 +1081,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     var de=document.documentElement,was=de.classList.contains('trd-rz');fitRoom();if(was||de.classList.contains('trd-rz'))resize();else size();});
 })();
 /* the suggestion line in the desktop band opens the same card as the corner box */
-(function(){var b=document.querySelector('[data-sug]');if(b)b.addEventListener('click',function(e){if(window.trdSuggest)window.trdSuggest.open(e);});})();
+[].forEach.call(document.querySelectorAll('[data-sug]'),function(b){b.addEventListener('click',function(e){if(window.trdSuggest)window.trdSuggest.open(e);});});
 /* The Red Pill Album is a cassette in a tape deck. First press: start the album; the cassette lifts out
    and flies to the floating player's spot, then the album page opens. After that the deck shows what is
    playing (reels turn, PLAY lit) and simply opens the album page. Without the player script it is a plain link. */
@@ -1239,5 +1389,16 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 
 </script>
 <script>/* cassette faces: fetched after the page has loaded (they only show on hover/tap) */(function(){function w(){[].forEach.call(document.querySelectorAll('.spine-face img[data-src]'),function(i){if(!i.getAttribute('src'))i.src=i.getAttribute('data-src');});}if(document.readyState==='complete')setTimeout(w,1500);else window.addEventListener('load',function(){setTimeout(w,1500);});})();</script>
+<script>
+/* homepage cassettes: every room title and subtitle shows in full on one line. If a line is wider than its tape
+   (narrow phone, big system font), shrink that line's font a little at a time (never below 9px). No ellipsis. */
+(function(){
+  function fit(){[].forEach.call(document.querySelectorAll('.tcase .sp-n,.tcase .sp-s'),function(e){
+    e.style.removeProperty('font-size');var f=parseFloat(getComputedStyle(e).fontSize),n=0;
+    while(e.scrollWidth>e.clientWidth+0.5&&f>9&&n<40){f-=0.25;n++;e.style.fontSize=f+'px';}});}
+  fit();var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,120);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('load',fit);
+})();
+</script>
 </body>
 </html>
