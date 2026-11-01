@@ -164,6 +164,12 @@ h1{margin:0 0 10px;font:600 clamp(30px,3.4vw,44px)/1.12 'Oswald',sans-serif;colo
 .more b{margin:0;font-size:17px;-webkit-line-clamp:3}
 .shr.shr-compact{justify-content:space-between}
 }"""
+CSS_PLAY_LOW = """/* playPos "low" (per-video flag in data/video-room-local.json, e.g. the Ring of Power title card): smaller play button
+   in the gap between the title and the ring so the whole title shows (2026-11-01) */
+.play.low{top:74%;height:9%;min-height:20px;width:auto;aspect-ratio:1;margin:0;transform:translate(-50%,-50%);box-shadow:0 0 0 2px var(--bulb),0 0 12px rgba(255,214,140,.5)}
+.play.low:after{left:38%;top:27%;width:34%;height:46%;border:0;background:var(--bulb);clip-path:polygon(0 0,100% 50%,0 100%)}
+.poster:hover .play.low,.poster:focus-visible .play.low{transform:translate(-50%,-50%) scale(1.08)}"""
+
 
 
 def page(v, img, meta, others):
@@ -227,7 +233,7 @@ def page(v, img, meta, others):
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/assets/trd/share.css?v=20261030c" data-trd-keep>
-<style>{CSS}</style>
+<style>{CSS}{(chr(10) + CSS_PLAY_LOW) if v.get('playPos') == 'low' else ''}</style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace('</', '<\\/')}</script>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
@@ -235,7 +241,7 @@ def page(v, img, meta, others):
 <header class="top"><a href="/"><b>The Rubber Duck&trade;</b></a><a href="/videos.html">Video Room</a></header>
 <main>
 <article class="vp">
-<a class="poster" href="{room}" aria-label="Play {e(t)} in the Video Room"><img src="{e(poster(v))}" alt="Poster frame from {e(t)}" width="1280" height="720" decoding="async"><span class="play"></span>{('<span class="dur">' + e(v['dur']) + '</span>') if v.get('dur') else ''}</a>
+<a class="poster" href="{room}" aria-label="Play {e(t)} in the Video Room"><img src="{e(poster(v))}" alt="Poster frame from {e(t)}" width="1280" height="720" decoding="async"><span class="play{' low' if v.get('playPos') == 'low' else ''}"></span>{('<span class="dur">' + e(v['dur']) + '</span>') if v.get('dur') else ''}</a>
 <div class="info">
 <p class="kick">{kick}</p>
 <h1>{e(t)}</h1>
