@@ -19,7 +19,7 @@ This file explains how the site works so anyone Duck trusts can keep it going wi
 - `memes.html` with `memes/data/memes.json` and `memes/web/`: the meme dump.
 - `pdfs.html` with `scif/`: the SCIF PDF room. Big PDFs go next to last. GitHub won't accept files over 100 MB.
 - `ledger.html` with `data/drops.js`: the Q drop ledger. Each drop links to qalerts.app.
-- `x/`: the searchable archive of all 61,225 @TheRubberDuck79 posts. Its media plays from X's own servers.
+- `x/`: the searchable archive of every @TheRubberDuck79 post (the count is `n` in `x/data/meta.json`). Its media plays from X's own servers.
 - Every page carries the GoatCounter visitor counter tag (therubberduck.goatcounter.com). Duck holds that login.
 
 ## Adding new memes
@@ -33,6 +33,15 @@ This file explains how the site works so anyone Duck trusts can keep it going wi
 
 ## The X archive
 `tools/x-archive-build.py` rebuilds `x/` from an X data export. The full export is on Duck's D: drive at `D:\TheRubberDuck\x-archive-2026-09-26`.
+
+### Keeping the X archive current (nightly)
+`tools/x-archive-build.py` is only for a full rebuild from a new export. New posts are added with `tools/x_archive_sync.py`, which never renumbers or rewrites existing posts.
+1. Get the new posts. Run `python3 tools/x_archive_sync.py plan` and fetch with those arguments: X API v2 "posts by user" (`GET /2/users/1254803542914850816/tweets`) with `since_id` set to the last archived post, following `next_token` until there is none. Grok Bot does this with its built-in X tool (`get_users_posts`), 25 posts per call. Save every raw response as a `.json` file in one folder. No key is ever stored in this repo.
+2. `tools/x_archive_nightly.sh <folder>` adds the posts (skips any already there, by post id), checks everything (`python3 tools/x_archive_sync.py verify`) and commits. Add `--push` to publish: it first tags the old `main` as `rollback-pre-xsync-YYYYMMDD`.
+3. What it updates: `x/data` (posts, search, filters, downloads), the month pages under `x/archive/` and the month list, `sitemaps/x.xml`, `sitemaps/all-urls.txt`, `sitemap.xml`, and the post count and date range in `x/index.html`, the page footers and `assets/search/site-index.json`.
+4. Posts are kept exactly as posted, except Wikipedia links, which become plain "(ref: Topic)". Hand fixes in month pages (such as Wayback links) are carried over; if a page was changed in another way the script stops and says which page.
+5. To undo a sync: `git push -f origin rollback-pre-xsync-YYYYMMDD:main` (only after telling Duck).
+- Limits: X returns only the newest 3,200 posts of a timeline, so if the sync stops for weeks, use a new X data export instead. Like and repost counts are as of the night they were fetched. Posts deleted on X later stay in the archive.
 
 ## Rules from Duck
 - Show Duck a preview before publishing anything new.
