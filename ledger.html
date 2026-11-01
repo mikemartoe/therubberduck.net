@@ -734,7 +734,6 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
           <input id="arcQuery" type="search" placeholder="Search the Q drops: #number, date or phrase" autocomplete="off" aria-label="Search the ledger">
           <button class="arc-clear" id="arcClear" type="button" aria-label="Clear search"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M18 6L6 18M6 6l12 12"/></svg></button>
         </div>
-        <button class="ldock-opt" id="ldockOpt" type="button" aria-expanded="false" aria-controls="ldockMore"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M7 12h10M10 18h4"/></svg><span>Filters</span><i class="ldock-dot" aria-hidden="true"></i></button>
         <div class="ldock-more" id="ldockMore">
 <label for="arcSort" class="sr-only" style="position:absolute;left:-9999px">Sort</label>
         <select class="arc-sort" id="arcSort" aria-label="Sort the ledger">
@@ -2006,7 +2005,6 @@ w.querySelector('.trd-sup-x').addEventListener('click',function(){w.hidden=true}
 .ldock .chip{min-height:36px}
 .ldock .lx-delta{margin:0;gap:6px}
 .ldock .arc-sort{min-height:36px}
-.ldock-opt{display:none}
 section[id],details[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 14px)!important}
 .arc-row[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 12px)!important}
 .e3-hero-kinetic{padding-top:36px!important}
@@ -2022,39 +2020,29 @@ section[id],details[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 14px)!impor
   .ldock .arc-bar{flex-wrap:wrap;gap:8px}
   .ldock .arc-search{flex:1 1 0;min-width:0;min-height:44px}
   .ldock .arc-search input{font-size:16px!important}
-  .ldock-opt{display:inline-flex;align-items:center;gap:6px;flex:none;min-height:44px;padding:0 12px;border:1px solid var(--border);border-radius:4px;background:var(--surface-1);color:var(--accent-ink);font-family:var(--font-display);font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;position:relative}
-  .ldock-opt .icon{width:18px;height:18px}
-  .ldock.open .ldock-opt{border-color:var(--accent);color:var(--accent)}
-  .ldock-dot{display:none;position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
-  .ldock.filtered .ldock-dot{display:block}
-  .ldock-more{display:none;flex-basis:100%;flex-direction:column;align-items:stretch;gap:8px;padding:2px 0 2px}
-  .ldock.open .ldock-more{display:flex}
-  .ldock .arc-chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
-  .ldock .arc-chips .chip{padding:0 4px;min-height:44px}
-  .ldock .arc-sort{min-height:44px;width:100%}
-  .ldock .lx-delta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-  .ldock .lx-dlbl{grid-column:1/-1}
-  .ldock .lx-delta .chip{min-height:44px}
+  /* phones: no Filters toggle; sort + Deltas sit inline under a full-width search, in one compact 4-column grid */
+  .ldock .arc-search{flex:1 1 100%}
+  .ldock-more{display:grid;flex-basis:100%;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center;gap:6px;padding:0}
+  .ldock .lx-delta{display:contents}
+  .ldock .lx-dlbl{grid-column:1/3;grid-row:1;margin:0 0 0 2px;font-size:9.5px;letter-spacing:.14em;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ldock .arc-sort{grid-column:3/5;grid-row:1;width:100%;min-height:36px;height:36px;flex:none;padding-top:0;padding-bottom:0}
+  .ldock .lx-delta .chip{grid-row:2;grid-column:auto;min-height:44px;height:44px;padding:0 2px;font-size:10px;letter-spacing:.06em;line-height:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ldock .lx-delta .lx-dd{display:block;margin:2px 0 0}
   .e3-hero-kinetic{padding-top:22px!important}
 }
 </style>
 <script>
 (function(){
-  var d=document.getElementById('ldock'), b=document.getElementById('ldockOpt'); if(!d) return;
+  var d=document.getElementById('ldock'); if(!d) return;
   function h(){ document.documentElement.style.setProperty('--ldock-h',d.offsetHeight+'px'); }
   h(); addEventListener('resize',h); if(window.ResizeObserver) new ResizeObserver(h).observe(d);
-  if(b) b.addEventListener('click',function(){
-    var o=!d.classList.contains('open'); d.classList.toggle('open',o); b.setAttribute('aria-expanded',o?'true':'false');
-  });
   function mark(){
     var st=window.TRDLedgerUI&&window.TRDLedgerUI.state; if(!st) return;
     var res=st.res||{};
     d.classList.toggle('filtered', st.board!=='all'||st.sort!=='newest'||res.kind==='delta');
   }
-  /* phones: the Filters panel folds away once a choice is made, so the results are not hidden under it */
-  function fold(){ if(b && getComputedStyle(b).display!=='none' && d.classList.contains('open')){ d.classList.remove('open'); b.setAttribute('aria-expanded','false'); } }
-  d.addEventListener('click',function(e){ setTimeout(mark,0); if(e.target.closest('.ldock-more .chip')) setTimeout(fold,250); });
-  d.addEventListener('change',function(e){ setTimeout(mark,0); if(e.target.closest('.ldock-more')) setTimeout(fold,250); });
+  d.addEventListener('click',function(){ setTimeout(mark,0); });
+  d.addEventListener('change',function(){ setTimeout(mark,0); });
   var q=document.getElementById('arcQuery'), long=q&&q.getAttribute('placeholder');
   function ph(){ if(q) q.setAttribute('placeholder', innerWidth<760?'Search the Q drops':long); }
   ph(); addEventListener('resize',ph);
