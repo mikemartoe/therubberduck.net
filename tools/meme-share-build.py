@@ -8,6 +8,13 @@ Reads memes/data/memes.json and writes:
                           would be cropped badly in a 1.91:1 card (portrait, square,
                           very wide). Other memes use their own image on R2.
 
+v2 (2026-11-02, PREVIEW): EVERY meme now gets its own exactly-1200x630 card, memes/card2/<id>.jpg on R2
+(memes.therubberduck.net), the meme letterboxed on the Meme Dump brown with a 24 px safe margin. Before, memes whose
+shape was 1.3-2.4:1 linked their raw image (any size/shape, up to MBs); X, Facebook and iMessage then cover-cropped it
+into their fixed ~1.91:1 frame (top/bottom or sides lost) and had to fetch and resize a big file for the preview.
+Cards are written to .work/r2/memes/card2/ (gitignored) for the R2 upload; nothing is added to the GitHub repo.
+Gate: python3 tools/share-card-audit.py memes --pages . --img-map https://memes.therubberduck.net/=.work/r2/ --csv ...
+
 Run after tools/memes-intake.py:  python tools/meme-share-build.py
 Re-running is safe: unchanged cards are skipped and pages for removed memes are deleted.
 """
@@ -17,7 +24,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = 'https://therubberduck.net'
 MEDIA = 'https://memes.therubberduck.net/'
 SHARE_DIR = os.path.join(ROOT, 'memes', 'share')
-CARD_DIR = os.path.join(ROOT, 'memes', 'card')
+CARD_DIR = os.path.join(ROOT, '.work', 'r2', 'memes', 'card2')   # -> R2 memes/card2/
+CARD_URL = MEDIA + 'memes/card2/'
+SAFE_W, SAFE_H = 1152, 582        # meme area inside the card: >= 24 px from every edge (safe after a 2:1 crop)
+SRC_ROOTS = [ROOT, os.path.join(os.path.dirname(ROOT), 'trd-site')]   # memes/web/ is gitignored: use any checkout that has it
 CARD_W, CARD_H = 1200, 630
 OK_MIN, OK_MAX = 1.3, 2.4          # aspect ratios that crop acceptably in a large card
 MAX_BYTES = 5 * 1024 * 1024        # X card image limit
@@ -32,19 +42,46 @@ def media_url(p):
     return p if p.startswith('http') else MEDIA + p.lstrip('/')
 
 
-def make_card(src, dst):
+def _video_frame(video):
+    """brightest of ~32 frames spread over the clip (posters that are a black first frame give a blank card)"""
+    import subprocess, tempfile
+    from PIL import Image, ImageStat
+    try:
+        dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', video],
+                                   capture_output=True, text=True).stdout.strip() or 0)
+    except ValueError:
+        dur = 0
+    times = sorted({round(dur * k / 32, 2) for k in range(1, 32)} | {0.5, 1, 2, 3}) if dur else [0.5, 1, 2, 3, 5, 8]
+    best, best_m = None, -1
+    for t in times:
+        if dur and t >= dur: continue
+        with tempfile.NamedTemporaryFile(suffix='.jpg') as f:
+            r = subprocess.run(['ffmpeg', '-v', 'error', '-y', '-ss', str(t), '-i', video, '-frames:v', '1', f.name], capture_output=True)
+            if r.returncode or not os.path.getsize(f.name): continue
+            im = Image.open(f.name).convert('RGB'); im.load()
+            m = ImageStat.Stat(im.convert('L')).mean[0]
+            if m > best_m: best, best_m = im, m
+    return best if best is not None and best.convert('L').getextrema()[1] > 40 else None
+
+
+def make_card(src, dst, video=None):
     from PIL import Image
     im = Image.open(src)
     try:
         im.seek(0)
     except Exception:
         pass
+    if im.mode in ('RGBA', 'LA', 'P', 'PA'):          # transparent PNG/GIF: flatten on white (on the brown it went black)
+        im = im.convert('RGBA'); white = Image.new('RGBA', im.size, (255, 255, 255, 255))
+        im = Image.alpha_composite(white, im)
     im = im.convert('RGB')
+    if video and im.convert('L').getextrema()[1] <= 40:   # black poster frame -> use a visible frame of the clip
+        im = _video_frame(video) or im
     bg = Image.new('RGB', (CARD_W, CARD_H), (20, 14, 9))
-    s = min(CARD_W / im.width, CARD_H / im.height)
+    s = min(SAFE_W / im.width, SAFE_H / im.height)
     nw, nh = max(1, int(im.width * s)), max(1, int(im.height * s))
     bg.paste(im.resize((nw, nh), Image.LANCZOS), ((CARD_W - nw) // 2, (CARD_H - nh) // 2))
-    bg.save(dst, 'JPEG', quality=72, optimize=True, progressive=True)
+    bg.save(dst, 'JPEG', quality=82, optimize=True, progressive=True)
 
 
 def page(it, img, w, h, ctype):
@@ -102,30 +139,36 @@ def main():
         src = it.get('poster') if it.get('kind') == 'video' else it.get('file')
         if not src:
             warn.append(mid + ': no image or poster, using the site card')
-            out = page(it, SITE + '/images/brand/trd-share-2026.jpg', 1200, 630, 'image/jpeg')
+            dst = os.path.join(CARD_DIR, mid + '.jpg')
+            make_card(os.path.join(ROOT, 'images', 'brand', 'trd-share-2026.jpg'), dst)
+            new_man[mid] = 'site-card'; cards.add(mid + '.jpg')
+            out = page(it, CARD_URL + mid + '.jpg', 1200, 630, 'image/jpeg')
             open(os.path.join(SHARE_DIR, mid + '.html'), 'w', encoding='utf-8').write(out)
             pages.add(mid + '.html')
             continue
         w, h = it.get('width') or 0, it.get('height') or 0
         if it.get('kind') == 'video':
-            local = os.path.join(ROOT, src)
+            local = next((os.path.join(r, src) for r in SRC_ROOTS if os.path.exists(os.path.join(r, src))), os.path.join(ROOT, src))
             if os.path.exists(local):
                 from PIL import Image
                 w, h = Image.open(local).size
         ext = src.rsplit('.', 1)[-1].lower()
         ar = (w / h) if h else 0
         bytes_ = it.get('bytes') or 0 if it.get('kind') != 'video' else 0
-        need_card = not (OK_MIN <= ar <= OK_MAX) or ext not in CT or bytes_ > MAX_BYTES
-        local = os.path.join(ROOT, src)
+        need_card = True                 # v2: every meme gets an exact 1200x630 card (was: only outside OK_MIN..OK_MAX)
+        local = next((os.path.join(r, src) for r in SRC_ROOTS if os.path.exists(os.path.join(r, src))), os.path.join(ROOT, src))
         if need_card and os.path.exists(local):
             dst = os.path.join(CARD_DIR, mid + '.jpg')
-            key = it.get('sha256') or str(os.path.getmtime(local))
+            key = (it.get('sha256') or str(os.path.getmtime(local))) + ':v2b'
             if man.get(mid) != key or not os.path.exists(dst):
-                make_card(local, dst)
+                vid = None
+                if it.get('kind') == 'video':
+                    vid = next((os.path.join(r, it['file']) for r in SRC_ROOTS if it.get('file') and os.path.exists(os.path.join(r, it['file']))), None)
+                make_card(local, dst, vid)
                 made += 1
             new_man[mid] = key
             cards.add(mid + '.jpg')
-            img, w, h, ctype = '%s/memes/card/%s.jpg' % (SITE, mid), CARD_W, CARD_H, 'image/jpeg'
+            img, w, h, ctype = CARD_URL + mid + '.jpg', CARD_W, CARD_H, 'image/jpeg'
         else:
             if need_card:
                 warn.append(mid + ': no local file for a card, using the original')

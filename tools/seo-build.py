@@ -165,7 +165,12 @@ _V2 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v2.json')   # drops re-re
 DROP_V2 = json.load(open(_V2)) if os.path.exists(_V2) else {'prefix': 'v2/', 'drops': {}}
 _V3 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v3.json')   # no-board previews (Mike, 2026-10-30)
 DROP_V3 = json.load(open(_V3)) if os.path.exists(_V3) else {'prefix': 'v3/', 'drops': {}}
+_V4P = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'drop-cards', 'cards-v4.json')
+DROP_V4 = json.load(open(_V4P)) if os.path.exists(_V4P) else {'prefix': 'v4/', 'drops': {}}
+
+
 def drop_og(n):
+    if str(n) in DROP_V4['drops']: return 'https://memes.therubberduck.net/drops/v4/og/%d.jpg' % n   # fixed 1200x630 (2026-11-02)
     if str(n) in DROP_V3['drops']: return DROP_OG.replace('/drops/', '/drops/' + DROP_V3['prefix'], 1) % n
     return DROP_OG.replace('/drops/', '/drops/' + DROP_V2['prefix'], 1) % n if str(n) in DROP_V2['drops'] else DROP_OG % n
 

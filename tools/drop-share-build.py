@@ -11,6 +11,10 @@ Drops listed in tools/drop-cards/cards-v2.json (written by tools/drop-cards/card
 (new keys, so the immutable 1-year cache on the old keys does not matter); their og:image:height and long flag come from it.
 Only drops present in the manifest get a page, so a page never points at an image not yet uploaded.
 
+v4 (2026-11-02): drops in tools/drop-cards/cards-v4.json use R2 drops/v4/og/N.jpg, exactly 1200x630 (tools/drop-cards/fitcard.py,
+whole drop inside a safe margin), and the share page itself shows the full drop text and its attached images with an
+"Open in The Drop Ledger" link (utm query kept) instead of an instant redirect. Gate: tools/share-card-audit.py.
+
 Usage: python3 tools/drop-share-build.py [--manifest .work/drop-cards/manifest.json]
 """
 import html, json, os, sys
@@ -31,11 +35,28 @@ V2D = {int(k): v for k, v in V2['drops'].items()}
 _V3 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v3.json')   # no-board previews (Mike, 2026-10-30): drops/v3/og2/N.jpg
 V3 = json.load(open(_V3)) if os.path.exists(_V3) else {'prefix': 'v3/', 'drops': {}}
 V3D = {int(k): v for k, v in V3['drops'].items()}
+_V4 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v4.json')   # fixed 1200x630 previews (2026-11-02, PREVIEW): drops/v4/og/N.jpg
+V4 = json.load(open(_V4)) if os.path.exists(_V4) else {'prefix': 'v4/', 'drops': {}}
+V4D = {int(k): v for k, v in V4['drops'].items()}
+_IMG = os.path.join(ROOT, 'data', 'drop-images.js')               # the drop's real attached images on R2 (drops/img/)
+if os.path.exists(_IMG):
+    _t = open(_IMG, encoding='utf-8').read(); _t = _t[_t.index('{'):_t.rstrip().rstrip(';').rindex('}') + 1]
+    _t = __import__('re').sub(r'([{,])([A-Za-z_]\w*|\d+):', r'\1"\2":', _t)
+    _J = json.loads(_t); IMG_BASE, IMGS = _J['base'], {int(k): v for k, v in _J['d'].items()}
+else:
+    IMG_BASE, IMGS = '', {}
+GOAT = '<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
 esc = lambda s: html.escape(s or '', quote=True)
 
 
 def tease(n, dt, site, board):
     return 'Q drop #%d \u00b7 %s' % (n, dt.strftime('%B %-d, %Y'))   # no board credit (Mike, 2026-10-30)
+
+
+def figs(n):
+    """the drop's attached images, full size (R2 drops/img/, WebP max 1200 wide), in post order"""
+    return ''.join('<figure><img src="%s" width="%d" height="%d" alt="Image %d attached to Q drop #%d" loading="lazy"></figure>'
+                   % (esc(IMG_BASE + im['src']), im['w'], im['h'], i + 1, n) for i, im in enumerate(IMGS.get(n, [])))
 
 
 def page(d):
@@ -44,7 +65,7 @@ def page(d):
     when = dt.strftime('%B %-d, %Y')
     title = 'Q Drop #%d, %s | The Drop Ledger | The Rubber Duck\u2122' % (n, when)
     desc = tease(n, dt, site, board)   # tease only (Mike, 2026-10-25): no drop text in previews
-    img = MEDIA + (V3['prefix'] if n in V3D else V2['prefix'] if n in V2D else '') + '%s/%d.jpg' % (OG_DIR, n)
+    img = MEDIA + V4['prefix'] + 'og/%d.jpg' % n if n in V4D else MEDIA + (V3['prefix'] if n in V3D else V2['prefix'] if n in V2D else '') + '%s/%d.jpg' % (OG_DIR, n)
     alt = 'Q drop #%d as originally posted, %s' % (n, when)   # no board credit (Mike, 2026-10-30)
     dest = '/ledger.html#drop-%d' % n
     return '''<!doctype html>
@@ -72,12 +93,24 @@ def page(d):
 <meta name="twitter:image" content="{i}">
 <meta name="twitter:image:alt" content="{a}">
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any">
-<meta http-equiv="refresh" content="0; url={dest}">
-<script>location.replace("/ledger.html"+location.search+"#drop-{n}");</script>
-<style>body{{margin:0;background:#040705;color:#C8F5D2;font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}}a{{color:#00FF41}}</style>
-</head><body><p>Opening Q drop #{n} in <a href="{dest}">The Drop Ledger</a>.</p></body></html>
-'''.format(t=esc(title), d=esc(desc), u=esc('%s/drops/share/%d.html' % (SITE, n)), canon=esc('%s/drops/%d/' % (SITE, n)),
-           i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=V3D[n]['og2_h'] if n in V3D else V2D[n]['og2_h'] if n in V2D else OG_H.get(n, 630))
+<style>body{{margin:0;background:#040705;color:#C8F5D2;font:16px/1.5 system-ui,sans-serif}}a{{color:#00FF41}}
+main{{max-width:760px;margin:0 auto;padding:18px 16px 40px}}h1{{font-size:20px;margin:0 0 12px;color:#00FF41}}
+.post{{background:#0b120d;border:1px solid #1d3a24;border-radius:10px;padding:14px 16px}}
+.txt{{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.55 ui-monospace,Menlo,Consolas,monospace;margin:0}}
+figure{{margin:14px 0 0}}figure img{{display:block;width:auto;max-width:100%;height:auto;border-radius:6px;background:#111}}
+.go{{display:inline-block;margin-top:18px;padding:10px 16px;border:1px solid #00FF41;border-radius:8px;text-decoration:none;font-weight:600}}
+.ft{{margin-top:22px;font-size:13px;opacity:.75}}</style>
+{goat}
+</head><body><main>
+<h1>Q drop #{n} &middot; {when}</h1>
+<article class="post"><pre class="txt">{body}</pre>{figs}</article>
+<a class="go" id="go" href="{dest}">Open in The Drop Ledger &rarr;</a>
+<p class="ft"><a href="/">The Rubber Duck&trade;</a> &middot; therubberduck.net</p>
+</main>
+<script>document.getElementById("go").href="/ledger.html"+location.search+"#drop-{n}";</script>
+</body></html>
+'''.format(goat=GOAT, when=esc(when), body=esc(text), figs=figs(n), t=esc(title), d=esc(desc), u=esc('%s/drops/share/%d.html' % (SITE, n)), canon=esc('%s/drops/%d/' % (SITE, n)),
+           i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=630 if n in V4D else V3D[n]['og2_h'] if n in V3D else V2D[n]['og2_h'] if n in V2D else OG_H.get(n, 630))
 
 
 def drop_cards_js(ns, man):
