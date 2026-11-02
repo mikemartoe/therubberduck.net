@@ -32,6 +32,16 @@ TODAY = S.TODAY
 LEDGER_DELTA = '/ledger.html?delta=today'
 DX_CSS = '<link rel="stylesheet" href="/assets/seo/dx.css?v=1">\n'
 RE_CSS = re.compile(r'<link rel="stylesheet" href="/assets/seo/dx\.css[^"]*">\n')
+# Web app (Mike, 2026-11-01): in the installed app (display-mode: standalone) these pages get an app bar with Back,
+# app home and the app menu instead of the website header (assets/trd/appbar.js does nothing in a browser tab).
+APPBAR = '<script src="/assets/trd/appbar.js?v=20261101a"></script>\n'
+RE_APPBAR = re.compile(r'<script src="/assets/trd/appbar\.js[^"]*"></script>\n')
+# Date pages are shareable like the Ledger drops and the Meme Dump (assets/trd/share.js): a "Share this date" bar
+# (preview card images/deltas/og/MM-DD.png, made by tools/deltas-cards.py) and the Ledger's compact row under every drop.
+SHARE_CSS = ('<link rel="stylesheet" href="/assets/trd/share.css?v=20261030c">\n'
+             '<link rel="stylesheet" href="/assets/seo/dx-share.css?v=1">\n')
+SHARE_JS = '<script src="/assets/trd/share.js?v=20261030c"></script><script src="/assets/seo/dx-share.js?v=1"></script>'
+DX_CARD = '/images/deltas/og/%s.png'
 IMG_BASE = 'https://memes.therubberduck.net/drops/img/'
 MISSING_IMAGES = set()   # keys listed in data/drop-images.js but not on R2 (404); 1001_1 uploaded 2026-10-30
 
@@ -164,7 +174,7 @@ def build_proof_pages():
                             'author': {'@type': 'Person', 'name': 'Donald J. Trump', 'url': 'https://x.com/realDonaldTrump'}} for t in tws]}]
         og = 'https://memes.therubberduck.net/drops/v3/og2/%d.jpg' % drops[0]['n']
         S.write('q-proofs/%s/index.html' % p['slug'], page(url, seo_title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Q Proofs', '/q-proofs/'), (p['title'], url)],
-                                                         og_image=og, og_type='article', extra_head=og_size('Q drop #%d. The Rubber Duck.' % drops[0]['n']) + DX_CSS + QP_CSS + PWA_HEAD))
+                                                         og_image=og, og_type='article', extra_head=og_size('Q drop #%d. The Rubber Duck.' % drops[0]['n']) + DX_CSS + QP_CSS + PWA_HEAD + APPBAR))
     return len(PROOFS)
 
 def proofs_index_html():
@@ -204,6 +214,12 @@ def drop_row(d):
     return ('<li><a href="/drops/%d/">Q drop #%d</a> <span class="n"><time datetime="%s">%s</time>%s</span><span class="dx-q">%s</span></li>'
             % (d['n'], d['n'], d['dt'].isoformat(), d['dt'].strftime('%-I:%M %p ET'), extra, E(ex)))
 
+def share_bar(k, name, count):
+    url = SITE + '/deltas/%s/' % k
+    return ('<section class="dx-share" aria-label="Share this date" hidden><p class="dx-share-h">Share this date <small>The link shows this date&rsquo;s preview card</small></p>'
+            '<div class="dx-share-row" data-share-id="%s" data-share-page="%s" data-share-card="%s" data-share-label="Share Q drop deltas for %s" data-share-text="%s"></div></section>'
+            % (k, url, SITE + DX_CARD % k, E(name), E('Q Drop Deltas for %s \u00b7 %d drop%s posted on this date' % (name, count, '' if count == 1 else 's'))))
+
 # ---------------------------------------------------------------- 1. day pages
 def build_days():
     for i, k in enumerate(DAYS):
@@ -225,13 +241,15 @@ def build_days():
         body = ('<h1>Q Drop Deltas for %s</h1>' % name +
                 '<p class="lede">%d drop%s posted on %s, %s. A delta is a drop&rsquo;s anniversary: read what was posted on this date in past years and see how it reads today. '
                 'To see today&rsquo;s deltas as they happen, open <a href="%s">Deltas in The Drop Ledger</a>.</p>' % (len(ds), '' if len(ds) == 1 else 's', name, yspan, LEDGER_DELTA) +
+                share_bar(k, name, len(ds)) +
                 '<p class="dx-jump">Jump to %s</p>' % jump + pn + groups + xs +
-                '<p class="dx-more">When a past drop proves true on its anniversary, it is a delta proof. See <a href="/q-proofs/">Q Proofs</a> for drops confirmed by President Trump.</p>' + pn)
+                '<p class="dx-more">When a past drop proves true on its anniversary, it is a delta proof. See <a href="/q-proofs/">Q Proofs</a> for drops confirmed by President Trump.</p>' + pn + SHARE_JS)
         items = [{'@type': 'ListItem', 'position': j + 1, 'url': SITE + '/drops/%d/' % d['n'], 'name': 'Q drop #%d, %s' % (d['n'], d['dt'].strftime('%B %-d, %Y'))} for j, d in enumerate(ds)]
         g = [{'@type': 'CollectionPage', '@id': SITE + '/deltas/%s/#c' % k, 'name': title, 'url': SITE + '/deltas/%s/' % k, 'isPartOf': {'@id': SITE + '/deltas/#hub'},
               'about': 'Q drops posted on %s' % name, 'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(ds), 'itemListElement': items}}]
         S.write('deltas/%s/index.html' % k, page('/deltas/%s/' % k, title, desc, body, g,
-                [('Home', '/'), ('Q Drops', '/drops/'), ('Deltas', '/deltas/'), (name, '/deltas/%s/' % k)], og_desc='Q drop deltas for %s: %d drops posted on this date.' % (name, len(ds)), extra_head=DX_CSS))
+                [('Home', '/'), ('Q Drops', '/drops/'), ('Deltas', '/deltas/'), (name, '/deltas/%s/' % k)], og_desc='Q drop deltas for %s: %d drops posted on this date.' % (name, len(ds)),
+                og_image=SITE + DX_CARD % k, extra_head=og_size('Q drop deltas for %s: %d drop%s posted on this date. The Rubber Duck.' % (name, len(ds), '' if len(ds) == 1 else 's')) + DX_CSS + SHARE_CSS + APPBAR))
         SM.append(('/deltas/%s/' % k, LM))
     return len(DAYS)
 
@@ -269,7 +287,7 @@ def build_hub():
           'hasPart': [{'@type': 'CollectionPage', 'url': SITE + '/deltas/%s/' % k, 'name': 'Q drop deltas for %s' % mmdd_name(k)} for k in DAYS]}]
     S.write('deltas/index.html', page('/deltas/', title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Deltas', '/deltas/')],
                                      og_image=SITE + '/images/brand/social-deltas-20261030.png',
-                                     extra_head=og_size('Deltas: Q drop anniversaries, year by year. The Rubber Duck.') + DX_CSS + PWA_HEAD))
+                                     extra_head=og_size('Deltas: Q drop anniversaries, year by year. The Rubber Duck.') + DX_CSS + PWA_HEAD + APPBAR))
     SM.insert(0, ('/deltas/', TODAY))
 
 # ---------------------------------------------------------------- 3. q proofs
@@ -300,7 +318,7 @@ def build_proofs():
           'mainEntity': {'@type': 'ItemList', 'name': 'Q drops signed Q+', 'numberOfItems': len(QPLUS), 'itemListElement': items}}]
     S.write('q-proofs/index.html', page('/q-proofs/', title, desc, body, g, [('Home', '/'), ('Q Drops', '/drops/'), ('Q Proofs', '/q-proofs/')],
                                       og_image=SITE + '/images/brand/social-q-proofs-20261030.png',
-                                      extra_head=og_size('Q Proofs: explore the drops and public record. The Rubber Duck.') + DX_CSS + QP_CSS + PWA_HEAD))
+                                      extra_head=og_size('Q Proofs: explore the drops and public record. The Rubber Duck.') + DX_CSS + QP_CSS + PWA_HEAD + APPBAR))
     SM.insert(1, ('/q-proofs/', TODAY))
 
 def drop_row_full(d):
@@ -332,7 +350,8 @@ def patch_drops():
         n = d['n']; f = 'drops/%d/index.html' % n
         if not os.path.exists(f): continue
         h0 = open(f, encoding='utf-8').read()
-        h = RE_FIG.sub('', h0); h = RE_XL.sub('', h); h = RE_CSS.sub('', h)
+        h = RE_FIG.sub('', h0); h = RE_XL.sub('', h); h = RE_CSS.sub('', h); h = RE_APPBAR.sub('', h)
+        h = h.replace('<link rel="stylesheet" href="%s">\n' % S.CSS_HREF, '<link rel="stylesheet" href="%s">\n' % S.CSS_HREF + APPBAR, 1)
         imgs = images_for(n)
         if imgs:
             with_img += 1; nimg += len(imgs)
@@ -375,8 +394,8 @@ def patch_drops():
 # ---------------------------------------------------------------- 5. /drops/ index line
 def patch_index():
     f = 'drops/index.html'; h0 = open(f, encoding='utf-8').read()
-    h = re.sub(r'<!-- seo-dx:begin -->.*?<!-- seo-dx:end -->', '', h0, flags=re.S); h = RE_CSS.sub('', h)
-    h = h.replace('<link rel="stylesheet" href="%s">\n' % S.CSS_HREF, '<link rel="stylesheet" href="%s">\n' % S.CSS_HREF + DX_CSS, 1)
+    h = re.sub(r'<!-- seo-dx:begin -->.*?<!-- seo-dx:end -->', '', h0, flags=re.S); h = RE_CSS.sub('', h); h = RE_APPBAR.sub('', h)
+    h = h.replace('<link rel="stylesheet" href="%s">\n' % S.CSS_HREF, '<link rel="stylesheet" href="%s">\n' % S.CSS_HREF + DX_CSS + APPBAR, 1)
     line = ('<!-- seo-dx:begin --><p class="dx-more">Read the drops by calendar date in <a href="/deltas/">Q Drop Deltas</a>, every drop posted on each day of the year, '
             'and see the drops confirmed by President Trump in <a href="/q-proofs/">Q Proofs</a>.</p><!-- seo-dx:end -->')
     h = h.replace('</p><ul class="months">', '</p>' + line + '<ul class="months">', 1)

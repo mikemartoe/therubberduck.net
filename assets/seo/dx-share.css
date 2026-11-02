@@ -1,0 +1,11 @@
+/* Deltas date pages: share bar + per-drop share rows (assets/seo/dx-share.js + assets/trd/share.js).
+   share.css takes its colours from these variables; here they are the archive pages' own colours. */
+.dx-share,.dx-list .shr{--border:var(--line);--text:var(--ink);--muted:var(--muted);--accent:var(--gold);--accent-ink:var(--gold);--surface-1:var(--bg);--surface-2:var(--panel)}
+.dx-share{margin:18px 0 6px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.dx-share[hidden]{display:none}
+.dx-share-h{margin:0 0 10px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;font-weight:800;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.dx-share-h small{font-weight:400;font-size:13px;letter-spacing:0;text-transform:none;color:var(--muted)}
+.dx-share .shr-btns{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:auto}
+.dx-share .shr-b{min-height:56px}
+@media(max-width:640px){.dx-share{padding:12px}.dx-share .shr-btns{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.dx-list .shr.shr-compact{margin-top:8px}
