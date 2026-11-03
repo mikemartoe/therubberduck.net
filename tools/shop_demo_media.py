@@ -38,6 +38,10 @@ DEMO_MEDIA = {
     'signed-dad-hat': ('Dad hat', _FRONT, [c[0] for c in COLORS]),
     'signed-trucker-hat': ('Trucker hat', _FRONT, [c[0] for c in COLORS]),
 }
+# Mike's standing rule (Oct 31 2026): the default/first color is White, never Black. These listings keep their current default for now
+# because White is a SPECIAL-ORDER color there (tools/umbrella_lineup.py); making it the default would open the page on the special-order
+# notice and the special-order Stripe link. Mike decides; see trd-logs/white-default-preview-2026-11-03.md.
+WHITE_DEFAULT_HOLD = set()   # truckers: White is a regular, default color since Nov 3 2026
 MEDIA_SLUG = {'signed-dad-hat': 'duck-dad-hat', 'signed-trucker-hat': 'duck-trucker-hat'}
 
 # The small signed-brim preview (a real signed hat, No. 11 of 500) on the signed hat listings: a secondary tile, never the main photo.
@@ -103,6 +107,9 @@ def demo_block(slug):
     posters = entry[3] if len(entry) > 3 else {}
     lab = (U.TRUCKER.get(slug) or {}).get('demo_label', {})   # e.g. the trucker's black demo IS the Black / White hat
     cols = [(k, lab.get(k, l), sw) for k, l, sw in COLORS if k in keys]
+    # White first and preselected (Mike, Oct 31 2026), except where White is a special-order color on the listing (WHITE_DEFAULT_HOLD)
+    if slug not in WHITE_DEFAULT_HOLD:
+        cols = [c for c in cols if c[0] == 'white'] + [c for c in cols if c[0] != 'white']
     names = [c[1] for c in cols]
     names_txt = ', '.join(names[:-1]) + ' and ' + names[-1] if len(names) > 1 else names[0]
     tabs = ''.join('<button type="button" role="tab" class="dm-t" data-c="%s" data-l="%s"%s aria-selected="%s" style="--sw:%s"><i></i>%s</button>'
@@ -150,9 +157,10 @@ def demo_block(slug):
 # Shown as the listing's main photo, full width above the facts; the frame has the photo's own aspect ratio, so nothing is cropped or letterboxed.
 # Signed Duck Tee (Oct 26 2026, branch shirts-audit): same print front + back, so it reuses the same approved mock files; the caption says the
 # signature is added by hand (the mock shows the print only). The colors you can order are still the ones in merch.html.
+# White first and preselected (Mike's standing rule, Oct 31 2026: the default color is White, never Black; his avatar is the duck on white).
 GALLERY_COLORS = [
-    ('black', 'Black', '#141414'),
     ('white', 'White', '#f3f2ee'),
+    ('black', 'Black', '#141414'),
     ('navy', 'Navy', '#1f2a44'),
     ('gold', 'Gold', '#d9a50a'),
     ('tiffany', 'Tiffany Blue', '#81d8d0'),
