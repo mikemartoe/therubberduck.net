@@ -657,6 +657,105 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://therubberduck.net/#org","name":"The Rubber Duck","alternateName":["TRD","The Rubber Duck™","TRD Collectibles"],"url":"https://therubberduck.net/","logo":{"@type":"ImageObject","url":"https://therubberduck.net/favicon-192.png","width":192,"height":192},"image":"https://therubberduck.net/images/brand/trd-share-2026.jpg","description":"An open archive of Trump and Q-era research: every Q drop, videos, X Spaces, PDFs, memes and the X archive, plus TRD Collectibles and the book anon mission.","sameAs":["https://x.com/TheRubberDuck79","https://x.com/TheRubberDuck78","https://rumble.com/user/TheRubberDuck78","https://rubberduck41.gumroad.com/","https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4","https://music.apple.com/us/album/the-red-pill-album/1896233683"]},{"@type":"WebSite","@id":"https://therubberduck.net/#website","url":"https://therubberduck.net/","name":"The Rubber Duck","alternateName":["TRD","therubberduck.net"],"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage":"en","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://therubberduck.net/ledger.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"CollectionPage","@id":"https://therubberduck.net/ledger.html#page","url":"https://therubberduck.net/ledger.html","name":"The Drop Ledger: Every Q Drop, In Order | The Rubber Duck™","description":"Every numbered Q drop, #1 to #4,966, in order as originally posted. Search by number, date or phrase, with a way back to each original source.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage":"en","breadcrumb":{"@id":"https://therubberduck.net/ledger.html#crumbs"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"},{"@type":"ListItem","position":2,"name":"The Drop Ledger","item":"https://therubberduck.net/ledger.html"}],"@id":"https://therubberduck.net/ledger.html#crumbs"},{"@type":"Dataset","name":"The Drop Ledger: every numbered Q drop, #1 to #4,966","description":"Every numbered Q drop from October 2017 to November 2022, in order, with dates and full text.","url":"https://therubberduck.net/drops/","creator":{"@id":"https://therubberduck.net/#org"},"isAccessibleForFree":true,"temporalCoverage":"2017-10-28/2022-11-27","distribution":{"@type":"DataDownload","encodingFormat":"application/javascript","contentUrl":"https://therubberduck.net/data/drops.js"}}]}</script>
 <!-- seo:end -->
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261030a" defer data-trd-keep></script>
+<style id="lrail-css">
+/* Desktop only (>=1100px), Mike-approved v2 layout (2026-11-03). Phones and tablets (<1100px) never match these rules.
+   1) Each drop: number and date as a header line on top ("#4961 • 8 Nov 2022"), the text uses the full column width,
+      the source links sit between the text and the share row. Pure CSS, so it holds even if scripts fail.
+   2) html.lrail (set by the small script inside #archive, only while the viewport is >=1100px): the room intro that sat
+      between the search bar and the first drop (hero, "How would you like to start?", newcomer panel, New to Q? Start here,
+      full-res image cards, ledger heading + stats, drop calendar, manifesto) lives in a sticky right column (#lrail, 360px)
+      that scrolls on its own; the left column is the endless list of full drops. Nothing is removed. */
+@media (min-width:1100px){
+  .arc-row{grid-template-columns:auto minmax(0,1fr)!important;column-gap:16px!important;row-gap:12px!important;align-items:baseline!important;padding:22px 14px 24px!important;margin:0 -14px!important}
+  .arc-row .n{grid-column:1;grid-row:1;line-height:1!important}
+  .arc-row .d{grid-column:2;grid-row:1;justify-self:start;position:relative;padding-left:16px}
+  .arc-row .d::before{content:"";position:absolute;left:0;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:var(--muted);opacity:.7}
+  .arc-row .e{grid-column:1 / -1!important;grid-row:2!important;min-width:0}
+  .arc-row .e .ex{max-width:none!important}
+  .arc-row .srcrow{margin-top:16px;gap:6px!important}
+  .arc-row .srcrow .src{padding:7px 9px!important;letter-spacing:0!important;gap:7px!important}
+  .arc-row .srcrow .src .src-host{font-size:11px!important}
+
+  html.lrail .arc-wrap{padding:0 clamp(14px,3vw,24px);box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) 360px;column-gap:24px;align-items:start}
+  html.lrail .arc-wrap > *:not(#lrail){grid-column:1}
+  html.lrail #archive{padding-top:20px!important}
+  html.lrail #lrail{grid-column:2;grid-row:1 / span 40;position:sticky;top:calc(var(--ldock-h,104px) + 16px);max-height:calc(100vh - var(--ldock-h,104px) - 32px);overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin;scrollbar-color:#1f5a2c transparent}
+  html.lrail #lrail > *{margin:0!important;max-width:none!important;width:auto!important;border:1px solid var(--border);border-radius:6px;background:var(--surface-1,#0b120d);padding:16px 18px!important;box-sizing:border-box;flex:none}
+  html.lrail #arcTop{margin-top:0!important}
+  /* hero -> compact card (decorative photo, scrim, ring and scroll cue are not drawn in the column; text, record card and button stay) */
+  html.lrail #lrail .e3-hero-kinetic{min-height:0!important;padding:16px 18px!important;overflow:visible}
+  html.lrail #lrail .e3-hero-kinetic .k-media,html.lrail #lrail .e3-hero-kinetic .k-scrim,html.lrail #lrail .e3-hero-kinetic .k-cue,html.lrail #lrail .e3-hero-kinetic .k-ring{display:none!important}
+  html.lrail #lrail .e3-hero-kinetic .k-wrap{width:auto!important;padding:0!important;display:block!important;margin:0!important}
+  html.lrail #lrail .e3-hero-kinetic .k-eyebrow{font-size:10px!important;margin:0 0 10px!important;letter-spacing:.08em!important;white-space:nowrap}
+  html.lrail #lrail .e3-hero-kinetic h1{font-size:34px!important;line-height:1.02!important;margin:0 0 10px!important;max-width:none!important}
+  html.lrail #lrail .e3-hero-kinetic .k-copy{font-size:14px!important;margin:0 0 12px!important;max-width:none!important}
+  html.lrail #lrail .e3-hero-kinetic .k-ctas{margin:0 0 12px!important;gap:8px!important}
+  html.lrail #lrail .e3-hero-kinetic .k-btn{min-height:34px!important;padding:0 16px!important;font-size:13px!important}
+  html.lrail #lrail .e3-hero-kinetic .k-side{display:block!important;min-height:0!important;position:static!important;margin-top:4px}
+  html.lrail #lrail .e3-hero-kinetic .k-card{position:static!important;min-width:0!important;padding:8px 12px!important;transform:none!important;display:flex!important;align-items:baseline;justify-content:space-between;gap:12px;border-radius:4px!important}
+  html.lrail #lrail .e3-hero-kinetic .k-card small{font-size:9px!important;margin:0 0 2px!important}
+  html.lrail #lrail .e3-hero-kinetic .k-card b{font-size:18px!important}
+  /* start options + newcomer panel */
+  html.lrail #lrail #lxPath{padding:14px 16px!important}
+  html.lrail #lrail .lx-path-ask{padding:0!important;border:0!important;margin:0!important;background:none!important}
+  html.lrail #lrail .lx-path-ask h3{font-size:16px!important;margin:0 0 4px!important;text-align:left!important}
+  html.lrail #lrail .lx-path-sub{font-size:12.5px!important;margin:0 0 10px!important;text-align:left!important}
+  html.lrail #lrail .lx-path-opts{grid-template-columns:1fr 1fr!important;gap:8px!important;display:grid!important}
+  html.lrail #lrail .lx-path-opt{padding:10px!important;margin:0!important}
+  html.lrail #lrail .lx-path-opt b{font-size:13.5px!important}
+  html.lrail #lrail .lx-path-opt span{font-size:12px!important;line-height:1.4!important}
+  html.lrail #lrail .lx-path-opt small{font-size:9.5px!important;letter-spacing:.06em!important;white-space:nowrap}
+  html.lrail #lrail .lx-path-bar{flex-wrap:wrap;gap:8px}
+  html.lrail #lrail #lxStart{padding:14px 16px!important}
+  html.lrail #lrail .lx-grid{grid-template-columns:1fr 1fr!important;display:grid!important;gap:6px!important}
+  html.lrail #lrail .lx-intro{font-size:13px!important}
+  html.lrail #lrail .lx-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  html.lrail #lrail .lx-cards li:last-child{grid-column:span 2}
+  html.lrail #lrail .lx-panel{max-width:100%;overflow-wrap:anywhere}
+  /* New to Q? Start here */
+  html.lrail #lrail #start-here{padding:0!important;background:none;border:0}
+  html.lrail #lrail #start-here .front-wrap{padding:0!important;max-width:none!important;margin:0!important;width:auto!important}
+  html.lrail #lrail #start-here .front-card{margin:0!important}
+  html.lrail #lrail #start-here .front-grid{display:block!important}
+  html.lrail #lrail #start-here *{font-size:13px}
+  html.lrail #lrail #start-here .front-title{font-size:15px!important}
+  /* full-resolution image cards */
+  html.lrail #lrail #hires .hx-row{grid-template-columns:1fr!important;display:grid!important;gap:8px!important;max-width:none!important}
+  html.lrail #lrail #hires .hx-k{margin:0 0 10px!important;text-align:left!important}
+  html.lrail #lrail #hires .hx-card{padding:8px!important;gap:12px!important}
+  html.lrail #lrail #hires .hx-th{width:64px!important;height:64px!important;flex:none}
+  html.lrail #lrail #hires .hx-th img{width:64px!important;height:64px!important;object-fit:cover}
+  html.lrail #lrail #hires .hx-card b,html.lrail #lrail #hires .hx-card strong,html.lrail #lrail #hires .hx-n{font-size:16px!important}
+  /* ledger heading + stats */
+  html.lrail #lrail .arc-head{padding:16px 18px!important}
+  html.lrail #lrail .arc-title{font-size:30px!important;margin:6px 0 8px!important}
+  html.lrail #lrail .arc-lede{font-size:13px!important;margin:0 0 10px!important}
+  html.lrail #lrail .arc-figure{display:grid!important;grid-template-columns:repeat(3,1fr)!important;margin:0 0 10px!important;padding:8px 0!important;gap:10px!important}
+  html.lrail #lrail .arc-figure dt{font-size:9px!important;white-space:nowrap}
+  html.lrail #lrail .arc-figure dd{font-size:17px!important;white-space:nowrap}
+  html.lrail #lrail .arc-note{font-size:12px!important;max-width:none!important;margin:0 0 8px!important}
+  /* drop calendar: stacked by year so the whole run fits the column (the wide strip stays the layout below 1100px) */
+  html.lrail #lrail #calendar{padding:14px!important;overflow:hidden}
+  html.lrail #lrail #calendar header{margin-bottom:10px!important}
+  html.lrail #lrail #calendar h3{font-size:15px!important}
+  html.lrail #lrail #calendar .scroll{display:none!important}
+  html.lrail #lrail #calendar .ycal{display:block}
+  /* manifesto */
+  html.lrail #lrail #manifesto{padding:16px 18px!important}
+  html.lrail #lrail #manifesto .k-wrap{display:block!important;width:auto!important;padding:0!important;margin:0!important;max-width:none!important}
+  html.lrail #lrail #manifesto *{font-size:13px;line-height:1.35}
+  html.lrail #lrail #manifesto [class*="k-"]{max-width:none!important}
+  html.lrail #lrail #manifesto blockquote,html.lrail #lrail #manifesto p{font-size:17px!important;line-height:1.3!important}
+}
+.e3-contrib-heatmap .ycal{display:none}
+.e3-contrib-heatmap .ycal .yr{margin:0 0 9px}
+.e3-contrib-heatmap .ycal .yh{display:flex;justify-content:space-between;font:600 11px/1.2 var(--font-display,monospace);color:var(--_t);margin:0 0 4px}
+.e3-contrib-heatmap .ycal .yh small{font-weight:400;color:var(--_m);font-size:10.5px}
+.e3-contrib-heatmap .ycal .ym{display:grid;grid-auto-flow:column;grid-auto-columns:var(--yc,5px);gap:1px;height:11px;font-size:8.5px;line-height:11px;color:var(--_m);white-space:nowrap;overflow:visible;margin:0 0 2px}
+.e3-contrib-heatmap .ycal .yg{display:grid;grid-template-rows:repeat(7,var(--yc,5px));grid-auto-flow:column;grid-auto-columns:var(--yc,5px);gap:1px}
+.e3-contrib-heatmap .ycal .yg .d{width:var(--yc,5px);height:var(--yc,5px);border-radius:1px;cursor:pointer}
+.e3-contrib-heatmap .ycal .yg .d.pad{visibility:hidden;cursor:default}
+</style>
 </head>
 <body>
 <header class="banner">
@@ -1098,6 +1197,63 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         <p class="arc-count" id="arcCountTop">4,966 records held</p>
         <button type="button" class="arc-endless" id="arcEndless" role="switch" aria-checked="false" title="Load more drops automatically as you scroll"><span class="sw" aria-hidden="true"></span>Endless scroll</button>
       </div>
+      <script id="lrail-js">
+      /* Desktop only (>=1100px, Mike-approved v2 layout, 2026-11-03): move the room intro into a sticky right column
+         (#lrail) inside the ledger grid, before the first drop is drawn. Each block keeps a placeholder at its home, so
+         below 1100px (phones, tablets, or a narrowed window) every block goes back exactly where it was. Nothing is removed. */
+      (function(){
+        if(!window.matchMedia) return;
+        var d=document, de=d.documentElement, MQ=matchMedia('(min-width:1100px)'), wrap=d.querySelector('#archive .arc-wrap');
+        if(!wrap) return;
+        var ids=['.e3-hero-kinetic','#lxPath','#lxStart','#start-here','#hires','#archive .arc-head','#calendar','#manifesto'];
+        var nodes=ids.map(function(s){ return d.querySelector(s); }).filter(Boolean), marks=[], rail=null;
+        function ycal(){
+          var cal=d.getElementById('calendar'); if(!cal || cal.querySelector('.ycal')) return;
+          var cells=[].slice.call(cal.querySelectorAll('.k-grid .d[data-arc-date]')); if(!cells.length) return;
+          var box=d.createElement('div'); box.className='ycal'; var by={}, ys=[];
+          cells.forEach(function(c){ var y=c.getAttribute('data-arc-date').slice(0,4); if(!by[y]){ by[y]=[]; ys.push(y); } by[y].push(c); });
+          var daily=(window.QSTATS&&window.QSTATS.daily)||{}, MS=86400000;
+          ys.forEach(function(y){
+            var list=by[y], j1=new Date(+y,0,1), first=list[0].getAttribute('data-arc-date').split('-');
+            var f=new Date(+first[0],+first[1]-1,+first[2]), pad=j1.getDay()+Math.round((f-j1)/MS), drops=0, days=0;
+            list.forEach(function(c){ var n=daily[c.getAttribute('data-arc-date')]||0; drops+=n; if(n) days++; });
+            var g='', m='';
+            for(var i=0;i<pad;i++) g+='<span class="d pad" aria-hidden="true"></span>';
+            g+=list.map(function(c){ return c.outerHTML.replace(/ style="[^"]*"/,''); }).join('');
+            var lab=[]; for(var mo=0;mo<12;mo++){ var md=new Date(+y,mo,1); lab[Math.floor((j1.getDay()+Math.round((md-j1)/MS))/7)]=md.toLocaleString(undefined,{month:'short'}); }
+            for(var k=0;k<54;k++) m+='<span>'+(lab[k]||'')+'</span>';
+            box.insertAdjacentHTML('beforeend','<div class="yr"><div class="yh">'+y+'<small>'+drops.toLocaleString()+' drops · '+days+' days</small></div><div class="ym" aria-hidden="true">'+m+'</div><div class="yg">'+g+'</div></div>');
+          });
+          box.addEventListener('click',function(e){
+            var c=e.target.closest('.d[data-arc-date]'); if(!c) return;
+            var q=d.getElementById('arcQuery'); if(q){ q.value=c.getAttribute('data-arc-date'); q.dispatchEvent(new Event('input',{bubbles:true})); }
+            var a=d.getElementById('archive'); if(a) a.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+          });
+          var sc=cal.querySelector('.scroll'); sc.parentNode.insertBefore(box, sc.nextSibling);
+        }
+        function size(){ var b=d.querySelector('#lrail .ycal'); if(!b || !b.clientWidth) return; b.style.setProperty('--yc', Math.max(4,Math.min(10,Math.floor((b.clientWidth-53)/54)))+'px'); }
+        function on(){
+          if(rail) return;
+          rail=d.createElement('aside'); rail.id='lrail'; rail.setAttribute('aria-label','About the Ledger');
+          nodes.forEach(function(n,i){ if(!marks[i]){ marks[i]=d.createComment('lrail-home'); } n.parentNode.insertBefore(marks[i],n); rail.appendChild(n); });
+          wrap.insertBefore(rail, wrap.firstChild);
+          de.classList.add('lrail');
+          try{ ycal(); }catch(e){}
+          size();
+        }
+        function off(){
+          if(!rail) return;
+          nodes.forEach(function(n,i){ if(marks[i] && marks[i].parentNode){ marks[i].parentNode.insertBefore(n,marks[i]); marks[i].parentNode.removeChild(marks[i]); } });
+          rail.parentNode.removeChild(rail); rail=null;
+          de.classList.remove('lrail');
+        }
+        function sync(){ if(MQ.matches) on(); else off(); }
+        sync();
+        if(MQ.addEventListener) MQ.addEventListener('change',sync); else if(MQ.addListener) MQ.addListener(sync);
+        addEventListener('resize',size,{passive:true});
+        if(d.readyState!=='complete') addEventListener('load',size,{once:true});
+      })();
+      </script>
 
       <ol class="arc-list" id="arcList" aria-live="polite"></ol>
       <div class="arc-more" id="arcMore" hidden>Loading more drops</div>
@@ -1545,6 +1701,11 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       src += '<span class="src src-none">No source link captured for this drop.</span>';
     }
     src += '<a class="src src-qalerts" href="https://qalerts.app/?n='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on qalerts.app (the original boards are offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on qalerts.app</span><span class="src-host">qalerts.app</span></a>';
+    /* 8ch.net is offline: keep the original link above and add QAgg.News, whose ?read=N page shows that one drop
+       (checked 2026-11-03 against drops #230-#3570 on 8ch.net: same number, timestamp and text). */
+    if(r.l && /(^|\.)8ch\.net$/.test(hostOf(r.l))){
+      src += '<a class="src src-qagg" href="https://qagg.news/?read='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on QAgg.News (8ch.net is offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on QAgg.News</span><span class="src-host">qagg.news</span></a>';
+    }
     src += '</span>';
     var cap = caps[r.n] ? '<p class="lx-cap">'+esc(caps[r.n])+'</p>' : '';
     return '<li class="arc-row" id="drop-'+r.n+'">'+
@@ -1552,11 +1713,14 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       '<span class="d" title="'+esc(r.time)+' (US Eastern)">'+fmtDate(r.d)+'</span>'+
             '<span class="e'+(!r.e&&pics&&!cap?' e-pic':'')+'">'+cap+body+src+'</span></li>';
   }
-  /* Endless scroll (off by default, remembered on this device): the list grows by one page (PER drops)
+  /* Endless scroll (off by default on phones/tablets, on by default on desktop, remembered on this device): the list grows by one page (PER drops)
      each time the reader nears its end. Off: the Prev / Next paging is unchanged. */
   var EKEY='trd.ledgerEndless', endlessBtn=document.getElementById('arcEndless'), moreEl=document.getElementById('arcMore'),
       topEl=document.getElementById('arcTop'), countTop=document.getElementById('arcCountTop'), footEl=document.querySelector('.arc-foot');
-  state.endless=false; try{ state.endless=localStorage.getItem(EKEY)==='1'; }catch(e){}
+  /* Desktop (>=1100px, Mike 2026-11-03): endless scroll is on unless the reader turned it off on this device.
+     Phones and tablets keep the old default (off) until switched on. */
+  var EDESK=!!(window.matchMedia&&matchMedia('(min-width:1100px)').matches);
+  state.endless=EDESK; try{ var ev=localStorage.getItem(EKEY); if(ev==='1'||ev==='0') state.endless=(ev==='1'); }catch(e){}
   var moreIO=null;
   function syncEndless(){
     if(endlessBtn) endlessBtn.setAttribute('aria-checked', state.endless?'true':'false');
@@ -1737,8 +1901,39 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     if(query.value!==v) query.value=v;
     if(LX.parseNumber(v)!==null) clearChipsForJump();
     apply(); syncHero(v); syncURL();
-    if(opts.scroll) scrollToResults();
+    if(isPhone()) phoneResults(true);
+    else if(opts.scroll) scrollToResults();
   }
+  /* Phones only (max-width:760px, the same breakpoint as the inline-filters change). While a search is active the
+     room intro above the results (image cards, hero, start-here, manifesto, calendar, ledger head, view switch and
+     the newcomer panel) folds away and the results land at once just under the sticky search bar. Clearing the search
+     brings the intro back without moving the list. Tablet and desktop never get the class, so nothing changes there. */
+  var PHONE=window.matchMedia?window.matchMedia('(max-width:760px)'):null, mainEl=document.getElementById('main');
+  function isPhone(){ return !!(PHONE&&PHONE.matches); }
+  function instantTo(y){
+    var de=document.documentElement, was=de.style.scrollBehavior;
+    de.style.scrollBehavior='auto';
+    window.scrollTo(0,Math.max(0,Math.round(y)));
+    de.style.scrollBehavior=was;
+  }
+  function phoneFold(on){
+    if(!mainEl) return;
+    on=!!on && isPhone();
+    if(mainEl.classList.contains('lx-q-on')===on) return;
+    if(on){ mainEl.classList.add('lx-q-on'); return; }
+    var a=list.hidden?null:list.getBoundingClientRect().top;
+    mainEl.classList.remove('lx-q-on');
+    if(a!==null){ var b=list.getBoundingClientRect().top; if(Math.abs(b-a)>1) instantTo(window.pageYOffset+(b-a)); }
+  }
+  function phoneResults(scroll){
+    phoneFold(state.q.trim().length>0);
+    if(!scroll) return;
+    if(state.jump!==null && state.filtered.length===1) return; /* a drop number: scheduleJump lands it */
+    var el=[info,topEl,list,empty].filter(function(x){ return x && !x.hidden; })[0];
+    if(el) instantTo(el.getBoundingClientRect().top+window.pageYOffset-headerBottom()-10);
+  }
+  if(PHONE){ var onBP=function(){ phoneFold(isPhone() && mainEl && mainEl.classList.contains('lx-q-on')); };
+    if(PHONE.addEventListener) PHONE.addEventListener('change',onBP); else if(PHONE.addListener) PHONE.addListener(onBP); }
   function scrollToResults(){
     var target=document.getElementById('arcInfo');
     var el=(target && !target.hidden)?target:list;
@@ -1759,12 +1954,12 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   }
   query.addEventListener('keydown',function(e){ if(e.key==='Enter'){ clearTimeout(typeT); setQuery(query.value,{scroll:true}); } });
   clear.addEventListener('click',function(){ clearTimeout(typeT); setQuery(''); query.focus(); });
-  sort.addEventListener('change',function(){ state.sort=sort.value; state.page=1; apply(); if(!listInView()) scrollToResults(); });
+  sort.addEventListener('change',function(){ state.sort=sort.value; state.page=1; apply(); if(isPhone()) phoneResults(true); else if(!listInView()) scrollToResults(); });
   chips.forEach(function(c){
     c.addEventListener('click',function(){
       chips.forEach(function(o){o.setAttribute('aria-pressed','false');});
       c.setAttribute('aria-pressed','true');
-      state.board=c.getAttribute('data-board'); state.page=1; apply(); if(!listInView()) scrollToResults();
+      state.board=c.getAttribute('data-board'); state.page=1; apply(); if(isPhone()) phoneResults(true); else if(!listInView()) scrollToResults();
     });
   });
   prev.addEventListener('click',function(){ if(state.page>1){state.page--;render();scrollBar();} });
@@ -1834,7 +2029,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       if(el.tagName==='INPUT') return; /* typing handled by the input event */
       setQuery(el.value||el.getAttribute('data-arc-query')||'');
     }
-    document.getElementById('archive').scrollIntoView({behavior:'smooth',block:'start'});
+    if(!isPhone()) document.getElementById('archive').scrollIntoView({behavior:'smooth',block:'start'});
   });
   [].slice.call(document.querySelectorAll('[data-arc-query]')).forEach(function(el){
     if(el.tagName==='INPUT'){ el.addEventListener('input',function(){ var v=el.value; clearTimeout(typeT); typeT=setTimeout(function(){ setQuery(v); },150); }); }
@@ -1848,9 +2043,19 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       q = q || sp.get('q') || sp.get('delta') || '';
     }catch(err){}
     if(q){ state.q=q; query.value=q; syncHero(q); }
+    state.qLink=!!q && !m;
   })();
 
   apply();
+  if(state.qLink && isPhone()){
+    /* a ?q= / ?delta= link on a phone: fold now, land once the page's styles are in (DOMContentLoaded) and once more
+       after load (late images/fonts), unless the visitor has already started scrolling or tapping */
+    phoneFold(true);
+    var held=true, letGo=function(){ held=false; }, land=function(){ if(held) phoneResults(true); };
+    ['wheel','touchstart','keydown','mousedown'].forEach(function(ev){ window.addEventListener(ev,letGo,{once:true,passive:true}); });
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',land,{once:true}); else setTimeout(land,0);
+    if(document.readyState==='complete') setTimeout(land,150); else window.addEventListener('load',function(){ setTimeout(land,150); },{once:true});
+  }
 })();
 
 /* ---------------- corrections form: saved on this device, never sent ---------------- */
@@ -2076,6 +2281,11 @@ section[id],details[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 14px)!impor
   .ldock .lx-delta .chip{grid-row:2;grid-column:auto;min-height:44px;height:44px;padding:0 2px;font-size:10px;letter-spacing:.06em;line-height:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center}
   .ldock .lx-delta .lx-dd{display:block;margin:2px 0 0}
   .e3-hero-kinetic{padding-top:22px!important}
+  /* phones, search active (#main.lx-q-on, set by the ledger script on phones only): room intro folds away, results sit under the search bar */
+  #main.lx-q-on>#hires,#main.lx-q-on>.e3-hero-kinetic,#main.lx-q-on>#start-here,#main.lx-q-on>#manifesto,#main.lx-q-on>#calendar,
+  #main.lx-q-on #archive .arc-head,#main.lx-q-on #archive .lx-path,#main.lx-q-on #archive .lx-start{display:none!important}
+  #main.lx-q-on #archive{padding-top:12px!important}
+  #main.lx-q-on #archive .lx-info{margin-top:0}
 }
 </style>
 <script>
