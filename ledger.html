@@ -500,6 +500,14 @@ main,.e3,.arc{background-color:var(--bg)}
 .arc-row .src .src-host{color:var(--muted)!important}
 .arc-row .src.src-none{color:var(--muted)!important;border-style:dashed!important;font-family:var(--font-body);font-style:italic;background:transparent!important}
 /* Two links per row: the source post, and the reply thread it was posted in. */
+.arc-row .srcrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px}
+.arc-row .srcrow .src{margin-top:0;flex:0 0 auto;white-space:nowrap}
+@media (max-width:640px){.arc-row .srcrow .src{max-width:100%;white-space:normal;flex-wrap:wrap;row-gap:2px}.arc-row .srcrow .src .src-host{overflow-wrap:anywhere}}
+.arc-row .src-thread{color:var(--text)!important;font-family:var(--font-display);font-size:11.5px;border-color:color-mix(in srgb,var(--accent) 38%,var(--border))!important;background:transparent!important}
+.arc-row .src-thread:hover{color:var(--accent)!important;border-color:var(--accent)!important;background:rgba(0,255,65,.06)!important}
+.arc-row .src-thread .src-arrow{color:var(--muted)}
+.arc-row .src-thread:hover .src-arrow{color:var(--accent)}
+.arc-row .src-thread .src-host{color:var(--muted)!important}
 .arc-row .gt{color:#86B96B!important}
 .arc-row .qref{color:#79C7D4!important}
 .arc-count{font-family:var(--font-display);color:var(--muted)}
@@ -1343,6 +1351,33 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   function fmtBlock(text){
     return String(text||'').split('\n').map(fmtLine).join('\n');
   }
+  function hostOf(u){ try{ return new URL(u).hostname.replace(/^www\./,''); }catch(e){ return ''; } }
+  /* Label the link by what the URL actually is. An archive capture is never called "the original post". */
+  function srcLabel(u){
+    var h=hostOf(u);
+    if(h==='archive.4plebs.org'||/\.?4plebs\.org$/.test(h)) return 'See original drop now';
+    if(/archive\.(today|ph|li|is|vn|md)$/.test(h)) return 'archive.today capture';
+    if(/web\.archive\.org$/.test(h)) return 'Wayback Machine capture';
+    if(h==='8kun.top'||/\.8kun\.top$/.test(h)) return '8kun post';
+    if(h==='8ch.net'||/\.8ch\.net$/.test(h)) return '8chan post';
+    if(h==='4chan.org'||/\.4chan\.org$/.test(h)) return '4chan post';
+    if(/dchan/.test(h)) return 'dChan archive capture';
+    return h ? ('source: '+h) : 'source link';
+  }
+  /* The thread a drop was posted in, derived from its source URL by dropping the '#reply' fragment.
+     A 4plebs thread archive is normalised to end with '/'. Returns '' when nothing can be derived. */
+  function threadOf(u){
+    if(!u) return '';
+    var s=String(u).split('#')[0];
+    if(!s) return '';
+    var h=hostOf(s);
+    if(/\.?4plebs\.org$/i.test(h)){
+      var q=s.indexOf('?');
+      if(q>-1){ s=s.slice(0,q).replace(/\/?$/,'/')+s.slice(q); }
+      else if(!/\/$/.test(s)){ s+='/'; }
+    }
+    return s;
+  }
   /* Every date in the ledger is US Eastern — the same as the 4,966 /drops/<n>/ pages.
      The raw timestamps are zone-free Unix seconds, so this is an exact conversion. assets/trd/ledger-search.js does the work. */
   var LX=window.TRDLedger;
@@ -1499,11 +1534,23 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     var body = r.e
       ? '<div class="ex fmt">'+fmtBlock(r.e)+'</div>'+pics
       : (pics || '<span class="nobody">No body text in the capture — an image-only post.</span>');
+    var src = '<span class="srcrow">';
+    if(r.l){
+      src += '<a class="src src-post" href="'+esc(r.l)+'" target="_blank" rel="noopener noreferrer" title="The post this drop was made in, as captured"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">'+esc(srcLabel(r.l))+'</span><span class="src-host">'+esc(hostOf(r.l))+'</span></a>';
+      var th = threadOf(r.l);
+      if(th && th!==r.l){
+        src += '<a class="src src-thread" href="'+esc(th)+'" target="_blank" rel="noopener noreferrer" title="Open the whole reply thread this drop started"><span class="src-arrow" aria-hidden="true">⤷</span><span class="src-lbl">See original anon research</span><span class="src-host">'+esc(hostOf(th))+'</span></a>';
+      }
+    } else {
+      src += '<span class="src src-none">No source link captured for this drop.</span>';
+    }
+    src += '<a class="src src-qalerts" href="https://qalerts.app/?n='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on qalerts.app (the original boards are offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on qalerts.app</span><span class="src-host">qalerts.app</span></a>';
+    src += '</span>';
     var cap = caps[r.n] ? '<p class="lx-cap">'+esc(caps[r.n])+'</p>' : '';
     return '<li class="arc-row" id="drop-'+r.n+'">'+
       '<span class="n"><a href="#drop-'+r.n+'" aria-label="Permalink to drop '+r.n+'"><span>#</span>'+r.n+'</a></span>'+
       '<span class="d" title="'+esc(r.time)+' (US Eastern)">'+fmtDate(r.d)+'</span>'+
-            '<span class="e'+(!r.e&&pics&&!cap?' e-pic':'')+'">'+cap+body+'</span></li>';
+            '<span class="e'+(!r.e&&pics&&!cap?' e-pic':'')+'">'+cap+body+src+'</span></li>';
   }
   /* Endless scroll (off by default, remembered on this device): the list grows by one page (PER drops)
      each time the reader nears its end. Off: the Prev / Next paging is unchanged. */
