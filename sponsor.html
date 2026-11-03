@@ -302,8 +302,8 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 .ap-msg a{color:#8a1a14;font-weight:700}
 .banner .meta a[aria-current="page"]{color:#fff;text-decoration-color:var(--mustard)}
 
-/* ============ rate card: one ad size, two ways to pay ============ */
-.rate{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+/* ============ rate card: one ad size, four ways to pay ============ */
+.rate{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:stretch}
 .rc{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--cream);background-image:var(--noise);color:var(--ink);border-radius:12px;padding:24px 22px 20px;border-top:8px solid var(--a);box-shadow:0 14px 26px rgba(0,0,0,.5)}
 .rc.gold{background-image:var(--noise),linear-gradient(180deg,#fff6d6,#f0dc9c)}
 .rc-k{margin:0;font-family:var(--script);font-size:1.75rem;line-height:1;color:var(--a)}
@@ -327,6 +327,11 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 .rc-spec p:not(.rc-k){margin:10px 0 0;font-size:1.1rem;line-height:1.4;color:#f1e6cf;text-wrap:balance}
 .rc-spec p b{color:#ffe2a0}
 .slot-logo.ad32{aspect-ratio:3/2}
+/* four tiers: the ad spec runs as a centered banner across the top, the four plans sit 4 across below */
+.rc-spec{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;align-items:center;gap:18px 44px;padding:26px 30px 30px}
+.rc-spec .card-mock{max-width:280px;margin-bottom:22px}
+.rc-spec>div{flex:0 1 540px;text-align:left}
+.rc-spec p:not(.rc-k){font-size:1.2rem}
 
 @media (max-width:1180px){
   .tier-row{grid-template-columns:repeat(6,minmax(0,1fr))}
@@ -388,12 +393,12 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
 <!-- SEO and share preview -->
-<meta name="description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
+<meta name="description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
 <link rel="canonical" href="https://therubberduck.net/sponsor.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Rubber Duck&trade;">
 <meta property="og:title" content="Sponsor the Site | Business-Card Ads, $50 a Month | The Rubber Duck&trade;">
-<meta property="og:description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
+<meta property="og:description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
 <meta property="og:url" content="https://therubberduck.net/sponsor.html">
 <meta property="og:image" content="https://therubberduck.net/images/brand/trd-share-2026.jpg">
 <meta property="og:image:width" content="1200">
@@ -402,10 +407,10 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TheRubberDuck79">
 <meta name="twitter:title" content="Sponsor the Site | Business-Card Ads, $50 a Month | The Rubber Duck&trade;">
-<meta name="twitter:description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
+<meta name="twitter:description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
 <meta name="twitter:image" content="https://therubberduck.net/images/brand/trd-share-2026.jpg">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://therubberduck.net/sponsor.html#page","url":"https://therubberduck.net/sponsor.html","name":"Sponsor the Site | The Rubber Duck","description":"Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage":"en","breadcrumb":{"@id":"https://therubberduck.net/sponsor.html#crumbs"}},{"@type":"BreadcrumbList","@id":"https://therubberduck.net/sponsor.html#crumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"},{"@type":"ListItem","position":2,"name":"Sponsor the Site","item":"https://therubberduck.net/sponsor.html"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://therubberduck.net/sponsor.html#page","url":"https://therubberduck.net/sponsor.html","name":"Sponsor the Site | The Rubber Duck","description":"Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage":"en","breadcrumb":{"@id":"https://therubberduck.net/sponsor.html#crumbs"}},{"@type":"BreadcrumbList","@id":"https://therubberduck.net/sponsor.html#crumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"},{"@type":"ListItem","position":2,"name":"Sponsor the Site","item":"https://therubberduck.net/sponsor.html"}]}]}</script>
 <link rel="stylesheet" href="/assets/trd/sitenav.css?v=2">
 </head>
 <body>
@@ -436,7 +441,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
       <div class="stripes" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <p class="kicker">The Rubber Duck&trade;</p>
       <h1 class="marquee" id="sp-title">Sponsor the Site</h1>
-      <p class="sub">Business-Card Ads &middot; $50 a Month &middot; $500 a Year</p>
+      <p class="sub">Business-Card Ads &middot; From $50 a Month</p>
       <p class="lede">The archive is free for everyone, and sponsors are how it stays that way. Sponsors get a 2 x 3 inch digital ad, the size of a business card, on this page. All you do is pay. We write it, design it and put it up, and it runs only after you approve it.</p>
     </div>
     <ul class="plaques" aria-label="What sponsorship includes">
@@ -450,8 +455,8 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 
   <section class="tiers" id="levels" aria-labelledby="tiers-title">
     <header class="head">
-      <h2 id="tiers-title"><small>The rate card</small>One ad. Two ways to pay.</h2>
-      <p>One ad size, one simple price. Pay by the month, or pay once for the full year and save $100.</p>
+      <h2 id="tiers-title"><small>The rate card</small>One ad. Four ways to pay.</h2>
+      <p>One ad size, simple prices. Pay by the month, or pay once for 3, 6 or 12 months and save.</p>
     </header>
     <div class="felt">
       <div class="rate" id="rate">
@@ -469,6 +474,20 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
           <ul class="t-list"><li>Your 2 x 3 in ad on the Sponsors page</li><li>We write and design it for you</li><li>It runs after you approve it</li><li>Renews monthly; stop any time with a note</li></ul>
           <a class="buy" data-plan="monthly" href="https://buy.stripe.com/3cI8wP4Xq34s0qj7rN9IQ1i" target="_blank" rel="noopener" aria-label="Sponsor the site, $50 a month">Start at $50 a month</a>
         </article>
+        <article class="rc" style="--a:var(--mustard)">
+          <p class="rc-k">Three months</p>
+          <p class="rc-amt">$100</p>
+          <p class="rc-per">for 3 months</p>
+          <ul class="t-list"><li>Your 2 x 3 in ad for 3 months</li><li>We write and design it for you</li><li>It runs after you approve it</li><li>One payment; saves $50 over monthly</li></ul>
+          <a class="buy" data-plan="3-months" href="https://buy.stripe.com/9B628r3Tm6gE0qj6nJ9IQ1l" target="_blank" rel="noopener" aria-label="Sponsor the site, $100 for 3 months">Take 3 months for $100</a>
+        </article>
+        <article class="rc" style="--a:#2f7d55">
+          <p class="rc-k">Six months</p>
+          <p class="rc-amt">$175</p>
+          <p class="rc-per">for 6 months</p>
+          <ul class="t-list"><li>Your 2 x 3 in ad for 6 months</li><li>We write and design it for you</li><li>It runs after you approve it</li><li>One payment; saves $125 over monthly</li></ul>
+          <a class="buy" data-plan="6-months" href="https://buy.stripe.com/6oUaEXahK0Wk1unbI39IQ1m" target="_blank" rel="noopener" aria-label="Sponsor the site, $175 for 6 months">Take 6 months for $175</a>
+        </article>
         <article class="rc gold" style="--a:var(--gold2)">
           <p class="rc-k">One-year commitment</p>
           <p class="rc-amt">$500</p>
@@ -477,7 +496,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
           <a class="buy" data-plan="year" href="https://buy.stripe.com/dRm6oH4Xq8oM6OHaDZ9IQ1j" target="_blank" rel="noopener" aria-label="Sponsor the site, $500 for one year">Take the year for $500</a>
         </article>
       </div>
-      <p class="fine" id="sp-fine">Monthly ads renew each month until you stop them. The one-year ad is a single $500 payment that covers 12 months, and nothing renews.</p>
+      <p class="fine" id="sp-fine">Monthly ads renew each month until you stop them. The 3-month, 6-month and one-year ads are single payments of $100, $175 and $500 that cover 3, 6 or 12 months, and nothing renews.</p>
     </div>
   </section>
 
@@ -492,7 +511,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
       <li style="--a:var(--mustard)"><b>Artwork, designed for you</b><span>We design your ad from your logo, made to fit the look of the site.</span></li>
       <li style="--a:#2f7d55"><b>A link to your business</b><span>Your ad links straight to your site or what you sell, one click away.</span></li>
       <li style="--a:var(--brown)"><b>Your approval first</b><span>We send you the finished ad. It goes up only after you say it is right.</span></li>
-      <li style="--a:var(--gold2)"><b>Simple terms</b><span>$50 a month, stop any time with a note. Or $500 once for a full year.</span></li>
+      <li style="--a:var(--gold2)"><b>Simple terms</b><span>$50 a month, stop any time with a note. Or pay once: $100 for 3 months, $175 for 6, $500 for a year.</span></li>
     </ul>
   </section>
 
@@ -508,7 +527,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
         <div class="slot-c">
           <p class="slot-k">Available</p>
           <h3 class="slot-t">Your business here</h3>
-          <p class="slot-d">A business-card-size ad, written and designed by us and approved by you, with a link to your business. $50 a month, or $500 for the year.</p>
+          <p class="slot-d">A business-card-size ad, written and designed by us and approved by you, with a link to your business. $50 a month, $100 for 3 months, $175 for 6 months or $500 for the year.</p>
           <a class="buy slot-go" href="#levels">Claim this spot</a>
         </div>
       </div>
@@ -522,7 +541,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
     </header>
     <div class="ap-wrap">
       <ol class="steps" aria-label="How it works">
-        <li><b>1</b><div><strong>Pick your plan</strong><span>$50 a month, or $500 for a full year.</span></div></li>
+        <li><b>1</b><div><strong>Pick your plan</strong><span>$50 a month, $100 for 3 months, $175 for 6 months or $500 for a full year.</span></div></li>
         <li><b>2</b><div><strong>Send your details</strong><span>Your logo, your links, and what you sell.</span></div></li>
         <li><b>3</b><div><strong>Approve your ad</strong><span>We write and design it. Once you OK it, it goes up.</span></div></li>
       </ol>
@@ -538,7 +557,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
         <label><span>Plan you are thinking about</span>
           <select name="level">
             <option value="Not sure yet">Not sure yet</option>
-            <option>$50 a month</option><option>$500 for one year</option>
+            <option>$50 a month</option><option>$100 for 3 months</option><option>$175 for 6 months</option><option>$500 for one year</option>
           </select>
         </label>
         <label><span>What you sell, and anything else we should know</span><textarea name="message" rows="4"></textarea></label>
@@ -580,7 +599,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 
 <script>
 /* ======================= SPONSOR LINKS: edit here ===========================
-   Rate card: one 2 x 3 in ad. monthly = $50 a month, year = $500 for 12 months (one payment).
+   Rate card: one 2 x 3 in ad. monthly = $50 a month; '3-months' = $100, '6-months' = $175, year = $500 for 12 months (each one payment).
    PROVIDER: 'stripe' or 'bmc'. Each plan button reads its URL from LINKS[PROVIDER][plan];
    a blank BMC entry falls back to the Stripe link, so a half-filled list never breaks a button.
    The same links are recorded in trd-merch/sponsor-links.json (not part of the site).          */
@@ -588,8 +607,8 @@ var SPONSOR = {
   PROVIDER: 'stripe',
   PAID_BY: { stripe: 'Paid through Stripe', bmc: 'Paid through Buy Me a Coffee' },
   LINKS: {
-    stripe: { monthly: 'https://buy.stripe.com/3cI8wP4Xq34s0qj7rN9IQ1i', year: 'https://buy.stripe.com/dRm6oH4Xq8oM6OHaDZ9IQ1j' },
-    bmc:    { monthly: '', year: '' }
+    stripe: { monthly: 'https://buy.stripe.com/3cI8wP4Xq34s0qj7rN9IQ1i', '3-months': 'https://buy.stripe.com/9B628r3Tm6gE0qj6nJ9IQ1l', '6-months': 'https://buy.stripe.com/6oUaEXahK0Wk1unbI39IQ1m', year: 'https://buy.stripe.com/dRm6oH4Xq8oM6OHaDZ9IQ1j' },
+    bmc:    { monthly: '', '3-months': '', '6-months': '', year: '' }
   },
   FORM_ENDPOINT: 'https://formsubmit.co/ajax/therubberduk@gmail.com',   // same FormSubmit inbox as the suggestion box
   FORM_SUBJECT: 'Sponsor inquiry: therubberduck.net'
