@@ -1701,11 +1701,6 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       src += '<span class="src src-none">No source link captured for this drop.</span>';
     }
     src += '<a class="src src-qalerts" href="https://qalerts.app/?n='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on qalerts.app (the original boards are offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on qalerts.app</span><span class="src-host">qalerts.app</span></a>';
-    /* 8ch.net is offline: keep the original link above and add QAgg.News, whose ?read=N page shows that one drop
-       (checked 2026-11-03 against drops #230-#3570 on 8ch.net: same number, timestamp and text). */
-    if(r.l && /(^|\.)8ch\.net$/.test(hostOf(r.l))){
-      src += '<a class="src src-qagg" href="https://qagg.news/?read='+encodeURIComponent(r.n)+'" target="_blank" rel="noopener" title="Read this drop on QAgg.News (8ch.net is offline)"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">Read on QAgg.News</span><span class="src-host">qagg.news</span></a>';
-    }
     src += '</span>';
     var cap = caps[r.n] ? '<p class="lx-cap">'+esc(caps[r.n])+'</p>' : '';
     return '<li class="arc-row" id="drop-'+r.n+'">'+
