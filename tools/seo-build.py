@@ -7,7 +7,7 @@ What it does (idempotent, safe to re-run after any data change):
   1. Generates static, crawlable HTML pages from the data the rooms already use:
        /drops/            Q drops: index, one page per month, one page per drop
        /x/archive/        X archive: index and one page per month (original posts and quotes)
-       /library/          SCIF Reading Room: index and one page per PDF
+       /library/          SCI[F]: index and one page per PDF
        /watch/            Video Room: index and one page per video (VideoObject)
        /listen/           Listening Room: index and one page per volume
        /shop/<slug>/      one page per TRD Collectibles item (Product, real prices)
@@ -158,7 +158,7 @@ def signup_block():
             '<p class="signup-p">One short note when something new lands: drops, videos, books and collectibles.</p>'
             + signup_form('signup-email') + '</div></aside>\n')
 NAV = [('/', 'Home'), ('/ledger.html', 'Drop Ledger'), ('/videos.html', 'Video Room'), ('/listening-room.html', 'Listening Room'),
-       ('/pdfs.html', 'SCIF Reading Room'), ('/x/', 'X Archive'), ('/memes.html', 'Meme Dump'), ('/album.html', 'Red Pill Album')]
+       ('/pdfs.html', 'SCI[F]'), ('/x/', 'X Archive'), ('/memes.html', 'Meme Dump'), ('/album.html', 'Red Pill Album')]
 
 DROP_OG = 'https://memes.therubberduck.net/drops/og2/%d.jpg'   # right-sized share cards on R2 (tools/drop-cards/rightsize.py); old 1200x630 in drops/og/
 _V2 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v2.json')   # drops re-rendered with their real attached images (2026-10-27)
@@ -447,7 +447,7 @@ def build_library():
         desc = clip('%s %s Free to read or download: %s pages, %s.' % (d['title'] + ('' if d['title'].endswith(('.', '?', '!')) else '.'), d.get('about') or d.get('desc', ''), d.get('pages', '?'), size), 158)
         img = '<img class="thumb" src="%s" alt="First page of %s" width="240" height="310" loading="lazy" decoding="async">' % (thumb_q, E(d['title'])) if thumb else ''
         body = ('<h1>%s</h1><div class="doc">%s<div><p class="lede">%s</p><dl class="facts"><dt>Topic</dt><dd>%s</dd><dt>Pages</dt><dd>%s</dd><dt>Size</dt><dd>%s</dd><dt>File</dt><dd>%s</dd><dt>Catalog no.</dt><dd>%s</dd></dl>'
-                '<p class="cta"><a class="btn" href="%s">Read or download this PDF (%s, %s)</a> <a href="/pdfs.html">Search every document in the SCIF Reading Room</a></p></div></div>'
+                '<p class="cta"><a class="btn" href="%s">Read or download this PDF (%s, %s)</a> <a href="/pdfs.html">Search every document in SCI[F]</a></p></div></div>'
                 % (E(d['title']), img, E(d.get('about') or d.get('desc', '')), E(d.get('topic', '')), E(d.get('pages', '')), size, E(d['name']), E(d['id']), pdf_q,
                    ('1 page' if str(d.get('pages')) == '1' else '%s pages' % E(d.get('pages', '?'))), size))
         rel = [x for x in topics[d.get('topic') or 'Other'] if x is not d][:12]
@@ -457,14 +457,14 @@ def build_library():
               'numberOfPages': d.get('pages'), 'contentSize': size, 'about': d.get('topic'), 'isAccessibleForFree': True,
               'associatedMedia': {'@type': 'MediaObject', 'contentUrl': pdf_abs, 'encodingFormat': 'application/pdf'},
               **({'thumbnailUrl': SITE + thumb_q, 'image': SITE + thumb_q} if thumb else {})}]
-        write('library/%s/index.html' % d['slug'], page(url, title, desc, body, g, [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('PDF library', '/library/'), (d['title'], url)],
+        write('library/%s/index.html' % d['slug'], page(url, title, desc, body, g, [('Home', '/'), ('SCI[F]', '/pdfs.html'), ('PDF library', '/library/'), (d['title'], url)],
               og_image=(SITE + thumb_q) if thumb else SHARE, signup=True))
         add_sm('library', url, lm, images=[(SITE + thumb_q, d['title'])] if thumb else [])
     secs = ''.join('<h2>%s</h2><ul class="list">%s</ul>' % (E(t), ''.join('<li><a href="/library/%s/">%s</a> <span class="n">%s pages</span></li>' % (d['slug'], E(d['title']), d.get('pages', '?')) for d in ds)) for t, ds in topics.items())
-    title = 'The SCIF Reading Room Library: %d Free PDFs' % len(docs)
+    title = 'SCI[F] Library: %d Free PDFs' % len(docs)
     desc = clip('%d public documents and books to read or download free: PSYOP doctrine, Q drops, the Epstein files and more, grouped by topic, each with a summary.' % len(docs))
-    body = '<h1>The SCIF Reading Room Library</h1><p class="lede">%d documents, grouped by topic. Each has its own page with a summary. Search and read them all in <a href="/pdfs.html">The SCIF Reading Room</a>.</p>%s' % (len(docs), secs)
-    write('library/index.html', page('/library/', title, desc, body, [], [('Home', '/'), ('SCIF Reading Room', '/pdfs.html'), ('PDF library', '/library/')], signup=True))
+    body = '<h1>SCI[F] Library</h1><p class="lede">%d documents, grouped by topic. Each has its own page with a summary. Search and read them all in <a href="/pdfs.html">SCI[F]</a>.</p>%s' % (len(docs), secs)
+    write('library/index.html', page('/library/', title, desc, body, [], [('Home', '/'), ('SCI[F]', '/pdfs.html'), ('PDF library', '/library/')], signup=True))
     add_sm('library', '/library/', lm)
     return len(docs)
 
@@ -706,7 +706,7 @@ def build_book():
             '<p class="lede"><b>anon mission</b> or <i>all you need to know about q - and how they made you afraid to ask</i>. A polished, printable PDF by The Rubber Duck.</p>'
             '<dl class="facts"><dt>Price</dt><dd>$19.99</dd><dt>Format</dt><dd>PDF, printable</dd><dt>Author</dt><dd>The Rubber Duck</dd><dt>Sold through</dt><dd>Gumroad</dd></dl>'
             '<p class="cta"><a class="btn" href="%s" rel="noopener">Get your copy on Gumroad, $19.99</a></p>'
-            '<p>Want the background first? Read every drop in <a href="/ledger.html">The Drop Ledger</a> or <a href="/drops/">by month</a>, see <a href="/process.html">how a drop was worked</a>, and browse the <a href="/library/">SCIF Reading Room library</a>.</p></div></div>') % GUMROAD
+            '<p>Want the background first? Read every drop in <a href="/ledger.html">The Drop Ledger</a> or <a href="/drops/">by month</a>, see <a href="/process.html">how a drop was worked</a>, and browse the <a href="/library/">SCI[F] library</a>.</p></div></div>') % GUMROAD
     write('book/anon-mission/index.html', page(url, title, desc, body, [book_ld()], [('Home', '/'), ('anon mission, Volume 1', url)],
           og_image=SITE + '/assets/trd/img/anon-mission-book-face@2x.webp', og_type='book'))
     add_sm('shop', url, TODAY, images=[(SITE + '/assets/trd/img/anon-mission-book-face@2x.webp', 'anon mission, Volume 1')])
@@ -722,8 +722,8 @@ ROOMS = OrderedDict([
                      'crumbs': [('Home', '/'), ('Video Room', '/videos.html')], 'img': '/assets/trd/img/share-videos.jpg'}),
     ('listening-room.html', {'path': '/listening-room.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('Listening Room', '/listening-room.html')], 'img': '/assets/trd/img/share-listening.jpg'}),
     ('memes.html', {'path': '/memes.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Meme Dump', '/memes.html')], 'img': None}),
-    ('pdfs.html', {'path': '/pdfs.html', 'title': 'The SCIF Reading Room | Free PDF Library on Q, PSYOP and Epstein | The Rubber Duck&trade;', 'desc': None,
-                   'crumbs': [('Home', '/'), ('SCIF Reading Room', '/pdfs.html')], 'img': None}),
+    ('pdfs.html', {'path': '/pdfs.html', 'title': 'SCI[F] | Free PDF Library on Q, PSYOP and Epstein | The Rubber Duck&trade;', 'desc': None,
+                   'crumbs': [('Home', '/'), ('SCI[F]', '/pdfs.html')], 'img': None}),
     ('x/index.html', {'path': '/x/', 'title': 'The X Archive: Every @TheRubberDuck79 Post | The Rubber Duck&trade;', 'desc': None, 'crumbs': [('Home', '/'), ('X Archive', '/x/')], 'img': None}),
     ('album.html', {'path': '/album.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Red Pill Album', '/album.html')], 'img': None}),
     ('merch.html', {'path': '/merch.html', 'title': 'TRD Collectibles | Signed Caps, Tees and Merch | The Rubber Duck&trade;',
@@ -768,7 +768,7 @@ def room_extra(f, info, merch_items):
         g.append({'@type': 'ItemList', 'name': 'Rooms at The Rubber Duck', 'itemListElement': [
             {'@type': 'SiteNavigationElement', 'position': i + 1, 'name': n, 'url': SITE + u} for i, (u, n) in enumerate([
                 ('/videos.html', 'Video Room'), ('/listening-room.html', 'Listening Room'), ('/ledger.html', 'The Drop Ledger'), ('/memes.html', 'The Meme Dump'),
-                ('/pdfs.html', 'The SCIF Reading Room'), ('/x/', 'Twitter / X Archive'), ('/album.html', 'Red Pill Album'), ('/merch.html', 'TRD Collectibles')])]})
+                ('/pdfs.html', 'SCI[F]'), ('/x/', 'Twitter / X Archive'), ('/album.html', 'Red Pill Album'), ('/merch.html', 'TRD Collectibles')])]})
     if f == 'merch.html':
         g.append({'@type': 'OnlineStore', '@id': SITE + '/merch.html#store', 'name': 'TRD Collectibles', 'url': url, 'parentOrganization': {'@id': ORG_ID}, 'brand': {'@type': 'Brand', 'name': 'The Rubber Duck'}})
         g.append({'@type': 'ItemList', 'name': 'TRD Collectibles', 'itemListElement': [

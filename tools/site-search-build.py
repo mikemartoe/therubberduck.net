@@ -26,7 +26,7 @@ def page(path):
     return t, clean(d.group(1), 220) if d else ''
 ROOMS = [('index.html', '/', 'Home'), ('videos.html', '/videos.html', 'Private Theater (videos)'),
          ('listening-room.html', '/listening-room.html', 'The Listening Room (recordings)'),
-         ('pdfs.html', '/pdfs.html', 'SCIF Reading Room (PDFs)'), ('ledger.html', '/ledger.html', 'The Drop Ledger (every Q drop)'),
+         ('pdfs.html', '/pdfs.html', 'SCI[F] (PDFs)'), ('ledger.html', '/ledger.html', 'The Drop Ledger (every Q drop)'),
          ('memes.html', '/memes.html', 'The Meme Dump'), ('x/index.html', '/x/', 'X Archive'),
          ('album.html', '/album.html', 'The Red Pill Album'), ('merch.html', '/merch.html', 'TRD Collectibles (store)'),
          ('sponsor.html', '/sponsor.html', 'Sponsor the Site'), ('Qdrops/index.html', '/Qdrops/', 'Q drops by month')]

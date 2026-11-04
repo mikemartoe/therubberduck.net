@@ -13,7 +13,7 @@ The site presents source material and leaves interpretation to the reader. Q dro
 ## Library
 
 - [PDF library](https://therubberduck.net/library/): 243 documents grouped by topic (PSYOP and military doctrine, Q drop compilations, Epstein-related records and more), each with its own page, title, page count and file size
-- [The SCIF Reading Room](https://therubberduck.net/pdfs.html): search, read or download any library file
+- [SCI[F]](https://therubberduck.net/pdfs.html): search, read or download any library file
 
 ## X archive
 

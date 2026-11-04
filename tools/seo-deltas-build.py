@@ -306,7 +306,7 @@ def build_proofs():
             proofs_index_html() +
             '<h2>Drops signed Q+</h2><p class="dx-note">%d drops carry the Q+ signature, oldest first.</p><ol class="dx-list">%s</ol>' % (len(QPLUS), rows) +
             (('<h2>Drops shown with their public record</h2><ul class="links">%s</ul>' % ''.join('<li><a href="/drops/%d/">Q drop #%d</a>: %s</li>' % (n, n, t) for n, t in ctx)) if ctx else '') +
-            (('<h2>The Book of Q Proofs</h2><p>Proof collections in the SCIF Reading Room, each with its own page and PDF.</p><ul class="links">%s</ul>' % ''.join('<li><a href="/library/%s/">%s</a></li>' % (s, t) for s, t in pdfs)) if pdfs else '') +
+            (('<h2>The Book of Q Proofs</h2><p>Proof collections in SCI[F], each with its own page and PDF.</p><ul class="links">%s</ul>' % ''.join('<li><a href="/library/%s/">%s</a></li>' % (s, t) for s, t in pdfs)) if pdfs else '') +
             (('<h2>Q proofs posted by The Rubber Duck</h2><ul class="dx-xl">%s</ul><p class="dx-more">More in <a href="/x/archive/">the X archive by month</a>.</p>' % ''.join(xpost_li(p) for p in pp[:25])) if pp else '') +
             '<p class="dx-more">Search every drop in <a href="/ledger.html">The Drop Ledger</a>, or browse <a href="/drops/">every Q drop by month</a>.</p>')
     items = [{'@type': 'ListItem', 'position': j + 1, 'url': SITE + '/drops/%d/' % d['n'], 'name': 'Q drop #%d, signed Q+' % d['n']} for j, d in enumerate(QPLUS)]
