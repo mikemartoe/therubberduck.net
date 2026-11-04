@@ -433,6 +433,8 @@ main,.e3,.arc{background-color:var(--bg)}
 .e3-hero-kinetic .k-btn:not(.k-primary){color:var(--text)!important;border-color:var(--border)!important}
 .e3-hero-kinetic .k-btn:not(.k-primary):hover{border-color:var(--accent)!important;color:var(--accent)!important;background:transparent!important}
 
+/* search highlights: soft transparent tint, text unchanged */
+mark.lx-hl{background:rgba(255,200,40,.3);color:inherit;font-weight:inherit;font-style:inherit;padding:0 1px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 /* the search prompt */
 .k-find-card{background:rgba(7,13,8,.96)!important;border:1px solid var(--border)!important;border-radius:4px!important;box-shadow:0 0 0 1px rgba(0,255,65,.06),0 30px 70px -34px #000!important}
 .k-find-lbl{color:var(--accent-ink)!important;font-family:var(--font-display);font-size:10px;letter-spacing:.24em}
@@ -810,7 +812,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 </style>
 <script src="data/drops.js"></script>
 <script src="data/drop-images.js?v=20261030a"></script>
-<script src="assets/trd/ledger-search.js?v=20261030"></script>
+<script src="assets/trd/ledger-search.js?v=20261103e"></script>
 <script src="assets/trd/ledger-starter.js?v=20261030" defer></script>
 <script src="assets/trd/ledger-path.js?v=20261029" defer></script>
 <script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Calendar","href":"#calendar"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"New? Start here","href":"#start-here"}}</script>
@@ -1724,6 +1726,43 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   function countText(out, from, to){
     return out.length ? ('Showing '+nf(from)+'–'+nf(to)+' of '+nf(out.length)+(out.length===ALL.length?' records':' matching records')) : 'No matching records';
   }
+  /* Search highlights (Mike 2026-11-03): wrap matching words in the visible drop text in a soft
+     transparent <mark class="lx-hl">, by splitting text nodes only (never touching markup, links or the share row). */
+  function hlRegex(terms){
+    var parts=(terms||[]).map(function(a){
+      a=String(a).toLowerCase().trim(); if(!a) return '';
+      var esc=function(x){ return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); };
+      if(/[^a-z0-9' ]/.test(a)) return esc(a);
+      var tk=a.replace(/'/g,'').match(/[a-z0-9]+/g)||[]; if(!tk.length) return '';
+      var body=tk.map(esc).join("[^a-z0-9]+");
+      return (tk.length===1&&tk[0].length<=2) ? '\\b'+body+'\\b' : '\\b'+body+"[a-z0-9']*";
+    }).filter(Boolean);
+    if(!parts.length) return null;
+    parts.sort(function(x,y){ return y.length-x.length; });
+    try{ return new RegExp('('+parts.join('|')+')','gi'); }catch(e){ return null; }
+  }
+  function highlightRows(rows, res){
+    var re=(res && res.kind==='text') ? hlRegex(res.hl) : null; if(!re) return;
+    rows.forEach(function(li){
+      var host=li.querySelector('.e'); if(!host) return;
+      var w=document.createTreeWalker(host, NodeFilter.SHOW_TEXT, {acceptNode:function(n){
+        var p=n.parentNode; if(!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if(p.closest && p.closest('.shr,.srcrow,mark,script,style,button')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT; }}), nodes=[], n;
+      while((n=w.nextNode())) nodes.push(n);
+      nodes.forEach(function(t){
+        var v=t.nodeValue; re.lastIndex=0; if(!re.test(v)) return; re.lastIndex=0;
+        var frag=document.createDocumentFragment(), last=0, m;
+        while((m=re.exec(v))){ if(!m[0].length){ re.lastIndex++; continue; }
+          if(m.index>last) frag.appendChild(document.createTextNode(v.slice(last,m.index)));
+          var mk=document.createElement('mark'); mk.className='lx-hl'; mk.textContent=m[0]; frag.appendChild(mk);
+          last=m.index+m[0].length; }
+        if(last<v.length) frag.appendChild(document.createTextNode(v.slice(last)));
+        t.parentNode.replaceChild(frag,t);
+      });
+      li.classList.toggle('lx-hl-none', !li.querySelector('mark.lx-hl'));
+    });
+  }
   function render(append){
     var out=state.filtered, pages=Math.max(1,Math.ceil(out.length/PER)), res=state.res||{};
     var caps=res.captions||{};
@@ -1732,6 +1771,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     var before=append?list.children.length:0;
     if(append) list.insertAdjacentHTML('beforeend',html); else list.innerHTML=html;
     [].slice.call(list.children,before).forEach(addShare);
+    highlightRows([].slice.call(list.children,before), res);
     empty.hidden = out.length>0;
     list.hidden = out.length===0;
     if(topEl) topEl.hidden = out.length===0;

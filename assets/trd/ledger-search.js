@@ -410,9 +410,12 @@
     var groups=parseText(raw), used=[];
     var rows=textFilter(pool2, groups, !opts.noSyn, used);
     info.kind='text'; info.used=used;
+    /* Highlight terms for the results (ledger.html wraps them in <mark class="lx-hl">). */
+    var hl=[]; groups.forEach(function(g){ g.forEach(function(t){ if(t.neg) return; (opts.noSyn?[t.w]:termAlts(t,true)).forEach(function(a){ a=String(a).trim(); if(a && hl.indexOf(a)<0) hl.push(a); }); }); });
+    info.hl=hl;
     if(!rows.length){
       var fg=fuzzyGroups(groups);
-      if(fg.changed.length){ rows=textFilterFuzzy(pool2, fg.groups); if(rows.length) info.fuzzy=fg.changed; }
+      if(fg.changed.length){ rows=textFilterFuzzy(pool2, fg.groups); if(rows.length){ info.fuzzy=fg.changed; fg.changed.forEach(function(f){ (f.alts||[]).forEach(function(a){ if(a && info.hl.indexOf(a)<0) info.hl.push(String(a)); }); }); } }
     }
     info.rows=rows;
     var shown=groups.map(function(g){ return g.map(function(t){ return (t.neg?'not ':'')+'“'+t.w+'”'; }).join(' + '); }).join(' or ');
