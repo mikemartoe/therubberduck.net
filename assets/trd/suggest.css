@@ -215,6 +215,12 @@
 .trs-dlg .trs-btn.trs-ghost{background:transparent; color:var(--trs-stamp); border-color:var(--trs-stamp); box-shadow:none}
 .trs-dlg .trs-btn:focus-visible,.trs-dlg .trs-x:focus-visible{outline:2px solid var(--trs-red-txt); outline-offset:3px}
 
+.trs-dlg .trs-home{display:flex; flex-direction:column; align-items:stretch; gap:9px; text-align:center; margin:0 0 14px; padding:10px 12px; border:1px dashed rgba(192,40,30,.55); border-radius:3px; background:rgba(255,250,235,.55)}
+.trs-dlg .trs-home-t{margin:0; flex:1 1 auto; font:700 13px/1.4 var(--trs-mono); color:var(--trs-type); text-wrap:balance}
+.trs-dlg .trs-home-b{width:100%}
+.trs-dlg a.trs-btn{display:inline-block; text-decoration:none; text-align:center; white-space:nowrap}
+.trs-dlg a.trs-btn:visited{color:#FFF6E6}
+@media (max-width:440px){.trs-dlg .trs-home-t{font-size:13.5px}}
 /* ---- the thank-you card ---- */
 .trs-dlg .trs-thanks{text-align:center; padding:22px 22px 20px}
 .trs-dlg .trs-stamp{

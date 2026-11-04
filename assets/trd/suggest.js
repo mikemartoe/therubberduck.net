@@ -151,6 +151,8 @@
         '<form class="trs-card trs-form" novalidate>' +
           '<div class="trs-head"><h2 class="trs-title" id="trs-title">Suggestion</h2><span class="trs-date"></span></div>' +
           '<p class="trs-to">To: The Rubber Duck. Ideas, fixes, requests.</p>' +
+          '<div class="trs-home"><p class="trs-home-t">New here? Take a look around The Rubber Duck first.</p>' +
+            '<a class="trs-btn trs-home-b" href="https://therubberduck.net/">Visit the homepage</a></div>' +
           '<label class="trs-f"><span class="trs-l">Your suggestion <em class="trs-req">(required)</em></span>' +
             '<textarea name="suggestion" maxlength="3000" required aria-required="true" aria-describedby="trs-msg"></textarea></label>' +
           '<div class="trs-row">' +
