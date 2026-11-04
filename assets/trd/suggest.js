@@ -5,7 +5,11 @@
    every body swap, so a half-written card is never lost.
    Include once per page, in <head>, BEFORE duckpod.js:
      <link rel="stylesheet" href="/assets/trd/suggest.css" data-trd-keep>
-     <script src="/assets/trd/suggest.js" data-trd-keep></script>             */
+     <script src="/assets/trd/suggest.js" data-trd-keep></script>
+   Direct link: https://therubberduck.net/suggest.html (a page with <body data-trs-page>) opens the card on load
+   and holds the wooden box in its own <div id="trs-slot">. Share bar: once the card is open, a Share row
+   (assets/trd/share.js, loaded on first open if the page has not loaded it) sits beside Close and always
+   shares the direct link above; on phones with a system share sheet a Share button opens it first.        */
 (function () {
   'use strict';
 
@@ -26,7 +30,9 @@
   var CONFIG = {
     ENDPOINT: 'https://formsubmit.co/ajax/therubberduk@gmail.com',
     SUBJECT: 'Suggestion Box: therubberduck.net',
-    SHOW_TAB: true
+    SHOW_TAB: true,
+    SHARE_URL: 'https://therubberduck.net/suggest.html',          // what the in-box Share row shares
+    SHARE_TEXT: 'The Rubber Duck Suggestion Box: got an idea for the site? Write it on a card and drop it in the slot.'
   };
   /* ===================================================================== */
 
@@ -139,7 +145,8 @@
   dlg.setAttribute('aria-labelledby', 'trs-title');
   dlg.innerHTML =
     '<div class="trs-stage"><div class="trs-inner">' +
-      '<button class="trs-x" type="button">Close</button>' +
+      '<div class="trs-top"><div class="trs-share"></div>' +
+        '<button class="trs-x" type="button">Close</button></div>' +
       '<div class="trs-wrap">' +
         '<form class="trs-card trs-form" novalidate>' +
           '<div class="trs-head"><h2 class="trs-title" id="trs-title">Suggestion</h2><span class="trs-date"></span></div>' +
@@ -177,7 +184,10 @@
     var pod = D.getElementById('trd-pod'), ref = pod && pod.parentNode === b ? pod : null;
     sec.classList.toggle('trs-nopod', !ref);
     fx.classList.toggle('trs-tab-off', !CONFIG.SHOW_TAB);
-    if (sec.parentNode !== b) { if (dlg.open) resetAfterNav(); b.insertBefore(sec, ref); }
+    var slotN = D.getElementById('trs-slot'), host = slotN && b.contains(slotN) ? slotN : b;   // suggest.html keeps the box front and center
+    sec.classList.toggle('trs-in-slot', host !== b);
+    if (sec.parentNode !== host) { if (dlg.open) resetAfterNav(); if (host === b) b.insertBefore(sec, ref); else host.appendChild(sec); }
+    autoOpen();
     if (fx.parentNode !== b) b.insertBefore(fx, ref);
     if (dlg.parentNode !== b) b.insertBefore(dlg, ref);
     fit();
@@ -289,6 +299,52 @@
     new MO(function () { corner(); fit(); }).observe(D.documentElement, { attributes: true, attributeFilter: ['class'] });
   }
 
+  /* ================= share the box (the direct link) ================= */
+  var shareBox = q('.trs-share'), shareReady = null;
+  function need(tag, attr, url) {
+    var base = url.split('?')[0];                                   // load share.js / share.css once, kept across soft navigation
+    return new Promise(function (res, rej) {
+      if (D.querySelector(tag + '[' + attr + '^="' + base + '"]')) { res(); return; }
+      var n = D.createElement(tag); n.setAttribute('data-trd-keep', '');
+      if (tag === 'link') { n.rel = 'stylesheet'; n.href = url; } else { n.src = url; n.async = true; }
+      n.onload = res; n.onerror = rej; D.head.appendChild(n);
+    });
+  }
+  function nativeBtn() {                                             // phones with a system share sheet: one Share button first
+    var b = el('button', 'shr-b shr-more', '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>');
+    b.type = 'button'; b.setAttribute('aria-label', 'Share'); b.title = 'Share';
+    on(b, 'click', function () {
+      var u = new URL(CONFIG.SHARE_URL);
+      u.searchParams.set('utm_source', 'native'); u.searchParams.set('utm_medium', 'share'); u.searchParams.set('utm_campaign', 'suggest-box');
+      try { if (W.trdTrack) W.trdTrack('event/suggest-share/native/box', 'Suggestion box shared: native', 0); } catch (e) {}
+      try { if (W.trdVisit) W.trdVisit.event('share', { platform: 'native', item: 'suggest-box' }); } catch (e) {}
+      navigator.share({ title: 'Suggestion Box | The Rubber Duck', text: CONFIG.SHARE_TEXT, url: u.href }).catch(function () {});
+    });
+    return b;
+  }
+  function buildShare() {
+    if (shareReady || !CONFIG.SHARE_URL || !shareBox) return;
+    shareReady = Promise.all([need('link', 'href', '/assets/trd/share.css?v=20261030c'), W.trdShare ? null : need('script', 'src', '/assets/trd/share.js?v=20261030c')])
+      .then(function () {
+        if (shareBox.firstChild) return;
+        if (!W.trdShare) { shareReady = null; return; }
+        var phone = W.matchMedia && W.matchMedia('(pointer:coarse)').matches && !!navigator.share;
+        var row = W.trdShare.build({
+          kind: 'suggest', id: 'box', page: CONFIG.SHARE_URL, text: CONFIG.SHARE_TEXT, compact: true,
+          groupLabel: 'Share the suggestion box',
+          only: phone ? ['x', 'fb', 'sms', 'link'] : ['x', 'truth', 'fb', 'email', 'link']
+        });
+        if (phone) { var g = row.querySelector('.shr-btns'); g.insertBefore(nativeBtn(), g.firstChild); }
+        shareBox.appendChild(row);
+      }).catch(function () { shareReady = null; });
+  }
+  /* the direct link (suggest.html, <body data-trs-page>): open the card as soon as the page is up, once per page */
+  var autoBody = null;
+  function autoOpen() {
+    var b = D.body; if (!b || !b.hasAttribute('data-trs-page') || autoBody === b) return;
+    autoBody = b; _st(function () { if (sec.isConnected && !dlg.open) open({ auto: true }); }, 0);
+  }
+
   /* ================= open / close ================= */
   function freshCard() {
     busy = false; send.disabled = false; send.textContent = 'Drop it in the box';
@@ -298,7 +354,8 @@
   }
   function open(e) {
     opener = e && e.currentTarget || null;
-    if (W.trdTrack) W.trdTrack('click/suggestion-box', 'Suggestion box opened');
+    if (W.trdTrack) { if (e && e.auto) W.trdTrack('click/suggestion-box-link', 'Suggestion box opened from its direct link'); else W.trdTrack('click/suggestion-box', 'Suggestion box opened'); }
+    buildShare();
     if (!thanks.hidden) { form.reset(); freshCard(); }
     q('.trs-date').textContent = today();
     if (!dlg.open) { try { dlg.showModal(); } catch (x) { dlg.setAttribute('open', ''); } }
