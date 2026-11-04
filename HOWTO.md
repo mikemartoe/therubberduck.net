@@ -18,7 +18,7 @@ This file explains how the site works so anyone Duck trusts can keep it going wi
 - `videos.html` and `listening-room.html`: the Rumble videos and recordings. Each one needs a real overview, never a blank one.
 - `memes.html` with `memes/data/memes.json` and `memes/web/`: the meme dump.
 - `pdfs.html` with `scif/`: the SCIF PDF room. Big PDFs go next to last. GitHub won't accept files over 100 MB.
-- `ledger.html` with `data/drops.js`: the Q drop ledger. Each drop links to qalerts.app.
+- `ledger.html` with `data/drops.js`: the Q drop ledger. Each drop links to its original post on the 4plebs archive and to the original anon research thread.
 - `x/`: the searchable archive of every @TheRubberDuck79 post (the count is `n` in `x/data/meta.json`). Its media plays from X's own servers.
 - Every page carries the GoatCounter visitor counter tag (therubberduck.goatcounter.com). Duck holds that login.
 
