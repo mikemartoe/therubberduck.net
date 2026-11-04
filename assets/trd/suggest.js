@@ -341,7 +341,8 @@
   /* the direct link (suggest.html, <body data-trs-page>): open the card as soon as the page is up, once per page */
   var autoBody = null;
   function autoOpen() {
-    var b = D.body; if (!b || !b.hasAttribute('data-trs-page') || autoBody === b) return;
+    var b = D.body; if (b && !b.hasAttribute('data-trs-page')) autoBody = null;   // left the page: a soft navigation back opens it again
+    if (!b || !b.hasAttribute('data-trs-page') || autoBody === b) return;
     autoBody = b; _st(function () { if (sec.isConnected && !dlg.open) open({ auto: true }); }, 0);
   }
 
