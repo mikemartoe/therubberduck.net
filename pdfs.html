@@ -80,6 +80,14 @@ h1.room-title .red{color:#e2312f}
 .logrows dt{font-family:var(--label);letter-spacing:.18em;text-transform:uppercase;color:#d9c48f;padding-right:22px;font-size:15px}
 .logrows dd{justify-content:flex-end;text-align:right;color:#efe8d3;text-transform:uppercase}
 .tally{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:auto}
+.room-share{margin-top:14px;display:flex;justify-content:center;min-height:36px}
+.room-share .shr.shr-compact{margin:0;flex-wrap:nowrap;gap:10px;justify-content:center}
+.room-share .shr-compact .shr-lbl{font-family:var(--label);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#d7cfb6}
+.room-share .shr-compact .shr-btns{flex-wrap:nowrap;gap:6px}
+.room-share .shr-compact .shr-b{width:36px;height:36px;border-radius:4px;color:#f3ead2;background:rgba(0,0,0,.35);border-color:rgba(243,234,210,.26)}
+.room-share .shr-compact .shr-b:hover,.room-share .shr-compact .shr-b:focus-visible{color:#fff;border-color:#c8261d;background:rgba(60,6,4,.9)}
+.room-share .shr-b svg{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.room-share .shr-b svg.f{fill:currentColor;stroke:none}
 .tally div{text-align:center;padding:10px 6px;background:rgba(0,0,0,.35);border-top:6px solid var(--k)}
 .tally b{display:block;font-family:var(--display);font-size:44px;line-height:1;color:#f3ead2}
 .tally span{font-family:var(--label);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#d7cfb6}
@@ -204,6 +212,8 @@ h1.room-title .red{color:#e2312f}
 </style>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" data-trd-keep>
 <script src="/assets/trd/suggest.js?v=20261103d" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/share.css?v=20261030c" data-trd-keep>
+<script src="/assets/trd/share.js?v=20261030c" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
@@ -282,6 +292,7 @@ h1.room-title .red{color:#e2312f}
         <div class="badge"><img src="scif/assets/img/duck-banner.png" alt=""><div><b id="visitor">Visitor</b><span>Cleared: TS // SCI</span><span id="timein">Time in: --:--</span></div></div>
         <dl class="logrows"><dt>Date</dt><dd id="ldate">--</dd><dt>Badge</dt><dd>TRD-79</dd><dt>Escort</dt><dd>Not required</dd><dt>Purpose</dt><dd>Research</dd></dl>
         <div class="tally" id="tally"></div>
+        <div class="room-share" id="roomShare"></div>
       </aside>
     </section>
 
@@ -394,6 +405,25 @@ function render(){
 }
 render();
 var lastCols=cols();window.addEventListener("resize",function(){var c=cols();if(c!==lastCols){lastCols=c;render();}});
+
+/* ---------- share the room (same compact row as the suggestion box: assets/trd/share.js) ---------- */
+(function(){
+  var host=$("roomShare"); if(!host||!window.trdShare) { if(host) host.style.display="none"; return; }
+  var URL0="https://therubberduck.net/pdfs.html", TXT="SCI[F] on The Rubber Duck: a free library of public documents and books. Read or download any file.";
+  var phone=window.matchMedia&&window.matchMedia("(pointer:coarse)").matches&&!!navigator.share;
+  var row=trdShare.build({kind:"room",id:"scif",page:URL0,text:TXT,compact:true,groupLabel:"Share SCI[F]",
+    only:phone?["x","fb","sms","link"]:["x","truth","fb","email","link"]});
+  if(phone){
+    var b=document.createElement("button");b.type="button";b.className="shr-b shr-more";b.title="Share";b.setAttribute("aria-label","Share");
+    b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
+    b.addEventListener("click",function(){var u=new URL(URL0);u.searchParams.set("utm_source","native");u.searchParams.set("utm_medium","share");u.searchParams.set("utm_campaign","room-scif");
+      try{if(window.trdTrack)window.trdTrack("event/room-share/native/scif","SCI[F] shared: native",0);}catch(e){}
+      try{if(window.trdVisit)window.trdVisit.event("share",{platform:"native",item:"room-scif"});}catch(e){}
+      navigator.share({title:"SCI[F] | The Rubber Duck",text:TXT,url:u.href}).catch(function(){});});
+    var g=row.querySelector(".shr-btns");g.insertBefore(b,g.firstChild);
+  }
+  host.appendChild(row);
+})();
 
 /* ---------- viewer ---------- */
 var viewer=$("viewer"),frame=$("vframe"),lastFocus=null;
