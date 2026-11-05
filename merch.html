@@ -254,6 +254,33 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
 
+/* ============ the book: same trading card and price tag, one full row at the top of the case ============ */
+.bookcase{scroll-margin-top:76px}
+.bookcase .grid{grid-template-columns:minmax(0,1fr)}
+.bookcase .photo{background:#0b0b0b}
+.bookcase .pos{background:#c8202b}
+.bookcase .photo>picture img{object-fit:contain;object-position:center center;background:#0b0b0b}
+/* the card grain is tuned for light product photos; on this black cover a heavy multiply hides the art */
+.bookcase .front::after{opacity:.16;mix-blend-mode:soft-light}
+.bookcase .fact p{font-size:clamp(16px,1.5vw,20px);line-height:1.4}
+.bookcase .nm{white-space:normal}
+.bookcase .tag .bk-blurb{margin:0;flex:1;display:flex;align-items:center;color:var(--ink);font-size:clamp(1.15rem,1.7vw,1.45rem);line-height:1.4;text-wrap:balance}
+.bookcase .buy{margin-top:0}
+@media (min-width:700px){
+  .bookcase .item{display:grid;grid-template-columns:minmax(220px,340px) minmax(0,1fr);gap:18px;align-items:stretch}
+  .bookcase .tc{aspect-ratio:5/7;width:100%;height:auto;min-height:0}
+  .bookcase .tag .bk-blurb{font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.45}
+}
+@media (max-width:699px){
+  .bookcase{scroll-margin-top:62px;margin-top:18px}
+  .bookcase .item{grid-template-columns:47% minmax(0,1fr);gap:10px}
+  .bookcase .tc{aspect-ratio:auto;min-height:268px;height:100%}
+  .bookcase .tag{gap:8px}
+  .bookcase .tag .bk-blurb{font-size:15.5px;line-height:1.32}
+  .bookcase .line td.amt{font-size:1.12rem}
+  .bookcase .nm{font-size:.8rem}
+}
+
 /* ---- one rubber duck header — same as listening-room.html ---- */
 @font-face{font-family:'TRD Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
 @font-face{font-family:'TRD Courier';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2'),url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
@@ -313,7 +340,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 <body>
 <header class="trd-nav" id="trd-nav"><div class="tn-in">
 <a class="tn-logo" href="/" aria-label="The Rubber Duck, home"><img src="/assets/trd/img/duck-banner.webp" width="40" height="34" alt=""><span class="tn-wm" aria-hidden="true">THE RUBBER DUCK<sup>&trade;</sup></span></a>
-<nav class="tn-links" id="tn-links" aria-label="Rooms"><a href="/videos.html">Videos</a><a href="/listening-room.html">Recordings</a><a href="/pdfs.html">PDFs</a><a href="/ledger.html">Drop Ledger</a><a href="/memes.html">Memes</a><a href="/x/">X Archive</a></nav>
+<nav class="tn-links" id="tn-links" aria-label="Rooms"><a href="/videos.html">Videos</a><a href="/listening-room.html">Recordings</a><a href="/pdfs.html">PDFs</a><a href="/ledger.html">Drop Ledger</a><a href="/memes.html">Memes</a><a href="/x/">X Archive</a><a href="/merch.html#anon-mission">Book</a></nav>
 <form class="tn-search" id="tn-form" role="search" action="/x/" method="get"><svg class="tn-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><input class="tn-q" id="tn-q" name="q" type="search" placeholder="Search the archive" aria-label="Search the whole archive" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="tn-res" aria-autocomplete="list"><div class="tn-res" id="tn-res" role="listbox" aria-label="Search results" hidden></div></form>
 <button class="tn-btn tn-menu" id="tn-menu" type="button" aria-expanded="false" aria-controls="tn-links" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
 <button class="tn-btn tn-sb" id="tn-sbtn" type="button" aria-expanded="false" aria-label="Search the archive"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
@@ -338,8 +365,8 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
       <div class="stripes" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       <p class="kicker">The Rubber Duck&trade;</p>
       <h1 class="marquee" id="shop-title">TRD Collectibles</h1>
-      <p class="sub">Caps &middot; Tees &middot; Signed Pieces</p>
-      <p class="lede">The site stays free. Every hat, tee and sticker you pick up here supports The Rubber Duck and keeps the site running. Tap any card to flip it over. We ship to US addresses only. Questions about an order? Email <a href="mailto:therubberduk@gmail.com">therubberduk@gmail.com</a>.</p>
+      <p class="sub">Caps &middot; Tees &middot; The Book &middot; Signed Pieces</p>
+      <p class="lede">The site stays free. Every hat, tee, book and sticker you pick up here supports The Rubber Duck and keeps the site running. Tap any card to flip it over. We ship to US addresses only. Questions about an order? Email <a href="mailto:therubberduk@gmail.com">therubberduk@gmail.com</a>.</p>
     </div>
     <ul class="plaques" aria-label="How ordering works">
       <li><b>Made to order</b><span>Stitched or printed</span></li>
@@ -352,6 +379,48 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 <!-- promise:end -->
     <span class="neon" aria-hidden="true">Open</span>
   </section>
+
+<!-- bookcard:begin -->
+  <section class="case bookcase" id="anon-mission" aria-labelledby="anon-mission-title">
+    <header class="head">
+      <h2 id="anon-mission-title"><small>The Book</small>anon mission, Volume 1</h2>
+      <p>All you need to know about q, and how they made you afraid to ask.</p>
+    </header>
+    <div class="glass">
+      <span class="brass">Volume 1 &middot; $19.99 on Gumroad</span>
+      <div class="grid">
+<article class="item book" id="anon-mission-card" data-slug="anon-mission-vol-1" data-external style="--a:#c8202b;--b:#1a1a1a">
+  <div class="tc" role="button" tabindex="0" aria-pressed="false" aria-label="anon mission, Volume 1 card. Press to flip it over for the details.">
+    <div class="tc-in">
+        <div class="face front">
+          <div class="photo"><picture><source srcset="/assets/trd/img/anon-mission-book-face.webp 1x, /assets/trd/img/anon-mission-book-face@2x.webp 2x" type="image/webp"><img src="/assets/trd/img/anon-mission-book-face.webp" alt="Cover of anon mission, Volume 1, by The Rubber Duck" width="560" height="872" loading="eager" decoding="async"></picture></div>
+          <span class="pos" aria-hidden="true">BK</span>
+          <span class="cno" aria-hidden="true"><i>V1</i></span>
+          <div class="plate"><span class="team">The Book</span><span class="nm">anon mission, Volume 1</span></div>
+        </div>
+        <div class="face back">
+          <div class="bk-top"><span class="bk-no">Vol. 1</span><span class="bk-nm">anon mission</span><span class="bk-pos">PDF</span></div>
+          <ul class="bio"><li><b>Book</b><span>anon mission, Volume 1</span></li><li><b>By</b><span>The Rubber Duck</span></li><li><b>Format</b><span>Printable PDF</span></li></ul>
+          <table class="stat"><thead><tr><th>Price</th><th>Format</th></tr></thead>
+            <tbody><tr><td class="amt">$19.99</td><td>PDF</td></tr></tbody></table>
+          <div class="fact"><p>anon mission, or all you need to know about q - and how they made you afraid to ask. A polished, printable PDF.</p></div>
+          <p class="bk-ship">Instant download on Gumroad</p>
+          <p class="bk-foot">The Rubber Duck&trade; &middot; therubberduck.net</p>
+        </div>
+    </div>
+    <span class="flip" aria-hidden="true">Flip</span>
+  </div>
+    <div class="tag">
+      <table class="line"><thead><tr><th>Price</th><th>Format</th></tr></thead>
+        <tbody><tr><td class="amt">$19.99</td><td>PDF</td></tr></tbody></table>
+      <p class="bk-blurb">anon mission, or all you need to know about q - and how they made you afraid to ask. A polished, printable PDF by The Rubber Duck.</p>
+      <a class="buy" href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">Buy</a>
+    </div>
+</article>
+      </div>
+    </div>
+  </section>
+<!-- bookcard:end -->
 
 <!-- hatreel:begin -->
 <style>
@@ -894,6 +963,15 @@ v.addEventListener("ended",function(){v.currentTime=0;go()});})();</script>
   function slug(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
   function money(c){c=+c;return '$'+(c%100?(c/100).toFixed(2):c/100)}
   document.querySelectorAll('.item').forEach(function(card){
+    if(card.hasAttribute('data-external')){
+      var tc0=card.querySelector('.tc');
+      if(tc0){
+        function flip0(){var f=tc0.classList.toggle('flipped');tc0.setAttribute('aria-pressed',f?'true':'false')}
+        tc0.addEventListener('click',flip0);
+        tc0.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();flip0()}});
+      }
+      return;
+    }
     var s=card.getAttribute('data-slug'),buy=card.querySelector('.buy'),size=card.querySelector('select.size'),tc=card.querySelector('.tc'),
         img=card.querySelector('.photo img'),src=card.querySelector('.photo source'),cname=card.querySelector('.cname'),amts=card.querySelectorAll('.amt'),
         name=card.querySelector('.bk-nm').textContent,color=null,csel=card.querySelector('select.csel'),
