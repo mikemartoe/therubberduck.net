@@ -433,7 +433,7 @@ grid.addEventListener("click",function(e){
   var b=e.target.closest(".folder[data-id]");if(!b)return;
   var d=DOCS.filter(function(x){return x.id===b.getAttribute("data-id");})[0];if(!d)return;
   track(d.id,d.title);
-  if(isMobile()){var w=null;try{w=window.open(d.file,"_blank");}catch(err){}if(w){try{w.opener=null;}catch(err){}toast("File "+d.id+" opened in a new tab");}else{location.href=d.file;}return;}
+  if(isMobile()){var vu="/scif/view.html?f="+encodeURIComponent(d.file)+"&t="+encodeURIComponent(d.title);var sa=window.matchMedia("(display-mode: standalone)").matches||window.matchMedia("(display-mode: fullscreen)").matches||navigator.standalone===true;if(sa){location.href=vu;return;}var w=null;try{w=window.open(d.file,"_blank");}catch(err){}if(w){try{w.opener=null;}catch(err){}toast("File "+d.id+" opened in a new tab");}else{location.href=vu;}return;}
   lastFocus=b;open(d);
 });
 function open(d){

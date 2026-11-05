@@ -225,6 +225,16 @@ main{position:relative;z-index:1}
 .more .btn{padding:12px 28px}
 
 /* ---------- lightbox ---------- */
+.lb-back{display:none}
+@media(max-width:900px){
+  .lb{padding-top:var(--trd-navh,0px)}
+  .lb-back{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:5;width:100%;min-height:52px;margin:0;
+    padding:10px 16px;background:#0b0805;color:#ffe2a0;border:0;border-bottom:2px solid var(--accent);
+    font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-align:left;cursor:pointer}
+  .lb-back svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .lb-back:active,.lb-back:hover{background:#1a130a;color:#fff}
+  .lb-stage{padding-top:16px}
+}
 .lb{position:fixed;inset:0;z-index:300;background:rgba(18,20,23,.985);display:none;overflow-y:auto;overscroll-behavior:contain}
 .lb.open{display:block}
 .lb-in{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,.85fr);gap:0;min-height:100%}
@@ -471,6 +481,7 @@ footer.site b{color:#c4cad0;font-weight:700}
   <button class="lb-close" id="lbclose" aria-label="Close (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <button class="lb-nav prev" id="lbprev" aria-label="Previous (←)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
   <button class="lb-nav next" id="lbnext" aria-label="Next (→)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button class="lb-back" id="lbback" type="button" aria-label="Back to Meme Dump"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 5l-7 7 7 7"/></svg>Back to Meme Dump</button>
   <div class="lb-in">
     <div class="lb-stage" id="lbstage"></div>
     <aside class="lb-side">
@@ -1028,6 +1039,7 @@ function openAt(i){
     fileName:it.file.split('/').pop()}));
   $('dl').href=mediaUrl(it.file);
   $('dl').setAttribute('download', it.file.split('/').pop());
+  var nv=document.querySelector('.trd-nav');lb.style.setProperty('--trd-navh',(nv?Math.max(0,Math.round(nv.getBoundingClientRect().bottom)):0)+'px');
   lb.classList.add('open');
   document.body.style.overflow='hidden';
   lb.scrollTop=0;
@@ -1112,6 +1124,7 @@ function bind(){
     openById(tile.dataset.id);
   });
   $('lbclose').addEventListener('click',close);
+  $('lbback').addEventListener('click',close);
   $('lb').addEventListener('click',function(e){ if(e.target===$('lb')||e.target===$('lbstage')) close() });
   $('lbprev').addEventListener('click',function(){openAt(cur-1)});
   $('lbnext').addEventListener('click',function(){openAt(cur+1)});
