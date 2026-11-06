@@ -315,10 +315,13 @@ html[data-theme="dark"] .corr .go{color:#1A1710}
 .lx-dlbl{font-family:var(--font-display);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-right:4px}
 .lx-dd{margin-left:7px;opacity:.75;letter-spacing:.04em}
 .lx-delta .chip{min-height:38px}
-.lx-info{margin:14px 0 0;font-size:13.5px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.lx-info{margin:14px 0 0;font-size:13.5px;color:var(--muted);display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px;row-gap:8px}
 .lx-info[hidden]{display:none}
-.lx-lbl{color:var(--text)}
-.lx-acts{display:inline-flex;flex-wrap:wrap;gap:8px}
+.lx-lbl{color:var(--text);min-width:0;overflow-wrap:anywhere}
+/* Total matching drops, beside the search label. The whole filtered set, not the rows drawn so far. */
+.lx-total{justify-self:end;margin:0;padding:1px 0 1px 4px;font-family:var(--font-display);font-weight:600;font-size:12.5px;line-height:1;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lx-total b{font-size:18px;font-weight:700;letter-spacing:0;text-transform:none;margin-right:5px;text-shadow:0 0 12px rgba(0,255,65,.45)}
+.lx-acts{display:inline-flex;flex-wrap:wrap;gap:8px;grid-column:1 / -1}
 .lx-acts-empty{justify-content:center;margin-top:4px}
 .lx-act{min-height:34px;padding:0 12px;border:1px solid rgba(0,255,65,.4);border-radius:3px;background:transparent;color:var(--accent);font-family:var(--font-display);font-size:11.5px;letter-spacing:.03em;cursor:pointer}
 .lx-act:hover{background:rgba(0,255,65,.08);border-color:var(--accent)}
@@ -1675,9 +1678,15 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     render();
     syncDeltaRow();
   }
+  /* "N drops" is the size of the whole filtered set (state.filtered), never the
+     endless-scroll window and never a count of how many times the words occur. */
+  function dropTotalHTML(n){
+    var word=n===1?'drop':'drops';
+    return '<span class="lx-total" title="'+nf(n)+' matching '+word+'"><b>'+nf(n)+'</b> '+word+'</span>';
+  }
   function renderInfo(res, shown){
     if(!res || !res.q){ info.hidden=true; info.innerHTML=''; return; }
-    var h='<span class="lx-lbl">'+esc(res.label||'')+'</span>';
+    var h='<span class="lx-lbl">'+esc(res.label||'')+'</span>'+dropTotalHTML(shown);
     var acts='';
     if(res.alt) acts+=btn(res.alt.label, res.alt.q);
     if(res.kind==='delta' && res.rows.length && res.numberDeltas && res.numberDeltas.length){
