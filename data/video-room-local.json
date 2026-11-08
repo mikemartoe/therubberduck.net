@@ -2977,5 +2977,42 @@
     "theme": "Loose Change Final Cut - DVDRIP",
     "browserPlayable": true,
     "ext": "mp4"
+  },
+  {
+    "id": "lmiwalken01",
+    "t": "‼️🎶MILITARY INTELLIGENCE🎶‼️",
+    "mq": [
+      "‼️🎶MILITARY INTELLIGENCE🎶‼️",
+      "\"The Walken Edit\"",
+      "👉🏼 lyrics by Q."
+    ],
+    "u": "https://stream.therubberduck.net/video-room/military-intelligence-walken-edit-20261108.mp4",
+    "e": "",
+    "mediaUrl": "https://stream.therubberduck.net/video-room/military-intelligence-walken-edit-20261108.mp4",
+    "source": "local",
+    "ts": 1794096000,
+    "d": "",
+    "dur": "3:42",
+    "v": "",
+    "vn": -1,
+    "live": false,
+    "rp": false,
+    "th": "/images/videos/military-intelligence-walken-title.jpg",
+    "desc": "‼️🎶MILITARY INTELLIGENCE🎶‼️\n\n\"The Walken Edit\"\n\n👉🏼 lyrics by Q.",
+    "pinned": true,
+    "published": true,
+    "copyExact": true,
+    "fullDesc": true,
+    "browserPlayable": true,
+    "ext": "mp4",
+    "streamKey": "video-room/military-intelligence-walken-edit-20261108.mp4",
+    "probe": {
+      "bytes": 69988129,
+      "seconds": 221.63,
+      "sha256": "4f58a944bc30a713cd929f73153747728e774b06ed93f2869e3b86ec5c96dfb1",
+      "video": "H264 928x718 30fps",
+      "audio": "AAC stereo 44.1kHz",
+      "poster": "0:51 golden doors"
+    }
   }
 ]
