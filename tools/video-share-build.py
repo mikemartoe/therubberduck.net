@@ -66,6 +66,8 @@ ET = None
 # Ring of Power (RESTORED), all 4 parts: Duck's high-res RING OF POWER title screen (2026-11-01).
 CARD_OVERRIDE = {i: CARDS_BASE + '/ring-of-power-og-1200x630.jpg' for i in ('l0142c95181', 'l6e805d6dec', 'l5b5d8294d1', 'lba98b1b77d')}
 CARD_ALT = {i: 'Ring of Power: Empire of the City (RESTORED) title card: RING OF POWER in white metal letters above a ring on black' for i in CARD_OVERRIDE}
+CARD_OVERRIDE['lmiwalken01'] = SITE + '/images/videos/military-intelligence-walken-og.jpg'
+CARD_ALT['lmiwalken01'] = 'Christopher Walken pushing open golden hotel doors, from Military Intelligence, The Walken Edit'
 
 
 def preview_img(v, cards_base):
@@ -154,6 +156,7 @@ h1{margin:0 0 10px;font:600 clamp(30px,3.4vw,44px)/1.12 'Oswald',sans-serif;colo
 .more .th i{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.85);color:var(--bulb);font:600 13px/1 'Oswald',sans-serif;font-style:normal;padding:4px 7px;border-radius:3px}
 .more b{display:block;margin-top:9px;font:600 18px/1.25 'Oswald',sans-serif;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .foot{padding-bottom:30px;text-align:center;color:var(--muted);font:500 14px/1.6 'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase}
+h1.exact{white-space:pre-line;font-weight:400;letter-spacing:0;text-transform:none;font-size:clamp(22px,2.6vw,34px);line-height:1.35}
 .foot a{color:var(--bulb);text-decoration:none}
 @media (max-width:820px){
 .vp{grid-template-columns:minmax(0,1fr);gap:20px}
@@ -175,23 +178,36 @@ CSS_PLAY_LOW = """/* playPos "low" (per-video flag in data/video-room-local.json
 def page(v, img, meta, others):
     e = lambda s: html.escape(s, quote=True)
     vid, t = v['id'], re.sub(r'\s+', ' ', v['t']).strip()
-    title = t + ' \u00b7 Video Room \u00b7 The Rubber Duck'
     n = notes(v)
+    exact = bool(v.get('copyExact')) and bool(n)
+    social = re.sub(r'\s+', ' ', n).strip() if exact else t
+    title = social + ' \u00b7 Video Room \u00b7 The Rubber Duck'
     date = when(v)
     bits = [b for b in [date, ('Running time ' + v['dur']) if v.get('dur') else ''] if b]
     lead = ' \u00b7 '.join(bits)
-    desc = clip(n, 200) if n else ((lead + '. ') if lead else '') + 'Free to watch in the Video Room at therubberduck.net.'
-    shown = (n if v.get('fullDesc') else clip(n, 420)) if n else ('Free to watch in The Rubber Duck Video Room. Tap the poster to play it on the big screen.')
+    desc = n if exact else (clip(n, 200) if n else ((lead + '. ') if lead else '') + 'Free to watch in the Video Room at therubberduck.net.')
+    shown = n if exact else ((n if v.get('fullDesc') else clip(n, 420)) if n else ('Free to watch in The Rubber Duck Video Room. Tap the poster to play it on the big screen.'))
     url = SITE + '/videos/share/' + vid + '.html'
     room = '/videos.html#v=' + vid
     m = meta.get(img)
-    w, h = (m['w'], m['h']) if m and m.get('w') else ((1200, 630) if '/video-room/og/' in img else (0, 0))
+    w, h = (m['w'], m['h']) if m and m.get('w') else ((1200, 630) if ('/video-room/og/' in img or v['id'] in CARD_OVERRIDE) else (0, 0))
     size = ('<meta property="og:image:width" content="%d">\n<meta property="og:image:height" content="%d">\n' % (w, h)) if w else ''
     alt = CARD_ALT.get(v['id']) or 'Video Room card for ' + t + ': poster frame, title and running time'
     kick = 'Livestream' if v.get('live') else 'Now showing'
     src = v.get('u') or ''
     alt_btn = ('<a class="btn alt" href="%s" target="_blank" rel="noopener">Watch on Rumble</a>' % e(src)) if 'rumble.com' in src else ''
-    ld = {'@context': 'https://schema.org', '@type': 'VideoObject', 'name': t, 'description': n or desc, 'url': url,
+    robots = 'noindex, nofollow' if v.get('published') is False else 'index, follow, max-image-preview:large'
+    meta_desc = e(desc).replace('\n', '&#10;')
+    exact_css = ("\n@font-face{font-family:'Courier Prime';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2');font-weight:400;font-display:swap}\n"
+                 "h1.exact{font-family:'Courier Prime','Noto Color Emoji','Courier New',monospace}") if exact else ''
+    if exact:
+        heading = '<h1 class="exact">' + e(n) + '</h1>'
+        blurb = ''
+    else:
+        heading = '<h1>' + e(t) + '</h1>'
+        blurb = '<p class="desc">' + e(shown) + '</p>'
+    frame_alt = alt if v['id'] in CARD_ALT else ('Poster frame from ' + t)
+    ld = {'@context': 'https://schema.org', '@type': 'VideoObject', 'name': social, 'description': n or desc, 'url': url,
           'thumbnailUrl': [img, poster(v) if poster(v).startswith('http') else SITE + poster(v)],
           'isAccessibleForFree': True, 'publisher': {'@type': 'Organization', 'name': 'The Rubber Duck', 'url': SITE + '/'}}
     if v.get('ts'):
@@ -206,19 +222,19 @@ def page(v, img, meta, others):
     more = ''.join('<li><a href="/videos/share/%s.html"><span class="th"><img src="%s" alt="" decoding="async">%s</span><b>%s</b></a></li>'
                    % (o['id'], e(poster(o)), ('<i>%s</i>' % e(o['dur'])) if o.get('dur') else '', e(re.sub(r'\s+', ' ', o['t']).strip())) for o in others)
     share = ('{kind:"video",id:%s,page:%s,text:%s,fileName:%s,compact:true,only:["x","truth","fb","email","sms","link"],groupLabel:%s}'
-             % (json.dumps(vid), json.dumps(url), json.dumps(t + ' \u00b7 Video Room \u00b7 The Rubber Duck'), json.dumps('trd-video-' + vid + '.jpg'), json.dumps('Share ' + t)))
+             % (json.dumps(vid), json.dumps(url), json.dumps(title), json.dumps('trd-video-' + vid + '.jpg'), json.dumps('Share ' + social)))
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <title>{e(title)}</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="{robots}">
 <link rel="canonical" href="{url}">
-<meta name="description" content="{e(desc)}">
+<meta name="description" content="{meta_desc}">
 <meta name="theme-color" content="#04060d">
 <meta property="og:type" content="video.other">
 <meta property="og:site_name" content="The Rubber Duck&trade;">
 <meta property="og:title" content="{e(title)}">
-<meta property="og:description" content="{e(desc)}">
+<meta property="og:description" content="{meta_desc}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{e(img)}">
 <meta property="og:image:secure_url" content="{e(img)}">
@@ -227,13 +243,13 @@ def page(v, img, meta, others):
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TheRubberDuck79">
 <meta name="twitter:title" content="{e(title)}">
-<meta name="twitter:description" content="{e(desc)}">
+<meta name="twitter:description" content="{meta_desc}">
 <meta name="twitter:image" content="{e(img)}">
 <meta name="twitter:image:alt" content="{e(alt)}">
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/assets/trd/share.css?v=20261030c" data-trd-keep>
-<style>{CSS}{(chr(10) + CSS_PLAY_LOW) if v.get('playPos') == 'low' else ''}</style>
+<style>{CSS}{(chr(10) + CSS_PLAY_LOW) if v.get('playPos') == 'low' else ''}{exact_css}</style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace('</', '<\\/')}</script>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
@@ -241,12 +257,12 @@ def page(v, img, meta, others):
 <header class="top"><a href="/"><b>The Rubber Duck&trade;</b></a><a href="/videos.html">Video Room</a></header>
 <main>
 <article class="vp">
-<a class="poster" href="{room}" aria-label="Play {e(t)} in the Video Room"><img src="{e(poster(v))}" alt="Poster frame from {e(t)}" width="1280" height="720" decoding="async"><span class="play{' low' if v.get('playPos') == 'low' else ''}"></span>{('<span class="dur">' + e(v['dur']) + '</span>') if v.get('dur') else ''}</a>
+<a class="poster" href="{room}" aria-label="Play {e(social)} in the Video Room"><img src="{e(poster(v))}" alt="{e(frame_alt)}" width="1280" height="720" decoding="async"><span class="play{' low' if v.get('playPos') == 'low' else ''}"></span>{('<span class="dur">' + e(v['dur']) + '</span>') if v.get('dur') else ''}</a>
 <div class="info">
 <p class="kick">{kick}</p>
-<h1>{e(t)}</h1>
+{heading}
 {('<p class="meta">' + e(lead) + '</p>') if lead else ''}
-<p class="desc">{e(shown)}</p>
+{blurb}
 <div class="acts"><a class="btn" href="{room}">Watch in the Video Room</a>{alt_btn}</div>
 <div id="shr"></div>
 </div>
@@ -266,6 +282,8 @@ def sitemap(feats):
     out = ['<?xml version="1.0" encoding="UTF-8"?>',
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
     for v in feats:
+        if v.get('published') is False:
+            continue
         img = html.escape(CARD_OVERRIDE.get(v['id']) or CARDS_BASE + '/' + v['id'] + '.jpg')
         out.append('  <url><loc>%s/videos/share/%s.html</loc><lastmod>%s</lastmod><image:image><image:loc>%s</image:loc></image:image></url>' % (SITE, v['id'], lm, img))
     open(os.path.join(ROOT, 'sitemaps', 'video-share.xml'), 'w', encoding='utf-8').write('\n'.join(out + ['</urlset>\n']))
@@ -276,24 +294,52 @@ def sitemap(feats):
     open(p, 'w', encoding='utf-8').write(idx)
 
 
+def sitemap_add(v):
+    """Insert one published feature into the video sitemap without rewriting the other URLs."""
+    if v.get('published') is False:
+        return
+    import datetime
+    img = html.escape(CARD_OVERRIDE.get(v['id']) or CARDS_BASE + '/' + v['id'] + '.jpg')
+    loc = '%s/videos/share/%s.html' % (SITE, v['id'])
+    p = os.path.join(ROOT, 'sitemaps', 'video-share.xml')
+    txt = open(p, encoding='utf-8').read()
+    line = '  <url><loc>%s</loc><lastmod>%s</lastmod><image:image><image:loc>%s</image:loc></image:image></url>\n' % (loc, datetime.date.today().isoformat(), img)
+    if loc in txt:
+        txt = re.sub(r'  <url><loc>%s</loc>.*?</url>\n' % re.escape(loc), line, txt, count=1)
+    else:
+        txt = txt.replace('</urlset>', line + '</urlset>')
+    open(p, 'w', encoding='utf-8').write(txt)
+    idxp = os.path.join(ROOT, 'sitemap.xml')
+    idx = open(idxp, encoding='utf-8').read()
+    idx = re.sub(r'(sitemaps/video-share\.xml</loc><lastmod>)[^<]+', r'\g<1>' + datetime.date.today().isoformat(), idx, count=1)
+    open(idxp, 'w', encoding='utf-8').write(idx)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--cards-base', default=CARDS_BASE)
     ap.add_argument('--poster', action='store_true', help='use the poster frame instead of the 1200x630 card')
     ap.add_argument('--img-meta', default='')
+    ap.add_argument('--only', nargs='+', default=[], help='write only these feature ids, and do not rebuild the other pages')
     a = ap.parse_args()
     meta = json.load(open(a.img_meta)) if a.img_meta else {}
-    feats, nr, nl, dups = load_features()
+    all_feats, nr, nl, dups = load_features()
+    want = set(a.only)
+    feats = [v for v in all_feats if v['id'] in want] if want else all_feats
+    if want and {v['id'] for v in feats} != want:
+        sys.exit('unknown id: ' + ', '.join(sorted(want - {v['id'] for v in feats})))
     outdir = os.path.join(ROOT, 'videos', 'share')
     os.makedirs(outdir, exist_ok=True)
     keep = set()
     base = '' if a.poster else a.cards_base
-    for i, v in enumerate(feats):
+    by_id = {v['id']: i for i, v in enumerate(all_feats)}
+    for v in feats:
+        i = by_id[v['id']]
         fn = v['id'] + '.html'
         keep.add(fn)
         others = []   # next three features with a different title (the parts of one multi-part feature share a title)
-        for k in range(1, len(feats)):
-            o = feats[(i + k) % len(feats)]
+        for k in range(1, len(all_feats)):
+            o = all_feats[(i + k) % len(all_feats)]
             sk = lambda x: x.get('series') or x['t']   # parts of one series/multi-part feature count once
             if sk(o) != sk(v) and all(sk(o) != sk(q) for q in others):
                 others.append(o)
@@ -301,7 +347,12 @@ def main():
                 break
         with open(os.path.join(outdir, fn), 'w', encoding='utf-8') as f:
             f.write(page(v, preview_img(v, base), meta, others))
-    sitemap(feats)
+        if want:
+            sitemap_add(v)
+    if want:
+        print('wrote %d share page(s): %s' % (len(feats), ', '.join(v['id'] for v in feats)))
+        return
+    sitemap(all_feats)
     # Retired ids the room still opens through an alias (DOUBLE_FEATURES alias: {old id: part}): a share link made
     # for the old id lands on the new feature's share page instead of a 404 (noindex, canonical to the new page).
     src = open(os.path.join(ROOT, 'videos.html'), encoding='utf-8').read()
