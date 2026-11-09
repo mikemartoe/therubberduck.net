@@ -6,8 +6,8 @@
    Deep link: #hires=<slug> opens a viewer on load or hashchange; closing clears the hash (replaceState).
    Share (2026-10-31): where the browser can share files (phones, installed web app), Share fetches the original
    and hands the actual file to the system share sheet with the item's share page link; elsewhere it opens a
-   small menu (copy link, X, Facebook, download). Share links point at /hires/<page>/, a static page with the
-   link-preview card that forwards people to /ledger.html#hires=<slug>. */
+   small menu (copy link, X, Facebook, download). Share links point at /hires/<page>/, a real indexable
+   page with the image and an Open in Drop Ledger link to /ledger.html#hires=<slug>. That page does not redirect. */
 (function () {
   var OSD_SRC = '/assets/trd/vendor/openseadragon-6.1.1.min.js';
   var BLOB_MAX = 150e6; // above this, let the browser handle the link itself instead of holding it in memory
