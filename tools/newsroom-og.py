@@ -22,7 +22,16 @@ THEME = [
     '02-iraq-baghdad.png',
     '01-desert-deployment.png',
 ]
-theme_imgs = [Image.open(os.path.join(SRC, f)).convert('RGB') for f in THEME]
+_theme_imgs = None
+
+def theme_imgs():
+    global _theme_imgs
+    if _theme_imgs is None:
+        missing = [f for f in THEME if not os.path.exists(os.path.join(SRC, f))]
+        if missing:
+            raise SystemExit('Missing theme photos in %s: %s (Mike\'s six; not shipped live)' % (SRC, ', '.join(missing)))
+        _theme_imgs = [Image.open(os.path.join(SRC, f)).convert('RGB') for f in THEME]
+    return _theme_imgs
 
 steel_path = os.path.join(FONTS, 'Steelfish-Bd.otf')
 courier_path = os.path.join(FONTS, 'CourierPrime-Bold.ttf')
@@ -147,7 +156,7 @@ def make_card(job, seed):
 
     bg = sand_bg(seed)
     for idx, cx, cy, mw, mh, ang in layout_for(seed):
-        place(bg, framed(theme_imgs[idx], mw, mh), int(cx * W), int(cy * H), ang)
+        place(bg, framed(theme_imgs()[idx], mw, mh), int(cx * W), int(cy * H), ang)
     bg = Image.alpha_composite(bg, Image.new('RGBA', (W, H), (8, 7, 5, 105)))
     canvas = bg.convert('RGB')
 
