@@ -9,3 +9,21 @@
 .dx-share .shr-b{min-height:56px}
 @media(max-width:640px){.dx-share{padding:12px}.dx-share .shr-btns{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .dx-list .shr.shr-compact{margin-top:8px}
+
+/* DUCK SAUCE newsroom story share */
+.dx-share[aria-label="Share this piece"]{margin:22px 0 8px;padding:16px 18px;background:rgba(232,220,192,.94);border:2px solid #3a3426;border-radius:0;box-shadow:0 10px 24px rgba(0,0,0,.35);color:#1a1812}
+.dx-share[aria-label="Share this piece"] .dx-share-h{margin:0 0 12px;font:700 14px/1.3 'Courier Prime',Courier,monospace;letter-spacing:.14em;text-transform:uppercase;color:#2a3320}
+.dx-share[aria-label="Share this piece"] .dx-share-h small{font-weight:400;font-size:13px;letter-spacing:.04em;text-transform:none;color:#4a4334}
+.dx-share[aria-label="Share this piece"] .shr{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:center;margin:0;padding:0;border:0;background:none}
+.dx-share[aria-label="Share this piece"] .shr-pic{display:block;border:1px solid #5a4e36;border-radius:0;background:#cbbd9b;box-shadow:0 8px 18px rgba(0,0,0,.35);aspect-ratio:1200/630}
+.dx-share[aria-label="Share this piece"] .shr-pic img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.dx-share[aria-label="Share this piece"] .shr-btns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto;gap:8px}
+.dx-share[aria-label="Share this piece"] .shr-b{min-height:52px;border:1px solid #5a4e36;border-radius:0;background:#2a3320;color:#f3e6c8;font:700 12px/1.2 'Courier Prime',Courier,monospace;letter-spacing:.06em;text-transform:uppercase;gap:4px}
+.dx-share[aria-label="Share this piece"] .shr-b:hover,.dx-share[aria-label="Share this piece"] .shr-b:focus-visible{background:#3a4a28;border-color:#c4a048;color:#f3e6c8;outline:2px solid #c4a048;outline-offset:2px}
+.dx-share[aria-label="Share this piece"] .shr-b svg{width:18px;height:18px}
+.dx-share[aria-label="Share this piece"] .shr-hint{grid-column:1/-1;margin:8px 0 0;font:700 13px/1.3 'Courier Prime',Courier,monospace;color:#2a3320}
+@media(max-width:640px){
+  .dx-share[aria-label="Share this piece"]{padding:12px}
+  .dx-share[aria-label="Share this piece"] .shr{grid-template-columns:1fr;gap:12px}
+  .dx-share[aria-label="Share this piece"] .shr-btns{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
