@@ -634,8 +634,6 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script src="/assets/trd/share.js?v=20261030c" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/hires.css?v=20261031s1" data-trd-keep>
 <script src="/assets/trd/hires.js?v=20261031s1" defer data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/stack.css?v=20261110a" data-trd-keep>
-<script src="/assets/trd/stack.js?v=20261029b" data-trd-keep></script>
 
 <script src="/data/drop-cards.js?v=20261027i1" data-trd-keep></script>
 <!-- SEO and share preview -->
@@ -1576,9 +1574,8 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
      Only platforms where a drop's link preview looks right get a button (X, Truth Social, Facebook); Email, Text and
      Copy link cover the rest (TikTok and Instagram: Copy link). The shared page is /drops/share/N.html, whose
      preview is the drop's card and which sends people to #drop-N here.
-     thumb / file / igFile are the drop's card on R2 (data/drop-cards.js). The stack reads those and shows them,
-     then Download and Share hand the same files over to attach. Drops re-rendered with their real attached
-     images live under drops/v2/; a long drop also has a 4:5 ig/ crop, which the stack prefers for the post. */
+     thumb / file / igFile are the drop's card on R2 (data/drop-cards.js). Drops re-rendered with their real
+     attached images live under drops/v2/; a long drop also has a 4:5 ig/ crop. */
   var SHARE_ONLY=['x','truth','fb','email','sms','link'];
   function addShare(li){
     if(!window.trdShare||li.querySelector('.shr')) return;
@@ -2382,7 +2379,6 @@ section[id],details[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 14px)!impor
   setTimeout(mark,300);
 })();
 </script>
-<script>(function(){ if(window.trdStack) trdStack.mount(document.querySelector('.ldock-in')); })();</script>
 <style id="ledger-photos-dock">
 /* Loaded after #ldock-css so the Photos toggle can sit beside the search on phones,
    and the desktop right rail steps aside so the photo grid can use the full width. */
