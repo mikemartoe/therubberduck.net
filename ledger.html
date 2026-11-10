@@ -1575,13 +1575,21 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   /* Share a drop: a compact row of share icons under every drop (assets/trd/share.js, compact mode), no second screen.
      Only platforms where a drop's link preview looks right get a button (X, Truth Social, Facebook); Email, Text and
      Copy link cover the rest (TikTok and Instagram: Copy link). The shared page is /drops/share/N.html, whose
-     preview is the drop's card and which sends people to #drop-N here. */
+     preview is the drop's card and which sends people to #drop-N here.
+     thumb / file / igFile are the drop's card on R2 (data/drop-cards.js). The stack reads those and shows them,
+     then Download and Share hand the same files over to attach. Drops re-rendered with their real attached
+     images live under drops/v2/; a long drop also has a 4:5 ig/ crop, which the stack prefers for the post. */
   var SHARE_ONLY=['x','truth','fb','email','sms','link'];
   function addShare(li){
     if(!window.trdShare||li.querySelector('.shr')) return;
     var n=+li.id.replace('drop-',''), r=BYN[n], e=li.querySelector('.e'); if(!e) return;
+    var C=window.TRD_DROP_CARDS||{base:'https://memes.therubberduck.net/drops/',long:[]},
+        B=(C.v2&&C.v2.indexOf(n)>-1)?C.v2base:C.base;
     e.appendChild(trdShare.build({kind:'drop', id:String(n), page:'https://therubberduck.net/drops/share/'+n+'.html',
-      text:'Q drop #'+n+' \u00b7 '+(r?fmtDate(r.d):''), fileName:'q-drop-'+n+'.png', compact:true, only:SHARE_ONLY,
+      text:'Q drop #'+n+' \u00b7 '+(r?fmtDate(r.d):''),
+      thumb:B+'og/'+n+'.jpg', file:B+'card/'+n+'.png',
+      igFile:(C.long&&C.long.indexOf(n)>-1)?(B+'ig/'+n+'.png'):null,
+      fileName:'q-drop-'+n+'.png', compact:true, only:SHARE_ONLY,
       groupLabel:'Share Q drop #'+n}));
   }
   /* Drop images: the small copy in the list (lazy, sized up front so nothing jumps), the full copy in the lightbox. */
