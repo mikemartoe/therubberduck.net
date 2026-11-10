@@ -167,8 +167,9 @@ a{color:inherit}
 .np-mast sup{font-family:'EB Garamond',serif;font-size:.32em;vertical-align:1.3em;text-transform:none;letter-spacing:0}
 .np-tag{text-align:center;font:700 3.3cqw/1.25 'Courier Prime',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);margin:.6cqw 0 1.2cqw}
 .np-strip{display:flex;justify-content:space-between;gap:2cqw;border-top:.9cqw double var(--rule);border-bottom:.9cqw double var(--rule);padding:1.1cqw .5cqw;font:700 3.1cqw/1.1 'Courier Prime',monospace;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
-.np-hl{flex:0 0 37%;min-height:0;margin:2.4cqw 0 2.2cqw;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.np-hl span{display:block;width:100%;font:700 9cqw/.98 'Oswald','Arial Narrow',Impact,sans-serif;text-transform:uppercase;text-align:center;letter-spacing:-.005em;text-wrap:balance;overflow-wrap:normal;word-break:normal}
+/* Headline sizes to its lines so short titles don't sit in a reserved gap under the rule. */
+.np-hl{flex:0 0 auto;min-height:0;margin:2cqw 0 1.8cqw;display:flex;align-items:center;justify-content:center}
+.np-hl span{display:block;width:100%;font:700 9cqw/.98 'Oswald','Arial Narrow',Impact,sans-serif;text-transform:uppercase;text-align:center;letter-spacing:-.005em;text-wrap:pretty;text-wrap:balance;overflow-wrap:normal;word-break:normal}
 .np-body{flex:1;min-height:0;display:grid;grid-template-columns:56% 1fr;gap:3.5cqw;border-top:.4cqw solid var(--rule);padding-top:2.6cqw}
 .np-photo{position:relative;min-height:0;overflow:hidden;background:#cbbd9b}
 .np-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.25) sepia(.2) contrast(1.1) brightness(.98)}
@@ -182,7 +183,6 @@ a{color:inherit}
 .np.lead .np-mast{font-size:10cqw}
 .np.lead .np-tag{font-size:2.4cqw}
 .np.lead .np-strip,.np.lead .np-foot{font-size:2cqw}
-.np.lead .np-hl{flex-basis:30%}
 .np.lead .np-body{grid-template-columns:50% 1fr}
 .np.lead .np-x{font-size:2.3cqw;column-count:2}
 
@@ -199,7 +199,7 @@ a{color:inherit}
 .sheet .mast sup{font-family:'EB Garamond',serif;font-size:.3em;vertical-align:1.4em;text-transform:none;letter-spacing:0}
 .sheet .strip{display:flex;justify-content:space-between;gap:12px;border-top:3px double var(--rule);border-bottom:3px double var(--rule);padding:7px 2px;font:700 13px/1.3 'Courier Prime',monospace;letter-spacing:.12em;text-transform:uppercase}
 .kicker{display:table;margin:22px auto 0;background:var(--olive-dk);color:#fff6e4;font:700 13px/1.3 'Courier Prime',monospace;letter-spacing:.16em;text-transform:uppercase;padding:7px 12px;border:1px solid #6a7a48}
-.sheet h1{font:700 58px/1.02 'Oswald','Arial Narrow',Impact,sans-serif;text-transform:uppercase;text-align:center;margin:18px 0 12px;letter-spacing:-.005em;text-wrap:balance;overflow-wrap:normal;word-break:normal}
+.sheet h1{font:700 58px/1.02 'Oswald','Arial Narrow',Impact,sans-serif;text-transform:uppercase;text-align:center;margin:14px 0 12px;letter-spacing:-.005em;text-wrap:pretty;text-wrap:balance;overflow-wrap:normal;word-break:normal}
 .byline{text-align:center;font:700 14px/1.55 'Courier Prime',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border-bottom:1px solid var(--rule);padding-bottom:14px;margin:0 0 22px}
 .byline a{color:var(--red)}
 .byline .ox{white-space:nowrap}
@@ -281,12 +281,10 @@ a{color:inherit}
   .np-strip{font-size:3.6cqw}
   .np-foot{font-size:3.5cqw}
   .np-tag{font-size:3.8cqw}
-  .np-hl{flex-basis:40%}
   .np-body{grid-template-columns:1fr}
   .np-cols{display:none}
   .np.lead .np-tag{font-size:3.4cqw}
   .np.lead .np-strip,.np.lead .np-foot{font-size:3cqw}
-  .np.lead .np-hl{flex-basis:34%}
   .np.lead .np-body{grid-template-columns:52% 1fr}
   .np.lead .np-x{font-size:2.9cqw;column-count:1}
   .crumbs{font-size:12px;margin-bottom:10px}
@@ -295,7 +293,7 @@ a{color:inherit}
   .sheet .mast{font-size:40px}
   .sheet .strip{font-size:11px;letter-spacing:.04em}
   .kicker{font-size:12px;margin-top:16px}
-  .sheet h1{font-size:34px;margin:14px 0 10px}
+  .sheet h1{font-size:34px;margin:12px 0 10px}
   .byline{font-size:12.5px}
   .story{font-size:19px}
   .story h2{font-size:25px}.story h3{font-size:22px}
@@ -333,3 +331,26 @@ a{color:inherit}
   .dx-share .shr{grid-template-columns:1fr;gap:12px}
   .dx-share .shr-btns{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+
+/* STANDING LAYOUT (Nov 10, 2026) for every DUCK SAUCE card and article, PC and phone:
+   headline, then story text, then the ENTIRE photo / collage (uncropped, full width, natural aspect).
+   Cards size to their content; on small cards the column rules fill any leftover height so rows stay even with no empty gaps. */
+.np,.np.lead,.nr-grid .lead{aspect-ratio:auto}
+.np-body,.np.lead .np-body{flex:1 1 auto;display:flex;flex-direction:column;gap:2.6cqw;grid-template-columns:none}
+.np-x,.np-cols{order:1}
+.np-photo{order:2;flex:0 0 auto;overflow:visible;background:none;line-height:0}
+.np-photo img{width:100%;height:auto;max-height:none;object-fit:contain}
+.np-cols{display:block;flex:1 1 auto;min-height:6cqw}
+.np-x{flex:1 1 auto}
+.np.lead .np-x{column-count:1;font-size:3cqw;text-align:left;hyphens:manual}
+.story.nodrop > p:first-of-type:first-letter{float:none;font:inherit;padding:0;color:inherit}
+.sheet .story + .dx-share{margin-top:22px}
+@media (max-width:640px){
+  .np-cols{display:block}
+  .np.lead .np-x{font-size:3.6cqw}
+}
+/* lead cards that span two rows: leftover height becomes column rules under the story, never a blank gap */
+.np.lead .np-x{flex:0 0 auto}
+.np.lead .np-body:after{content:"";order:1;flex:1 1 auto;min-height:0;
+  background:repeating-linear-gradient(180deg,rgba(29,22,17,.55) 0 .45cqw,transparent .45cqw 1.3cqw);
+  -webkit-mask:linear-gradient(90deg,#000 48.5%,transparent 48.5%,transparent 51.5%,#000 51.5%);mask:linear-gradient(90deg,#000 48.5%,transparent 48.5%,transparent 51.5%,#000 51.5%)}
