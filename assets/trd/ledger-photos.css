@@ -1,0 +1,189 @@
+/* Ledger Photos view — Phase 1. No aspect-ratio or container-type on tiles
+   (WebKit iPhone bug, 2026-11-09: grid items with those can collapse).
+   Thumbs keep their own height via width/height attributes + width:100%; height:auto. */
+
+.ldock-view{
+  display:inline-flex;
+  flex:none;
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  background:var(--surface-1);
+}
+.ldock-view button{
+  min-height:36px;
+  padding:0 14px;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-family:var(--font-display);
+  font-size:12.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.ldock-view button + button{border-left:1px solid var(--border)}
+.ldock-view button:hover{color:var(--accent)}
+.ldock-view button[aria-pressed="true"]{background:var(--accent);color:#040705;font-weight:600}
+.ldock-view button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+.ph-types{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:10px 0 0;
+}
+.ph-types[hidden]{display:none}
+.ph-types .chip{min-height:34px;padding:0 12px;font-family:var(--font-display);font-size:11.5px;letter-spacing:.04em;border-radius:3px}
+.ph-types .chip[aria-pressed="true"]{color:#040705}
+
+.ph-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(168px, 1fr));
+  gap:10px;
+  margin:14px 0 28px;
+  width:100%;
+  min-width:0;
+}
+.ph-grid[hidden]{display:none}
+.ph-tile{
+  display:block;
+  width:100%;
+  min-width:0;
+  margin:0;
+  padding:0;
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:var(--surface-1);
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  cursor:zoom-in;
+  overflow:hidden;
+  transition:border-color .18s, box-shadow .18s;
+}
+.ph-tile:hover,.ph-tile:focus-visible{
+  border-color:var(--accent);
+  box-shadow:0 0 0 1px var(--accent),0 0 18px -6px rgba(0,255,65,.45);
+  outline:none;
+}
+.ph-thumb{
+  display:block;
+  width:100%;
+  min-width:0;
+  background:var(--surface-2);
+}
+.ph-thumb img{
+  display:block;
+  width:100%;
+  height:auto;
+  vertical-align:top;
+}
+.ph-meta{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding:8px 10px 9px;
+  min-width:0;
+}
+.ph-n{
+  font-family:var(--font-display);
+  font-size:13px;
+  font-weight:600;
+  color:var(--accent);
+  letter-spacing:.02em;
+  line-height:1.2;
+}
+.ph-d{
+  font-family:var(--font-display);
+  font-size:10.5px;
+  letter-spacing:.06em;
+  color:var(--muted);
+}
+.ph-cap{
+  margin:2px 0 0;
+  font-size:12.5px;
+  line-height:1.35;
+  color:var(--text);
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.ph-cap[hidden]{display:none}
+.ph-cap mark.lx-hl,.dlb-cap mark.lx-hl{
+  background:rgba(255,200,40,.3);
+  color:inherit;
+  font-weight:inherit;
+  padding:0 1px;
+  border-radius:2px;
+}
+
+/* Hide the drop list / pager while the Photos grid is up. Keep the search dock. */
+#main.lx-photos #arcList,
+#main.lx-photos #arcMore,
+#main.lx-photos #arcTop,
+#main.lx-photos .arc-foot,
+#main.lx-photos #lxPath,
+#main.lx-photos #lxStart,
+#main.lx-photos #start-here{display:none!important}
+#main.lx-photos #arcEmpty{display:none!important}
+
+@media (max-width:760px){
+  #main.lx-photos>#hires,
+  #main.lx-photos>.e3-hero-kinetic,
+  #main.lx-photos>#manifesto,
+  #main.lx-photos>#calendar,
+  #main.lx-photos #archive .arc-head{display:none!important}
+  #main.lx-photos #archive{padding-top:12px!important}
+  .ldock-view{flex:none;width:auto}
+  .ldock-view button{min-height:36px;padding:0 10px;font-size:11px}
+  .ph-grid{grid-template-columns:repeat(2, minmax(0, 1fr));gap:8px;margin-top:10px}
+  .ph-types .chip{min-height:36px;flex:1 1 auto}
+  .ph-meta{padding:7px 8px 8px}
+}
+
+@media (min-width:761px){
+  .ldock-view{min-height:36px}
+}
+
+/* Lightbox: sentence captions + links back to the drop. */
+.dlb-cap{
+  text-transform:none;
+  letter-spacing:0;
+  font:400 13.5px/1.4 var(--font-body);
+  color:var(--text);
+  max-width:min(72ch, calc(100vw - 32px));
+}
+.dlb-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px 14px;
+  margin:0;
+}
+.dlb-links a{
+  font-family:var(--font-display);
+  font-size:12px;
+  letter-spacing:.04em;
+  color:var(--accent);
+  text-decoration:none;
+  border-bottom:1px solid rgba(0,255,65,.35);
+}
+.dlb-links a:hover{border-bottom-color:var(--accent)}
+@media (max-width:640px){
+  .dlb{padding:60px 8px 88px}
+  .dlb-cap{font-size:13px}
+}
+
+@media (max-width:760px){
+  .ldock .arc-bar{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:8px;
+    align-items:center;
+  }
+  .ldock .arc-search{grid-column:1; flex:none !important; width:100%; min-width:0;}
+  .ldock-view{grid-column:2;}
+  .ldock-more{grid-column:1 / -1;}
+}

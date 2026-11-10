@@ -621,6 +621,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" data-trd-keep>
+<link rel="stylesheet" href="/assets/trd/ledger-photos.css?v=20261109p1">
 <script src="/assets/trd/suggest.js?v=20261103d" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
@@ -816,6 +817,8 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 </style>
 <script src="data/drops.js"></script>
 <script src="data/drop-images.js?v=20261030a"></script>
+<script src="data/drop-image-text.js?v=20261109p1"></script>
+<script src="data/drop-image-files.js?v=20261109p1"></script>
 <script src="assets/trd/ledger-search.js?v=20261103e"></script>
 <script src="assets/trd/ledger-starter.js?v=20261030" defer></script>
 <script src="assets/trd/ledger-path.js?v=20261029" defer></script>
@@ -1581,6 +1584,11 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   }
   /* Drop images: the small copy in the list (lazy, sized up front so nothing jumps), the full copy in the lightbox. */
   var DI=window.TRD_DROP_IMAGES||null;
+  function imgText(n,i){
+    var T=window.TRD_DROP_IMAGE_TEXT||{}, v=T[n+'_'+(i+1)];
+    if(v && typeof v==='object') v=v.alt||v.caption||'';
+    return String(v||'');
+  }
   function imgsOf(n){ return (DI&&DI.d&&DI.d[n])||null; }
   function imgsHTML(n){
     var a=imgsOf(n); if(!a||!a.length) return '';
@@ -1591,9 +1599,9 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     return '<div class="dimg'+(k>2?' dimg-wrap':'')+'" style="max-width:'+maxW+'px">'+groups.map(function(g){
       var gs=0; g.forEach(function(i){ gs+=a[i].sw/a[i].sh; });
       return '<div class="dimg-g" style="flex:'+gs.toFixed(4)+' 1 '+(GAP*(g.length-1))+'px;max-width:'+Math.round(MAXH*gs+GAP*(g.length-1))+'px">'+g.map(function(i){
-        var im=a[i], ar=im.sw/im.sh, lab='Q drop #'+n+(k>1?', image '+(i+1)+' of '+k:', image');
-        return '<button type="button" class="dimg-t" data-dimg="'+n+'" data-i="'+i+'" style="flex:'+ar.toFixed(4)+' 1 0px" aria-label="Enlarge '+lab+'">'+
-          '<img src="'+esc(DI.base+im.sm)+'" width="'+im.sw+'" height="'+im.sh+'" loading="lazy" decoding="async" alt="'+lab+'"></button>';
+        var im=a[i], ar=im.sw/im.sh, cap=imgText(n,i), lab=cap||('Q drop #'+n+(k>1?', image '+(i+1)+' of '+k:', image'));
+        return '<button type="button" class="dimg-t" data-dimg="'+n+'" data-i="'+i+'" style="flex:'+ar.toFixed(4)+' 1 0px" aria-label="Enlarge '+esc(lab)+'">'+
+          '<img src="'+esc(DI.base+im.sm)+'" width="'+im.sw+'" height="'+im.sh+'" loading="lazy" decoding="async" alt="'+esc(lab)+'"></button>';
       }).join('')+'</div>';
     }).join('')+'</div>';
   }
@@ -1604,7 +1612,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     var el=document.createElement('div');
     el.className='dlb'; el.id='dropLightbox'; el.hidden=true;
     el.setAttribute('role','dialog'); el.setAttribute('aria-modal','true'); el.setAttribute('aria-label','Drop image');
-    el.innerHTML='<figure class="dlb-fig"><img class="dlb-img" alt=""><figcaption class="dlb-cap"></figcaption></figure>'+
+    el.innerHTML='<figure class="dlb-fig"><img class="dlb-img" alt=""><figcaption class="dlb-cap"></figcaption><nav class="dlb-links"><a class="dlb-ledger" href="#">This drop in the Ledger</a><a class="dlb-page" href="#">Open the drop page</a></nav></figure>'+
       '<button type="button" class="dlb-x" aria-label="Close" title="Close">'+ico('<path d="M18 6L6 18M6 6l12 12"/>')+'</button>'+
       '<button type="button" class="dlb-prev" aria-label="Previous image" title="Previous image">'+ico('<path d="m15 18-6-6 6-6"/>')+'</button>'+
       '<button type="button" class="dlb-next" aria-label="Next image" title="Next image">'+ico('<path d="m9 18 6-6-6-6"/>')+'</button>';
@@ -1614,8 +1622,11 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     function show(n,i){
       var a=imgsOf(n); if(!a) return;
       i=(i+a.length)%a.length; cur.n=n; cur.i=i;
-      var im=a[i], t=++tok, lab='Q drop #'+n+(a.length>1?', image '+(i+1)+' of '+a.length:'');
+      var im=a[i], t=++tok, text=imgText(n,i), lab=text||('Q drop #'+n+(a.length>1?', image '+(i+1)+' of '+a.length:''));
       img.src=DI.base+im.sm; img.alt=lab; cap.textContent=lab;
+      var a1=el.querySelector('.dlb-ledger'), a2=el.querySelector('.dlb-page');
+      if(a1){ a1.href='/ledger.html#drop-'+n; a1.textContent='Q drop #'+n+' in the Ledger'; }
+      if(a2){ a2.href='/drops/'+n+'/'; a2.textContent='Open drop #'+n; }
       var full=new Image(); full.onload=function(){ if(t===tok) img.src=full.src; }; full.src=DI.base+im.src;
       bp.hidden=bn.hidden=a.length<2;
     }
@@ -1648,7 +1659,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       if(e.target===img) return;
       close();   /* a tap anywhere outside the picture closes it */
     });
-    LB={open:open,close:close};
+    LB={open:open,close:close,show:show};
     return LB;
   }
   list.addEventListener('click',function(ev){
@@ -1662,6 +1673,10 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   function mdq(m,d){ return MON[m-1]+' '+d; }
 
   function apply(){
+    if(window.TRDLedgerPhotos && window.TRDLedgerPhotos.state.view==='photos'){
+      window.TRDLedgerPhotos.refresh();
+      return;
+    }
     var res=LX.search(state.q,{noSyn:state.noSyn});
     state.res=res;
     state.jump=(res.kind==='number' && res.rows.length===1)?res.jump:null;
@@ -1930,7 +1945,11 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     urlT=setTimeout(function(){
       try{
         var u=new URL(location.href), q=state.q.trim();
-        u.searchParams.delete('q'); u.searchParams.delete('delta');
+        u.searchParams.delete('q'); u.searchParams.delete('delta'); u.searchParams.delete('view'); u.searchParams.delete('type');
+        if(window.TRDLedgerPhotos && window.TRDLedgerPhotos.state.view==='photos'){
+          u.searchParams.set('view','photos');
+          var typ=window.TRDLedgerPhotos.state.type; if(typ) u.searchParams.set('type',typ);
+        }
         if(/^(today|yesterday|tomorrow)$/i.test(q)) u.searchParams.set('delta',q.toLowerCase());
         else if(q) u.searchParams.set('q',q);
         if(q && /^#drop-\d+$/.test(u.hash)) u.hash='';
@@ -2078,7 +2097,10 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   [].slice.call(document.querySelectorAll('[data-arc-query]')).forEach(function(el){
     if(el.tagName==='INPUT'){ el.addEventListener('input',function(){ var v=el.value; clearTimeout(typeT); typeT=setTimeout(function(){ setQuery(v); },150); }); }
   });
-  window.TRDLedgerUI={setQuery:setQuery, state:state};
+  window.TRDLedgerUI={setQuery:setQuery, state:state, apply:apply, syncURL:syncURL, phoneFold:phoneFold, phoneResults:phoneResults,
+    openLightbox:function(n,i,from){ lightbox().open(n,i,from); },
+    showLightbox:function(n,i){ lightbox().show(n,i); },
+    closeLightbox:function(){ if(LB) LB.close(); }};
 
   (function deepLink(){
     var m=(location.hash||'').match(/^#drop-(\d+)$/), q=m?('#'+m[1]):'';
@@ -2345,12 +2367,28 @@ section[id],details[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 14px)!impor
   d.addEventListener('click',function(){ setTimeout(mark,0); });
   d.addEventListener('change',function(){ setTimeout(mark,0); });
   var q=document.getElementById('arcQuery'), long=q&&q.getAttribute('placeholder');
-  function ph(){ if(q) q.setAttribute('placeholder', innerWidth<760?'Search the Q drops':long); }
+  function ph(){ if(!q) return; if(document.documentElement.classList.contains('lx-photos')|| (document.getElementById('main')&&document.getElementById('main').classList.contains('lx-photos'))) return; q.setAttribute('placeholder', innerWidth<760?'Search the Q drops':long); }
   ph(); addEventListener('resize',ph);
   setTimeout(mark,300);
 })();
 </script>
 <script>(function(){ if(window.trdStack) trdStack.mount(document.querySelector('.ldock-in')); })();</script>
+<style id="ledger-photos-dock">
+/* Loaded after #ldock-css so the Photos toggle can sit beside the search on phones,
+   and the desktop right rail steps aside so the photo grid can use the full width. */
+@media (max-width:760px){
+  .ldock .arc-bar{display:grid !important;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+  .ldock .arc-search{grid-column:1;flex:none !important;width:auto !important;min-width:0}
+  .ldock-view{grid-column:2}
+  .ldock-more{grid-column:1 / -1}
+}
+html.lrail.lx-photos .arc-wrap,html.lx-photos.lrail .arc-wrap{grid-template-columns:minmax(0,1fr) !important}
+#main.lx-photos #lrail{display:none !important}
+@media (max-width:640px){
+  .dlb{padding:60px 8px 150px}
+}
+</style>
+<script src="assets/trd/ledger-photos.js?v=20261109p1"></script>
 <script src="/assets/trd/onair.js?v=20261109" defer data-trd-keep></script>
 </body>
 </html>
