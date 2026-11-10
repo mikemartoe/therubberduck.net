@@ -28,8 +28,12 @@ back.addEventListener('click',function(e){
   try{var r=document.referrer&&new URL(document.referrer);
     if(r&&r.origin===location.origin&&/\/pdfs(\.html)?$/.test(r.pathname)&&history.length>1){e.preventDefault();history.back();}}catch(err){}
 });
-if(!/^scif\/pdfs\/[^?#]+\.pdf$/i.test(f)||f.indexOf('..')>-1){document.getElementById('st').textContent='Document not found.';return;}
-var url='/'+f;document.getElementById('dl').href=url;
+var ALLOWED=/^https:\/\/(memes|media)\.therubberduck\.net\/[^?#]+\.pdf$/i;
+var url;
+if(ALLOWED.test(f)&&f.indexOf('..')<0){url=f;}
+else if(/^scif\/pdfs\/[^?#]+\.pdf$/i.test(f)&&f.indexOf('..')<0){
+  url='https://memes.therubberduck.net/'+f.split('/').map(function(s){try{return encodeURIComponent(decodeURIComponent(s));}catch(e){return encodeURIComponent(s);}}).join('/');
+}else{document.getElementById('st').textContent='Document not found.';return;}document.getElementById('dl').href=url;
 document.getElementById('t').textContent=t||f.split('/').pop();document.title=(t||'SCI[F] Document')+' · The Rubber Duck™';
 if(!window.pdfjsLib){location.replace(url);return;}
 pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.worker.min.js';

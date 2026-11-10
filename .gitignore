@@ -6,3 +6,7 @@ memes/staging/
 # R2-hosted meme binaries (do not push to GitHub Pages)
 memes/web/
 __pycache__/
+
+# Hosted on R2 (https://memes.therubberduck.net/) to keep the GitHub Pages artifact under 1 GB.
+scif/pdfs/*.pdf
+memes/card/
