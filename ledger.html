@@ -621,7 +621,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" data-trd-keep>
-<link rel="stylesheet" href="/assets/trd/ledger-photos.css?v=20261109p1">
+<link rel="stylesheet" href="/assets/trd/ledger-photos.css?v=20261109p2">
 <script src="/assets/trd/suggest.js?v=20261103d" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
@@ -804,7 +804,9 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
  .e3-nav-pill{height:auto;padding:10px 12px 0;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
  .e3-nav-pill .k-pill{position:static;left:auto;right:auto;bottom:auto;width:100%;justify-content:space-between;padding:6px 6px 6px 12px;gap:0}
  .e3-nav-pill .k-brand{margin:0}.e3-nav-pill .k-brand b{display:inline}
- .e3-nav-pill .k-links{display:none}
+ .e3-nav-pill .k-pill{flex-wrap:wrap}
+ .e3-nav-pill .k-links{display:flex;flex:1 1 100%;order:3;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .e3-nav-pill .k-links a{padding:0 10px;font-size:12px;height:36px}
  .e3-nav-pill .k-cta{margin-left:auto;padding:0 14px}.e3-nav-pill .k-cta b{display:inline}
 }
 .e3-hero-kinetic .k-card{background:var(--surface-1)!important;color:var(--text)!important;border:1px solid var(--border)!important}
@@ -822,7 +824,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script src="assets/trd/ledger-search.js?v=20261103e"></script>
 <script src="assets/trd/ledger-starter.js?v=20261030" defer></script>
 <script src="assets/trd/ledger-path.js?v=20261029" defer></script>
-<script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Calendar","href":"#calendar"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"New? Start here","href":"#start-here"}}</script>
+<script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Photo Search","href":"/ledger.html?view=photos"},{"label":"Calendar","href":"#calendar"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"New? Start here","href":"#start-here"}}</script>
 <script>
 (function(){
   var root=document.currentScript.closest('.e3-nav-pill'),D=JSON.parse(root.querySelector('script.data').textContent),esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
@@ -1656,7 +1658,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
       if(e.target.closest('.dlb-x')) return close();
       if(e.target.closest('.dlb-prev')) return show(cur.n,cur.i-1);
       if(e.target.closest('.dlb-next')) return show(cur.n,cur.i+1);
-      if(e.target===img) return;
+      if(e.target===img || e.target.closest('.dlb-fig')) return;
       close();   /* a tap anywhere outside the picture closes it */
     });
     LB={open:open,close:close,show:show};
@@ -2388,7 +2390,7 @@ html.lrail.lx-photos .arc-wrap,html.lx-photos.lrail .arc-wrap{grid-template-colu
   .dlb{padding:60px 8px 150px}
 }
 </style>
-<script src="assets/trd/ledger-photos.js?v=20261109p1"></script>
+<script src="assets/trd/ledger-photos.js?v=20261109p2"></script>
 <script src="/assets/trd/onair.js?v=20261109" defer data-trd-keep></script>
 </body>
 </html>

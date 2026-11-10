@@ -300,8 +300,64 @@
     else el.appendChild(nav);
     return nav;
   }
+  function shareId(n,i){ return n+'_'+(i+1); }
+  function parseShareId(s){
+    var m=String(s||'').trim().match(/^(\d+)_(\d+)$/);
+    if(!m) return null;
+    return {n:+m[1], i:+m[2]-1};
+  }
+  function shareHost(el){
+    var h=el.querySelector('#dlbShare');
+    if(!h){
+      h=document.createElement('div');
+      h.id='dlbShare';
+      var nav=el.querySelector('.dlb-links') || el.querySelector('.dlb-fig');
+      if(nav && nav.classList.contains('dlb-links')) nav.after(h);
+      else if(nav) nav.appendChild(h);
+      else el.appendChild(h);
+    }
+    return h;
+  }
+  function fillShare(n,i){
+    var el=document.getElementById('dropLightbox'); if(!el || !window.trdShare) return;
+    var host=shareHost(el);
+    host.innerHTML='';
+    var id=shareId(n,i), cap=capOf(n,i);
+    var im=null, arr=(DI && DI.d && (DI.d[n]||DI.d[String(n)])) || [];
+    im=arr[i];
+    var file=DI && DI.base && im ? (DI.base+im.src) : '';
+    var thumb=DI && DI.base && im ? (DI.base+(im.sm||im.src)) : file;
+    var text=(cap?cap+' \u00b7 ':'')+'Q drop #'+n+' \u00b7 The Drop Ledger';
+    host.appendChild(trdShare.build({
+      kind:'photo', id:id, label:cap||('Q drop #'+n),
+      page:'https://therubberduck.net/drops/photo/'+encodeURIComponent(id)+'.html',
+      noPic:true, text:text, thumb:thumb, file:file, igFile:null,
+      fileName:(im && im.src ? String(im.src).split('/').pop() : id+'.webp')
+    }));
+  }
+  function setImgParam(id){
+    try{
+      var u=new URL(location.href);
+      if(id) u.searchParams.set('img', id);
+      else u.searchParams.delete('img');
+      if(u.href!==location.href) history.replaceState(history.state, '', u.href);
+    }catch(e){}
+  }
+  function hookLightboxClose(){
+    var el=document.getElementById('dropLightbox');
+    if(!el || el._phCloseHook) return;
+    el._phCloseHook=true;
+    var mo=new MutationObserver(function(){
+      if(el.hidden){
+        walk=null;
+        if(state.view==='photos') setImgParam('');
+      }
+    });
+    mo.observe(el, {attributes:true, attributeFilter:['hidden']});
+  }
   function fillLightbox(n,i){
     var el=document.getElementById('dropLightbox'); if(!el) return;
+    hookLightboxClose();
     var img=el.querySelector('.dlb-img'), cap=el.querySelector('.dlb-cap');
     var text=capOf(n,i);
     var lab=text || ('Q drop #'+n);
@@ -311,6 +367,25 @@
     var a1=nav.querySelector('.dlb-ledger'), a2=nav.querySelector('.dlb-page');
     if(a1){ a1.href='/ledger.html#drop-'+n; a1.setAttribute('data-ph-ledger', String(n)); a1.textContent='Q drop #'+n+' in the Ledger'; }
     if(a2){ a2.href='/drops/'+n+'/'; a2.textContent='Open drop #'+n; }
+    if(state.view==='photos'){
+      fillShare(n,i);
+      setImgParam(shareId(n,i));
+    }
+  }
+  function openById(id){
+    var p=parseShareId(id); if(!p) return false;
+    var it=null;
+    ITEMS.forEach(function(x){ if(!it && x.n===p.n && x.i===p.i) it=x; });
+    if(!it) return false;
+    /* if the current filter does not include it, still open it */
+    var inView=state.filtered.some(function(x){ return x.n===it.n && x.i===it.i; });
+    if(!inView){
+      openFromGrid(it, null);
+      walk={rows:[it], idx:0};
+    } else {
+      openFromGrid(it, null);
+    }
+    return true;
   }
   document.addEventListener('click', function(e){
     var a=e.target.closest('a[data-ph-ledger]'); if(!a) return;
@@ -409,12 +484,22 @@
     setViewButtons();
     if(main) main.classList.toggle('lx-photos', state.view==='photos');
     document.documentElement.classList.toggle('lx-photos', state.view==='photos');
+    var navLinks=document.querySelectorAll('.e3-nav-pill .k-links a');
+    var phNav=document.querySelector('.e3-nav-pill .k-links a[href*="view=photos"]');
+    if(phNav){
+      if(state.view==='photos'){
+        navLinks.forEach(function(a){ a.classList.toggle('k-current', a===phNav); });
+      } else {
+        phNav.classList.remove('k-current');
+      }
+    }
     typesEl.hidden=state.view!=='photos';
     if(state.view!=='photos'){
       grid.hidden=true;
       grid.innerHTML='';
       shown=0;
       walk=null;
+      setImgParam('');
       placeholder();
       if(!opts.skipUrl) syncURL();
       /* let the drop list re-show its own info */
@@ -449,14 +534,15 @@
   /* Public caption helper used by the drop-list lightbox as well. */
   root.TRDDropCap=capOf;
 
-  /* Boot from ?view=photos (and optional ?type=). */
+  /* Boot from ?view=photos (and optional ?type= / ?img=). */
   (function boot(){
-    var view='drops', type='';
+    var view='drops', type='', img='';
     try{
       var sp=new URLSearchParams(location.search);
       if((sp.get('view')||'').toLowerCase()==='photos') view='photos';
-      var t=(sp.get('type')||'').toLowerCase();
-      if(TYPES.some(function(x){ return x.id===t; })) type=t;
+      var typ=(sp.get('type')||'').toLowerCase();
+      if(TYPES.some(function(x){ return x.id===typ; })) type=typ;
+      img=(sp.get('img')||'').trim();
     }catch(e){}
     state.type=type;
     setTypeButtons();
@@ -465,9 +551,12 @@
       var a=document.getElementById('archive');
       if(a) setTimeout(function(){ a.scrollIntoView({block:'start', behavior:'auto'}); }, 0);
     }
+    if(view==='photos' && img){
+      setTimeout(function(){ openById(img); }, 0);
+    }
   })();
 
   placeholder();
   addEventListener('resize', placeholder);
-  root.TRDLedgerPhotos={setView:setView, state:state, items:ITEMS, filter:filterPhotos, capOf:capOf, refresh:applyPhotos};
+  root.TRDLedgerPhotos={setView:setView, state:state, items:ITEMS, filter:filterPhotos, capOf:capOf, refresh:applyPhotos, openById:openById};
 })(typeof window!=='undefined'?window:globalThis);

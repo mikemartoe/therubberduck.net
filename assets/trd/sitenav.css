@@ -10,8 +10,8 @@
 .tn-logo img{display:block;width:40px;height:34px;object-fit:contain}
 .tn-wm{font:700 27px/1 'TRN Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;letter-spacing:.005em;white-space:nowrap}
 .tn-wm sup{font-size:.36em;vertical-align:1.1em;margin-left:1px}
-.tn-links{flex:1;display:flex;justify-content:center;align-items:center;gap:clamp(6px,1.2vw,18px);min-width:0}
-.tn-links a{color:#f3e6c8;text-decoration:none;text-transform:uppercase;letter-spacing:.06em;font-size:13px;padding:8px 6px;border-radius:4px;white-space:nowrap;border-bottom:2px solid transparent}
+.tn-links{flex:1;display:flex;justify-content:center;align-items:center;gap:clamp(4px,0.7vw,12px);min-width:0}
+.tn-links a{color:#f3e6c8;text-decoration:none;text-transform:uppercase;letter-spacing:.05em;font-size:13px;padding:8px 4px;border-radius:4px;white-space:nowrap;border-bottom:2px solid transparent}
 .tn-links a:hover,.tn-links a:focus-visible{color:#ffd77a;border-bottom-color:#e3a82b}
 .tn-links a[aria-current="page"]{color:#ffd77a;border-bottom-color:#e3a82b}
 .tn-search{flex:none;position:relative;display:flex;align-items:center;margin:0}

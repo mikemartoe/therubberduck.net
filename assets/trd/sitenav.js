@@ -10,7 +10,7 @@
   var W = window, D = document;
   if (W.trdNav) return;
   var on = function (t, ty, fn, o) { EventTarget.prototype.addEventListener.call(t, ty, fn, o); };
-  var IDX = '/assets/search/site-index.json?v=2', data = null, loading = null, hay = null, sel = -1, last = '';
+  var IDX = '/assets/search/site-index.json?v=3', data = null, loading = null, hay = null, sel = -1, last = '';
   var RANK = [0, 6, 2, 3, 4, 1, 1, 7];   /* Room, Q drop, PDF, Video, Recording, Collectible, Book, Meme */
   function $(id) { return D.getElementById(id); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }

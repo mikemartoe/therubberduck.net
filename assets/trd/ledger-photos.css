@@ -187,3 +187,25 @@
   .ldock-view{grid-column:2;}
   .ldock-more{grid-column:1 / -1;}
 }
+
+
+/* Share row in the Photos lightbox — same labeled grid as the Meme Dump.
+   .dlb button is otherwise position:absolute (close / prev / next). */
+#dlbShare{width:min(420px,100%);max-width:100%}
+#dlbShare:empty{display:none}
+#dlbShare .shr{margin:4px 0 0}
+.dlb #dlbShare button{
+  position:static;
+  width:auto;
+  height:auto;
+  min-height:58px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+@media (max-width:640px){
+  .dlb:has(#dlbShare .shr){align-items:flex-start;overflow:auto;padding-bottom:96px}
+  .dlb:has(#dlbShare .shr) .dlb-img{max-height:min(46vh, calc(100dvh - 320px))}
+  .dlb #dlbShare button{min-height:62px}
+}

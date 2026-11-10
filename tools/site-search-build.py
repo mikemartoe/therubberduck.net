@@ -32,10 +32,13 @@ ROOMS = [('index.html', '/', 'Home'), ('videos.html', '/videos.html', 'Private T
          ('sponsor.html', '/sponsor.html', 'Sponsor the Site'), ('Qdrops/index.html', '/Qdrops/', 'Q drops by month')]
 FROZEN = {'ledger.html': 'Every Q drop, dated and searchable.',      # frozen pages: never opened by this script
           'album.html': 'The Red Pill Album by The Rubber Duck: 22 tracks, play it right here.'}
+PHOTO_SEARCH = (0, 'Photo Search (drop images)', '/ledger.html?view=photos',
+                'Search every photo, screenshot, meme and graphic that appeared in a Q drop, by caption, filename, number or type.')
 for f, u, name in ROOMS:
     if f in FROZEN: rows.append([0, name, u, FROZEN[f]])
     elif os.path.exists(f):
         t, d = page(f); rows.append([0, name, u, d])
+rows.append(list(PHOTO_SEARCH))
 def section(folder, ti):
     for f in sorted(glob.glob(folder + '/*/index.html')):
         t, d = page(f); rows.append([ti, t, '/' + os.path.dirname(f) + '/', d])
