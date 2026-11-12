@@ -10,6 +10,12 @@
   'use strict';
   var W = window, D = document;
   if (W.trdDropView) return;
+  if (!W.trdSourceLink && !D.querySelector('script[data-trd-source]')) {
+    var srcLink = D.createElement('script');
+    srcLink.src = '/assets/trd/source-link.js?v=20261112b';
+    srcLink.setAttribute('data-trd-source', '');
+    (D.head || D.documentElement).appendChild(srcLink);
+  }
 
   var SITE = 'https://therubberduck.net';
   var MAX = 4966;
@@ -60,7 +66,7 @@
     if (D.querySelector('link[data-trd-drop-view]')) return;
     var l = D.createElement('link');
     l.rel = 'stylesheet';
-    l.href = '/assets/trd/drop-view.css?v=20261112a';
+    l.href = '/assets/trd/drop-view.css?v=20261112b';
     l.setAttribute('data-trd-drop-view', '');
     l.setAttribute('data-trd-keep', '');
     (D.head || D.documentElement).appendChild(l);
@@ -348,6 +354,22 @@
       host.innerHTML = '<p class="dv-url"><a href="' + esc(SITE + '/drops/share/' + n + '.html') + '">Share page for Q drop #' + n + '</a></p>';
     });
   }
+  function sourceHTML(rec) {
+    var raw = rec && rec[4];
+    var api = W.trdSourceLink;
+    if (!raw || !api) return '';
+    var post = api.url(raw);
+    if (!post || /(?:^|\.)8ch\.net$/i.test(api.host(post) || '')) return '';
+    var threadRaw = String(raw).split('#')[0];
+    var thread = api.url(threadRaw);
+    var html = '<p class="dv-src"><a href="' + esc(post) + '" target="_blank" rel="noopener noreferrer">' +
+      esc(api.label(post)) + ' <span class="h">' + esc(api.host(post)) + '</span></a>';
+    if (thread && thread !== post) {
+      html += '<a href="' + esc(thread) + '" target="_blank" rel="noopener noreferrer">See original anon research <span class="h">' +
+        esc(api.host(thread)) + '</span></a>';
+    }
+    return html + '</p>';
+  }
   function imagesHTML(n) {
     var DI = W.TRD_DROP_IMAGES;
     var a = DI && DI.d && (DI.d[n] || DI.d[String(n)]);
@@ -361,9 +383,11 @@
     var n = win._n, body = win.querySelector('.dv-body');
     var when = rec ? whenOf(rec[1]) : '';
     var text = rec ? (rec[5] || '') : '';
+    var source = sourceHTML(rec);
     body.innerHTML =
       (when ? '<p class="dv-when">' + esc(when) + '</p>' : '') +
       (text ? '<div class="dv-text">' + textHTML(text) + '</div>' : '<p class="dv-empty">No body text in the capture — an image-only post.</p>') +
+      source +
       '<div class="dv-pics"></div><div class="dv-share"></div>';
     enhance(body.querySelector('.dv-text'));
     var pics = body.querySelector('.dv-pics');
@@ -433,9 +457,12 @@
     win.addEventListener('pointerdown', function () { raise(win); });
     win.querySelector('.dv-x').addEventListener('click', function () { close(win); });
     win.querySelector('.dv-x').focus();
-    loadMap().then(function (all) {
+    Promise.all([
+      loadMap(),
+      loadScript('/assets/trd/source-link.js?v=20261112b', function () { return !!W.trdSourceLink; }).catch(function () {})
+    ]).then(function (res) {
       if (!win.isConnected) return;
-      var rec = all[n];
+      var rec = res[0][n];
       if (!rec) {
         win.querySelector('.dv-body').innerHTML = '<p class="dv-empty">No drop #' + n + ' in the archive.</p>';
         return;

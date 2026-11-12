@@ -131,48 +131,19 @@
   });
   W.trdNav = { load: load, run: run };
 })();
-/* Dead 8chan links (Mike t1950u): 8ch.net has been offline since 2019, and about 3,340 Q drop source links
-   still point at it. Every 8ch.net link on a page that loads this file opens the Wayback Machine copy
-   (https://web.archive.org/web/2/<original>) instead, and the original address stays visible as text.
-   One rule, applied in the browser to static pages and to anything rendered later (drop text, X posts).
-   ledger.html and album.html are left alone on purpose. */
+/* 8ch.net deep links open the 8ch.net homepage, and the Wayback Machine blocks
+   8ch.net itself. assets/trd/source-link.js sends each one to the live 8kun
+   thread or to a Wayback capture of the dchan archive of that same post.
+   Runs on every page that loads this file, including the ledger. */
 (function () {
   var W = window, D = document;
-  if (W.trdArch || /^\/(ledger|album)\.html$/i.test(location.pathname)) return;
-  var HOST = /^(?:www\.)?8ch\.net$/i, WB = 'https://web.archive.org/web/2/';
-  function fix(a) {
-    if (a.getAttribute('data-trd-arch')) return;
-    var h = a.getAttribute('href'); if (!h || h.indexOf('8ch.net') < 0) return;
-    var u; try { u = new URL(h, location.href); } catch (e) { return; }
-    if (!HOST.test(u.hostname)) return;
-    var orig = u.href, shown = orig.replace(/^https?:\/\/(?:www\.)?/i, '');
-    a.setAttribute('data-trd-arch', orig);
-    a.setAttribute('href', WB + orig);
-    a.setAttribute('title', '8ch.net has been offline since 2019. Opens the archived copy on the Wayback Machine. Original: ' + orig);
-    if (!a.getAttribute('target')) { a.setAttribute('target', '_blank'); a.setAttribute('rel', 'nofollow noopener'); }
-    var txt = (a.textContent || '').replace(/^https?:\/\/(?:www\.)?/i, '').trim();
-    var note = D.createElement('span');
-    note.className = 'trd-arch-note';
-    note.textContent = txt === shown ? ' (archived copy)' : ' (archived copy; original: ' + shown + ')';
-    a.parentNode && a.parentNode.insertBefore(note, a.nextSibling);
-  }
-  function scan(root) {
-    if (!root || !root.querySelectorAll) return;
-    if (root.tagName === 'A') fix(root);
-    var l = root.querySelectorAll('a[href*="8ch.net"]:not([data-trd-arch])');
-    for (var i = 0; i < l.length; i++) fix(l[i]);
-  }
-  var queued = false;
-  function later() { if (queued) return; queued = true; (W.requestAnimationFrame || setTimeout)(function () { queued = false; scan(D.body); }); }
-  function start() {
-    scan(D.body);
-    var MO = W.MutationObserver; if (MO && D.body) new MO(later).observe(D.body, { childList: true, subtree: true });
-  }
-  if (!D.getElementById('trd-arch-css')) {
-    var st = D.createElement('style'); st.id = 'trd-arch-css';
-    st.textContent = '.trd-arch-note{font-size:.85em;opacity:.75;word-break:break-all}';
-    (D.head || D.documentElement).appendChild(st);
-  }
-  if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', start); else start();
-  W.trdArch = { scan: scan };
+  if (W.trdArch) return;
+  function boot() { if (W.trdSourceLink) W.trdSourceLink.scan(D.body); }
+  if (W.trdSourceLink) { W.trdArch = { scan: W.trdSourceLink.scan }; boot(); return; }
+  if (D.querySelector('script[data-trd-source]')) { W.trdArch = { scan: function () {} }; return; }
+  var s = D.createElement('script');
+  s.src = '/assets/trd/source-link.js?v=20261112b';
+  s.setAttribute('data-trd-source', '');
+  s.onload = function () { W.trdArch = { scan: W.trdSourceLink ? W.trdSourceLink.scan : function () {} }; boot(); };
+  (D.head || D.documentElement).appendChild(s);
 })();

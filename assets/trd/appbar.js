@@ -3,7 +3,7 @@
 (function () {
   if (window.trdDropView || document.querySelector('script[data-trd-drop-view]')) return;
   var s = document.createElement('script');
-  s.src = '/assets/trd/drop-view.js?v=20261112a';
+  s.src = '/assets/trd/drop-view.js?v=20261112b';
   s.setAttribute('data-trd-drop-view', '');
   s.setAttribute('data-trd-keep', '');
   (document.head || document.documentElement).appendChild(s);

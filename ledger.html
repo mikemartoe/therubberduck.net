@@ -626,7 +626,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
-<script src="/assets/trd/duckpod.js" data-trd-keep></script>
+<script src="/assets/trd/duckpod.js?v=20261112b" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/share.css?v=20261030c" data-trd-keep>
@@ -661,7 +661,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://therubberduck.net/#org","name":"The Rubber Duck","alternateName":["TRD","The Rubber Duck™","TRD Collectibles"],"url":"https://therubberduck.net/","logo":{"@type":"ImageObject","url":"https://therubberduck.net/favicon-192.png","width":192,"height":192},"image":"https://therubberduck.net/images/brand/trd-share-2026.jpg","description":"An open archive of Trump and Q-era research: every Q drop, videos, X Spaces, PDFs, memes and the X archive, plus TRD Collectibles and the book anon mission.","sameAs":["https://x.com/TheRubberDuck79","https://x.com/TheRubberDuck78","https://rumble.com/user/TheRubberDuck78","https://rubberduck41.gumroad.com/","https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4","https://music.apple.com/us/album/the-red-pill-album/1896233683"]},{"@type":"WebSite","@id":"https://therubberduck.net/#website","url":"https://therubberduck.net/","name":"The Rubber Duck","alternateName":["TRD","therubberduck.net"],"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage":"en","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://therubberduck.net/ledger.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"CollectionPage","@id":"https://therubberduck.net/ledger.html#page","url":"https://therubberduck.net/ledger.html","name":"The Drop Ledger: Every Q Drop, In Order | The Rubber Duck™","description":"Every numbered Q drop, #1 to #4,966, in order as originally posted. Search by number, date or phrase, with a way back to each original source.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage":"en","breadcrumb":{"@id":"https://therubberduck.net/ledger.html#crumbs"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"},{"@type":"ListItem","position":2,"name":"The Drop Ledger","item":"https://therubberduck.net/ledger.html"}],"@id":"https://therubberduck.net/ledger.html#crumbs"},{"@type":"Dataset","name":"The Drop Ledger: every numbered Q drop, #1 to #4,966","description":"Every numbered Q drop from October 2017 to November 2022, in order, with dates and full text.","url":"https://therubberduck.net/drops/","creator":{"@id":"https://therubberduck.net/#org"},"isAccessibleForFree":true,"temporalCoverage":"2017-10-28/2022-11-27","distribution":{"@type":"DataDownload","encodingFormat":"application/javascript","contentUrl":"https://therubberduck.net/data/drops.js"}}]}</script>
 <!-- seo:end -->
-<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261030a" defer data-trd-keep></script>
+<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261112b" defer data-trd-keep></script>
 <style id="lrail-css">
 /* Desktop only (>=1100px), Mike-approved v2 layout (2026-11-03). Phones and tablets (<1100px) never match these rules.
    1) Each drop: number and date as a header line on top ("#4961 • 8 Nov 2022"), the text uses the full column width,
@@ -1431,6 +1431,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   <span data-icon="sun"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon" aria-hidden="true" focusable="false"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></g></svg></span>
 </button>
 
+<script src="assets/trd/source-link.js?v=20261112b"></script>
 <script>
 /* ---------------- theme ---------------- */
 (function(){
@@ -1719,16 +1720,25 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     info.innerHTML=h+(acts?'<span class="lx-acts">'+acts+'</span>':'');
     info.hidden=false;
   }
+  /* 8ch.net deep links now open that site's homepage. Open the same thread and
+     post on 8kun or on a Wayback capture of the dchan archive instead. */
+  function openOf(u){
+    if(!u || !window.trdSourceLink) return u || '';
+    var n = trdSourceLink.url(u);
+    if(!n || /(?:^|\.)8ch\.net$/i.test((trdSourceLink.host(n) || ''))) return '';
+    return n;
+  }
   function rowHTML(r, caps){
     var pics = imgsHTML(r.n);
     var body = r.e
       ? '<div class="ex fmt">'+fmtBlock(r.e)+'</div>'+pics
       : (pics || '<span class="nobody">No body text in the capture — an image-only post.</span>');
     var src = '<span class="srcrow">';
-    if(r.l){
-      src += '<a class="src src-post" href="'+esc(r.l)+'" target="_blank" rel="noopener noreferrer" title="The post this drop was made in, as captured"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">'+esc(srcLabel(r.l))+'</span><span class="src-host">'+esc(hostOf(r.l))+'</span></a>';
-      var th = threadOf(r.l);
-      if(th && th!==r.l){
+    var post = r.l ? openOf(r.l) : '';
+    if(post){
+      src += '<a class="src src-post" href="'+esc(post)+'" target="_blank" rel="noopener noreferrer" title="The post this drop was made in, as captured"><span class="src-arrow" aria-hidden="true">↗</span><span class="src-lbl">'+esc(srcLabel(post))+'</span><span class="src-host">'+esc(hostOf(post))+'</span></a>';
+      var th = openOf(threadOf(r.l));
+      if(th && th!==post){
         src += '<a class="src src-thread" href="'+esc(th)+'" target="_blank" rel="noopener noreferrer" title="Open the whole reply thread this drop started"><span class="src-arrow" aria-hidden="true">⤷</span><span class="src-lbl">See original anon research</span><span class="src-host">'+esc(hostOf(th))+'</span></a>';
       }
     } else {

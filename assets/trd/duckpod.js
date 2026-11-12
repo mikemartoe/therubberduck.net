@@ -2,7 +2,7 @@
 (function () {
   if (window.trdDropView || document.querySelector('script[data-trd-drop-view]')) return;
   var s = document.createElement('script');
-  s.src = '/assets/trd/drop-view.js?v=20261112a';
+  s.src = '/assets/trd/drop-view.js?v=20261112b';
   s.setAttribute('data-trd-drop-view', '');
   s.setAttribute('data-trd-keep', '');
   (document.head || document.documentElement).appendChild(s);
@@ -15,7 +15,7 @@
      the pod then resumes the saved track and position from localStorage.
    Include once per page, in <head>:
      <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
-     <script src="/assets/trd/duckpod.js" data-trd-keep></script>          */
+     <script src="/assets/trd/duckpod.js?v=20261112b" data-trd-keep></script>          */
 (function () {
   'use strict';
   var W = window, D = document;
