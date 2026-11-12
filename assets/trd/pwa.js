@@ -1,3 +1,12 @@
+/* Shared isolated-drop window for the installed app and any page that only loads the PWA script. */
+(function () {
+  if (window.trdDropView || document.querySelector('script[data-trd-drop-view]')) return;
+  var s = document.createElement('script');
+  s.src = '/assets/trd/drop-view.js?v=20261112a';
+  s.setAttribute('data-trd-drop-view', '');
+  s.setAttribute('data-trd-keep', '');
+  (document.head || document.documentElement).appendChild(s);
+})();
 /* The Rubber Duck web app (PWA): service worker, install banner, push alerts. Preview 2026-10-30.
    Alerts UI renders into any element with [data-trd-alerts]. Install banner shows on phones/tablets only. */
 (function () {

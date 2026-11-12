@@ -1,3 +1,12 @@
+/* Shared isolated-drop window. Loaded with the pod so every room that has the pod gets it. */
+(function () {
+  if (window.trdDropView || document.querySelector('script[data-trd-drop-view]')) return;
+  var s = document.createElement('script');
+  s.src = '/assets/trd/drop-view.js?v=20261112a';
+  s.setAttribute('data-trd-drop-view', '');
+  s.setAttribute('data-trd-keep', '');
+  (document.head || document.documentElement).appendChild(s);
+})();
 /* The Duck Pod: a site-wide player for The Red Pill Album by The Rubber Duck.
    - One <audio> element that lives for the whole visit.
    - A small soft-navigation router: internal links fetch the next page and swap

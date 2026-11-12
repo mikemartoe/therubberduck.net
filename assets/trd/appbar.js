@@ -1,3 +1,13 @@
+/* Loads the shared isolated-drop window on every archive page that includes this file,
+   including a normal browser tab (the app bar below still runs only when installed). */
+(function () {
+  if (window.trdDropView || document.querySelector('script[data-trd-drop-view]')) return;
+  var s = document.createElement('script');
+  s.src = '/assets/trd/drop-view.js?v=20261112a';
+  s.setAttribute('data-trd-drop-view', '');
+  s.setAttribute('data-trd-keep', '');
+  (document.head || document.documentElement).appendChild(s);
+})();
 /* The Rubber Duck web app: app bar for the static archive pages (Deltas, Q Proofs, Q drop pages).
    Does nothing in a normal browser tab. Only when the page runs inside the installed app
    (display-mode: standalone, or iOS navigator.standalone) it:
