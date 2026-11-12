@@ -108,6 +108,7 @@ figure{{margin:14px 0 0}}figure img{{display:block;width:auto;max-width:100%;hei
 <p class="ft"><a href="/">The Rubber Duck&trade;</a> &middot; therubberduck.net</p>
 </main>
 <script>document.getElementById("go").href="/ledger.html"+location.search+"#drop-{n}";</script>
+<script src="/assets/trd/drop-view.js?v=20261112a" data-trd-keep></script>
 </body></html>
 '''.format(goat=GOAT, when=esc(when), body=esc(text), figs=figs(n), t=esc(title), d=esc(desc), u=esc('%s/drops/share/%d.html' % (SITE, n)), canon=esc('%s/drops/%d/' % (SITE, n)),
            i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=630 if n in V4D else V3D[n]['og2_h'] if n in V3D else V2D[n]['og2_h'] if n in V2D else OG_H.get(n, 630))
