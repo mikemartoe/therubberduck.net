@@ -282,6 +282,9 @@ def hand_fixes(generated, committed):
     if len(a) != len(b): return None
     fx = {x: y for x, y in zip(a, b) if x != y}
     redo = HREF.sub(lambda m: 'href="%s"' % fx.get(m.group(1), m.group(1)), generated)
+    # Visible URL text (the link label) is often changed along with the href.
+    for old, newu in sorted(fx.items(), key=lambda kv: -len(kv[0])):
+        redo = redo.replace(old, newu)
     return fx if redo == committed else None
 
 # ---------------------------------------------------------------- apply

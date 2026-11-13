@@ -223,7 +223,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <p><b>The archive stays free.</b> Keep it running: pick up a signed cap or tee at <a href="/merch.html">TRD Collectibles</a>, or get the book <a href="/book/anon-mission/">anon mission, Volume 1</a> ($19.99 on Gumroad).</p>
 </aside>
 <footer class="wrap foot"><p>{E(BRAND)} &middot; <a href="/">therubberduck.net</a> &middot; <a href="https://x.com/TheRubberDuck79" rel="me">@TheRubberDuck79</a> &middot; <a href="https://x.com/TheRubberDuck78" rel="me">@TheRubberDuck78</a> &middot; <a href="https://rumble.com/user/TheRubberDuck78" rel="me">Rumble</a> &middot; <a href="/drops/">Q drops by month</a> &middot; <a href="/x/archive/">X posts by month</a> &middot; <a href="/library/">PDF library</a> &middot; <a href="/watch/">Videos</a> &middot; <a href="/listen/">Spaces and shows</a></p></footer>
-<script src="/assets/trd/drop-view.js?v=20261112a" data-trd-keep></script>
+<script src="/assets/trd/drop-view.js?v=20261112b" data-trd-keep></script>
 </body>
 </html>
 '''
