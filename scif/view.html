@@ -24,9 +24,19 @@ h1{font-size:15px;margin:12px 14px 4px;color:#ffe2a0;word-break:break-word}
 (function(){
 var q=new URLSearchParams(location.search),f=q.get('f')||'',t=q.get('t')||'';
 var back=document.getElementById('back');
+var backPath=q.get('back')||'';
+if(/^\/[A-Za-z0-9._~\/-]+$/.test(backPath)&&backPath.indexOf('..')<0&&backPath.length<180){
+  back.href=backPath;
+  back.setAttribute('aria-label','Back');
+  var label=back.lastChild;
+  if(label&&label.nodeType===3) label.nodeValue=' Back';
+}
 back.addEventListener('click',function(e){
   try{var r=document.referrer&&new URL(document.referrer);
-    if(r&&r.origin===location.origin&&/\/pdfs(\.html)?$/.test(r.pathname)&&history.length>1){e.preventDefault();history.back();}}catch(err){}
+    var same=r&&r.origin===location.origin;
+    var okPdf=same&&/\/pdfs(\.html)?$/.test(r.pathname);
+    var okBack=same&&backPath&&(r.pathname===backPath||r.pathname.replace(/\/$/,'')===backPath.replace(/\/$/,''));
+    if((okPdf||okBack)&&history.length>1){e.preventDefault();history.back();}}catch(err){}
 });
 var ALLOWED=/^https:\/\/(memes|media)\.therubberduck\.net\/[^?#]+\.pdf$/i;
 var url;

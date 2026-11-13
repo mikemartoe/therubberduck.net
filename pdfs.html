@@ -56,7 +56,7 @@ button{font:inherit;cursor:pointer}
 .lamp::after{content:"";position:absolute;left:50%;top:12px;transform:translateX(-50%);width:150px;height:24px;border-radius:0 0 80px 80px/0 0 24px 24px;background:linear-gradient(#2c3a2c,#17201a);box-shadow:0 14px 40px 10px rgba(255,214,140,.35)}
 .wrap{position:relative;max-width:var(--max);margin:0 auto;padding:0 var(--gap)}
 
-.intro{display:grid;grid-template-columns:1.35fr 1fr;gap:var(--gap);align-items:stretch;padding:70px 0 var(--gap)}
+.intro{display:grid;grid-template-columns:1.35fr 1fr;gap:var(--gap);align-items:stretch;padding:10px 0 var(--gap)}
 .panel{background:rgba(14,15,12,.72);border:1px solid rgba(232,222,190,.16);box-shadow:inset 0 0 0 4px rgba(0,0,0,.25),0 18px 40px rgba(0,0,0,.35);padding:30px 34px;display:flex;flex-direction:column}
 .kicker{font-family:var(--label);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#d9c48f;font-size:15px;margin:0 0 6px}
 h1.room-title{font-family:var(--display);font-weight:700;font-size:84px;line-height:.92;margin:0 0 14px;color:#f3ead2;letter-spacing:.01em}
@@ -91,6 +91,44 @@ h1.room-title .red{color:#e2312f}
 .tally div{text-align:center;padding:10px 6px;background:rgba(0,0,0,.35);border-top:6px solid var(--k)}
 .tally b{display:block;font-family:var(--display);font-size:44px;line-height:1;color:#f3ead2}
 .tally span{font-family:var(--label);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#d7cfb6}
+
+
+/* ---------- secret rooms ---------- */
+.vault{margin:52px 0 6px;padding:16px 16px 12px;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.12));border:1px solid rgba(232,222,190,.16);box-shadow:inset 0 0 0 4px rgba(0,0,0,.28)}
+.vault-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 12px}
+.vault-h h2{font-family:var(--label);font-weight:600;letter-spacing:.22em;text-transform:uppercase;font-size:15px;margin:0;color:#d9c48f}
+.vault-h p{margin:0;font-size:14px;color:#cfc7ae}
+.door-row{display:flex;align-items:flex-end;gap:16px;overflow-x:auto;padding:10px 4px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.door{flex:0 0 176px;scroll-snap-align:start;position:relative;display:flex;flex-direction:column;align-items:center;min-height:292px;padding:12px 12px 14px;text-decoration:none;color:#f3ead2;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.07),transparent 22% 78%,rgba(0,0,0,.28)),
+    linear-gradient(180deg,#6a7166 0%,#454b42 42%,#2a2e29 100%);
+  border:3px solid #121411;border-radius:3px 3px 2px 2px;
+  box-shadow:inset 0 0 0 8px rgba(12,14,11,.55),inset 0 0 0 9px rgba(200,186,140,.18),0 16px 24px rgba(0,0,0,.45)}
+.door.is-open:hover,.door.is-open:focus-visible{transform:translateY(-6px);box-shadow:inset 0 0 0 8px rgba(12,14,11,.55),inset 0 0 0 9px rgba(230,211,163,.45),0 22px 28px rgba(0,0,0,.55)}
+.door.is-open:focus-visible{outline:3px solid #f1d27a;outline-offset:3px}
+.door.is-sealed{filter:saturate(.55) brightness(.86);cursor:default}
+.d-code{font-family:var(--label);letter-spacing:.22em;font-size:11px;color:#d7cfb6}
+.d-mark{margin-top:6px;align-self:stretch;text-align:center;font-family:var(--label);font-weight:700;letter-spacing:.16em;font-size:11px;text-transform:uppercase;padding:3px 0;background:var(--ts);color:#fff}
+.door.is-sealed .d-mark{background:#3a1518;color:#e7c6c4}
+.d-win{display:block;width:calc(100% - 16px);height:112px;margin:14px 0 8px;border:3px solid #111;background:#f3eedf;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.d-win img{width:100%;height:100%;object-fit:contain;display:block}
+.d-win.d-mesh{height:46px;background:
+  linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.55)),
+  repeating-linear-gradient(90deg,#1a1c18 0 2px,transparent 2px 7px),
+  repeating-linear-gradient(#1a1c18 0 2px,transparent 2px 7px),
+  #2a2418}
+.d-name{font-family:var(--display);font-size:54px;line-height:.85;letter-spacing:.04em;margin-top:2px}
+.d-name.d-redact{display:flex;flex-direction:column;gap:6px;width:78%;margin:10px 0 6px}
+.d-name.d-redact i{display:block;height:12px;background:#0b0b09}
+.d-name.d-redact i:nth-child(2){width:84%}
+.d-name.d-redact i:nth-child(3){width:62%}
+.d-line{font-family:var(--label);font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-align:center;color:#e6d3a3;min-height:2.5em;line-height:1.25;padding:0 4px}
+.d-lock{width:26px;height:26px;margin-top:auto;color:#e7d7a4}
+.d-go{margin-top:6px;font-family:var(--label);font-weight:600;letter-spacing:.18em;font-size:12px;text-transform:uppercase}
+.door.is-open .d-go{color:#f3ead2}
+.door.is-sealed .d-go{color:#b7ae96}
+.door.is-open::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:3px;background:#e7c56a;box-shadow:0 0 12px 2px rgba(255,214,140,.85)}
 
 /* ---------- controls ---------- */
 .controls{display:grid;grid-template-columns:1fr auto;gap:var(--gap);align-items:stretch;margin-bottom:var(--gap)}
@@ -189,7 +227,8 @@ h1.room-title .red{color:#e2312f}
   :root{--gap:16px}
   body{font-size:17px}
   .marking{font-size:12px;letter-spacing:.2em}
-  .intro{padding-top:50px}
+  .intro{padding-top:6px}
+  .vault{margin-top:40px}
   .panel{padding:22px 20px}
   h1.room-title{font-size:58px}
   .rules{grid-template-columns:1fr}
@@ -209,6 +248,7 @@ h1.room-title .red{color:#e2312f}
   .signin input{width:150px}
     }
 @media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}}
+@media (max-width:640px){.vault-h{flex-direction:column;align-items:flex-start;gap:4px}.door{flex-basis:168px;min-height:276px}.d-name{font-size:48px}}
 </style>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" data-trd-keep>
 <script src="/assets/trd/suggest.js?v=20261103d" data-trd-keep></script>
@@ -274,6 +314,13 @@ h1.room-title .red{color:#e2312f}
 <main class="room">
   <div class="lamp" aria-hidden="true"></div>
   <div class="wrap">
+    <section class="vault" id="secretRooms" aria-labelledby="vaultTitle">
+      <div class="vault-h">
+        <h2 id="vaultTitle">Secret Rooms</h2>
+        <p>One door is open.</p>
+      </div>
+      <div class="door-row" id="doorRow" role="list"></div>
+    </section>
     <section class="intro">
       <div class="panel">
         <p class="kicker">Facility 79 &middot; Document Control</p>
@@ -350,6 +397,39 @@ h1.room-title .red{color:#e2312f}
 </div>
 <div class="toast" id="toast" role="status"></div>
 
+<script>
+/* Secret rooms off the SCI[F] hall.
+   Add a room by appending an object here. open:true plus href makes a live door.
+   open:false draws a sealed door and does not link. */
+(function(){
+  var ROOMS = [
+    {id:"oss", code:"SR-01", name:"OSS", line:"Office of Strategic Services", href:"/scif/rooms/oss/", open:true,
+     insignia:"https://memes.therubberduck.net/scif/rooms/oss/thumbs/OSS-insignia.webp"},
+    {id:"sr-02", code:"SR-02", name:"", line:"Sealed", href:"", open:false},
+    {id:"sr-03", code:"SR-03", name:"", line:"Sealed", href:"", open:false},
+    {id:"sr-04", code:"SR-04", name:"", line:"Sealed", href:"", open:false}
+  ];
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+  var row = document.getElementById("doorRow");
+  if(!row) return;
+  row.innerHTML = ROOMS.map(function(r){
+    var win = (r.open && r.insignia)
+      ? '<span class="d-win"><img src="'+esc(r.insignia)+'" alt="" width="160" height="120" decoding="async"></span>'
+      : '<span class="d-win d-mesh" aria-hidden="true"></span>';
+    var name = r.name
+      ? '<span class="d-name">'+esc(r.name)+'</span>'
+      : '<span class="d-name d-redact" aria-hidden="true"><i></i><i></i><i></i></span>';
+    var lock = r.open
+      ? '<svg class="d-lock is-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11V7.5a4 4 0 0 1 7.4-2.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="5.5" y="11" width="13" height="9" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>'
+      : '<svg class="d-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="5.5" y="11" width="13" height="9" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+    var inner = '<span class="d-code">'+esc(r.code)+'</span><span class="d-mark">'+(r.open?"Top Secret":"Sealed")+'</span>'+win+name+'<span class="d-line">'+esc(r.line||"")+'</span>'+lock+'<span class="d-go">'+(r.open?"Enter":"Locked")+'</span>';
+    if(r.open && r.href){
+      return '<a class="door is-open" role="listitem" id="door-'+esc(r.id)+'" href="'+esc(r.href)+'" aria-label="'+esc(r.name)+', '+esc(r.line)+', open">'+inner+'</a>';
+    }
+    return '<div class="door is-sealed" role="listitem" id="door-'+esc(r.id)+'" aria-disabled="true" aria-label="'+esc(r.code)+', sealed">'+inner+'</div>';
+  }).join("");
+})();
+</script>
 <script>
 (function(){
 "use strict";
