@@ -1,0 +1,2983 @@
+{
+ "room": "oss",
+ "title": "OSS Secret Room",
+ "parent_room": "SCI[F] Reading Room (pdfs.html)",
+ "r2_bucket": "trd-memes",
+ "r2_prefix": "scif/rooms/oss/",
+ "public_base": "https://memes.therubberduck.net/scif/rooms/oss/",
+ "generated": "2026-11-12 America/New_York",
+ "counts": {
+  "document": 36,
+  "image/meme": 8,
+  "video": 1,
+  "link": 25,
+  "qdrop": 127
+ },
+ "mike_added_count": 4,
+ "notes": [
+  "No exact duplicates by SHA-256 among the 50 folder files.",
+  "Related, not duplicates: OSS-insignia.png/.svg (same emblem, two formats); FY2017 NDAA full law + Section 922 excerpt; EO 9621 typeset text + Federal Register scan; two Donovan portraits; DoDD 5111.10 original + Change 1.",
+  "R2 keys replace spaces with hyphens (3 of Mike's PDFs).",
+  "Q drops: none mention OSS, Dulles, Bay of Pigs, or Truman by name (per QDROPS.md); matches are CIA, JFK, Kennedy, clowns."
+ ],
+ "items": [
+  {
+   "id": "doc-fdr-order-establishing-oss-1942-06-13-official-text",
+   "category": "document",
+   "title": "Military Order Establishing the Office of Strategic Services (FDR)",
+   "date": "1942-06-13",
+   "description": "Roosevelt's order creating the OSS and naming William J. Donovan its director (typeset official text).",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/FDR-Order-Establishing-OSS-1942-06-13-official-text.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/FDR-Order-Establishing-OSS-1942-06-13-official-text.webp",
+   "source_url": "https://www.presidency.ucsb.edu/documents/order-establishing-the-office-strategic-services",
+   "mike_added": false,
+   "file": "pdfs/FDR-Order-Establishing-OSS-1942-06-13-official-text.pdf",
+   "bytes": 3540,
+   "sha256": "e60945187cbe4aca0f0847a59b69bb935a51cf43ca3fcc56ec1f9f437fae586a"
+  },
+  {
+   "id": "doc-oss-simple-sabotage-field-manual-1944",
+   "category": "document",
+   "title": "OSS Simple Sabotage Field Manual (Strategic Services Field Manual No. 3)",
+   "date": "1944-01-17",
+   "description": "The OSS's most famous field manual on everyday sabotage by ordinary citizens in enemy territory.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/OSS-Simple-Sabotage-Field-Manual-1944.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/OSS-Simple-Sabotage-Field-Manual-1944.webp",
+   "source_url": "https://web.archive.org/web/20250118230037/https://www.cia.gov/static/5c875f3ec660e092cf893f60b4a288df/SimpleSabotage.pdf",
+   "mike_added": false,
+   "file": "pdfs/OSS-Simple-Sabotage-Field-Manual-1944.pdf",
+   "bytes": 2562087,
+   "sha256": "fd17c15721996e97a9186fa01cd76adba3b3ace17447a855f85e6a0be582aa96"
+  },
+  {
+   "id": "doc-cia-creation-of-the-intelligence-community-founding-documents",
+   "category": "document",
+   "title": "The Creation of the Intelligence Community: Founding Documents (CIA)",
+   "date": "1944-11-18",
+   "description": "CIA volume of founding papers, including Donovan's Nov. 18, 1944 memo to FDR asking for a permanent peacetime central intelligence service.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/CIA-Creation-of-the-Intelligence-Community-Founding-Documents.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/CIA-Creation-of-the-Intelligence-Community-Founding-Documents.webp",
+   "source_url": "https://www.cia.gov/static/The-Creation-of-the-Intelligence-Community.pdf",
+   "mike_added": false,
+   "file": "pdfs/CIA-Creation-of-the-Intelligence-Community-Founding-Documents.pdf",
+   "bytes": 4088762,
+   "sha256": "f753d4505f8f487eb8d62da96e7bbfad53cc138667b9dec638b1febe90b41e94"
+  },
+  {
+   "id": "doc-eo-9621-oss-termination-official-text-1945-09-20",
+   "category": "document",
+   "title": "Executive Order 9621: Termination of the Office of Strategic Services",
+   "date": "1945-09-20",
+   "description": "Truman's order dissolving the OSS and splitting its functions between the State and War Departments (typeset official text).",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/EO-9621-OSS-termination-official-text-1945-09-20.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/EO-9621-OSS-termination-official-text-1945-09-20.webp",
+   "source_url": "https://www.trumanlibrary.gov/library/executive-orders/9621/executive-order-9621",
+   "mike_added": false,
+   "file": "pdfs/EO-9621-OSS-termination-official-text-1945-09-20.pdf",
+   "bytes": 21674,
+   "sha256": "b4097b9ebfcd37612c4fbfbadccb7f6425bef19c557f332741eb80c41c756430"
+  },
+  {
+   "id": "doc-eo-9621-federal-register-1945-09-22-scan-pages",
+   "category": "document",
+   "title": "Federal Register, Sept. 22, 1945 (10 FR 12033): EO 9621 as published",
+   "date": "1945-09-22",
+   "description": "Period scan of the Federal Register pages carrying the OSS shutdown order.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/EO-9621-Federal-Register-1945-09-22-scan-pages.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/EO-9621-Federal-Register-1945-09-22-scan-pages.webp",
+   "source_url": "https://www.govinfo.gov/content/pkg/FR-1945-09-22/pdf/FR-1945-09-22.pdf",
+   "mike_added": false,
+   "file": "pdfs/EO-9621-Federal-Register-1945-09-22-scan-pages.pdf",
+   "bytes": 533549,
+   "sha256": "7d585f5d3070f1c1f1d25cd226e8e0abce9f3452953ac55b409da67576674370"
+  },
+  {
+   "id": "doc-national-security-act-1947-61-stat",
+   "category": "document",
+   "title": "National Security Act of 1947 (P.L. 80-253, 61 Stat. 495), original",
+   "date": "1947-07-26",
+   "description": "The original statute that created the CIA, the National Security Council, and the National Military Establishment.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/National-Security-Act-1947-61-Stat.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/National-Security-Act-1947-61-Stat.webp",
+   "source_url": "https://www.govinfo.gov/content/pkg/STATUTE-61/pdf/STATUTE-61-Pg495.pdf",
+   "mike_added": false,
+   "file": "pdfs/National-Security-Act-1947-61-Stat.pdf",
+   "bytes": 2892947,
+   "sha256": "88da9e23bdd990051d718d9eba7d555c718de7947e61a4bb112ea2f4a1c4cfca"
+  },
+  {
+   "id": "doc-national-security-act-1947-as-amended-govinfo",
+   "category": "document",
+   "title": "National Security Act of 1947, as amended (through P.L. 119-60)",
+   "date": "2025-12-18",
+   "description": "Current official compilation of the 1947 Act, as amended; not the 1947 original.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/National-Security-Act-1947-as-amended-govinfo.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/National-Security-Act-1947-as-amended-govinfo.webp",
+   "source_url": "https://www.govinfo.gov/content/pkg/COMPS-1493/pdf/COMPS-1493.pdf",
+   "mike_added": false,
+   "file": "pdfs/National-Security-Act-1947-as-amended-govinfo.pdf",
+   "bytes": 571095,
+   "sha256": "77a08322d8e0fda0f30f2a1699aec2b5282c5324db1a0c7e6622cb82214350fd"
+  },
+  {
+   "id": "doc-law-of-land-warfare",
+   "category": "document",
+   "title": "FM 27-10: The Law of Land Warfare (Department of the Army)",
+   "date": "1956-07",
+   "description": "Army field manual on the laws of war, July 1956, reprint including Change 1. Added by Mike.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/Law-Of-Land-Warfare.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/Law-Of-Land-Warfare.webp",
+   "source_url": null,
+   "mike_added": true,
+   "file": "pdfs/Law Of Land Warfare.pdf",
+   "bytes": 2352205,
+   "sha256": "c0ddb9a50d8a715ee2c116ed4326c18644bc0fb7eb31fe838088fe3bdfe9d45b"
+  },
+  {
+   "id": "doc-nsam-55-jcs-and-the-president-1961-06-28-frus-text",
+   "category": "document",
+   "title": "NSAM 55: Relations of the Joint Chiefs of Staff to the President in Cold War Operations",
+   "date": "1961-06-28",
+   "description": "After the Bay of Pigs, Kennedy tells the Joint Chiefs to advise him directly and unfiltered on Cold War operations.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/NSAM-55-JCS-and-the-President-1961-06-28-FRUS-text.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/NSAM-55-JCS-and-the-President-1961-06-28-FRUS-text.webp",
+   "source_url": "https://history.state.gov/historicaldocuments/frus1961-63v08/d32",
+   "mike_added": false,
+   "file": "pdfs/NSAM-55-JCS-and-the-President-1961-06-28-FRUS-text.pdf",
+   "bytes": 12799,
+   "sha256": "5a292dee2b82bbfcae0eda5952a08394255a9e1815b17a77c7446a850ede40e9"
+  },
+  {
+   "id": "doc-nsam-56-evaluation-of-paramilitary-requirements-1961-06-28-frus-text",
+   "category": "document",
+   "title": "NSAM 56: Evaluation of Paramilitary Requirements",
+   "date": "1961-06-28",
+   "description": "Kennedy orders an inventory of U.S. paramilitary assets after the Bay of Pigs.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/NSAM-56-Evaluation-of-Paramilitary-Requirements-1961-06-28-FRUS-text.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/NSAM-56-Evaluation-of-Paramilitary-Requirements-1961-06-28-FRUS-text.webp",
+   "source_url": "https://history.state.gov/historicaldocuments/frus1961-63v08/d33",
+   "mike_added": false,
+   "file": "pdfs/NSAM-56-Evaluation-of-Paramilitary-Requirements-1961-06-28-FRUS-text.pdf",
+   "bytes": 8483,
+   "sha256": "af3b89b36614330746b6daeb53739fd5bd58f2c803653d447a5859be173829fa"
+  },
+  {
+   "id": "doc-nsam-57-responsibility-for-paramilitary-operations-1961-06-28-frus-text",
+   "category": "document",
+   "title": "NSAM 57: Responsibility for Paramilitary Operations",
+   "date": "1961-06-28",
+   "description": "Assigns large covert paramilitary operations primarily to Defense, with the CIA in a supporting role.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/NSAM-57-Responsibility-for-Paramilitary-Operations-1961-06-28-FRUS-text.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/NSAM-57-Responsibility-for-Paramilitary-Operations-1961-06-28-FRUS-text.webp",
+   "source_url": "https://history.state.gov/historicaldocuments/frus1961-63v08/d34",
+   "mike_added": false,
+   "file": "pdfs/NSAM-57-Responsibility-for-Paramilitary-Operations-1961-06-28-FRUS-text.pdf",
+   "bytes": 17168,
+   "sha256": "2e9729016276cac2da31d69f58ef32d70dd3ee822337fca6dee6afbad88c0f67"
+  },
+  {
+   "id": "doc-jfk-remarks-award-to-allen-dulles-1961-11-28-official-text",
+   "category": "document",
+   "title": "JFK Remarks Upon Presenting an Award to Allen W. Dulles",
+   "date": "1961-11-28",
+   "description": "Public record of Dulles leaving the CIA after the Bay of Pigs; a medal ceremony, not a denunciation.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/JFK-remarks-award-to-Allen-Dulles-1961-11-28-official-text.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/JFK-remarks-award-to-Allen-Dulles-1961-11-28-official-text.webp",
+   "source_url": "https://www.presidency.ucsb.edu/documents/remarks-upon-presenting-award-allen-w-dulles",
+   "mike_added": false,
+   "file": "pdfs/JFK-remarks-award-to-Allen-Dulles-1961-11-28-official-text.pdf",
+   "bytes": 4566,
+   "sha256": "22a13b37e674508f123c8fb4f26cfa2744a5906224485ca3ab8fca4ad2874e4b"
+  },
+  {
+   "id": "doc-operation-northwoods-jcs-memo-1962-03-13",
+   "category": "document",
+   "title": "Operation Northwoods: Justification for US Military Intervention in Cuba (JCS)",
+   "date": "1962-03-13",
+   "description": "Declassified Joint Chiefs plan proposing pretexts, including staged attacks, for war with Cuba; it was not approved.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/Operation-Northwoods-JCS-memo-1962-03-13.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/Operation-Northwoods-JCS-memo-1962-03-13.webp",
+   "source_url": "https://www.archives.gov/files/research/jfk/releases/2018/202-10002-10104.pdf",
+   "mike_added": false,
+   "file": "pdfs/Operation-Northwoods-JCS-memo-1962-03-13.pdf",
+   "bytes": 9563795,
+   "sha256": "f6deebd1234e5b0d6b6230f49a29c89f7fab9104f76028f4a5b68c3a39a3ed57"
+  },
+  {
+   "id": "doc-us-government-counterinsurgency-guide",
+   "category": "document",
+   "title": "U.S. Government Counterinsurgency Guide (Interagency Counterinsurgency Initiative)",
+   "date": "2009-01",
+   "description": "Interagency guide to counterinsurgency, January 2009. Added by Mike.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/US-Government-Counterinsurgency-Guide.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/US-Government-Counterinsurgency-Guide.webp",
+   "source_url": null,
+   "mike_added": true,
+   "file": "pdfs/US Government Counterinsurgency Guide.pdf",
+   "bytes": 2546714,
+   "sha256": "ada48fbe9ecbb11369cc3bf2da744b78fb58fdcd77a02646aab964ff628c93bc"
+  },
+  {
+   "id": "doc-unconventional_warfare_pocket_guide_v1_0_final_6_april_2016",
+   "category": "document",
+   "title": "Unconventional Warfare Pocket Guide, v1.0 (USASOC G3X)",
+   "date": "2016-04-06",
+   "description": "Pocket reference on unconventional warfare doctrine and concepts for military leaders and planners. Added by Mike.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/Unconventional_Warfare_Pocket_Guide_v1_0_Final_6_April_2016.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/Unconventional_Warfare_Pocket_Guide_v1_0_Final_6_April_2016.webp",
+   "source_url": null,
+   "mike_added": true,
+   "file": "pdfs/Unconventional_Warfare_Pocket_Guide_v1_0_Final_6_April_2016.pdf",
+   "bytes": 1070221,
+   "sha256": "42f1e0e983b10d626c2a188e47b13c3d992239d46e484a55e3726506ef912bc2"
+  },
+  {
+   "id": "doc-fy2017-ndaa-pl-114-328",
+   "category": "document",
+   "title": "National Defense Authorization Act for FY2017 (P.L. 114-328), full law",
+   "date": "2016-12-23",
+   "description": "Full public law; Section 922 gave ASD(SO/LIC) a service secretary-like role over SOF-peculiar administrative matters.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/FY2017-NDAA-PL-114-328.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/FY2017-NDAA-PL-114-328.webp",
+   "source_url": "https://www.govinfo.gov/content/pkg/PLAW-114publ328/pdf/PLAW-114publ328.pdf",
+   "mike_added": false,
+   "file": "pdfs/FY2017-NDAA-PL-114-328.pdf",
+   "bytes": 2647399,
+   "sha256": "e659265fe2b08db1b39c7983e55ba37396d69f797aa1092d396c1e4f80152c4d"
+  },
+  {
+   "id": "doc-fy2017-ndaa-section-922-pl-114-328-excerpt",
+   "category": "document",
+   "title": "FY2017 NDAA Section 922 (excerpt)",
+   "date": "2016-12-23",
+   "description": "The section that set up the 2020 elevation: ASD(SO/LIC) in the admin chain between SecDef and SOCOM.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/FY2017-NDAA-Section-922-PL-114-328-excerpt.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/FY2017-NDAA-Section-922-PL-114-328-excerpt.webp",
+   "source_url": "https://www.govinfo.gov/content/pkg/PLAW-114publ328/pdf/PLAW-114publ328.pdf",
+   "mike_added": false,
+   "file": "pdfs/FY2017-NDAA-Section-922-PL-114-328-excerpt.pdf",
+   "bytes": 60236,
+   "sha256": "9b671347a4b95ba58323abc91fb65d622349a2739aa5cc9044a3d5646b2fb976"
+  },
+  {
+   "id": "doc-fy2019-ndaa-section-917-pl-115-232-excerpt",
+   "category": "document",
+   "title": "FY2019 NDAA Section 917 (excerpt)",
+   "date": "2018-08-13",
+   "description": "Congress orders full implementation of Section 922 within 90 days.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/FY2019-NDAA-Section-917-PL-115-232-excerpt.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/FY2019-NDAA-Section-917-PL-115-232-excerpt.webp",
+   "source_url": "https://www.govinfo.gov/content/pkg/PLAW-115publ232/pdf/PLAW-115publ232.pdf",
+   "mike_added": false,
+   "file": "pdfs/FY2019-NDAA-Section-917-PL-115-232-excerpt.pdf",
+   "bytes": 54857,
+   "sha256": "c5968f80d7b57501eccb87038cfbb745c2ac279a8566c139b83c878c41965e32"
+  },
+  {
+   "id": "doc-gao-19-386-sof-management-oversight-2019-05",
+   "category": "document",
+   "title": "GAO-19-386: Special Operations Forces: Additional Actions Are Needed to Effectively Expand Management Oversight",
+   "date": "2019-05",
+   "description": "GAO finds Section 922 still not fully implemented in 2019.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/GAO-19-386-SOF-management-oversight-2019-05.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/GAO-19-386-SOF-management-oversight-2019-05.webp",
+   "source_url": "https://www.gao.gov/assets/700/699453.pdf",
+   "mike_added": false,
+   "file": "pdfs/GAO-19-386-SOF-management-oversight-2019-05.pdf",
+   "bytes": 2282308,
+   "sha256": "ee1a6dd5ee9e679d59a1dc468b617fe91a15d90aa3b214ff9626d686bc7dccc0"
+  },
+  {
+   "id": "doc-dod-release-personnel-changes-at-the-pentagon-2020-11-10",
+   "category": "document",
+   "title": "DOD Statement on Personnel Changes at the Pentagon",
+   "date": "2020-11-10",
+   "description": "Official release naming Ezra Cohen-Watnick the new Acting Under Secretary of Defense for Intelligence and Security.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DoD-Release-Personnel-Changes-at-the-Pentagon-2020-11-10.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoD-Release-Personnel-Changes-at-the-Pentagon-2020-11-10.webp",
+   "source_url": "https://www.war.gov/News/Releases/Release/Article/2411893/dod-statement-on-personnel-changes-at-the-pentagon/",
+   "mike_added": false,
+   "file": "pdfs/DoD-Release-Personnel-Changes-at-the-Pentagon-2020-11-10.pdf",
+   "bytes": 28705,
+   "sha256": "3968a2472831ff117afc08bff36311db4fa4aa0e03c4b9dc943bec2ace4b796a"
+  },
+  {
+   "id": "doc-dod-biography-ezra-cohen-acting-usdi",
+   "category": "document",
+   "title": "Official DoD Biography: Ezra Cohen, Acting Under Secretary of Defense for Intelligence and Security",
+   "date": "2020-11-10",
+   "description": "Official bio noting his earlier service as Acting ASD(SO/LIC).",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DoD-Biography-Ezra-Cohen-Acting-USDI.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoD-Biography-Ezra-Cohen-Acting-USDI.webp",
+   "source_url": "https://www.war.gov/About/Biographies/Biography/Article/2297081/ezra-cohen/",
+   "mike_added": false,
+   "file": "pdfs/DoD-Biography-Ezra-Cohen-Acting-USDI.pdf",
+   "bytes": 29247,
+   "sha256": "b55e658f1abc502f0b9018fb43e6792c2cdb1ae5760f5081609a5bfd635a1e85"
+  },
+  {
+   "id": "doc-miller-asd-solic-organizational-role-memo-2020-11-18",
+   "category": "document",
+   "title": "Organizational Role of the ASD for Special Operations and Low Intensity Conflict (Acting SecDef Miller memo, OSD011166-20)",
+   "date": "2020-11-18",
+   "description": "Miller's signed memo having SO/LIC report directly to him with a service-secretary-like budget role (third-party hosted scan).",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/Miller-ASD-SOLIC-organizational-role-memo-2020-11-18.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/Miller-ASD-SOLIC-organizational-role-memo-2020-11-18.webp",
+   "source_url": "https://gsofimperatives.org/wp-content/uploads/2020/11/ORGANIZATIONAL-ROLE-OF-THE-ASD-FOR-SOLIC-OSD011166-20-FOD-Final-2.pdf",
+   "mike_added": false,
+   "file": "pdfs/Miller-ASD-SOLIC-organizational-role-memo-2020-11-18.pdf",
+   "bytes": 93259,
+   "sha256": "feb0e441fea062399aa400289bb0e95275b499011617dac592cbce13b645ec59"
+  },
+  {
+   "id": "doc-dod-news-special-operations-leader-to-report-directly-2020-11-18",
+   "category": "document",
+   "title": "Special Operations Leader to Report Directly to Acting Defense Secretary (DoD News)",
+   "date": "2020-11-18",
+   "description": "Official DoD News story on Miller's Fort Bragg announcement; records that Ezra Cohen-Watnick also spoke.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DoD-News-Special-Operations-Leader-to-Report-Directly-2020-11-18.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoD-News-Special-Operations-Leader-to-Report-Directly-2020-11-18.webp",
+   "source_url": "https://www.defense.gov/News/News-Stories/Article/Article/2419154/special-operations-leader-to-report-directly-to-acting-defense-secretary/",
+   "mike_added": false,
+   "file": "pdfs/DoD-News-Special-Operations-Leader-to-Report-Directly-2020-11-18.pdf",
+   "bytes": 30857,
+   "sha256": "b8392547f89c44a668f9243f057590c0b2e032c93d0f86c7be2a39ad2fa91033"
+  },
+  {
+   "id": "doc-depsecdef-asd-solic-implementation-plan-memo-2020-12-03",
+   "category": "document",
+   "title": "Development of an Implementation Plan for a Direct Reporting ASD(SO/LIC) (DepSecDef memo, OSD011444-20)",
+   "date": "2020-12-03",
+   "description": "Follow-on memo ordering the plan to carry out Miller's Nov. 18 change (third-party hosted scan).",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DepSecDef-ASD-SOLIC-implementation-plan-memo-2020-12-03.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DepSecDef-ASD-SOLIC-implementation-plan-memo-2020-12-03.webp",
+   "source_url": "https://gsof.org/wp-content/uploads/2020/12/DEVELOPMENT-OF-AN-IMPLEMENTATION-PLAN-FOR-A-DIRECT-REPORTING-OSD011444-20-FRONT-OFFICE-DOCUMENT-FINAL.pdf",
+   "mike_added": false,
+   "file": "pdfs/DepSecDef-ASD-SOLIC-implementation-plan-memo-2020-12-03.pdf",
+   "bytes": 348372,
+   "sha256": "6dabaa0e47cc393a1837f54933643176e5a5bf92c6d04413f723a4d898d7126a"
+  },
+  {
+   "id": "doc-dod-release-tonon-acting-asd-solic-2020-12-15",
+   "category": "document",
+   "title": "Media Advisory: Designation of Acting ASD for Special Operations and Low Intensity Conflict",
+   "date": "2020-12-15",
+   "description": "Joseph M. Tonon named Acting ASD(SO/LIC), serving since Dec. 4, 2020 under the Nov. 18 memo.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DoD-Release-Tonon-Acting-ASD-SOLIC-2020-12-15.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoD-Release-Tonon-Acting-ASD-SOLIC-2020-12-15.webp",
+   "source_url": "https://www.war.gov/News/Releases/Release/Article/2447997/media-advisory-on-designation-of-acting-assistant-secretary-of-defense-for-spec/",
+   "mike_added": false,
+   "file": "pdfs/DoD-Release-Tonon-Acting-ASD-SOLIC-2020-12-15.pdf",
+   "bytes": 26285,
+   "sha256": "787b67e53c3524b5d3011827912f126e9b47ab8a0b883d64463b79e36f53ccec"
+  },
+  {
+   "id": "doc-austin-asd-solic-organizational-role-memo-2021-05-05",
+   "category": "document",
+   "title": "Memorandum on Organizational Role of ASD(SO/LIC) (SecDef Austin)",
+   "date": "2021-05-05",
+   "description": "Austin puts SO/LIC back under the Under Secretary for Policy for policy matters, keeping the direct report for SOF admin matters.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/Austin-ASD-SOLIC-organizational-role-memo-2021-05-05.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/Austin-ASD-SOLIC-organizational-role-memo-2021-05-05.webp",
+   "source_url": "https://media.defense.gov/2021/May/05/2002635058/-1/-1/0/MEMORANDUM-ON-ORGANIZATIONAL-ROLE-OF-THE-ASSISTANT-SECRETARY-OF-DEFENSE-FOR-SPECIAL-OPERATIONS-AND-LOW-INTENSITY-CONFLICT.PDF",
+   "mike_added": false,
+   "file": "pdfs/Austin-ASD-SOLIC-organizational-role-memo-2021-05-05.pdf",
+   "bytes": 1168233,
+   "sha256": "00ab6ba8ae7a16a074a5f50cc39a596d23badb2d06f6c7519a9ec2bbae95cad4"
+  },
+  {
+   "id": "doc-dod-release-austin-optimizes-asd-solic-role-2021-05-05",
+   "category": "document",
+   "title": "DOD Optimizes Organizational Role of ASD(SO/LIC) (official release)",
+   "date": "2021-05-05",
+   "description": "Official release calling Austin's partial rollback a \"further optimization.\"",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DoD-Release-Austin-Optimizes-ASD-SOLIC-Role-2021-05-05.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoD-Release-Austin-Optimizes-ASD-SOLIC-Role-2021-05-05.webp",
+   "source_url": "https://www.war.gov/News/Releases/Release/Article/2596682/dod-optimizes-organizational-role-of-the-assistant-secretary-of-defense-for-spe/",
+   "mike_added": false,
+   "file": "pdfs/DoD-Release-Austin-Optimizes-ASD-SOLIC-Role-2021-05-05.pdf",
+   "bytes": 28329,
+   "sha256": "0bd5e8aa1fc65a2ee1d194592320f851b45362e283383a0dbf9ec1c28cb14842"
+  },
+  {
+   "id": "doc-dodd-5111.10-asd-solic-2021-05-05",
+   "category": "document",
+   "title": "DoD Directive 5111.10: ASD for Special Operations and Low-Intensity Conflict",
+   "date": "2021-05-05",
+   "description": "Official directive issued the same day as the Austin memo.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DoDD-5111.10-ASD-SOLIC-2021-05-05.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoDD-5111.10-ASD-SOLIC-2021-05-05.webp",
+   "source_url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodd/511110p.pdf",
+   "mike_added": false,
+   "file": "pdfs/DoDD-5111.10-ASD-SOLIC-2021-05-05.pdf",
+   "bytes": 227159,
+   "sha256": "da92b31b4d0f2814895d55e1fa33721c31a8bc66e3dda294bfee9f7676695532"
+  },
+  {
+   "id": "doc-crs-rs21048-us-sof-background-issues-for-congress-2021-05-06",
+   "category": "document",
+   "title": "CRS RS21048: U.S. Special Operations Forces: Background and Issues for Congress",
+   "date": "2021-05-06",
+   "description": "Congressional Research Service report covering both Miller's 2020 move and Austin's reversal.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/CRS-RS21048-US-SOF-Background-Issues-for-Congress-2021-05-06.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/CRS-RS21048-US-SOF-Background-Issues-for-Congress-2021-05-06.webp",
+   "source_url": "https://www.congress.gov/crs_external_products/RS/PDF/RS21048/RS21048.69.pdf",
+   "mike_added": false,
+   "file": "pdfs/CRS-RS21048-US-SOF-Background-Issues-for-Congress-2021-05-06.pdf",
+   "bytes": 1037165,
+   "sha256": "15a1c694eabe1afee626e40ef64578aa4e10ae5573630fad8963fe8ea09d6f1a"
+  },
+  {
+   "id": "doc-crs-if10545-defense-primer-sof-2022-11-21",
+   "category": "document",
+   "title": "CRS IF10545: Defense Primer: Special Operations Forces",
+   "date": "2022-11-21",
+   "description": "Short CRS primer reflecting the post-Austin reporting line.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/CRS-IF10545-Defense-Primer-SOF-2022-11-21.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/CRS-IF10545-Defense-Primer-SOF-2022-11-21.webp",
+   "source_url": "https://www.congress.gov/crs_external_products/IF/PDF/IF10545/IF10545.14.pdf",
+   "mike_added": false,
+   "file": "pdfs/CRS-IF10545-Defense-Primer-SOF-2022-11-21.pdf",
+   "bytes": 593154,
+   "sha256": "419a69f16fa17f7826d99743d54034b65a0ded25fb3058f17373b5b78d8b0785"
+  },
+  {
+   "id": "doc-gao-24-106372-sof-civilian-oversight-2024-03",
+   "category": "document",
+   "title": "GAO-24-106372: Special Operations Forces: Documented Policies and Workforce Planning Needed to Strengthen Civilian Oversight",
+   "date": "2024-03",
+   "description": "GAO's 2024 look at SO/LIC civilian oversight.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/GAO-24-106372-SOF-civilian-oversight-2024-03.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/GAO-24-106372-SOF-civilian-oversight-2024-03.webp",
+   "source_url": "https://www.gao.gov/assets/gao-24-106372.pdf",
+   "mike_added": false,
+   "file": "pdfs/GAO-24-106372-SOF-civilian-oversight-2024-03.pdf",
+   "bytes": 1224097,
+   "sha256": "b428a0cd5c46a2a46c09e82faf8bf89fc85961195c49e404d0dd3332afd0f82d"
+  },
+  {
+   "id": "doc-fy2025-ndaa-sections-907-and-908-pl-118-159-excerpt",
+   "category": "document",
+   "title": "FY2025 NDAA Sections 907 and 908 (excerpt)",
+   "date": "2024-12-23",
+   "description": "Congress tells DoD to fully institutionalize ASD(SO/LIC)'s authorities within a year.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/FY2025-NDAA-Sections-907-and-908-PL-118-159-excerpt.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/FY2025-NDAA-Sections-907-and-908-PL-118-159-excerpt.webp",
+   "source_url": "https://www.govinfo.gov/content/pkg/PLAW-118publ159/pdf/PLAW-118publ159.pdf",
+   "mike_added": false,
+   "file": "pdfs/FY2025-NDAA-Sections-907-and-908-PL-118-159-excerpt.pdf",
+   "bytes": 59744,
+   "sha256": "2c6f4c11ab73bfafe059772a7765554dd66e93249b38bf4b9f3dcc32bb4dba4b"
+  },
+  {
+   "id": "doc-dodd-5111.10-asd-solic-change-1-2025-03-12",
+   "category": "document",
+   "title": "DoD Directive 5111.10, incorporating Change 1",
+   "date": "2025-03-12",
+   "description": "The SO/LIC directive as updated in March 2025.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DoDD-5111.10-ASD-SOLIC-Change-1-2025-03-12.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoDD-5111.10-ASD-SOLIC-Change-1-2025-03-12.webp",
+   "source_url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodd/511110p.pdf",
+   "mike_added": false,
+   "file": "pdfs/DoDD-5111.10-ASD-SOLIC-Change-1-2025-03-12.pdf",
+   "bytes": 440045,
+   "sha256": "f46fc11b029429f22cc6c854a55c5d8f53f07c4691425f12f121943c6a30c476"
+  },
+  {
+   "id": "doc-dcsa-release-tonon-named-director-2026-05-06",
+   "category": "document",
+   "title": "Joseph M. Tonon Named Director of DCSA (official release)",
+   "date": "2026-05-06",
+   "description": "Official release confirming Tonon's earlier service as Acting ASD(SO/LIC).",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DCSA-Release-Tonon-named-Director-2026-05-06.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DCSA-Release-Tonon-named-Director-2026-05-06.webp",
+   "source_url": "https://www.dcsa.mil/About-Us/News/Article/Article/4479547/joseph-m-tonon-named-director-of-the-defense-counterintelligence-and-security-a/",
+   "mike_added": false,
+   "file": "pdfs/DCSA-Release-Tonon-named-Director-2026-05-06.pdf",
+   "bytes": 28928,
+   "sha256": "0213d7c43c2cff1b0191802aa60a2524a590677e3ae37b560d8181c2caee3862"
+  },
+  {
+   "id": "doc-hegseth-asw-oss-memorandum-2026-11-02",
+   "category": "document",
+   "title": "Elevation of ASW for Special Operations and Low-Intensity Conflict (Hegseth memo, OSD011630-26)",
+   "date": "2026-11-02",
+   "description": "Hegseth's memo giving SO/LIC the title ASW for the Office of Strategic Services, $45M+ a year and 100 billets.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/Hegseth-ASW-OSS-memorandum-2026-11-02.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/Hegseth-ASW-OSS-memorandum-2026-11-02.webp",
+   "source_url": "https://armedforces.press/wp-content/uploads/2026/11/elevation-asw-oss-memo.pdf",
+   "mike_added": false,
+   "file": "pdfs/Hegseth-ASW-OSS-memorandum-2026-11-02.pdf",
+   "bytes": 126144,
+   "sha256": "b6155e4a777a0d8c076adad1ddc25dfd069ea7c2e680fc46c04e93c26821d997"
+  },
+  {
+   "id": "doc-dow-release-hegseth-elevates-sof-leadership-oss-2026-11-12",
+   "category": "document",
+   "title": "Secretary of War Pete Hegseth Elevates Special Operations Leadership to Revitalize the Legacy of the OSS (official release)",
+   "date": "2026-11-12",
+   "description": "Department of War release announcing the Nov. 2 OSS memo.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/pdfs/DoW-Release-Hegseth-Elevates-SOF-Leadership-OSS-2026-11-12.pdf",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoW-Release-Hegseth-Elevates-SOF-Leadership-OSS-2026-11-12.webp",
+   "source_url": "https://www.war.gov/News/Releases/Release/Article/4643910/secretary-of-war-pete-hegseth-elevates-special-operations-leadership-to-revital/",
+   "mike_added": false,
+   "file": "pdfs/DoW-Release-Hegseth-Elevates-SOF-Leadership-OSS-2026-11-12.pdf",
+   "bytes": 26488,
+   "sha256": "ce00fa0435dd92d1d25e26387e8f4f3af7af79ae4f5246f2bbdd7982d28df1e6"
+  },
+  {
+   "id": "img-william-j-donovan-portrait",
+   "category": "image/meme",
+   "title": "William J. Donovan, official portrait",
+   "date": "ca. 1918",
+   "description": "Early official portrait of Donovan, good for then-and-later layouts.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/images/William-J-Donovan-portrait.jpg",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/William-J-Donovan-portrait.webp",
+   "source_url": "https://commons.wikimedia.org/wiki/File:William_Joseph_Donovan.jpg",
+   "mike_added": false,
+   "file": "images/William-J-Donovan-portrait.jpg",
+   "bytes": 104137,
+   "sha256": "7c85a2078255ff970fe7d87caf3295283ccb19ba14a11828c743c81e237f26bb"
+  },
+  {
+   "id": "img-william-j-donovan-oss-director-nara",
+   "category": "image/meme",
+   "title": "William J. \"Wild Bill\" Donovan, Head of the OSS",
+   "date": "ca. 1945",
+   "description": "Standard wartime portrait of Donovan as OSS director (National Archives).",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/images/William-J-Donovan-OSS-director-NARA.jpg",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/William-J-Donovan-OSS-director-NARA.webp",
+   "source_url": "https://commons.wikimedia.org/wiki/File:William_Joseph_(Wild_Bill)_Donovan,_Head_of_the_OSS.jpg",
+   "mike_added": false,
+   "file": "images/William-J-Donovan-OSS-director-NARA.jpg",
+   "bytes": 261128,
+   "sha256": "54740faf7f5f5ffa31b6553a3a5b1fbc2ccee3a1dd87cecea614a3d952494583"
+  },
+  {
+   "id": "img-oss-insignia",
+   "category": "image/meme",
+   "title": "OSS insignia (PNG)",
+   "date": "1942-1945",
+   "description": "Office of Strategic Services spearhead insignia, raster copy for cards and memes.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/images/OSS-insignia.png",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/OSS-insignia.webp",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Office_of_Strategic_Services_Insignia.svg",
+   "mike_added": false,
+   "file": "images/OSS-insignia.png",
+   "bytes": 167545,
+   "sha256": "54c5c4f6071329c5c00bfc9a34efb331a54446f4bfdef269e441cf4ac729b58f"
+  },
+  {
+   "id": "img-oss-insignia-svg",
+   "category": "image/meme",
+   "title": "OSS insignia (SVG)",
+   "date": "1942-1945",
+   "description": "Same OSS insignia as a scalable vector.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/images/OSS-insignia.svg",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/OSS-insignia-svg.webp",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Office_of_Strategic_Services_Insignia.svg",
+   "mike_added": false,
+   "file": "images/OSS-insignia.svg",
+   "bytes": 5673,
+   "sha256": "6a42d3f68c1dc7691e82b633780bde9c3bb43a1d30558b03ba702101a9c1df56"
+  },
+  {
+   "id": "img-harry-s-truman-portrait",
+   "category": "image/meme",
+   "title": "Harry S. Truman portrait",
+   "date": "ca. 1945",
+   "description": "Truman, who dissolved the OSS in 1945 and signed the 1947 Act creating the CIA (Truman Library).",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/images/Harry-S-Truman-portrait.jpg",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/Harry-S-Truman-portrait.webp",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Harry-truman.jpg",
+   "mike_added": false,
+   "file": "images/Harry-S-Truman-portrait.jpg",
+   "bytes": 91871,
+   "sha256": "decbd5d9e2ac79296a43de9749eef5be6e1d6b54c543496d795234bb51604e4b"
+  },
+  {
+   "id": "img-allen-dulles",
+   "category": "image/meme",
+   "title": "Allen Dulles",
+   "date": "ca. 1950",
+   "description": "CIA director replaced by Kennedy after the Bay of Pigs.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/images/Allen-Dulles.jpg",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/Allen-Dulles.webp",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Allen_Dulles.jpg",
+   "mike_added": false,
+   "file": "images/Allen-Dulles.jpg",
+   "bytes": 39053,
+   "sha256": "e1e73e1b0d19708335491f93bc7d0a08fdc84adc75c504d0bb36229d7f46371a"
+  },
+  {
+   "id": "img-john-f-kennedy-official-white-house-portrait",
+   "category": "image/meme",
+   "title": "John F. Kennedy, official White House color portrait",
+   "date": "1963-07-11",
+   "description": "Official White House color portrait of JFK.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/images/John-F-Kennedy-official-White-House-portrait.jpg",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/John-F-Kennedy-official-White-House-portrait.webp",
+   "source_url": "https://commons.wikimedia.org/wiki/File:John_F._Kennedy,_White_House_color_photo_portrait.jpg",
+   "mike_added": false,
+   "file": "images/John-F-Kennedy-official-White-House-portrait.jpg",
+   "bytes": 2488716,
+   "sha256": "5990691f38bc2d0ebf29e1d49c0fe27357bac4b1b5959121ce7d26248b065d6f"
+  },
+  {
+   "id": "img-dod-photo-201118-d-zz999-101y-fort-bragg-sign",
+   "category": "image/meme",
+   "title": "Fort Bragg sign: \"Home of the Airborne and Special Operations Forces\" (DoD photo 201118-D-ZZ999-101Y)",
+   "date": "2020-11-18",
+   "description": "Official DoD still used with the Nov. 18, 2020 story; the installation sign, not the speech.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/images/DoD-photo-201118-D-ZZ999-101Y-Fort-Bragg-sign.jpg",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/DoD-photo-201118-D-ZZ999-101Y-Fort-Bragg-sign.webp",
+   "source_url": "https://media.defense.gov/2020/Nov/18/2002537585/1280/1280/0/201118-D-ZZ999-101Y.JPG",
+   "mike_added": false,
+   "file": "images/DoD-photo-201118-D-ZZ999-101Y-Fort-Bragg-sign.jpg",
+   "bytes": 217571,
+   "sha256": "d10e42a78e5476005cd3c918c4db9cdf57cb954a7ad6b1acc7c1507259f9cd25"
+  },
+  {
+   "id": "vid-body-search",
+   "category": "video",
+   "title": "Body Search (OSS training film)",
+   "date": "1942-1945",
+   "description": "Dramatized OSS training film on hiding material and getting through a body search (NARA ARC 39983), about 19 minutes.",
+   "url": "https://memes.therubberduck.net/scif/rooms/oss/videos/OSS-training-film-Body-Search-1942-1945.mp4",
+   "thumb_url": "https://memes.therubberduck.net/scif/rooms/oss/thumbs/OSS-training-film-Body-Search-1942-1945.webp",
+   "source_url": "https://archive.org/details/gov.archives.arc.39983",
+   "mike_added": false,
+   "file": "videos/OSS-training-film-Body-Search-1942-1945.mp4",
+   "bytes": 83131383,
+   "sha256": "2b08094076ff77f8877020205efeb2f90da63e60a27479d919478fc41b370d1c",
+   "duration_seconds": 1152
+  },
+  {
+   "id": "link-undercover-1943",
+   "category": "link",
+   "title": "Undercover / How to Operate Behind Enemy Lines (OSS training film)",
+   "date": "1943",
+   "description": "61-minute OSS training film tied to John Ford's Field Photographic Branch; public domain, about 265 MB, not copied.",
+   "url": "https://archive.org/details/gov.archives.arc.39979",
+   "thumb_url": null,
+   "source_url": "https://archive.org/details/gov.archives.arc.39979",
+   "mike_added": false,
+   "note": "Public domain; could be mirrored to R2 later. NARA: https://catalog.archives.gov/id/39979"
+  },
+  {
+   "id": "link-dvids-773176",
+   "category": "link",
+   "title": "Acting Defense Secretary Holds Troop Event (Fort Bragg, full event, 13:39)",
+   "date": "2020-11-18",
+   "description": "Official DVIDS video of the Fort Bragg event where Miller announced the change and Ezra Cohen-Watnick spoke.",
+   "url": "https://www.dvidshub.net/video/773176/acting-defense-secretary-holds-troop-event",
+   "thumb_url": null,
+   "source_url": "https://www.dvidshub.net/video/773176/acting-defense-secretary-holds-troop-event",
+   "mike_added": false,
+   "note": "Public domain; about 186 MB, not copied."
+  },
+  {
+   "id": "link-dvids-773224",
+   "category": "link",
+   "title": "Acting Secretary of Defense Christopher Miller made change (short clip)",
+   "date": "2020-11-18",
+   "description": "Official DVIDS short clip of Miller and the memo signing.",
+   "url": "https://www.dvidshub.net/video/773224/acting-secretary-defense-christopher-miller-made-change-wide",
+   "thumb_url": null,
+   "source_url": "https://www.dvidshub.net/video/773224/acting-secretary-defense-christopher-miller-made-change-wide",
+   "mike_added": false
+  },
+  {
+   "id": "link-mike-x-clip",
+   "category": "link",
+   "title": "Mike's X post with the Ezra Cohen-Watnick Fort Bragg clip",
+   "date": "2026-04-07",
+   "description": "@TheRubberDuck79 post with a 2:14 clip of Cohen-Watnick speaking at Fort Bragg after Miller's introduction.",
+   "url": "https://x.com/TheRubberDuck79/status/2041702461094732104",
+   "thumb_url": null,
+   "source_url": "https://x.com/TheRubberDuck79/status/2041702461094732104",
+   "mike_added": true
+  },
+  {
+   "id": "link-nara-oss-records-talk",
+   "category": "link",
+   "title": "Revealing Ties to Espionage in the OSS Records (National Archives)",
+   "date": "2025",
+   "description": "Official NARA talk by archivist Molly Kamph on OSS history and records.",
+   "url": "https://www.youtube.com/watch?v=IL6z-41Gp3Q",
+   "thumb_url": null,
+   "source_url": "https://www.youtube.com/watch?v=IL6z-41Gp3Q",
+   "mike_added": false
+  },
+  {
+   "id": "link-pbs-night-wings",
+   "category": "link",
+   "title": "Night Wings: OSS Carpetbagger Ops (PBS)",
+   "date": null,
+   "description": "PBS documentary on OSS \"Carpetbagger\" air operations and Donovan.",
+   "url": "https://www.pbs.org/video/night-wings-oss-carpetbagger-ops-lxphjf/",
+   "thumb_url": null,
+   "source_url": "https://www.pbs.org/video/night-wings-oss-carpetbagger-ops-lxphjf/",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-pbs-perilous-fight",
+   "category": "link",
+   "title": "The Perilous Fight: The Secret War (PBS)",
+   "date": null,
+   "description": "PBS companion page on the WWII secret-intelligence war, including Donovan and the OSS.",
+   "url": "https://www.pbs.org/perilousfight/battlefield/the_secret_war/",
+   "thumb_url": null,
+   "source_url": "https://www.pbs.org/perilousfight/battlefield/the_secret_war/",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-ww2hrt-oss",
+   "category": "link",
+   "title": "The OSS: Office of Strategic Services (WWII History Round Table)",
+   "date": null,
+   "description": "Long public history talk on the OSS; not a government film.",
+   "url": "https://www.youtube.com/watch?v=_wwNzetvZbE",
+   "thumb_url": null,
+   "source_url": "https://www.youtube.com/watch?v=_wwNzetvZbE",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-cia-bay-of-pigs",
+   "category": "link",
+   "title": "The Bay of Pigs Invasion (CIA)",
+   "date": null,
+   "description": "Official CIA historical article on the operation.",
+   "url": "https://www.cia.gov/stories/story/the-bay-of-pigs-invasion/",
+   "thumb_url": null,
+   "source_url": "https://www.cia.gov/stories/story/the-bay-of-pigs-invasion/",
+   "mike_added": false
+  },
+  {
+   "id": "link-cia-simple-sabotage",
+   "category": "link",
+   "title": "The Art of Simple Sabotage (CIA)",
+   "date": null,
+   "description": "Official CIA story page on the 1944 OSS sabotage manual.",
+   "url": "https://www.cia.gov/stories/story/the-art-of-simple-sabotage/",
+   "thumb_url": null,
+   "source_url": "https://www.cia.gov/stories/story/the-art-of-simple-sabotage/",
+   "mike_added": false
+  },
+  {
+   "id": "link-truman-wapo-1963",
+   "category": "link",
+   "title": "Truman, \"Limit CIA Role to Intelligence,\" The Washington Post, p. A11",
+   "date": "1963-12-22",
+   "description": "Truman says he never meant the CIA to run peacetime cloak-and-dagger operations.",
+   "url": "https://www.cia.gov/readingroom/docs/CIA-RDP75-00149R000700550023-3.pdf",
+   "thumb_url": null,
+   "source_url": "https://www.cia.gov/readingroom/docs/CIA-RDP75-00149R000700550023-3.pdf",
+   "mike_added": false,
+   "note": "Copyrighted; do not republish full text. Also: https://archive.org/details/LimitCIARoleToIntelligenceByHarrySTruman"
+  },
+  {
+   "id": "link-nyt-1966-splinter",
+   "category": "link",
+   "title": "\"C.I.A.: Maker of Policy, or Tool?\" The New York Times",
+   "date": "1966-04-25",
+   "description": "Source of the \"splinter the CIA into a thousand pieces\" line, attributed to an unnamed Kennedy official, not a signed JFK quote.",
+   "url": null,
+   "thumb_url": null,
+   "source_url": null,
+   "mike_added": false,
+   "note": "Copyrighted; no URL in the folder notes."
+  },
+  {
+   "id": "link-breakingdefense-2020",
+   "category": "link",
+   "title": "\"What Acting SecDef Miller's Special Ops Shift Means,\" Breaking Defense",
+   "date": "2020-11-18",
+   "description": "Quotes Miller putting SOCOM \"on par with the military services for the first time.\"",
+   "url": "https://breakingdefense.com/2020/11/what-acting-secdef-millers-special-ops-shift-means/",
+   "thumb_url": null,
+   "source_url": "https://breakingdefense.com/2020/11/what-acting-secdef-millers-special-ops-shift-means/",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-airandspace-2020",
+   "category": "link",
+   "title": "\"Acting Defense Secretary Directs Changes in Special Ops Civilian Oversight,\" Air & Space Forces Magazine",
+   "date": "2020-11-18",
+   "description": "News coverage of the Nov. 18 change.",
+   "url": "https://www.airandspaceforces.com/acting-defense-secretary-directs-changes-in-special-ops-civilian-oversight/",
+   "thumb_url": null,
+   "source_url": "https://www.airandspaceforces.com/acting-defense-secretary-directs-changes-in-special-ops-civilian-oversight/",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-mcclatchy-2020",
+   "category": "link",
+   "title": "McClatchy Fort Bragg pool report (Tara Copp)",
+   "date": "2020-11-18",
+   "description": "Pool report on the signing at Fort Bragg.",
+   "url": "https://www.mcclatchydc.com/news/nation-world/national/national-security/article247251164.html",
+   "thumb_url": null,
+   "source_url": "https://www.mcclatchydc.com/news/nation-world/national/national-security/article247251164.html",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-military-com-2020",
+   "category": "link",
+   "title": "\"In Shake-Up, Acting SecDef Elevates Special Operations to Be 'On Par' with Service Branches,\" Military.com",
+   "date": "2020-11-18",
+   "description": "News coverage of the Nov. 18 change.",
+   "url": "https://www.military.com/daily-news/2020/11/18/shake-acting-secdef-elevates-special-operations-be-par-service-branches.html",
+   "thumb_url": null,
+   "source_url": "https://www.military.com/daily-news/2020/11/18/shake-acting-secdef-elevates-special-operations-be-par-service-branches.html",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-stripes-2020",
+   "category": "link",
+   "title": "Stars and Stripes on the Nov. 18 order",
+   "date": "2020-11-18",
+   "description": "News coverage; describes Cohen-Watnick in the SO/LIC role that day, which differs from official DoD News.",
+   "url": "https://www.stripes.com/theaters/us/acting-defense-secretary-orders-top-special-ops-civilian-to-report-directly-to-him-1.652557",
+   "thumb_url": null,
+   "source_url": "https://www.stripes.com/theaters/us/acting-defense-secretary-orders-top-special-ops-civilian-to-report-directly-to-him-1.652557",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-upi-2020",
+   "category": "link",
+   "title": "UPI: US Special Operations structure streamlined, will report to Defense Secretary",
+   "date": "2020-11-18",
+   "description": "News coverage of the Nov. 18 change.",
+   "url": "https://www.upi.com/Defense-News/2020/11/18/US-Special-Operations-structure-streamlined-will-report-to-Defense-Secretary/7031605720378/",
+   "thumb_url": null,
+   "source_url": "https://www.upi.com/Defense-News/2020/11/18/US-Special-Operations-structure-streamlined-will-report-to-Defense-Secretary/7031605720378/",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-upi-2021",
+   "category": "link",
+   "title": "UPI on Austin's partial reversal",
+   "date": "2021-05-05",
+   "description": "News coverage of the May 2021 rollback.",
+   "url": "https://www.upi.com/Defense-News/2021/05/05/SOCOM-specialoperations-austin/1871620245361/",
+   "thumb_url": null,
+   "source_url": "https://www.upi.com/Defense-News/2021/05/05/SOCOM-specialoperations-austin/1871620245361/",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-breakingdefense-2026",
+   "category": "link",
+   "title": "\"Hegseth seeks to elevate top SOF civilian to service-secretary equivalent,\" Breaking Defense",
+   "date": "2026-11-12",
+   "description": "Quotes the Nov. 2 memo; notes the under-secretary request needs Congress.",
+   "url": "https://breakingdefense.com/2026/11/hegseth-seeks-to-elevate-top-sof-civilian-to-service-secretary-equivalent/",
+   "thumb_url": null,
+   "source_url": "https://breakingdefense.com/2026/11/hegseth-seeks-to-elevate-top-sof-civilian-to-service-secretary-equivalent/",
+   "mike_added": false,
+   "note": "Copyrighted; link only."
+  },
+  {
+   "id": "link-jfk-2025-release",
+   "category": "link",
+   "title": "JFK Assassination Records, 2025 release (National Archives)",
+   "date": "2025-03-18",
+   "description": "Records posted under EO 14176; tens of thousands of pages, not copied.",
+   "url": "https://www.archives.gov/research/jfk/release-2025",
+   "thumb_url": null,
+   "source_url": "https://www.archives.gov/research/jfk/release-2025",
+   "mike_added": false
+  },
+  {
+   "id": "link-jfk-collection",
+   "category": "link",
+   "title": "President John F. Kennedy Assassination Records Collection (National Archives)",
+   "date": null,
+   "description": "Collection home page.",
+   "url": "https://www.archives.gov/research/jfk",
+   "thumb_url": null,
+   "source_url": "https://www.archives.gov/research/jfk",
+   "mike_added": false
+  },
+  {
+   "id": "link-jfk-nsams",
+   "category": "link",
+   "title": "JFK Library: National Security Action Memoranda",
+   "date": null,
+   "description": "JFK Library index of NSAMs.",
+   "url": "https://www.jfklibrary.org/archives/other-resources/national-security-action-memoranda-nsams",
+   "thumb_url": null,
+   "source_url": "https://www.jfklibrary.org/archives/other-resources/national-security-action-memoranda-nsams",
+   "mike_added": false
+  },
+  {
+   "id": "link-usc-138",
+   "category": "link",
+   "title": "10 U.S.C. § 138 (Assistant Secretaries of Defense)",
+   "date": null,
+   "description": "Current law implementing Section 922.",
+   "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section138",
+   "thumb_url": null,
+   "source_url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section138",
+   "mike_added": false
+  },
+  {
+   "id": "link-usc-167",
+   "category": "link",
+   "title": "10 U.S.C. § 167 (Unified combatant command for special operations forces)",
+   "date": null,
+   "description": "Current law on SOCOM and the SO/LIC admin chain.",
+   "url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section167",
+   "thumb_url": null,
+   "source_url": "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title10-section167",
+   "mike_added": false
+  },
+  {
+   "id": "q-9",
+   "category": "qdrop",
+   "number": 9,
+   "title": "Q drop #9",
+   "date": "2017-10-29T22:30 America/New_York",
+   "description": "Projection D’s can’t lose control over the black population. At some point the great awakening will occur whereby these false local / national black leaders are corrupt and paid off to help keep the black pop poor and…",
+   "url": "https://therubberduck.net/#view-9",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-9",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-11",
+   "category": "qdrop",
+   "number": 11,
+   "title": "Q drop #11",
+   "date": "2017-10-29T23:20 America/New_York",
+   "description": "Key: Military Intelligence v FBI CIA NSA No approval or congressional oversight State Secrets upheld under SC Who is the Commander and Chief of the military? Under what article can the President impose MI take over…",
+   "url": "https://therubberduck.net/#view-11",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-11",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-15",
+   "category": "qdrop",
+   "number": 15,
+   "title": "Q drop #15",
+   "date": "2017-10-31T23:00 America/New_York",
+   "description": "There are more good people than bad. The wizards and warlocks (inside term) will not allow another Satanic Evil POS control our country. Realize Soros, Clintons, Obama, Putin, etc. are all controlled by 3 families (the…",
+   "url": "https://therubberduck.net/#view-15",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-15",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-17",
+   "category": "qdrop",
+   "number": 17,
+   "title": "Q drop #17",
+   "date": "2017-10-31T23:58 America/New_York",
+   "description": "Why does Obama travel in advance of POTUS to foreign locations? Why is this relevant? Focus on the power of POTUS as it relates to the Marines. How can MI be applied to prosecute bad actors and avoid corrupt agencies…",
+   "url": "https://therubberduck.net/#view-17",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-17",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-19",
+   "category": "qdrop",
+   "number": 19,
+   "title": "Q drop #19",
+   "date": "2017-11-01T00:29 America/New_York",
+   "description": "Why do D’s want to control the black pop? Why do they intentionally keep poor and in need? Why do D’s project racism on a daily basis against R’s? Why do black elected officials do the crazy talk on behalf of D’s? How…",
+   "url": "https://therubberduck.net/#view-19",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-19",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-23",
+   "category": "qdrop",
+   "number": 23,
+   "title": "Q drop #23",
+   "date": "2017-11-01T01:11 America/New_York",
+   "description": "Note MI has the same SAPs as NSA, CIA etc as designated post 9-11. Why is this relevant? Who can be held hostage and controlled? CIA thinks its foreign offshore assets are strong enough to defend against the US…",
+   "url": "https://therubberduck.net/#view-23",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-23",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-39",
+   "category": "qdrop",
+   "number": 39,
+   "title": "Q drop #39",
+   "date": "2017-11-02T02:14 America/New_York",
+   "description": "Would it blow your mind if I told you BO has been to NK and perhaps there now? Why did his administration do little to slow their nuclear and missle capabilities? Who feeds NK w/ strategic intel? Iran? What deal was…",
+   "url": "https://therubberduck.net/#view-39",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-39",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-46",
+   "category": "qdrop",
+   "number": 46,
+   "title": "Q drop #46",
+   "date": "2017-11-02T12:57 America/New_York",
+   "description": "Why is the information re: BO important re: U1 and export approval to Canada to EU? Where is BO today? Did BO and/or his admin ever make false statements that U1 would never be exported from the US? Who made those…",
+   "url": "https://therubberduck.net/#view-46",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-46",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-66",
+   "category": "qdrop",
+   "number": 66,
+   "title": "Q drop #66",
+   "date": "2017-11-02T20:19 America/New_York",
+   "description": ">>147688276 Let's be real clear. The CIA just attacked the Command and Chief which was immediately detected by NSA/MI and alerted to POTUS. Re-review all my crumbs including today/yesterday/weekend. What does this mean?…",
+   "url": "https://therubberduck.net/#view-66",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-66",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-92",
+   "category": "qdrop",
+   "number": 92,
+   "title": "Q drop #92",
+   "date": "2017-11-05T01:55 America/New_York",
+   "description": "Seth Rich only mentioned because it directly relates to SA. Las Vegas. What hotel did the 'reported' gunfire occur from? What floors specifically? Who owns the top floors? Top floors only. Why is that relevant? What was…",
+   "url": "https://therubberduck.net/#view-92",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-92",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA",
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-110",
+   "category": "qdrop",
+   "number": 110,
+   "title": "Q drop #110",
+   "date": "2017-11-05T20:08 America/New_York",
+   "description": "MSM. CIA counter-ops. Will all fall down. Q",
+   "url": "https://therubberduck.net/#view-110",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-110",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-121",
+   "category": "qdrop",
+   "number": 121,
+   "title": "Q drop #121",
+   "date": "2017-11-06T16:52 America/New_York",
+   "description": "Why were the acts that recently occurred in SA so critically important? What US assets are in place in/near SA? What assurances were made to protect the Kingdom? Who shot down the missile from Yemen? POTUS…",
+   "url": "https://therubberduck.net/#view-121",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-121",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-140",
+   "category": "qdrop",
+   "number": 140,
+   "title": "Q drop #140",
+   "date": "2017-11-11T23:33 America/New_York",
+   "description": "Wealth (over generations) buys power. Power (over generations) buys more wealth/control. More wealth/control buys countries and its people. Families combined (TRI) = NWO. Inner TRI families will collapse. What is the…",
+   "url": "https://therubberduck.net/#view-140",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-140",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-142",
+   "category": "qdrop",
+   "number": 142,
+   "title": "Q drop #142",
+   "date": "2017-11-12T12:16 America/New_York",
+   "description": "How did Soros replace family ‘y’? Who is family ‘y’? Trace the bloodlines of these (3) families. What happened during WWII? Was Hitler a puppet? Who was his handler? What was the purpose? What was the real purpose of…",
+   "url": "https://therubberduck.net/#view-142",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-142",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-144",
+   "category": "qdrop",
+   "number": 144,
+   "title": "Q drop #144",
+   "date": "2017-11-12T14:52 America/New_York",
+   "description": "Patriots don’t sleep. 40,000ft. v. necessary to understand [US]/SA/global events. Paint the picture. Decrease altitude (we will not fly that high again). Higher the altitude greater the [risk] of conspiracy ST. Many…",
+   "url": "https://therubberduck.net/#view-144",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-144",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA",
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-145",
+   "category": "qdrop",
+   "number": 145,
+   "title": "Q drop #145",
+   "date": "2017-11-12T16:24 America/New_York",
+   "description": "::::WARNING:::: This is not a game! DIRECT ATTACK TODAY BY NYT/CLOWNS IN AMERICA: https://www.nytimes.com/2017/11/12/us/nsa-shadow-brokers.html Do you believe in coincidences? How many coincidences do you need before…",
+   "url": "https://therubberduck.net/#view-145",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-145",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-146",
+   "category": "qdrop",
+   "number": 146,
+   "title": "Q drop #146",
+   "date": "2017-11-12T16:30 America/New_York",
+   "description": "::::WARNING:::: This is not a game! DIRECT ATTACK TODAY BY NYT/CLOWNS IN AMERICA: https://www.nytimes.com/2017/11/12/us/nsa-shadow-brokers.html Do you believe in coincidences? How many coincidences do you need before…",
+   "url": "https://therubberduck.net/#view-146",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-146",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-148",
+   "category": "qdrop",
+   "number": 148,
+   "title": "Q drop #148",
+   "date": "2017-11-12T17:10 America/New_York",
+   "description": "NYT/Clowns In America article released today re: Q-group is a DIRECT attack/warning re: what is being dropped here. Read between the lines. Why was the article published today? POTUS has been briefed. New measures…",
+   "url": "https://therubberduck.net/#view-148",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-148",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-151",
+   "category": "qdrop",
+   "number": 151,
+   "title": "Q drop #151",
+   "date": "2017-11-14T12:51 America/New_York",
+   "description": "How do you capture a very dangerous animal? Do you attack it from the front? Do you walk through the front door? Do you signal ahead of time you will be attacking? How do you distinguish between good and bad? Who do you…",
+   "url": "https://therubberduck.net/#view-151",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-151",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-154",
+   "category": "qdrop",
+   "number": 154,
+   "title": "Q drop #154",
+   "date": "2017-11-14T21:25 America/New_York",
+   "description": "Who financed 9-11? Who was Bin Laden’s handler? Why was the Clowns In America tasked to hunt/kill/capture UBL? Why not MI? If we found UBL, eliminated his security, why would we immediately kill him and not take him…",
+   "url": "https://therubberduck.net/#view-154",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-154",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-158",
+   "category": "qdrop",
+   "number": 158,
+   "title": "Q drop #158",
+   "date": "2017-11-20T02:29 America/New_York",
+   "description": "(cont..) When was this announced? When did events in SA transpire? Who controlled a large portion of Twitter stock? Why is this relevant? Define oppression. Who controls the narrative? Who really controls the narrative?…",
+   "url": "https://therubberduck.net/#view-158",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-158",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-217",
+   "category": "qdrop",
+   "number": 217,
+   "title": "Q drop #217",
+   "date": "2017-11-23T01:14 America/New_York",
+   "description": ">>150569615 Clowns In America. Q",
+   "url": "https://therubberduck.net/#view-217",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-217",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-239",
+   "category": "qdrop",
+   "number": 239,
+   "title": "Q drop #239",
+   "date": "2017-11-30T02:23 America/New_York",
+   "description": "The Asia Foundation. CIA-RDP84B00049R001303260026-4 Happy hunting. Q",
+   "url": "https://therubberduck.net/#view-239",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-239",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-350",
+   "category": "qdrop",
+   "number": 350,
+   "title": "Q drop #350",
+   "date": "2017-12-14T21:27 America/New_York",
+   "description": "Shall we play a game? Find the spider(s) and build the web (the ‘map’). Remember, they consider you to be the fly (specifically, the ‘feeder’). Remember, they never thought she was going to lose. Therefore, they never…",
+   "url": "https://therubberduck.net/#view-350",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-350",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK",
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-354",
+   "category": "qdrop",
+   "number": 354,
+   "title": "Q drop #354",
+   "date": "2017-12-14T21:43 America/New_York",
+   "description": "Shall we play a game? Find the spider(s) and build the web (the ‘map’). Remember, they consider you to be the fly (specifically, the ‘feeder’). Remember, they never thought she was going to lose. Therefore, they never…",
+   "url": "https://therubberduck.net/#view-354",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-354",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK",
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-389",
+   "category": "qdrop",
+   "number": 389,
+   "title": "Q drop #389",
+   "date": "2017-12-19T20:26 America/New_York",
+   "description": "CS/Soros. CS/Playboy. CS/Heidi Fleiss. HEIDI FLEISS (EVIL/CLOWN/BLACKMAIL). Q",
+   "url": "https://therubberduck.net/#view-389",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-389",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-428",
+   "category": "qdrop",
+   "number": 428,
+   "title": "Q drop #428",
+   "date": "2017-12-22T01:13 America/New_York",
+   "description": ">>146142 Why is EM provided BIG WW subsidies? No subsidies = ? Clown contribution in exchange for access code? Why relevant? Amazon Echo? Google Home? Clown contributions? Apple Face ID Tech? FB Face ID Tech? Catching…",
+   "url": "https://therubberduck.net/#view-428",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-428",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-430",
+   "category": "qdrop",
+   "number": 430,
+   "title": "Q drop #430",
+   "date": "2017-12-22T01:26 America/New_York",
+   "description": ">>146326 What do Clowns do w/ the access codes and tech? Who controls NK? Who really controls NK? What families are protected using leverage? Bank / Financial leverage? NUKE strike package leverage? Why is IRAN…",
+   "url": "https://therubberduck.net/#view-430",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-430",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-436",
+   "category": "qdrop",
+   "number": 436,
+   "title": "Q drop #436",
+   "date": "2017-12-22T17:37 America/New_York",
+   "description": "ONE OF TWENTY TWO: [DNC BREACH / DOSSIER] [DNC] [SR]> [WL]> HUSSEIN> DNI DIR> CLOWN DIR> CLAS: 1-12> GOOG> CROWDSTRIKE> DNC> (SR 187)(MS13 (2) 187)> DWS_DIR> F-I/D-J ASSIST> \"INSURANCE\" /_ > HUSSEIN> HRC> LL> JC> AM>…",
+   "url": "https://therubberduck.net/#view-436",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-436",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-484",
+   "category": "qdrop",
+   "number": 484,
+   "title": "Q drop #484",
+   "date": "2018-01-07T02:38 America/New_York",
+   "description": "Hussein/HRC (& many more) must be terrified! Ahmadinejed talking. Where did ALL that money go? How many planes? Where did the planes land? Why were Clowns/private contractors escorting? Why cash? Why offshore cash? Why…",
+   "url": "https://therubberduck.net/#view-484",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-484",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-554",
+   "category": "qdrop",
+   "number": 554,
+   "title": "Q drop #554",
+   "date": "2018-01-19T00:20 America/New_York",
+   "description": "CNBC Bomb Airport? NEWS CREDENTIALS FAILED @ SEC. False Flag Attempt? ISIS on LIFE SUPPORT? CLOWNS FAILED. Q",
+   "url": "https://therubberduck.net/#view-554",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-554",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-570",
+   "category": "qdrop",
+   "number": 570,
+   "title": "Q drop #570",
+   "date": "2018-01-21T14:06 America/New_York",
+   "description": "Will SESSIONS drop the hammer? 1 of 22. #Memo shifts narrative. #Memo reinstates SESSIONS' authority re: Russia/ALL. #Memo factually demonstrates collusion at highest levels. #Memo factually demonstrates HUSSEIN ADMIN…",
+   "url": "https://therubberduck.net/#view-570",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-570",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-628",
+   "category": "qdrop",
+   "number": 628,
+   "title": "Q drop #628",
+   "date": "2018-01-27T13:09 America/New_York",
+   "description": "@Snowden. The clock is ticking. How's Russia? [Mr. Contractor] Freedom of the Press. John Perry Barlow. https://freedom.press SecureDrop [Whistleblowers]? SecureDrop>Clowns In America. NOBODY IS SAFE. Q",
+   "url": "https://therubberduck.net/#view-628",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-628",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-631",
+   "category": "qdrop",
+   "number": 631,
+   "title": "Q drop #631",
+   "date": "2018-01-27T13:41 America/New_York",
+   "description": ">>180316 HK allowed his passport to clear customs WITH THE CLOWNS IN AMERICA AND DEPT OF DEFENSE PUTTING A NAT SEC HOLD WW? How does he clear customs? How does he end up in Russia? Coincidence? Who was the 1st agency he…",
+   "url": "https://therubberduck.net/#view-631",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-631",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-703",
+   "category": "qdrop",
+   "number": 703,
+   "title": "Q drop #703",
+   "date": "2018-02-10T03:33 America/New_York",
+   "description": "“Rest in peace Mr. President (JFK), through your wisdom and strength, since your tragic death, Patriots have planned, installed, and by the grace of God, activated, the beam of LIGHT. We will forever remember your…",
+   "url": "https://therubberduck.net/#view-703",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-703",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-709",
+   "category": "qdrop",
+   "number": 709,
+   "title": "Q drop #709",
+   "date": "2018-02-10T05:13 America/New_York",
+   "description": "JFK Con Room. https:// www.cia.gov/kids-page/games/break-the-code/code-1.html Would you believe this site is actually used to comm to rogue operators? @Snowden [John] Cold? Q",
+   "url": "https://therubberduck.net/#view-709",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-709",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-710",
+   "category": "qdrop",
+   "number": 710,
+   "title": "Q drop #710",
+   "date": "2018-02-10T05:15 America/New_York",
+   "description": "Clown black op sites. Asia. Goodbye. Q",
+   "url": "https://therubberduck.net/#view-710",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-710",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-714",
+   "category": "qdrop",
+   "number": 714,
+   "title": "Q drop #714",
+   "date": "2018-02-10T05:46 America/New_York",
+   "description": "Mess with the best, die like the rest. [2] highly classified clown ops exposed. [44] remaining. Wizards & Warlocks. Save the best for last. [P] Q",
+   "url": "https://therubberduck.net/#view-714",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-714",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-717",
+   "category": "qdrop",
+   "number": 717,
+   "title": "Q drop #717",
+   "date": "2018-02-10T06:33 America/New_York",
+   "description": "Public: FBI/DOJ/O-WH/SD Private: Clowns Clowns Clowns Expand your thinking. Q",
+   "url": "https://therubberduck.net/#view-717",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-717",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-722",
+   "category": "qdrop",
+   "number": 722,
+   "title": "Q drop #722",
+   "date": "2018-02-11T14:47 America/New_York",
+   "description": "Think BDT NYC ‘attempt’ & Barlow. Not stated for verification of credibility. Why are we still here given foreknowledge of events? No FBI investigation into this? Impossible to locate? Less than 10. Who are we talking…",
+   "url": "https://therubberduck.net/#view-722",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-722",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-725",
+   "category": "qdrop",
+   "number": 725,
+   "title": "Q drop #725",
+   "date": "2018-02-11T15:37 America/New_York",
+   "description": ">>339583 Ask yourself, why is NK participating in the O-games this year? Ask yourself, why is the 'sister' w/ Pence? Ask yourself, if controlled, how might you protect yourself and look for a way out? Ask yourself, what…",
+   "url": "https://therubberduck.net/#view-725",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-725",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-730",
+   "category": "qdrop",
+   "number": 730,
+   "title": "Q drop #730",
+   "date": "2018-02-11T16:33 America/New_York",
+   "description": ">>340695 Coincidence \"Truth To Power\"? Coincidence Barlow? Learn. What if Snowden was still a Clown? Why would it be important he was in Russia? LEARN!!!! Q",
+   "url": "https://therubberduck.net/#view-730",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-730",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-731",
+   "category": "qdrop",
+   "number": 731,
+   "title": "Q drop #731",
+   "date": "2018-02-11T16:38 America/New_York",
+   "description": "Timestamp: @Snowden \"Truth To Power\" Drop \"Truth To Power\" Learn. Q >>340441 >>325370 You will cease to exist Timestamp. Learn. Q >>340695 Coincidence \"Truth To Power\"? Coincidence Barlow? Learn. What if Snowden was…",
+   "url": "https://therubberduck.net/#view-731",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-731",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-742",
+   "category": "qdrop",
+   "number": 742,
+   "title": "Q drop #742",
+   "date": "2018-02-12T10:01 America/New_York",
+   "description": "The Inner Circle. Mika Brzezinski. Background. Family/careers. McLean, Virginia. The age of tech has hurt their ability to hide/control. Majority today were ‘born in’ to the circle. Investigate those in front of the…",
+   "url": "https://therubberduck.net/#view-742",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-742",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-743",
+   "category": "qdrop",
+   "number": 743,
+   "title": "Q drop #743",
+   "date": "2018-02-12T10:17 America/New_York",
+   "description": "The Inner Circle. Mika Brzezinski. Background. Family/careers. McLean, Virginia. The age of tech has hurt their ability to hide/control. Majority today were ‘born in’ to the circle. Investigate those in front of the…",
+   "url": "https://therubberduck.net/#view-743",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-743",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-760",
+   "category": "qdrop",
+   "number": 760,
+   "title": "Q drop #760",
+   "date": "2018-02-15T00:25 America/New_York",
+   "description": "@Snowden Thank you for showing the world how Clowns pass the narrative to journalists @ 4am. Re_read crumbs re: SecureDrop. John Perry Barlow. Q",
+   "url": "https://therubberduck.net/#view-760",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-760",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-783",
+   "category": "qdrop",
+   "number": 783,
+   "title": "Q drop #783",
+   "date": "2018-02-16T20:05 America/New_York",
+   "description": "Clown Agency>No Such Agency. RIP JFK - we will succeed. Pyramid will collapse. Think shell. Q",
+   "url": "https://therubberduck.net/#view-783",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-783",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK",
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-809",
+   "category": "qdrop",
+   "number": 809,
+   "title": "Q drop #809",
+   "date": "2018-02-22T21:05 America/New_York",
+   "description": "Clowns revealed in China/other. 2010. [187] Sold intel? HRC open source server? [Missing emails] [CrowdStrike] Granted access. Betrayed. Only the tip. This will be made public [soon]. Q",
+   "url": "https://therubberduck.net/#view-809",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-809",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-834",
+   "category": "qdrop",
+   "number": 834,
+   "title": "Q drop #834",
+   "date": "2018-03-03T23:56 America/New_York",
+   "description": "The BRIDGE. 187 BRIDGE-2. @Snowden Clowns. The LINK. Google/YT. Facebook. Twitter. Russia ICBM tech. HRC open source. SAP. JP. TP. Highest levels of US-G. U1. NK. WHY would Russia tell the world? Why? Why is SR back in…",
+   "url": "https://therubberduck.net/#view-834",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-834",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-850",
+   "category": "qdrop",
+   "number": 850,
+   "title": "Q drop #850",
+   "date": "2018-03-06T00:39 America/New_York",
+   "description": "Learn double meanings. News unlocks MAP. Why is STEEL so important? Expand your thinking. https:// www.cia.gov/library/readingroom/docs/CIA-RDP80-00810A004000690005-7.pdf Q",
+   "url": "https://therubberduck.net/#view-850",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-850",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-851",
+   "category": "qdrop",
+   "number": 851,
+   "title": "Q drop #851",
+   "date": "2018-03-06T00:41 America/New_York",
+   "description": "Learn. https:// www.cia.gov/library/readingroom/docs/CIA-RDP90-00845R000100170004-5.pdf Q",
+   "url": "https://therubberduck.net/#view-851",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-851",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-888",
+   "category": "qdrop",
+   "number": 888,
+   "title": "Q drop #888",
+   "date": "2018-03-08T19:55 America/New_York",
+   "description": ">>593959 Thank you Kim. Deal made. Clowns out. Strings cut. We took control. Iran next. Q",
+   "url": "https://therubberduck.net/#view-888",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-888",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-942",
+   "category": "qdrop",
+   "number": 942,
+   "title": "Q drop #942",
+   "date": "2018-03-10T21:15 America/New_York",
+   "description": "CNN airing assassination of JFK. CNN 3 sec delay - speech. CNN Jim’s finger on button ready to stop transmission. These people are sick. Q",
+   "url": "https://therubberduck.net/#view-942",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-942",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1009",
+   "category": "qdrop",
+   "number": 1009,
+   "title": "Q drop #1009",
+   "date": "2018-04-04T16:05 America/New_York",
+   "description": ">>893904 Troops to Border. Clown Black Ops. Private funds. Raised how? Troops @ Border does what? Impact? To who? D's involved. MS_13/Illegals road block. Sex traffic road block. Children road block. Drugs road block.…",
+   "url": "https://therubberduck.net/#view-1009",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1009",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1013",
+   "category": "qdrop",
+   "number": 1013,
+   "title": "Q drop #1013",
+   "date": "2018-04-04T16:38 America/New_York",
+   "description": ">>894571 TWITTER. CLOWNS. Operation Q-T2810C. False drops. Bot push. Future \"Conspiracy\" push to norms. Bad mixed w/ good. Taint. They are scared. Q",
+   "url": "https://therubberduck.net/#view-1013",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1013",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1021",
+   "category": "qdrop",
+   "number": 1021,
+   "title": "Q drop #1021",
+   "date": "2018-04-04T19:02 America/New_York",
+   "description": "List the estimated wealth of religious organizations. Billions. Vatican bank. $229B. Board of Superintendence. Supervisory Commission of Cardinals. Clown connection. 1832 Rothschild loan to the Holy See. Q",
+   "url": "https://therubberduck.net/#view-1021",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1021",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1075",
+   "category": "qdrop",
+   "number": 1075,
+   "title": "Q drop #1075",
+   "date": "2018-04-07T14:33 America/New_York",
+   "description": ">>938332 New tactic. Buckle up. MediaMatters 4ch. Narrative + anything Q. Clowns + Twitter push. MSM overdrive. All 4 a LARP? Q",
+   "url": "https://therubberduck.net/#view-1075",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1075",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1082",
+   "category": "qdrop",
+   "number": 1082,
+   "title": "Q drop #1082",
+   "date": "2018-04-08T14:15 America/New_York",
+   "description": "POTUS & JFK JR. Relationship. Plane crash 1999. HRC Senate 2000. The “Start.” Enjoy the show. Q",
+   "url": "https://therubberduck.net/#view-1082",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1082",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1106",
+   "category": "qdrop",
+   "number": 1106,
+   "title": "Q drop #1106",
+   "date": "2018-04-09T13:25 America/New_York",
+   "description": "Syria. Hold until CONF. MIL assets on the ground locked out of GZ. ISRAEL strike harmed ability to prove events. Clown report must be VERIFIED. Troop unwind to STILL occur. Have faith. Trust POTUS. Q",
+   "url": "https://therubberduck.net/#view-1106",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1106",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1160",
+   "category": "qdrop",
+   "number": 1160,
+   "title": "Q drop #1160",
+   "date": "2018-04-15T21:30 America/New_York",
+   "description": "[4] Clown UIDs here. Armenia. GOOG ‘qanon’ search stats (by country). Armenia #1. Q",
+   "url": "https://therubberduck.net/#view-1160",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1160",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1161",
+   "category": "qdrop",
+   "number": 1161,
+   "title": "Q drop #1161",
+   "date": "2018-04-15T22:06 America/New_York",
+   "description": "SC - Supreme Court. RBG. AS 187 / Clown Black (Brennan). Q",
+   "url": "https://therubberduck.net/#view-1161",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1161",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1183",
+   "category": "qdrop",
+   "number": 1183,
+   "title": "Q drop #1183",
+   "date": "2018-04-19T18:09 America/New_York",
+   "description": ">>1105264 Push to DIVIDE is strong. Think pre vs post 2016 election. Why? Stay TOGETHER. Stay STRONG. We, the PEOPLE. WWG1WGA - JFK. Q",
+   "url": "https://therubberduck.net/#view-1183",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1183",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1241",
+   "category": "qdrop",
+   "number": 1241,
+   "title": "Q drop #1241",
+   "date": "2018-04-23T13:56 America/New_York",
+   "description": "Reminder. Iran is next. Marker. CLAS - Sec 11A P 2.2. “Installments.” $250B. Jan 1. Jun 1. No inspection @ GZ NR sites. No missile tech prevention. Load carrying. ICBM. Think NK. Who controls the $? Who really controls…",
+   "url": "https://therubberduck.net/#view-1241",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1241",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1243",
+   "category": "qdrop",
+   "number": 1243,
+   "title": "Q drop #1243",
+   "date": "2018-04-23T14:51 America/New_York",
+   "description": ">>1158014 Why was Armenia mentioned recently? Clowns losing control. Q",
+   "url": "https://therubberduck.net/#view-1243",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1243",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1265",
+   "category": "qdrop",
+   "number": 1265,
+   "title": "Q drop #1265",
+   "date": "2018-04-25T12:08 America/New_York",
+   "description": ">>1180770 We knew this day would come. We knew people would need a guide. We all have a part to play. We knew FLYNN would be challenged. Part of the plan? Flynn JR recent “did not lie to VP.” Timing. Plan. SIG sent [WH…",
+   "url": "https://therubberduck.net/#view-1265",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1265",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1286",
+   "category": "qdrop",
+   "number": 1286,
+   "title": "Q drop #1286",
+   "date": "2018-04-27T19:39 America/New_York",
+   "description": "Reconcile. Reporting incorrect? Per WH? The day before. Enemy? Slave? Mueller & U1? Mueller & https://www.politico.com/story/2017/08/08/robert-mueller-counsel-financial-records-241414 Comey to POTUS - not being…",
+   "url": "https://therubberduck.net/#view-1286",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1286",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1290",
+   "category": "qdrop",
+   "number": 1290,
+   "title": "Q drop #1290",
+   "date": "2018-04-27T23:57 America/New_York",
+   "description": ">>1218316 Hope not. Might as well go sit in the CIA. Russia grounding our military planes in Syria. Military aircraft crashing in US. Coincidence? Autists need Red Bull? Q",
+   "url": "https://therubberduck.net/#view-1290",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1290",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1318",
+   "category": "qdrop",
+   "number": 1318,
+   "title": "Q drop #1318",
+   "date": "2018-05-08T00:36 America/New_York",
+   "description": "Think LOGICALLY. Mass exodus in DC? Mass exodus - corporate CEOs? Why? Who has the POWER? Who has the CONTROL? If POTUS was NOT IN CONTROL would they be retreating? Who is the AG? Who MUST approve the firing/dismissal…",
+   "url": "https://therubberduck.net/#view-1318",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1318",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1334",
+   "category": "qdrop",
+   "number": 1334,
+   "title": "Q drop #1334",
+   "date": "2018-05-10T23:31 America/New_York",
+   "description": "Rank & File. DOJ, FBI, CIA) Central Intelligence Agency\">C_A, State. [G-2][Collect] [SIS Good]. Not Forgotten. Overcome. Q",
+   "url": "https://therubberduck.net/#view-1334",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1334",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1351",
+   "category": "qdrop",
+   "number": 1351,
+   "title": "Q drop #1351",
+   "date": "2018-05-13T00:59 America/New_York",
+   "description": "Sealed indictments. Define indictment. “An indictment is a formal accusation against one or more defendants, charging them with one or more crimes. In the federal criminal system, the indictment is the principal method…",
+   "url": "https://therubberduck.net/#view-1351",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1351",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1380",
+   "category": "qdrop",
+   "number": 1380,
+   "title": "Q drop #1380",
+   "date": "2018-05-16T11:42 America/New_York",
+   "description": "No Such Agency vs Clowns In America. Today. Now. What is being revealed? What will it lead to? PS. Faces of lawmakers stepping out. Focus. When did Adm R step down? Reconcile. Nunes. Gowdy. DOJ. FBI. Next [1/2]. Q",
+   "url": "https://therubberduck.net/#view-1380",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1380",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1385",
+   "category": "qdrop",
+   "number": 1385,
+   "title": "Q drop #1385",
+   "date": "2018-05-16T16:25 America/New_York",
+   "description": "US History [ABCs] SIS [FBI] > CIA) Central Intelligence Agency\">C_A Did the 'covert' counterintelligence branch of the FBI end? Or, was it expanded into a new agency? Double meanings exist. SIS is good? UK:US US:UK Q",
+   "url": "https://therubberduck.net/#view-1385",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1385",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1391",
+   "category": "qdrop",
+   "number": 1391,
+   "title": "Q drop #1391",
+   "date": "2018-05-16T23:24 America/New_York",
+   "description": "Page from the CIA website showing Gina C. Haspel's career timeline.",
+   "url": "https://therubberduck.net/#view-1391",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1391",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-1395",
+   "category": "qdrop",
+   "number": 1395,
+   "title": "Q drop #1395",
+   "date": "2018-05-17T00:49 America/New_York",
+   "description": ">>1439665 Bomb disposal team. Bomb(s) about to blow. Which means? 1) They know 2) They are told (controlled) 3) Both Coordinated. Clowns wear masks. Q",
+   "url": "https://therubberduck.net/#view-1395",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1395",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1425",
+   "category": "qdrop",
+   "number": 1425,
+   "title": "Q drop #1425",
+   "date": "2018-05-20T13:54 America/New_York",
+   "description": ">>1482048 Given we have now undeniably [on purpose] verified ourselves to be an inside source, expect the MSM [Clown Army] to attack in full cooperation w/ foreign and domestic assets. Be prepared. TRUST the plan.…",
+   "url": "https://therubberduck.net/#view-1425",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1425",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1433",
+   "category": "qdrop",
+   "number": 1433,
+   "title": "Q drop #1433",
+   "date": "2018-05-21T19:04 America/New_York",
+   "description": "Military OP. [Green] General K [JFK] Full Disclosure. General Statement: Once the 'extremely guarded & highly classified' information is finally revealed to House investigators, DNI, public etc., RR must recuse or…",
+   "url": "https://therubberduck.net/#view-1433",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1433",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1443",
+   "category": "qdrop",
+   "number": 1443,
+   "title": "Q drop #1443",
+   "date": "2018-06-10T23:53 America/New_York",
+   "description": "#FLY[RR]FLY# Failure per WH instruction / agreement. DECLAS_Public[3] EO dated_official IG redactions [heavy+][remove] Hussein [WH [call] [tarmac] BC/LL] #RR# JC. #2. LL. BP. PS. LP. ………. 302s Texts Tarmac FBI DOJ…",
+   "url": "https://therubberduck.net/#view-1443",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1443",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1455",
+   "category": "qdrop",
+   "number": 1455,
+   "title": "Q drop #1455",
+   "date": "2018-06-11T13:09 America/New_York",
+   "description": "London pics [prev]. Year determined? Relevant. 2015/2016. Find the markers [street/surroundings updates] UK/SIS WH/CIA) Central Intelligence Agency\">C_A/FBI/DOJ Joint-Treason. You have a choice. SIS 'good' agents. The…",
+   "url": "https://therubberduck.net/#view-1455",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1455",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1489",
+   "category": "qdrop",
+   "number": 1489,
+   "title": "Q drop #1489",
+   "date": "2018-06-13T00:41 America/New_York",
+   "description": "MSM attacks. [Round 2] MOSSAD attempts failed. Clown attempts failed. Expect bigger push. FBI (4) open investigations. 8ch risk (DDOS_+_inject). TOGETHER YOU ARE STRONGER. TOGETHER YOU CONTROL NARRATIVE & RESPONSE.…",
+   "url": "https://therubberduck.net/#view-1489",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1489",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1493",
+   "category": "qdrop",
+   "number": 1493,
+   "title": "Q drop #1493",
+   "date": "2018-06-13T15:35 America/New_York",
+   "description": ">>1732221 Lee S. Re: D OPs Hussein Hacking State Voting Sys The TIP. THEY MUST WIN. AT ALL COSTS. SR 187 DISCOVERY. UK SIS. CIA) Central Intelligence Agency\">C_A RUSSIA MASK HACK (SAME HAS CHINA SUB WASH - SET UP). GOD…",
+   "url": "https://therubberduck.net/#view-1493",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1493",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1538",
+   "category": "qdrop",
+   "number": 1538,
+   "title": "Q drop #1538",
+   "date": "2018-06-18T00:33 America/New_York",
+   "description": "Public learned today. Why? What must be finished? Why still employed? Purpose? LP released after….. PS will be released after….. Just because something isn’t public doesn’t mean…. [DOJ texts / emails]…",
+   "url": "https://therubberduck.net/#view-1538",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1538",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1588",
+   "category": "qdrop",
+   "number": 1588,
+   "title": "Q drop #1588",
+   "date": "2018-06-26T21:04 America/New_York",
+   "description": ">>1915774 Coincidence? Review image/location. Nothing provided is random. SFO>JFK A321 Direct Q",
+   "url": "https://therubberduck.net/#view-1588",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1588",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1607",
+   "category": "qdrop",
+   "number": 1607,
+   "title": "Q drop #1607",
+   "date": "2018-06-27T14:20 America/New_York",
+   "description": ">>1926855 His choice? Remember, Kennedy was the swing vote. No more. Locked & Loaded. RBG next. Q",
+   "url": "https://therubberduck.net/#view-1607",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1607",
+   "mike_added": false,
+   "matched_terms": [
+    "Kennedy"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1666",
+   "category": "qdrop",
+   "number": 1666,
+   "title": "Q drop #1666",
+   "date": "2018-07-03T01:52 America/New_York",
+   "description": "https://www.breitbart.com/big-government/2018/07/02/nunes-refers-ten-obama-officials-to-house-judiciary-and-oversight-joint-task-force/amp/?__twitter_impression=true Re_ read drops re: Five Eyes / FVEY. Will be…",
+   "url": "https://therubberduck.net/#view-1666",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1666",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1698",
+   "category": "qdrop",
+   "number": 1698,
+   "title": "Q drop #1698",
+   "date": "2018-07-25T13:51 America/New_York",
+   "description": "Screenshot of an earlier Q post from February 10, 2018 beginning \"Rest in peace Mr. President (JFK).\"",
+   "url": "https://therubberduck.net/#view-1698",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1698",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-1751",
+   "category": "qdrop",
+   "number": 1751,
+   "title": "Q drop #1751",
+   "date": "2018-07-29T13:36 America/New_York",
+   "description": ">>2338977 Every CIA) Central Intelligence Agency\">C_A/MOS tactic of infiltration and internal disruption is being deployed on this board (central hub). The World is Here. Recognize. This movement is bigger than anyone…",
+   "url": "https://therubberduck.net/#view-1751",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1751",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1764",
+   "category": "qdrop",
+   "number": 1764,
+   "title": "Q drop #1764",
+   "date": "2018-07-30T16:57 America/New_York",
+   "description": "https://www.dni.gov/files/documents/icotr/51117/2016_Cert_FISC_Memo_Opin_Order_Apr_2017.pdf >Nicholas Rasmussen (IMPORTANT name to remember) >Former Director of NCTC…",
+   "url": "https://therubberduck.net/#view-1764",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1764",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1795",
+   "category": "qdrop",
+   "number": 1795,
+   "title": "Q drop #1795",
+   "date": "2018-08-02T01:20 America/New_York",
+   "description": "Screenshot of a Q post from July 30, 2018 linking DNI and FISA documents and asking about the CIA station chief in London.",
+   "url": "https://therubberduck.net/#view-1795",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1795",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-1828",
+   "category": "qdrop",
+   "number": 1828,
+   "title": "Q drop #1828",
+   "date": "2018-08-09T22:27 America/New_York",
+   "description": "[SPY OP] [WH [Hussein][VJ][DM][JB][RE][[[JK]]][SP][KM]]?—-?[HRC/DNC] [CIA) Central Intelligence Agency\">C_A [JB][CLAS1-5]](NSA - play/reveal TT) ^^ [DNI [JC]] ^^ ^^^^^ ^^ [DOJ…",
+   "url": "https://therubberduck.net/#view-1828",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1828",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1887",
+   "category": "qdrop",
+   "number": 1887,
+   "title": "Q drop #1887",
+   "date": "2018-08-15T15:51 America/New_York",
+   "description": ">>2613023 Has intel been shared w/ our enemies in an effort to warn them against capture/kill? How long did it take to locate/kill UBL? How many times did we locate UBL in the past and stand down orders were given? Why…",
+   "url": "https://therubberduck.net/#view-1887",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1887",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1927",
+   "category": "qdrop",
+   "number": 1927,
+   "title": "Q drop #1927",
+   "date": "2018-08-19T15:05 America/New_York",
+   "description": "[Cause] Define 'Subversion'. The act of subverting : the state of being subverted; especially : a systematic attempt to overthrow or undermine a government or political system by persons working secretly from within?…",
+   "url": "https://therubberduck.net/#view-1927",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1927",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1935",
+   "category": "qdrop",
+   "number": 1935,
+   "title": "Q drop #1935",
+   "date": "2018-08-27T20:04 America/New_York",
+   "description": "Focus Here: \"…raise troubling questions about Halper, who was believed to have worked with the CIA and part of the matrix of players in the bureau’s ‘CrossFire Hurricane’ investigation into Trump’s 2016 presidential…",
+   "url": "https://therubberduck.net/#view-1935",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1935",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1948",
+   "category": "qdrop",
+   "number": 1948,
+   "title": "Q drop #1948",
+   "date": "2018-08-28T14:40 America/New_York",
+   "description": "https://in.reuters.com/article/iran-economy-rouhani-sanctions/iran-parliament-censures-rouhani-in-sign-pragmatists-losing-sway-idINKCN1LD0DL [Hassan Rouhani] Who paid HUSSEIN to attend HARVARD LAW SCHOOL? Who is Prince…",
+   "url": "https://therubberduck.net/#view-1948",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1948",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-1959",
+   "category": "qdrop",
+   "number": 1959,
+   "title": "Q drop #1959",
+   "date": "2018-08-28T18:05 America/New_York",
+   "description": "Screenshot of an earlier Q post from February 22, 2018 reading \"Clowns revealed in China/other. 2010. [187] Sold intel?\"",
+   "url": "https://therubberduck.net/#view-1959",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1959",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-1998",
+   "category": "qdrop",
+   "number": 1998,
+   "title": "Q drop #1998",
+   "date": "2018-08-30T11:55 America/New_York",
+   "description": ">>2797703 Spooks are Spooked. Clowns inserted [Snowden2] last year. Operation failed. Expect another BIG coordinated wave [#3] of attacks by FAKE NEWS. Q",
+   "url": "https://therubberduck.net/#view-1998",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-1998",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-2055",
+   "category": "qdrop",
+   "number": 2055,
+   "title": "Q drop #2055",
+   "date": "2018-09-01T12:56 America/New_York",
+   "description": "https://twitter.com/CIA/status/1034866941587087360 Q",
+   "url": "https://therubberduck.net/#view-2055",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-2055",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-2077",
+   "category": "qdrop",
+   "number": 2077,
+   "title": "Q drop #2077",
+   "date": "2018-09-04T12:54 America/New_York",
+   "description": "Ex 1 - 'Being Afraid' Does HRC care about you? If she cared about protecting you… Would she sell out America’s secrets and Uranium to China/Russia [Ex 1]? They always thought if charges were brought [v. them] they would…",
+   "url": "https://therubberduck.net/#view-2077",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-2077",
+   "mike_added": false,
+   "matched_terms": [
+    "Kennedy"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-2107",
+   "category": "qdrop",
+   "number": 2107,
+   "title": "Q drop #2107",
+   "date": "2018-09-07T13:56 America/New_York",
+   "description": "Long screenshot of a Q post from May 21, 2018 titled \"Military OP\" and \"General K [JFK],\" on full disclosure.",
+   "url": "https://therubberduck.net/#view-2107",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-2107",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-2335",
+   "category": "qdrop",
+   "number": 2335,
+   "title": "Q drop #2335",
+   "date": "2018-10-04T17:14 America/New_York",
+   "description": "https://www.bloomberg.com/news/features/2018-10-04/the-big-hack-how-china-used-a-tiny-chip-to-infiltrate-america-s-top-companies \"Elemental’s servers could be found in Department of Defense data centers, the CIA’s drone…",
+   "url": "https://therubberduck.net/#view-2335",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-2335",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-2336",
+   "category": "qdrop",
+   "number": 2336,
+   "title": "Q drop #2336",
+   "date": "2018-10-04T17:22 America/New_York",
+   "description": "Screenshot of an earlier Q post from February 22, 2018 reading \"Clowns revealed in China/other. 2010. [187] Sold intel?\"",
+   "url": "https://therubberduck.net/#view-2336",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-2336",
+   "mike_added": false,
+   "matched_terms": [
+    "clowns"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-2573",
+   "category": "qdrop",
+   "number": 2573,
+   "title": "Q drop #2573",
+   "date": "2018-12-10T14:47 America/New_York",
+   "description": "\"The times are too grave, the challenge too urgent, and the stakes too high — to permit the customary passions of political debate. We are not here to curse the darkness, but to light the candle that can guide us…",
+   "url": "https://therubberduck.net/#view-2573",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-2573",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-2807",
+   "category": "qdrop",
+   "number": 2807,
+   "title": "Q drop #2807",
+   "date": "2019-02-19T10:47 America/New_York",
+   "description": "[TOPIC: TAXPAYER THEFT] INSIDER vs OUTSIDER RETAIN CONTROL vs. LOSE CONTROL Kennedy was an outsider [assassinated] Reagan was an outsider [assassination attempt] POTUS is an outsider [CLAS HIGH] How much money (CASH)…",
+   "url": "https://therubberduck.net/#view-2807",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-2807",
+   "mike_added": false,
+   "matched_terms": [
+    "Kennedy"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-3391",
+   "category": "qdrop",
+   "number": 3391,
+   "title": "Q drop #3391",
+   "date": "2019-07-09T14:28 America/New_York",
+   "description": "Phone screenshot of a Q post from December 12, 2018 titled \"JFK Jr. is Not Alive,\" answering \"Is JFK Jr alive?\" with \"No.\"",
+   "url": "https://therubberduck.net/#view-3391",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-3391",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-3632",
+   "category": "qdrop",
+   "number": 3632,
+   "title": "Q drop #3632",
+   "date": "2019-11-25T12:43 America/New_York",
+   "description": "Page of a declassified CIA memo saying the agency's posture toward the media is basically defensive and reactive.",
+   "url": "https://therubberduck.net/#view-3632",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-3632",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-3734",
+   "category": "qdrop",
+   "number": 3734,
+   "title": "Q drop #3734",
+   "date": "2019-12-19T12:50 America/New_York",
+   "description": ">>7561023 Also, think 'White Squal' re: Cuban M Crisis/JFK. Do comms only go to Anons? Bigger than you can imagine. Expand you're thinking. Q",
+   "url": "https://therubberduck.net/#view-3734",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-3734",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-3762",
+   "category": "qdrop",
+   "number": 3762,
+   "title": "Q drop #3762",
+   "date": "2019-12-28T12:33 America/New_York",
+   "description": "Screenshot of an earlier Q post linking a 2016 FISC certification, naming Nicholas Rasmussen and noting that Gina Haspel was CIA station chief in London.",
+   "url": "https://therubberduck.net/#view-3762",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-3762",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-3763",
+   "category": "qdrop",
+   "number": 3763,
+   "title": "Q drop #3763",
+   "date": "2019-12-28T12:35 America/New_York",
+   "description": "CIA career timeline of Director Gina C. Haspel.",
+   "url": "https://therubberduck.net/#view-3763",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-3763",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-3990",
+   "category": "qdrop",
+   "number": 3990,
+   "title": "Q drop #3990",
+   "date": "2020-04-28T19:14 America/New_York",
+   "description": "FBI CHAIN OF COMMAND MIDYEAR INVESTIGATION [HRC EMAIL]? FBI CHAIN OF COMMAND FISA-RUSSIA-POTUS-FLYNN-STONE-PAPADOP-MANAF? [CIA BRIDGE_BRENNAN_INTEL ASSESS[17]_UKRAINE_LINK]? FBI CHAIN OF COMMAND DNC HACK? [CIA BRIDGE >…",
+   "url": "https://therubberduck.net/#view-3990",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-3990",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4016",
+   "category": "qdrop",
+   "number": 4016,
+   "title": "Q drop #4016",
+   "date": "2020-04-30T17:04 America/New_York",
+   "description": "Was the DNC was hacked by Russia? CIA [BRENNAN] FORCE? Seth Rich internal DL hand-to-hand pass USA? Crowdstrike code insert? If FBI [CHAIN OF COMMAND] was corrupt what other investigations were corrupted? WHO DID THEY…",
+   "url": "https://therubberduck.net/#view-4016",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4016",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4021",
+   "category": "qdrop",
+   "number": 4021,
+   "title": "Q drop #4021",
+   "date": "2020-04-30T18:46 America/New_York",
+   "description": "https://twitter.com/johnrobertsFox/status/1255972553950220288 Think SIGINT Think CIA Think Double agents China thought they eliminated all in-country assets.…",
+   "url": "https://therubberduck.net/#view-4021",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4021",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4129",
+   "category": "qdrop",
+   "number": 4129,
+   "title": "Q drop #4129",
+   "date": "2020-05-06T19:48 America/New_York",
+   "description": "Black-and-white photo of John F. Kennedy with his quote \"Ask not what your country can do for you; ask what you can do for your country.\"",
+   "url": "https://therubberduck.net/#view-4129",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4129",
+   "mike_added": false,
+   "matched_terms": [
+    "Kennedy"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-4153",
+   "category": "qdrop",
+   "number": 4153,
+   "title": "Q drop #4153",
+   "date": "2020-05-08T14:41 America/New_York",
+   "description": "Crowdstrike testimony re: DNC & Russia [hack]? >no direct evidence? >manipulation of source? >comp-to-comp [transfer] speed [hack]? >internal DL [terminal 1] speed? >hand-to-hand transfer? >WL publish v SR 187? >MS13…",
+   "url": "https://therubberduck.net/#view-4153",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4153",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4166",
+   "category": "qdrop",
+   "number": 4166,
+   "title": "Q drop #4166",
+   "date": "2020-05-09T02:49 America/New_York",
+   "description": "[99%] men and women at CIA serve with distinction [Patriots]. [1%] [99%] men and women at FBI serve with distinction [Patriots]. [1%] [99%] men and women at DOJ serve with distinction [Patriots]. [1%] [99%] men and…",
+   "url": "https://therubberduck.net/#view-4166",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4166",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4299",
+   "category": "qdrop",
+   "number": 4299,
+   "title": "Q drop #4299",
+   "date": "2020-05-20T21:12 America/New_York",
+   "description": "Important to note [future events]. Masking v unmasking incidentally intercepted v direct [target] 702 collection [minimization procedures] v CIA v FVEY How does the CIA collect intelligence?…",
+   "url": "https://therubberduck.net/#view-4299",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4299",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4302",
+   "category": "qdrop",
+   "number": 4302,
+   "title": "Q drop #4302",
+   "date": "2020-05-21T10:50 America/New_York",
+   "description": "https://www.cia.gov/library/readingroom/docs/CIA-RDP91-00901R000600400020-9.pdf Expand your thinking. Q",
+   "url": "https://therubberduck.net/#view-4302",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4302",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4303",
+   "category": "qdrop",
+   "number": 4303,
+   "title": "Q drop #4303",
+   "date": "2020-05-21T10:53 America/New_York",
+   "description": "https://www.intelligence.senate.gov/sites/default/files/hearings/ciasuseofjournal00unit.pdf Logical thinking. CIA coming back into the news [soon]? Q",
+   "url": "https://therubberduck.net/#view-4303",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4303",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4456",
+   "category": "qdrop",
+   "number": 4456,
+   "title": "Q drop #4456",
+   "date": "2020-06-11T12:41 America/New_York",
+   "description": "https://www.judiciary.senate.gov/press/rep/releases/chairman-graham-announces-committee-to-consider-subpoena-authorization-related-to-oversight-of-fisa-process-crossfire-hurricane-investigation Committee approved…",
+   "url": "https://therubberduck.net/#view-4456",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4456",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4486",
+   "category": "qdrop",
+   "number": 4486,
+   "title": "Q drop #4486",
+   "date": "2020-06-20T15:15 America/New_York",
+   "description": "CIA Director _early 2017 - April 2018? External Advisory Board (CIA) members during this time? Was Bill Barr a member of the board? What advantages might exist to incoming AG Barr re: member of external advisory board…",
+   "url": "https://therubberduck.net/#view-4486",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4486",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4545",
+   "category": "qdrop",
+   "number": 4545,
+   "title": "Q drop #4545",
+   "date": "2020-06-30T00:19 America/New_York",
+   "description": "Humanity is good, but, when we let our guard down we allow darkness to infiltrate and destroy. Like past battles fought, we now face our greatest battle at present, a battle to save our Republic, our way of life, and…",
+   "url": "https://therubberduck.net/#view-4545",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4545",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4779",
+   "category": "qdrop",
+   "number": 4779,
+   "title": "Q drop #4779",
+   "date": "2020-09-28T15:02 America/New_York",
+   "description": "Screenshot of a Q post from May 5, 2020 linking reports on the FBI and CIA Russia assessment, naming [Brennan] and [Comey], with links to federal conspiracy statutes.",
+   "url": "https://therubberduck.net/#view-4779",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4779",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-4813",
+   "category": "qdrop",
+   "number": 4813,
+   "title": "Q drop #4813",
+   "date": "2020-10-06T20:04 America/New_York",
+   "description": "How close did we come to losing it? What if she got in? What if she got (3+) SC Justice(s)? What if she got 300+ Judges? What if rogue elements remained [+ more added] within FBI, CIA, NSA, State, DNI, WH, IRS, DHS,…",
+   "url": "https://therubberduck.net/#view-4813",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4813",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4838",
+   "category": "qdrop",
+   "number": 4838,
+   "title": "Q drop #4838",
+   "date": "2020-10-09T00:27 America/New_York",
+   "description": "What happens if CIA was actively involved in domestic targeting and surv of US person(s) [direct _indirect]? How does one agency attach itself to another?…",
+   "url": "https://therubberduck.net/#view-4838",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4838",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4839",
+   "category": "qdrop",
+   "number": 4839,
+   "title": "Q drop #4839",
+   "date": "2020-10-09T00:31 America/New_York",
+   "description": ">>10992036 Who was DNI? Who was AG? CIA leads to the top? Q",
+   "url": "https://therubberduck.net/#view-4839",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4839",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4845",
+   "category": "qdrop",
+   "number": 4845,
+   "title": "Q drop #4845",
+   "date": "2020-10-09T19:03 America/New_York",
+   "description": "https://twitter.com/HillaryClinton/status/573340998287413248 Roger that, Madam Secretary. [C] = classified [State] https://www.businessinsider.com/hillary-clinton-fbi-report-classified-markings-2016-9 Clinton Foundation…",
+   "url": "https://therubberduck.net/#view-4845",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4845",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4853",
+   "category": "qdrop",
+   "number": 4853,
+   "title": "Q drop #4853",
+   "date": "2020-10-14T12:39 America/New_York",
+   "description": "Wife: CIA Husband: DOJ How does one agency attach itself to another? Q",
+   "url": "https://therubberduck.net/#view-4853",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4853",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": false
+  },
+  {
+   "id": "q-4885",
+   "category": "qdrop",
+   "number": 4885,
+   "title": "Q drop #4885",
+   "date": "2020-10-17T15:29 America/New_York",
+   "description": "Phone screenshot of a December 12, 2018 exchange where an anon asked \"Is JFK Jr alive?\" and Q answered \"No.\"",
+   "url": "https://therubberduck.net/#view-4885",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4885",
+   "mike_added": false,
+   "matched_terms": [
+    "JFK"
+   ],
+   "match_in_image_text_only": true
+  },
+  {
+   "id": "q-4926",
+   "category": "qdrop",
+   "number": 4926,
+   "title": "Q drop #4926",
+   "date": "2020-10-21T22:36 America/New_York",
+   "description": "Official portrait of CIA Director Gina Haspel in front of the CIA seal.",
+   "url": "https://therubberduck.net/#view-4926",
+   "thumb_url": null,
+   "source_url": "https://therubberduck.net/#view-4926",
+   "mike_added": false,
+   "matched_terms": [
+    "CIA"
+   ],
+   "match_in_image_text_only": true
+  }
+ ]
+}
