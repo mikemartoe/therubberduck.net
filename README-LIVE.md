@@ -20,13 +20,13 @@ Mike sends a link to where he is speaking live -> set these fields in `live.json
 "live": true,
 "liveUrl": "https://x.com/i/spaces/XXXX",
 "liveLabel": "Live on X Spaces",
-"liveStart": "2026-11-17T14:20:00-05:00",
+"liveStart": "2026-11-17T14:15:00-05:00",
 "liveEnd":   "2026-11-17T17:00:00-05:00",
 "replayUntil": "2026-11-24T23:59:00-05:00",
 "replayLabel": "Listen to the replay",
 ```
 Leave `latestArticle` alone. `liveStart` / `liveEnd` are ISO times with the offset (-05:00 in winter, -04:00 in summer).
-- Before `liveStart`: sign lit, label **LIVE TODAY 2:20 PM ET** (or **LIVE TUE 2:20 PM ET** on an earlier day), click opens the link.
+- Before `liveStart`: sign lit, label **LIVE TODAY 2:15 PM ET** (or **LIVE TUE 2:15 PM ET** on an earlier day), click opens the link.
 - `liveStart` .. `liveEnd`: label **LIVE NOW ON X**, click opens the link. Flips by itself at the start time, no deploy.
 - Optional replay: between `liveEnd` and `replayUntil` the sign stays lit but calm (no flicker / pulse), label
   **LISTEN TO THE REPLAY** (`replayLabel`; phone sub-line "Replay"), click opens the same `liveUrl` (the X Space
@@ -52,7 +52,7 @@ Leave `latestArticle` alone. `liveStart` / `liveEnd` are ISO times with the offs
 ## Go live / end live
 ```
 python3 tools/update-live-json.py --live "https://x.com/i/spaces/XXXX" --label "Live on X Spaces" \
-  --start 2026-11-17T14:20:00-05:00 --end 2026-11-17T17:00:00-05:00
+  --start 2026-11-17T14:15:00-05:00 --end 2026-11-17T17:00:00-05:00
 python3 tools/update-live-json.py --off
 ```
 Commit + push `live.json`. GitHub Pages usually serves it within ~1–2 minutes; open pages pick it up within 2 more.
