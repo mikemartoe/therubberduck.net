@@ -397,6 +397,19 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 @media (min-width:900px) and (min-height:500px){.support{padding:56px 0 64px}.sup-in{max-width:clamp(1240px,84vw,1640px);padding:0 24px;box-sizing:border-box}}
 @media (min-width:900px) and (max-width:1100px) and (min-height:500px){.sup-in{padding:0 16px}}
 @media (prefers-reduced-motion:reduce){.sup-card,.sc-go i{transition:none}.sup-card:hover{transform:none}}
+.sup-btd{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;margin:0 0 18px;padding:20px 22px 16px;border-radius:10px;text-decoration:none;color:#f6ecd4;overflow:hidden;
+  background:linear-gradient(180deg,#4d2c15,#2a170b);border:2px solid #e3a82b;box-shadow:0 8px 20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,220,150,.25);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.sup-btd::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:repeating-linear-gradient(90deg,#C8302B 0 14px,#E2652A 14px 28px,#E3A82B 28px 42px,#7A4A24 42px 56px)}
+.sup-btd:hover,.sup-btd:focus-visible{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.7),0 0 0 2px #ffd77a,0 0 22px rgba(255,190,90,.35)}
+.sup-btd:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
+.btd-copy{display:flex;flex-direction:column;gap:4px;min-width:0;padding-top:4px}
+.btd-k{font:700 28px/1 var(--display);letter-spacing:.01em;color:#fff}
+.btd-s{font:400 16px/1.4 var(--body);color:#e9dcc0}
+.btd-go{margin-left:auto;flex:none;padding:10px 16px;border-radius:8px;font:700 15px/1 var(--body);color:#2a170b;background:#ffd77a;letter-spacing:.02em}
+.btd-go i{font-style:normal;display:inline-block;transition:transform .2s var(--ease)}
+.sup-btd:hover .btd-go i{transform:translateX(3px)}
+@media (max-width:599px){.sup-btd{padding:16px 14px 14px;flex-direction:column;align-items:stretch;text-align:center;gap:12px;margin-bottom:12px}.btd-k{font-size:24px}.btd-s{font-size:14px}.btd-go{margin:0;width:100%;text-align:center;box-sizing:border-box}}
+@media (prefers-reduced-motion:reduce){.sup-btd,.btd-go i{transition:none}.sup-btd:hover{transform:none}}
 /* ---- the suggestion line (desktop band) ---- */
 .band{display:none}
 
@@ -1018,8 +1031,15 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     <header class="sup-head">
       <p class="sup-k">Keep the tape rolling</p>
       <h2 class="sup-h" id="support-h">Support the archive</h2>
-      <p class="sup-s">The archive is free to use and carries no ads. It runs on sponsors, the shop, the book and the odd coffee.</p>
+      <p class="sup-s">The archive is free to use and carries no ads. It runs on people who back the Duck, sponsors, the shop, the book and the odd coffee.</p>
     </header>
+    <a class="sup-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="Back the Duck: a few dollars a month helps keep this archive going. Opens Buy Me a Coffee membership in a new tab">
+      <span class="btd-copy">
+        <span class="btd-k">Back the Duck</span>
+        <span class="btd-s">If you can, a few dollars a month helps keep this archive going. No paywall.</span>
+      </span>
+      <span class="btd-go">See monthly options <i aria-hidden="true">&rsaquo;</i></span>
+    </a>
     <div class="sup-grid">
       <a class="sup-card sc-spon" href="/sponsor.html">
         <span class="sc-art" aria-hidden="true"><span class="sc-sign"><small>Sponsor the Site</small><b>Site<br>Sponsors</b></span></span>
@@ -1066,7 +1086,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     </nav>
     <nav class="sf-col" aria-label="Support the archive">
       <h2>Support</h2>
-      <ul><li><a href="/sponsor.html">Sponsor the Site</a></li><li><a href="/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">The book (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Buy Me a Coffee</a></li></ul>
+      <ul><li><a href="/sponsor.html">Sponsor the Site</a></li><li><a href="/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">The book (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Buy Me a Coffee</a></li></ul>
     </nav>
     <div class="sf-col">
       <h2>Contact</h2>
