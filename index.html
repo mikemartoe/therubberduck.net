@@ -1503,6 +1503,10 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 (function(){
   var path=location.pathname;
   if(path!=='/' && path!=='/index.html' && path!=='/index.htm') return;
+  if(/[?&]xmaspreview=1(&|$)/.test(location.search)){ /* private preview of the full-screen v2 pop-up (Nov 17 2026); inert without the flag */
+    window.TRD_XMAS_PREVIEW=true; window.TRD_XMAS_PAGE='/christmas-preview-x7q4/';
+    var s2=document.createElement('script'); s2.src='/assets/trd/xmaspopup2.js?v=20261117a'; document.head.appendChild(s2); return;
+  }
   if(Date.now()>=Date.parse('2026-12-26T05:00:00.000Z')) return;
   var KEY='trd.xmasBundle.closed';
   try{var v=localStorage.getItem(KEY); if(v && (Date.now()-Number(v))<864e5) return;}catch(e){}
