@@ -28,7 +28,7 @@ def newest():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--live'); ap.add_argument('--label', default=''); ap.add_argument('--start', default=''); ap.add_argument('--end', default=''); ap.add_argument('--off', action='store_true')
+    ap.add_argument('--live'); ap.add_argument('--label', default=''); ap.add_argument('--start', default=''); ap.add_argument('--end', default=''); ap.add_argument('--replay-until', default=''); ap.add_argument('--replay-label', default=''); ap.add_argument('--off', action='store_true')
     ap.add_argument('--published-at', help='override latestArticle.publishedAt (ISO, e.g. 2026-11-09T18:00:00-05:00)')
     a = ap.parse_args()
     d = json.load(open(LIVE)) if os.path.exists(LIVE) else {}
@@ -37,9 +37,9 @@ def main():
     if n:
         if a.published_at: n['publishedAt'] = a.published_at
         d['latestArticle'] = n
-    if a.live: d.update(live=True, liveUrl=a.live, liveLabel=a.label, liveStart=a.start, liveEnd=a.end)
-    if a.off: d.update(live=False, liveUrl='', liveLabel='', liveStart='', liveEnd='')
-    out = {'live': d['live'], 'liveUrl': d['liveUrl'], 'liveLabel': d['liveLabel'], 'liveStart': d.get('liveStart', ''), 'liveEnd': d.get('liveEnd', ''), 'latestArticle': d.get('latestArticle', {})}
+    if a.live: d.update(live=True, liveUrl=a.live, liveLabel=a.label, liveStart=a.start, liveEnd=a.end, replayUntil=a.replay_until, replayLabel=a.replay_label)
+    if a.off: d.update(live=False, liveUrl='', liveLabel='', liveStart='', liveEnd='', replayUntil='', replayLabel='')
+    out = {'live': d['live'], 'liveUrl': d['liveUrl'], 'liveLabel': d['liveLabel'], 'liveStart': d.get('liveStart', ''), 'liveEnd': d.get('liveEnd', ''), 'replayUntil': d.get('replayUntil', ''), 'replayLabel': d.get('replayLabel', ''), 'latestArticle': d.get('latestArticle', {})}
     open(LIVE, 'w', encoding='utf-8').write(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(out, ensure_ascii=False, indent=2))
 

@@ -8,7 +8,8 @@
                    -> click opens the article, label "NEW DISPATCH".
    Optional "liveStart" / "liveEnd" (ISO with offset): before start the sign is lit with "Live today 2:20 PM ET",
    between them "Live now on X", after liveEnd it goes back to normal on its own. While a live link is
-   upcoming or live, a small ON AIR pop-up also shows in the bottom-left corner (close is remembered per link).
+   upcoming or live (or in the optional replay window: "replayUntil" / "replayLabel" -> calm lit sign,
+   "Listen to the replay", same liveUrl), a small ON AIR pop-up also shows in the bottom-left corner (close is remembered per link).
    Dim otherwise. Re-checks every 2 minutes while the tab is visible. See README-LIVE.md. */
 (function () {
   'use strict';
@@ -36,6 +37,9 @@
   + '.trd-onair:focus-visible{outline:3px solid #ffd77a;outline-offset:3px;border-radius:6px}'
   + '.trd-onair.is-away.is-dim{opacity:0;pointer-events:none;transform:translateY(-6px)}'
   + '@media (prefers-reduced-motion:no-preference){.trd-onair.is-lit .oa-box{animation:oaGlow 5s ease-in-out infinite}.trd-onair.is-lit .oa-on{animation:oaFlick 7s linear infinite}}'
+  /* replay: lit but calm (no flicker, no pulse, softer glow) */
+  + '.trd-onair.is-lit.is-replay .oa-box,.trd-onair.is-lit.is-replay .oa-on{animation:none!important}'
+  + '.trd-onair.is-lit.is-replay .oa-box{box-shadow:0 0 0 1px #000,inset 0 1px 0 rgba(255,255,255,.12),0 4px 10px rgba(0,0,0,.6),0 0 10px 2px rgba(255,214,150,.35)}'
   + '@keyframes oaGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}'
   + '@keyframes oaFlick{0%,61%,63.5%,66%,100%{opacity:1}62%{opacity:.55}64.5%{opacity:.75}}'
   /* compact sign: phones (in the header bar, right of the logo), small laptops, and the top strip on pages without the header */
@@ -64,6 +68,7 @@
   + '.trd-oap .oap-x{position:absolute;top:4px;right:4px;width:24px;height:24px;border:0;border-radius:4px;background:transparent;color:#bfb29a;font:400 18px/24px system-ui,sans-serif;cursor:pointer;padding:0}'
   + '.trd-oap .oap-x:hover,.trd-oap .oap-x:focus-visible{color:#fff;background:rgba(255,255,255,.08)}'
   + '@media (prefers-reduced-motion:no-preference){.trd-oap .oap-sign{animation:oaGlow 5s ease-in-out infinite}.trd-oap .oap-on{animation:oaFlick 7s linear infinite}}'
+  + '.trd-oap.is-replay .oap-sign,.trd-oap.is-replay .oap-on{animation:none!important}'
   + '@media print{.trd-onair,.trd-oap{display:none}}';
 
   var st = document.createElement('style'); st.id = 'trd-onair-css'; st.textContent = css;
@@ -115,12 +120,12 @@
   }
   function render() {
     var sub = el.querySelector('.oa-sub'), lbl = el.querySelector('.oa-lbl');
-    el.classList.toggle('is-lit', state.lit); el.classList.toggle('is-dim', !state.lit);
+    el.classList.toggle('is-lit', state.lit); el.classList.toggle('is-replay', state.lit && state.mode === 'replay'); el.classList.toggle('is-dim', !state.lit);
     if (state.lit) {
       el.href = state.href; el.removeAttribute('aria-disabled'); el.tabIndex = 0;
       if (state.external) { el.target = '_blank'; el.rel = 'noopener'; } else { el.removeAttribute('target'); el.removeAttribute('rel'); }
       lbl.innerHTML = state.label + '<i>&rsaquo;</i>';
-      sub.textContent = el.classList.contains('compact') ? (state.mode === 'live' ? 'Live now' : state.mode === 'soon' ? 'Today' : 'New post') : 'Live';
+      sub.textContent = el.classList.contains('compact') ? (state.mode === 'live' ? 'Live now' : state.mode === 'soon' ? 'Today' : state.mode === 'replay' ? 'Replay' : 'New post') : 'Live';
       el.setAttribute('aria-label', state.aria); el.title = state.aria;
     } else {
       el.removeAttribute('href'); el.setAttribute('aria-disabled', 'true'); el.tabIndex = -1; el.removeAttribute('title');
@@ -134,14 +139,17 @@
     var win = liveWindow(data);
     if (win) {
       var ext = /^https?:/i.test(data.liveUrl) && data.liveUrl.indexOf(location.host) < 0;
-      state = win.mode === 'soon'
+      state = win.mode === 'replay'
+        ? { lit: true, mode: 'replay', href: data.liveUrl, external: ext, label: data.replayLabel || 'Listen to the replay',
+            aria: 'On air: listen to the replay' + (data.liveLabel ? ', ' + data.liveLabel : '') + '. Opens the recording' }
+        : win.mode === 'soon'
         ? { lit: true, mode: 'soon', href: data.liveUrl, external: ext, label: win.when,
             aria: 'On air: The Rubber Duck goes live ' + win.when.toLowerCase().replace(/^live /, '') + (data.liveLabel ? ', ' + data.liveLabel : '') + '. Open the broadcast' }
         : { lit: true, mode: 'live', href: data.liveUrl, external: ext, label: win.start ? 'Live now on X' : (data.liveLabel || 'Live now'),
             aria: 'On air: The Rubber Duck is live now' + (data.liveLabel ? ', ' + data.liveLabel : '') + '. Open the broadcast' };
       state.when = win.when; state.start = win.start;
       // flip at the start / end time without another deploy or reload
-      [win.start, win.end].forEach(function (t) { if (t && t > now() && t - now() < 864e5) timers.push(setTimeout(function () { decide(data); }, t - now() + 500)); });
+      [win.start, win.end, win.replay].forEach(function (t) { if (t && t > now() && t - now() < 864e5) timers.push(setTimeout(function () { decide(data); }, t - now() + 500)); });
     } else if (a.slug && a.url) {
       var seen = lsGet(SEEN), t = ts(a.publishedAt), fresh = !isNaN(t) && Date.now() - t < DAY;
       if (onNewsroom) { lsSet(SEEN, a.slug); seen = a.slug; }
@@ -157,8 +165,13 @@
   function liveWindow(d) {
     if (!(d.live === true && d.liveUrl)) return null;
     var s = ts(d.liveStart), e = ts(d.liveEnd), n = now();
-    if (!isNaN(e) && n >= e) return null;
-    var w = { start: isNaN(s) ? 0 : s, end: isNaN(e) ? 0 : e, when: '' };
+    var rp = ts(d.replayUntil);
+    var w = { start: isNaN(s) ? 0 : s, end: isNaN(e) ? 0 : e, replay: isNaN(rp) ? 0 : rp, when: '' };
+    if (!isNaN(e) && n >= e) {
+      // after the live window: optional replay state until replayUntil, then back to normal
+      if (w.replay && n < w.replay) { w.mode = 'replay'; return w; }
+      return null;
+    }
     if (w.start) w.when = whenLabel(w.start);
     w.mode = (w.start && n < w.start) ? 'soon' : 'live';
     return w;
@@ -174,12 +187,13 @@
     return (sameDay ? 'Live today ' : 'Live ' + (a.weekday || '') + ' ') + tm;
   }
   function popup() {
-    var on = state.lit && (state.mode === 'live' || state.mode === 'soon');
+    var on = state.lit && (state.mode === 'live' || state.mode === 'soon' || state.mode === 'replay');
     var key = on ? POPK + ':' + state.href + ':' + state.mode : '';
     if (!on || lsGet(key)) { if (pop) { pop.parentNode && pop.parentNode.removeChild(pop); pop = null; } return; }
     // never on top of the Christmas bundle pop-up: wait until it is closed
     var line = state.mode === 'live' ? 'Mike is live on X Spaces now' : state.when.replace(/^Live (today|\w+) /, 'Live $1 at ') + ' on X Spaces';
     var go = state.mode === 'live' ? 'Join \u203a' : 'Set reminder \u203a';
+    if (state.mode === 'replay') { line = 'Missed it? Listen to the replay'; go = 'Listen \u203a'; }
     if (!pop) {
       pop = document.createElement('div'); pop.className = 'trd-oap oap-hide'; pop.setAttribute('role', 'status');
       pop.innerHTML = '<a class="oap-sign" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><span class="oap-on">ON AIR</span><span class="oap-sub">Live</span></a>'
@@ -195,7 +209,8 @@
     pop.querySelector('.oap-line').textContent = line;
     var g = pop.querySelector('.oap-go'); g.textContent = go; g.href = state.href;
     pop.querySelector('.oap-sign').href = state.href;
-    pop.querySelector('.oap-sub').textContent = state.mode === 'live' ? 'Live now' : 'Today';
+    pop.querySelector('.oap-sub').textContent = state.mode === 'live' ? 'Live now' : state.mode === 'replay' ? 'Replay' : 'Today';
+    pop.classList.toggle('is-replay', state.mode === 'replay');
     lift();
   }
   // keep the pop-up above other bottom-fixed bars (Ledger support button / phone nav pill, Listening Room player)
