@@ -1,7 +1,9 @@
 {
-  "live": false,
-  "liveUrl": "",
-  "liveLabel": "",
+  "live": true,
+  "liveUrl": "https://x.com/i/spaces/1OdVRaeBERelZQ",
+  "liveLabel": "Live on X Spaces",
+  "liveStart": "2026-11-17T14:20:00-05:00",
+  "liveEnd": "2026-11-17T17:00:00-05:00",
   "latestArticle": {
     "slug": "new-israeli-leadership-will-investigate-failures-that-allowed-october-7-hamas-attack",
     "title": "🇮🇱NEW ISRAELI LEADERSHIP🇮🇱WILL INVESTIGATE Failures That Allowed October 7 Hamas Attack!",

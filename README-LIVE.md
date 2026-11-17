@@ -1,17 +1,38 @@
 # ON AIR · LIVE sign
 
 A vintage light-box sign in the upper-left of every room landing page (homepage, Private Theater,
-Listening Room, SCI[F], Drop Ledger, Meme Dump, Twitter/X Archive, DUCK SAUCE). PC: just under the
+Listening Room, SCI[F] + OSS room, Drop Ledger, Meme Dump, Twitter/X Archive, DUCK SAUCE, Collectibles
+(merch.html), Site Sponsors (sponsor.html), Red Pill Album (album.html), Drive-In (/watch/)). PC: just under the
 header bar. Phones: inside the header bar, right of the logo.
 
 - Script: `/assets/trd/onair.js` (CSS is inside it). Include on a page with
-  `<script src="/assets/trd/onair.js?v=20261109" defer data-trd-keep></script>`.
+  `<script src="/assets/trd/onair.js?v=20261117" defer data-trd-keep></script>`.
 - Data: `/live.json`, fetched on load and every 2 minutes while the tab is open.
 
 ```json
-{ "live": false, "liveUrl": "", "liveLabel": "",
+{ "live": false, "liveUrl": "", "liveLabel": "", "liveStart": "", "liveEnd": "",
   "latestArticle": { "slug": "...", "title": "...", "url": "/newsroom/<slug>/", "publishedAt": "YYYY-MM-DD or ISO" } }
 ```
+
+## New live link = edit ONE file (`/live.json`)
+Mike sends a link to where he is speaking live -> set these fields in `live.json`, commit, push, purge Cloudflare:
+```json
+"live": true,
+"liveUrl": "https://x.com/i/spaces/XXXX",
+"liveLabel": "Live on X Spaces",
+"liveStart": "2026-11-17T14:20:00-05:00",
+"liveEnd":   "2026-11-17T17:00:00-05:00",
+```
+Leave `latestArticle` alone. `liveStart` / `liveEnd` are ISO times with the offset (-05:00 in winter, -04:00 in summer).
+- Before `liveStart`: sign lit, label **LIVE TODAY 2:20 PM ET** (or **LIVE TUE 2:20 PM ET** on an earlier day), click opens the link.
+- `liveStart` .. `liveEnd`: label **LIVE NOW ON X**, click opens the link. Flips by itself at the start time, no deploy.
+- After `liveEnd`: back to normal (new-dispatch / dim). No cleanup needed, but set `live` back to false later.
+- Without `liveStart`/`liveEnd` it behaves like before (lit "live now" until `live` is set false).
+- While upcoming/live, a small ON AIR pop-up shows bottom-left with one line and **Join** / **Set reminder**
+  (opens the link in a new tab). Closing it is remembered per link (`localStorage["trd.onairPop.closed:<url>:<soon|live>"]`).
+  On the homepage it stays hidden while the Christmas bundle pop-up is open and appears after that is closed.
+  It lifts itself above the Ledger phone nav pill / support button and the Listening Room player bar.
+- Test any time without deploying: add `?onair-now=2026-11-17T14:25:00-05:00` to a page URL.
 
 ## When it lights up
 1. `live: true` with a `liveUrl` → lit, label **LIVE NOW** (or `liveLabel`), click opens `liveUrl` (new tab if off-site).
@@ -24,7 +45,8 @@ header bar. Phones: inside the header bar, right of the logo.
 
 ## Go live / end live
 ```
-python3 tools/update-live-json.py --live "https://x.com/i/broadcasts/XXXX" --label "LIVE FROM THE BEACH"
+python3 tools/update-live-json.py --live "https://x.com/i/spaces/XXXX" --label "Live on X Spaces" \
+  --start 2026-11-17T14:20:00-05:00 --end 2026-11-17T17:00:00-05:00
 python3 tools/update-live-json.py --off
 ```
 Commit + push `live.json`. GitHub Pages usually serves it within ~1–2 minutes; open pages pick it up within 2 more.
