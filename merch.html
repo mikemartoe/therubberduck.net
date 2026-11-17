@@ -380,6 +380,82 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
     <span class="neon" aria-hidden="true">Open</span>
   </section>
 
+<!-- xmasbundle:begin (Christmas bundle, Nov 2026; remove this block to roll back) -->
+<style id="xmasbundle-css">
+.xb{max-width:1100px;margin:28px auto 8px;padding:0 16px}
+.xb-in{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;background:linear-gradient(180deg,#143a28,#0a1e16);color:#faf4e6;border:2px solid #c8202b;border-radius:18px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.xb-media img{width:100%;height:auto;border-radius:12px;display:block}
+.xb-thumbs{display:flex;gap:8px;margin-top:8px}
+.xb-thumbs button{flex:1;padding:0;border:2px solid transparent;border-radius:8px;background:none;cursor:pointer;overflow:hidden}
+.xb-thumbs button[aria-pressed="true"]{border-color:#ecbe5a}
+.xb-thumbs img{width:100%;height:64px;object-fit:cover;display:block}
+.xb-k{margin:0;color:#ecbe5a;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem}
+.xb h2{margin:4px 0 6px;font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.1;color:#faf4e6}
+.xb-price{font-size:2.4rem;font-weight:800;margin:6px 0 2px}
+.xb-price small{font-size:1rem;font-weight:600;color:#ecbe5a;margin-left:6px}
+.xb ul{margin:10px 0 12px;padding-left:18px;line-height:1.5}
+.xb-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.xb-pick label{display:flex;flex-direction:column;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#ecbe5a;gap:4px}
+.xb-pick select{font:inherit;font-size:1rem;text-transform:none;letter-spacing:0;padding:9px 8px;border-radius:8px;border:1px solid #556;background:#fff;color:#111}
+.xb-buy{display:block;width:100%;text-align:center;background:#c8202b;color:#fff;font-weight:800;font-size:1.15rem;padding:14px;border-radius:10px;text-decoration:none;border:0;cursor:pointer}
+.xb-buy[aria-disabled="true"]{background:#6b2a2f;cursor:not-allowed}
+.xb-cut{margin:10px 0 0;font-weight:700;color:#ecbe5a}
+.xb-live{margin:12px 0 0;padding:10px 12px;background:#961c22;border-radius:8px;font-weight:600}
+@media (max-width:760px){.xb-in{grid-template-columns:1fr;padding:14px;gap:14px}.xb-pick{grid-template-columns:1fr 1fr}.xb-pick label:last-child{grid-column:1/-1}}
+</style>
+<section class="xb" id="christmas-bundle" aria-labelledby="xb-title">
+  <div class="xb-in">
+    <div class="xb-media">
+      <img id="xb-main" src="/store-img/xmas-bundle-hero.webp" width="1000" height="1000" alt="The Duck Christmas Bundle: Rubber Duck tee, embroidered dad hat and duck sticker, $79 shipping included" loading="eager">
+      <div class="xb-thumbs" role="group" aria-label="Bundle pictures">
+        <button type="button" aria-pressed="true" data-src="/store-img/xmas-bundle-hero.webp"><img src="/store-img/xmas-bundle-hero.webp" alt="Bundle" loading="lazy"></button>
+        <button type="button" aria-pressed="false" data-src="/store-img/xmas-bundle-colors.webp"><img src="/store-img/xmas-bundle-colors.webp" alt="Color options" loading="lazy"></button>
+        <button type="button" aria-pressed="false" data-src="/store-img/xmas-bundle-box.webp"><img src="/store-img/xmas-bundle-box.webp" alt="What's in the box" loading="lazy"></button>
+      </div>
+    </div>
+    <div class="xb-copy">
+      <p class="xb-k">Christmas 2026</p>
+      <h2 id="xb-title">The Duck Christmas Bundle</h2>
+      <p class="xb-price">$79 <small>shipping included</small></p>
+      <ul>
+        <li>The Rubber Duck Tee, printed front and back</li>
+        <li>The Rubber Duck Dad Hat, embroidered front and back</li>
+        <li>A 3&times;3 duck sticker</li>
+      </ul>
+      <p>Same bundle for everybody. You just pick the shirt color and the hat color.</p>
+      <div class="xb-pick">
+        <label>Shirt color<select id="xb-tee"><option value="black">Black</option><option value="navy">Navy</option><option value="white">White</option><option value="gold">Gold</option></select></label>
+        <label>Shirt size<select id="xb-size"><option>S</option><option>M</option><option selected>L</option><option>XL</option><option>2XL</option><option>3XL</option></select></label>
+        <label>Hat color<select id="xb-hat"><option value="black">Black</option><option value="navy">Navy</option><option value="white">White</option></select></label>
+      </div>
+      <a class="xb-buy" id="xb-buy" href="#christmas-bundle" data-checkout="" aria-disabled="true">Checkout opens soon</a>
+      <p class="xb-cut">Order by Sunday, December 6 to have it by Christmas.</p>
+      <p class="xb-live">Every bundle sold keeps therubberduck.net live.</p>
+    </div>
+  </div>
+</section>
+<script id="xmasbundle-js">
+(function(){
+  var b=document.getElementById('xb-buy'); if(!b) return;
+  var base=b.getAttribute('data-checkout')||'';
+  function upd(){
+    if(!base){return;}
+    var ref=['christmas-bundle',document.getElementById('xb-tee').value,document.getElementById('xb-size').value,document.getElementById('xb-hat').value].join('_');
+    b.href=base+(base.indexOf('?')<0?'?':'&')+'client_reference_id='+encodeURIComponent(ref);
+    b.removeAttribute('aria-disabled'); b.textContent='Get the bundle';
+  }
+  ['xb-tee','xb-size','xb-hat'].forEach(function(id){var e=document.getElementById(id); if(e) e.addEventListener('change',upd);});
+  b.addEventListener('click',function(e){ if(!base){ e.preventDefault(); } });
+  upd();
+  var main=document.getElementById('xb-main');
+  document.querySelectorAll('.xb-thumbs button').forEach(function(t){t.addEventListener('click',function(){
+    main.src=t.getAttribute('data-src');
+    document.querySelectorAll('.xb-thumbs button').forEach(function(o){o.setAttribute('aria-pressed',o===t?'true':'false');});
+  });});
+})();
+</script>
+<!-- xmasbundle:end -->
+
 <!-- bookcard:begin -->
   <section class="case bookcase" id="anon-mission" aria-labelledby="anon-mission-title">
     <header class="head">
