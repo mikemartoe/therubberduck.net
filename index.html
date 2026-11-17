@@ -1485,7 +1485,9 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 #xbp-title{margin:0 0 4px;font-size:clamp(1.45rem,5vw,1.85rem);line-height:1.15;color:#faf4e6;font-weight:800}
 #xbp-price{margin:0 0 8px;font-size:2rem;font-weight:800}
 #xbp-price small{font-size:1rem;font-weight:600;color:#ecbe5a;margin-left:6px}
-#xbp-items{margin:0 0 10px;color:#faf4e6}
+#xbp-items{margin:0 0 6px;color:#faf4e6}
+#xbp-more{margin:0 0 10px;color:#ecbe5a;font-weight:600}
+#xbp-more b{color:#faf4e6}
 #xbp-live{margin:0 0 8px;padding:8px 10px;background:#961c22;border-radius:8px;font-weight:600}
 #xbp-cut{margin:0 0 14px;font-weight:700;color:#ecbe5a}
 #xbp-buy{display:block;width:100%;text-align:center;background:#c8202b;color:#fff;font-weight:800;font-size:1.15rem;padding:14px;border-radius:10px;text-decoration:none}
@@ -1516,17 +1518,18 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     close.textContent='\u00d7';
     var pic=make('picture');
     pic.appendChild(make('source',{type:'image/webp',srcset:'/store-img/xmas-bundle-hero.webp'}));
-    var img=make('img',{src:'/store-img/xmas-bundle-hero.jpg',width:'1000',height:'1000',alt:'The Rubber Duck Christmas Bundle: Rubber Duck tee, embroidered dad hat and duck sticker, $79 shipping included'});
+    var img=make('img',{src:'/store-img/xmas-bundle-hero.jpg',width:'1000',height:'1000',alt:'The Rubber Duck Christmas Bundle: Rubber Duck tee, embroidered baseball cap and duck sticker, $79 shipping included'});
     pic.appendChild(img);
     var copy=make('div',{id:'xbp-copy'});
     copy.innerHTML='<h2 id="xbp-title">The Rubber Duck Christmas Bundle</h2>'
       +'<p id="xbp-price">$79 <small>shipping included</small></p>'
-      +'<p id="xbp-items">Tee + hat + sticker</p>'
+      +'<p id="xbp-items">Tee + baseball cap + sticker</p>'
+      +'<p id="xbp-more">Bigger bundles: <b>Big Duck $129</b> &middot; <b>TRD-MVP $179</b></p>'
       +'<div id="xbp-desc">'
       +'<p id="xbp-live">Every bundle sold keeps therubberduck.net live.</p>'
       +'<p id="xbp-cut">Order by Sunday, December 6 to have it by Christmas.</p>'
       +'</div>'
-      +'<a id="xbp-buy" href="/merch.html#christmas-bundle">Get the bundle</a>';
+      +'<a id="xbp-buy" href="/merch.html#christmas-bundles">See all 3 bundles</a>';
     card.appendChild(close); card.appendChild(pic); card.appendChild(copy);
     root.appendChild(card);
     var prev=document.activeElement;
