@@ -14,12 +14,12 @@
   var KEY = 'trd.xmasBundle.closed';
   if (!PREVIEW) { try { var v = localStorage.getItem(KEY); if (v && (Date.now() - Number(v)) < 864e5) return; } catch (e) {} }
   var TIERS = [
-    { id: 'christmas-bundle', img: '/store-img/xmas-bundle-hero', price: '$79', items: 'Tee, baseball cap, sticker',
-      alt: 'The Rubber Duck Christmas Bundle, $79 shipping included: tee, baseball cap and sticker' },
-    { id: 'christmas-bundle-big-duck', img: '/store-img/xmas-bundle-big-duck-hero', price: '$129', items: 'Tee, baseball cap, mug, koozie, 2 stickers + FREE $50 ad',
-      alt: 'The Rubber Duck Christmas Bundle: Big Duck, $129 shipping included' },
-    { id: 'christmas-bundle-trd-mvp', img: '/store-img/xmas-bundle-trd-mvp-hero', price: '$179', items: 'Hoodie, tee, baseball cap, mug, koozie, patch, 3 stickers + FREE $50 ad',
-      alt: 'The Rubber Duck Christmas Bundle: TRD-MVP, $179 shipping included' }
+    { id: 'christmas-bundle', img: '/store-img/xmas-bundle-one-hero', price: '$79', items: 'Tee, baseball cap, sticker',
+      alt: 'The Rubber Duck Christmas Bundle: Bundle One, $79 shipping included' },
+    { id: 'christmas-bundle-big-duck', img: '/store-img/xmas-bundle-two-hero', price: '$129', items: 'Tee, baseball cap, mug, koozie, 2 stickers + FREE $50 ad',
+      alt: 'The Rubber Duck Christmas Bundle: Bundle Two, $129 shipping included' },
+    { id: 'christmas-bundle-trd-mvp', img: '/store-img/xmas-bundle-three-hero', price: '$179', items: 'Hoodie, tee, baseball cap, mug, koozie, patch, 3 stickers + FREE $50 ad',
+      alt: 'The Rubber Duck Christmas Bundle: Bundle Three, $179 shipping included' }
   ];
   var css = ''
   + '#xbp-root.x2{position:fixed;inset:0;z-index:2147483600;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:0;animation:none;color:#faf4e6;font-family:Roboto,"Helvetica Neue",Arial,sans-serif;'

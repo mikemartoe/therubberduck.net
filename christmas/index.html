@@ -92,6 +92,7 @@ main{position:relative;z-index:1;padding:20px 0 40px}
 .xb-ad span{display:block;font-weight:600;font-size:.88rem}
 .xb-box{margin:8px 0 0;font-size:.92rem;color:#e9dcc0}
 /* 3-tier lineup */
+.xb-alias{display:block;height:0;scroll-margin-top:52px}
 .xbl{max-width:1100px;margin:28px auto 0;padding:0 16px;scroll-margin-top:90px}
 .xbl-h{text-align:center;margin:0 0 12px}
 .xbl-h p{margin:0;color:#ecbe5a;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.8rem}
@@ -108,24 +109,25 @@ main{position:relative;z-index:1;padding:20px 0 40px}
 <section class="xbl" id="christmas-bundles" aria-labelledby="xbl-title">
   <div class="xbl-h"><p>Christmas 2026 &middot; shipping included</p><h2 id="xbl-title">The Rubber Duck Christmas Bundles</h2></div>
   <div class="xbl-row">
-    <a class="xbl-card" href="#christmas-bundle" data-tier="christmas-bundle"><img src="/store-img/xmas-bundle-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle, $79" loading="eager"><b>The Rubber Duck Christmas Bundle &middot; $79</b><i>Tee, baseball cap, sticker</i><span>See the $79 bundle</span></a>
-    <a class="xbl-card" href="#christmas-bundle-big-duck" data-tier="christmas-bundle-big-duck"><img src="/store-img/xmas-bundle-big-duck-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Big Duck, $129" loading="eager"><b>Big Duck &middot; $129</b><i>Tee, baseball cap, mug, koozie, 2 stickers + FREE $50 ad</i><span>See the $129 bundle</span></a>
-    <a class="xbl-card" href="#christmas-bundle-trd-mvp" data-tier="christmas-bundle-trd-mvp"><img src="/store-img/xmas-bundle-trd-mvp-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: TRD-MVP, $179" loading="eager"><b>TRD-MVP &middot; $179</b><i>Hoodie, tee, baseball cap, mug, koozie, patch, 3 stickers + FREE $50 ad</i><span>See the $179 bundle</span></a>
+    <a class="xbl-card" href="#christmas-bundle" data-tier="christmas-bundle"><img src="/store-img/xmas-bundle-one-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Bundle One, $79" loading="eager"><b>Bundle One &middot; $79</b><i>Tee, baseball cap, sticker</i><span>See the $79 bundle</span></a>
+    <a class="xbl-card" href="#christmas-bundle-big-duck" data-tier="christmas-bundle-big-duck"><img src="/store-img/xmas-bundle-two-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Bundle Two, $129" loading="eager"><b>Bundle Two &middot; $129</b><i>Tee, baseball cap, mug, koozie, 2 stickers + FREE $50 ad</i><span>See the $129 bundle</span></a>
+    <a class="xbl-card" href="#christmas-bundle-trd-mvp" data-tier="christmas-bundle-trd-mvp"><img src="/store-img/xmas-bundle-three-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Bundle Three, $179" loading="eager"><b>Bundle Three &middot; $179</b><i>Hoodie, tee, baseball cap, mug, koozie, patch, 3 stickers + FREE $50 ad</i><span>See the $179 bundle</span></a>
   </div>
 </section>
+<span class="xb-alias" id="bundle-one"></span>
 <section class="xb" id="christmas-bundle" data-slug="christmas-bundle" aria-labelledby="xb-title">
   <div class="xb-in">
     <div class="xb-media">
-      <img class="xb-main" id="xb-main" src="/store-img/xmas-bundle-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Rubber Duck tee, embroidered baseball cap and duck sticker, $79 shipping included" loading="eager">
+      <img class="xb-main" id="xb-main" src="/store-img/xmas-bundle-one-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Bundle One. Rubber Duck tee, embroidered baseball cap and duck sticker, $79 shipping included" loading="eager">
       <div class="xb-thumbs" role="group" aria-label="Bundle pictures">
-        <button type="button" aria-pressed="true" data-src="/store-img/xmas-bundle-hero.webp"><img src="/store-img/xmas-bundle-hero.webp" alt="Bundle" loading="eager"></button>
+        <button type="button" aria-pressed="true" data-src="/store-img/xmas-bundle-one-hero.webp"><img src="/store-img/xmas-bundle-one-hero.webp" alt="Bundle One" loading="eager"></button>
         <button type="button" aria-pressed="false" data-src="/store-img/xmas-bundle-colors.webp"><img src="/store-img/xmas-bundle-colors.webp" alt="Color options" loading="eager"></button>
         <button type="button" aria-pressed="false" data-src="/store-img/xmas-bundle-box.webp"><img src="/store-img/xmas-bundle-box.webp" alt="What's in the box" loading="eager"></button>
       </div>
     </div>
     <div class="xb-copy">
       <p class="xb-k">Christmas 2026</p>
-      <h2 id="xb-title">The Rubber Duck Christmas Bundle</h2>
+      <h2 id="xb-title">The Rubber Duck Christmas Bundle: Bundle One</h2>
       <p class="xb-price">$79 <small>shipping included</small></p>
       <ul>
         <li>The Rubber Duck Tee, printed front and back</li>
@@ -144,14 +146,15 @@ main{position:relative;z-index:1;padding:20px 0 40px}
     </div>
   </div>
 </section>
+<span class="xb-alias" id="bundle-two"></span>
 <section class="xb" id="christmas-bundle-big-duck" data-slug="christmas-bundle-big-duck" aria-labelledby="xb-title-big-duck">
   <div class="xb-in">
     <div class="xb-media">
-      <img class="xb-main" src="/store-img/xmas-bundle-big-duck-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Big Duck. Rubber Duck tee, baseball cap, mug, koozie and 2 stickers, plus a free $50 ad on therubberduck.net for 90 days, $129 shipping included" loading="eager">
+      <img class="xb-main" src="/store-img/xmas-bundle-two-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Bundle Two. Rubber Duck tee, baseball cap, mug, koozie and 2 stickers, plus a free $50 ad on therubberduck.net for 90 days, $129 shipping included" loading="eager">
     </div>
     <div class="xb-copy">
       <p class="xb-k">Christmas 2026 &middot; Bigger bundle</p>
-      <h2 id="xb-title-big-duck">The Rubber Duck Christmas Bundle: Big Duck</h2>
+      <h2 id="xb-title-big-duck">The Rubber Duck Christmas Bundle: Bundle Two</h2>
       <p class="xb-price">$129 <small>shipping included</small></p>
       <ul>
         <li>The Rubber Duck Tee, printed front and back</li>
@@ -173,14 +176,15 @@ main{position:relative;z-index:1;padding:20px 0 40px}
     </div>
   </div>
 </section>
+<span class="xb-alias" id="bundle-three"></span>
 <section class="xb" id="christmas-bundle-trd-mvp" data-slug="christmas-bundle-trd-mvp" aria-labelledby="xb-title-trd-mvp">
   <div class="xb-in">
     <div class="xb-media">
-      <img class="xb-main" src="/store-img/xmas-bundle-trd-mvp-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: TRD-MVP. White Rubber Duck hoodie, tee, baseball cap, mug, koozie, patch and 3 stickers, plus a free $50 ad on therubberduck.net for 90 days, $179 shipping included" loading="eager">
+      <img class="xb-main" src="/store-img/xmas-bundle-three-hero.webp" width="1000" height="1000" alt="The Rubber Duck Christmas Bundle: Bundle Three. White Rubber Duck hoodie, tee, baseball cap, mug, koozie, patch and 3 stickers, plus a free $50 ad on therubberduck.net for 90 days, $179 shipping included" loading="eager">
     </div>
     <div class="xb-copy">
       <p class="xb-k">Christmas 2026 &middot; The biggest bundle</p>
-      <h2 id="xb-title-trd-mvp">The Rubber Duck Christmas Bundle: TRD-MVP</h2>
+      <h2 id="xb-title-trd-mvp">The Rubber Duck Christmas Bundle: Bundle Three</h2>
       <p class="xb-price">$179 <small>shipping included</small></p>
       <ul>
         <li>The Rubber Duck Hoodie, white</li>
