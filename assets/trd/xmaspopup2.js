@@ -1,4 +1,4 @@
-/* Full-screen Christmas pop-up v2 (therubberduck.net homepage). PREVIEW, Nov 17 2026.
+/* Full-screen Christmas pop-up v2 (therubberduck.net homepage). LIVE Nov 17 2026 (Mike approved). Loaded by index.html (xmaspopup block).
    Shows the three bundle heroes ($79 / $129 / $179). Each one opens the Christmas page at that bundle's section.
    Close: the big "X EXIT" button, the Esc key, tapping outside the graphics, or "No thanks, take me to the site".
    Same frequency as v1: homepage only, hidden for 24h after a close (localStorage trd.xmasBundle.closed), off after Dec 25 2026.
