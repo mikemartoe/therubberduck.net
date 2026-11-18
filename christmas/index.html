@@ -49,6 +49,19 @@ main{position:relative;z-index:1;padding:20px 0 40px}
 .xm-hero p{margin:0 auto;max-width:680px;font-size:1.08rem;color:#efe4c6}
 .xm-foot{position:relative;z-index:1;text-align:center;padding:10px 18px 60px;color:#efe4c6}
 .xm-foot a{color:#ecbe5a;font-weight:700}
+
+.xm-btd{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;max-width:720px;margin:8px auto 28px;padding:20px 22px 16px;border-radius:10px;text-decoration:none;color:#f6ecd4;background:rgba(8,24,15,.55);box-shadow:0 8px 20px rgba(0,0,0,.35);overflow:hidden}
+.xm-btd::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:repeating-linear-gradient(90deg,#C8302B 0 14px,#E2652A 14px 28px,#E3A82B 28px 42px,#7A4A24 42px 56px)}
+.xm-btd:hover,.xm-btd:focus-visible{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.7),0 0 0 2px #ecbe5a,0 0 22px rgba(255,190,90,.35)}
+.xm-btd:focus-visible{outline:3px solid #ecbe5a;outline-offset:3px}
+.xm-btd-copy{display:flex;flex-direction:column;gap:4px;min-width:0;padding-top:4px;text-align:left}
+.xm-btd-k{font:700 28px/1 'Bungee','Arial Black',Impact,sans-serif;letter-spacing:.01em;color:#fff}
+.xm-btd-s{font:400 16px/1.4 'Roboto','Helvetica Neue',Arial,sans-serif;color:#efe4c6}
+.xm-btd-go{margin-left:auto;flex:none;padding:10px 16px;border-radius:8px;font:700 15px/1 'Roboto','Helvetica Neue',Arial,sans-serif;color:#2a170b;background:#ecbe5a;letter-spacing:.02em}
+.xm-btd-go i{font-style:normal;display:inline-block;transition:transform .2s ease}
+.xm-btd:hover .xm-btd-go i{transform:translateX(3px)}
+@media (max-width:599px){.xm-btd{padding:16px 14px 14px;flex-direction:column;align-items:stretch;text-align:center;gap:12px;margin-bottom:20px}.xm-btd-copy{text-align:center}.xm-btd-k{font-size:24px}.xm-btd-s{font-size:14px}.xm-btd-go{margin:0;width:100%;text-align:center;box-sizing:border-box}}
+@media (prefers-reduced-motion:reduce){.xm-btd,.xm-btd-go i{transition:none}.xm-btd:hover{transform:none}}
 .xbl-h{display:none}
 </style>
 <script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
@@ -234,7 +247,17 @@ main{position:relative;z-index:1;padding:20px 0 40px}
 })();
 </script>
 </main>
-<footer class="xm-foot"><p>Every bundle sold keeps therubberduck.net live. Thank you.</p><p><a href="/">Back to The Rubber Duck</a> &middot; <a href="/merch.html">TRD Collectibles store</a></p></footer>
+<footer class="xm-foot">
+  <a class="xm-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="Back the Duck: a few dollars a month helps keep this archive going. Opens Buy Me a Coffee membership in a new tab">
+    <span class="xm-btd-copy">
+      <span class="xm-btd-k">Back the Duck</span>
+      <span class="xm-btd-s">If you can, a few dollars a month helps keep this archive going. No paywall.</span>
+    </span>
+    <span class="xm-btd-go">See monthly options <i aria-hidden="true">&rsaquo;</i></span>
+  </a>
+  <p>Every bundle sold keeps therubberduck.net live. Thank you.</p>
+  <p><a href="/">Back to The Rubber Duck</a> &middot; <a href="/merch.html">TRD Collectibles store</a> &middot; <a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a></p>
+</footer>
 <script>window.addEventListener("load",function(){if(location.hash){var e=document.getElementById(location.hash.slice(1));if(e)e.scrollIntoView();}});</script>
 <script src="/assets/trd/onair.js?v=20261117r" defer data-trd-keep></script>
 </body>
