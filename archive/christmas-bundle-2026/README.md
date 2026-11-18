@@ -29,7 +29,7 @@ Custom fields: teecolor, teesize (Big Duck) / size "Size (tee + hoodie)" (TRD-MV
 | Button text "See the $X bundle" | 8cae01ea3 | rollback-pre-xmas-buttons-20261117 -> ae36e20c1 |
 | Private preview | 5226ed7b5 | — |
 | Publish /christmas/ + pop-up v2 | f6d52745e | rollback-pre-xmas-popup2-20261117 -> 5226ed7b5 |
-| Campaign source media archive | (see git log for archive/christmas-bundle-2026) | — |
+| Campaign source media archive | bd10be467 | rollback-pre-xmas-archive-20261117 -> f6d52745e |
 
 Roll back the pop-up only: remove the `xmaspopup:begin … xmaspopup:end` block in index.html. Full rollback: `git checkout rollback-pre-xmas-popup2-20261117 -- index.html christmas-bundle/index.html …`, commit, push, purge Cloudflare (zone d0b522cc48a1425088c5c8760f92b72d).
 
