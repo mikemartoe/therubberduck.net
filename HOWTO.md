@@ -20,7 +20,7 @@ This file explains how the site works so anyone Duck trusts can keep it going wi
 - `pdfs.html` with `scif/`: the SCI[F] PDF room. Big PDFs go next to last. GitHub won't accept files over 100 MB.
 - `ledger.html` with `data/drops.js`: the Q drop ledger. Each drop links to its original post on the 4plebs archive and to the original anon research thread.
 - `x/`: the searchable archive of every @TheRubberDuck79 post (the count is `n` in `x/data/meta.json`). Its media plays from X's own servers.
-- Every page carries the GoatCounter visitor counter tag (therubberduck.goatcounter.com). Duck holds that login.
+- Every page carries the GoatCounter visitor counter tag (therubberduck.goatcounter.com). Duck holds that login. Google Analytics 4 (G-8QQRLHEKJT, Rubber Duck Gmail) is loaded from /assets/trd/analytics.js on every public page; Umami can be added in that same file later. Leave GoatCounter and Cloudflare analytics in place.
 
 ## Adding new memes
 1. New memes go in `D:\meme\for-the-site` on Duck's laptop.

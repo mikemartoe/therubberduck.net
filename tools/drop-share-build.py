@@ -46,6 +46,7 @@ if os.path.exists(_IMG):
 else:
     IMG_BASE, IMGS = '', {}
 GOAT = '<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
+ANALYTICS = '<script src="/assets/trd/analytics.js?v=20261117a" data-trd-keep></script>'
 esc = lambda s: html.escape(s or '', quote=True)
 
 
@@ -101,6 +102,7 @@ figure{{margin:14px 0 0}}figure img{{display:block;width:auto;max-width:100%;hei
 .go{{display:inline-block;margin-top:18px;padding:10px 16px;border:1px solid #00FF41;border-radius:8px;text-decoration:none;font-weight:600}}
 .ft{{margin-top:22px;font-size:13px;opacity:.75}}</style>
 {goat}
+{analytics}
 </head><body><main>
 <h1>Q drop #{n} &middot; {when}</h1>
 <article class="post"><pre class="txt">{body}</pre>{figs}</article>
@@ -110,7 +112,7 @@ figure{{margin:14px 0 0}}figure img{{display:block;width:auto;max-width:100%;hei
 <script>document.getElementById("go").href="/ledger.html"+location.search+"#drop-{n}";</script>
 <script src="/assets/trd/drop-view.js?v=20261112a" data-trd-keep></script>
 </body></html>
-'''.format(goat=GOAT, when=esc(when), body=esc(text), figs=figs(n), t=esc(title), d=esc(desc), u=esc('%s/drops/share/%d.html' % (SITE, n)), canon=esc('%s/drops/%d/' % (SITE, n)),
+'''.format(goat=GOAT, analytics=ANALYTICS, when=esc(when), body=esc(text), figs=figs(n), t=esc(title), d=esc(desc), u=esc('%s/drops/share/%d.html' % (SITE, n)), canon=esc('%s/drops/%d/' % (SITE, n)),
            i=esc(img), a=esc(alt), dest=esc(dest), n=n, h=630 if n in V4D else V3D[n]['og2_h'] if n in V3D else V2D[n]['og2_h'] if n in V2D else OG_H.get(n, 630))
 
 

@@ -211,6 +211,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <link rel="stylesheet" href="{CSS_HREF}">
 {extra_head}{SIGNUP_JS if signup and SIGNUP_ON else ''}{ld_script(graph)}
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script src="/assets/trd/analytics.js?v=20261117a" data-trd-keep></script>
 </head>
 <body>
 <header class="top"><div class="wrap"><a class="brand" href="/">THE RUBBER DUCK&trade;</a>
@@ -733,7 +734,7 @@ ROOMS = OrderedDict([
     ('process.html', {'path': '/process.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Process', '/process.html')], 'img': None}),
 ])
 PRECONNECT = {
-    '*': ['https://therubberduck.goatcounter.com', 'https://gc.zgo.at'],
+    '*': ['https://therubberduck.goatcounter.com', 'https://gc.zgo.at', 'https://www.googletagmanager.com', 'https://www.google-analytics.com'],
     'videos.html': ['https://hugh.cdn.rumble.cloud', 'https://rumble.com'],
     'listening-room.html': ['https://hugh.cdn.rumble.cloud'],
     'memes.html': ['https://memes.therubberduck.net'],
