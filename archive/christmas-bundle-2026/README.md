@@ -4,7 +4,8 @@ Last updated Tuesday, November 17, 2026 (America/New_York, ET). No passwords, to
 
 ## Live URLs
 - Christmas page: https://therubberduck.net/christmas/
-  - #christmas-bundle ($79), #christmas-bundle-big-duck ($129 Big Duck), #christmas-bundle-trd-mvp ($179 TRD-MVP)
+  - On /christmas/ and in the homepage pop-up the bundles are named Bundle One ($79), Bundle Two ($129) and Bundle Three ($179) (Mike, Nov 17 evening). Stripe product names and the store page (merch.html) still use the original names (The Rubber Duck Christmas Bundle / Big Duck / TRD-MVP).
+  - Anchors: #bundle-one, #bundle-two, #bundle-three, plus the original #christmas-bundle, #christmas-bundle-big-duck, #christmas-bundle-trd-mvp (still work)
 - Homepage pop-up (full screen, homepage only, EXIT / Esc / tap outside close it, hidden 24h after close, off after Dec 25): https://therubberduck.net/
 - Store lineup: https://therubberduck.net/merch.html#christmas-bundles (bundle rows unchanged)
 - Old URLs (redirect to /christmas/): /christmas-preview-x7q4/ (keeps #hash), /christmas-bundle/ -> /christmas/#christmas-bundle
@@ -30,6 +31,9 @@ Custom fields: teecolor, teesize (Big Duck) / size "Size (tee + hoodie)" (TRD-MV
 | Private preview | 5226ed7b5 | — |
 | Publish /christmas/ + pop-up v2 | f6d52745e | rollback-pre-xmas-popup2-20261117 -> 5226ed7b5 |
 | Campaign source media archive | bd10be467 | rollback-pre-xmas-archive-20261117 -> f6d52745e |
+| Archive README fix | e3bf56387 | rollback-pre-xmas-archive-readme-20261117 -> bd10be467 |
+| Bundle One/Two/Three names on /christmas/ + pop-up | a601721d5 | rollback-pre-xmas-bundle-numbers-20261117 -> e3bf56387 |
+| Archive Bundle One/Two/Three heroes + README | (latest commit touching archive/christmas-bundle-2026) | rollback-pre-xmas-bundle-numbers-archive-20261117 -> a601721d5 |
 
 Roll back the pop-up only: remove the `xmaspopup:begin … xmaspopup:end` block in index.html. Full rollback: `git checkout rollback-pre-xmas-popup2-20261117 -- index.html christmas-bundle/index.html …`, commit, push, purge Cloudflare (zone d0b522cc48a1425088c5c8760f92b72d).
 
@@ -37,10 +41,11 @@ Roll back the pop-up only: remove the `xmaspopup:begin … xmaspopup:end` block 
 - /christmas/ page: trd-site/christmas/index.html (body has data-trd-full so the ON AIR sign loads after a pop-up click)
 - Pop-up v2 code: trd-site/assets/trd/xmaspopup2.js (loaded from index.html)
 - Store sections: trd-site/merch.html (xmasbundle block)
-- Store images: trd-site/store-img/xmas-bundle-hero, xmas-bundle-big-duck-hero, xmas-bundle-trd-mvp-hero (.jpg/.webp)
+- Store page images (merch.html, unchanged): trd-site/store-img/xmas-bundle-hero, xmas-bundle-big-duck-hero, xmas-bundle-trd-mvp-hero (.jpg/.webp)
+- Christmas page + pop-up images: trd-site/store-img/xmas-bundle-one-hero, xmas-bundle-two-hero, xmas-bundle-three-hero (.jpg/.webp, 1000px)
 - Share image: trd-site/images/share/christmas-bundle-og-20261117.jpg
 - Sitemap: trd-site/sitemaps/shop.xml, sitemaps/all-urls.txt, sitemap.xml
-- Source media copy (off-box in the git repo, not indexed; /archive/ is disallowed in robots.txt): trd-site/archive/christmas-bundle-2026/ (tiers heroes + hoodie mockups, images, promo videos and frames, redpill sticker finals, QR avatar options)
+- Source media copy (off-box in the git repo, not indexed; /archive/ is disallowed in robots.txt): trd-site/archive/christmas-bundle-2026/ (tiers heroes + hoodie mockups, images, promo videos and frames, redpill sticker finals, QR avatar options, bundle-numbers/ Bundle One/Two/Three heroes)
 
 ## Printful (store 18941423)
 - New hoodie: sync product 495448573, Gildan 18500 White S–3XL, catalog variants 5522–5527, sync variants 5648884264–5648884269, front file 1091466582
@@ -59,6 +64,7 @@ Roll back the pop-up only: remove the `xmaspopup:begin … xmaspopup:end` block 
 - tiers/tier2-big-duck-129-hero.jpg, tiers/tier3-trd-mvp-179-hero.jpg, tiers/old/tier3-head-duck-179-hero.jpg, tiers/hoodie-white-*.png
 - images/ ($79 heroes and ads), promo/ (bundle-promo.mp4, bundle-promo-16x9.mp4, build.py, build_wide.py)
 - popup-preview/ (preview shots), popup-live/ (live checks: verify.py and screenshots)
+- bundle-numbers/ (Bundle One/Two/Three 1600px heroes + compose_bundle_numbers.py), bundle-numbers-live/ (live checks of the renamed page and pop-up: verify.py and screenshots)
 - ADS.md, PLAN.md, STRIPE-PAYLOADS.md, metrics-2026-11-17-1655.md
 
 ## Backups
