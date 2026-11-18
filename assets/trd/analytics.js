@@ -1,11 +1,11 @@
 /* Site analytics loader for therubberduck.net.
-   Google Analytics 4 (G-8QQRLHEKJT) lives here so every public page can
-   include one script. GoatCounter (gc.zgo.at) and Cloudflare analytics stay
-   on the pages themselves; this file does not replace them.
+   Google Analytics 4 (G-8QQRLHEKJT) and Umami Cloud
+   (website 39b0d7e9-44bb-42f0-aad8-c9e4ef61e694) live here so every public
+   page can include one script. GoatCounter (gc.zgo.at) and Cloudflare
+   analytics stay on the pages themselves; this file does not replace them.
 
-   To add Umami later, fill in the Umami section below and leave this file's
-   name and the <script src="/assets/trd/analytics.js"> tag on the pages
-   unchanged (bump the ?v= query on that tag if the file is cached). */
+   Bump the ?v= query on the <script src="/assets/trd/analytics.js"> tag
+   if this file is cached. */
 (function () {
   if (window.__trdAnalytics) return;
   window.__trdAnalytics = true;
@@ -22,10 +22,10 @@
   ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
   document.head.appendChild(ga);
 
-  // --- Umami (add later) ---
-  // var umami = document.createElement('script');
-  // umami.defer = true;
-  // umami.src = 'https://cloud.umami.is/script.js';
-  // umami.setAttribute('data-website-id', 'YOUR-UMAMI-WEBSITE-ID');
-  // document.head.appendChild(umami);
+  // --- Umami Cloud ---
+  var umami = document.createElement('script');
+  umami.defer = true;
+  umami.src = 'https://cloud.umami.is/script.js';
+  umami.setAttribute('data-website-id', '39b0d7e9-44bb-42f0-aad8-c9e4ef61e694');
+  document.head.appendChild(umami);
 })();

@@ -252,7 +252,7 @@ def page(v, img, meta, others):
 <style>{CSS}{(chr(10) + CSS_PLAY_LOW) if v.get('playPos') == 'low' else ''}{exact_css}</style>
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace('</', '<\\/')}</script>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script src="/assets/trd/analytics.js?v=20261117a" data-trd-keep></script>
+<script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
 </head><body>
 <header class="top"><a href="/"><b>The Rubber Duck&trade;</b></a><a href="/videos.html">Video Room</a></header>

@@ -46,7 +46,7 @@ if os.path.exists(_IMG):
 else:
     IMG_BASE, IMGS = '', {}
 GOAT = '<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
-ANALYTICS = '<script src="/assets/trd/analytics.js?v=20261117a" data-trd-keep></script>'
+ANALYTICS = '<script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>'
 esc = lambda s: html.escape(s or '', quote=True)
 
 
