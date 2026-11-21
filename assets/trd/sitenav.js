@@ -265,3 +265,23 @@
   if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', build);
   else build();
 })();
+
+/* Bold Substack signup pop-up: load once on every page that already uses the site nav. */
+(function () {
+  var D = document, W = window;
+  if (W.trdSignupPopBoot) return;
+  W.trdSignupPopBoot = true;
+  function add(tag, attrs) {
+    var el = D.createElement(tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    el.setAttribute('data-trd-keep', '');
+    (D.head || D.documentElement).appendChild(el);
+    return el;
+  }
+  if (!D.querySelector('link[href*="signup-pop.css"]')) {
+    add('link', { rel: 'stylesheet', href: '/assets/trd/signup-pop.css?v=20261121p' });
+  }
+  if (!D.querySelector('script[src*="signup-pop.js"]')) {
+    add('script', { src: '/assets/trd/signup-pop.js?v=20261121p', defer: '' });
+  }
+})();

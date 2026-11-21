@@ -1,0 +1,68 @@
+/* Bold Substack signup pop-up (therubberduck.net). Gold / red / dark brown poster card.
+   Loaded from sitenav.js on the homepage and room pages. Preview: ?trd_signup=1 */
+.trd-signup{padding:0;border:0;background:transparent;color:#2e1f13;
+  width:min(960px,calc(100vw - 32px));max-width:calc(100vw - 32px);
+  max-height:min(90vh,580px);overflow:visible}
+.trd-signup::backdrop{background:rgba(8,5,3,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.trd-signup-card{position:relative;display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);
+  min-height:0;max-height:min(90vh,580px);border-radius:16px;overflow:hidden;
+  background:
+    radial-gradient(90% 80% at 18% 0%,rgba(255,236,170,.72) 0%,rgba(227,168,43,0) 58%),
+    #e3a82b;
+  color:#2e1f13;
+  box-shadow:0 0 0 1px #2e1f13,0 28px 70px rgba(0,0,0,.72),0 0 80px rgba(227,168,43,.18)}
+.trd-signup-art{position:relative;display:flex;align-items:center;justify-content:center;
+  min-height:0;overflow:hidden;padding:28px 8px 22px 22px;background:transparent}
+.trd-signup-art img{display:block;width:100%;height:auto;max-height:100%;object-fit:contain;
+  object-position:center;pointer-events:none;
+  filter:drop-shadow(0 16px 18px rgba(46,31,19,.35))}
+.trd-signup-copy{position:relative;display:flex;flex-direction:column;justify-content:center;
+  min-width:0;padding:44px 48px 40px 20px}
+.trd-signup-h{margin:0;font-family:'TRN Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;
+  font-weight:700;font-size:clamp(56px,7.2vw,92px);line-height:.82;letter-spacing:.01em;
+  text-transform:uppercase;color:#2e1f13;text-wrap:balance}
+.trd-signup-s{margin:16px 0 0;font:400 17.5px/1.35 'Roboto','Helvetica Neue',Arial,sans-serif;color:#4a321c}
+.trd-signup-form{display:flex;flex-direction:column;gap:10px;margin:26px 0 0;width:100%}
+.trd-signup-form[hidden],.trd-signup-ok[hidden]{display:none}
+.trd-signup-email{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:100%;height:58px;
+  margin:0;padding:0 18px;border:0;border-radius:8px;background:#fff;color:#2e1f13;
+  font:400 18px/1 'Roboto','Helvetica Neue',Arial,sans-serif;
+  box-shadow:inset 0 0 0 1px rgba(46,31,19,.14)}
+.trd-signup-email::placeholder{color:#8a6a42;opacity:1}
+.trd-signup-email:focus{outline:none;box-shadow:inset 0 0 0 2px #2e1f13}
+.trd-signup-go{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:100%;height:58px;
+  margin:0;padding:0 18px;border:0;border-radius:8px;cursor:pointer;
+  background:#c8302b;color:#fff;
+  font:700 20px/1 'Roboto','Helvetica Neue',Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;
+  box-shadow:0 2px 0 #7a1d16,0 8px 16px rgba(80,16,12,.28);
+  transition:background .15s ease,transform .12s ease,box-shadow .15s ease}
+.trd-signup-go:hover,.trd-signup-go:focus-visible{background:#dc3a34}
+.trd-signup-go:focus-visible{outline:3px solid #2e1f13;outline-offset:2px}
+.trd-signup-go:active{transform:translateY(1px)}
+.trd-signup-go:disabled{opacity:.7;cursor:wait}
+.trd-signup-err{margin:8px 0 0;min-height:0;font:600 14px/1.3 'Roboto','Helvetica Neue',Arial,sans-serif;color:#7a1d16}
+.trd-signup-ok{margin:28px 0 0;font:700 22px/1.3 'Roboto','Helvetica Neue',Arial,sans-serif;color:#2e1f13}
+.trd-signup-x{-webkit-appearance:none;appearance:none;position:absolute;top:8px;right:8px;z-index:2;
+  width:44px;height:44px;margin:0;padding:0;border:0;border-radius:8px;background:transparent;cursor:pointer;
+  color:#2e1f13;font:700 32px/1 'Roboto','Helvetica Neue',Arial,sans-serif;box-shadow:none}
+.trd-signup-x:hover{background:rgba(46,31,19,.1)}
+.trd-signup-x:focus-visible{outline:none;background:rgba(46,31,19,.12)}
+@media (max-width:699px){
+  .trd-signup{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:92vh}
+  .trd-signup-card{grid-template-columns:1fr;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
+  .trd-signup-art{padding:44px 28px 0;min-height:180px;max-height:230px}
+  .trd-signup-art img{max-height:210px;width:auto;margin:0 auto}
+  .trd-signup-copy{padding:8px 22px 24px}
+  .trd-signup-h{font-size:clamp(44px,15vw,68px)}
+  .trd-signup-s{margin-top:10px;font-size:15.5px}
+  .trd-signup-form{margin-top:16px}
+  .trd-signup-email,.trd-signup-go{height:52px}
+  .trd-signup-go{font-size:18px}
+  .trd-signup-ok{margin-top:16px;font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  .trd-signup-go{transition:none}
+}
+@media print{
+  .trd-signup{display:none}
+}
