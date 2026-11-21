@@ -175,7 +175,7 @@ def drop_og(n):
     return DROP_OG.replace('/drops/', '/drops/' + DROP_V2['prefix'], 1) % n if str(n) in DROP_V2['drops'] else DROP_OG % n
 
 
-def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', og_desc=None, signup=False, robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'):
+def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', og_desc=None, signup=False, robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1', support_strip=None):
     url = SITE + path
     full_title = title if title.endswith(BRAND) else title + ' | ' + BRAND
     graph = [{'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'url': SITE + '/', 'sameAs': SAME_AS[:3]}, {'@type': 'WebPage', '@id': url + '#page', 'url': url, 'name': full_title, 'description': desc,
@@ -186,6 +186,38 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
     crumb_html = ' <span aria-hidden="true">&rsaquo;</span> '.join(
         ('<a href="%s">%s</a>' % (u, E(n)) if i < len(crumb_items) - 1 else '<span aria-current="page">%s</span>' % E(n))
         for i, (n, u) in enumerate(crumb_items))
+    ss_head = ''
+    if support_strip:
+        ss_kind, ss_id, ss_label = support_strip
+        ss_head = (
+            '<link rel="stylesheet" href="/assets/trd/share.css?v=20261030c">\n'
+            '<link rel="stylesheet" href="/assets/trd/support-strip.css?v=20261120a">\n'
+            '<script src="/assets/trd/share.js?v=20261030c" data-trd-keep></script>\n'
+            '<script src="/assets/trd/support-strip.js?v=20261120a" data-trd-keep></script>\n'
+        )
+        support_html = (
+            '<aside class="wrap trd-ss" id="trdSupportStrip" data-ss-kind="%s" data-ss-id="%s" aria-label="Support the archive">\n'
+            '<div class="trd-ss-in">\n'
+            '<p class="trd-ss-line">‼️ This archive stays free because of people like you.</p>\n'
+            '<div class="trd-ss-acts">\n'
+            '<a class="trd-ss-b" href="/merch.html">👉🏼 Grab a shirt in the store</a>\n'
+            '<span class="trd-ss-dot" aria-hidden="true">·</span>\n'
+            '<a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">☕ Buy me a coffee</a>\n'
+            '<span class="trd-ss-dot" aria-hidden="true">·</span>\n'
+            '<button type="button" class="trd-ss-b trd-ss-share" aria-expanded="false" aria-controls="trdSsShareRow">🔗 %s</button>\n'
+            '</div>\n'
+            '<div class="trd-ss-share-row" id="trdSsShareRow" hidden></div>\n'
+            '</div>\n'
+            '</aside>'
+        ) % (E(str(ss_kind)), E(str(ss_id)), E(ss_label))
+    else:
+        support_html = (
+            '<aside class="wrap support" aria-label="Support the archive">\n'
+            '<p><b>The archive stays free.</b> Keep it running: pick up a signed cap or tee at '
+            '<a href="/merch.html">TRD Collectibles</a>, or get the book '
+            '<a href="/book/anon-mission/">anon mission, Volume 1</a> ($19.99 on Gumroad).</p>\n'
+            '</aside>'
+        )
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -209,7 +241,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <meta name="twitter:image" content="{og_image}">
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="{CSS_HREF}">
-{extra_head}{SIGNUP_JS if signup and SIGNUP_ON else ''}{ld_script(graph)}
+{ss_head}{extra_head}{SIGNUP_JS if signup and SIGNUP_ON else ''}{ld_script(graph)}
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
 </head>
@@ -220,9 +252,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <nav class="crumbs" aria-label="Breadcrumb">{crumb_html}</nav>
 {body}
 </main>
-{signup_block() if signup else ''}<aside class="wrap support" aria-label="Support the archive">
-<p><b>The archive stays free.</b> Keep it running: pick up a signed cap or tee at <a href="/merch.html">TRD Collectibles</a>, or get the book <a href="/book/anon-mission/">anon mission, Volume 1</a> ($19.99 on Gumroad).</p>
-</aside>
+{signup_block() if signup else ''}{support_html}
 <footer class="wrap foot"><p>{E(BRAND)} &middot; <a href="/">therubberduck.net</a> &middot; <a href="https://x.com/TheRubberDuck79" rel="me">@TheRubberDuck79</a> &middot; <a href="https://x.com/TheRubberDuck78" rel="me">@TheRubberDuck78</a> &middot; <a href="https://rumble.com/user/TheRubberDuck78" rel="me">Rumble</a> &middot; <a href="/drops/">Q drops by month</a> &middot; <a href="/x/archive/">X posts by month</a> &middot; <a href="/library/">PDF library</a> &middot; <a href="/watch/">Videos</a> &middot; <a href="/listen/">Spaces and shows</a></p></footer>
 <script src="/assets/trd/drop-view.js?v=20261112b" data-trd-keep></script>
 </body>
@@ -316,7 +346,7 @@ def build_drops():
         write('drops/%d/index.html' % n, page('/drops/%d/' % n, title, desc, body, g,
               [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('Q drop #%d' % n, '/drops/%d/' % n)], og_type='article', signup=True,
               og_desc='Q drop #%d \u00b7 %s' % (n, d['dt'].strftime('%B %-d, %Y')),   # tease only
-              og_image=drop_og(n)))
+              og_image=drop_og(n), support_strip=('drop', n, 'Share this drop')))
         add_sm('drops', '/drops/%d/' % n, lm)
 
     # per month

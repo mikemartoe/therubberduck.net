@@ -631,7 +631,9 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/share.css?v=20261030c" data-trd-keep>
 <link rel="stylesheet" href="/assets/trd/support-banner.css?v=20261026sb1" data-trd-keep>
+<link rel="stylesheet" href="/assets/trd/support-strip.css?v=20261120a" data-trd-keep>
 <script src="/assets/trd/share.js?v=20261030c" data-trd-keep></script>
+<script src="/assets/trd/support-strip.js?v=20261120a" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/hires.css?v=20261031s1" data-trd-keep>
 <script src="/assets/trd/hires.js?v=20261031s1" defer data-trd-keep></script>
 
@@ -1294,13 +1296,17 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         </div>
       </div>
 
-      <aside class="lsb" id="ledgerSupport" aria-label="Support the Ledger">
-        <div class="lsb-in">
-          <p class="lsb-copy">The Ledger is free to read, free to search, and fan-funded.</p>
-          <div class="lsb-acts">
-            <a class="lsb-b lsb-sup" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-            <a class="lsb-b lsb-shop" href="/merch.html">Shop the merch<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <aside class="trd-ss" id="trdSupportStrip" data-ss-kind="ledger" data-ss-id="ledger" aria-label="Support the Ledger">
+        <div class="trd-ss-in">
+          <p class="trd-ss-line">‼️ This archive stays free because of people like you.</p>
+          <div class="trd-ss-acts">
+            <a class="trd-ss-b" href="/merch.html">👉🏼 Grab a shirt in the store</a>
+            <span class="trd-ss-dot" aria-hidden="true">·</span>
+            <a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+            <span class="trd-ss-dot" aria-hidden="true">·</span>
+            <button type="button" class="trd-ss-b trd-ss-share" aria-expanded="false" aria-controls="trdSsShareRow">🔗 Share the Ledger</button>
           </div>
+          <div class="trd-ss-share-row" id="trdSsShareRow" hidden></div>
         </div>
       </aside>
 

@@ -1,0 +1,91 @@
+/* TRD support strip (preview): a small in-page strip at the bottom of drop pages
+   and the Ledger. No popup, no overlay, nothing sticky. Uses the host page's
+   colour and font variables so it matches each room. */
+.trd-ss{
+  --trd-ss-link: var(--gold, var(--accent, #e3a82b));
+  --trd-ss-link-hover: var(--accent-hover, #ffd27a);
+  --trd-ss-ink: var(--ink, var(--text, #f3ead6));
+  --trd-ss-muted: var(--muted, #b9a985);
+  --trd-ss-panel: var(--panel, var(--surface-2, #16120c));
+  --trd-ss-line: var(--line, var(--border, #2e261a));
+  margin: 30px 0 0;
+}
+.trd-ss-in{
+  background: var(--trd-ss-panel);
+  border: 1px solid var(--trd-ss-line);
+  border-radius: 8px;
+  padding: 14px 16px 16px;
+}
+.trd-ss-line{
+  margin: 0 0 12px;
+  font-family: var(--font-display, inherit);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--trd-ss-ink);
+  text-wrap: balance;
+}
+.trd-ss-acts{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 4px;
+}
+.trd-ss-dot{
+  color: var(--trd-ss-muted);
+  padding: 0 6px;
+  font-weight: 700;
+  user-select: none;
+}
+.trd-ss-b{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 6px 11px;
+  margin: 0;
+  border: 1px solid var(--trd-ss-line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--trd-ss-link);
+  font: inherit;
+  font-weight: 700;
+  font-size: 14.5px;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.trd-ss-b:hover,
+.trd-ss-b:focus-visible{
+  color: var(--on-accent, #140e05);
+  background: var(--trd-ss-link);
+  border-color: var(--trd-ss-link);
+  outline: none;
+}
+.trd-ss-b:focus-visible{
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--trd-ss-link) 35%, transparent);
+}
+.trd-ss-share[aria-expanded="true"]{
+  color: var(--on-accent, #140e05);
+  background: var(--trd-ss-link);
+  border-color: var(--trd-ss-link);
+}
+.trd-ss-share-row{
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--trd-ss-line);
+}
+.trd-ss-share-row[hidden]{display: none}
+@media (max-width: 480px){
+  .trd-ss-acts{gap: 8px}
+  .trd-ss-dot{display: none}
+  .trd-ss-b{flex: 1 1 100%; white-space: normal; text-align: center}
+  .trd-ss-line{font-size: 15px}
+}
+@media (prefers-reduced-motion: reduce){
+  .trd-ss-b{transition: none}
+}
+@media print{
+  .trd-ss{break-inside: avoid}
+}
