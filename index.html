@@ -5,7 +5,7 @@
 <!-- e3:plan-override: This page is not the Drop Ledger (ledger.html keeps that plan). The homepage is a one-screen front room by explicit request: a welcome line, two stacks of cassette doors, the album as a cassette deck and the TRD Collectibles shop entrance, with no scroll on a laptop or PC. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preload" as="image" type="image/webp" href="/images/brand/duck-hero-soft-640.webp" imagesrcset="/images/brand/duck-hero-soft-640.webp 640w, /images/brand/duck-hero-soft.webp 1178w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="/images/brand/duck-hero-soft-640.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="/assets/trd/fonts/Steelfish-Bd.woff2" crossorigin>
 <title>The Rubber Duck&trade; | Q Drops Archive, Videos, X Spaces, Merch and Books</title>
 <meta name="theme-color" content="#1a120c">
@@ -40,6 +40,9 @@
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
+/* below-the-fold regions: same look when scrolled into view, less first-paint work */
+#support, footer.site-foot, #trd-suggest{content-visibility:auto;contain-intrinsic-size:auto 700px}
+
 /* a warm lamp over the room instead of a red glare */
 body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(70% 55% at 38% 30%,rgba(255,196,110,.13) 0%,rgba(255,170,80,.05) 45%,transparent 75%),
@@ -51,7 +54,6 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
   background:url("/images/brand/duck-hero-soft-640.webp") 34% 50%/contain no-repeat;
   opacity:.16;filter:sepia(.75) saturate(1.3) brightness(1.5) contrast(.8);
   animation:roomDrift 48s var(--ease) infinite alternate;will-change:transform}
-@media (min-width:900px){.room-duck{background-image:url("/images/brand/duck-hero-soft.webp")}}
 @keyframes roomDrift{from{transform:scale(1)}to{transform:scale(1.025) translate3d(0,-1%,0)}}
 .haze{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 40%,rgba(26,18,12,0) 40%,rgba(18,12,8,.75) 100%)}
 
@@ -757,7 +759,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 <script src="/assets/trd/suggest.js?v=20261103d" defer data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/bookbanner.css" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/bookbanner.css"></noscript>
 <script src="/assets/trd/bookbanner.js" defer data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/duckpod.css?v=2d" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/duckpod.css?v=2d"></noscript>
+<link rel="stylesheet" href="/assets/trd/duckpod.css?v=2d" data-trd-keep>
 <script src="/assets/trd/duckpod.js?v=20261112b" defer data-trd-keep></script>
 <script src="/assets/trd/track.js" defer data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" defer data-trd-keep></script>
