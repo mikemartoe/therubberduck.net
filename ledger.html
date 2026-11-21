@@ -1203,6 +1203,14 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 
       <p class="lx-info" id="arcInfo" aria-live="polite" hidden></p>
 
+      <aside class="lx-site-more" id="lxSiteMore" hidden>
+        <div class="lx-sm-h">
+          <h3>More from across the site</h3>
+          <a class="lx-sm-all" id="lxSiteMoreLink" href="/">Search the whole site</a>
+        </div>
+        <div class="lx-sm-list" id="lxSiteMoreList"></div>
+      </aside>
+
       <div class="arc-top" id="arcTop">
         <p class="arc-count" id="arcCountTop">4,966 records held</p>
         <button type="button" class="arc-endless" id="arcEndless" role="switch" aria-checked="false" title="Load more drops automatically as you scroll"><span class="sw" aria-hidden="true"></span>Endless scroll</button>
@@ -2385,7 +2393,7 @@ section[id],details[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 14px)!impor
   d.addEventListener('click',function(){ setTimeout(mark,0); });
   d.addEventListener('change',function(){ setTimeout(mark,0); });
   var q=document.getElementById('arcQuery'), long=q&&q.getAttribute('placeholder');
-  function ph(){ if(!q) return; if(document.documentElement.classList.contains('lx-photos')|| (document.getElementById('main')&&document.getElementById('main').classList.contains('lx-photos'))) return; q.setAttribute('placeholder', innerWidth<760?'Search the Q drops':long); }
+  function ph(){ if(!q) return; if(document.getElementById('arcPhTick')) return; if(document.documentElement.classList.contains('lx-photos')|| (document.getElementById('main')&&document.getElementById('main').classList.contains('lx-photos'))) return; q.setAttribute('placeholder', innerWidth<760?'Search the Q drops':long); }
   ph(); addEventListener('resize',ph);
   setTimeout(mark,300);
 })();
@@ -2602,6 +2610,55 @@ html.lrail #lrail #ldock .lx-delta .chip{flex:none;width:auto;min-width:0}
 html.lrail section[id],
 html.lrail details[id],
 html.lrail .arc-row[id]{scroll-margin-top:16px!important}
+
+/* PC: flip the columns, keep the same widths — tools rail 360px on the left, drops on the right. */
+html.lrail .arc-wrap{grid-template-columns:360px minmax(0,1fr)!important}
+html.lrail .arc-wrap > *:not(#lrail){grid-column:2!important}
+html.lrail #lrail{grid-column:1!important}
+
+/* ---- rolling search prompts (aria-hidden; the input keeps its aria-label) ---- */
+.ldock .arc-search{position:relative}
+.arc-ph{
+  position:absolute;left:40px;right:12px;top:0;bottom:0;
+  overflow:hidden;pointer-events:none;
+  display:flex;align-items:center;
+  color:var(--muted);
+  font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.2;
+}
+.arc-ph.is-off,.ldock .arc-search:focus-within .arc-ph,.ldock .arc-search.has-value .arc-ph{opacity:0;visibility:hidden}
+.arc-ph-line{
+  position:absolute;left:0;right:0;white-space:nowrap;
+  transform:translateY(0);opacity:1;
+  transition:transform .42s cubic-bezier(.16,1,.3,1),opacity .42s ease;
+}
+.arc-ph-line.is-out{transform:translateY(-110%);opacity:0}
+.arc-ph-line.is-in{transform:translateY(110%);opacity:0}
+.arc-ph-line.is-in.is-up{transform:translateY(0);opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .arc-ph{display:none!important}
+}
+
+/* ---- site-wide search fallback, under Ledger results ---- */
+.lx-site-more{
+  margin:12px 0 16px;padding:14px 16px 12px;
+  border:1px solid var(--border);border-radius:6px;
+  background:var(--surface-1,#0b120d);
+}
+.lx-site-more[hidden]{display:none!important}
+.lx-sm-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 10px}
+.lx-sm-h h3{margin:0;font-family:var(--font-display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.lx-sm-all{font-family:var(--font-display);font-size:12.5px;color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 45%,transparent)}
+.lx-sm-all:hover{color:var(--text);border-bottom-color:var(--accent)}
+.lx-sm-list{display:flex;flex-direction:column;gap:2px}
+.lx-sm-list a{
+  display:block;padding:8px 8px;border-radius:4px;color:var(--text);text-decoration:none;
+}
+.lx-sm-list a:hover,.lx-sm-list a:focus-visible{background:rgba(0,255,65,.06)}
+.lx-sm-k{display:inline-block;margin-right:8px;padding:1px 6px;border-radius:3px;background:rgba(0,255,65,.12);color:var(--accent);font-family:var(--font-display);font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.lx-sm-t{font-weight:600}
+.lx-sm-d{display:block;margin:2px 0 0 0;color:var(--muted);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lx-sm-msg{padding:6px 8px;color:var(--muted);font-size:13px}
+.lx-sm-x{margin-top:6px}
 </style>
 <script>
 /* Move the existing search dock above the Ledger tabs, and on the wide
@@ -2635,6 +2692,190 @@ html.lrail .arc-row[id]{scroll-margin-top:16px!important}
     new MutationObserver(place).observe(root,{childList:true,subtree:true});
   }
   addEventListener('resize',function(){ setTimeout(place,160); },{passive:true});
+})();
+</script>
+<script src="/assets/trd/sitenav.js?v=7" data-trd-keep></script>
+<script>
+/* Rolling typable prompts in the Ledger search box, then a site-wide fallback
+   that reuses the existing header-search engine (trdNav.hits). */
+(function(){
+  var d=document, input=d.getElementById('arcQuery'), wrap=d.getElementById('arcSearchWrap');
+  if(!input || !wrap) return;
+  var FIRST='Search the Q drops';
+  /* Only typable queries that already return Ledger hits (or, for a couple of
+     short questions, useful site-wide hits once the fallback is showing).
+     Kept short so each line fits the 360px rail and a 390px phone box. */
+  var PROMPTS=[
+    FIRST,
+    '#4966',
+    'Hillary',
+    'Oct 2018',
+    'future proves past',
+    'today',
+    'what about Hillary?',
+    'FISA',
+    'WWG1WGA',
+    '10/22/2020',
+    'Flynn',
+    'the storm',
+    'today ± 3 days',
+    'why was Flynn fired',
+    'map',
+    'HRC Oct 2018',
+    'POTUS',
+    'yesterday',
+    'how do we know?',
+    'mockingbird',
+    '#1',
+    'Iran',
+    'nothing can stop',
+    'what about the storm',
+    'Sessions',
+    'this day',
+    'flag',
+    'who is Q',
+    '2018',
+    'seal'
+  ];
+
+  var reduce=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){
+    input.setAttribute('placeholder', FIRST);
+  } else if(wrap && !d.getElementById('arcPhTick')){
+    input.setAttribute('placeholder','');
+    if(!input.getAttribute('aria-label')) input.setAttribute('aria-label','Search the ledger');
+    var ph=d.createElement('div');
+    ph.className='arc-ph';
+    ph.id='arcPhTick';
+    ph.setAttribute('aria-hidden','true');
+    var line=d.createElement('span');
+    line.className='arc-ph-line';
+    line.textContent=FIRST;
+    ph.appendChild(line);
+    wrap.appendChild(ph);
+    var i=0, timer=null, moving=false;
+    function photos(){ return d.documentElement.classList.contains('lx-photos') || (d.getElementById('main')&&d.getElementById('main').classList.contains('lx-photos')); }
+    function busy(){ return d.activeElement===input || !!(input.value&&input.value.length) || photos(); }
+    function show(on){ ph.classList.toggle('is-off', !on); }
+    function schedule(){
+      clearTimeout(timer);
+      var hold=(i===0)?2800:2200;
+      timer=setTimeout(tick, hold);
+    }
+    function tick(){
+      if(busy()){ show(false); schedule(); return; }
+      show(true);
+      if(moving){ schedule(); return; }
+      i=(i+1)%PROMPTS.length;
+      var next=PROMPTS[i];
+      var incoming=d.createElement('span');
+      incoming.className='arc-ph-line is-in';
+      incoming.textContent=next;
+      ph.appendChild(incoming);
+      line.classList.add('is-out');
+      moving=true;
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ incoming.classList.add('is-up'); }); });
+      setTimeout(function(){
+        if(line.parentNode) line.parentNode.removeChild(line);
+        incoming.classList.remove('is-in','is-up');
+        line=incoming; moving=false;
+      }, 440);
+      schedule();
+    }
+    input.addEventListener('focus', function(){ show(false); clearTimeout(timer); });
+    input.addEventListener('blur', function(){ if(!busy()){ show(true); schedule(); } });
+    input.addEventListener('input', function(){ if(input.value) show(false); else if(d.activeElement!==input){ show(true); schedule(); } });
+    schedule();
+  }
+
+  /* ---- More from across the site (existing trdNav engine) ---- */
+  var more=d.getElementById('lxSiteMore'), list=d.getElementById('lxSiteMoreList'), link=d.getElementById('lxSiteMoreLink');
+  var QSTART=/^\s*(what|who|when|where|why|how|did|is)\b/i;
+  function isQuestion(q){ return /\?\s*$/.test(q) || QSTART.test(q); }
+  function dropCount(){
+    var photos=d.documentElement.classList.contains('lx-photos');
+    if(photos && window.TRDLedgerPhotos && TRDLedgerPhotos.state) return (TRDLedgerPhotos.state.filtered||[]).length;
+    if(window.TRDLedgerUI && TRDLedgerUI.state) return (TRDLedgerUI.state.filtered||[]).length;
+    return 0;
+  }
+  function dropKind(){
+    if(d.documentElement.classList.contains('lx-photos')) return 'photos';
+    var st=window.TRDLedgerUI && TRDLedgerUI.state;
+    return (st && st.res && st.res.kind) || '';
+  }
+  function shouldShow(q, n, kind){
+    if(!q || q.trim().length<2) return false;
+    if(isQuestion(q)) return true;
+    if(kind==='number') return n===0;          /* a found drop number is a precise hit */
+    if(kind==='date'||kind==='month'||kind==='year'||kind==='delta'||kind==='range'||kind==='md') return n===0;
+    return n<=3;
+  }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var STOPQ={what:1,who:1,when:1,where:1,why:1,how:1,did:1,do:1,does:1,is:1,are:1,was:1,were:1,can:1,could:1,would:1,should:1,the:1,a:1,an:1,of:1,and:1,to:1,in:1,on:1,for:1,at:1,by:1,about:1,say:1,said:1,mention:1,tell:1,me:1,please:1,i:1,you:1,we:1,they:1,it:1};
+  function cleanQuery(q){
+    var s=String(q||'').replace(/[?!.,;:]+/g,' ').replace(/\s+/g,' ').trim();
+    var words=s.split(/\s+/).filter(function(w){ return w && w.length>1 && !STOPQ[w.toLowerCase()]; });
+    return words.join(' ');
+  }
+  function paint(res, note){
+    if(!more||!list||!link) return;
+    var q=res.q, html='';
+    if(note) html+='<div class="lx-sm-msg">Showing matches for \u201c'+esc(note)+'\u201d.</div>';
+    (res.items||[]).forEach(function(r){
+      html+='<a href="'+esc(r.href)+'"><span class="lx-sm-k">'+esc(r.type)+'</span><span class="lx-sm-t">'+esc(r.title)+'</span>'+(r.blurb?'<span class="lx-sm-d">'+esc(r.blurb)+'</span>':'')+'</a>';
+    });
+    if(!(res.items||[]).length) html+='<div class="lx-sm-msg">Nothing else across the rooms, PDFs, videos or memes for \u201c'+esc(q)+'\u201d.</div>';
+    else if(res.total>res.items.length) html+='<div class="lx-sm-msg">'+(res.total>=4000?'4,000+':res.total.toLocaleString('en-US'))+' matches across the site.</div>';
+    html+='<a class="lx-sm-all lx-sm-x" href="'+esc(res.xHref)+'">Search '+(res.xPosts?res.xPosts.toLocaleString('en-US')+' ':'')+'X posts for \u201c'+esc(q)+'\u201d \u203a</a>';
+    list.innerHTML=html;
+    link.href='/?q='+encodeURIComponent(q);
+    more.hidden=false;
+  }
+  function resolveHits(q){
+    var res=window.trdNav.hits(q), note=null;
+    if((!res.items || !res.items.length) && isQuestion(q)){
+      var cq=cleanQuery(q);
+      if(cq && cq.length>=2 && cq.toLowerCase()!==q.toLowerCase()){
+        var res2=window.trdNav.hits(cq);
+        if(res2 && res2.items && res2.items.length){ res=res2; note=cq; }
+      }
+    }
+    return {res:res, note:note};
+  }
+  function hide(){ if(more) more.hidden=true; }
+  function refresh(){
+    var q=(input.value||'').trim();
+    var n=dropCount(), kind=dropKind();
+    if(!shouldShow(q,n,kind)){ hide(); return; }
+    if(!window.trdNav){ hide(); return; }
+    var go=function(){
+      var pack=resolveHits(q), res=pack.res;
+      if(!res || !res.ready){
+        if(more&&list){ list.innerHTML='<div class="lx-sm-msg">Searching the rest of the site\u2026</div>'; more.hidden=false; }
+        return;
+      }
+      paint(res, pack.note);
+    };
+    var p=window.trdNav.load && window.trdNav.load();
+    if(p && p.then) p.then(go).catch(function(){ if(list){ list.innerHTML='<div class="lx-sm-msg">The site-wide search could not load. Try again in a moment.</div>'; if(more) more.hidden=false; } });
+    else go();
+  }
+  if(window.trdNav && window.trdNav.load) try{ window.trdNav.load(); }catch(e){}
+  /* Ledger's apply() is a local function; wrapping TRDLedgerUI.apply does not catch
+     typed searches. Watch the query box and the result chrome instead. */
+  var tRefresh=null;
+  function queueRefresh(){ clearTimeout(tRefresh); tRefresh=setTimeout(refresh,60); }
+  input.addEventListener('input', queueRefresh);
+  input.addEventListener('change', queueRefresh);
+  d.addEventListener('click', function(e){
+    var t=e.target && e.target.closest && e.target.closest('#viewDrops, #viewPhotos, .ldock-more, .lx-delta, .lx-act, #arcClear, #arcSort');
+    if(t) queueRefresh();
+  });
+  if(window.MutationObserver){
+    ['arcInfo','arcEmpty','arcCountTop','phGrid'].forEach(function(id){
+      var el=d.getElementById(id); if(el) new MutationObserver(queueRefresh).observe(el,{childList:true,subtree:true,attributes:true});
+    });
+  }
 })();
 </script>
 </body>

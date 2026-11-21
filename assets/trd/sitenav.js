@@ -31,16 +31,17 @@
     var n = data && data.xPosts ? data.xPosts.toLocaleString('en-US') + ' ' : '';
     return '<a class="tn-x" role="option" href="/x/?q=' + encodeURIComponent(q) + '"><span class="tn-k">X</span>Search ' + n + 'X posts for \u201c' + esc(q) + '\u201d \u203a</a>';
   }
-  function run(raw) {
-    var q = raw.trim(), b = box(), inp = $('tn-q');
-    if (!b) return;
-    if (q.length < 2) { close(); return; }
-    if (!data) { msg('Loading the archive index\u2026'); load(); return; }
-    var words = fold(q).split(/\s+/).filter(Boolean), num = /^#?\d{1,4}$/.test(q) ? q.replace('#', '') : null, hits = [];
-    for (var i = 0; i < hay.length && hits.length < 4000; i++) {
+  /* Same engine the header search uses. Returns {q, total, items, xPosts, xHref, ready}
+     so other rooms (the Ledger) can reuse it without a second index or a second algorithm. */
+  function hits(raw) {
+    var q = String(raw || '').trim();
+    var empty = { q: q, total: 0, items: [], xPosts: (data && data.xPosts) || 0, xHref: '/x/?q=' + encodeURIComponent(q), ready: !!data };
+    if (q.length < 2 || !data || !hay) return empty;
+    var words = fold(q).split(/\s+/).filter(Boolean), num = /^#?\d{1,4}$/.test(q) ? q.replace('#', '') : null, found = [];
+    for (var i = 0; i < hay.length && found.length < 4000; i++) {
       var h = hay[i], ok = true;
       for (var k = 0; k < words.length; k++) if (h.indexOf(words[k]) < 0) { ok = false; break; }
-      if (ok) hits.push(i);
+      if (ok) found.push(i);
     }
     var rows = data.rows, fq = fold(q);
     function score(i) {
@@ -49,19 +50,28 @@
       if (num && r[0] === 1 && r[2] === '/drops/' + num + '/') s -= 100;
       return s;
     }
-    hits.sort(function (a, b) { return score(a) - score(b) || a - b; });
-    /* a mix: at most 3 of a kind first (so 7,000 memes never bury a PDF or a drop), then fill up to 10 */
+    found.sort(function (a, b) { return score(a) - score(b) || a - b; });
     var show = [], per = {}, rest = [];
-    hits.forEach(function (i) { var t = rows[i][0]; if (show.length < 10 && (per[t] || 0) < 3) { per[t] = (per[t] || 0) + 1; show.push(i); } else rest.push(i); });
+    found.forEach(function (i) { var t = rows[i][0]; if (show.length < 10 && (per[t] || 0) < 3) { per[t] = (per[t] || 0) + 1; show.push(i); } else rest.push(i); });
     for (var r2 = 0; show.length < 10 && r2 < rest.length; r2++) show.push(rest[r2]);
     show.sort(function (a, b) { return score(a) - score(b) || a - b; });
-    var html = '';
-    show.forEach(function (i) {
+    var items = show.map(function (i) {
       var r = rows[i];
-      html += '<a role="option" href="' + esc(r[2]) + '"><span class="tn-k">' + esc(data.types[r[0]]) + '</span><span class="tn-t">' + esc(r[1]) + '</span>' + (r[3] ? '<span class="tn-d">' + esc(r[3]) + '</span>' : '') + '</a>';
+      return { typeId: r[0], type: data.types[r[0]], title: r[1], href: r[2], blurb: r[3] || '' };
     });
-    if (!show.length) html += '<div class="tn-msg">Nothing in the rooms, drops, PDFs, videos, recordings or memes for \u201c' + esc(q) + '\u201d.</div>';
-    else if (hits.length > show.length) html += '<div class="tn-msg">' + (hits.length >= 4000 ? '4,000+' : hits.length.toLocaleString('en-US')) + ' matches; add a word to narrow it down.</div>';
+    return { q: q, total: found.length, items: items, xPosts: data.xPosts || 0, xHref: '/x/?q=' + encodeURIComponent(q), ready: true };
+  }
+  function run(raw) {
+    var q = raw.trim(), b = box(), inp = $('tn-q');
+    if (!b) return;
+    if (q.length < 2) { close(); return; }
+    if (!data) { msg('Loading the archive index\u2026'); load(); return; }
+    var res = hits(q), html = '';
+    res.items.forEach(function (r) {
+      html += '<a role="option" href="' + esc(r.href) + '"><span class="tn-k">' + esc(r.type) + '</span><span class="tn-t">' + esc(r.title) + '</span>' + (r.blurb ? '<span class="tn-d">' + esc(r.blurb) + '</span>' : '') + '</a>';
+    });
+    if (!res.items.length) html += '<div class="tn-msg">Nothing in the rooms, drops, PDFs, videos, recordings or memes for \u201c' + esc(q) + '\u201d.</div>';
+    else if (res.total > res.items.length) html += '<div class="tn-msg">' + (res.total >= 4000 ? '4,000+' : res.total.toLocaleString('en-US')) + ' matches; add a word to narrow it down.</div>';
     html += xRow(q);
     b.innerHTML = html; b.hidden = false; sel = -1;
     if (inp) inp.setAttribute('aria-expanded', 'true');
@@ -129,7 +139,18 @@
     var b = e.target && e.target.closest && e.target.closest('[data-sug-open]'); if (!b) return;
     if (W.trdSuggest && W.trdSuggest.open) { e.preventDefault(); W.trdSuggest.open(e); }
   });
-  W.trdNav = { load: load, run: run };
+  W.trdNav = { load: load, run: run, hits: hits };
+  /* Pages with the site header: ?q= opens the existing header search on that query. */
+  function bootQ() {
+    if (/\/ledger\.html$/.test(location.pathname)) return;
+    var inp = $('tn-q'), q;
+    try { q = new URLSearchParams(location.search).get('q'); } catch (e) { return; }
+    if (!inp || !q) return;
+    inp.value = q;
+    var n = nav(); if (n) n.classList.add('search-open');
+    load(); run(q);
+  }
+  if (D.readyState === 'loading') on(D, 'DOMContentLoaded', bootQ); else bootQ();
 })();
 /* 8ch.net deep links open the 8ch.net homepage, and the Wayback Machine blocks
    8ch.net itself. assets/trd/source-link.js sends each one to the live 8kun
