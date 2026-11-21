@@ -24,22 +24,22 @@ BATCH = 10000
 ROOT = Path(__file__).resolve().parents[1]
 
 
+# This key is already live at the site root (added earlier). Do not add a second key file.
+PREFERRED_KEY = "87ec15a7d3106650da00344f9439e6e9"
+
 def find_key() -> tuple[str, Path]:
+    preferred = ROOT / (PREFERRED_KEY + ".txt")
+    if preferred.is_file() and preferred.read_text(encoding="utf-8").strip() == PREFERRED_KEY:
+        return PREFERRED_KEY, preferred
     keys = []
     for p in ROOT.glob("*.txt"):
-        if p.name in {".dump-ingest-status.json"}:
-            continue
         text = p.read_text(encoding="utf-8").strip()
-        if text and p.stem == text and 8 <= len(text) <= 128 and all(
+        if text and p.name == text + ".txt" and 8 <= len(text) <= 128 and all(
             c.isalnum() or c in "-_" for c in text
         ):
-            # typical IndexNow key file: filename is {key}.txt and body is the key
-            if p.name == text + ".txt":
-                keys.append((text, p))
+            keys.append((text, p))
     if not keys:
         sys.exit("No IndexNow key file found at repo root ({key}.txt).")
-    if len(keys) > 1:
-        sys.exit("Multiple IndexNow key files found: " + ", ".join(k[1].name for k in keys))
     return keys[0]
 
 
