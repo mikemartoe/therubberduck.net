@@ -1094,6 +1094,76 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   .mk-b .tcase{--sh:50px;--gap:3px}
   .mk-b .tcase .sp-ic{width:36px;height:36px}
 }
+
+/* ===== PC Walkman centered + store sized down (Mike, 2026-11-21) =====
+   Desktop shelf only (>=900px). Walkman stays horizontal at its current size.
+   Plaque + Walkman + transport keys are centered as a group in the left bay
+   (optically centered above the wood shelf). TRD Collectibles is scaled down
+   proportionally and centered in the right bay: the shop keeps its full scene
+   (width-based height, no vertical crop), and "Got an idea for the site?"
+   stays on at most two lines. Phone/tablet (<900px) unchanged. */
+@media (min-width:900px){
+  .b-bay1{
+    justify-content:center;
+    align-items:center;
+    /* even left/right; extra bottom padding equals the wood shelf height so
+       the group sits in the middle of the alcove, not the whole bay. */
+    padding:18px 20px 32px;
+  }
+  .b-bay1 .b-plaque{margin-left:auto;margin-right:auto}
+  .b-bay1 .deck{width:100%;max-width:100%;align-self:center}
+  .b-bay3{
+    justify-content:center;
+    align-items:center;
+    padding:18px 20px 32px;
+  }
+  /* Pair stays full column width so the suggestion line has room.
+     The storefront itself is slightly narrower and proportionally tall. */
+  .b-bay3 .b-pair{
+    container-type:inline-size;
+    width:100%;
+    height:auto;
+    max-height:none;
+    flex:0 1 auto;
+    min-width:0;
+    min-height:0;
+    grid-template-rows:auto auto;
+    justify-items:center;
+  }
+  .b-bay3 .shop{
+    width:90%;
+    /* Pre-change 1440/1536 storefront box was ~319×503. */
+    height:calc(90cqw * 505 / 320);
+    min-height:calc(90cqw * 505 / 320);
+    max-height:none;
+    box-sizing:border-box;
+  }
+  .b-bay3 .shop-sign-name{white-space:nowrap}
+  .b-bay3 .mk-sugc{
+    width:100%;
+    justify-self:stretch;
+    box-sizing:border-box;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:6px 10px;
+    min-width:0;
+  }
+  .b-bay3 .mk-sugc img{flex:none}
+  .b-bay3 .mk-sugc b{
+    /* Don't shrink below two-line width; the chip wraps under if needed. */
+    flex:1 0 9.5rem;
+    min-width:9.5rem;
+    font-size:clamp(17px,2.2vw,24px);
+    line-height:1.08;
+    text-wrap:balance;
+    overflow-wrap:normal;
+    hyphens:manual;
+  }
+  .b-bay3 .mk-sugc .mk-chip{flex:none;white-space:nowrap;margin-left:auto}
+}
+@media (min-width:900px) and (max-height:979px){
+  .b-bay1,.b-bay3{padding:14px 20px 28px}
+}
 </style>
 <script src="/assets/trd/analytics.js?v=20261121a" data-trd-keep></script>
 </head>
