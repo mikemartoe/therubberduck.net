@@ -5,7 +5,7 @@
 <!-- e3:plan-override: This page is not the Drop Ledger (ledger.html keeps that plan). The homepage is a one-screen front room by explicit request: a welcome line, two stacks of cassette doors, the album as a cassette deck and the TRD Collectibles shop entrance, with no scroll on a laptop or PC. -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preload" as="image" href="/images/brand/duck-hero-soft.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="/images/brand/duck-hero-soft-640.webp" imagesrcset="/images/brand/duck-hero-soft-640.webp 640w, /images/brand/duck-hero-soft.webp 1178w" imagesizes="100vw" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="/assets/trd/fonts/Steelfish-Bd.woff2" crossorigin>
 <title>The Rubber Duck&trade; | Q Drops Archive, Videos, X Spaces, Merch and Books</title>
 <meta name="theme-color" content="#1a120c">
@@ -47,9 +47,11 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 
 /* ============ THE ROOM: the duck, softly lit, in the background ============ */
 .room{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.room picture{position:absolute;inset:0;display:block}
-.room .duck{position:absolute;inset:6% 0;width:100%;height:88%;object-fit:contain;object-position:34% 50%;opacity:.16;
-  filter:sepia(.75) saturate(1.3) brightness(1.5) contrast(.8);animation:roomDrift 48s var(--ease) infinite alternate;will-change:transform}
+.room-duck{position:absolute;inset:6% 0;width:100%;height:88%;
+  background:url("/images/brand/duck-hero-soft-640.webp") 34% 50%/contain no-repeat;
+  opacity:.16;filter:sepia(.75) saturate(1.3) brightness(1.5) contrast(.8);
+  animation:roomDrift 48s var(--ease) infinite alternate;will-change:transform}
+@media (min-width:900px){.room-duck{background-image:url("/images/brand/duck-hero-soft.webp")}}
 @keyframes roomDrift{from{transform:scale(1)}to{transform:scale(1.025) translate3d(0,-1%,0)}}
 .haze{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 40%,rgba(26,18,12,0) 40%,rgba(18,12,8,.75) 100%)}
 
@@ -751,14 +753,14 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 }
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" data-trd-keep>
-<script src="/assets/trd/suggest.js?v=20261103d" data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
-<script src="/assets/trd/bookbanner.js" data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/duckpod.css?v=2d" data-trd-keep>
-<script src="/assets/trd/duckpod.js?v=20261112b" data-trd-keep></script>
-<script src="/assets/trd/track.js" data-trd-keep></script>
-<script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
+<link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d"></noscript>
+<script src="/assets/trd/suggest.js?v=20261103d" defer data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/bookbanner.css" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/bookbanner.css"></noscript>
+<script src="/assets/trd/bookbanner.js" defer data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/duckpod.css?v=2d" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/duckpod.css?v=2d"></noscript>
+<script src="/assets/trd/duckpod.js?v=20261112b" defer data-trd-keep></script>
+<script src="/assets/trd/track.js" defer data-trd-keep></script>
+<script src="/assets/trd/visit.js?v=20261025s1" defer data-trd-keep></script>
 <!-- SEO and share preview -->
 <meta name="description" content="Welcome, curious minds. The Rubber Duck&#x27;s open archive of the Q era: every Q drop, videos, X Spaces, PDFs, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.">
 <link rel="canonical" href="https://therubberduck.net/">
@@ -786,7 +788,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://therubberduck.net/#org","name":"The Rubber Duck","alternateName":["TRD","The Rubber Duck™","TRD Collectibles"],"url":"https://therubberduck.net/","logo":{"@type":"ImageObject","url":"https://therubberduck.net/favicon-192.png","width":192,"height":192},"image":"https://therubberduck.net/images/brand/trd-share-home-20261029.jpg","description":"An open archive of Trump and Q-era research: every Q drop, videos, X Spaces, PDFs, memes and the X archive, plus TRD Collectibles and the book anon mission.","sameAs":["https://x.com/TheRubberDuck79","https://x.com/TheRubberDuck78","https://rumble.com/user/TheRubberDuck78","https://rubberduck41.gumroad.com/","https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4","https://music.apple.com/us/album/the-red-pill-album/1896233683"]},{"@type":"WebSite","@id":"https://therubberduck.net/#website","url":"https://therubberduck.net/","name":"The Rubber Duck","alternateName":["TRD","therubberduck.net"],"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage":"en","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://therubberduck.net/ledger.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://therubberduck.net/#page","url":"https://therubberduck.net/","name":"The Rubber Duck™ | Q Drops Archive, Videos, X Spaces, Merch and Books","description":"Welcome, curious minds. The Rubber Duck's open archive of the Q era: every Q drop, videos, X Spaces, PDFs, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage":"en","breadcrumb":{"@id":"https://therubberduck.net/#crumbs"},"about":{"@id":"https://therubberduck.net/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"}],"@id":"https://therubberduck.net/#crumbs"},{"@type":["Book","Product"],"@id":"https://therubberduck.net/book/anon-mission/#book","name":"anon mission, Volume 1","alternateName":"anon mission or all you need to know about q - and how they made you afraid to ask","description":"anon mission or all you need to know about q - and how they made you afraid to ask. A polished, printable PDF by The Rubber Duck.","author":{"@id":"https://therubberduck.net/#org"},"publisher":{"@id":"https://therubberduck.net/#org"},"brand":{"@type":"Brand","name":"The Rubber Duck"},"bookFormat":"https://schema.org/EBook","inLanguage":"en","url":"https://therubberduck.net/book/anon-mission/","image":"https://therubberduck.net/assets/trd/img/anon-mission-book-face@2x.webp","sameAs":"https://rubberduck41.gumroad.com/l/ttmhx","offers":{"@type":"Offer","url":"https://rubberduck41.gumroad.com/l/ttmhx","price":"19.99","priceCurrency":"USD","availability":"https://schema.org/InStock","seller":{"@id":"https://therubberduck.net/#org"}}},{"@type":"ItemList","name":"Rooms at The Rubber Duck","itemListElement":[{"@type":"SiteNavigationElement","position":1,"name":"Video Room","url":"https://therubberduck.net/videos.html"},{"@type":"SiteNavigationElement","position":2,"name":"Listening Room","url":"https://therubberduck.net/listening-room.html"},{"@type":"SiteNavigationElement","position":3,"name":"The Drop Ledger","url":"https://therubberduck.net/ledger.html"},{"@type":"SiteNavigationElement","position":4,"name":"The Meme Dump","url":"https://therubberduck.net/memes.html"},{"@type":"SiteNavigationElement","position":5,"name":"SCI[F]","url":"https://therubberduck.net/pdfs.html"},{"@type":"SiteNavigationElement","position":6,"name":"Executive Order Library","url":"https://therubberduck.net/eo-library/"},{"@type":"SiteNavigationElement","position":7,"name":"Twitter / X Archive","url":"https://therubberduck.net/x/"},{"@type":"SiteNavigationElement","position":8,"name":"Red Pill Album","url":"https://therubberduck.net/album.html"},{"@type":"SiteNavigationElement","position":9,"name":"TRD Collectibles","url":"https://therubberduck.net/merch.html"}]}]}</script>
 <!-- seo:end -->
 <link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261121e">
-<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261121a" defer data-trd-keep></script>
+<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a"></noscript><script src="/assets/trd/pwa.js?v=20261121a" defer data-trd-keep></script>
 <style id="home-shelf-css">
 /* ===== The cassette tower: a matte black, 3D-printed open-front case (CSS only) =====
    Viewed from slightly above and to the left: top surface + left side face visible, front is an open frame.
@@ -1095,7 +1097,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   .mk-b .tcase .sp-ic{width:36px;height:36px}
 }
 </style>
-<script src="/assets/trd/analytics.js?v=20261121a" data-trd-keep></script>
+<script src="/assets/trd/analytics.js?v=20261121a" defer data-trd-keep></script>
 </head>
 <body>
 <header class="trd-nav" id="trd-nav"><div class="tn-in">
@@ -1119,10 +1121,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 </header>
 
 <div class="room" aria-hidden="true">
-  <picture>
-    <source type="image/webp" srcset="images/brand/duck-hero-soft-640.webp 640w, images/brand/duck-hero-soft.webp 1178w" sizes="100vw">
-    <img class="duck" src="images/brand/duck-hero-soft-640.png" srcset="images/brand/duck-hero-soft-640.png 640w, images/brand/duck-hero-soft.png 1178w" sizes="100vw" alt="The Rubber Duck: a glossy black chrome duck with a glowing red eye and a lit cigar" width="1178" height="1011" decoding="async" fetchpriority="high">
-  </picture>
+  <div class="room-duck"></div>
   <span class="haze"></span>
 </div>
 
