@@ -698,6 +698,57 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 /* the Walkman itself, glass window cut out (with a light smoke and sheen) */
 .deck-well::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:url(/walkman/walkman-window-1000.webp) center/100% 100% no-repeat}
 .deck-keys{position:relative;z-index:4} /* keep the keys above the Walkman's drop shadow */
+
+/* ===== Mission button + closeable pop-up (Mike, 2026-11-21). Intro copy stays in the dialog for SEO. ===== */
+.hello-h{margin:0}
+.hello-btn{-webkit-appearance:none;appearance:none;display:inline-block;margin:0;max-width:100%;
+  padding:10px 22px 8px;border-radius:6px;cursor:pointer;font:inherit;letter-spacing:inherit;line-height:inherit;
+  color:var(--ink);text-transform:inherit;text-align:center;text-wrap:balance;
+  background:linear-gradient(180deg,#3a2616,#1f140c);
+  border:2px solid var(--mustard);
+  box-shadow:0 2px 0 #6e4a0d,0 6px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,220,170,.22);
+  text-shadow:0 2px 10px rgba(0,0,0,.5);
+  transition:background .2s var(--ease),box-shadow .2s var(--ease),transform .15s var(--ease)}
+.hello-btn:hover,.hello-btn:focus-visible{background:linear-gradient(180deg,#4a321c,#2a190e);
+  box-shadow:0 0 0 2px #2e1f13,0 0 0 5px var(--mustard),0 8px 22px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,220,170,.28)}
+.hello-btn:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
+.hello-btn:active{transform:translateY(1px)}
+.mk-b .hello{padding:0 6px}
+.mk-b .hello-h{font-size:clamp(26px,6.4vw,45px);line-height:1.08}
+@media (min-width:900px){
+  .mk-b{padding-top:12px;padding-bottom:24px;gap:12px}
+  .mk-b .hello-h{font-size:clamp(36px,3.2vw,48px)}
+  .hello-btn{padding:12px 28px 10px}
+}
+@media (max-width:599px){
+  .hello-btn{padding:9px 14px 7px}
+  .mk-b .hello-h{font-size:clamp(22px,7.2vw,30px)}
+}
+
+.mission-dlg{padding:0;border:0;background:transparent;color:var(--ink);
+  width:min(720px,calc(100vw - 28px));max-width:calc(100vw - 28px);
+  max-height:min(88vh,900px);overflow:auto;overscroll-behavior:contain}
+.mission-dlg::backdrop{background:rgba(8,5,3,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.mission-dlg-card{position:relative;margin:0;padding:36px 32px 32px;border-radius:8px;
+  background:linear-gradient(180deg,#2a1b10,#1a110a 70%,#140c08);
+  border:2px solid var(--mustard);
+  box-shadow:0 0 0 2px #2e1f13,0 24px 50px rgba(0,0,0,.7),0 0 40px rgba(227,168,43,.16);
+  text-align:center}
+.mission-dlg-h{margin:0 0 6px;padding:0 36px;font-family:var(--display);font-weight:700;font-size:clamp(26px,5vw,42px);
+  line-height:1.08;letter-spacing:.01em;color:var(--mustard);text-shadow:0 2px 10px rgba(0,0,0,.5);text-wrap:balance}
+.mission-dlg .hello-s{margin:12px 0 0;font-size:clamp(15px,2.1vw,17.5px);line-height:1.5;color:var(--ink-soft);text-align:left;max-width:46em}
+.mission-dlg .hello-sign{margin-top:18px;text-align:center}
+.mission-dlg-x{-webkit-appearance:none;appearance:none;position:absolute;top:6px;right:6px;z-index:1;
+  width:44px;height:44px;margin:0;padding:0;border:0;border-radius:6px;background:transparent;cursor:pointer;
+  color:var(--mustard);font:700 32px/1 var(--body)}
+.mission-dlg-x:hover{color:#ffd77a;background:rgba(227,168,43,.12)}
+.mission-dlg-x:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+@media (max-width:599px){
+  .mission-dlg{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:88vh}
+  .mission-dlg-card{padding:32px 16px 22px}
+  .mission-dlg-h{padding:0 28px;font-size:clamp(22px,8vw,30px)}
+  .mission-dlg .hello-s{font-size:15px;margin-top:10px}
+}
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" data-trd-keep>
@@ -996,6 +1047,53 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   .mk-b .tcase{--sh:40px;--gap:3px}
   .mk-b .tcase .sp-ic{width:34px;height:34px}
 }
+
+/* ===== Cassette size-up + titles fitted to the label (Mike, 2026-11-21) =====
+   Intro is now a pop-up, so the shelf can sit higher and the nine tapes can be taller.
+   Titles stay on one line, shrink to the label (no ellipsis / no clip). */
+.tcase{--sh:52px;--gap:4px}
+.tcase .sp-t{container-type:inline-size;min-width:0;overflow:hidden;justify-content:center;gap:1px}
+.tcase .sp-n,.tcase .sp-s{display:block;width:100%;max-width:100%;min-width:0;flex-shrink:0;box-sizing:border-box;
+  white-space:nowrap;overflow:hidden;text-overflow:clip;line-height:1}
+.mk-b .tcase .sp-n{font-size:clamp(11px,8.4cqw,20px)}
+.mk-b .tcase .sp-s{font-size:clamp(9px,5.8cqw,13px)}
+.mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:clamp(10px,7.2cqw,17px);letter-spacing:-.03em}
+.mk-b .tcase .t4 .sp-n,.mk-b .tcase .t6 .sp-n{font-size:clamp(12px,9.6cqw,24px)}
+.mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:clamp(11px,7.8cqw,19px)}
+.mk-b .tcase .t7 .sp-n{font-size:clamp(12px,9.2cqw,22px)}
+.mk-b .tcase .t7 .sp-s{font-size:clamp(8px,5.2cqw,12px)}
+.mk-b .tcase .t8 .sp-n{font-size:clamp(10px,6.8cqw,17px)}
+.mk-b .tcase .t8 .sp-s{font-size:clamp(9px,5.6cqw,13px)}
+.mk-b .tcase .t9 .sp-n{font-size:clamp(11px,7.6cqw,18px)}
+.mk-b .tcase .t9 .sp-s{font-size:clamp(9px,5.6cqw,13px)}
+.mk-b .tcase .sp-ic{width:36px;height:36px}
+@media (min-width:768px){
+  .tcase{--sh:56px;--gap:4px}
+  .mk-b .tcase .sp-ic{width:38px;height:38px}
+}
+@media (min-width:900px){
+  .mk-b .tcase{max-width:580px;--sh:62px;--gap:5px;--D:16px;--wall:20px;--lid:20px;--base:16px;--prot:34px}
+  .mk-b .tcase .sp-ic{width:42px;height:42px}
+  .mk-b .tcase .sp-n{font-size:clamp(13px,7.6cqw,22px)}
+  .mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:clamp(12px,6.6cqw,18px);letter-spacing:-.03em}
+  .mk-b .tcase .t4 .sp-n,.mk-b .tcase .t6 .sp-n{font-size:clamp(15px,9cqw,26px)}
+  .mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:clamp(13px,7.2cqw,20px)}
+  .mk-b .tcase .t7 .sp-n{font-size:clamp(14px,8.4cqw,24px)}
+  .mk-b .tcase .t8 .sp-n{font-size:clamp(12px,6.2cqw,17px)}
+  .mk-b .tcase .t9 .sp-n{font-size:clamp(13px,7cqw,20px)}
+}
+@media (min-width:900px) and (max-height:979px){
+  .mk-b{padding-top:8px;padding-bottom:16px;gap:8px}
+  .mk-b .hello-h{font-size:clamp(34px,3vw,44px)}
+  .hello-btn{padding:8px 24px 7px}
+  .b-bay{padding:12px 20px 18px}
+  .mk-b .tcase{--sh:54px;--gap:4px}
+  .mk-b .tcase .sp-ic{width:40px;height:40px}
+}
+@media (min-width:900px) and (max-height:820px){
+  .mk-b .tcase{--sh:50px;--gap:3px}
+  .mk-b .tcase .sp-ic{width:36px;height:36px}
+}
 </style>
 <script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
 </head>
@@ -1029,12 +1127,18 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 </div>
 
 <main class="mk mk-b"><header class="hello">
-        <h2 class="hello-h">WELCOME TO MY MISSION</h2>
-        <p class="hello-s">in this site you will find all of the research, work and data I&#39;ve created, collected and curated - in support of my mission - over the last 10 years. all free, and all forensically searchable; my entire Twitter archive, every authentic Q drop, every meme, all podcasts and X spaces, every document declassified over the last decade, The Red Pill Album, all movies, documentaries, tv shows and clips created to WAKE YOU UP TO THE TRUTH.</p>
-        <p class="hello-s">this site will self-delete before being paywalled - so if you like what you see here - see below and consider supporting the site by visiting the store, becoming a site sponsor or supporting me and my mission.</p>
-        <p class="hello-s hello-sign">God Bless, TRD</p>
+        <h2 class="hello-h"><button type="button" class="hello-btn" id="hello-mission" aria-haspopup="dialog" aria-controls="mission-dlg" aria-expanded="false">WELCOME TO MY MISSION</button></h2>
         <p class="hello-cta"><a class="hero-cta" href="album.html" data-cta="album"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span>Play The Red Pill Album</span><small>22 tracks</small></a></p>
-      </header><div class="b-unit"><div class="b-bay b-bay1"><p class="b-plaque">Side A &middot; The Red Pill Album</p><a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album">
+      </header>
+      <dialog class="mission-dlg" id="mission-dlg" aria-labelledby="mission-dlg-title">
+        <div class="mission-dlg-card">
+          <button type="button" class="mission-dlg-x" aria-label="Close">&times;</button>
+          <h2 class="mission-dlg-h" id="mission-dlg-title">WELCOME TO MY MISSION</h2>
+          <p class="hello-s">in this site you will find all of the research, work and data I&#39;ve created, collected and curated - in support of my mission - over the last 10 years. all free, and all forensically searchable; my entire Twitter archive, every authentic Q drop, every meme, all podcasts and X spaces, every document declassified over the last decade, The Red Pill Album, all movies, documentaries, tv shows and clips created to WAKE YOU UP TO THE TRUTH.</p>
+          <p class="hello-s">this site will self-delete before being paywalled - so if you like what you see here - see below and consider supporting the site by visiting the store, becoming a site sponsor or supporting me and my mission.</p>
+          <p class="hello-s hello-sign">God Bless, TRD</p>
+        </div>
+      </dialog><div class="b-unit"><div class="b-bay b-bay1"><p class="b-plaque">Side A &middot; The Red Pill Album</p><a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album">
         <span class="deck-top" aria-hidden="true"><b>TRD</b><span>Stereo cassette deck</span><span class="deck-led"><i></i>Play</span></span>
         <span class="deck-well">
             <span class="cas" id="podCas" aria-hidden="true">
@@ -1506,11 +1610,43 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 /* homepage cassettes: every room title and subtitle shows in full on one line. If a line is wider than its tape
    (narrow phone, big system font), shrink that line's font a little at a time (never below 9px). No ellipsis. */
 (function(){
+  function tooWide(e){
+    var box=e.parentElement,avail=box?box.clientWidth:e.clientWidth;
+    if(avail<8)return false;
+    var prev=e.style.width;e.style.width='max-content';
+    var sw=e.scrollWidth;e.style.width=prev;
+    return sw>avail+1;
+  }
   function fit(){[].forEach.call(document.querySelectorAll('.tcase .sp-n,.tcase .sp-s'),function(e){
     e.style.removeProperty('font-size');var f=parseFloat(getComputedStyle(e).fontSize),n=0;
-    while(e.scrollWidth>e.clientWidth+0.5&&f>9&&n<40){f-=0.25;n++;e.style.fontSize=f+'px';}});}
-  fit();var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(fit,120);});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);window.addEventListener('load',fit);
+    while(tooWide(e)&&f>9&&n<48){f-=0.25;n++;e.style.fontSize=f+'px';}});}
+  function run(){fit();if(window.requestAnimationFrame)requestAnimationFrame(fit);}
+  run();var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(run,120);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run);window.addEventListener('load',run);
+})();
+</script>
+<script>
+/* Welcome to my mission: the heading is a button that opens the intro in a closeable pop-up. */
+(function(){
+  var btn=document.getElementById('hello-mission'),dlg=document.getElementById('mission-dlg');
+  if(!btn||!dlg)return;
+  var closer=dlg.querySelector('.mission-dlg-x');
+  function open(){
+    if(typeof dlg.showModal==='function')dlg.showModal();
+    else dlg.setAttribute('open','');
+    btn.setAttribute('aria-expanded','true');
+  }
+  function close(){
+    if(typeof dlg.close==='function'&&dlg.open)dlg.close();
+    else dlg.removeAttribute('open');
+    btn.setAttribute('aria-expanded','false');
+    if(typeof btn.focus==='function')btn.focus();
+  }
+  btn.addEventListener('click',function(){ if(dlg.open) close(); else open(); });
+  if(closer)closer.addEventListener('click',function(e){e.preventDefault();close();});
+  dlg.addEventListener('click',function(e){ if(e.target===dlg) close(); });
+  dlg.addEventListener('close',function(){ btn.setAttribute('aria-expanded','false'); });
+  dlg.addEventListener('keydown',function(e){ if(e.key==='Escape'&&dlg.open&&typeof dlg.close!=='function'){e.preventDefault();close();} });
 })();
 </script>
 <script src="/assets/trd/onair.js?v=20261117r" defer data-trd-keep></script>
