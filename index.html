@@ -718,6 +718,8 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   box-shadow:0 0 0 2px #2e1f13,0 0 0 5px var(--mustard),0 8px 22px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,220,170,.28)}
 .hello-btn:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
 .hello-btn:active{transform:translateY(1px)}
+.hello-btn.hello-coin{position:relative;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:none;box-shadow:none;text-shadow:none;overflow:visible;color:inherit}
+.hello-btn.hello-coin:hover,.hello-btn.hello-coin:focus-visible{background:none;box-shadow:none}
 .mk-b .hello{padding:0 6px}
 .mk-b .hello-h{font-size:clamp(26px,6.4vw,45px);line-height:1.08}
 @media (min-width:900px){
@@ -734,7 +736,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   width:min(980px,calc(100vw - 32px));max-width:calc(100vw - 32px);
   max-height:min(90vh,620px);overflow:visible}
 .mission-dlg::backdrop{background:rgba(8,5,3,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-.mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,40%) minmax(0,1fr);
+.mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
   min-height:0;max-height:min(90vh,620px);border-radius:16px;overflow:hidden;
   background:
     radial-gradient(90% 80% at 18% 0%,rgba(255,236,170,.72) 0%,rgba(227,168,43,0) 58%),
@@ -758,14 +760,15 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   color:#2e1f13;font:700 32px/1 var(--body);box-shadow:none}
 .mission-dlg-x:hover{color:#2e1f13;background:rgba(46,31,19,.1)}
 .mission-dlg-x:focus-visible{outline:none;background:rgba(46,31,19,.12)}
+.mission-dlg-media{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;padding:32px 36px 32px 8px}
+.mission-oath{display:block;width:100%;height:auto;max-height:100%;aspect-ratio:16/9;background:#0C1020;border:0;border-radius:4px}
 @media (max-width:699px){
   .mission-dlg{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:92vh}
-  .mission-dlg-card{grid-template-columns:1fr;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
-  .mission-dlg-art{padding:44px 28px 0;min-height:160px;max-height:200px}
-  .mission-dlg-art img{max-height:180px;width:auto;margin:0 auto}
-  .mission-dlg-copy{padding:8px 20px 24px;overflow:visible}
-  .mission-dlg-h{font-size:clamp(32px,11vw,48px)}
-  .mission-dlg .hello-s{font-size:15px;margin-top:10px}
+  .mission-dlg-card{grid-template-columns:minmax(0,55%) minmax(0,45%);min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
+  .mission-dlg-copy{padding:14px 10px 16px 14px;overflow:auto}
+  .mission-dlg-media{padding:36px 12px 16px 4px}
+  .mission-dlg-h{font-size:clamp(16px,4.8vw,24px)}
+  .mission-dlg .hello-s{font-size:13px;margin-top:8px}
 }
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -813,7 +816,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://therubberduck.net/#org","name":"The Rubber Duck","alternateName":["TRD","The Rubber Duck™","TRD Collectibles"],"url":"https://therubberduck.net/","logo":{"@type":"ImageObject","url":"https://therubberduck.net/favicon-192.png","width":192,"height":192},"image":"https://therubberduck.net/images/brand/trd-share-home-20261029.jpg","description":"An open archive of Trump and Q-era research: every Q drop, videos, X Spaces, PDFs, memes and the X archive, plus TRD Collectibles and the book anon mission.","sameAs":["https://x.com/TheRubberDuck79","https://x.com/TheRubberDuck78","https://rumble.com/user/TheRubberDuck78","https://rubberduck41.gumroad.com/","https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4","https://music.apple.com/us/album/the-red-pill-album/1896233683"]},{"@type":"WebSite","@id":"https://therubberduck.net/#website","url":"https://therubberduck.net/","name":"The Rubber Duck","alternateName":["TRD","therubberduck.net"],"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage": "en","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://therubberduck.net/ledger.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://therubberduck.net/#page","url":"https://therubberduck.net/","name":"The Rubber Duck™ | Q Drops Archive, Videos, X Spaces, Merch and Books","description":"Welcome, curious minds. The Rubber Duck's open archive of the Q era: every Q drop, videos, X Spaces, PDFs, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage": "en","breadcrumb":{"@id":"https://therubberduck.net/#crumbs"},"about":{"@id":"https://therubberduck.net/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"}],"@id":"https://therubberduck.net/#crumbs"},{"@type":["Book","Product"],"@id":"https://therubberduck.net/book/anon-mission/#book","name":"anon mission, Volume 1","alternateName":"anon mission or all you need to know about q - and how they made you afraid to ask","description":"anon mission or all you need to know about q - and how they made you afraid to ask. A polished, printable PDF by The Rubber Duck.","author":{"@id":"https://therubberduck.net/#org"},"publisher":{"@id":"https://therubberduck.net/#org"},"brand":{"@type":"Brand","name":"The Rubber Duck"},"bookFormat":"https://schema.org/EBook","inLanguage": "en","url":"https://therubberduck.net/book/anon-mission/","image":"https://therubberduck.net/assets/trd/img/anon-mission-book-face@2x.webp","sameAs":"https://rubberduck41.gumroad.com/l/ttmhx","offers":{"@type":"Offer","url":"https://rubberduck41.gumroad.com/l/ttmhx","price":"19.99","priceCurrency":"USD","availability":"https://schema.org/InStock","seller":{"@id":"https://therubberduck.net/#org"}}},{"@type":"ItemList","name":"Rooms at The Rubber Duck","itemListElement":[{"@type":"SiteNavigationElement","position":1,"name":"Video Room","url":"https://therubberduck.net/videos.html"},{"@type":"SiteNavigationElement","position":2,"name":"Listening Room","url":"https://therubberduck.net/listening-room.html"},{"@type":"SiteNavigationElement","position":3,"name":"The Drop Ledger","url":"https://therubberduck.net/ledger.html"},{"@type":"SiteNavigationElement","position":4,"name":"The Meme Dump","url":"https://therubberduck.net/memes.html"},{"@type":"SiteNavigationElement","position":5,"name":"SCI[F]","url":"https://therubberduck.net/pdfs.html"},{"@type":"SiteNavigationElement","position":6,"name":"Executive Order Library","url":"https://therubberduck.net/eo-library/"},{"@type":"SiteNavigationElement","position":7,"name":"Twitter / X Archive","url":"https://therubberduck.net/x/"},{"@type":"SiteNavigationElement","position":8,"name":"Red Pill Album","url":"https://therubberduck.net/album.html"},{"@type":"SiteNavigationElement","position":9,"name":"TRD Collectibles","url":"https://therubberduck.net/merch.html"}]}]}</script>
 <!-- seo:end -->
 <link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261121f">
-<link rel="stylesheet" href="/assets/trd/eol-home.css?v=20261121s">
+<link rel="stylesheet" href="/assets/trd/eol-home.css?v=20261121t">
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a"></noscript><script src="/assets/trd/pwa.js?v=20261121a" defer data-trd-keep></script>
 <style id="home-shelf-css">
 /* ===== The cassette tower: a matte black, 3D-printed open-front case (CSS only) =====
@@ -1224,21 +1227,24 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 </div>
 
 <main class="mk mk-b"><header class="hello">
-        <h2 class="hello-h"><button type="button" class="hello-btn" id="hello-mission" aria-haspopup="dialog" aria-controls="mission-dlg" aria-expanded="false" aria-label="Welcome to my mission"><span class="hello-btn-shine" aria-hidden="true"></span><span class="hello-btn-label"><span class="hello-btn-rest">WELCOME TO MY MISSION</span><span class="hello-btn-hover">click to learn mission</span></span></button></h2>
-        <p class="hello-hint" aria-hidden="true">tap to learn mission</p>
+        <h2 class="hello-h"><button type="button" class="hello-btn hello-coin" id="hello-mission" aria-haspopup="dialog" aria-controls="mission-dlg" aria-expanded="false" aria-label="Learn the mission"><span class="hello-coin-shadow" aria-hidden="true"></span><span class="hello-coin-bob"><span class="hello-coin-edge" aria-hidden="true"></span><span class="hello-coin-face"><img src="/assets/trd/img/mission-coin.webp" width="1024" height="1024" alt="" decoding="async"><span class="hello-btn-shine" aria-hidden="true"></span></span></span></button></h2>
+        <p class="hello-coin-cap" aria-hidden="true">click to learn the mission</p>
+        <p class="hello-hint" aria-hidden="true">tap to learn the mission</p>
         <p class="hello-cta"><a class="hero-cta" href="album.html" data-cta="album"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span>Play The Red Pill Album</span><small>22 tracks</small></a></p>
       </header>
       <dialog class="mission-dlg" id="mission-dlg" aria-labelledby="mission-dlg-title">
         <div class="mission-dlg-card">
           <button type="button" class="mission-dlg-x" aria-label="Close">&times;</button>
-          <div class="mission-dlg-art">
-            <img src="/assets/trd/img/signup-duck.webp" width="960" height="825" alt="The Rubber Duck&trade;" decoding="async">
-          </div>
           <div class="mission-dlg-copy">
             <h2 class="mission-dlg-h" id="mission-dlg-title">WELCOME TO MY MISSION</h2>
             <p class="hello-s">in this site you will find all of the research, work and data I&#39;ve created, collected and curated - in support of my mission - over the last 10 years. all free, and all forensically searchable; my entire Twitter archive, every authentic Q drop, every meme, all podcasts and X spaces, every document declassified over the last decade, The Red Pill Album, all movies, documentaries, tv shows and clips created to WAKE YOU UP TO THE TRUTH.</p>
             <p class="hello-s">this site will self-delete before being paywalled - so if you like what you see here - see below and consider supporting the site by visiting the store, becoming a site sponsor or supporting me and my mission.</p>
             <p class="hello-s hello-sign">God Bless, TRD</p>
+          </div>
+          <div class="mission-dlg-media">
+            <video id="mission-oath" class="mission-oath" controls playsinline preload="metadata" poster="/assets/trd/img/oath-poster.webp" aria-label="oath video coming soon">
+              <track kind="captions" srclang="en" label="English" default src="/assets/trd/video/oath-captions.vtt">
+            </video>
           </div>
         </div>
       </dialog><div class="b-unit"><div class="b-bay b-bay1"><p class="b-plaque">Side A &middot; The Red Pill Album</p><a class="deck" href="album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 tracks. Press play to start the album. Open player">
@@ -1742,7 +1748,12 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
     var title=document.getElementById('mission-dlg-title');
     if(title){title.setAttribute('tabindex','-1');try{title.focus();}catch(e){}}
   }
+  function pauseOath(){
+    var vid=document.getElementById('mission-oath');
+    if(vid){try{vid.pause();}catch(e){}}
+  }
   function close(){
+    pauseOath();
     if(typeof dlg.close==='function'&&dlg.open)dlg.close();
     else dlg.removeAttribute('open');
     btn.setAttribute('aria-expanded','false');
@@ -1751,7 +1762,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   btn.addEventListener('click',function(){ if(dlg.open) close(); else open(); });
   if(closer)closer.addEventListener('click',function(e){e.preventDefault();close();});
   dlg.addEventListener('click',function(e){ if(e.target===dlg) close(); });
-  dlg.addEventListener('close',function(){ btn.setAttribute('aria-expanded','false'); });
+  dlg.addEventListener('close',function(){ pauseOath(); btn.setAttribute('aria-expanded','false'); });
   dlg.addEventListener('keydown',function(e){ if(e.key==='Escape'&&dlg.open&&typeof dlg.close!=='function'){e.preventDefault();close();} });
   try{ if(new URLSearchParams(location.search).get('trd_mission')==='1') open(); }catch(e){}
 })();

@@ -96,23 +96,8 @@ body.eol-home .banner a.hb-book::before{
   background:radial-gradient(closest-side,rgba(208,175,108,.28),rgba(208,175,108,.08) 60%,rgba(0,0,0,0));
 }
 
-/* Mission button */
-body.eol-home .hello-h,body.eol-home .hello-btn{
-  font-family:var(--eo-display);
-  letter-spacing:.04em;
-}
-body.eol-home .hello-btn{
-  background:linear-gradient(180deg,#1C2448,#0E1224);
-  border:2px solid var(--af1-gold-leaf);
-  color:var(--af1-white);
-  box-shadow:0 0 0 1px rgba(208,175,108,.28),0 8px 20px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);
-  text-shadow:0 2px 16px rgba(0,0,0,.45);
-}
-body.eol-home .hello-btn:hover,body.eol-home .hello-btn:focus-visible{
-  background:linear-gradient(180deg,#243056,#151B33);
-  box-shadow:0 0 0 2px #0C1020,0 0 0 5px var(--af1-gold-leaf),0 8px 22px rgba(0,0,0,.55);
-}
-body.eol-home .hello-btn:focus-visible{outline:3px solid var(--af1-gold-leaf);outline-offset:4px}
+/* Mission coin button: oversized, floating, with a thin gold edge. */
+body.eol-home .hello-h{margin:0;line-height:0;font-size:0}
 
 /* Shelf unit: navy cabinet with gold trim (posts, bays, plaques, table). */
 body.eol-home .b-unit{
@@ -245,12 +230,12 @@ body.eol-home footer.site-foot a.sf-x:hover,body.eol-home footer.site-foot a.sf-
 body.eol-home .sf-legal{border-top-color:rgba(208,175,108,.22);color:var(--muted)}
 body.eol-home :focus-visible.sf-btn,body.eol-home footer.site-foot a:focus-visible{outline-color:var(--af1-gold-leaf)}
 
-/* Mission dialog: same navy + gold poster card as the signup pop-up. Full duck, never clipped. */
+/* Mission dialog: navy + gold poster card. Text left, oath video right. Same box size as before. */
 body.eol-home .mission-dlg{padding:0;border:0;background:transparent;color:#F6F1E4;
   width:min(980px,calc(100vw - 32px));max-width:calc(100vw - 32px);
   max-height:min(92vh,640px);overflow:visible}
 body.eol-home .mission-dlg::backdrop{background:rgba(8,10,20,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-body.eol-home .mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);
+body.eol-home .mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
   min-height:0;max-height:min(92vh,640px);border-radius:8px;overflow:hidden;
   background:
     radial-gradient(120% 60% at 20% 0%,rgba(208,175,108,.16),transparent 52%),
@@ -258,34 +243,36 @@ body.eol-home .mission-dlg-card{position:relative;margin:0;display:grid;grid-tem
   color:#F6F1E4;text-align:left;
   border:1px solid #2A3358;
   box-shadow:inset 0 0 0 1px rgba(208,175,108,.28),inset 0 0 0 7px rgba(14,18,36,.88),0 28px 70px rgba(0,0,0,.72)}
-body.eol-home .mission-dlg-art{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;overflow:visible;
-  padding:40px 16px 40px 36px;background:transparent;box-sizing:border-box}
-body.eol-home .mission-dlg-art img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;
-  object-fit:contain;object-position:center;pointer-events:none;
-  filter:drop-shadow(0 18px 22px rgba(0,0,0,.55)) drop-shadow(0 0 24px rgba(208,175,108,.28))}
 body.eol-home .mission-dlg-copy{position:relative;display:flex;flex-direction:column;justify-content:center;min-width:0;min-height:0;
-  padding:40px 48px 36px 16px;overflow:auto;overscroll-behavior:contain}
-body.eol-home .mission-dlg-h{margin:0;padding:0 40px 0 0;font-family:var(--eo-display);font-weight:700;
-  font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:.04em;color:#fff;
+  padding:40px 20px 36px 40px;overflow:auto;overscroll-behavior:contain}
+body.eol-home .mission-dlg-h{margin:0;padding:0 36px 0 0;font-family:var(--eo-display);font-weight:700;
+  font-size:clamp(26px,3.6vw,42px);line-height:1.08;letter-spacing:.04em;color:#fff;
   text-shadow:0 2px 24px rgba(0,0,0,.45);text-wrap:balance;text-transform:uppercase}
 body.eol-home .mission-dlg-h:focus{outline:none}
-body.eol-home .mission-dlg .hello-s{margin:14px 0 0;font-family:var(--eo-body);font-size:clamp(16px,1.5vw,18.5px);
+body.eol-home .mission-dlg .hello-s{margin:14px 0 0;font-family:var(--eo-body);font-size:clamp(15px,1.35vw,17.5px);
   line-height:1.5;color:#F3EFE4;text-align:left;max-width:none;font-style:normal}
 body.eol-home .mission-dlg .hello-s b{color:var(--af1-gold-bright)}
 body.eol-home .mission-dlg .hello-sign{margin-top:18px;font-weight:700;color:var(--af1-gold-bright);text-align:left;font-family:var(--eo-display);letter-spacing:.06em}
+body.eol-home .mission-dlg-media{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;
+  padding:36px 36px 36px 8px;box-sizing:border-box}
+body.eol-home .mission-oath{display:block;width:100%;height:auto;max-height:min(420px,calc(92vh - 96px));
+  aspect-ratio:16/9;object-fit:contain;background:#0C1020;
+  border:1px solid rgba(208,175,108,.38);border-radius:4px;
+  box-shadow:0 14px 32px rgba(0,0,0,.5),0 0 0 1px rgba(14,18,36,.8)}
 body.eol-home .mission-dlg-x{-webkit-appearance:none;appearance:none;position:absolute;top:10px;right:10px;z-index:2;
   width:44px;height:44px;margin:0;padding:0;border:0;border-radius:4px;background:transparent;cursor:pointer;
   color:var(--af1-gold-leaf);font:700 32px/1 var(--eo-display);box-shadow:none}
 body.eol-home .mission-dlg-x:hover{color:var(--af1-gold-bright);background:rgba(208,175,108,.12)}
 body.eol-home .mission-dlg-x:focus-visible{outline:none;background:rgba(208,175,108,.18)}
 @media (max-width:699px){
-  body.eol-home .mission-dlg{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:92vh}
-  body.eol-home .mission-dlg-card{grid-template-columns:1fr;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
-  body.eol-home .mission-dlg-art{padding:32px 28px 16px;max-height:none;overflow:visible}
-  body.eol-home .mission-dlg-art img{max-width:78%;max-height:none;width:auto;height:auto;margin:0 auto}
-  body.eol-home .mission-dlg-copy{padding:16px 22px 28px;overflow:visible}
-  body.eol-home .mission-dlg-h{font-size:clamp(22px,8.4vw,32px);padding-right:36px}
-  body.eol-home .mission-dlg .hello-s{font-size:16px;margin-top:10px}
+  body.eol-home .mission-dlg{width:calc(100vw - 16px);max-width:calc(100vw - 16px);max-height:92vh}
+  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,55%) minmax(0,45%);align-items:start;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
+  body.eol-home .mission-dlg-copy{padding:44px 8px 18px 14px;overflow:auto}
+  body.eol-home .mission-dlg-media{padding:44px 14px 16px 4px;align-items:flex-start}
+  body.eol-home .mission-dlg-h{font-size:clamp(15px,4.6vw,22px);padding-right:32px;letter-spacing:.03em}
+  body.eol-home .mission-dlg .hello-s{font-size:clamp(11.5px,3.1vw,13.5px);margin-top:8px;line-height:1.4}
+  body.eol-home .mission-dlg .hello-sign{margin-top:10px;letter-spacing:.04em}
+  body.eol-home .mission-oath{max-height:none}
 }
 
 /* Cinzel is wider than Steelfish, so the wordmark is sized to keep the header balanced. */
@@ -301,85 +288,111 @@ body.eol-home .banner .wm{font-size:clamp(32px,4.4vw,58px);white-space:nowrap}
   body.eol-home .hb-sign-n{font-size:13px}
 }
 
-/* Mission button: gold shine, hover lift, and a no-jump label swap. */
-body.eol-home .hello{position:relative}
-body.eol-home .hello-btn{
-  position:relative;
-  overflow:visible;
-  isolation:isolate;
-  transition:background .2s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease);
+/* Oversized Commander in Chief coin: floats above the page with a soft shadow,
+   a thin gold edge at the top and bottom, a shine sweep, and a lowercase caption. */
+body.eol-home .hello{position:relative;padding-top:16px;padding-bottom:4px}
+body.eol-home .hello-btn.hello-coin{
+  --coin:248px;
+  width:var(--coin);height:var(--coin);
+  position:relative;display:grid;place-items:center;
+  padding:0;margin:0;border:0;border-radius:50%;
+  background:none;box-shadow:none;text-shadow:none;color:inherit;
+  overflow:visible;isolation:isolate;cursor:pointer;
+  transition:transform .25s var(--ease);
+}
+@media (max-width:699px){
+  body.eol-home .hello-btn.hello-coin{--coin:172px}
+  body.eol-home .hello{padding-top:10px}
+}
+body.eol-home .hello-coin-shadow{
+  position:absolute;left:50%;bottom:-14px;z-index:0;pointer-events:none;
+  width:86%;height:36px;transform:translateX(-50%);
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.9) 0%,rgba(0,0,0,.5) 40%,transparent 74%);
+  filter:blur(8px);
+  animation:coinShadow 4.8s ease-in-out infinite;
+}
+body.eol-home .hello-coin-bob{
+  position:relative;z-index:1;display:block;width:100%;height:100%;
+  animation:coinFloat 4.8s ease-in-out infinite;
+}
+body.eol-home .hello-coin-edge{
+  position:absolute;left:1.5%;right:1.5%;top:-3px;bottom:-8px;z-index:0;pointer-events:none;
+  border-radius:50%;
+  background:linear-gradient(180deg,#f3e0a4 0%,#c4a04a 18%,#6e5418 52%,#c4a04a 84%,#e8c96a 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,230,160,.28),0 2px 0 rgba(80,58,16,.55);
+}
+body.eol-home .hello-coin-face{
+  position:absolute;inset:0;z-index:1;border-radius:50%;overflow:hidden;
+  box-shadow:0 -3px 0 0 #f0d78a;
+  background:#0C1020;
+}
+body.eol-home .hello-coin-face img{
+  display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;
+  border-radius:50%;
 }
 body.eol-home .hello-btn-shine{
-  position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;z-index:1;
+  position:absolute;inset:0;border-radius:50%;overflow:hidden;pointer-events:none;z-index:2;
 }
 body.eol-home .hello-btn-shine::after{
   content:"";position:absolute;top:-30%;bottom:-30%;left:-40%;width:45%;
   background:linear-gradient(105deg,
     transparent 0%,
     rgba(228,201,138,0) 35%,
-    rgba(255,248,220,.55) 50%,
-    rgba(208,175,108,.18) 58%,
+    rgba(255,248,220,.62) 50%,
+    rgba(208,175,108,.22) 58%,
     transparent 72%);
   transform:translateX(-160%) skewX(-18deg);
   animation:helloShine 5.5s ease-in-out infinite;
 }
-body.eol-home .hello-btn-label{
-  position:relative;z-index:2;display:grid;place-items:center;width:100%;
-  pointer-events:none;
-}
-body.eol-home .hello-btn-rest,
-body.eol-home .hello-btn-hover{
-  grid-area:1/1;
-  text-wrap:balance;
-  transition:opacity .28s var(--ease);
-}
-body.eol-home .hello-btn-hover{
-  opacity:0;
-  font-family:var(--eo-body);
-  font-weight:600;
-  font-style:normal;
-  letter-spacing:.01em;
-  text-transform:none;
-  font-variant:normal;
-  font-variant-caps:normal;
-}
+body.eol-home .hello-coin-cap,
 body.eol-home .hello-hint{
-  display:none;margin:8px 0 0;padding:0;
-  font-family:var(--eo-body);font-weight:600;font-style:normal;font-size:15px;line-height:1.2;
+  margin:18px 0 0;padding:0;min-height:1.25em;
+  font-family:var(--eo-body);font-weight:600;font-style:normal;font-size:17px;line-height:1.25;
   letter-spacing:.01em;text-transform:none;font-variant:normal;font-variant-caps:normal;
-  color:var(--af1-gold-leaf);
-  text-align:center;
+  color:var(--af1-gold-leaf);text-align:center;
 }
+body.eol-home .hello-coin-cap{display:none;opacity:0;transition:opacity .28s var(--ease)}
+body.eol-home .hello-hint{display:none}
 @media (hover:hover) and (pointer:fine){
-  body.eol-home .hello-btn:hover,
-  body.eol-home .hello-btn:focus-visible{
-    transform:translateY(-3px);
-    background:linear-gradient(180deg,#2a3860,#151B33);
-    box-shadow:0 0 0 2px #0C1020,0 0 0 5px var(--af1-gold-leaf),0 14px 28px rgba(0,0,0,.5),0 0 32px rgba(208,175,108,.4);
+  body.eol-home .hello-coin-cap{display:block}
+  body.eol-home .hello:has(#hello-mission:hover) .hello-coin-cap,
+  body.eol-home .hello:has(#hello-mission:focus-visible) .hello-coin-cap{opacity:1}
+  body.eol-home .hello-btn.hello-coin:hover .hello-coin-face,
+  body.eol-home .hello-btn.hello-coin:focus-visible .hello-coin-face{
+    box-shadow:0 -3px 0 0 #f0d78a,0 0 0 2px #0C1020,0 0 0 5px var(--af1-gold-leaf),0 0 28px rgba(208,175,108,.55);
   }
-  body.eol-home .hello-btn:hover .hello-btn-rest,
-  body.eol-home .hello-btn:focus-visible .hello-btn-rest{opacity:0}
-  body.eol-home .hello-btn:hover .hello-btn-hover,
-  body.eol-home .hello-btn:focus-visible .hello-btn-hover{opacity:1}
+  body.eol-home .hello-btn.hello-coin:hover .hello-coin-bob,
+  body.eol-home .hello-btn.hello-coin:focus-visible .hello-coin-bob{
+    filter:drop-shadow(0 10px 18px rgba(208,175,108,.28));
+  }
 }
-body.eol-home .hello-btn:focus-visible{
-  outline:3px solid var(--af1-gold-leaf);outline-offset:4px;
+body.eol-home .hello-btn.hello-coin:focus-visible{
+  outline:3px solid var(--af1-gold-leaf);outline-offset:8px;
 }
-body.eol-home .hello-btn:active{
-  transform:translateY(1px);
-  box-shadow:0 0 0 2px #0C1020,0 0 0 4px var(--af1-gold-leaf),0 4px 12px rgba(0,0,0,.5),inset 0 2px 6px rgba(0,0,0,.35);
+body.eol-home .hello-btn.hello-coin:active .hello-coin-bob{
+  animation:none;transform:translateY(2px);
 }
 @media (hover:none){
   body.eol-home .hello-hint{display:block}
+  body.eol-home .hello-coin-cap{display:none}
 }
 @keyframes helloShine{
   0%,58%{transform:translateX(-160%) skewX(-18deg)}
   78%{transform:translateX(280%) skewX(-18deg)}
   100%{transform:translateX(280%) skewX(-18deg)}
 }
+@keyframes coinFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-9px)}
+}
+@keyframes coinShadow{
+  0%,100%{transform:translateX(-50%) scale(1);opacity:.95}
+  50%{transform:translateX(-50%) scale(.86);opacity:.58}
+}
 @media (prefers-reduced-motion:reduce){
-  body.eol-home .hello-btn{transition:background .15s ease,box-shadow .15s ease}
+  body.eol-home .hello-coin-bob,
+  body.eol-home .hello-coin-shadow{animation:none}
   body.eol-home .hello-btn-shine::after{animation:none;display:none}
-  body.eol-home .hello-btn-rest,body.eol-home .hello-btn-hover{transition:none}
-  body.eol-home .hello-btn:hover,body.eol-home .hello-btn:focus-visible,body.eol-home .hello-btn:active{transform:none}
+  body.eol-home .hello-coin-cap{transition:none}
+  body.eol-home .hello-btn.hello-coin:active .hello-coin-bob{transform:none}
 }
