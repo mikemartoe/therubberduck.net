@@ -61,6 +61,8 @@
     var d = document;
     var input = opts.input;
     var wrap = opts.wrap;
+    var first = opts.first || FIRST;
+    var prompts = (opts.prompts && opts.prompts.length) ? opts.prompts : PROMPTS;
     if (!input || !wrap) return;
     if (wrap.getAttribute('data-trd-tick-on')) return;
     wrap.setAttribute('data-trd-tick-on', '1');
@@ -68,19 +70,19 @@
     if (cs && cs.position === 'static') wrap.style.position = 'relative';
     var reduce = root.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
-      if (!input.getAttribute('placeholder')) input.setAttribute('placeholder', FIRST);
+      if (!input.getAttribute('placeholder')) input.setAttribute('placeholder', first);
       return;
     }
     ensureCSS();
     input.setAttribute('placeholder', '');
-    if (!input.getAttribute('aria-label')) input.setAttribute('aria-label', opts.label || 'Search the Q drops');
+    if (!input.getAttribute('aria-label')) input.setAttribute('aria-label', opts.label || first);
     var ph = d.createElement('div');
     ph.className = 'arc-ph';
     if (opts.tickId) ph.id = opts.tickId;
     ph.setAttribute('aria-hidden', 'true');
     var line = d.createElement('span');
     line.className = 'arc-ph-line';
-    line.textContent = FIRST;
+    line.textContent = first;
     ph.appendChild(line);
     wrap.appendChild(ph);
     var i = 0, timer = null, moving = false, finish = null, viewT = null;
@@ -102,7 +104,7 @@
       var keep = kids.length ? kids[kids.length - 1] : null;
       if (!keep) {
         keep = d.createElement('span');
-        keep.textContent = PROMPTS[i] || FIRST;
+        keep.textContent = prompts[i] || first;
         ph.appendChild(keep);
       }
       kids.forEach(function (el) { if (el !== keep && el.parentNode) el.parentNode.removeChild(el); });
@@ -132,10 +134,10 @@
       if (busy()) { show(false); schedule(); return; }
       show(true);
       if (moving) { schedule(); return; }
-      i = (i + 1) % PROMPTS.length;
+      i = (i + 1) % prompts.length;
       var incoming = d.createElement('span');
       incoming.className = 'arc-ph-line is-in';
-      incoming.textContent = PROMPTS[i];
+      incoming.textContent = prompts[i];
       ph.appendChild(incoming);
       line.classList.add('is-out');
       moving = true;
