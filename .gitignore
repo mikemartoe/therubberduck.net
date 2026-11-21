@@ -10,3 +10,6 @@ __pycache__/
 # Hosted on R2 (https://memes.therubberduck.net/) to keep the GitHub Pages artifact under 1 GB.
 scif/pdfs/*.pdf
 memes/card/
+
+# Official FR PDFs cached for the EO library preview (too large for GitHub Pages).
+eo-library/pdfs/*.pdf

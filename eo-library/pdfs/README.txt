@@ -1,0 +1,1 @@
+Official Federal Register PDFs are cached here for local preview and, in production, should be hosted on R2 like other large binaries (see scif/pdfs). They are gitignored because 512 PDFs are too large for GitHub Pages.
