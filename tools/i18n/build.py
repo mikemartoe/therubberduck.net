@@ -88,7 +88,7 @@ NOTE = {
     "en-au": "Australian English edition. Prices are in USD. View the original.",
     "es": "Traducción asistida por máquina. Ver el original en inglés.",
     "fr": "Traduction assistée par ordinateur. Voir l’original en anglais.",
-    "fr-ca": "Traduction assistée par ordinateur. Voir l'original anglais.",
+    "fr-ca": "Traduction assistée par ordinateur. Voir l’original anglais.",
     "de": "Maschinenunterstützte Übersetzung. Zum englischen Original.",
     "nl": "Machine-ondersteunde vertaling. Naar het Engelse origineel.",
     "ja": "機械支援翻訳です。英語の原文はこちら。",
@@ -261,7 +261,21 @@ def _apply_to_chunk(html: str, catalog: dict[str, str]) -> str:
                 en_tok = en_tok.replace(term, token)
         if en_tok != en:
             keys.append(en_tok)
-        for a, b in (("'", "&#39;"), ("'", "&apos;"), ("'", "&rsquo;"), ("’", "&rsquo;"), ("™", "&trade;"), ("·", "&middot;")):
+        for a, b in (
+            ("'", "&#39;"),
+            ("'", "&apos;"),
+            ("'", "&rsquo;"),
+            ("’", "&rsquo;"),
+            ("‘", "&lsquo;"),
+            ("™", "&trade;"),
+            ("·", "&middot;"),
+            ("&", "&amp;"),
+            ("—", "&mdash;"),
+            ("–", "&ndash;"),
+            ("×", "&times;"),
+            ('"', "&quot;"),
+            ("©", "&copy;"),
+        ):
             for k in list(keys):
                 enc = k.replace(a, b)
                 if enc != k:
