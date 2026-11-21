@@ -1,3 +1,4 @@
+const R2_PDF = 'https://memes.therubberduck.net/eo-library/pdfs/eo-';
 /* President Donald J. Trump Executive Order Library — search, shelves, open binder. */
 import * as pdfjsLib from '/eo-library/vendor/pdfjs/pdf.min.mjs';
 pdfjsLib.GlobalWorkerOptions.workerSrc = '/eo-library/vendor/pdfjs/pdf.worker.min.mjs';
@@ -385,8 +386,9 @@ async function openBinder(n){
   $('folioStatus').textContent = r.statusNote ? ((r.status==='revoked'?'Revoked. ':r.status==='amended'?'Amended. ':r.status==='superseded'?'Superseded. ':'')+r.statusNote) : (r.status==='active'?'In force.':'');
   $('folioSum').innerHTML = highlight(esc(r.summary), toks(state.q));
   const links = [];
-  if (r.pdfUrl) links.push('<a href="'+esc(r.pdfUrl)+'" target="_blank" rel="noopener">Official Federal Register PDF</a>');
+  links.push('<a href="'+R2_PDF+r.n+'.pdf" target="_blank" rel="noopener">Signed Federal Register PDF</a>');
   if (r.frUrl) links.push('<a href="'+esc(r.frUrl)+'" target="_blank" rel="noopener">Federal Register page</a>');
+  if (r.pdfUrl) links.push('<a href="'+esc(r.pdfUrl)+'" target="_blank" rel="noopener">govinfo.gov official file</a>');
   $('folioLinks').innerHTML = links.join('');
   const qhost = $('folioQList');
   if (r.q && r.q.length){
@@ -443,8 +445,9 @@ async function showDocument(r){
   $('folioPage').textContent = '';
   if (pdfDoc){ try{ pdfDoc.destroy(); }catch(e){} pdfDoc=null; }
 
+  const r2 = R2_PDF+r.n+'.pdf';
   const local = '/eo-library/pdfs/eo-'+r.n+'.pdf';
-  const urls = [local];
+  const urls = [r2, local];
   if (r.pdfUrl) urls.push(r.pdfUrl);
 
   for (const url of urls){
@@ -465,8 +468,9 @@ async function showDocument(r){
   const raw = (TEXTS && (TEXTS[r.n] || TEXTS[String(r.n)])) || (r.title+'\n\n'+r.summary);
   textEl.hidden = false;
   textEl.textContent = raw;
-  msg.innerHTML = r.pdfUrl
-    ? 'The official signed Federal Register PDF could not be drawn in this window (the government host blocked or delayed the file). <a href="'+esc(r.pdfUrl)+'" target="_blank" rel="noopener">Open the official signed PDF</a>. The full text of the order is below.'
+  const pdfLink = r.pdfUrl || (R2_PDF+r.n+'.pdf');
+  msg.innerHTML = r.hasPdf
+    ? 'The official signed Federal Register PDF could not be drawn in this window. <a href="'+esc(pdfLink)+'" target="_blank" rel="noopener">Open the official signed PDF</a>. The full text of the order is below.'
     : 'No Federal Register PDF is on file for this order. The full text is below.';
 }
 

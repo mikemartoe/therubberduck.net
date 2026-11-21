@@ -16,8 +16,6 @@
   --ink:#121018;
   --muted:#C9C0A8;
   --yellow:#F5FF00;
-  --leather:#1A1410;
-  --leather-2:#2C221A;
   --font-display:'Cinzel', 'Times New Roman', Times, serif;
   --font-body:'EB Garamond', Georgia, 'Times New Roman', serif;
   --nav-h:52px;
@@ -112,20 +110,22 @@ body.eol .trd-nav{
 .binder:focus-visible{outline:2px solid var(--af1-gold-leaf);outline-offset:6px}
 .binder-cover{
   position:relative;display:flex;flex-direction:column;align-items:center;
-  min-height:310px;padding:22px 16px 18px;
+  min-height:310px;padding:22px 16px 18px 30px;
   background:
-    radial-gradient(120% 60% at 50% 0%, rgba(208,175,108,.12), transparent 50%),
-    linear-gradient(160deg, #2a2118 0%, #1a1410 42%, #120e0c 100%);
-  border:1px solid #3a2f22;
+    radial-gradient(120% 60% at 50% 0%, rgba(208,175,108,.16), transparent 52%),
+    linear-gradient(160deg, #1C2448 0%, #151B33 42%, #0E1224 100%);
+  border:1px solid #2A3358;
   box-shadow:
-    inset 0 0 0 1px rgba(208,175,108,.22),
-    inset 0 0 0 6px rgba(18,14,12,.85),
-    inset 0 0 0 7px rgba(208,175,108,.35),
+    inset 0 0 0 1px rgba(208,175,108,.28),
+    inset 0 0 0 6px rgba(14,18,36,.88),
+    inset 0 0 0 7px rgba(208,175,108,.42),
     0 16px 28px rgba(0,0,0,.45);
   border-radius:3px 10px 10px 3px;
   color:#F6F1E4;
 }
-.binder-cover::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:10px;background:linear-gradient(90deg,#0c0a08,#2a2118 60%,#1a1410);border-right:1px solid rgba(208,175,108,.2);border-radius:2px 0 0 2px}
+.binder-cover::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:10px;background:linear-gradient(90deg,#0A0E1C,#151B33 60%,#1C2448);border-right:1px solid rgba(208,175,108,.22);border-radius:2px 0 0 2px}
+/* Air Force One red-and-gold cheatline, running beside the spine */
+.binder-cover::after{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:8px;background:linear-gradient(90deg,var(--af1-gold-bright) 0,var(--af1-gold-bright) 1.5px,var(--af1-red) 1.5px,var(--af1-red) 6.5px,var(--af1-gold-bright) 6.5px,var(--af1-gold-bright) 8px);box-shadow:0 0 0 1px rgba(14,18,36,.35)}
 .binder-seal{width:58px;height:58px;margin:0 0 10px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
 .binder-k{margin:0;font-family:var(--font-display);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--af1-gold-leaf)}
 .binder-num{margin:4px 0 8px;font-family:var(--font-display);font-weight:700;font-size:1.55rem;letter-spacing:.04em;color:var(--af1-gold-bright);line-height:1}
@@ -153,16 +153,18 @@ body.eol footer.site-foot{background:var(--af1-navy-deep);border-top:1px solid v
 .folio-board{display:grid;grid-template-columns:230px 1fr;gap:0;min-height:min(70vh,820px);transform-origin:left center;animation:folioOpen .7s var(--ease)}
 @keyframes folioOpen{from{transform:perspective(1400px) rotateY(16deg) translateY(12px);opacity:.4}to{transform:none;opacity:1}}
 .folio-left{background:
-  linear-gradient(160deg,#2a2118,#140f0c);
-  border:1px solid #3a2f22;
-  box-shadow:inset 0 0 0 7px rgba(18,14,12,.9), inset 0 0 0 8px rgba(208,175,108,.4);
-  display:flex;align-items:center;justify-content:center;padding:24px 14px}
-.folio-cover{text-align:center;color:var(--cream)}
+  linear-gradient(160deg,#1C2448,#0E1224);
+  border:1px solid #2A3358;
+  box-shadow:inset 0 0 0 7px rgba(14,18,36,.9), inset 0 0 0 8px rgba(208,175,108,.45);
+  display:flex;align-items:center;justify-content:center;padding:24px 14px;position:relative}
+.folio-left::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:10px;background:linear-gradient(90deg,#0A0E1C,#151B33 60%,#1C2448)}
+.folio-left::after{content:"";position:absolute;left:10px;top:12px;bottom:12px;width:8px;background:linear-gradient(90deg,var(--af1-gold-bright) 0,var(--af1-gold-bright) 1.5px,var(--af1-red) 1.5px,var(--af1-red) 6.5px,var(--af1-gold-bright) 6.5px,var(--af1-gold-bright) 8px)}
+.folio-cover{text-align:center;color:var(--cream);padding-left:18px}
 .folio-cover img{width:88px;height:88px;margin:0 auto 16px}
 .folio-cover-k{margin:0;font-family:var(--font-display);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--af1-gold-leaf)}
 .folio-cover-n{margin:10px 0 0;font-family:var(--font-display);font-size:1.6rem;color:var(--af1-gold-bright)}
 .folio-cover-sign{margin:16px 0 0;font-family:'Yellowtail',cursive;font-size:26px;color:var(--af1-gold-leaf);white-space:nowrap}
-.folio-right{background:#1a1410;padding:14px;display:flex;flex-direction:column}
+.folio-right{background:#0E1224;padding:14px;display:flex;flex-direction:column}
 .folio-paper{flex:1;background:var(--cream);color:var(--ink);border:1px solid #d9d0bd;box-shadow:inset 0 0 0 1px #fff, 0 10px 30px rgba(0,0,0,.4);display:flex;flex-direction:column;min-height:0}
 .folio-pdf{flex:1;overflow:auto;display:flex;flex-direction:column;align-items:center;background:#efe9d8;padding:12px;min-height:420px}
 .folio-pdf canvas{max-width:100%;height:auto;box-shadow:0 8px 24px rgba(0,0,0,.18);background:#fff}

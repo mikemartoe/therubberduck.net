@@ -756,6 +756,7 @@ ROOMS = OrderedDict([
     ('memes.html', {'path': '/memes.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Meme Dump', '/memes.html')], 'img': None}),
     ('pdfs.html', {'path': '/pdfs.html', 'title': 'SCI[F] | Free PDF Library on Q, PSYOP and Epstein | The Rubber Duck&trade;', 'desc': None,
                    'crumbs': [('Home', '/'), ('SCI[F]', '/pdfs.html')], 'img': None}),
+    ('eo-library/index.html', {'path': '/eo-library/', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('Executive Order Library', '/eo-library/')], 'img': '/eo-library/img/signing.webp'}),
     ('x/index.html', {'path': '/x/', 'title': 'The X Archive: Every @TheRubberDuck79 Post | The Rubber Duck&trade;', 'desc': None, 'crumbs': [('Home', '/'), ('X Archive', '/x/')], 'img': None}),
     ('album.html', {'path': '/album.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Red Pill Album', '/album.html')], 'img': None}),
     ('merch.html', {'path': '/merch.html', 'title': 'TRD Collectibles | Signed Caps, Tees and Merch | The Rubber Duck&trade;',
