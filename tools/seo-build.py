@@ -342,7 +342,8 @@ def build_drops():
                 '<li><a href="/drops/%s/">All Q drops from %s</a></li></ul>' % (mk, mname) + pn)
         g = [{'@type': 'CreativeWork', '@id': SITE + '/drops/%d/#drop' % n, 'name': 'Q drop #%d' % n, 'text': d['text'][:5000],
               'dateCreated': d['dt'].isoformat(), 'datePublished': d['dt'].isoformat(), 'author': {'@type': 'Person', 'name': 'Q'},
-              'isPartOf': {'@id': SITE + '/drops/#archive'}, 'url': SITE + '/drops/%d/' % n}]
+              'isPartOf': {'@id': SITE + '/drops/#archive'}, 'url': SITE + '/drops/%d/' % n,
+              **({'isBasedOn': d['link']} if d.get('link') else {})}]
         write('drops/%d/index.html' % n, page('/drops/%d/' % n, title, desc, body, g,
               [('Home', '/'), ('Q Drops', '/drops/'), (mname, '/drops/%s/' % mk), ('Q drop #%d' % n, '/drops/%d/' % n)], og_type='article', signup=True,
               og_desc='Q drop #%d \u00b7 %s' % (n, d['dt'].strftime('%B %-d, %Y')),   # tease only
@@ -436,6 +437,29 @@ def build_x():
     add_sm('x', '/x/archive/', lm)
     return total, len(keep_months)
 
+
+def library_provenance(title, desc):
+    """JSON-LD-only source fields for a library PDF. Does not change visible page text."""
+    extra = {}
+    blob = ' '.join(filter(None, [title or '', desc or '']))
+    urls = re.findall(r'https?://[^\s<>"\')]+', blob)
+    if urls:
+        extra['isBasedOn'] = urls[0].rstrip('.,;)')
+    ym = re.search(r'\(((?:19|20)\d{2})\)', title or '')
+    if ym:
+        extra['datePublished'] = ym.group(1)
+    if re.search(r'\bFBI Records\b', title or '') or (re.search(r'\bFBI\b', title or '') and 'Epstein' in (title or '')):
+        extra['creator'] = {'@type': 'Organization', 'name': 'Federal Bureau of Investigation'}
+    elif re.search(r'State Dept', title or ''):
+        extra['creator'] = {'@type': 'Organization', 'name': 'U.S. Department of State'}
+    elif 'Department of the Army' in (desc or '') or re.search(r'^FM \d', title or ''):
+        extra['creator'] = {'@type': 'Organization', 'name': 'U.S. Department of the Army'}
+    elif 'US Army War College' in (desc or '') or 'Strategic Studies Institute' in (desc or ''):
+        extra['creator'] = {'@type': 'Organization', 'name': 'Strategic Studies Institute, U.S. Army War College'}
+    elif '7th Psychological Operations Group' in (desc or ''):
+        extra['creator'] = {'@type': 'Organization', 'name': '7th Psychological Operations Group'}
+    return extra
+
 # ---------------------------------------------------------------- 3. SCIF library
 def slugify(s):
     s = re.sub(r'\.pdf$', '', s, flags=re.I)
@@ -452,7 +476,9 @@ def build_library():
         base = s; k = 2
         while s in used: s = '%s-%d' % (base, k); k += 1
         used.add(s); d['slug'] = s
-        topics.setdefault(d.get('topic') or 'Other', []).append(d)
+        # Group typo/duplicate shelves together on the index only; item pages keep the original topic label.
+        _topic = {'Epstein': 'EPSTEIN', 'Q': 'Q DROPS'}.get(d.get('topic') or 'Other', d.get('topic') or 'Other')
+        topics.setdefault(_topic, []).append(d)
     # Real document names (work order step 6): tools/library-names.json maps catalog id -> the name read from the PDF itself
     # (JSTOR cover page, report cover, PDF metadata or page 1 text; the 'source' field says which). Slugs/URLs above are
     # computed from the original title first, so no URL changes. Rollback: delete tools/library-names.json and re-run --only library.
@@ -482,13 +508,16 @@ def build_library():
                 '<p class="cta"><a class="btn" href="%s">Read or download this PDF (%s, %s)</a> <a href="/pdfs.html">Search every document in SCI[F]</a></p></div></div>'
                 % (E(d['title']), img, E(d.get('about') or d.get('desc', '')), E(d.get('topic', '')), E(d.get('pages', '')), size, E(d['name']), E(d['id']), pdf_q,
                    ('1 page' if str(d.get('pages')) == '1' else '%s pages' % E(d.get('pages', '?'))), size))
-        rel = [x for x in topics[d.get('topic') or 'Other'] if x is not d][:12]
+        _shelf = {'Epstein': 'EPSTEIN', 'Q': 'Q DROPS'}.get(d.get('topic') or 'Other', d.get('topic') or 'Other')
+        rel = [x for x in topics[_shelf] if x is not d][:12]
         if rel:
             body += '<h2>More on %s</h2><ul class="list">%s</ul>' % (E(d.get('topic')), ''.join('<li><a href="/library/%s/">%s</a></li>' % (x['slug'], E(x['title'])) for x in rel))
         g = [{'@type': 'DigitalDocument', 'name': d['title'], 'description': d.get('about') or d.get('desc', ''), 'url': SITE + url, 'encodingFormat': 'application/pdf',
               'numberOfPages': d.get('pages'), 'contentSize': size, 'about': d.get('topic'), 'isAccessibleForFree': True,
+              'provider': {'@id': ORG_ID},
               'associatedMedia': {'@type': 'MediaObject', 'contentUrl': pdf_abs, 'encodingFormat': 'application/pdf'},
               **({'thumbnailUrl': SITE + thumb_q, 'image': SITE + thumb_q} if thumb else {})}]
+        g[0].update(library_provenance(d['title'], d.get('about') or d.get('desc', '')))
         write('library/%s/index.html' % d['slug'], page(url, title, desc, body, g, [('Home', '/'), ('SCI[F]', '/pdfs.html'), ('PDF library', '/library/'), (d['title'], url)],
               og_image=(SITE + thumb_q) if thumb else SHARE, signup=True))
         add_sm('library', url, lm, images=[(SITE + thumb_q, d['title'])] if thumb else [])
@@ -757,6 +786,7 @@ ROOMS = OrderedDict([
     ('pdfs.html', {'path': '/pdfs.html', 'title': 'SCI[F] | Free PDF Library on Q, PSYOP and Epstein | The Rubber Duck&trade;', 'desc': None,
                    'crumbs': [('Home', '/'), ('SCI[F]', '/pdfs.html')], 'img': None}),
     ('eo-library/index.html', {'path': '/eo-library/', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('Executive Order Library', '/eo-library/')], 'img': '/eo-library/img/signing.webp'}),
+    ('scif/rooms/oss/index.html', {'path': '/scif/rooms/oss/', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('SCI[F]', '/pdfs.html'), ('OSS Secret Room', '/scif/rooms/oss/')], 'img': None}),
     ('x/index.html', {'path': '/x/', 'title': 'The X Archive: Every @TheRubberDuck79 Post | The Rubber Duck&trade;', 'desc': None, 'crumbs': [('Home', '/'), ('X Archive', '/x/')], 'img': None}),
     ('album.html', {'path': '/album.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Red Pill Album', '/album.html')], 'img': None}),
     ('merch.html', {'path': '/merch.html', 'title': 'TRD Collectibles | Signed Caps, Tees and Merch | The Rubber Duck&trade;',
@@ -813,6 +843,11 @@ def room_extra(f, info, merch_items):
                   'datePublished': '2026-04-30', 'numTracks': len(tracks), 'image': SITE + '/images/opt/album-cover-card.jpg', 'url': url,
                   'sameAs': ['https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4', 'https://music.apple.com/us/album/the-red-pill-album/1896233683'],
                   'track': [{'@type': 'MusicRecording', 'position': i + 1, 'name': html.unescape(t), 'duration': iso_dur(d), 'url': SITE + '/audio/' + s + '.mp3'} for i, (s, t, d) in enumerate(tracks)]})
+    if f == 'eo-library/index.html':
+        g.append({'@type': 'Dataset', '@id': url + '#dataset', 'name': 'The Executive Order Library: President Donald J. Trump',
+                  'description': '512 official Federal Register executive orders signed by President Donald J. Trump, first term (220) and second term (292), with short summaries.',
+                  'url': url, 'creator': {'@id': ORG_ID}, 'isAccessibleForFree': True, 'numberOfItems': 512,
+                  'about': {'@type': 'Person', 'name': 'Donald J. Trump'}})
     if f in ('ledger.html', 'Qdrops/index.html'):
         g.append({'@type': 'Dataset', 'name': 'The Drop Ledger: every numbered Q drop, #1 to #4,966', 'description': 'Every numbered Q drop from %s to %s, in order, with dates and full text.' % (DROP_RANGE[0].strftime('%B %Y'), DROP_RANGE[1].strftime('%B %Y')),
                   'url': SITE + '/drops/', 'creator': {'@id': ORG_ID}, 'isAccessibleForFree': True, 'temporalCoverage': '%s/%s' % (DROP_RANGE[0].date().isoformat(), DROP_RANGE[1].date().isoformat()),
@@ -905,7 +940,14 @@ def build_sitemaps():
             idx.append('  <sitemap><loc>%s/sitemaps/%s.xml</loc><lastmod>%s</lastmod></sitemap>' % (SITE, extra, elm))
     idx.append('</sitemapindex>\n')
     write('sitemap.xml', '\n'.join(idx))
-    write('robots.txt', 'User-agent: *\nAllow: /\nDisallow: /tools/\nDisallow: /workers/\n\nSitemap: %s/sitemap.xml\n' % SITE)
+    write('robots.txt', (
+        'User-agent: *\nAllow: /\nDisallow: /tools/\nDisallow: /workers/\nDisallow: /archive/\n\n'
+        'User-agent: OAI-SearchBot\nAllow: /\n\n'
+        'User-agent: PerplexityBot\nAllow: /\n\n'
+        'User-agent: Claude-SearchBot\nAllow: /\n\n'
+        'User-agent: Claude-User\nAllow: /\n\n'
+        'User-agent: Google-Extended\nAllow: /\n\n'
+        'Sitemap: %s/sitemap.xml\n' % SITE))
     allurls = [u[0] for n in names for u in SITEMAPS[n]]
     write('sitemaps/all-urls.txt', '\n'.join(allurls) + '\n')
     return {n: len(SITEMAPS[n]) for n in names}

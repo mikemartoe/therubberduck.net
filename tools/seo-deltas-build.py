@@ -246,7 +246,8 @@ def build_days():
                 '<p class="dx-more">When a past drop proves true on its anniversary, it is a delta proof. See <a href="/q-proofs/">Q Proofs</a> for drops confirmed by President Trump.</p>' + pn + SHARE_JS)
         items = [{'@type': 'ListItem', 'position': j + 1, 'url': SITE + '/drops/%d/' % d['n'], 'name': 'Q drop #%d, %s' % (d['n'], d['dt'].strftime('%B %-d, %Y'))} for j, d in enumerate(ds)]
         g = [{'@type': 'CollectionPage', '@id': SITE + '/deltas/%s/#c' % k, 'name': title, 'url': SITE + '/deltas/%s/' % k, 'isPartOf': {'@id': SITE + '/deltas/#hub'},
-              'about': 'Q drops posted on %s' % name, 'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(ds), 'itemListElement': items}}]
+              'about': 'Q drops posted on %s' % name, 'publisher': {'@id': S.ORG_ID}, 'creator': {'@id': S.ORG_ID}, 'inLanguage': 'en',
+              'mainEntity': {'@type': 'ItemList', 'numberOfItems': len(ds), 'itemListElement': items}}]
         S.write('deltas/%s/index.html' % k, page('/deltas/%s/' % k, title, desc, body, g,
                 [('Home', '/'), ('Q Drops', '/drops/'), ('Deltas', '/deltas/'), (name, '/deltas/%s/' % k)], og_desc='Q drop deltas for %s: %d drops posted on this date.' % (name, len(ds)),
                 og_image=SITE + DX_CARD % k, extra_head=og_size('Q drop deltas for %s: %d drop%s posted on this date. The Rubber Duck.' % (name, len(ds), '' if len(ds) == 1 else 's')) + DX_CSS + SHARE_CSS + APPBAR))
@@ -282,6 +283,7 @@ def build_hub():
             '<p class="dx-more">See also <a href="/q-proofs/">Q Proofs</a>, drops confirmed by President Trump, and <a href="/drops/">every Q drop by month</a>.</p>'
             '<p class="dx-more">Get the daily Deltas digest on your phone: <a href="/alerts/">turn on alerts</a>.</p>')
     g = [{'@type': 'CollectionPage', '@id': SITE + '/deltas/#hub', 'name': title, 'url': SITE + '/deltas/', 'description': desc,
+          'publisher': {'@id': S.ORG_ID}, 'creator': {'@id': S.ORG_ID}, 'inLanguage': 'en',
           'about': [{'@type': 'DefinedTerm', 'name': 'Delta', 'description': 'A Q drop\u2019s anniversary: the drops posted on the same calendar date in past years, read again to see their relevance today.'},
                     {'@type': 'DefinedTerm', 'name': 'Delta proof', 'description': 'A delta whose past drop proves true on its anniversary date.'}],
           'hasPart': [{'@type': 'CollectionPage', 'url': SITE + '/deltas/%s/' % k, 'name': 'Q drop deltas for %s' % mmdd_name(k)} for k in DAYS]}]
