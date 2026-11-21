@@ -4,23 +4,37 @@
    page can include one script. GoatCounter (gc.zgo.at) and Cloudflare
    analytics stay on the pages themselves; this file does not replace them.
 
+   GA is queued immediately, but the gtag.js script itself waits until
+   window load + requestIdleCallback so it does not compete with first paint.
    Bump the ?v= query on the <script src="/assets/trd/analytics.js"> tag
    if this file is cached. */
 (function () {
   if (window.__trdAnalytics) return;
   window.__trdAnalytics = true;
 
-  // --- Google Analytics 4 ---
+  // --- Google Analytics 4 (queue now, fetch the script after first paint) ---
   var GA_ID = 'G-8QQRLHEKJT';
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
   window.gtag = gtag;
   gtag('js', new Date());
   gtag('config', GA_ID);
-  var ga = document.createElement('script');
-  ga.async = true;
-  ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-  document.head.appendChild(ga);
+  function loadGa() {
+    if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
+    var ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(ga);
+  }
+  function afterPaint(fn) {
+    var run = function () {
+      if (window.requestIdleCallback) requestIdleCallback(fn, { timeout: 3000 });
+      else setTimeout(fn, 1);
+    };
+    if (document.readyState === 'complete') run();
+    else window.addEventListener('load', run);
+  }
+  afterPaint(loadGa);
 
   // --- Umami Cloud ---
   var umami = document.createElement('script');
