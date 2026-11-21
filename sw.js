@@ -4,7 +4,7 @@
      offline page is shown instead. Drop pages are never cached here.
    - Everything else goes straight to the network (normal HTTP caching).
    - Handles push alerts (new drops, daily Deltas digest). */
-var VERSION = 'trd-shell-20261121c';
+var VERSION = 'trd-shell-20261121d';
 var SHELL = [
   '/offline.html',
   '/assets/trd/pwa.css?v=20261030a',
@@ -13,6 +13,12 @@ var SHELL = [
   '/images/app/app-icon-maskable-192.png',
   '/images/app/duck-white.svg'
 ];
+function fetchRetry(req, n) {
+  return fetch(req).catch(function (err) {
+    if (n <= 0) throw err;
+    return new Promise(function (r) { setTimeout(r, 600); }).then(function () { return fetchRetry(req, n - 1); });
+  });
+}
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(SHELL); }).then(function () { return self.skipWaiting(); }));
 });
@@ -27,8 +33,13 @@ self.addEventListener('fetch', function (e) {
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
   if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).catch(function () {
-      return caches.match('/offline.html').then(function (r) { return r || new Response('Offline', { status: 503, headers: { 'content-type': 'text/plain' } }); });
+    /* Never show the offline page for a hiccup: retry the page twice, and only
+       fall back to offline.html when the device itself reports no connection. */
+    e.respondWith(fetchRetry(req, 2).catch(function (err) {
+      if (self.navigator && self.navigator.onLine === false) {
+        return caches.match('/offline.html').then(function (r) { return r || Response.error(); });
+      }
+      return fetch(req, { cache: 'reload' });
     }));
     return;
   }
