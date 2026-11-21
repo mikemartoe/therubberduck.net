@@ -4,7 +4,7 @@
      offline page is shown instead. Drop pages are never cached here.
    - Everything else goes straight to the network (normal HTTP caching).
    - Handles push alerts (new drops, daily Deltas digest). */
-var VERSION = 'trd-shell-20261112b';
+var VERSION = 'trd-shell-20261121a';
 var SHELL = [
   '/offline.html',
   '/assets/trd/pwa.css?v=20261030a',

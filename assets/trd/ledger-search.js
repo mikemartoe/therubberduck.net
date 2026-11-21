@@ -314,6 +314,108 @@
     return {kind:'text', rows:rows, used:used, hl:hl, fuzzy:null, order:'list', label:'Drops containing '+shown+'.', empty:rows.length?null:('No drop uses '+shown+'.')};
   }
 
+
+  /* When a cleaned question leaves only a near-universal term (e.g. only “Q”,
+     or a term matching more than about 30% of the ledger), don't dump the
+     whole run. Identity questions get a short list of drops where Q talks
+     about who Q is, built from phrases verified in the drop text itself.
+     Other broad leftovers are ranked, capped, and linked to the full set. */
+  var WIDE_SHARE=0.3, WIDE_CAP=40;
+  /* Readable phrases that actually appear in drop text (space-separated, not
+     hyphenated URL slugs). “Q team”, “not one person” and “<10” do not occur
+     as written; “Q+” is a signature, not an explanation of who Q is. */
+  var IDENTITY_PHRASES=['Q Clearance','Q group','military intelligence','less than 10','no one person','a single person','not about one person','we are Q'];
+  function isBroad(rows){ return !!(rows && R.length && rows.length>R.length*WIDE_SHARE); }
+  function readableHay(rec){ return norm(rec.e||'').replace(/\s+/g,' '); }
+  function phraseOk(hay, phrase){
+    var p=norm(phrase).replace(/\s+/g,' ').trim();
+    if(!p) return false;
+    var i=hay.indexOf(p);
+    if(i<0) return false;
+    if(p==='less than 10' && hay.charAt(i+p.length)==='%') return false;
+    if(p==='military intelligence'){
+      var idx=0, anyGood=false;
+      while((idx=hay.indexOf(p, idx))>=0){
+        if(!/russian $/.test(hay.slice(0, idx))) anyGood=true;
+        idx+=p.length;
+      }
+      return anyGood;
+    }
+    return true;
+  }
+  function identityFocus(opts){
+    opts=opts||{};
+    var by={}, phraseHits={};
+    IDENTITY_PHRASES.forEach(function(ph){
+      var res=search('"'+ph.replace(/"/g,'')+'"', Object.assign({}, opts, {skipQuestionFix:true, asText:true}));
+      (res.rows||[]).forEach(function(r){
+        if(!phraseOk(readableHay(r), ph)) return;
+        if(!by[r.n]){ by[r.n]=r; phraseHits[r.n]=[]; }
+        phraseHits[r.n].push(ph);
+      });
+    });
+    var rows=Object.keys(by).map(function(n){ return by[n]; });
+    function rarity(ph){
+      var c=0; Object.keys(phraseHits).forEach(function(k){ if(phraseHits[k].indexOf(ph)>=0) c++; });
+      return 1/(c||1);
+    }
+    rows.sort(function(a,b){
+      var pa=phraseHits[a.n]||[], pb=phraseHits[b.n]||[];
+      var sa=0, sb=0;
+      pa.forEach(function(ph){ sa+=1+rarity(ph); });
+      pb.forEach(function(ph){ sb+=1+rarity(ph); });
+      return sb-sa || a.n-b.n;
+    });
+    if(rows.length>WIDE_CAP) rows=rows.slice(0,WIDE_CAP);
+    var hl=[]; IDENTITY_PHRASES.forEach(function(ph){ if(hl.indexOf(ph)<0) hl.push(ph); });
+    var shown=IDENTITY_PHRASES.map(function(ph){ return '“'+ph+'”'; }).join(', ');
+    return {kind:'text', rows:rows, used:[], hl:hl, fuzzy:null, order:'list',
+            label:'Drops where Q describes who Q is.',
+            empty:rows.length?null:'No drop spells out who Q is in those terms.',
+            phrases:phraseHits};
+  }
+  function capBroad(info, typed, cq){
+    var total=(info.rows||[]).length, terms=String(cq||'').split(/\s+/).filter(Boolean);
+    var rows=(info.rows||[]).slice();
+    rows.sort(function(a,b){
+      var ta=termHitCount(a,terms,true), tb=termHitCount(b,terms,true);
+      var da=0, db=0;
+      terms.forEach(function(w){
+        if(w.length<=2) return;
+        /* longer leftover terms count as more specific */
+        if(textFilter([a],[[{w:w,neg:false,phrase:false}]],true).length) da+=w.length;
+        if(textFilter([b],[[{w:w,neg:false,phrase:false}]],true).length) db+=w.length;
+      });
+      return tb-ta || db-da || a.n-b.n;
+    });
+    if(rows.length>WIDE_CAP) rows=rows.slice(0,WIDE_CAP);
+    info.rows=rows;
+    info.order='list';
+    info.q=typed;
+    var pretty=prettyContent(cq);
+    info.note='Showing the most relevant drops for: '+pretty+' ('+rows.length+' of '+total.toLocaleString('en-US')+')';
+    info.alt={label:'See all drops mentioning '+pretty, q:cq};
+    info.wide={total:total, term:cq};
+    return info;
+  }
+  function narrowBroadQuestion(again, typed, raw, cq, opts){
+    if(!isBroad(again.rows)){
+      if(norm(cq)!==norm(raw)) again.note='Showing drops for: '+prettyContent(cq);
+      return again;
+    }
+    if(norm(cq).trim()==='q'){
+      var focused=identityFocus(opts);
+      if(focused.rows && focused.rows.length){
+        focused.q=typed;
+        focused.note='Showing drops where Q describes who Q is ('+focused.rows.length+')';
+        focused.alt={label:'See all drops mentioning Q', q:'Q'};
+        focused.wide={total:again.rows.length, term:'Q'};
+        return focused;
+      }
+    }
+    return capBroad(again, typed, cq);
+  }
+
   /* ---------- calendar helpers ---------- */
   function addDays(y,m,d,n){ var x=new Date(Date.UTC(y,m-1,d+n)); return {y:x.getUTCFullYear(), m:x.getUTCMonth()+1, d:x.getUTCDate()}; }
   function mdSet(m,d,spread){ var s={}; for(var i=-spread;i<=spread;i++){ var x=addDays(2020,m,d,i); s[x.m*100+x.d]=1; } return s; }
@@ -378,8 +480,7 @@
         var again=search(cq, Object.assign({}, opts, {skipQuestionFix:true}));
         again.q=typed;
         if(again.rows && again.rows.length){
-          if(norm(cq)!==norm(raw)) again.note='Showing drops for: '+prettyContent(cq);
-          return again;
+          return narrowBroadQuestion(again, typed, raw, cq, opts);
         }
         var terms=cq.split(/\s+/).filter(Boolean);
         if(terms.length>1){

@@ -23,11 +23,14 @@ a{color:inherit}
 .stack{display:grid;gap:12px}
 .hero{display:flex;align-items:center;justify-content:center;text-align:center;min-height:136px;padding:16px;border:1px solid #34533D;background:#0B140E}
 .hero h1{margin:0;color:#00ED39;font-size:clamp(26px,8.6vw,38px);line-height:1.15;letter-spacing:.02em}
-.search{display:flex;height:56px;border:1px solid #34533D;background:#0B140E}
-.search input{flex:1;min-width:0;border:0;background:transparent;color:#E8F4E9;font:inherit;padding:0 16px;outline:none}
+.search{display:flex;height:56px;border:2px solid #F5FF00;background:#0B140E}
+.search input{flex:1;min-width:0;width:100%;height:100%;border:0;background:transparent;color:#E8F4E9;font:inherit;padding:0 16px;outline:none}
 .search input::placeholder{color:#B4C6B7}
-.search button{width:56px;border:0;border-left:1px solid #34533D;background:transparent;color:#00ED39;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.search:focus-within{border-color:#00ED39}
+.search button{width:56px;flex:0 0 56px;border:0;border-left:1px solid #F5FF00;background:transparent;color:#00ED39;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.search:focus-within{border-color:#F5FF00;box-shadow:0 0 0 1px #F5FF00}
+.app-search-wrap{position:relative;flex:1;min-width:0;height:100%;display:flex;align-items:center}
+.search .arc-ph{position:absolute;left:16px;right:8px;top:0;bottom:0;overflow:hidden;pointer-events:none;display:flex;align-items:center;color:#B4C6B7;font:inherit;font-size:17px;line-height:1.2}
+.search:focus-within .arc-ph,.search.has-value .arc-ph,.search .arc-ph.is-off{opacity:0;visibility:hidden}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .card{display:flex;flex-direction:column;justify-content:space-between;gap:12px;min-height:112px;padding:16px;border:1px solid #34533D;background:#0B140E;text-decoration:none}
 .card b{font-size:clamp(20px,6vw,27px);line-height:1.12;letter-spacing:.02em;color:#E8F4E9}
@@ -56,7 +59,7 @@ a{color:inherit}
 </header>
 <main class="stack">
 <section class="hero"><h1>Q DROPS. DATES. RESEARCH.</h1></section>
-<form class="search" action="/ledger.html" method="get" role="search"><label for="q" class="sr" style="position:absolute;left:-9999px">Search the drops</label><input id="q" name="q" type="search" placeholder="Number, date or phrase" autocomplete="off" enterkeyhint="search"><button type="submit" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></form>
+<form class="search" id="appSearch" action="/ledger.html" method="get" role="search"><label for="q" class="sr" style="position:absolute;left:-9999px">Search the drops</label><div class="app-search-wrap" id="appSearchWrap" data-trd-ticker data-trd-ticker-input="q" data-trd-ticker-id="appPhTick" data-trd-ticker-label="Search the drops"><input id="q" name="q" type="search" placeholder="Search the Q drops" autocomplete="off" enterkeyhint="search"></div><input type="hidden" name="from" value="app"><button type="submit" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></form>
 <div class="pair tall">
 <a class="card feat" id="today" href="/deltas/"><b>TODAY'S DELTAS</b><span>Read this date's drops</span></a>
 <a class="card feat" href="/q-proofs/"><b>Q PROOFS</b><span>Explore the public record</span></a>
@@ -78,7 +81,18 @@ a{color:inherit}
 </main>
 <p class="foot">therubberduck.net</p>
 </div>
+<script src="/assets/trd/search-ticker.js?v=20261121a" data-trd-keep></script>
 <script>/* Today's Deltas: today's date in New York time, linked to its date page when that date has drops */
 (function(){var p=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'2-digit',day:'2-digit'}).formatToParts(new Date()),m,d;p.forEach(function(x){if(x.type==='month')m=x.value;if(x.type==='day')d=x.value;});var k=m+'-'+d,a=document.getElementById('today');
-fetch('/data/deltas-index.json').then(function(r){return r.json();}).then(function(j){if(j[k]){a.href='/deltas/'+k+'/';}}).catch(function(){});})();</script>
+fetch('/data/deltas-index.json').then(function(r){return r.json();}).then(function(j){if(j[k]){a.href='/deltas/'+k+'/';}}).catch(function(){});})();
+/* Prefill from ?q= so Back from the Ledger still shows the typed query. Remember it in the app URL before submit. */
+(function(){var input=document.getElementById('q'); if(!input) return;
+var q=new URLSearchParams(location.search).get('q');
+if(q && !input.value) input.value=q;
+var form=document.getElementById('appSearch');
+if(form) form.addEventListener('submit',function(){
+  var v=input.value||'', u=new URL(location.href);
+  if(v) u.searchParams.set('q',v); else u.searchParams.delete('q');
+  try{history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}
+});})();</script>
 </body></html>

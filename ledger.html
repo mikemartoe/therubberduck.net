@@ -820,7 +820,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script src="data/drop-images.js?v=20261030a"></script>
 <script src="data/drop-image-text.js?v=20261109p1"></script>
 <script src="data/drop-image-files.js?v=20261109p1"></script>
-<script src="assets/trd/ledger-search.js?v=20261121a"></script>
+<script src="assets/trd/ledger-search.js?v=20261121b"></script>
 <script src="assets/trd/ledger-starter.js?v=20261030" defer></script>
 <script src="assets/trd/ledger-path.js?v=20261029" defer></script>
 <script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Photo Search","href":"/ledger.html?view=photos"},{"label":"Calendar","href":"#calendar"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"New? Start here","href":"#start-here"}}</script>
@@ -2715,100 +2715,17 @@ html.lrail #lrail{grid-column:1!important}
 })();
 </script>
 <script src="/assets/trd/sitenav.js?v=8" data-trd-keep></script>
+<script src="/assets/trd/search-ticker.js?v=20261121a" data-trd-keep></script>
 <script>
-/* Rolling typable prompts in the Ledger search box, then a site-wide fallback
+/* Rolling typable prompts (shared TRDSearchTicker), then a site-wide fallback
    that reuses the existing header-search engine (trdNav.hits). */
 (function(){
   var d=document, input=d.getElementById('arcQuery'), wrap=d.getElementById('arcSearchWrap');
   if(!input || !wrap) return;
-  var FIRST='Search the Q drops';
-  /* Only typable queries that already return Ledger hits (or, for a couple of
-     short questions, useful site-wide hits once the fallback is showing).
-     Kept short so each line fits the 360px rail and a 390px phone box. */
-  var PROMPTS=[
-    FIRST,
-    '#4966',
-    'Hillary',
-    'Oct 2018',
-    'future proves past',
-    'today',
-    'what about Hillary?',
-    'FISA',
-    'WWG1WGA',
-    '10/22/2020',
-    'Flynn',
-    'the storm',
-    'today ± 3 days',
-    'why was Flynn fired?',
-    'map',
-    'HRC Oct 2018',
-    'POTUS',
-    'yesterday',
-    'how do we know?',
-    'mockingbird',
-    '#1',
-    'Iran',
-    'nothing can stop',
-    'what about the storm?',
-    'did Q mention Iran?',
-    'what did Q say about Iran?',
-    'Sessions',
-    'this day',
-    'flag',
-    'who is Q?',
-    '2018',
-    'seal'
-  ];
-
-  var reduce=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduce){
-    input.setAttribute('placeholder', FIRST);
-  } else if(wrap && !d.getElementById('arcPhTick')){
-    input.setAttribute('placeholder','');
-    if(!input.getAttribute('aria-label')) input.setAttribute('aria-label','Search the ledger');
-    var ph=d.createElement('div');
-    ph.className='arc-ph';
-    ph.id='arcPhTick';
-    ph.setAttribute('aria-hidden','true');
-    var line=d.createElement('span');
-    line.className='arc-ph-line';
-    line.textContent=FIRST;
-    ph.appendChild(line);
-    wrap.appendChild(ph);
-    var i=0, timer=null, moving=false;
-    function photos(){ return d.documentElement.classList.contains('lx-photos') || (d.getElementById('main')&&d.getElementById('main').classList.contains('lx-photos')); }
-    function busy(){ return d.activeElement===input || !!(input.value&&input.value.length) || photos(); }
-    function show(on){ ph.classList.toggle('is-off', !on); }
-    function schedule(){
-      clearTimeout(timer);
-      var hold=(i===0)?2800:2200;
-      timer=setTimeout(tick, hold);
-    }
-    function tick(){
-      if(busy()){ show(false); schedule(); return; }
-      show(true);
-      if(moving){ schedule(); return; }
-      i=(i+1)%PROMPTS.length;
-      var next=PROMPTS[i];
-      var incoming=d.createElement('span');
-      incoming.className='arc-ph-line is-in';
-      incoming.textContent=next;
-      ph.appendChild(incoming);
-      line.classList.add('is-out');
-      moving=true;
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){ incoming.classList.add('is-up'); }); });
-      setTimeout(function(){
-        if(line.parentNode) line.parentNode.removeChild(line);
-        incoming.classList.remove('is-in','is-up');
-        line=incoming; moving=false;
-      }, 440);
-      schedule();
-    }
-    input.addEventListener('focus', function(){ show(false); clearTimeout(timer); });
-    input.addEventListener('blur', function(){ if(!busy()){ show(true); schedule(); } });
-    input.addEventListener('input', function(){ if(input.value) show(false); else if(d.activeElement!==input){ show(true); schedule(); } });
-    schedule();
-  }
+  if(window.TRDSearchTicker) TRDSearchTicker.mount({
+    input:input, wrap:wrap, tickId:'arcPhTick', label:'Search the ledger',
+    photos:function(){ return d.documentElement.classList.contains('lx-photos') || (d.getElementById('main')&&d.getElementById('main').classList.contains('lx-photos')); }
+  });
 
   /* ---- More from across the site (existing trdNav engine) ---- */
   var more=d.getElementById('lxSiteMore'), list=d.getElementById('lxSiteMoreList'), link=d.getElementById('lxSiteMoreLink');
@@ -2947,6 +2864,10 @@ html.lrail #lrail{grid-column:1!important}
     if(window.MutationObserver) new MutationObserver(syncJump).observe(d.documentElement,{attributes:true,attributeFilter:['class']});
     setTimeout(syncJump, 400);
   }
+  /* Catch searches that land with ?q= already in the URL (including the installed app form). */
+  queueRefresh();
+  setTimeout(queueRefresh, 400);
+  setTimeout(queueRefresh, 1600);
 })();
 </script>
 <button type="button" id="lxJumpSearch" class="lx-jump-search" hidden>Search</button>
