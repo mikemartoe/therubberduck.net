@@ -235,7 +235,7 @@ body.eol-home .mission-dlg{padding:0;border:0;background:transparent;color:#F6F1
   width:min(980px,calc(100vw - 32px));max-width:calc(100vw - 32px);
   max-height:min(92vh,720px);overflow:visible}
 body.eol-home .mission-dlg::backdrop{background:rgba(8,10,20,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-body.eol-home .mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+body.eol-home .mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
   min-height:0;max-height:min(92vh,720px);border-radius:8px;overflow:hidden;
   background:
     radial-gradient(120% 60% at 20% 0%,rgba(208,175,108,.16),transparent 52%),
@@ -253,10 +253,11 @@ body.eol-home .mission-dlg .hello-s{margin:10px 0 0;font-family:var(--eo-body);f
   line-height:1.45;color:#F3EFE4;text-align:left;max-width:none;font-style:normal}
 body.eol-home .mission-dlg .hello-s b{color:var(--af1-gold-bright)}
 body.eol-home .mission-dlg .hello-sign{margin-top:12px;font-weight:700;color:var(--af1-gold-bright);text-align:left;font-family:var(--eo-display);letter-spacing:.06em}
-body.eol-home .mission-drop{margin:14px 0 0;padding:0;width:100%;max-width:100%}
-body.eol-home .mission-drop img{display:block;width:100%;height:auto;border:0;border-radius:0}
-body.eol-home .mission-dlg-media{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;
-  padding:28px 28px 28px 8px;box-sizing:border-box}
+body.eol-home .mission-dlg-media{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:0;
+  padding:28px 28px 24px 12px;box-sizing:border-box;gap:14px}
+body.eol-home .mission-drop{margin:0;padding:0;width:100%;max-width:100%;flex:none}
+body.eol-home .mission-drop img{display:block;width:100%;height:auto;border:0;border-radius:0;
+  box-shadow:0 8px 22px rgba(0,0,0,.35)}
 body.eol-home .mission-oath{display:block;width:100%;height:auto;max-height:min(520px,calc(92vh - 80px));
   aspect-ratio:720/800;object-fit:contain;background:#0C1020;
   border:1px solid rgba(208,175,108,.38);border-radius:4px;
@@ -277,13 +278,12 @@ body.eol-home .mission-dlg-x:hover{color:var(--af1-gold-bright);background:rgba(
 body.eol-home .mission-dlg-x:focus-visible{outline:none;background:rgba(208,175,108,.18)}
 @media (max-width:699px){
   body.eol-home .mission-dlg{width:calc(100vw - 16px);max-width:calc(100vw - 16px);max-height:92vh}
-  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,58%) minmax(0,42%);align-items:start;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
+  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,48%) minmax(0,52%);align-items:start;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
   body.eol-home .mission-dlg-copy{padding:36px 8px 16px 12px;overflow:auto}
-  body.eol-home .mission-dlg-media{flex-direction:column;padding:48px 28px 16px 4px;align-items:center;justify-content:flex-start}
+  body.eol-home .mission-dlg-media{flex-direction:column;padding:48px 16px 16px 6px;align-items:center;justify-content:flex-start;gap:10px}
   body.eol-home .mission-dlg-h{font-size:clamp(14px,4.2vw,20px);padding-right:32px;letter-spacing:.03em}
   body.eol-home .mission-dlg .hello-s{font-size:clamp(11px,2.9vw,12.5px);margin-top:7px;line-height:1.38}
   body.eol-home .mission-dlg .hello-sign{margin-top:8px;letter-spacing:.04em}
-  body.eol-home .mission-drop{margin-top:10px}
   body.eol-home .mission-oath{max-height:none}
   body.eol-home .mission-dlg-media.is-pending .mission-oath::-webkit-media-controls{display:none!important;opacity:0}
   body.eol-home .mission-oath-note{display:block;font-size:12.5px;margin-top:8px}
