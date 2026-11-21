@@ -17,3 +17,10 @@ html[lang="ja"] .hello-h,html[lang="ja"] .hello-k,html[lang="ja"] .marquee,html[
   word-break:normal;
   overflow-wrap:anywhere;
 }
+
+/* Cinzel and EB Garamond have no Japanese glyphs. Keep them first for Latin,
+   then fall through to a system CJK stack on Japanese pages. */
+html[lang="ja"] body.eol-home{
+  --eo-display:'Cinzel','Hiragino Mincho ProN','Yu Mincho','YuMincho','Hiragino Sans','Yu Gothic','YuGothic','Noto Serif JP','Noto Sans JP','Meiryo',serif;
+  --eo-body:'EB Garamond','Hiragino Mincho ProN','Yu Mincho','YuMincho','Hiragino Sans','Yu Gothic','YuGothic','Noto Serif JP','Noto Sans JP','Meiryo',serif;
+}
