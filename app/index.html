@@ -81,7 +81,7 @@ a{color:inherit}
 </main>
 <p class="foot">therubberduck.net</p>
 </div>
-<script src="/assets/trd/search-ticker.js?v=20261121a" data-trd-keep></script>
+<script src="/assets/trd/search-ticker.js?v=20261121c" data-trd-keep></script>
 <script>/* Today's Deltas: today's date in New York time, linked to its date page when that date has drops */
 (function(){var p=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',month:'2-digit',day:'2-digit'}).formatToParts(new Date()),m,d;p.forEach(function(x){if(x.type==='month')m=x.value;if(x.type==='day')d=x.value;});var k=m+'-'+d,a=document.getElementById('today');
 fetch('/data/deltas-index.json').then(function(r){return r.json();}).then(function(j){if(j[k]){a.href='/deltas/'+k+'/';}}).catch(function(){});})();

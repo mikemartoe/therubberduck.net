@@ -38,9 +38,11 @@
     'seal'
   ];
 
+  /* Step uses em so a browser zoom or font-size change keeps the roll distance
+     in step with the type, instead of a pixel height captured once at load. */
   var CSS = '.arc-ph-line{position:absolute;left:0;right:0;white-space:nowrap;transform:translateY(0);opacity:1;transition:transform .42s cubic-bezier(.16,1,.3,1),opacity .42s ease}' +
-    '.arc-ph-line.is-out{transform:translateY(-110%);opacity:0}' +
-    '.arc-ph-line.is-in{transform:translateY(110%);opacity:0}' +
+    '.arc-ph-line.is-out{transform:translateY(-1.32em);opacity:0}' +
+    '.arc-ph-line.is-in{transform:translateY(1.32em);opacity:0}' +
     '.arc-ph-line.is-in.is-up{transform:translateY(0);opacity:1}' +
     '.arc-ph.is-off{opacity:0;visibility:hidden}' +
     '@media (prefers-reduced-motion:reduce){.arc-ph{display:none!important}}';
@@ -81,13 +83,50 @@
     line.textContent = FIRST;
     ph.appendChild(line);
     wrap.appendChild(ph);
-    var i = 0, timer = null, moving = false;
+    var i = 0, timer = null, moving = false, finish = null, viewT = null;
+    var lastDpr = root.devicePixelRatio || 1;
     var photos = typeof opts.photos === 'function' ? opts.photos : function () { return false; };
     function busy() { return d.activeElement === input || !!(input.value && input.value.length) || photos(); }
     function show(on) { ph.classList.toggle('is-off', !on); }
+    function clearNative() { input.setAttribute('placeholder', ''); }
     function schedule() {
       clearTimeout(timer);
       timer = setTimeout(tick, (i === 0) ? 2800 : 2200);
+    }
+    function settle() {
+      /* Drop a mid-flight roll so a zoom or layout move cannot leave two lines
+         or a stuck translate. Keep one rest-state line. */
+      moving = false;
+      if (finish) { clearTimeout(finish); finish = null; }
+      var kids = [].slice.call(ph.querySelectorAll('.arc-ph-line'));
+      var keep = kids.length ? kids[kids.length - 1] : null;
+      if (!keep) {
+        keep = d.createElement('span');
+        keep.textContent = PROMPTS[i] || FIRST;
+        ph.appendChild(keep);
+      }
+      kids.forEach(function (el) { if (el !== keep && el.parentNode) el.parentNode.removeChild(el); });
+      keep.style.transition = 'none';
+      keep.className = 'arc-ph-line';
+      keep.style.transform = '';
+      keep.style.opacity = '';
+      void keep.offsetWidth;
+      keep.style.transition = '';
+      line = keep;
+    }
+    function onView() {
+      clearNative();
+      settle();
+      if (busy()) show(false);
+      else { show(true); schedule(); }
+    }
+    function queueView() {
+      var dpr = root.devicePixelRatio || 1;
+      clearTimeout(viewT);
+      viewT = setTimeout(function () {
+        lastDpr = root.devicePixelRatio || dpr;
+        onView();
+      }, 50);
     }
     function tick() {
       if (busy()) { show(false); schedule(); return; }
@@ -101,19 +140,32 @@
       line.classList.add('is-out');
       moving = true;
       requestAnimationFrame(function () { requestAnimationFrame(function () { incoming.classList.add('is-up'); }); });
-      setTimeout(function () {
+      finish = setTimeout(function () {
+        finish = null;
         if (line.parentNode) line.parentNode.removeChild(line);
         incoming.classList.remove('is-in', 'is-up');
         line = incoming; moving = false;
       }, 440);
       schedule();
     }
-    input.addEventListener('focus', function () { show(false); clearTimeout(timer); });
+    input.addEventListener('focus', function () { show(false); clearTimeout(timer); settle(); });
     input.addEventListener('blur', function () { if (!busy()) { show(true); schedule(); } });
     input.addEventListener('input', function () {
-      if (input.value) show(false);
+      if (input.value) { show(false); clearTimeout(timer); settle(); }
       else if (d.activeElement !== input) { show(true); schedule(); }
     });
+    addEventListener('resize', queueView, { passive: true });
+    addEventListener('orientationchange', queueView, { passive: true });
+    if (root.visualViewport) {
+      visualViewport.addEventListener('resize', queueView, { passive: true });
+    }
+    try {
+      if (root.matchMedia) {
+        var resMq = matchMedia('(resolution: ' + (lastDpr || 1) + 'dppx)');
+        if (resMq && resMq.addEventListener) resMq.addEventListener('change', queueView);
+        else if (resMq && resMq.addListener) resMq.addListener(queueView);
+      }
+    } catch (e) {}
     if (input.value) show(false);
     else schedule();
   }

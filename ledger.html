@@ -2401,7 +2401,20 @@ section[id],details[id]{scroll-margin-top:calc(var(--ldock-h,60px) + 14px)!impor
   d.addEventListener('click',function(){ setTimeout(mark,0); });
   d.addEventListener('change',function(){ setTimeout(mark,0); });
   var q=document.getElementById('arcQuery'), long=q&&q.getAttribute('placeholder');
-  function ph(){ if(!q) return; if(document.getElementById('arcPhTick')) return; if(document.documentElement.classList.contains('lx-photos')|| (document.getElementById('main')&&document.getElementById('main').classList.contains('lx-photos'))) return; q.setAttribute('placeholder', innerWidth<760?'Search the Q drops':long); }
+  function tickerLive(){
+    /* Walk the input's own tree, not getElementById. When a zoom crosses the
+       desktop breakpoint the search dock is briefly detached, so #arcPhTick
+       is not in the document and the old check would restore the native
+       placeholder under the ticker — and leave it there. */
+    var wrap=q&&(q.closest?q.closest('#arcSearchWrap'):q.parentElement);
+    return !!(wrap&&(wrap.getAttribute('data-trd-tick-on')||wrap.querySelector('.arc-ph')));
+  }
+  function ph(){
+    if(!q) return;
+    if(tickerLive()){ q.setAttribute('placeholder',''); return; }
+    if(document.documentElement.classList.contains('lx-photos')|| (document.getElementById('main')&&document.getElementById('main').classList.contains('lx-photos'))) return;
+    q.setAttribute('placeholder', innerWidth<760?'Search the Q drops':long);
+  }
   ph(); addEventListener('resize',ph);
   setTimeout(mark,300);
 })();
@@ -2639,8 +2652,8 @@ html.lrail #lrail{grid-column:1!important}
   transform:translateY(0);opacity:1;
   transition:transform .42s cubic-bezier(.16,1,.3,1),opacity .42s ease;
 }
-.arc-ph-line.is-out{transform:translateY(-110%);opacity:0}
-.arc-ph-line.is-in{transform:translateY(110%);opacity:0}
+.arc-ph-line.is-out{transform:translateY(-1.32em);opacity:0}
+.arc-ph-line.is-in{transform:translateY(1.32em);opacity:0}
 .arc-ph-line.is-in.is-up{transform:translateY(0);opacity:1}
 @media (prefers-reduced-motion:reduce){
   .arc-ph{display:none!important}
@@ -2722,7 +2735,7 @@ html.lrail #lrail{grid-column:1!important}
 })();
 </script>
 <script src="/assets/trd/sitenav.js?v=8" data-trd-keep></script>
-<script src="/assets/trd/search-ticker.js?v=20261121a" data-trd-keep></script>
+<script src="/assets/trd/search-ticker.js?v=20261121c" data-trd-keep></script>
 <script>
 /* Rolling typable prompts (shared TRDSearchTicker), then a site-wide fallback
    that reuses the existing header-search engine (trdNav.hits). */
