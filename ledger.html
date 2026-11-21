@@ -2407,5 +2407,235 @@ html.lrail.lx-photos .arc-wrap,html.lx-photos.lrail .arc-wrap{grid-template-colu
 </style>
 <script src="assets/trd/ledger-photos.js?v=20261109p2"></script>
 <script src="/assets/trd/onair.js?v=20261117r" defer data-trd-keep></script>
+<style id="ledger-search-top">
+/* Ledger-only layout pass, 2026-11-20: slim the masthead into the ON AIR row,
+   put the existing search bar first with a highlighter-yellow border, and keep
+   the search tools visible under it. No rebuild — existing nodes, new placement. */
+:root{--ledger-head-h:52px;--ledger-search-yellow:#F5FF00}
+@media (max-width:760px){:root{--ledger-head-h:48px}}
+
+/* ---- slim masthead in the same row as ON AIR ---- */
+header.banner{
+  position:relative;
+  z-index:200;
+  min-height:var(--ledger-head-h);
+  padding-left:90px;
+  background:#000;
+  box-shadow:0 1px 0 rgba(255,200,100,.18),0 6px 18px rgba(0,0,0,.55);
+}
+header.banner .banner-in{
+  max-width:none;
+  min-height:var(--ledger-head-h);
+  margin:0;
+  padding:4px 12px 4px 8px;
+  display:flex;
+  flex-wrap:nowrap!important;
+  align-items:center;
+  justify-content:flex-start!important;
+  gap:10px 12px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+header.banner .banner-in::-webkit-scrollbar{display:none}
+header.banner img{height:36px;width:auto;flex:none}
+header.banner .wm{font-size:32px;line-height:1;margin:0;flex:none}
+header.banner .wm sup{font-size:.32em;vertical-align:1.35em}
+header.banner .meta{
+  display:flex;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center;
+  gap:0 14px!important;
+  width:auto!important;
+  justify-content:flex-start!important;
+  flex:none;
+  font-size:13px;
+  white-space:nowrap;
+}
+header.banner .meta a{display:inline-block;padding:8px 0;white-space:nowrap}
+
+/* Shop sign stays in the row as a compact pill (overrides the absolute/wrap rules). */
+header.banner a.trd-shopsign{
+  position:static!important;
+  transform:none!important;
+  flex:none;
+  flex-direction:row;
+  align-items:center;
+  gap:7px;
+  padding:4px 10px 4px 0;
+  border-radius:999px;
+  border-width:1.5px;
+  margin-left:auto;
+}
+header.banner a.trd-shopsign::before{
+  align-self:stretch;
+  width:16px;
+  height:auto;
+  margin:-4px 0;
+  background:repeating-linear-gradient(180deg,#C8302B 0 6px,#E2652A 6px 12px,#E3A82B 12px 18px,#7A4A24 18px 24px);
+}
+header.banner .trd-shopsign-k{padding:0;font-size:13px}
+header.banner .trd-shopsign-n{padding:0;font-size:12px}
+header.banner a.trd-shopsign:hover,
+header.banner a.trd-shopsign:focus-visible{transform:none!important}
+
+/* Compact ON AIR so the lit label does not hang out of the slim row.
+   The bottom-left pop-up still carries "Listen to the replay". */
+.trd-onair-strip{
+  position:absolute;
+  top:0;left:0;
+  z-index:201;
+  height:var(--ledger-head-h);
+  width:auto;
+  padding:0 0 0 8px;
+  border:0;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  pointer-events:none;
+}
+.trd-onair-strip .trd-onair{pointer-events:auto}
+.trd-onair.no-nav{
+  position:absolute!important;
+  top:50%!important;
+  left:10px!important;
+  transform:translateY(-50%);
+  z-index:201;
+}
+/* When the sign is a child of body, 50% would be the viewport — pin it to the banner instead. */
+@media (min-width:1200px){
+  .trd-onair.no-nav{top:10px!important;transform:none}
+}
+.trd-onair.no-nav .oa-box,
+.trd-onair.in-strip .oa-box{width:74px!important;height:32px!important;padding:2px 4px 2px!important}
+.trd-onair.no-nav .oa-on,
+.trd-onair.in-strip .oa-on{font-size:15.5px!important}
+.trd-onair.no-nav .oa-sub,
+.trd-onair.in-strip .oa-sub{font-size:6.5px!important;letter-spacing:.16em!important;margin-right:-.16em!important}
+.trd-onair.no-nav .oa-lbl,
+.trd-onair.in-strip .oa-lbl{display:none!important}
+
+@media (max-width:760px){
+  header.banner img{height:30px}
+  header.banner .wm{font-size:22px}
+  header.banner .meta{font-size:12px;gap:0 12px!important}
+  header.banner .meta a{padding:7px 0}
+  header.banner a.trd-shopsign{margin-left:4px}
+}
+
+/* ---- search first, tools visible under it, then the Ledger tabs ---- */
+.ldock{z-index:70}
+.ldock .arc-search{
+  border:2.5px solid var(--ledger-search-yellow)!important;
+  border-radius:6px!important;
+  min-height:52px;
+  box-shadow:0 0 0 1px rgba(245,255,0,.18),0 0 18px -8px rgba(245,255,0,.55)!important;
+  background:var(--surface-1)!important;
+}
+.ldock .arc-search:focus-within{
+  border-color:var(--ledger-search-yellow)!important;
+  box-shadow:0 0 0 3px rgba(245,255,0,.35),0 0 22px -6px rgba(245,255,0,.7)!important;
+}
+.ldock .arc-search input{
+  min-height:48px;
+  font-size:16px!important;
+}
+.ldock .arc-bar{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr);
+  gap:8px;
+  align-items:stretch;
+}
+.ldock .arc-search{
+  grid-column:1 / -1;
+  flex:none!important;
+  width:auto!important;
+  min-width:0;
+  max-width:none;
+}
+.ldock-view{
+  grid-column:1 / -1;
+  justify-self:start;
+}
+.ldock-more{grid-column:1 / -1}
+
+@media (max-width:760px){
+  .ldock .arc-search{min-height:54px}
+  .ldock .arc-search input{min-height:50px;font-size:16px!important}
+  /* keep sort + date chips visible in the compact 4-column grid under the search */
+  .ldock-more{display:grid;flex-basis:auto;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center;gap:6px;padding:0}
+  /* while a search is open, the tab pill would scroll over the tools — hide it */
+  body:has(#main.lx-q-on) .e3-nav-pill{display:none!important}
+}
+
+/* Desktop right rail: search sits at the top of the tools panel, drops stay on the left. */
+html.lrail #lrail{
+  top:16px!important;
+  max-height:calc(100vh - 32px)!important;
+}
+html.lrail #lrail #ldock{
+  position:relative!important;
+  top:auto!important;
+  z-index:3;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  order:-1;
+}
+html.lrail #lrail #ldock .ldock-in{max-width:none;padding:0}
+html.lrail #lrail #ldock .ldock-more{display:grid;grid-template-columns:1fr;gap:8px}
+html.lrail #lrail #ldock .arc-sort{width:100%}
+html.lrail #lrail #ldock .lx-delta{
+  display:grid!important;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  width:100%;
+  flex:none;
+  margin:0;
+}
+html.lrail #lrail #ldock .lx-dlbl{grid-column:1 / -1;margin:2px 0 0}
+html.lrail #lrail #ldock .lx-delta .chip{flex:none;width:auto;min-width:0}
+html.lrail section[id],
+html.lrail details[id],
+html.lrail .arc-row[id]{scroll-margin-top:16px!important}
+</style>
+<script>
+/* Move the existing search dock above the Ledger tabs, and on the wide
+   desktop layout park it at the top of the right-hand tools rail. */
+(function(){
+  var d=document, dock=d.getElementById('ldock'), nav=d.querySelector('.e3-nav-pill');
+  if(!dock) return;
+  var home=d.createComment('ldock-home');
+  if(nav && nav.parentNode){
+    nav.parentNode.insertBefore(home, nav);
+    nav.parentNode.insertBefore(dock, nav);
+  } else {
+    dock.parentNode.insertBefore(home, dock);
+  }
+  function place(){
+    var rail=d.getElementById('lrail');
+    var desk=d.documentElement.classList.contains('lrail');
+    var photos=d.documentElement.classList.contains('lx-photos');
+    if(desk && rail && !photos){
+      if(dock.parentNode!==rail) rail.insertBefore(dock, rail.firstChild);
+      return;
+    }
+    if(home.parentNode && dock.previousSibling!==home){
+      home.parentNode.insertBefore(dock, home.nextSibling);
+    }
+  }
+  place();
+  if(window.MutationObserver){
+    new MutationObserver(place).observe(d.documentElement,{attributes:true,attributeFilter:['class']});
+    var root=d.getElementById('archive')||d.body;
+    new MutationObserver(place).observe(root,{childList:true,subtree:true});
+  }
+  addEventListener('resize',function(){ setTimeout(place,160); },{passive:true});
+})();
+</script>
 </body>
 </html>
