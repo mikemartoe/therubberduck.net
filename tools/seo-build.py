@@ -243,7 +243,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 <link rel="stylesheet" href="{CSS_HREF}">
 {ss_head}{extra_head}{SIGNUP_JS if signup and SIGNUP_ON else ''}{ld_script(graph)}
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
+<script src="/assets/trd/analytics.js?v=20261121a" data-trd-keep></script>
 </head>
 <body>
 <header class="top"><div class="wrap"><a class="brand" href="/">THE RUBBER DUCK&trade;</a>
@@ -496,7 +496,7 @@ def build_library():
     title = 'SCI[F] Library: %d Free PDFs' % len(docs)
     desc = clip('%d public documents and books to read or download free: PSYOP doctrine, Q drops, the Epstein files and more, grouped by topic, each with a summary.' % len(docs))
     body = '<h1>SCI[F] Library</h1><p class="lede">%d documents, grouped by topic. Each has its own page with a summary. Search and read them all in <a href="/pdfs.html">SCI[F]</a>.</p>%s' % (len(docs), secs)
-    write('library/index.html', page('/library/', title, desc, body, [], [('Home', '/'), ('SCI[F]', '/pdfs.html'), ('PDF library', '/library/')], signup=True))
+    write('library/index.html', page('/library/', title, desc, body, [{'@type': 'CollectionPage', '@id': SITE + '/library/#collection', 'url': SITE + '/library/', 'name': title, 'description': desc, 'isPartOf': {'@id': SITE_ID}, 'inLanguage': 'en', 'breadcrumb': {'@id': SITE + '/library/#crumbs'}}], [('Home', '/'), ('SCI[F]', '/pdfs.html'), ('PDF library', '/library/')], signup=True))
     add_sm('library', '/library/', lm)
     return len(docs)
 
@@ -550,7 +550,7 @@ def build_videos():
     title = 'Videos and Livestreams: All %d Features' % len(out)
     desc = clip('Every video and livestream in The Rubber Duck Drive-In: %d features, each with its own page, a summary, the player and a link to Rumble.' % len(out))
     body = '<h1>All Videos and Livestreams</h1><p class="lede">%d features, newest first. Watch them the fun way at <a href="/videos.html">The Rubber Duck Drive-In</a>.</p><ul class="list">%s</ul>' % (len(out), rows)
-    write('watch/index.html', page('/watch/', title, desc, body, [], [('Home', '/'), ('Video Room', '/videos.html'), ('All videos', '/watch/')], og_image=SITE + '/assets/trd/img/share-videos.jpg'))
+    write('watch/index.html', page('/watch/', title, desc, body, [{'@type': 'CollectionPage', '@id': SITE + '/watch/#collection', 'url': SITE + '/watch/', 'name': title, 'description': desc, 'isPartOf': {'@id': SITE_ID}, 'inLanguage': 'en', 'breadcrumb': {'@id': SITE + '/watch/#crumbs'}}], [('Home', '/'), ('Video Room', '/videos.html'), ('All videos', '/watch/')], og_image=SITE + '/assets/trd/img/share-videos.jpg'))
     add_sm('media', '/watch/', lm)
     return len(out)
 
@@ -603,7 +603,7 @@ def build_listen():
     title = 'X Spaces and Shows: All %d Listening Room Volumes' % len(vols)
     desc = clip('Every X Space and Rumble show with The Rubber Duck in The Listening Room: %d volumes by series, each with a written summary and minutes.' % len(vols))
     body = '<h1>X Spaces and Shows</h1><p class="lede">%d conversations, shelved by series. Each has its own page with a summary. Listen the fun way in <a href="/listening-room.html">The Listening Room</a>.</p>%s' % (len(vols), secs)
-    write('listen/index.html', page('/listen/', title, desc, body, [], [('Home', '/'), ('Listening Room', '/listening-room.html'), ('All volumes', '/listen/')], og_image=SITE + '/assets/trd/img/share-listening.jpg'))
+    write('listen/index.html', page('/listen/', title, desc, body, [{'@type': 'CollectionPage', '@id': SITE + '/listen/#collection', 'url': SITE + '/listen/', 'name': title, 'description': desc, 'isPartOf': {'@id': SITE_ID}, 'inLanguage': 'en', 'breadcrumb': {'@id': SITE + '/listen/#crumbs'}}], [('Home', '/'), ('Listening Room', '/listening-room.html'), ('All volumes', '/listen/')], og_image=SITE + '/assets/trd/img/share-listening.jpg'))
     add_sm('media', '/listen/', lm)
     return len(vols)
 
