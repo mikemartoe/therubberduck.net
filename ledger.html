@@ -820,7 +820,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <script src="data/drop-images.js?v=20261030a"></script>
 <script src="data/drop-image-text.js?v=20261109p1"></script>
 <script src="data/drop-image-files.js?v=20261109p1"></script>
-<script src="assets/trd/ledger-search.js?v=20261103e"></script>
+<script src="assets/trd/ledger-search.js?v=20261121a"></script>
 <script src="assets/trd/ledger-starter.js?v=20261030" defer></script>
 <script src="assets/trd/ledger-path.js?v=20261029" defer></script>
 <script type="application/json" class="data">{"brand":{"label":"The Drop Ledger","logo":"images/brand/wordmark.svg","href":"#main"},"links":[{"label":"The record","href":"#archive"},{"label":"Photo Search","href":"/ledger.html?view=photos"},{"label":"Calendar","href":"#calendar"},{"label":"Method","href":"#method"},{"label":"Album","href":"album.html"},{"label":"Process","href":"process.html"}],"cta":{"label":"New? Start here","href":"#start-here"}}</script>
@@ -1208,6 +1208,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
           <h3>More from across the site</h3>
           <a class="lx-sm-all" id="lxSiteMoreLink" href="/">Search the whole site</a>
         </div>
+        <button type="button" class="lx-sm-back" id="lxSiteMoreBack">↑ Back to Ledger search</button>
         <div class="lx-sm-list" id="lxSiteMoreList"></div>
       </aside>
 
@@ -1718,7 +1719,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   }
   function renderInfo(res, shown){
     if(!res || !res.q){ info.hidden=true; info.innerHTML=''; return; }
-    var h='<span class="lx-lbl">'+esc(res.label||'')+'</span>'+dropTotalHTML(shown);
+    var h=(res.note?'<span class="lx-note">'+esc(res.note)+'</span> ':'')+'<span class="lx-lbl">'+esc(res.label||'')+'</span>'+dropTotalHTML(shown);
     var acts='';
     if(res.alt) acts+=btn(res.alt.label, res.alt.q);
     if(res.kind==='delta' && res.rows.length && res.numberDeltas && res.numberDeltas.length){
@@ -2413,7 +2414,7 @@ html.lrail.lx-photos .arc-wrap,html.lx-photos.lrail .arc-wrap{grid-template-colu
   .dlb{padding:60px 8px 150px}
 }
 </style>
-<script src="assets/trd/ledger-photos.js?v=20261109p2"></script>
+<script src="assets/trd/ledger-photos.js?v=20261121a"></script>
 <script src="/assets/trd/onair.js?v=20261117r" defer data-trd-keep></script>
 <style id="ledger-search-top">
 /* Ledger-only layout pass, 2026-11-20: slim the masthead into the ON AIR row,
@@ -2659,6 +2660,25 @@ html.lrail #lrail{grid-column:1!important}
 .lx-sm-d{display:block;margin:2px 0 0 0;color:var(--muted);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lx-sm-msg{padding:6px 8px;color:var(--muted);font-size:13px}
 .lx-sm-x{margin-top:6px}
+.lx-note{display:block;margin:0 0 6px;color:var(--accent);font-family:var(--font-display);font-size:13px;font-weight:600}
+.lx-sm-back{
+  display:inline-flex;align-items:center;gap:6px;margin:0 0 10px;padding:7px 12px;
+  border:1px solid var(--accent);border-radius:6px;background:transparent;
+  color:var(--accent);font-family:var(--font-display);font-size:12.5px;letter-spacing:.04em;
+  cursor:pointer;
+}
+.lx-sm-back:hover,.lx-sm-back:focus-visible{background:rgba(0,255,65,.1);color:var(--text)}
+#lxJumpSearch{
+  position:fixed;right:16px;bottom:calc(112px + env(safe-area-inset-bottom,0px));z-index:80;
+  padding:10px 16px;border:2px solid #F5FF00;border-radius:999px;background:#020403;color:#F5FF00;
+  font-family:var(--font-display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;
+  cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.55);
+}
+#lxJumpSearch:hover,#lxJumpSearch:focus-visible{background:#14180a;color:#fff}
+#lxJumpSearch[hidden]{display:none!important}
+@media (max-width:480px){
+  #lxJumpSearch{right:8px;bottom:calc(96px + env(safe-area-inset-bottom,0px));padding:9px 14px;font-size:12px}
+}
 </style>
 <script>
 /* Move the existing search dock above the Ledger tabs, and on the wide
@@ -2694,7 +2714,7 @@ html.lrail #lrail{grid-column:1!important}
   addEventListener('resize',function(){ setTimeout(place,160); },{passive:true});
 })();
 </script>
-<script src="/assets/trd/sitenav.js?v=7" data-trd-keep></script>
+<script src="/assets/trd/sitenav.js?v=8" data-trd-keep></script>
 <script>
 /* Rolling typable prompts in the Ledger search box, then a site-wide fallback
    that reuses the existing header-search engine (trdNav.hits). */
@@ -2719,7 +2739,7 @@ html.lrail #lrail{grid-column:1!important}
     'Flynn',
     'the storm',
     'today ± 3 days',
-    'why was Flynn fired',
+    'why was Flynn fired?',
     'map',
     'HRC Oct 2018',
     'POTUS',
@@ -2729,11 +2749,13 @@ html.lrail #lrail{grid-column:1!important}
     '#1',
     'Iran',
     'nothing can stop',
-    'what about the storm',
+    'what about the storm?',
+    'did Q mention Iran?',
+    'what did Q say about Iran?',
     'Sessions',
     'this day',
     'flag',
-    'who is Q',
+    'who is Q?',
     '2018',
     'seal'
   ];
@@ -2828,16 +2850,22 @@ html.lrail #lrail{grid-column:1!important}
     else if(res.total>res.items.length) html+='<div class="lx-sm-msg">'+(res.total>=4000?'4,000+':res.total.toLocaleString('en-US'))+' matches across the site.</div>';
     html+='<a class="lx-sm-all lx-sm-x" href="'+esc(res.xHref)+'">Search '+(res.xPosts?res.xPosts.toLocaleString('en-US')+' ':'')+'X posts for \u201c'+esc(q)+'\u201d \u203a</a>';
     list.innerHTML=html;
-    link.href='/?q='+encodeURIComponent(q);
+    var typed=(input.value||'').trim();
+    link.href='/?q='+encodeURIComponent(q)+'&from=ledger'+(typed && typed!==q ? '&lq='+encodeURIComponent(typed) : '');
     more.hidden=false;
   }
   function resolveHits(q){
     var res=window.trdNav.hits(q), note=null;
+    function better(next, label){
+      if(!next || !next.items || !next.items.length) return false;
+      res=next; note=label; return true;
+    }
     if((!res.items || !res.items.length) && isQuestion(q)){
-      var cq=cleanQuery(q);
-      if(cq && cq.length>=2 && cq.toLowerCase()!==q.toLowerCase()){
-        var res2=window.trdNav.hits(cq);
-        if(res2 && res2.items && res2.items.length){ res=res2; note=cq; }
+      var stripped=String(q||'').replace(/[?!.,;:]+$/g,'').replace(/\s+/g,' ').trim();
+      if(stripped && stripped.toLowerCase()!==q.toLowerCase()) better(window.trdNav.hits(stripped), null);
+      if((!res.items || !res.items.length)){
+        var cq=cleanQuery(q);
+        if(cq && cq.length>=2 && cq.toLowerCase()!==q.toLowerCase()) better(window.trdNav.hits(cq), cq);
       }
     }
     return {res:res, note:note};
@@ -2876,7 +2904,51 @@ html.lrail #lrail{grid-column:1!important}
       var el=d.getElementById(id); if(el) new MutationObserver(queueRefresh).observe(el,{childList:true,subtree:true,attributes:true});
     });
   }
+
+  function flushLedgerURL(){
+    try{
+      var u=new URL(location.href), typed=(input.value||'').trim();
+      u.searchParams.delete('q'); u.searchParams.delete('delta');
+      if(/^(today|yesterday|tomorrow)$/i.test(typed)) u.searchParams.set('delta',typed.toLowerCase());
+      else if(typed) u.searchParams.set('q',typed);
+      if(u.href!==location.href) history.replaceState(history.state,'',u.href);
+    }catch(e){}
+  }
+  function backToSearch(){
+    var box=d.getElementById('arcSearchWrap')||d.getElementById('ldock')||input;
+    var reduce=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(box && box.scrollIntoView) box.scrollIntoView({behavior:reduce?'auto':'smooth', block:'start'});
+    flushLedgerURL();
+    setTimeout(function(){
+      if(!input) return;
+      try{ input.focus({preventScroll:true}); }catch(e){ try{ input.focus(); }catch(e2){} }
+      try{ input.scrollLeft=0; }catch(e){}
+    }, reduce?0:220);
+  }
+  var backBtn=d.getElementById('lxSiteMoreBack');
+  if(backBtn) backBtn.addEventListener('click', backToSearch);
+  if(link) link.addEventListener('click', flushLedgerURL);
+
+  var jump=d.getElementById('lxJumpSearch');
+  function searchBoxOnScreen(){
+    var el=d.getElementById('arcSearchWrap')||input;
+    if(!el) return true;
+    var r=el.getBoundingClientRect(), vh=window.innerHeight||800;
+    return r.bottom>8 && r.top<vh-8;
+  }
+  function syncJump(){
+    if(!jump) return;
+    jump.hidden=searchBoxOnScreen();
+  }
+  if(jump){
+    jump.addEventListener('click', backToSearch);
+    addEventListener('scroll', syncJump, {passive:true});
+    addEventListener('resize', syncJump, {passive:true});
+    if(window.MutationObserver) new MutationObserver(syncJump).observe(d.documentElement,{attributes:true,attributeFilter:['class']});
+    setTimeout(syncJump, 400);
+  }
 })();
 </script>
+<button type="button" id="lxJumpSearch" class="lx-jump-search" hidden>Search</button>
 </body>
 </html>

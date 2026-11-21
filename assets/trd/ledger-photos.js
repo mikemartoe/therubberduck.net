@@ -182,7 +182,13 @@
   }
 
   function filterPhotos(q, type, sort){
-    var rows=ITEMS.slice(), label='', groups=null, date=null, num=null, raw=(q||'').trim();
+    var rows=ITEMS.slice(), label='', groups=null, date=null, num=null, typed=(q||'').trim();
+    var raw=typed.replace(/[?!.,;:]+$/,'');
+    var note='';
+    if(LX && LX.looksLikeQuestion && LX.looksLikeQuestion(typed)){
+      var cq=LX.cleanQuestionQuery(raw);
+      if(cq && cq.toLowerCase()!==raw.toLowerCase()){ note='Showing photos for: '+cq.split(/\s+/).filter(Boolean).map(function(w){return w.toLowerCase()==='q'?'Q':w;}).join(', '); raw=cq; }
+    }
     if(type) rows=rows.filter(function(it){ return it.types.indexOf(type)>-1; });
     if(raw){
       date=LX.parseDateQuery(raw);
@@ -217,7 +223,8 @@
     if(sort==='oldest') rows.sort(function(a,b){ return a.t-b.t || a.n-b.n || a.i-b.i; });
     else if(sort==='number') rows.sort(function(a,b){ return a.n-b.n || a.i-b.i; });
     else rows.sort(function(a,b){ return b.n-a.n || a.i-b.i; });
-    return {rows:rows, label:label, hl:hlTerms(groups), q:raw};
+    if(note) label=note+(label?' '+label:'');
+    return {rows:rows, label:label, hl:hlTerms(groups), q:typed, note:note};
   }
 
   /* ---- render ---- */

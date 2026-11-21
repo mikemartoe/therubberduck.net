@@ -183,6 +183,7 @@
         if(w==='or'){ groups.push([]); continue; }
         if(w==='and') continue;
         if(w.charAt(0)==='-' && w.length>1){ neg=true; w=w.slice(1); }
+        w=stripTokPunct(w); if(!w) continue;
         groups[groups.length-1].push({w:w, neg:neg, phrase:false});
       } else groups[groups.length-1].push({w:phrase, neg:neg, phrase:true});
     }
@@ -269,6 +270,50 @@
     });
   }
 
+
+  /* Question cleanup (Ledger only): strip trailing punctuation and filler words,
+     then AND the remaining content terms. Plain queries skip this and stay identical. */
+  var QFILLER={what:1,who:1,when:1,where:1,why:1,how:1,did:1,does:1,do:1,is:1,are:1,was:1,were:1,can:1,could:1,would:1,should:1,the:1,a:1,an:1,of:1,and:1,to:1,in:1,on:1,for:1,at:1,by:1,about:1,say:1,said:1,mention:1,tell:1,me:1,please:1,i:1,you:1,we:1,they:1,it:1};
+  var QSTART=/^\s*(what|who|when|where|why|how|did|is)\b/i;
+  function looksLikeQuestion(q){ return /\?\s*$/.test(String(q||'')) || QSTART.test(String(q||'')); }
+  function stripTokPunct(w){ return String(w||'').replace(/^[?!.,;:]+/,'').replace(/[?!.,;:]+$/,''); }
+  function cleanQuestionQuery(q){
+    var s=norm(q).replace(/[?!.,;:]+/g,' ').replace(/\s+/g,' ').trim();
+    if(!s) return '';
+    var words=s.split(/\s+/).map(stripTokPunct).filter(function(w){
+      if(!w) return false;
+      var k=w.toLowerCase();
+      if(k==='q') return true;
+      return !QFILLER[k];
+    });
+    return words.join(' ');
+  }
+  function prettyContent(cq){
+    return String(cq||'').split(/\s+/).filter(Boolean).map(function(w){ return w.toLowerCase()==='q'?'Q':w; }).join(', ');
+  }
+  function termHitCount(r, terms, useSyn){
+    var n=0;
+    terms.forEach(function(w){
+      var t={w:w, neg:false, phrase:false};
+      if(textFilter([r],[[t]],useSyn).length) n++;
+    });
+    return n;
+  }
+  function orSearch(terms, opts, pool){
+    opts=opts||{}; pool=pool||R;
+    var groups=terms.map(function(w){ return [{w:w, neg:false, phrase:false}]; });
+    var used=[], rows=textFilter(pool, groups, !opts.noSyn, used);
+    if(!rows.length){
+      var fg=fuzzyGroups(groups);
+      if(fg.changed.length){ rows=textFilterFuzzy(pool, fg.groups); }
+    }
+    var useSyn=!opts.noSyn;
+    rows=rows.slice().sort(function(a,b){ return termHitCount(b,terms,useSyn)-termHitCount(a,terms,useSyn) || b.n-a.n; });
+    var hl=[]; terms.forEach(function(w){ (opts.noSyn?[w]:termAlts({w:w,neg:false,phrase:false},true)).forEach(function(a){ a=String(a).trim(); if(a && hl.indexOf(a)<0) hl.push(a); }); });
+    var shown=terms.map(function(w){ return '“'+w+'”'; }).join(' or ');
+    return {kind:'text', rows:rows, used:used, hl:hl, fuzzy:null, order:'list', label:'Drops containing '+shown+'.', empty:rows.length?null:('No drop uses '+shown+'.')};
+  }
+
   /* ---------- calendar helpers ---------- */
   function addDays(y,m,d,n){ var x=new Date(Date.UTC(y,m-1,d+n)); return {y:x.getUTCFullYear(), m:x.getUTCMonth()+1, d:x.getUTCDate()}; }
   function mdSet(m,d,spread){ var s={}; for(var i=-spread;i<=spread;i++){ var x=addDays(2020,m,d,i); s[x.m*100+x.d]=1; } return s; }
@@ -321,8 +366,33 @@
   function today(now){ var x=now||new Date(); return {y:x.getFullYear(), m:x.getMonth()+1, d:x.getDate()}; }
   function search(q, opts){
     opts=opts||{}; q=String(q||'');
-    var raw=q.trim(), info={q:raw, kind:'all', rows:R, label:'', note:'', nearest:null, numberDeltas:null, alt:null, used:[], fuzzy:null, captions:null, order:null, jump:null, empty:null};
-    if(!raw) return info;
+    var typed=q.trim();
+    var raw=typed.replace(/[?!.,;:]+$/,'');
+    var info={q:typed, kind:'all', rows:R, label:'', note:'', nearest:null, numberDeltas:null, alt:null, used:[], fuzzy:null, captions:null, order:null, jump:null, empty:null, hl:[]};
+    if(!typed) return info;
+    /* Questions: strip filler words, then AND the remaining terms through the same engine.
+       Recurses once with skipQuestionFix so plain queries in the inner call stay on the normal path. */
+    if(!opts.skipQuestionFix && looksLikeQuestion(typed)){
+      var cq=cleanQuestionQuery(raw);
+      if(cq){
+        var again=search(cq, Object.assign({}, opts, {skipQuestionFix:true}));
+        again.q=typed;
+        if(again.rows && again.rows.length){
+          if(norm(cq)!==norm(raw)) again.note='Showing drops for: '+prettyContent(cq);
+          return again;
+        }
+        var terms=cq.split(/\s+/).filter(Boolean);
+        if(terms.length>1){
+          var orInfo=orSearch(terms, opts, R);
+          if(orInfo.rows && orInfo.rows.length){
+            orInfo.q=typed;
+            orInfo.note='Showing drops for: '+prettyContent(cq);
+            orInfo.date=null; orInfo.nearest=null; orInfo.numberDeltas=null; orInfo.alt=null; orInfo.captions=null; orInfo.jump=null;
+            return orInfo;
+          }
+        }
+      }
+    }
     var lowq=norm(raw).trim();
 
     /* special lists */
@@ -430,6 +500,7 @@
 
   var API={build:build, search:search, etParts:etParts, etStats:etStats, parseDateQuery:parseDateQuery, parseNumber:parseNumber,
            nearestMD:nearestMD, numberDeltas:numberDeltas, fmtDay:fmtDay, fmtMD:fmtMD, today:today, addDays:addDays,
+           looksLikeQuestion:looksLikeQuestion, cleanQuestionQuery:cleanQuestionQuery,
            START:START, SYN:SYN, records:function(){ return R; }, byN:function(n){ return BYN[n]; }, MON:MON, MONF:MONF};
   root.TRDLedger=API;
   /* Build at once and re-date the heatmap stats to Eastern, so the calendar matches the list and the drop pages. */

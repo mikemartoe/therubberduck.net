@@ -61,12 +61,33 @@
     });
     return { q: q, total: found.length, items: items, xPosts: data.xPosts || 0, xHref: '/x/?q=' + encodeURIComponent(q), ready: true };
   }
+  function ledgerReturnHref() {
+    try {
+      var p = new URLSearchParams(location.search);
+      if (p.get('from') !== 'ledger') return '';
+      var lq = p.get('lq') || p.get('q') || '';
+      return '/ledger.html' + (lq ? '?q=' + encodeURIComponent(lq) : '');
+    } catch (e) { return ''; }
+  }
+  function ledgerBackRow() {
+    var href = ledgerReturnHref();
+    if (!href) return '';
+    return '<a class="tn-ledger-back" href="' + esc(href) + '">\u2190 Back to the Ledger</a>';
+  }
+  function ensureLedgerBackStyle() {
+    if (D.getElementById('tn-ledger-back-css')) return;
+    var st = D.createElement('style');
+    st.id = 'tn-ledger-back-css';
+    st.textContent = '.tn-res .tn-ledger-back{display:block;margin:0 0 8px;padding:8px 10px;border:1px solid #00ED39;border-radius:6px;color:#00ED39;text-decoration:none;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:12.5px}.tn-res .tn-ledger-back:hover{background:rgba(0,255,65,.08);color:#fff}';
+    (D.head || D.documentElement).appendChild(st);
+  }
   function run(raw) {
     var q = raw.trim(), b = box(), inp = $('tn-q');
     if (!b) return;
     if (q.length < 2) { close(); return; }
     if (!data) { msg('Loading the archive index\u2026'); load(); return; }
-    var res = hits(q), html = '';
+    var res = hits(q), html = ledgerBackRow();
+    if (html) ensureLedgerBackStyle();
     res.items.forEach(function (r) {
       html += '<a role="option" href="' + esc(r.href) + '"><span class="tn-k">' + esc(r.type) + '</span><span class="tn-t">' + esc(r.title) + '</span>' + (r.blurb ? '<span class="tn-d">' + esc(r.blurb) + '</span>' : '') + '</a>';
     });
