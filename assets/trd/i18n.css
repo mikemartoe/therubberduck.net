@@ -1,0 +1,19 @@
+/* Language switcher (footer) and Japanese typography. Loaded sitewide from the footer hook. */
+.sf-langs{margin:14px 0 0;padding:12px 0 0;border-top:1px solid rgba(251,243,224,.12);display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.sf-langs a{color:var(--muted,#c9b48e);text-decoration:none;font:600 13px/1.3 var(--body,Roboto,Helvetica,Arial,sans-serif)}
+.sf-langs a:hover,.sf-langs a:focus-visible{color:var(--ink,#fbf3e0);text-decoration:underline}
+.sf-langs a[aria-current="page"]{color:var(--ink,#fbf3e0)}
+.trd-i18n-note{margin:12px 0 0;font:400 13px/1.45 var(--body,Roboto,Helvetica,Arial,sans-serif);color:var(--muted,#c9b48e)}
+.trd-i18n-note a{color:inherit;text-decoration:underline}
+
+html[lang="ja"]{
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",sans-serif;
+  line-break:strict;
+  word-break:normal;
+  overflow-wrap:anywhere;
+}
+html[lang="ja"] .hello-h,html[lang="ja"] .hello-k,html[lang="ja"] .marquee,html[lang="ja"] h1,html[lang="ja"] h2{
+  line-break:strict;
+  word-break:normal;
+  overflow-wrap:anywhere;
+}

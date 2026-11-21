@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+  <meta name="google-site-verification" content="8a6ehKPZe7hekWevfNPr4EMw4DCTyvcX33ZrPpgtDI4" />
+<!-- e3:plan-override: This page is not the Drop Ledger (ledger.html keeps that plan). The homepage is a one-screen front room by explicit request: a welcome line, two stacks of cassette doors, the album as a cassette deck and the TRD Collectibles shop entrance, with no scroll on a laptop or PC. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" as="image" type="image/webp" href="/images/brand/duck-hero-soft-640.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="/assets/trd/fonts/Steelfish-Bd.woff2" crossorigin>
+<title>The Rubber Duck&trade; | Q-drops-archief, video’s, X Spaces, merch en boeken</title>
+<meta name="theme-color" content="#1a120c">
+<!-- Icons: Lucide — ISC — https://github.com/lucide-icons/lucide -->
+<style>
+/* ============ FACES (self-hosted, no CDN) ============ */
+@font-face{font-family:'Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('fonts/Steelfish%20Bd.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('/fonts/Roboto-Regular.woff2') format('woff2'),url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('/fonts/Roboto-Bold.woff2') format('woff2'),url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Roboto';src:url('/fonts/Roboto-Black.woff2') format('woff2'),url('fonts/Roboto-Black.ttf') format('truetype');font-weight:900;font-style:normal;font-display:swap}
+@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'TRD Oswald';src:url('/assets/trd/fonts/Oswald-VariableFont_wght.woff2') format('woff2'),url('/assets/trd/fonts/Oswald-VariableFont_wght.ttf') format('truetype');font-weight:200 700;font-display:swap}
+@font-face{font-family:'TRD Courier B';src:url('/assets/trd/fonts/CourierPrime-Bold.woff2') format('woff2'),url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Yellowtail';src:url('/assets/trd/fonts/Yellowtail-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Yellowtail-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+
+/* ============ TOKENS: warm, welcoming, vintage ============ */
+:root{
+  --bg:#1a120c;            /* warm walnut, not black */
+  --ink:#fbf3e0;
+  --ink-soft:#eadcbc;
+  --muted:#c9b48e;
+  --paper:#fbf4e3; --paper2:#f1e3c2;
+  --brown:#2e1f13; --brown2:#6b4a2c;
+  --mustard:#e3a82b; --mustard2:#c98a17; --orange:#e2652a; --red:#c8302b; --wood:#6b4325;
+  --display:'Steelfish','Arial Narrow',Impact,system-ui,sans-serif;
+  --body:'Roboto','Helvetica Neue',Arial,sans-serif;
+  --retro:'Bungee','Arial Black',Impact,sans-serif;
+  --script:'Yellowtail','Brush Script MT',cursive;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* below-the-fold regions: same look when scrolled into view, less first-paint work */
+#support, footer.site-foot, #trd-suggest{content-visibility:auto;contain-intrinsic-size:auto 700px}
+
+/* a warm lamp over the room instead of a red glare */
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(70% 55% at 38% 30%,rgba(255,196,110,.13) 0%,rgba(255,170,80,.05) 45%,transparent 75%),
+             radial-gradient(40% 40% at 85% 60%,rgba(227,168,43,.08) 0%,transparent 70%)}
+
+/* ============ THE ROOM: the duck, softly lit, in the background ============ */
+.room{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.room-duck{position:absolute;inset:6% 0;width:100%;height:88%;
+  background:url("/images/brand/duck-hero-soft-640.webp") 34% 50%/contain no-repeat;
+  opacity:.16;filter:sepia(.75) saturate(1.3) brightness(1.5) contrast(.8);
+  animation:roomDrift 48s var(--ease) infinite alternate;will-change:transform}
+@keyframes roomDrift{from{transform:scale(1)}to{transform:scale(1.025) translate3d(0,-1%,0)}}
+.haze{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 40%,rgba(26,18,12,0) 40%,rgba(18,12,8,.75) 100%)}
+
+/* ============ THE STAGE ============ */
+.stage{position:relative;z-index:2;width:100%;max-width:1240px;margin:0 auto;padding:22px 16px 28px;
+  display:grid;grid-template-columns:1fr;gap:22px}
+.hall{display:flex;flex-direction:column;gap:20px;min-width:0}
+.top{display:flex;flex-direction:column;gap:18px;min-width:0}
+
+/* ---- welcome ---- */
+.hello{margin:0;text-align:left;display:flex;flex-direction:column;min-width:0}
+.hello-k,.hello-h,.hello-s,.hello-sign{text-transform:none;font-variant:normal;font-variant-caps:normal}
+.hello-k::first-letter,.hello-h::first-letter,.hello-s::first-letter,.hello-sign::first-letter{text-transform:none;font-variant:normal;font-size:inherit;float:none}
+.hello-k{margin:0;font-family:var(--script);font-size:28px;line-height:1;color:var(--mustard);text-shadow:0 2px 10px rgba(0,0,0,.5);text-transform:none}
+.hello-h{margin:6px 0 0;font-family:var(--display);font-weight:700;font-size:40px;line-height:1.08;letter-spacing:.01em;color:var(--ink);text-transform:none;max-width:100%}
+.hello-s{margin:10px 0 0;font-size:16px;line-height:1.5;color:var(--ink-soft);text-transform:none;max-width:100%;overflow-wrap:break-word;word-wrap:break-word}
+.hello-sign{margin-top:16px;text-transform:none}
+.hello-s b{color:#ffd77a;font-weight:700}
+.hello-how{margin:12px 0 0;display:flex;align-items:center;gap:10px;font:700 14.5px/1.3 var(--body);color:#f3d48a}
+.hello-how svg{flex:none;width:18px;height:18px;color:var(--mustard)}
+.hello-how b{color:#fff}
+.hello-cta{margin:14px 0 0}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;padding:11px 20px 11px 16px;border-radius:999px;text-decoration:none;
+  background:linear-gradient(180deg,#d8392f,#a3231c);color:#fff;border:2px solid #ffd77a;font:700 16px/1 var(--body);letter-spacing:.02em;
+  box-shadow:0 6px 16px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.25);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.hero-cta svg{width:18px;height:18px;flex:none}
+.hero-cta small{font:600 12px/1 var(--body);color:#ffe1a8;opacity:.9}
+.hero-cta:hover,.hero-cta:focus-visible{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.6),0 0 0 2px #ffd77a,0 0 22px rgba(255,190,90,.4)}
+.hero-cta:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.hero-cta{transition:none}.hero-cta:hover{transform:none}}
+
+/* ============ THE TAPE DECK: The Red Pill Album as a cassette; press play and it becomes the player ============ */
+.deck{position:relative;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:8px;min-width:0;text-decoration:none;color:#222;
+  padding:10px 14px 12px;border-radius:10px;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),
+    linear-gradient(180deg,#d9d6cf 0%,#bdb8ae 55%,#a8a397 100%);
+  border-left:12px solid #5a3720;border-right:12px solid #5a3720;
+  box-shadow:0 0 0 2px #2e1f13,0 18px 36px rgba(0,0,0,.6),0 0 60px rgba(255,170,80,.14),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(0,0,0,.2);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.deck::before,.deck::after{content:"";position:absolute;top:0;bottom:0;width:12px;pointer-events:none;
+  background:repeating-linear-gradient(180deg,rgba(0,0,0,.18) 0 2px,transparent 2px 7px),linear-gradient(90deg,#4a2c17,#7a4c2c 50%,#4a2c17)}
+.deck::before{left:-12px;border-radius:10px 0 0 10px}
+.deck::after{right:-12px;border-radius:0 10px 10px 0}
+.deck:hover,.deck:focus-visible{transform:translateY(-3px);box-shadow:0 0 0 2px #2e1f13,0 0 0 5px var(--mustard),0 24px 44px rgba(0,0,0,.65),0 0 70px rgba(255,170,80,.25)}
+.deck-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font:700 11px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:#4a4237}
+.deck-top b{font-family:var(--retro);font-weight:400;letter-spacing:.06em;font-size:12.5px;color:#2e1f13}
+.deck-led{display:inline-flex;align-items:center;gap:6px}
+.deck-led i{width:8px;height:8px;border-radius:50%;background:#5a1410;box-shadow:inset 0 1px 1px rgba(0,0,0,.5)}
+.deck.is-playing .deck-led i{background:#ff3b33;box-shadow:0 0 6px #ff3b33,0 0 12px rgba(255,59,51,.6)}
+/* the cassette well (a size container, so the cassette keeps its shape at any size) */
+.deck-well{container-type:size;min-height:0;display:grid;place-items:center;border-radius:6px;padding:6px;
+  background:linear-gradient(180deg,#1b1714,#2a2420);box-shadow:inset 0 3px 10px rgba(0,0,0,.8),inset 0 0 0 1px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.5)}
+/* detached fly is momentary; deck stays the live player on this page */
+.deck.tpd-detached .deck-well{outline:none}
+
+/* the cassette: a standard Compact Cassette (100.4 x 63.8 mm), front view, worn from years in a glovebox.
+   All positions are % of the shell; type is in cqw so it scales, also while it flies into the player.
+   Regular-weight typewriter only (no bold). */
+.cas{container-type:inline-size;position:relative;display:block;width:min(100cqw,calc(100cqh * 1.5737));aspect-ratio:100.4/63.8;border-radius:3.2%/5%;
+  background:url('/assets/trd/img/cas-scratch.webp') center/100% 100% no-repeat,linear-gradient(160deg,#3a3633 0%,#211e1c 45%,#161412 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.14),inset 0 2px 0 rgba(255,255,255,.1),0 6px 16px rgba(0,0,0,.65);overflow:hidden;transition:transform .3s var(--ease);
+  font-family:'TRD Courier','Courier Prime','Courier New',monospace;font-weight:400}
+.deck:hover .cas,.deck:focus-visible .cas{transform:scale(1.015)}
+.cas i.sc{position:absolute;width:3.2%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#8d8a86 0 35%,#4e4b48 40% 100%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.5);z-index:2}
+.cas i.sc::after{content:"";position:absolute;left:20%;right:20%;top:46%;height:9%;background:#2a2826;transform:rotate(var(--r,20deg))}
+.cas i.s1{left:2.9%;top:5.5%}.cas i.s2{right:2.9%;top:5.5%;--r:-35deg}.cas i.s3{left:2.9%;bottom:5.5%;--r:70deg}.cas i.s4{right:2.9%;bottom:5.5%;--r:5deg}.cas i.s5{left:48.4%;bottom:7%;--r:-60deg}
+/* the paper label: faded print, rubbed edges, scuffs, top-right corner lifting */
+.cas-label{position:absolute;left:5%;right:5%;top:6.3%;height:67.4%;border-radius:1.2%/2.5%;
+  background:url('/assets/trd/img/rpa-label-aged.webp') center/100% 100% no-repeat,#d9c9a3;
+  box-shadow:inset 0 0 0 1px rgba(226,212,176,.25),inset 0 0 14px rgba(0,0,0,.45),0 0 0 .5px rgba(0,0,0,.5);
+  clip-path:polygon(0 0,93.5% 0,100% 13.5%,100% 100%,0 100%)}
+.cas-peel{position:absolute;right:5%;top:6.3%;width:5.85%;height:9.1%;z-index:1;pointer-events:none;
+  background:linear-gradient(225deg,transparent 0 49%,#e7dcc0 50%,#cdbb92 78%,#b9a57a 100%);clip-path:polygon(0 0,100% 100%,0 100%);
+  filter:drop-shadow(-1px 1px 1.5px rgba(0,0,0,.55))}
+.cas-head{position:absolute;left:3.5%;right:3.5%;top:3%;height:18%;display:flex;align-items:center;justify-content:space-between;gap:3%}
+.cas-art{display:flex;align-items:center;gap:1.6cqw;min-width:0}
+.cas-t{flex:none;font-size:5.4cqw;line-height:1;color:#efe7d6;letter-spacing:-.02em;white-space:nowrap;opacity:.92;text-shadow:0 0 1px rgba(0,0,0,.6)}
+.cas-pill{flex:none;display:block;width:15cqw;height:auto;filter:saturate(.8) brightness(.92) drop-shadow(0 1px 2px rgba(0,0,0,.7))}
+.cas-mark{flex:none;display:flex;flex-direction:column;align-items:center;gap:.6cqw;margin-right:3cqw}
+.cas-oval{display:flex;align-items:center;gap:.6cqw;padding:.4cqw 1.5cqw;border:.3cqw solid #cfc6b4;border-radius:50%;font-size:2.3cqw;line-height:1;color:#e9e1cf;letter-spacing:.06em}
+.cas-oval img{width:3.2cqw;height:auto;display:block;opacity:.9}
+.cas-cat{font-size:2cqw;line-height:1;color:#bfb6a5;letter-spacing:.08em}
+.cas-meta{position:absolute;left:18%;right:18%;top:22.5%;text-align:center;font-size:2.2cqw;line-height:1.1;letter-spacing:.06em;color:#d8cfbd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cas-side{position:absolute;left:2%;top:34%;width:14%;height:36%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e4dccb}
+.cas-side small{font-size:1.9cqw;line-height:1;letter-spacing:.1em}
+.cas-side b{font-family:'Yellowtail',cursive;font-weight:400;font-size:9cqw;line-height:.9;color:#f2eee4;transform:rotate(-8deg);opacity:.9;text-shadow:0 0 1px rgba(255,255,255,.3)}
+.cas-by{position:absolute;right:2%;top:44%;width:14%;text-align:center;font-size:1.9cqw;line-height:1.3;color:#bfb6a5;letter-spacing:.06em}
+.cas-list{position:absolute;left:3.5%;right:3.5%;bottom:3%;height:24%;display:grid;grid-template-columns:1.25fr 1fr;grid-auto-rows:1fr;column-gap:2.5%;align-content:center;
+  font-size:2.6cqw;line-height:1.2;color:#e6dece;letter-spacing:-.04em}
+.cas-list span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cas-list i{font-style:normal;color:#d8574b}
+/* the window: tape pack on two hubs, 42.5 mm apart */
+.cas-win{position:absolute;left:21%;width:58%;top:28.2%;height:26.6%;border-radius:999px;z-index:1;
+  background:linear-gradient(180deg,rgba(40,30,24,.92),rgba(15,12,10,.96));box-shadow:inset 0 0 0 1.5px #2e1f13,inset 0 2px 4px rgba(0,0,0,.6),0 0 0 2px rgba(10,8,6,.55);overflow:hidden}
+.cas-win::after{content:"";position:absolute;inset:0;background:linear-gradient(170deg,rgba(255,255,255,.2) 0 22%,transparent 22% 100%),url('/assets/trd/img/cas-scratch.webp') center/300% 300%}
+.cas-tape{position:absolute;left:30%;right:30%;top:22%;bottom:22%;background:linear-gradient(180deg,#5a3720,#3b2414);border-radius:3px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+.reel{position:absolute;top:50%;aspect-ratio:1;transform:translateY(-50%);border-radius:50%;background:radial-gradient(circle,transparent 0 46%,#4a2c17 47% 100%)}
+.reel.l{left:2%;width:30%}.reel.r{right:4%;width:22%}
+.reel b{position:absolute;inset:0;margin:auto;width:58%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,#1a1a1a 0 18%,transparent 19%),repeating-conic-gradient(#e0362b 0 30deg,#a8170f 30deg 60deg);
+  box-shadow:0 0 0 1.5px #f2b0a8;animation:reel 2.2s linear infinite;animation-play-state:paused}
+.reel.r b{width:80%}
+.deck.is-playing .reel b{animation-play-state:running}
+@keyframes reel{to{transform:rotate(-360deg)}}
+/* the raised head-access foot: 64 mm at the top, 74 mm at the base */
+.cas-foot{position:absolute;left:13.2%;right:13.2%;bottom:0;height:20%;clip-path:polygon(6.8% 0,93.2% 0,100% 100%,0 100%);
+  background:linear-gradient(180deg,#2c2826,#1a1715);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.cas-foot i{position:absolute;bottom:26%;width:5.5%;aspect-ratio:1;border-radius:50%;background:#050505;box-shadow:inset 0 1px 1px rgba(255,255,255,.15)}
+.cas-foot i:nth-child(1){left:12%}.cas-foot i:nth-child(2){left:30%;width:3.5%;border-radius:20%}.cas-foot i:nth-child(3){right:30%;width:3.5%;border-radius:20%}.cas-foot i:nth-child(4){right:12%}
+.deck-keys{display:flex;align-items:stretch;gap:6px}
+.key{flex:1;display:grid;place-items:center;min-height:34px;border-radius:4px 4px 6px 6px;color:#3a3530;
+  background:linear-gradient(180deg,#f2efe8,#cfcac0);box-shadow:0 3px 0 #8d877b,0 5px 8px rgba(0,0,0,.35),inset 0 1px 0 #fff}
+.key svg{width:16px;height:16px}
+.key-play{flex:3;display:flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;color:#fff;font:700 15px/1 var(--body);letter-spacing:.12em;text-transform:uppercase;
+  background:linear-gradient(180deg,#e2452b,#b8261d);box-shadow:0 3px 0 #6e130c,0 5px 10px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35);animation:playGlow 2.8s ease-in-out infinite}
+.key-play svg{width:18px;height:18px}
+@keyframes playGlow{0%,100%{box-shadow:0 3px 0 #6e130c,0 5px 10px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35)}50%{box-shadow:0 3px 0 #6e130c,0 5px 10px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35),0 0 18px 3px rgba(255,120,60,.55)}}
+.deck:hover .key-play,.deck:focus-visible .key-play{transform:translateY(2px);box-shadow:0 1px 0 #6e130c,0 3px 6px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.35)}
+.deck.is-live .key-play{animation:none}
+.key-play .kp-on{display:none}
+.deck.is-live .key-play .kp-off{display:none}.deck.is-live .key-play .kp-on{display:inline}
+
+/* ============ THE STACKS: every room as a cassette spine in its clear case ============ */
+.stacks{display:grid;grid-template-columns:1fr;gap:10px}
+.stack{display:grid;gap:10px;min-width:0}
+.spine{--off:0px;--rot:0deg;--lift:0px;position:relative;display:block;min-width:0;min-height:62px;padding:4px 5px;border-radius:3px;text-decoration:none;overflow:visible;
+  background:linear-gradient(180deg,rgba(255,255,255,.62) 0,rgba(255,255,255,.2) 3px,rgba(210,220,230,.10) 50%,rgba(255,255,255,.2) calc(100% - 3px),rgba(255,255,255,.55) 100%);
+  border:1px solid rgba(255,255,255,.38);box-shadow:0 3px 0 rgba(0,0,0,.35),0 8px 16px rgba(0,0,0,.42);
+  transform:translateX(var(--off)) translateY(var(--lift)) rotate(var(--rot));transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.spine::after{content:"";position:absolute;left:5px;right:5px;top:4px;height:30%;pointer-events:none;border-radius:1px;
+  background:linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0))}
+.spine:hover,.spine:focus-visible{transform:translateX(calc(var(--off) + 16px)) translateY(var(--lift)) rotate(calc(var(--rot) * .35));
+  box-shadow:0 3px 0 rgba(0,0,0,.35),0 12px 24px rgba(0,0,0,.5),0 0 0 2px var(--mustard),0 0 26px rgba(255,190,90,.3)}
+.sp{position:relative;display:flex;align-items:center;gap:12px;height:100%;min-height:52px;padding:4px 10px 4px 8px;border-radius:1px;overflow:hidden}
+.sp-cat{flex:none;writing-mode:vertical-rl;transform:rotate(180deg);font:700 9.5px/1 var(--body);letter-spacing:.12em;opacity:.85}
+.sp-ic{flex:none;width:42px;height:42px;border-radius:5px;object-fit:cover;display:block;box-shadow:0 0 0 2px currentColor,0 2px 5px rgba(0,0,0,.4);background:#2e1f13}
+.sp-t{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.sp-n{font-size:20px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-s{font:400 14px/1.2 var(--body);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.sp-end{flex:none;display:flex;align-items:center;gap:9px}
+.sp-mk{display:flex;flex-direction:column;align-items:center;gap:2px;font:700 7.5px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.sp-mk img{width:26px;height:22px;object-fit:contain;display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}
+.sp-go{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;transition:transform .2s var(--ease)}
+.sp-go svg{width:16px;height:16px}
+.spine:hover .sp-go,.spine:focus-visible .sp-go{transform:translateX(3px)}
+.start-tag{position:absolute;top:-11px;right:62px;z-index:2;padding:3px 10px 2px;border-radius:999px;background:var(--orange);color:#fff;
+  font:700 11.5px/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+
+/* six original 80s spines (no real artists, labels or marks) */
+/* 1 Videos: brushed chrome, heavy black italic, red pinstripes */
+.t1 .sp{background:linear-gradient(180deg,#f4f4f2,#c9c8c4 55%,#e2e1dd);color:#141414}
+.t1 .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(90deg,#c8302b 0 2px,transparent 2px 4px,#c8302b 4px 6px)}
+.t1 .sp-n{font-family:var(--body);font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:.02em}
+.t1 .sp-s{color:#3a3a3a}.t1 .sp-go{background:#141414;color:#fff}
+/* 2 The Listening Room: cream with red blocky letters */
+.t2 .sp{background:linear-gradient(180deg,#fbf4e3,#efe2c2);color:#c8202b}
+.t2 .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:#c8202b}
+.t2 .sp-n{font-family:var(--retro);font-size:17px;letter-spacing:.01em}
+.t2 .sp-s{color:#5a3a22}.t2 .sp-go{background:#c8202b;color:#fff}
+/* 3 SCI[F]: an 80s sunset rainbow */
+.t3 .sp{background:linear-gradient(90deg,#3c1f63 0%,#8d2a77 28%,#d9483f 55%,#f08a2c 78%,#f6c945 100%);color:#fff}
+.t3 .sp-n{font-family:var(--body);font-weight:900;font-style:italic;text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.t3 .sp-s{color:#fff3df;text-shadow:0 1px 2px rgba(0,0,0,.45)}.t3 .sp-go{background:rgba(255,255,255,.92);color:#5a1f4f}
+/* 4 The Drop Ledger: yellow condensed letters on black */
+.t4 .sp{background:linear-gradient(180deg,#151515,#050505);color:#ffd21f}
+.t4 .sp-n{font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:.06em;text-transform:uppercase}
+.t4 .sp-s{color:#efe5c8}.t4 .sp-go{background:#ffd21f;color:#111}
+/* 5 The Meme Dump: neon pink on midnight blue, cyan echo */
+.t5 .sp{background:linear-gradient(180deg,#1d2266,#121548);color:#ff5fae}
+.t5 .sp::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(84,220,255,.08) 0 1px,transparent 1px 16px)}
+.t5 .sp-n{font-family:var(--retro);font-size:17px;text-shadow:2px 2px 0 #23c3e6}
+.t5 .sp-s{color:#bfeeff}.t5 .sp-go{background:#ff5fae;color:#fff}
+/* 6 Twitter / X Archive: white with tall blue letters and a red-blue double stripe */
+.t6 .sp{background:linear-gradient(180deg,#ffffff,#e9e6de);color:#1f4fa0}
+.t6 .sp::before{content:"";position:absolute;right:0;top:0;bottom:0;width:7px;background:linear-gradient(90deg,#c8302b 0 3px,#fff 3px 4px,#1f4fa0 4px 7px)}
+.t6 .sp-n{font-family:var(--display);font-weight:700;font-size:25px;letter-spacing:.03em}
+.t6 .sp-s{color:#3d4656}.t6 .sp-go{background:#1f4fa0;color:#fff}
+/* hand-stacked, not machine-perfect — uneven offsets, slight lift, readable */
+.stack-a .spine:nth-child(1){--off:3px;--rot:-.7deg;--lift:3px}
+.stack-a .spine:nth-child(2){--off:14px;--rot:.85deg;--lift:-4px}
+.stack-a .spine:nth-child(3){--off:-9px;--rot:-.55deg;--lift:2px}
+.stack-b .spine:nth-child(1){--off:12px;--rot:.65deg;--lift:-3px}
+.stack-b .spine:nth-child(2){--off:-11px;--rot:-.9deg;--lift:5px}
+.stack-b .spine:nth-child(3){--off:8px;--rot:.5deg;--lift:-2px}
+
+/* ============ SPINE HOVER: upright aged Norelco J-card face (70×109) ============
+   In-spine .spine-face stays hidden forever (source only). One #trd-face-portal on
+   body paints the face — no reparent, no CSS hover flash, no ghost leftovers.
+   Desktop: the card is clickable (same as clicking its spine); touch: tap, tap again to enter.
+   A small badge on the card says what a click / tap does. Double-click / double-tap skips into the room. */
+.spine-face{
+  position:absolute;left:0;top:0;width:1px;height:1px;margin:0;padding:0;border:0;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  overflow:hidden;z-index:-1}
+.spine-face img{display:block;width:1px;height:1px}
+#trd-face-portal{
+  position:fixed;left:0;top:0;z-index:2147483640;
+  width:min(168px,44vw);max-width:200px;aspect-ratio:70/109;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transform:perspective(920px) rotateY(-3deg) rotateX(2deg) scale(.96);
+  transition:opacity .18s var(--ease),transform .28s var(--ease);
+  filter:drop-shadow(0 16px 28px rgba(0,0,0,.65));
+  margin:0;padding:0;border:0;background:transparent}
+#trd-face-portal.is-on{
+  opacity:1;visibility:visible;
+  transform:perspective(920px) rotateY(-3deg) rotateX(2deg) scale(1)}
+#trd-face-portal.is-open{pointer-events:auto;cursor:pointer}
+#trd-face-portal img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.28),0 0 0 2px rgba(30,20,10,.35);
+  pointer-events:none}
+/* the card is a target too: on PC as soon as it shows, on touch once it is open */
+@media (hover:hover) and (pointer:fine){#trd-face-portal.is-on{pointer-events:auto;cursor:pointer}}
+/* an invisible bridge from the card's bottom edge down to its own spine, so the pointer can travel
+   from the spine to the card without brushing the neighbouring spine in between */
+#trd-face-portal::after{content:"";position:absolute;left:0;right:0;top:100%;height:var(--tfp-bridge,0px)}
+/* the badge: a mustard cassette-label pill hung on the card's bottom edge, centred */
+#trd-face-portal .tfp-badge{position:absolute;left:50%;bottom:0;transform:translate(-50%,50%);z-index:1;
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;box-sizing:border-box;max-width:calc(100% + 24px);
+  padding:7px 13px 7px 15px;border-radius:999px;white-space:nowrap;pointer-events:none;
+  background:linear-gradient(180deg,#f2c35a,#e3a82b 55%,#cf931c);color:#2e1f13;border:1.5px solid #2e1f13;
+  font:700 12px/1 var(--body);letter-spacing:.09em;text-transform:uppercase;
+  box-shadow:0 0 0 1.5px rgba(246,223,160,.6),0 6px 14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,240,200,.65)}
+#trd-face-portal .tfp-badge svg{width:13px;height:13px;flex:none;transition:transform .18s var(--ease)}
+#trd-face-portal:hover .tfp-badge{background:linear-gradient(180deg,#ffe08f,#ffd77a 55%,#e8b546)}
+#trd-face-portal:hover .tfp-badge svg{transform:translateX(2px)}
+@media (max-width:720px), (hover:none), (pointer:coarse){
+  #trd-face-portal .tfp-badge{font-size:11px;letter-spacing:.07em;padding:6px 11px 6px 13px;gap:6px}
+  #trd-face-portal .tfp-badge svg{width:12px;height:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  #trd-face-portal,#trd-face-portal.is-on{transition:none;transform:none}
+  #trd-face-portal .tfp-badge svg,#trd-face-portal:hover .tfp-badge svg{transition:none;transform:none}
+}
+.stacks,.stack,.deck{overflow:visible}
+@media (min-width:900px) and (min-height:500px){
+  #trd-face-portal{width:min(230px,24vw);max-width:250px}
+  #trd-face-portal.is-deck{width:min(270px,28vw);max-width:290px}
+}
+@media (max-width:720px), (hover:none), (pointer:coarse){
+  #trd-face-portal{width:min(168px,44vw);max-width:200px}
+  #trd-face-portal.is-deck{width:min(180px,48vw);max-width:210px}
+}
+
+
+.shop{position:relative;display:flex;flex-direction:column;min-height:420px;border-radius:12px 12px 6px 6px;overflow:hidden;text-decoration:none;color:var(--brown);
+  /* brick facade */
+  background:
+    repeating-linear-gradient(0deg,rgba(40,18,10,.55) 0 2px,transparent 2px 22px),
+    repeating-linear-gradient(90deg,rgba(40,18,10,.45) 0 2px,transparent 2px 44px) 0 0/44px 44px,
+    repeating-linear-gradient(90deg,transparent 0 22px,rgba(40,18,10,.45) 22px 24px,transparent 24px 44px) 0 22px/44px 44px,
+    linear-gradient(180deg,#8a3b26,#73301f);
+  box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 2px #3b2414,0 0 0 5px var(--mustard2),0 0 70px rgba(255,180,80,.16);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.shop:hover,.shop:focus-visible{transform:translateY(-3px);box-shadow:0 24px 50px rgba(0,0,0,.6),0 0 0 2px #3b2414,0 0 0 5px var(--mustard),0 0 40px rgba(255,190,90,.25)}
+.shop-cornice{flex:none;height:14px;background:linear-gradient(180deg,#e9d8b0,#b89a62);border-bottom:3px solid #4a2c17}
+/* the sign board */
+.shop-sign{flex:none;margin:12px 16px 0;padding:10px 12px 11px;border-radius:6px;text-align:center;
+  background:linear-gradient(180deg,#3d2616,#2a190e);border:3px solid var(--mustard);box-shadow:0 0 0 2px #2a190e,0 6px 12px rgba(0,0,0,.45),inset 0 0 18px rgba(0,0,0,.6)}
+.shop-sign-pre{display:block;font-family:var(--script);font-size:20px;line-height:1;color:#ffd77a}
+.shop-sign-name{display:block;margin-top:3px;font-family:var(--retro);font-size:27px;line-height:1.05;color:#f6ecd4;letter-spacing:.01em;
+  text-shadow:0 2px 0 #c8302b,0 3px 0 #7a1d16,0 0 14px rgba(255,200,120,.25);white-space:nowrap}
+/* the awning: 70s stripes with a scalloped edge */
+.shop-awning{flex:none;position:relative;height:46px;margin:12px -4px 0;
+  background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 40%,rgba(255,255,255,.08) 70%,rgba(0,0,0,.12)),
+    repeating-linear-gradient(90deg,#c8302b 0 22px,#e2652a 22px 44px,#e3a82b 44px 66px,#7a4a24 66px 88px);
+  box-shadow:0 10px 14px -6px rgba(0,0,0,.6)}
+.shop-awning::after{content:"";position:absolute;left:0;right:0;top:100%;height:11px;
+  background:radial-gradient(circle at 11px 0,#a8401f 10.5px,transparent 11px) 0 0/22px 11px repeat-x;filter:drop-shadow(0 3px 2px rgba(0,0,0,.4))}
+/* the shopfront: window + door, in wood */
+.shop-front{flex:1;min-height:0;display:flex;gap:10px;margin:22px 16px 0;padding:10px;border-radius:4px 4px 0 0;
+  background:linear-gradient(90deg,#5a3720,#7a4c2c 20%,#6b4325 50%,#7a4c2c 80%,#5a3720);
+  box-shadow:inset 0 0 0 2px #3b2414,inset 0 3px 8px rgba(0,0,0,.4)}
+.shop-window{position:relative;flex:2.6;min-width:0;border-radius:3px;overflow:hidden;
+  background:radial-gradient(90% 70% at 50% 30%,#fff1c7 0%,#f2c873 40%,#b9772e 100%);
+  box-shadow:inset 0 0 0 3px var(--mustard2),inset 0 0 0 5px #3b2414,inset 0 10px 24px rgba(90,40,10,.45)}
+.shop-window::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;box-shadow:inset 0 0 0 3px var(--mustard2),inset 0 0 0 5px #3b2414,inset 0 8px 18px rgba(60,25,5,.4);
+  background:linear-gradient(115deg,rgba(255,255,255,.22) 0 9%,transparent 9% 22%,rgba(255,255,255,.1) 22% 25%,transparent 25%)}
+.shop-neon{position:absolute;z-index:3;top:5%;left:50%;transform:translateX(-50%);padding:3px 10px 1px;border:2px solid #ff5a8a;border-radius:10px;
+  font-family:var(--retro);font-size:26px;line-height:1.1;color:#fff;letter-spacing:.06em;
+  text-shadow:0 0 4px #fff,0 0 10px #ff4f7e,0 0 20px #ff2f63,0 0 34px #ff2f63;
+  box-shadow:0 0 8px #ff4f7e,0 0 18px rgba(255,47,99,.55),inset 0 0 8px rgba(255,79,126,.6);background:rgba(60,10,20,.25);
+  animation:neonHum 6s steps(1) infinite}
+@keyframes neonHum{0%,91%,94%,100%{opacity:1}92%,93.5%{opacity:.55}}
+.shop-in{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;filter:saturate(1.05) brightness(1.04)}
+/* real product mockups standing on the window sill, like a price-tagged display */
+.shop-cards{position:absolute;left:7%;right:7%;bottom:6%;height:22%;display:flex;justify-content:space-between;align-items:flex-end;container-type:size;z-index:1}
+.card{position:relative;flex:none;height:100cqh;width:auto;aspect-ratio:4/5;padding:4px 4px 13px;border-radius:4px;background:#fbf4e3;
+  border:2px solid var(--mustard);box-shadow:0 5px 10px rgba(60,25,5,.5)}
+.card img{display:block;width:100%;height:100%;object-fit:cover;border-radius:2px;background:#fff}
+.card::after{content:attr(data-name);position:absolute;left:0;right:0;bottom:2px;text-align:center;font:700 8.5px/1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:#7a1d16;white-space:nowrap}
+.card.c1{transform:rotate(-5deg)}
+.card.c2{transform:rotate(4deg)}
+.shop-shelf{position:absolute;left:0;right:0;bottom:0;height:8%;z-index:1;background:linear-gradient(180deg,#7a4c2c,#4a2c17);box-shadow:0 -3px 6px rgba(0,0,0,.25)}
+.shop-door{position:relative;flex:1;min-width:0;border-radius:3px;padding:8% 4.5% 0;
+  background:linear-gradient(90deg,#3e7a5f,#4f8f71 50%,#3e7a5f);box-shadow:inset 0 0 0 3px #2c5642,inset 0 0 0 5px #3b2414}
+.shop-door-glass{display:block;height:46%;border-radius:2px;position:relative;
+  background:linear-gradient(rgba(255,214,140,.12),rgba(255,214,140,.12)),url(assets/trd/img/shop-interior.webp) 92% 62%/auto 210% no-repeat,#e6b45e;box-shadow:inset 0 0 0 3px var(--mustard2)}
+.shop-door-glass::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.35) 0 14%,transparent 14%)}
+.shop-hang{position:absolute;left:50%;top:22%;transform:translateX(-50%) rotate(-3deg);padding:3px 7px 2px;background:#fbf4e3;border:2px solid var(--red);border-radius:3px;
+  font:700 11px/1.1 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--red);white-space:nowrap;box-shadow:0 2px 4px rgba(0,0,0,.35);z-index:1}
+.shop-hang::before{content:"";position:absolute;left:50%;bottom:100%;width:26px;height:12px;margin-left:-13px;border:1.5px solid #3b2414;border-bottom:0;border-radius:13px 13px 0 0}
+.shop-door-panel{display:block;height:24%;margin-top:9%;border-radius:2px;box-shadow:inset 0 0 0 2px #2c5642,inset 0 0 0 4px rgba(255,255,255,.12)}
+.shop-knob{position:absolute;right:9%;top:62%;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3c4,#e3a82b 50%,#8a5a12)}
+/* the step and the doormat line */
+.shop-step{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 8px;padding:10px 14px;
+  background:linear-gradient(180deg,#d9c7a2,#b9a47c);border-top:4px solid #8f7a55;border-radius:0 0 4px 4px}
+.shop-step-l{font:700 14.5px/1.2 var(--body);color:var(--brown);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.shop-step-go{flex:none;display:inline-flex;align-items:center;gap:6px;padding:7px 12px 7px 14px;border-radius:999px;background:var(--red);color:#fff;
+  font:700 14px/1 var(--body);box-shadow:0 3px 0 #7a1d16;transition:background .2s ease}
+.shop-step-go svg{width:16px;height:16px}
+.shop:hover .shop-step-go,.shop:focus-visible .shop-step-go{background:#e04a2c}
+.shop-walk{flex:none;height:10px;background:linear-gradient(180deg,#5c5148,#3a332d)}
+
+
+/* ---- Support the archive (after the room; on PC below the first screen) ---- */
+.support{position:relative;z-index:2;padding:40px 16px 48px;background:linear-gradient(180deg,rgba(14,10,7,0),rgba(14,10,7,.88) 60px,rgba(14,10,7,.94));}
+.sup-in{max-width:1240px;margin:0 auto}
+.sup-head{text-align:center;max-width:640px;margin:0 auto 26px}
+.sup-k{margin:0;font:400 26px/1 var(--script);color:var(--mustard)}
+.sup-h{margin:6px 0 0;font:700 44px/1 var(--display);letter-spacing:.01em;color:#fff}
+.sup-s{margin:10px 0 0;font-size:16px;line-height:1.45;color:var(--ink-soft,#d8cbb2)}
+.sup-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.sup-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:20px 14px 16px;border-radius:10px;text-decoration:none;color:#f6ecd4;overflow:hidden;
+  background:linear-gradient(180deg,#4d2c15,#2a170b);border:2px solid #e3a82b;box-shadow:0 8px 20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,220,150,.25);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.sup-card::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:repeating-linear-gradient(90deg,#C8302B 0 14px,#E2652A 14px 28px,#E3A82B 28px 42px,#7A4A24 42px 56px)}
+.sc-spon::before{background:repeating-linear-gradient(90deg,#1f4fa0 0 14px,#f1e3c2 14px 28px,#c8302b 28px 42px,#f1e3c2 42px 56px)}
+.sup-card:hover,.sup-card:focus-visible{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.7),0 0 0 2px #ffd77a,0 0 22px rgba(255,190,90,.35)}
+.sup-card:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
+.sc-art{height:104px;display:flex;align-items:center;justify-content:center;gap:6px;margin:4px 0 8px}
+.sc-art img{height:100%;width:auto;filter:drop-shadow(0 8px 10px rgba(0,0,0,.7))}
+.sc-shop .sc-art img{height:84px;border-radius:8px;background:#f3ead8}
+.sc-book .sc-art img{transform:rotate(-4deg)}
+.sc-bmc .sc-art img{height:88px}
+.sc-sign{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:150px;height:84px;border-radius:8px;border:2px solid #e3a82b;background:#2a170b;box-shadow:inset 0 0 0 3px #4d2c15}
+.sc-sign small{font:400 15px/1 var(--script);color:#ffd77a}
+.sc-sign b{font:400 15px/1.05 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14;text-transform:uppercase}
+.sc-k{font:400 18px/1.1 var(--script);color:#ffd77a}
+.sc-n{font:400 19px/1.1 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14}
+.sc-s{font:400 14.5px/1.35 var(--body);color:#e9dcc0;min-height:2.7em}
+.sc-go{margin-top:auto;padding-top:10px;font:700 14px/1 var(--body);color:#ffd77a;letter-spacing:.02em}
+.sc-go i{font-style:normal;display:inline-block;transition:transform .2s var(--ease)}
+.sup-card:hover .sc-go i{transform:translateX(3px)}
+@media (min-width:600px) and (max-width:899px){.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:599px){.support{padding:32px 16px 40px}.sup-h{font-size:38px}.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .sup-card{padding:16px 8px 14px}.sc-art{height:80px;margin-bottom:6px}.sc-shop .sc-art img{height:60px}.sc-bmc .sc-art img{height:68px}
+  .sc-sign{width:118px;height:66px}.sc-sign small{font-size:12px}.sc-sign b{font-size:12px}.sc-k{font-size:16px}.sc-n{font-size:15px}.sc-s{font-size:13px}.sc-go{font-size:13px}}
+@media (min-width:900px) and (min-height:500px){.support{padding:56px 0 64px}.sup-in{max-width:clamp(1240px,84vw,1640px);padding:0 24px;box-sizing:border-box}}
+@media (min-width:900px) and (max-width:1100px) and (min-height:500px){.sup-in{padding:0 16px}}
+@media (prefers-reduced-motion:reduce){.sup-card,.sc-go i{transition:none}.sup-card:hover{transform:none}}
+.sup-btd{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;margin:0 0 18px;padding:20px 22px 16px;border-radius:10px;text-decoration:none;color:#f6ecd4;overflow:hidden;
+  background:linear-gradient(180deg,#4d2c15,#2a170b);border:2px solid #e3a82b;box-shadow:0 8px 20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,220,150,.25);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.sup-btd::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:repeating-linear-gradient(90deg,#C8302B 0 14px,#E2652A 14px 28px,#E3A82B 28px 42px,#7A4A24 42px 56px)}
+.sup-btd:hover,.sup-btd:focus-visible{transform:translateY(-3px);box-shadow:0 12px 24px rgba(0,0,0,.7),0 0 0 2px #ffd77a,0 0 22px rgba(255,190,90,.35)}
+.sup-btd:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
+.btd-copy{display:flex;flex-direction:column;gap:4px;min-width:0;padding-top:4px}
+.btd-k{font:700 28px/1 var(--display);letter-spacing:.01em;color:#fff}
+.btd-s{font:400 16px/1.4 var(--body);color:#e9dcc0}
+.btd-go{margin-left:auto;flex:none;padding:10px 16px;border-radius:8px;font:700 15px/1 var(--body);color:#2a170b;background:#ffd77a;letter-spacing:.02em}
+.btd-go i{font-style:normal;display:inline-block;transition:transform .2s var(--ease)}
+.sup-btd:hover .btd-go i{transform:translateX(3px)}
+@media (max-width:599px){.sup-btd{padding:16px 14px 14px;flex-direction:column;align-items:stretch;text-align:center;gap:12px;margin-bottom:12px}.btd-k{font-size:24px}.btd-s{font-size:14px}.btd-go{margin:0;width:100%;text-align:center;box-sizing:border-box}}
+@media (prefers-reduced-motion:reduce){.sup-btd,.btd-go i{transition:none}.sup-btd:hover{transform:none}}
+/* ---- the suggestion line (desktop band) ---- */
+.band{display:none}
+
+
+:focus-visible{outline:3px solid #ffd77a;outline-offset:4px;border-radius:4px}
+
+
+:focus-visible{outline:3px solid #ffd77a;outline-offset:3px;border-radius:6px}
+
+/* ============ TABLETS / WIDE PHONES ============ */
+@media (min-width:600px){
+  .stacks{grid-template-columns:1fr 1fr;gap:18px}
+  .hello-h{font-size:46px}
+  .deck-well{height:360px}
+}
+
+/* ============ LAPTOP / PC (≥900×500): one screen, no scroll — separate from phone ============
+   Hall (left): the welcome and the tape deck share a row (same top and bottom edges); under them
+   two stacks of three cassette spines. The shop (right) spans the whole hall. Below everything a band
+   the height of the support duck: the floating player's resting spot (left), the suggestion line
+   (centre), the duck and the suggestion box (right). */
+@media (min-width:900px) and (min-height:500px){
+  body{display:flex;flex-direction:column;min-height:100vh;min-height:100svh}
+  body > .support,body > .site-foot{flex:none}
+  body > .banner,body > #trd-book,body > .trd-nav{flex:none}
+  #trd-suggest{display:none!important}
+  #trd-pod{height:0!important}
+  .stage{flex:none;height:calc(100vh - 170px);height:calc(100svh - 170px);min-height:0;max-width:clamp(1240px,84vw,1640px);padding:clamp(16px,2.6vh,34px) 24px 0;
+    grid-template-columns:minmax(0,1fr) clamp(330px,23.5vw,480px);grid-template-rows:minmax(0,1fr) clamp(114px,12.5vh,134px);
+    column-gap:clamp(28px,2.6vw,52px);row-gap:0}
+  body > #trd-book .trb-in{width:min(clamp(1240px,84vw,1640px),100%)}
+  .hall{gap:clamp(14px,2.2vh,26px);min-height:0}
+  .top{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) var(--deckw,minmax(0,1fr));gap:clamp(18px,1.8vw,30px);align-items:center}
+  .hello{justify-content:center}
+  .hello-k{font-size:clamp(24px,3.3vh,36px)}
+  .hello-h{font-size:clamp(30px,min(4.9vh,2.75vw),64px)}
+  .hello-s{font-size:clamp(15px,min(2vh,1.15vw),20px);margin-top:clamp(6px,1.2vh,14px)}
+  .hello-how{font-size:clamp(14px,min(1.85vh,1.05vw),18px);margin-top:clamp(8px,1.4vh,16px)}
+  .hello-cta{margin-top:clamp(8px,1.4vh,16px)}
+  .hero-cta{font-size:clamp(14px,min(1.9vh,1.1vw),19px);padding:clamp(8px,1.1vh,13px) clamp(16px,1.3vw,22px)}
+  .deck{align-self:center;height:fit-content;min-height:0;grid-template-rows:auto auto auto;padding:clamp(7px,1.1vh,14px) 14px clamp(9px,1.3vh,16px);gap:clamp(5px,.9vh,10px)}
+  .deck-well{height:auto;aspect-ratio:100.4/63.8;width:100%}
+  .key{min-height:clamp(30px,4.4vh,48px)}
+  .key-play{font-size:clamp(13.5px,1.8vh,17px)}
+  .stacks{grid-template-columns:1fr 1fr;gap:clamp(18px,1.8vw,30px)}
+  .stack{gap:clamp(10px,1.35vh,16px)}
+  .spine{height:clamp(58px,7.8vh,96px);min-height:0}
+  .sp{min-height:0}
+  .sp-ic{width:clamp(38px,5.2vh,62px);height:clamp(38px,5.2vh,62px)}
+  .sp-n{font-size:clamp(17px,min(2.5vh,1.3vw),27px)}
+  .t2 .sp-n,.t5 .sp-n{font-size:clamp(14.5px,min(2.1vh,1.07vw),23px)}
+  .t4 .sp-n,.t6 .sp-n{font-size:clamp(21px,min(3vh,1.55vw),33px)}
+  .t1 .sp-n,.t3 .sp-n{font-size:clamp(15.5px,min(2.25vh,1.13vw),25px)}
+  .sp-s{font-size:clamp(12.5px,min(1.75vh,.9vw),17px)}
+  .sp{gap:clamp(9px,.8vw,14px)}
+  .shop{min-height:0}
+  .shop-sign-name{font-size:clamp(19px,min(3.4vh,1.75vw),36px)}
+  .shop-sign-pre{font-size:clamp(17px,2.3vh,26px)}
+  .shop-awning{height:clamp(32px,5vh,58px)}
+  .shop-neon{font-size:clamp(20px,3.2vh,34px)}
+  .shop-step-l{font-size:clamp(13px,min(1.75vh,1vw),17px)}
+  .shop-step-go{font-size:clamp(13px,min(1.7vh,.98vw),16px)}
+  .card::after{font-size:clamp(8px,1.1vh,11px)}
+  .band{grid-column:1/-1;display:flex;align-items:center;justify-content:center;padding-bottom:6px}
+  .band-sug{-webkit-appearance:none;appearance:none;cursor:pointer;display:inline-flex;align-items:center;gap:12px;padding:11px 20px;border-radius:999px;
+    border:1.5px dashed rgba(227,168,43,.65);background:rgba(46,31,19,.72);color:var(--ink-soft);font:400 clamp(15px,1.9vh,18px)/1.2 var(--body);
+    transition:background .2s ease,border-color .2s ease}
+  .band-sug b{color:#ffd77a;font-weight:700}
+  .band-sug svg{width:20px;height:20px;color:var(--mustard)}
+  .band-sug:hover,.band-sug:focus-visible{background:rgba(70,46,26,.9);border-color:var(--mustard)}
+}
+
+/* mid-width laptops: slightly narrower shop so hall stays readable */
+@media (min-width:900px) and (max-width:1100px) and (min-height:500px){
+  .stage{grid-template-columns:minmax(0,1fr) clamp(240px,28vw,320px);max-width:100%;padding-left:16px;padding-right:16px}
+  .top{grid-template-columns:minmax(0,1.05fr) minmax(280px,var(--deckw,1fr));gap:clamp(12px,1.4vw,22px)}
+}
+
+/* shorter laptop screens (768-820px tall): give the cassette more room so its label reads */
+@media (min-width:900px) and (min-height:500px) and (max-height:920px){
+  .deck-top{display:none}
+  .deck{grid-template-rows:auto auto;padding-top:9px}
+  .deck-well{padding:4px}
+  .spine{height:clamp(54px,6.9vh,64px)}
+  .key{min-height:clamp(30px,3.8vh,36px)}
+  .sp-s{-webkit-line-clamp:1}
+}
+@media (min-width:900px) and (min-height:500px) and (max-height:820px){
+  .spine{height:clamp(54px,7.3vh,60px)}
+  .sp-ic{width:36px;height:36px}
+}
+/* very short laptop screens (stage under 516px, i.e. under ~720px tall, e.g. 1366x657 with browser bars):
+   the script below adds html.trd-rz and --rz = innerHeight / (header + 516px). The header, the book band and
+   the room then lay out exactly as at 720 tall and scale down together, so nothing is crushed or overlaps. */
+@media (min-width:900px) and (min-height:500px){
+  html.trd-rz body > .banner,html.trd-rz body > #trd-book,html.trd-rz .stage{zoom:var(--rz,1)}
+  html.trd-rz .stage{max-width:calc(clamp(1240px,84vw,1640px) / var(--rz,1))}
+}
+
+/* ============ PHONES ============
+   Stage padding-bottom clears the fixed duck + suggestion box when you scroll to the shop.
+   Deck/spine width reserve (so their chrome is not covered) is in the rules just below. */
+@media (max-width:599px){
+  .stage{padding:18px 14px calc(100px + env(safe-area-inset-bottom,0px));gap:24px}
+  .hello-k{font-size:26px}
+  .hello-h{font-size:32px;line-height:1.12}
+  .hello-s{font-size:15.5px;line-height:1.5}
+  .deck-well{height:auto;aspect-ratio:100/66}
+  /* mobile spines: cassette-case proportion (~100x64 shell → ~2.5:1 bar), not full-bleed CD width */
+  .stacks{gap:9px;width:min(100%,288px)!important;max-width:100%;margin-inline:auto}
+  .spine{min-height:0;height:40px;padding:2px 3px}
+  .sp{min-height:0;height:100%;gap:6px;padding:1px 6px 1px 4px}
+  .sp-ic{width:26px;height:26px;border-radius:3px;box-shadow:0 0 0 1.5px currentColor,0 1px 3px rgba(0,0,0,.4)}
+  .sp-cat{font-size:7.5px;letter-spacing:.1em}
+  .sp-n{font-size:13px}.t2 .sp-n,.t5 .sp-n{font-size:11.5px}.t4 .sp-n,.t6 .sp-n{font-size:15px}.t1 .sp-n,.t3 .sp-n{font-size:12px}
+  .sp-s{font-size:10px;-webkit-line-clamp:1}
+  .sp-go{width:22px;height:22px}
+  .sp-go svg{width:12px;height:12px}
+  .sp-mk{display:none}
+  .start-tag{top:-9px;right:28px;padding:2px 7px 1px;font-size:9.5px}
+  .shop{min-height:470px;margin:6px 2px 0}
+  .shop-sign-name{font-size:24px}
+  .room .duck{object-position:50% 50%;opacity:.14}
+}
+/* below the one-screen laptop layout: keep cassette deck and spines clear of the fixed duck +
+   suggestion box (reserve matches duck+box footprint; PC/laptop fine-pointer layout uses the band instead) */
+@media (max-width:480px){
+  .deck{width:calc(100% - 132px);max-width:100%;box-sizing:border-box}
+  .stacks{width:100%;max-width:100%;box-sizing:border-box}
+}
+@media (min-width:481px) and (max-width:1023px){
+  .deck{width:calc(100% - 156px);max-width:100%;box-sizing:border-box}
+  .stacks{width:100%;max-width:100%;box-sizing:border-box}
+}
+@media (min-width:900px) and (min-height:500px){
+  .deck{width:auto;max-width:none}
+  .stacks{width:auto;max-width:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .spine:hover,.spine:focus-visible{transform:translateX(var(--off,0px)) translateY(var(--lift,0px))}
+  .deck:hover,.shop:hover{transform:none}
+}
+
+/* ---- one rubber duck header — same as listening-room.html ---- */
+@font-face{font-family:'TRD Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'TRD Courier';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2'),url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+.banner{background:#000;color:#fff;position:relative;z-index:200;border-bottom:1px solid #2a1d10;box-shadow:0 1px 0 rgba(255,200,100,.18),0 10px 30px rgba(0,0,0,.7)}
+.banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
+.banner img{height:92px;width:auto;display:block}
+.banner .wm{font-family:'TRD Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;font-size:96px;line-height:.9;letter-spacing:-.01em;margin:0;white-space:nowrap}
+.banner .wm a{color:#fff;text-decoration:none}
+.banner .wm sup{font-size:.28em;vertical-align:1.6em;margin-left:2px}
+.banner .meta{display:flex;flex-direction:column;gap:6px;font-family:'TRD Courier','Courier Prime',monospace;font-size:15px;line-height:1.2}
+.banner .meta a{color:#ffe2a0}
+.banner .meta .handle{color:#b9ab8c}
+@media (max-width:760px){
+  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+  .banner img{height:62px}
+  .banner .wm{font-size:58px}
+  .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
+}
+
+/* ============ HOMEPAGE V2b (Oct 2026): book + duck left, two equal signs right ============ */
+.deck-well{position:relative}
+
+/* header: brand first. Wordmark centred, one sign each side (sponsor left, collectibles right) */
+.banner .banner-in.hb2{max-width:clamp(1240px,84vw,1640px);display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;
+  gap:clamp(14px,1.6vw,30px);padding:12px clamp(18px,1.8vw,32px)}
+.banner .banner-in > a.trd-shopsign{display:none!important}
+.hb-left{display:flex;align-items:center;justify-content:flex-end;gap:clamp(10px,1.4vw,26px);min-width:0}
+.hb-right{display:flex;align-items:center;justify-content:flex-start;gap:clamp(10px,1vw,18px);min-width:0}
+.banner a.logo-x{flex:none;display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none;border-radius:8px;transition:transform .25s var(--ease),filter .25s var(--ease)}
+.banner a.logo-x img{height:86px}
+.banner a.logo-x:hover,.banner a.logo-x:focus-visible{transform:translateY(-2px);filter:drop-shadow(0 0 12px rgba(255,215,122,.35))}
+.hb-cap{font:700 11px/1 var(--body);letter-spacing:.06em;color:#d8c49a;white-space:nowrap}
+.banner a.logo-x:hover .hb-cap,.banner a.logo-x:focus-visible .hb-cap{color:#ffd77a}
+/* the hardcover: bigger, lifted, a warm glow behind it, slightly overhanging the header */
+.banner a.hb-book{flex:none;display:block;position:relative;z-index:2;border-radius:4px;
+  transform:rotate(-4deg);transition:transform .3s var(--ease),filter .3s var(--ease);
+  filter:drop-shadow(0 16px 14px rgba(0,0,0,.9)) drop-shadow(0 0 3px rgba(255,215,122,.55)) drop-shadow(0 0 18px rgba(255,180,80,.38))}
+.banner a.hb-book::before{content:"";position:absolute;left:-30%;right:-30%;top:-10%;bottom:-6%;z-index:-1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(255,196,96,.30),rgba(255,160,60,.10) 60%,rgba(0,0,0,0))}
+.banner a.hb-book img{display:block;height:150px;width:auto;margin:-10px 0 -44px}
+.banner a.hb-book:hover,.banner a.hb-book:focus-visible{transform:translateY(-6px) rotate(-2deg) scale(1.05);
+  filter:drop-shadow(0 24px 20px rgba(0,0,0,.9)) drop-shadow(0 0 4px rgba(255,215,122,.7)) drop-shadow(0 0 26px rgba(255,190,90,.55))}
+/* the two header signs: same box, same edges */
+.hb-sign{--sw:clamp(168px,12.6vw,214px);--sh:88px;position:relative;flex:none;box-sizing:border-box;width:var(--sw);height:var(--sh);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:13px 10px 7px;border-radius:8px;text-decoration:none;text-align:center;overflow:hidden;
+  background:linear-gradient(180deg,#4d2c15,#2a170b);border:2px solid #E3A82B;
+  box-shadow:0 6px 16px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,220,150,.25),0 0 14px rgba(255,180,80,.16);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.hb-sign::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;
+  background:repeating-linear-gradient(90deg,#C8302B 0 14px,#E2652A 14px 28px,#E3A82B 28px 42px,#7A4A24 42px 56px)}
+.hb-spon::before{background:repeating-linear-gradient(90deg,#1f4fa0 0 14px,#f1e3c2 14px 28px,#c8302b 28px 42px,#f1e3c2 42px 56px)}
+.hb-sign-k{font:400 17px/1 var(--script);color:#FFD77A;white-space:nowrap}
+.hb-sign-n{font:400 18px/1.06 var(--retro);white-space:nowrap;letter-spacing:.02em;color:#F6ECD4;text-shadow:0 2px 0 #8a1c14}
+.hb-sign:hover,.hb-sign:focus-visible{transform:translateY(-2px);box-shadow:0 10px 20px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,220,150,.3),0 0 0 2px #ffd77a,0 0 22px rgba(255,190,90,.4)}
+.hb-sign:focus-visible{outline:3px solid #ffd77a;outline-offset:3px}
+@media (min-width:1400px) and (min-height:850px){.banner a.hb-book img{height:172px;margin:-6px 0 -70px}}
+@media (min-width:900px) and (max-width:1279px){
+  .banner .wm{font-size:clamp(66px,7.2vw,90px)}
+  .banner a.logo-x img{height:74px}
+  .banner a.hb-book img{height:128px;margin:-8px 0 -38px}
+  .hb-sign{--sw:clamp(132px,12.8vw,164px);--sh:80px;padding:12px 7px 6px}
+  .hb-sign-k{font-size:15px}.hb-sign-n{font-size:14.5px}
+}
+/* phones and small tablets: duck + wordmark, then book + the two signs */
+@media (max-width:899px){
+  .banner .banner-in.hb2{display:grid;grid-template-columns:auto auto;grid-template-areas:"x w" "b r";justify-content:center;align-items:center;gap:8px 12px;padding:12px 14px 14px}
+  .hb-left{display:contents}
+  .banner a.logo-x{grid-area:x}.banner .wm{grid-area:w}.banner a.hb-book{grid-area:b;justify-self:center}.hb-right{grid-area:r;justify-content:space-between;gap:8px}
+  .banner .banner-in.hb2{grid-template-columns:1fr 1fr;grid-template-areas:"w w" "l r";gap:8px}
+  .hb-left{display:flex;grid-area:l}.hb-right{grid-area:r}
+  .banner .banner-in.hb2 .wm{justify-self:center;text-align:center}
+  .hb-left .hb-sign,.hb-right .hb-sign{--sw:100%;flex:1 1 0}
+  .banner a.logo-x img{height:58px}
+  .hb-cap{font-size:9px;letter-spacing:.03em}
+  .banner a.hb-book img{height:82px;margin:-2px 0 -6px}
+  .hb-sign{--sw:calc(50% - 4px);--sh:66px;flex:1 1 0;padding:10px 4px 5px;gap:3px}
+  .hb-sign-k{font-size:14px}.hb-sign-n{font-size:13px}
+}
+@media (min-width:600px) and (max-width:899px){
+  .banner .wm{font-size:78px}
+  .banner a.logo-x img{height:72px}
+  .banner a.hb-book img{height:100px}
+  .hb-sign{--sh:80px}.hb-sign-k{font-size:16px}.hb-sign-n{font-size:16px}
+}
+@media (max-width:374px){.banner .wm{font-size:52px}.hb-sign-n{font-size:11.5px}}
+
+/* a spine may also be a <button> (an in-page action instead of a link): same look as the link spines */
+button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;margin:0;width:100%}
+}
+/* 600-1279px wide (tablets, small laptops): tape titles were cut off ("PERSON...", "PRIVATE THEAT...").
+   Here only: drop the tiny brand mark (as on phones), tighten the gaps and let the title size follow the width.
+   Phones (under 600px) and 1280px+ are untouched. */
+@media (min-width:600px) and (max-width:1279px){
+  .spine .sp-mk{display:none}
+  .spine .sp-end{gap:0}
+}
+@media (min-width:600px) and (max-width:899px){
+  .spine .sp{gap:9px}
+  .stacks .sp-ic{width:38px;height:38px}
+  .stacks .sp-n{font-size:clamp(13px,2.3vw,20px)}
+  .stacks .t2 .sp-n,.stacks .t5 .sp-n{font-size:clamp(11.5px,1.9vw,17px)}
+  .stacks .t4 .sp-n,.stacks .t6 .sp-n{font-size:clamp(15px,2.9vw,25px)}
+  .stacks .t1 .sp-n,.stacks .t3 .sp-n{font-size:clamp(12px,2.15vw,20px)}
+}
+@media (min-width:900px) and (max-width:1279px) and (min-height:500px){
+  .spine .sp{gap:clamp(7px,.7vw,12px)}
+  .stacks .t2 .sp-n,.stacks .t5 .sp-n{font-size:clamp(12px,min(2.1vh,1.25vw),23px)}
+  .stacks .t1 .sp-n,.stacks .t3 .sp-n{font-size:clamp(13px,min(2.25vh,1.3vw),25px)}
+  .spine .sp-ic{width:min(clamp(38px,5.2vh,62px),4.4vw);height:min(clamp(38px,5.2vh,62px),4.4vw)}
+}
+@media (prefers-reduced-motion:reduce){
+  .banner a.hb-book,.banner a.hb-book:hover,.hb-sign{transition:none}
+}
+
+/* ===== PREVIEW ONLY (2026-10-26): red Sony WM-10 Super Walkman replaces the drawn tape deck visual.
+   The cassette (#podCas) still sits in .deck-well, seen through the Walkman's window, so the reels,
+   the PRESS PLAY flight to the player keeps working. ===== */
+.deck{background:none;box-shadow:none;padding:0!important;border:0!important;border-radius:0;gap:clamp(6px,1vh,10px)}
+.deck::before,.deck::after{display:none}
+.deck-top{display:none}
+.deck:hover,.deck:focus-visible{box-shadow:none;transform:translateY(-3px)}
+.deck-well{position:relative;display:block;width:100%;height:auto!important;aspect-ratio:2000/1324!important;padding:0!important;border-radius:0;
+  background:none;box-shadow:none;filter:drop-shadow(0 14px 22px rgba(0,0,0,.55)) drop-shadow(0 3px 5px rgba(0,0,0,.45));transition:filter .25s var(--ease)}
+.deck:hover .deck-well,.deck:focus-visible .deck-well{filter:drop-shadow(0 18px 30px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(255,170,80,.28))}
+.deck:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
+/* dark smoked glass behind the tape */
+.deck-well::before{content:"";position:absolute;left:17.8%;width:48.5%;top:15.56%;height:40.48%;border-radius:.6cqw;background:#0e0d0f;z-index:0}
+/* the tape is as big as the player: it fills the Walkman's whole black door, from just under the lid's top edge
+   to the red body, uniformly scaled (never stretched); only ~1.1% of the shell's outer edge is trimmed each side.
+   It sits above the Walkman art, under a light glass smoke and sheen. Door in well units: y .8-40.4cqw. */
+.deck-well .cas{position:absolute;left:14.39cqw;top:.8cqw;width:62.32cqw;z-index:3;clip-path:inset(0 1.14% 0 1.14% round .8cqw)}
+/* the Walkman's black door, repainted plain above the art so the side labels don't peek out beside the tape */
+.deck-well::before{left:0;top:0;width:100%;height:100%;border-radius:0;z-index:3;
+  background:linear-gradient(180deg,#2b2b2e 0,#1c1c1f 14%,#151517 60%,#101012 100%);
+  clip-path:polygon(15.2% 1.2%,85.9% 1.2%,76.0% 60.6%,6.0% 60.6%)}
+/* glass over the tape: light smoke and one soft sheen, so it reads as inside the door, not stuck on top */
+.deck-well .cas::after{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(115deg,rgba(255,255,255,0) 0 30%,rgba(255,255,255,.07) 30% 44%,rgba(255,255,255,0) 44% 100%),linear-gradient(rgba(10,10,14,.12),rgba(10,10,14,.12))}
+.deck:hover .deck-well .cas,.deck:focus-visible .deck-well .cas{transform:none}
+/* the Walkman itself, glass window cut out (with a light smoke and sheen) */
+.deck-well::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:url(/walkman/walkman-window-1000.webp) center/100% 100% no-repeat}
+.deck-keys{position:relative;z-index:4} /* keep the keys above the Walkman's drop shadow */
+
+/* ===== Mission button + closeable pop-up (Mike, 2026-11-21). Intro copy stays in the dialog for SEO. ===== */
+.hello-h{margin:0}
+.hello-btn{-webkit-appearance:none;appearance:none;display:inline-block;margin:0;max-width:100%;
+  padding:10px 22px 8px;border-radius:6px;cursor:pointer;font:inherit;letter-spacing:inherit;line-height:inherit;
+  color:var(--ink);text-transform:inherit;text-align:center;text-wrap:balance;
+  background:linear-gradient(180deg,#3a2616,#1f140c);
+  border:2px solid var(--mustard);
+  box-shadow:0 2px 0 #6e4a0d,0 6px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,220,170,.22);
+  text-shadow:0 2px 10px rgba(0,0,0,.5);
+  transition:background .2s var(--ease),box-shadow .2s var(--ease),transform .15s var(--ease)}
+.hello-btn:hover,.hello-btn:focus-visible{background:linear-gradient(180deg,#4a321c,#2a190e);
+  box-shadow:0 0 0 2px #2e1f13,0 0 0 5px var(--mustard),0 8px 22px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,220,170,.28)}
+.hello-btn:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
+.hello-btn:active{transform:translateY(1px)}
+.mk-b .hello{padding:0 6px}
+.mk-b .hello-h{font-size:clamp(26px,6.4vw,45px);line-height:1.08}
+@media (min-width:900px){
+  .mk-b{padding-top:12px;padding-bottom:24px;gap:12px}
+  .mk-b .hello-h{font-size:clamp(36px,3.2vw,48px)}
+  .hello-btn{padding:12px 28px 10px}
+}
+@media (max-width:599px){
+  .hello-btn{padding:9px 14px 7px}
+  .mk-b .hello-h{font-size:clamp(22px,7.2vw,30px)}
+}
+
+.mission-dlg{padding:0;border:0;background:transparent;color:var(--ink);
+  width:min(720px,calc(100vw - 28px));max-width:calc(100vw - 28px);
+  max-height:min(88vh,900px);overflow:auto;overscroll-behavior:contain}
+.mission-dlg::backdrop{background:rgba(8,5,3,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.mission-dlg-card{position:relative;margin:0;padding:36px 32px 32px;border-radius:8px;
+  background:linear-gradient(180deg,#2a1b10,#1a110a 70%,#140c08);
+  border:2px solid var(--mustard);
+  box-shadow:0 0 0 2px #2e1f13,0 24px 50px rgba(0,0,0,.7),0 0 40px rgba(227,168,43,.16);
+  text-align:center}
+.mission-dlg-h{margin:0 0 6px;padding:0 36px;font-family:var(--display);font-weight:700;font-size:clamp(26px,5vw,42px);
+  line-height:1.08;letter-spacing:.01em;color:var(--mustard);text-shadow:0 2px 10px rgba(0,0,0,.5);text-wrap:balance}
+.mission-dlg .hello-s{margin:12px 0 0;font-size:clamp(15px,2.1vw,17.5px);line-height:1.5;color:var(--ink-soft);text-align:left;max-width:46em}
+.mission-dlg .hello-sign{margin-top:18px;text-align:center}
+.mission-dlg-x{-webkit-appearance:none;appearance:none;position:absolute;top:6px;right:6px;z-index:1;
+  width:44px;height:44px;margin:0;padding:0;border:0;border-radius:6px;background:transparent;cursor:pointer;
+  color:var(--mustard);font:700 32px/1 var(--body)}
+.mission-dlg-x:hover{color:#ffd77a;background:rgba(227,168,43,.12)}
+.mission-dlg-x:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+@media (max-width:599px){
+  .mission-dlg{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:88vh}
+  .mission-dlg-card{padding:32px 16px 22px}
+  .mission-dlg-h{padding:0 28px;font-size:clamp(22px,8vw,30px)}
+  .mission-dlg .hello-s{font-size:15px;margin-top:10px}
+}
+</style>
+<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d"></noscript>
+<script src="/assets/trd/suggest.js?v=20261103d" defer data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/bookbanner.css" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/bookbanner.css"></noscript>
+<script src="/assets/trd/bookbanner.js" defer data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/duckpod.css?v=2d" data-trd-keep>
+<script src="/assets/trd/duckpod.js?v=20261112b" defer data-trd-keep></script>
+<script src="/assets/trd/track.js" defer data-trd-keep></script>
+<script src="/assets/trd/visit.js?v=20261025s1" defer data-trd-keep></script>
+<!-- SEO and share preview -->
+<meta name="description" content="Welcome, curious minds. The Rubber Duck&#x27;s open archive of the Q era: every Q drop, videos, X Spaces, PDF’s, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.">
+<link rel="canonical" href="https://therubberduck.net/nl/">
+<link rel="alternate" hreflang="en" href="https://therubberduck.net/">
+<link rel="alternate" hreflang="en-AU" href="https://therubberduck.net/en-au/">
+<link rel="alternate" hreflang="es" href="https://therubberduck.net/es/">
+<link rel="alternate" hreflang="fr-FR" href="https://therubberduck.net/fr/">
+<link rel="alternate" hreflang="fr-CA" href="https://therubberduck.net/fr-ca/">
+<link rel="alternate" hreflang="de" href="https://therubberduck.net/de/">
+<link rel="alternate" hreflang="nl-NL" href="https://therubberduck.net/nl/">
+<link rel="alternate" hreflang="ja" href="https://therubberduck.net/ja/">
+<link rel="alternate" hreflang="x-default" href="https://therubberduck.net/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Rubber Duck&trade;">
+<meta property="og:title" content="The Rubber Duck&trade; | Q-drops-archief, video’s, X Spaces, merch en boeken">
+<meta property="og:description" content="Welcome, curious minds. The Rubber Duck&#x27;s open archive of the Q era: every Q drop, videos, X Spaces, PDF’s, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.">
+<meta property="og:url" content="https://therubberduck.net/">
+<meta property="og:image" content="https://therubberduck.net/images/brand/room-home-20261103.jpg?v=20261103">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Rubber Duck homepage as it looks today: the Walkman loaded with The Red Pill Album, the six room tapes, and the TRD Collectibles shop front.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TheRubberDuck79">
+<meta name="twitter:creator" content="@TheRubberDuck79">
+<meta name="twitter:title" content="The Rubber Duck&trade; | Q-drops-archief, video’s, X Spaces, merch en boeken">
+<meta name="twitter:description" content="Welcome, curious minds. The Rubber Duck&#x27;s open archive of the Q era: every Q drop, videos, X Spaces, PDF’s, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.">
+<meta name="twitter:image" content="https://therubberduck.net/images/brand/room-home-20261103.jpg?v=20261103">
+<meta name="twitter:image:alt" content="The Rubber Duck homepage as it looks today: the Walkman loaded with The Red Pill Album, the six room tapes, and the TRD Collectibles shop front.">
+<!-- seo:begin -->
+<link rel="preconnect" href="https://therubberduck.goatcounter.com" crossorigin>
+<link rel="preconnect" href="https://gc.zgo.at" crossorigin>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://therubberduck.net/#org","name":"The Rubber Duck","alternateName":["TRD","The Rubber Duck™","TRD Collectibles"],"url":"https://therubberduck.net/","logo":{"@type":"ImageObject","url":"https://therubberduck.net/favicon-192.png","width":192,"height":192},"image":"https://therubberduck.net/images/brand/trd-share-home-20261029.jpg","description":"An open archive of Trump and Q-era research: every Q drop, videos, X Spaces, PDFs, memes and the X archive, plus TRD Collectibles and the book anon mission.","sameAs":["https://x.com/TheRubberDuck79","https://x.com/TheRubberDuck78","https://rumble.com/user/TheRubberDuck78","https://rubberduck41.gumroad.com/","https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4","https://music.apple.com/us/album/the-red-pill-album/1896233683"]},{"@type":"WebSite","@id":"https://therubberduck.net/#website","url":"https://therubberduck.net/","name":"The Rubber Duck","alternateName":["TRD","therubberduck.net"],"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage": "nl-NL","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://therubberduck.net/ledger.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"WebPage","@id":"https://therubberduck.net/#page","url":"https://therubberduck.net/","name":"The Rubber Duck™ | Q Drops Archive, Videos, X Spaces, Merch and Books","description":"Welcome, curious minds. The Rubber Duck's open archive of the Q era: every Q drop, videos, X Spaces, PDFs, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage": "nl-NL","breadcrumb":{"@id":"https://therubberduck.net/#crumbs"},"about":{"@id":"https://therubberduck.net/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"}],"@id":"https://therubberduck.net/#crumbs"},{"@type":["Book","Product"],"@id":"https://therubberduck.net/book/anon-mission/#book","name":"anon mission, Volume 1","alternateName":"anon mission or all you need to know about q - and how they made you afraid to ask","description":"anon mission or all you need to know about q - and how they made you afraid to ask. A polished, printable PDF by The Rubber Duck.","author":{"@id":"https://therubberduck.net/#org"},"publisher":{"@id":"https://therubberduck.net/#org"},"brand":{"@type":"Brand","name":"The Rubber Duck"},"bookFormat":"https://schema.org/EBook","inLanguage": "nl-NL","url":"https://therubberduck.net/book/anon-mission/","image":"https://therubberduck.net/assets/trd/img/anon-mission-book-face@2x.webp","sameAs":"https://rubberduck41.gumroad.com/l/ttmhx","offers":{"@type":"Offer","url":"https://rubberduck41.gumroad.com/l/ttmhx","price":"19.99","priceCurrency":"USD","availability":"https://schema.org/InStock","seller":{"@id":"https://therubberduck.net/#org"}}},{"@type":"ItemList","name":"Rooms at The Rubber Duck","itemListElement":[{"@type":"SiteNavigationElement","position":1,"name":"Video Room","url":"https://therubberduck.net/videos.html"},{"@type":"SiteNavigationElement","position":2,"name":"Listening Room","url":"https://therubberduck.net/listening-room.html"},{"@type":"SiteNavigationElement","position":3,"name":"The Drop Ledger","url":"https://therubberduck.net/ledger.html"},{"@type":"SiteNavigationElement","position":4,"name":"The Meme Dump","url":"https://therubberduck.net/memes.html"},{"@type":"SiteNavigationElement","position":5,"name":"SCI[F]","url":"https://therubberduck.net/pdfs.html"},{"@type":"SiteNavigationElement","position":6,"name":"Executive Order Library","url":"https://therubberduck.net/eo-library/"},{"@type":"SiteNavigationElement","position":7,"name":"Twitter / X Archive","url":"https://therubberduck.net/x/"},{"@type":"SiteNavigationElement","position":8,"name":"Red Pill Album","url":"https://therubberduck.net/album.html"},{"@type":"SiteNavigationElement","position":9,"name":"TRD Collectibles","url":"https://therubberduck.net/merch.html"}]}]}</script>
+<!-- seo:end -->
+<link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261121f">
+<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" media="print" onload="this.media='all'" data-trd-keep><noscript><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a"></noscript><script src="/assets/trd/pwa.js?v=20261121a" defer data-trd-keep></script>
+<style id="home-shelf-css">
+/* ===== The cassette tower: a matte black, 3D-printed open-front case (CSS only) =====
+   Viewed from slightly above and to the left: top surface + left side face visible, front is an open frame.
+   Cassettes in clear Norelco cases are stacked flat inside and stick out past the right end, staggered. */
+.tcase{--D:14px;--wall:16px;--lid:16px;--base:14px;--prot:24px;--sh:50px;--gap:4px;
+  position:relative;width:100%;margin:0 auto;padding:calc(var(--D) + var(--lid) + 6px) 0 calc(var(--base) + 4px) calc(var(--D) + var(--wall) - 6px);
+  isolation:isolate}
+.tcase .tc-shell{position:absolute;left:0;top:0;bottom:0;right:var(--prot);z-index:0;pointer-events:none;
+  filter:drop-shadow(0 22px 22px rgba(0,0,0,.6)) drop-shadow(0 4px 4px rgba(0,0,0,.5))}
+/* top surface, with faint print layer lines running front to back */
+.tc-top{position:absolute;left:0;top:0;right:0;height:var(--D);clip-path:polygon(0 0,calc(100% - var(--D)) 0,100% 100%,var(--D) 100%);
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.06) 0 1px,rgba(0,0,0,.12) 1px 2px),linear-gradient(180deg,#2c2c2e,#3a3a3d)}
+/* left side face (darkest: away from the light) */
+.tc-side{position:absolute;left:0;top:0;bottom:0;width:var(--D);clip-path:polygon(0 0,100% 100%,100% 100%,100% 100%,0 calc(100% - var(--D)));
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),linear-gradient(90deg,#0b0b0c,#18181a)}
+.tc-side{clip-path:polygon(0 0,100% var(--D),100% 100%,0 calc(100% - var(--D)))}
+/* the front: an open frame (lid, left wall, base) around the dark bay */
+.tc-front{position:absolute;left:var(--D);top:var(--D);right:0;bottom:0;border-radius:3px 4px 4px 3px;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 2.5px),linear-gradient(180deg,#232325,#141415 60%,#0e0e0f);
+  box-shadow:inset 1px 1px 0 rgba(255,255,255,.16),inset -1px -1px 0 rgba(0,0,0,.6)}
+.tc-bay{position:absolute;left:calc(var(--D) + var(--wall));top:calc(var(--D) + var(--lid));right:0;bottom:var(--base);
+  background:linear-gradient(180deg,#060606,#101011 70%,#1a1a1b);
+  box-shadow:inset 10px 10px 18px rgba(0,0,0,.9),inset 0 -2px 0 rgba(255,255,255,.05)}
+/* soft highlight along the lid's front edge and the wall's front edge (rounded print edges catching the lamp) */
+.tc-hl{position:absolute;left:var(--D);top:var(--D);right:0;height:3px;border-radius:3px;background:linear-gradient(90deg,rgba(255,255,255,.05),rgba(255,236,200,.28) 30%,rgba(255,255,255,.08));filter:blur(.4px)}
+.tc-hl2{position:absolute;left:var(--D);top:var(--D);bottom:0;width:2px;background:linear-gradient(180deg,rgba(255,236,200,.25),rgba(255,255,255,.04))}
+.tc-hl3{position:absolute;left:calc(var(--D) + var(--wall));right:0;bottom:var(--base);height:1px;background:rgba(255,255,255,.12)}
+/* table shadow */
+.tcase::after{content:"";position:absolute;z-index:-1;left:2%;right:4%;bottom:-10px;height:24px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.65),transparent);pointer-events:none}
+
+/* the stack of tapes */
+.tc-tapes{position:relative;z-index:1;display:flex;flex-direction:column;gap:var(--gap)}
+.tcase .spine{--off:0px;--rot:0deg;--lift:0px;height:var(--sh);min-height:0;margin:0;padding:4px 18px 4px 6px;border-radius:2px;
+  background:linear-gradient(180deg,rgba(255,255,255,.7) 0,rgba(255,255,255,.22) 3px,rgba(200,215,230,.10) 50%,rgba(255,255,255,.18) calc(100% - 4px),rgba(255,255,255,.6) 100%);
+  border:1px solid rgba(255,255,255,.45);
+  box-shadow:0 2px 0 rgba(0,0,0,.55),0 6px 10px rgba(0,0,0,.55),inset 0 0 0 1px rgba(0,0,0,.25)}
+/* hinge end of the Norelco case: smoky clear plastic with the dark cassette shell behind it */
+.tcase .spine::before{content:"";position:absolute;right:2px;top:3px;bottom:3px;width:13px;border-radius:1px 2px 2px 1px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,.35) 0 1px,rgba(30,30,32,.85) 1px 45%,rgba(60,60,64,.8) 70%,rgba(255,255,255,.45) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+.tcase .spine::after{left:6px;right:18px;top:4px;height:34%}
+.tcase .sp{min-height:0;height:100%;gap:9px;padding:2px 8px 2px 6px}
+.tcase .sp-ic{width:34px;height:34px;border-radius:4px;box-shadow:0 0 0 1.5px currentColor,0 1px 3px rgba(0,0,0,.4)}
+.tcase .sp-cat{font-size:8px;letter-spacing:.1em}
+.tcase .sp-t{gap:2px}
+.tcase .sp-n{font-size:17.5px}
+.tcase .t2 .sp-n,.tcase .t5 .sp-n{font-size:14.5px}
+.tcase .t4 .sp-n,.tcase .t6 .sp-n{font-size:22px}
+.tcase .t1 .sp-n,.tcase .t3 .sp-n{font-size:16px}
+.tcase .sp-s{font-size:12.5px;-webkit-line-clamp:1}
+.tcase .sp-mk{display:none}
+.tcase .sp-go{width:26px;height:26px}.tcase .sp-go svg{width:14px;height:14px}
+.tcase .start-tag{top:-10px;right:46px;padding:2px 8px 1px;font-size:10px;z-index:3}
+/* stacked by hand: each case sits a little in or out */
+.tc-tapes .spine:nth-child(1){--off:-6px}
+.tc-tapes .spine:nth-child(2){--off:-3px}
+.tc-tapes .spine:nth-child(3){--off:-13px}
+.tc-tapes .spine:nth-child(4){--off:-1px}
+.tc-tapes .spine:nth-child(5){--off:-10px}
+.tc-tapes .spine:nth-child(6){--off:0px}
+.tc-tapes .spine:nth-child(7){--off:-7px}
+.tc-tapes .spine:nth-child(8){--off:-4px}
+.tc-tapes .spine:nth-child(9){--off:-9px}
+.tcase .spine:hover,.tcase .spine:focus-visible{transform:translateX(calc(var(--off) + 10px))}
+/* the slot caption under the case */
+.tc-cap{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;font:700 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#f3d48a}
+.tc-cap i{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(227,168,43,.6))}
+.tc-cap i:last-child{background:linear-gradient(90deg,rgba(227,168,43,.6),transparent)}
+
+/* wood tabletop the case stands on */
+.wood{background:
+   repeating-linear-gradient(92deg,rgba(60,30,10,.0) 0 18px,rgba(60,30,10,.18) 18px 19px,rgba(255,220,170,.05) 19px 31px,rgba(60,30,10,.12) 31px 32px),
+   repeating-linear-gradient(88deg,rgba(255,230,190,.06) 0 3px,transparent 3px 9px),
+   linear-gradient(180deg,#8a5a34,#6b4325 55%,#54331b)}
+
+/* homepage: the suggestion box sits on the shelf, so the footer box and the floating tab are hidden here (the card dialog still opens) */
+#trd-suggest-fx,#trd-suggest{display:none!important}
+.trd-mock-note{display:none}
+.mk .hello-h{text-wrap:balance}.mk .hello-s{text-wrap:pretty}
+
+/* ===== shared mock pieces ===== */
+.mk{position:relative;z-index:2;width:100%;margin:0 auto;padding:22px 14px 34px;display:flex;flex-direction:column;gap:26px}
+.mk .deck{width:100%;max-width:none}
+.mk-chip{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;padding:8px 13px 8px 14px;border-radius:999px;
+  background:linear-gradient(180deg,#f2c35a,#e3a82b 55%,#cf931c);color:#2e1f13;border:1.5px solid #2e1f13;
+  font:700 12.5px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;box-shadow:0 4px 10px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,240,200,.6)}
+.mk-chip svg{width:13px;height:13px}
+.mk-sug{-webkit-appearance:none;appearance:none;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 14px 10px 12px;text-align:left;
+  border-radius:16px;border:1.5px dashed rgba(227,168,43,.7);background:rgba(46,31,19,.82);color:var(--ink-soft);font-family:var(--body)}
+.mk-sug img{flex:none;width:48px;height:auto;filter:drop-shadow(0 3px 5px rgba(0,0,0,.5))}
+.mk-sug-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.mk-sug-t b{font:400 24px/1 var(--display);font-family:'Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;letter-spacing:.01em;color:#ffd77a}
+.mk-sug-t > span:not(.mk-chip){font-size:15px;line-height:1.25;color:var(--ink-soft)}
+.mk-sug .mk-chip{align-self:flex-start;margin-top:6px}
+.mk-sug img{width:64px}
+.mk-sug:hover,.mk-sug:focus-visible{background:rgba(70,46,26,.92);border-color:var(--mustard)}
+.mk-h2{margin:0 0 12px;text-align:center;font:700 34px/1 'Steelfish','Arial Narrow',Impact,sans-serif;letter-spacing:.02em;color:var(--ink)}
+.mk-h2 small{display:block;margin-bottom:4px;font:400 24px/1 var(--script);color:var(--mustard)}
+
+/* compact shop (half-width) */
+.mini .shop{min-height:0;height:100%;margin:0;border-radius:10px 10px 6px 6px}
+.mini .shop-cornice{height:9px}
+.mini .shop-sign{margin:8px 8px 0;padding:7px 4px 8px}
+.mini .shop-sign-pre{font-size:15px}
+.mini .shop-sign-name{font-size:14.5px;letter-spacing:0;white-space:normal;line-height:1.1}
+.mini .shop-awning{height:26px;margin-top:8px}
+.mini .shop-front{margin:14px 8px 0;padding:6px;gap:6px}
+.mini .shop-door{display:none}
+.mini .shop-neon{font-size:15px;padding:2px 7px 0}
+.mini .shop-cards{display:none}
+.mini .shop-step{margin:0 4px;padding:8px 6px;justify-content:center}
+.mini .shop-step-l{display:none}
+.mini .shop-step-go{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px}
+.mini .shop-walk{height:7px}
+/* tall suggestion card (half-width) */
+.mk-sugc{-webkit-appearance:none;appearance:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:8px;height:100%;width:100%;margin:0;
+  padding:14px 10px 14px;border-radius:10px;border:1.5px dashed rgba(227,168,43,.75);background:linear-gradient(180deg,rgba(70,46,26,.92),rgba(40,26,15,.92));
+  color:var(--ink-soft);font-family:var(--body);text-align:center}
+.mk-sugc img{width:96px;height:auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.55))}
+.mk-sugc b{font:700 27px/0.98 'Steelfish','Arial Narrow',Impact,sans-serif;color:#ffd77a;letter-spacing:.01em}
+.mk-sugc span.s{font-size:14.5px;line-height:1.25}
+.mk-sugc:hover,.mk-sugc:focus-visible{border-color:var(--mustard);background:linear-gradient(180deg,rgba(90,60,34,.95),rgba(50,32,18,.95))}
+
+
+/* B: HI-FI SHELF. A walnut shelf unit holds everything: deck shelf, tower shelf, shop + suggestion shelf. */
+.mk-b{gap:22px;padding:24px 8px 34px}
+.mk-b .hello{padding:0 6px}
+.b-bay2{padding-left:0;padding-right:2px}
+.mk-b .tcase{--D:11px;--wall:12px}
+.mk-b .tcase .sp-s{font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:clip;-webkit-line-clamp:none}
+.mk-b .tcase .sp-n{text-overflow:clip}
+.mk-b .tcase .sp{gap:8px}.mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:14px}.mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:15.5px}
+.mk-b .hello{text-align:center;align-items:center}
+.mk-b .hello-k{font-size:31px}
+.mk-b .hello-h{font-size:45px;line-height:1.08;text-transform:none}
+.mk-b .hello-s{font-size:16.5px;line-height:1.5;margin-top:12px;max-width:46em;text-transform:none}
+.mk-b .hello-cta{display:none}
+.b-unit{--post:10px;position:relative;margin:0 -2px;padding:0 var(--post);border-radius:8px;
+  background:linear-gradient(90deg,#4a2c17,#7a4c2c 40%,#5c3a20) left/var(--post) 100% no-repeat,linear-gradient(90deg,#5c3a20,#7a4c2c 60%,#4a2c17) right/var(--post) 100% no-repeat,#2a1b10;
+  box-shadow:0 0 0 2px #1d120a,0 22px 40px rgba(0,0,0,.6);border-top:12px solid #6b4325}
+.b-bay{position:relative;padding:18px 12px 20px;
+  background:radial-gradient(80% 70% at 50% 35%,rgba(255,196,110,.14),transparent 75%),linear-gradient(180deg,#24170d,#1a110a);
+  box-shadow:inset 0 10px 18px rgba(0,0,0,.55)}
+.b-bay::after{content:"";position:absolute;left:calc(-1 * var(--post));right:calc(-1 * var(--post));bottom:-1px;height:14px;z-index:3;
+  background:repeating-linear-gradient(92deg,rgba(60,30,10,0) 0 22px,rgba(60,30,10,.25) 22px 23px),linear-gradient(180deg,#9a6a3e,#6b4325 45%,#4a2c17);
+  box-shadow:0 4px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,220,170,.35)}
+.b-bay{padding-bottom:30px}
+.b-bay:last-child::after{border-radius:0 0 8px 8px}
+.b-plaque{margin:0 auto 12px;width:max-content;max-width:100%;padding:6px 14px 5px;border-radius:4px;text-align:center;
+  background:linear-gradient(180deg,#f2c35a,#c98a17);color:#2e1f13;font:700 13px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;box-shadow:0 2px 0 #6e4a0d,0 4px 8px rgba(0,0,0,.4)}
+.mk-b .deck{margin:0}
+.mk-b .tcase-wrap{margin:0}
+.mk-b .tc-cap{margin-top:12px}
+.b-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:stretch;height:330px}
+/* no divider between the Walkman and the tape case: one continuous bay (Mike, 1 Nov) */
+.b-bay1{padding-bottom:12px;box-shadow:inset 0 10px 18px rgba(0,0,0,.55)}
+.b-bay1::after{display:none}
+.b-bay2{padding-top:12px;box-shadow:none}
+@media (max-width:899px){
+  .b-bay1{background:radial-gradient(80% 70% at 50% 35%,rgba(255,196,110,.14),transparent 75%),linear-gradient(180deg,#24170d,#1f140b)}
+  .b-bay2{background:radial-gradient(80% 70% at 50% 45%,rgba(255,196,110,.10),transparent 75%),linear-gradient(180deg,#1f140b,#1a110a)}
+}
+@media (max-width:599px){
+  .mk-b .hello{padding:0 4px;width:100%;max-width:100%;box-sizing:border-box}
+  .mk-b .hello-h{font-size:30px;line-height:1.12;max-width:100%}
+  .mk-b .hello-s{font-size:15px;line-height:1.5;margin-top:10px;max-width:100%}
+}
+@media (max-width:379px){.mk-b .mini .shop-sign-name{font-size:12.5px}}
+@media (min-width:900px){
+  .mk-b{max-width:1400px;padding:26px 36px 34px;gap:22px}
+  .mk-b .hello{max-width:1000px;margin:0 auto}
+  .mk-b .hello-h{font-size:50px;line-height:1.08}.mk-b .hello-s{font-size:17.5px;line-height:1.5;max-width:46em}.mk-b .hello-k{font-size:30px}
+  .mk-b{padding-top:18px;gap:16px}
+  .mk-b .mini .shop-sign-name{font-size:24px}.mk-b .mini .shop-sign-pre{font-size:20px}.mk-b .mini .shop-door{display:block}.mk-b .mini .shop-awning{height:36px}
+  .b-unit{display:grid;grid-template-columns:1fr 1.05fr 0.8fr;column-gap:12px;--post:14px;
+    background:linear-gradient(90deg,#4a2c17,#7a4c2c 40%,#5c3a20) left/14px 100% no-repeat,linear-gradient(90deg,#5c3a20,#7a4c2c 60%,#4a2c17) right/14px 100% no-repeat,
+      linear-gradient(90deg,#5c3a20,#7a4c2c 50%,#5c3a20) calc(33.3% + 2px) 0/12px 100% no-repeat,#2a1b10}
+  .b-unit{background:#5c3a20}
+  .b-bay{display:flex;flex-direction:column;justify-content:center;padding:18px 20px 30px}
+  .b-bay::after{left:0;right:0}
+  .b-bay3 .b-pair{height:100%;grid-template-columns:1fr;grid-template-rows:1fr auto}
+  .mk-b .tcase{max-width:500px;--sh:54px;--gap:5px;--D:16px;--wall:20px;--lid:20px;--base:16px;--prot:34px}
+  .mk-b .tcase .sp-ic{width:44px;height:44px}
+  .mk-b .tcase .sp-n{font-size:22px}.mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:18px}.mk-b .tcase .t4 .sp-n,.mk-b .tcase .t6 .sp-n{font-size:28px}.mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:20px}
+  .mk-b .tcase .sp-s{font-size:14.5px}
+  .mk-b .mk-sugc{flex-direction:row;height:auto;padding:10px 14px;text-align:left}
+  .mk-b .mk-sugc img{width:54px}.mk-b .mk-sugc b{font-size:24px}.mk-b .mk-sugc span.s{display:none}
+  .b-bay1{margin-right:-12px;padding-right:32px;padding-bottom:30px}
+  .b-bay2{padding-top:18px;box-shadow:inset 0 10px 18px rgba(0,0,0,.55)}
+  .b-bay1::after{display:block}
+}
+
+/* ===== TRD-007 DUCK SAUCE: the spicy top tape (olive drab, hazard stripe, ON AIR tally). Mike, 9 Nov 2026 ===== */
+.t7 .sp{background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 5px),linear-gradient(180deg,#4b5232,#353b22 55%,#2a2f1b);color:#f1e6c4;padding-left:16px;
+  box-shadow:inset 0 0 0 1.5px #c9a54a,inset 0 0 0 3px rgba(0,0,0,.35)}
+.t7 .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:11px;background:repeating-linear-gradient(135deg,#c8302b 0 5px,#9c9a92 5px 10px);box-shadow:inset -1px 0 0 rgba(0,0,0,.45)}
+.t7 .sp-cat{color:#e4c76a}
+.t7 .sp-ic{box-shadow:0 0 0 1.5px #d6b252,0 1px 3px rgba(0,0,0,.5)}
+.t7 .sp-n{font-family:'TRN Steelfish',var(--display);font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#f6ecd0;text-shadow:0 1px 0 rgba(0,0,0,.55)}
+.t7 .sp-s{font-family:'TRN Courier','Courier Prime','Courier New',monospace;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:#e4d6ae}
+.t7 .sp-go{background:linear-gradient(180deg,#e3c26a,#c69a35);color:#1f2213}
+.t7 .ds-tags{display:flex;flex-direction:column;align-items:flex-end;gap:3px;font-family:'TRN Courier','Courier Prime','Courier New',monospace;font-weight:700;text-transform:uppercase;line-height:1}
+.t7 .ds-tally{display:inline-flex;align-items:center;gap:4px;padding:2px 5px 1px;border-radius:2px;background:#151710;color:#f2e7c7;font-size:8.5px;letter-spacing:.14em;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12)}
+.t7 .ds-tally i{width:6px;height:6px;border-radius:50%;background:#e2322b;box-shadow:0 0 5px rgba(255,60,40,.85)}
+.t7 .ds-stamp{padding:1px 4px 0;border:1.5px solid rgba(214,52,44,.9);border-radius:2px;color:#e0453b;font-size:8.5px;letter-spacing:.12em;transform:rotate(-6deg);opacity:.92;mix-blend-mode:screen}
+@media (prefers-reduced-motion:no-preference){.t7 .ds-tally i{animation:dsTally 1.6s ease-in-out infinite}}
+@keyframes dsTally{0%,100%{opacity:1}50%{opacity:.35}}
+.tcase .t7{border-color:rgba(214,178,82,.75);margin-bottom:6px}
+.tcase .start-tag{top:-8px}
+.tcase .t7 .sp-n{font-size:21px}
+.tcase .t7 .sp-s{font-size:10.5px}
+@media (min-width:900px){
+  .mk-b .tcase{--sh:47px;--gap:4px}
+  .mk-b .tcase .sp-ic{width:38px;height:38px}
+  .mk-b .tcase .sp-n{font-size:20px}.mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:16.5px}.mk-b .tcase .t4 .sp-n,.mk-b .tcase .t6 .sp-n{font-size:25px}.mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:18.5px}
+  .mk-b .tcase .sp-s{font-size:13.5px}
+  .mk-b .tcase .t7 .sp-n{font-size:25px}.mk-b .tcase .t7 .sp-s{font-size:11.5px}
+  .mk-b .tcase .t7 .ds-tally,.mk-b .tcase .t7 .ds-stamp{font-size:9px}
+}
+@media (max-width:899px){.tcase .t7 .ds-stamp{font-size:7.5px}.tcase .t7 .ds-tally{font-size:7.5px}.tcase .t7 .sp-s{letter-spacing:.07em;font-size:10px}.tcase .t7 .sp{gap:7px}}
+@media (max-width:359px){.tcase .t7 .ds-stamp{display:none}}
+
+/* ===== TRD-008 Executive Order Library: Air Force One navy, red, gold, white. Preview 2026-11-21 ===== */
+.t8 .sp{background:linear-gradient(180deg,#1C2444,#151B33 55%,#0C1020);color:#E4C98A;padding-left:16px}
+.t8 .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(180deg,#FFFFFF 0 28%,#D0AF6C 28% 40%,#8B142E 40% 62%,#151B33 62% 100%)}
+.t8 .sp-n{font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#E4C98A}
+.t8 .sp-s{color:#F6F1E4}
+.t8 .sp-go{background:#8B142E;color:#fff}
+.t8 .sp-ic{box-shadow:0 0 0 1.5px #D0AF6C,0 1px 3px rgba(0,0,0,.5)}
+.t8 .sp-cat{color:#D0AF6C}
+.tcase .t8 .sp-n{font-size:14.5px}
+.tcase .t8 .sp-s{font-size:12px}
+@media (min-width:900px){
+  .mk-b .tcase .t8 .sp-n{font-size:16.5px}
+  .mk-b .tcase .t8 .sp-s{font-size:13px}
+}
+
+/* ===== Red Pill Room (album.html): original face-redpill art and red-pill-album icon.
+   There was never a prior case-spine for this room; the album was the Walkman deck plus
+   a pre-shelf homepage door. Spine CSS is new, in the J-card's black/red/white language.
+   Catalog on the J-card is TRD-022 (the album); room tape code is TRD-009. Preview 2026-11-21 ===== */
+.t9 .sp{background:linear-gradient(180deg,#1a1a1a,#0d0d0d 55%,#050505);color:#fff;padding-left:16px}
+.t9 .sp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:#e2322b}
+.t9 .sp-n{font-family:var(--body);font-weight:400;letter-spacing:.02em;color:#fff}
+.t9 .sp-s{color:#d8d8d8}
+.t9 .sp-go{background:#e2322b;color:#fff}
+.t9 .sp-ic{box-shadow:0 0 0 1.5px #e2322b,0 1px 3px rgba(0,0,0,.5)}
+.t9 .sp-cat{color:#e2322b}
+.tcase .t9 .sp-n{font-size:16px}
+.tcase .t9 .sp-s{font-size:12px}
+@media (min-width:900px){
+  .mk-b .tcase .t9 .sp-n{font-size:18px}
+  .mk-b .tcase .t9 .sp-s{font-size:13px}
+}
+/* Nine tapes: slightly tighter stack so the case fits on a 1366x768 PC without clipping the last tape. */
+.tcase{--sh:44px;--gap:3px}
+@media (min-width:900px){
+  .mk-b .tcase{--sh:40px;--gap:3px}
+  .mk-b .tcase .sp-ic{width:34px;height:34px}
+}
+
+/* ===== Cassette size-up + titles fitted to the label (Mike, 2026-11-21) =====
+   Intro is now a pop-up, so the shelf can sit higher and the nine tapes can be taller.
+   Titles stay on one line, shrink to the label (no ellipsis / no clip). */
+.tcase{--sh:52px;--gap:4px}
+.tcase .sp-t{container-type:inline-size;min-width:0;overflow:hidden;justify-content:center;gap:1px}
+.tcase .sp-n,.tcase .sp-s{display:block;width:100%;max-width:100%;min-width:0;flex-shrink:0;box-sizing:border-box;
+  white-space:nowrap;overflow:hidden;text-overflow:clip;line-height:1}
+.mk-b .tcase .sp-n{font-size:clamp(11px,8.4cqw,20px)}
+.mk-b .tcase .sp-s{font-size:clamp(9px,5.8cqw,13px)}
+.mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:clamp(10px,7.2cqw,17px);letter-spacing:-.03em}
+.mk-b .tcase .t4 .sp-n,.mk-b .tcase .t6 .sp-n{font-size:clamp(12px,9.6cqw,24px)}
+.mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:clamp(11px,7.8cqw,19px)}
+.mk-b .tcase .t7 .sp-n{font-size:clamp(12px,9.2cqw,22px)}
+.mk-b .tcase .t7 .sp-s{font-size:clamp(8px,5.2cqw,12px)}
+.mk-b .tcase .t8 .sp-n{font-size:clamp(10px,6.8cqw,17px)}
+.mk-b .tcase .t8 .sp-s{font-size:clamp(9px,5.6cqw,13px)}
+.mk-b .tcase .t9 .sp-n{font-size:clamp(11px,7.6cqw,18px)}
+.mk-b .tcase .t9 .sp-s{font-size:clamp(9px,5.6cqw,13px)}
+.mk-b .tcase .sp-ic{width:36px;height:36px}
+@media (min-width:768px){
+  .tcase{--sh:56px;--gap:4px}
+  .mk-b .tcase .sp-ic{width:38px;height:38px}
+}
+@media (min-width:900px){
+  .mk-b .tcase{max-width:580px;--sh:62px;--gap:5px;--D:16px;--wall:20px;--lid:20px;--base:16px;--prot:34px}
+  .mk-b .tcase .sp-ic{width:42px;height:42px}
+  .mk-b .tcase .sp-n{font-size:clamp(13px,7.6cqw,22px)}
+  .mk-b .tcase .t2 .sp-n,.mk-b .tcase .t5 .sp-n{font-size:clamp(12px,6.6cqw,18px);letter-spacing:-.03em}
+  .mk-b .tcase .t4 .sp-n,.mk-b .tcase .t6 .sp-n{font-size:clamp(15px,9cqw,26px)}
+  .mk-b .tcase .t1 .sp-n,.mk-b .tcase .t3 .sp-n{font-size:clamp(13px,7.2cqw,20px)}
+  .mk-b .tcase .t7 .sp-n{font-size:clamp(14px,8.4cqw,24px)}
+  .mk-b .tcase .t8 .sp-n{font-size:clamp(12px,6.2cqw,17px)}
+  .mk-b .tcase .t9 .sp-n{font-size:clamp(13px,7cqw,20px)}
+}
+@media (min-width:900px) and (max-height:979px){
+  .mk-b{padding-top:8px;padding-bottom:16px;gap:8px}
+  .mk-b .hello-h{font-size:clamp(34px,3vw,44px)}
+  .hello-btn{padding:8px 24px 7px}
+  .b-bay{padding:12px 20px 18px}
+  .mk-b .tcase{--sh:54px;--gap:4px}
+  .mk-b .tcase .sp-ic{width:40px;height:40px}
+}
+@media (min-width:900px) and (max-height:820px){
+  .mk-b .tcase{--sh:50px;--gap:3px}
+  .mk-b .tcase .sp-ic{width:36px;height:36px}
+}
+</style>
+<script src="/assets/trd/analytics.js?v=20261121a" defer data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261121a">
+</head>
+<body>
+<header class="trd-nav" id="trd-nav"><div class="tn-in">
+<a class="tn-logo" href="/nl/" aria-label="THE RUBBER DUCK™, home"><img src="/assets/trd/img/duck-banner.webp" width="40" height="34" alt=""><span class="tn-wm" aria-hidden="true">THE RUBBER DUCK<sup>&trade;</sup></span></a>
+<nav class="tn-links" id="tn-links" aria-label="Kamers"><a href="/videos.html">Video’s</a><a href="/listening-room.html">Opnamen</a><a href="/pdfs.html">PDF’s</a><a href="/eo-library/">EO Library</a><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Fotozoeken</a><a href="/memes.html">Memes</a><a href="/x/">X-archief</a><a href="/newsroom.html">DUCK SAUCE</a><a href="/nl/merch.html#anon-mission">Boek</a></nav>
+<form class="tn-search" id="tn-form" role="search" action="/x/" method="get"><svg class="tn-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><input class="tn-q" id="tn-q" name="q" type="search" placeholder="Search the archive" aria-label="Search the whole archive" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="tn-res" aria-autocomplete="list"><div class="tn-res" id="tn-res" role="listbox" aria-label="Search results" hidden></div></form>
+<button class="tn-btn tn-menu" id="tn-menu" type="button" aria-expanded="false" aria-controls="tn-links" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+<button class="tn-btn tn-sb" id="tn-sbtn" type="button" aria-expanded="false" aria-label="Search the archive"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+</div></header>
+<script>window.trdNav||(function(){var s=document.createElement('script');s.src='/assets/trd/sitenav.js?v=20261121f';s.setAttribute('data-trd-keep','');document.head.appendChild(s);})();</script>
+<header class="banner">
+  <div class="banner-in hb2">
+    <div class="hb-left">
+      <a class="hb-sign hb-spon" href="/nl/sponsor.html" aria-label="Sponsor de site Sitesponsors. See the sponsor tiers"><span class="hb-sign-k">Sponsor de site</span><span class="hb-sign-n">Site<br>Sponsors</span></a>
+    </div>
+    <h1 class="wm"><a href="/nl/" aria-label="THE RUBBER DUCK™, back to the homepage">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
+    <div class="hb-right">
+      <a class="hb-sign hb-shop" href="/nl/merch.html" aria-label="Visit TRD Collectibles, the store"><span class="hb-sign-k">Visit</span><span class="hb-sign-n">TRD<br>Collectibles</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="room" aria-hidden="true">
+  <div class="room-duck"></div>
+  <span class="haze"></span>
+</div>
+
+<main class="mk mk-b"><header class="hello">
+        <h2 class="hello-h"><button type="button" class="hello-btn" id="hello-mission" aria-haspopup="dialog" aria-controls="mission-dlg" aria-expanded="false">WELKOM BIJ MIJN MISSIE</button></h2>
+        <p class="hello-cta"><a class="hero-cta" href="/album.html" data-cta="album"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><span>Play The Red Pill Album</span><small>22 nummers</small></a></p>
+      </header>
+      <dialog class="mission-dlg" id="mission-dlg" aria-labelledby="mission-dlg-title">
+        <div class="mission-dlg-card">
+          <button type="button" class="mission-dlg-x" aria-label="Sluiten">&times;</button>
+          <h2 class="mission-dlg-h" id="mission-dlg-title">WELKOM BIJ MIJN MISSIE</h2>
+          <p class="hello-s">op deze site vind je al het onderzoek, het werk en de data die ik de afgelopen 10 jaar — ter ondersteuning van mijn missie — heb gemaakt, verzameld en samengesteld. allemaal gratis, en allemaal forensisch doorzoekbaar; mijn volledige Twitter-archief, elke authentieke Q drop, elke meme, alle podcasts en X Spaces, elk document dat het afgelopen decennium is vrijgegeven, The Red Pill Album, alle films, documentaires, series en clips die zijn gemaakt om JE WAKKER TE SCHUDDEN TOT DE WAARHEID.</p>
+          <p class="hello-s">deze site wist zichzelf liever dan achter een betaalmuur te verdwijnen — als je mooi vindt wat je hier ziet, kijk hieronder en overweeg de site te steunen via de winkel, als sponsor, of door mij en mijn missie te steunen.</p>
+          <p class="hello-s hello-sign">God Bless, TRD</p>
+        </div>
+      </dialog><div class="b-unit"><div class="b-bay b-bay1"><p class="b-plaque">Kant A &middot; The Red Pill Album</p><a class="deck" href="/album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 nummers. Druk op play om het album te starten. Speler openen">
+        <span class="deck-top" aria-hidden="true"><b>TRD</b><span>Stereo-cassettedeck</span><span class="deck-led"><i></i>Play</span></span>
+        <span class="deck-well">
+            <span class="cas" id="podCas" aria-hidden="true">
+              <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
+              <span class="cas-label">
+                <span class="cas-head"><span class="cas-art"><span class="cas-t">Red Pill</span><img class="cas-pill" src="/assets/trd/img/rpa-pill-160.webp" width="160" height="56" alt="Red capsule pill" decoding="async"><span class="cas-t">Album</span></span><span class="cas-mark"><span class="cas-oval"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" decoding="async">TRD</span><span class="cas-cat">TRD-022</span></span></span>
+                <span class="cas-meta">Kant A &middot; 22 nummers</span>
+                <span class="cas-side"><small>SIDE</small><b>A</b></span>
+                <span class="cas-by">Type II<br>C-90</span>
+                <span class="cas-list"><span><i>1.</i> And Frogs To Destroy Them</span><span><i>4.</i> Enjoy The Show</span><span><i>2.</i> Boom, Boom, Boom</span><span><i>7.</i> GOD WINS</span><span><i>3.</i> Dark to Light</span><span><i>10.</i> Q Clearance Patriot</span></span>
+              </span>
+              <span class="cas-peel"></span>
+              <span class="cas-win"><span class="reel l"><b></b></span><span class="cas-tape"></span><span class="reel r"><b></b></span></span>
+              <span class="cas-foot"><i></i><i></i><i></i><i></i></span>
+            </span>
+        </span>
+        <span class="deck-keys" aria-hidden="true"><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M11 6v12l-8.5-6zM21 6v12l-8.5-6z"/></svg></span><span class="key key-play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><span class="kp-off">Press play</span><span class="kp-on">Open player</span></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13 6v12l8.5-6zM3 6v12l8.5-6z"/></svg></span><span class="key"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6" y="6" width="12" height="12" rx="1" fill="currentColor"/></svg></span></span>
+        <span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-redpill-400.webp" srcset="/assets/trd/img/cassettes/face-redpill-200.webp 200w, /assets/trd/img/cassettes/face-redpill-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for the Red Pill Album, TRD-022" decoding="async"></span>
+      </a></div><div class="b-bay b-bay2"><section class="tcase-wrap " aria-label="The rooms"><div class="tcase"><span class="tc-shell" aria-hidden="true"><span class="tc-side"></span><span class="tc-top"></span><span class="tc-front"></span><span class="tc-bay"></span><span class="tc-hl"></span><span class="tc-hl2"></span><span class="tc-hl3"></span></span><nav class="tc-tapes" aria-label="Kamers"><a class="spine t4" href="/ledger.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-004</span><img class="sp-ic" src="/images/icons/drop-ledger.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Drop Ledger</span><span class="sp-s">Every post, dated, searchable</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-ledger-400.webp" srcset="/assets/trd/img/cassettes/face-ledger-200.webp 200w, /assets/trd/img/cassettes/face-ledger-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-004 The Drop Ledger" decoding="async"></span></a>
+<a class="spine t8" href="/eo-library/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-008</span><img class="sp-ic" src="/images/icons/eo-library.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Executive Order Library</span><span class="sp-s">Signed orders, both terms</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-eo-library-400.webp" srcset="/assets/trd/img/cassettes/face-eo-library-200.webp 200w, /assets/trd/img/cassettes/face-eo-library-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-008 Executive Order Library" decoding="async"></span></a><a class="spine t5" href="/memes.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-005</span><img class="sp-ic" src="/images/icons/meme-dump.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Meme Dump</span><span class="sp-s">Images and memes, catalogued</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-memes-400.webp" srcset="/assets/trd/img/cassettes/face-memes-200.webp 200w, /assets/trd/img/cassettes/face-memes-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-005 The Meme Dump" decoding="async"></span></a>
+<a class="spine t1" href="/videos.html"><span class="start-tag">Start here</span><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-001</span><img class="sp-ic" src="/images/icons/videos.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Private Theater</span><span class="sp-s">Red pill clips, movies, shows</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-private-theater-400.webp" srcset="/assets/trd/img/cassettes/face-private-theater-200.webp 200w, /assets/trd/img/cassettes/face-private-theater-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-001 Private Theater" decoding="async"></span></a>
+<a class="spine t3" href="/pdfs.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-003</span><img class="sp-ic" src="/images/icons/scif.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">SCI[F]</span><span class="sp-s">The document library (PDF’s)</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Stereo</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-scif-400.webp" srcset="/assets/trd/img/cassettes/face-scif-200.webp 200w, /assets/trd/img/cassettes/face-scif-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-003 SCI[F]" decoding="async"></span></a>
+<a class="spine t6" href="/x/"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-006</span><img class="sp-ic" src="/assets/trd/img/duck-banner.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Twitter / X-archief</span><span class="sp-s">Past posts, all in one place</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-x-400.webp" srcset="/assets/trd/img/cassettes/face-x-200.webp 200w, /assets/trd/img/cassettes/face-x-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-006 Twitter / X-archief" decoding="async"></span></a><a class="spine t2" href="/listening-room.html"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-002</span><img class="sp-ic" src="/images/icons/listening-room.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">The Luisterkamer</span><span class="sp-s">Opnamen, with summaries</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-listening-400.webp" srcset="/assets/trd/img/cassettes/face-listening-200.webp 200w, /assets/trd/img/cassettes/face-listening-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-002 The Luisterkamer" decoding="async"></span></a>
+<a class="spine t7" href="/newsroom.html" aria-label="DUCK SAUCE, The Rubber Duck Newsroom. Live dispatches"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-007</span><img class="sp-ic" src="/images/icons/ducksauce.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">DUCK SAUCE</span><span class="sp-s">Live dispatches</span></span><span class="sp-end"><span class="ds-tags" aria-hidden="true"><span class="ds-tally"><i></i>On air</span><span class="ds-stamp">Classified</span></span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-ducksauce-400.webp" srcset="/assets/trd/img/cassettes/face-ducksauce-200.webp 200w, /assets/trd/img/cassettes/face-ducksauce-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-007 DUCK SAUCE, The Rubber Duck Newsroom" decoding="async"></span></a><a class="spine t9" href="/album.html" aria-label="Red Pill Room. The Red Pill Album, 22 nummers"><span class="sp"><span class="sp-cat" aria-hidden="true">TRD-009</span><img class="sp-ic" src="/images/icons/red-pill-album.webp" width="42" height="42" alt="" decoding="async"><span class="sp-t"><span class="sp-n">Red Pill Room</span><span class="sp-s">22 nummers</span></span><span class="sp-end"><span class="sp-mk" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" alt="" width="26" height="22" decoding="async">Type II</span><span class="sp-go" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span><span class="spine-face" aria-hidden="true"><img data-src="/assets/trd/img/cassettes/face-redpill-400.webp" srcset="/assets/trd/img/cassettes/face-redpill-200.webp 200w, /assets/trd/img/cassettes/face-redpill-400.webp 400w" sizes="200px" width="560" height="872" alt="Cassette face for TRD-009 Red Pill Room" decoding="async"></span></a></nav></div><p class="tc-cap"><i></i><span>Nine rooms &middot; Tap a tape to enter</span><i></i></p></section></div><div class="b-bay b-bay3 mini"><div class="b-pair"><a class="shop" href="/nl/merch.html" aria-label="TRD Collectibles. Caps, tees and signed pieces. Step inside the store">
+    <span class="shop-cornice" aria-hidden="true"></span>
+    <span class="shop-sign" aria-hidden="true"><span class="shop-sign-pre">The Rubber Duck&trade; presents</span><span class="shop-sign-name">TRD Collectibles</span></span>
+    <span class="shop-awning" aria-hidden="true"></span>
+    <span class="shop-front" aria-hidden="true">
+      <span class="shop-window">
+        <span class="shop-neon">OPEN</span>
+        <img class="shop-in" src="/assets/trd/img/shop-interior.webp" srcset="assets/trd/img/shop-interior.webp 480w, assets/trd/img/shop-interior@2x.webp 800w" sizes="(min-width:761px) 22vw, 60vw" width="480" height="480" alt="Inside the TRD Collectibles shop" loading="lazy" decoding="async">
+        <span class="shop-cards">
+          <span class="card c1" data-name="Cap"><img src="/store-img/duck-dad-hat-fb_white-128.webp" width="128" height="128" alt="Duck Dad Hat in white: front, with the back inset showing the red pill above the strap" loading="lazy" decoding="async"></span>
+          <span class="card c2" data-name="Mug"><img src="/store-img/duck-mug_white-128.webp" width="128" height="128" alt="Duck Mug in white, product photo" loading="lazy" decoding="async"></span>
+        </span>
+        <span class="shop-shelf"></span>
+      </span>
+      <span class="shop-door"><span class="shop-door-glass"><span class="shop-hang">Come in</span></span><span class="shop-door-panel"></span><span class="shop-knob"></span></span>
+    </span>
+    <span class="shop-step"><span class="shop-step-l">Caps, tees, signed pieces</span><span class="shop-step-go">Tap to enter <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+    <span class="shop-walk" aria-hidden="true"></span>
+  </a><button class="mk-sugc" type="button" data-sug><img src="/assets/trd/img/suggestion-box-trd.webp" srcset="/assets/trd/img/suggestion-box-trd.webp 1x, /assets/trd/img/suggestion-box-trd@2x.webp 2x" width="176" height="240" alt=""><b>Got an idea for the site?</b><span class="s">Drop a card in the suggestion box</span><span class="mk-chip">Tap to enter <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 12h14M13 6l6 6-6 6"/></svg></span></button></div></div></div></main>
+
+<section class="support" id="support" aria-labelledby="support-h">
+  <div class="sup-in">
+    <header class="sup-head">
+      <p class="sup-k">Houd de band aan het rollen</p>
+      <h2 class="sup-h" id="support-h">Steun het archief</h2>
+      <p class="sup-s">Het archief is gratis te gebruiken en heeft geen advertenties. Het draait op mensen die de Duck steunen, op sponsors, de winkel, het boek en af en toe een koffie.</p>
+    </header>
+    <a class="sup-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="Back the Duck: a few dollars per maand helps keep this archive going. Opens Buy Me a Coffee membership in a new tab">
+      <span class="btd-copy">
+        <span class="btd-k">Back the Duck</span>
+        <span class="btd-s">Als het kan, helpen een paar dollar per maand dit archief in de lucht te houden. Geen betaalmuur.</span>
+      </span>
+      <span class="btd-go">Bekijk maandopties <i aria-hidden="true">&rsaquo;</i></span>
+    </a>
+    <div class="sup-grid">
+      <a class="sup-card sc-spon" href="/nl/sponsor.html">
+        <span class="sc-art" aria-hidden="true"><span class="sc-sign"><small>Sponsor de site</small><b>Site<br>Sponsors</b></span></span>
+        <span class="sc-k">Sponsor de site</span>
+        <span class="sc-n">$50 per maand</span>
+        <span class="sc-s">of eenmalig: $100 voor 3 maanden, $175 voor 6, $500 voor 12</span>
+        <span class="sc-go">Bekijk sponsoring <i aria-hidden="true">&rsaquo;</i></span>
+      </a>
+      <a class="sup-card sc-shop" href="/nl/merch.html">
+        <span class="sc-art" aria-hidden="true"><img src="/store-img/duck-dad-hat-fb_white-128.webp" width="128" height="128" alt="Duck Dad Hat in white: front, with the back inset showing the red pill above the strap" loading="lazy" decoding="async"><img src="/store-img/duck-mug_white-128.webp" width="128" height="128" alt="Duck Mug in white, product photo" loading="lazy" decoding="async"></span>
+        <span class="sc-k">TRD Collectibles</span>
+        <span class="sc-n">De winkel</span>
+        <span class="sc-s">Petten, T-shirts, mokken en gesigneerde stukken</span>
+        <span class="sc-go">Naar de winkel <i aria-hidden="true">&rsaquo;</i></span>
+      </a>
+      <a class="sup-card sc-book" href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener" aria-label="Het boek: anon mission, Volume 1, hardcover. Opens Gumroad in a new tab">
+        <span class="sc-art" aria-hidden="true"><img src="/assets/trd/img/anon-mission-hardcover-3d.webp?v=2" srcset="/assets/trd/img/anon-mission-hardcover-3d.webp?v=2 1x, /assets/trd/img/anon-mission-hardcover-3d@2x.webp?v=2 2x" width="127" height="168" alt="anon mission Volume 1 hardcover book, link to Gumroad" loading="lazy" decoding="async"></span>
+        <span class="sc-k">Het boek</span>
+        <span class="sc-n">anon mission, Vol. 1</span>
+        <span class="sc-s">De hardcover, op Gumroad</span>
+        <span class="sc-go">Haal het boek <i aria-hidden="true">&rsaquo;</i></span>
+      </a>
+      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Buy Me a Coffee: support my mission, any amount, one time. Opens in a new tab">
+        <span class="sc-art" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" loading="lazy" decoding="async"></span>
+        <span class="sc-k">Buy Me a Coffee</span>
+        <span class="sc-n">Steun mijn missie</span>
+        <span class="sc-s">Elk bedrag, eenmalig</span>
+        <span class="sc-go">Buy a coffee <i aria-hidden="true">&rsaquo;</i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="sf-in">
+    <div class="sf-brand">
+      <a class="sf-logo" href="/nl/"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="The Rubber Duck, site logo, link to home" loading="lazy" decoding="async">THE RUBBER DUCK&trade;</a>
+      <p>Een open archief van het Q-tijdperk: elke Q drop, de shows, X Spaces-opnamen, PDF’s, memes en meer dan 100.000 Twitter/X-berichten.</p>
+      <a class="sf-x" href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener me"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg>Volg @TheRubberDuck79</a>
+    </div>
+    <nav class="sf-col" aria-label="Het archief">
+      <h2>Het archief</h2>
+      <ul><li><a href="/videos.html">Video’s</a></li><li><a href="/listening-room.html">Opnamen</a></li><li><a href="/pdfs.html">PDF’s</a></li><li><a href="/eo-library/">EO Library</a></li><li><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Fotozoeken</a></li><li><a href="/memes.html">Memes</a></li><li><a href="/x/">X-archief</a></li><li><a href="/newsroom.html">DUCK SAUCE</a></li><li><a href="/album.html">The Red Pill Album</a></li></ul>
+    </nav>
+    <nav class="sf-col" aria-label="Steun het archief">
+      <h2>Steun</h2>
+      <ul><li><a href="/nl/sponsor.html">Sponsor de site</a></li><li><a href="/nl/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">Het boek (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Buy Me a Coffee</a></li></ul>
+    </nav>
+    <div class="sf-col">
+      <h2>Contact</h2>
+      <ul><li><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener">Stuur @TheRubberDuck79 een bericht op X</a></li><li><a href="mailto:therubberduk@gmail.com">E-mail: therubberduk@gmail.com</a></li><li><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener">Vragen over bestellingen en sponsoring op X</a></li><li><button class="sf-btn" type="button" data-sug-open>Suggestiebox</button></li></ul>
+    </div>
+  </div>
+  <nav class="sf-langs" aria-label="Language"><a href="/" lang="en" hreflang="en">English</a><a href="/en-au/" lang="en-AU" hreflang="en-AU">English (Australia)</a><a href="/es/" lang="es" hreflang="es">Español</a><a href="/fr/" lang="fr-FR" hreflang="fr-FR">Français</a><a href="/fr-ca/" lang="fr-CA" hreflang="fr-CA">Français (Canada)</a><a href="/de/" lang="de" hreflang="de">Deutsch</a><a href="/nl/" lang="nl-NL" hreflang="nl-NL" aria-current="page">Nederlands</a><a href="/ja/" lang="ja" hreflang="ja">日本語</a></nav>
+<p class="trd-i18n-note">Machine-ondersteunde vertaling. Naar het Engelse origineel. <a href="/" lang="en" hreflang="en">English</a></p>
+<div class="sf-legal">
+    <p>Let op: dit is een onafhankelijk archief van openbare berichten, documenten en opnamen, bijgehouden voor onderzoek en commentaar. Materiaal van derden blijft van de rechthebbenden en wordt ter referentie getoond. Niets hiervan is financieel, juridisch of medisch advies. Niet verbonden met X, Spotify, Rumble, Gumroad of Buy Me a Coffee.</p>
+    <p>&copy; 2026 The Rubber Duck&trade;. Alle rechten voorbehouden.</p>
+  </div>
+</footer>
+
+<script>
+/* desktop: size the deck column so its dark bay is exactly cassette-shaped (100.4 x 63.8), filled edge to edge */
+(function(){
+  var mq=window.matchMedia('(min-width:900px) and (min-height:500px)');
+  var ROOM_H=516; /* stage height at 1280x720, the shortest screen the room is laid out for unscaled */
+  function fitRoom(){var de=document.documentElement,stage=document.querySelector('.stage');
+    de.classList.remove('trd-rz');de.style.removeProperty('--rz');if(stage)stage.style.removeProperty('height');
+    if(!stage||!mq.matches)return;
+    var H=window.innerHeight,z=1;
+    /* the room is exactly the rest of the first screen (the Support section and footer sit below it) */
+    function fill(){var t=stage.getBoundingClientRect().top+(window.scrollY||0);stage.style.height=Math.max(0,(H-t)/z)+'px';}
+    fill();
+    for(var i=0;i<3;i++){ /* the header can unwrap once scaled, so settle in a couple of passes */
+      var sh=stage.getBoundingClientRect().height/z, head=H/z-sh, nz=Math.min(1,Math.floor(H/(head+ROOM_H)*1000)/1000);
+      if(i===0&&sh>=ROOM_H-0.5)return; if(Math.abs(nz-z)<0.002)break; z=nz;
+      de.style.setProperty('--rz',String(z));de.classList.add('trd-rz');fill();}
+  }
+  function size(){var top=document.querySelector('.top'),deck=document.querySelector('.deck'),well=deck&&deck.querySelector('.deck-well');
+    if(!top||!well)return; if(!mq.matches){top.style.removeProperty('--deckw');return;}
+    if(top.hasAttribute('data-deckfit')){deck.style.removeProperty('width');deck.style.removeProperty('justify-self');top.removeAttribute('data-deckfit');} /* re-measure unscaled so a taller window grows it back */
+    var cs=getComputedStyle(well),ph=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom),pw=parseFloat(cs.paddingLeft)+parseFloat(cs.paddingRight);
+    var h=well.clientHeight-ph, chrome=deck.offsetWidth-well.clientWidth+pw;
+    var w=Math.round(h*1.5106+chrome), max=Math.round(top.clientWidth*.56);
+    top.style.setProperty('--deckw',Math.min(w,max)+'px');
+    /* short laptop screens (e.g. 1280x720): the deck is taller than its row and ran into the tape stacks,
+       covering PRESS PLAY. Scale the whole deck down proportionally, centred in its own column (the column,
+       the welcome text and the stacks keep their widths), so it may spill at most (gap - 8px) above and
+       below its row: never under the book band, never touching a tape. No-op wherever it already fits. */
+    var hall=top.parentNode,stage=hall&&hall.parentNode,gap=parseFloat(getComputedStyle(hall).rowGap)||0,
+        pad=stage?parseFloat(getComputedStyle(stage).paddingTop)||0:0,slack=Math.max(0,Math.min(gap,pad)-8),
+        wi=well.clientHeight-ph,vchrome=deck.offsetHeight-wi,dch=deck.offsetWidth-well.clientWidth+pw,
+        fit=Math.floor((top.clientHeight+2*slack-vchrome)*1.5106+dch);
+    if(deck.offsetHeight>top.clientHeight+2*slack&&fit<deck.offsetWidth){
+      deck.style.width=Math.max(0,fit)+'px';deck.style.justifySelf='center';top.setAttribute('data-deckfit','');}
+  }
+  /* on resize, start over from the unsized column (same two passes as a fresh load), so the deck matches a fresh load at the new size */
+  function resize(){var top=document.querySelector('.top'),deck=document.querySelector('.deck');if(top){top.style.removeProperty('--deckw');top.removeAttribute('data-deckfit');}
+    if(deck){deck.style.removeProperty('width');deck.style.removeProperty('justify-self');}fitRoom();size();size();}
+  fitRoom(); size(); var t; window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(resize,100);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){ /* header height depends on the web fonts */
+    var de=document.documentElement,was=de.classList.contains('trd-rz');fitRoom();if(was||de.classList.contains('trd-rz'))resize();else size();});
+})();
+/* the suggestion line in the desktop band opens the same card as the corner box */
+[].forEach.call(document.querySelectorAll('[data-sug]'),function(b){b.addEventListener('click',function(e){if(window.trdSuggest)window.trdSuggest.open(e);});});
+/* The Red Pill Album is a cassette in a tape deck. First press: start the album; the cassette lifts out
+   and flies to the floating player's spot, then the album page opens. After that the deck shows what is
+   playing (reels turn, PLAY lit) and simply opens the album page. Without the player script it is a plain link. */
+(function(){
+  var deck=document.querySelector('[data-trd-pod-door]'); if(!deck||!window.trdPod)return;
+  var cas=document.getElementById('podCas')||deck.querySelector('.cas'), meta=cas.querySelector('.cas-meta');
+  function paint(st){
+    var live=!!(st&&st.started);
+    deck.classList.toggle('is-live',live); deck.classList.toggle('is-playing',live&&!!st.playing);
+    if(!live){meta.textContent='Side A \u00b7 22 tracks';deck.setAttribute('aria-label','The Red Pill Album, 22 tracks. Press play to start the album');return;}
+    var line=(st.playing?'Now playing':'Paused')+' \u00b7 '+(st.i+1)+'/22 \u00b7 '+st.title;
+    if(meta.textContent!==line)meta.textContent=line;
+    deck.setAttribute('aria-label',(st.playing?'Now playing: ':'Paused: ')+st.title+'. Open The Red Pill Album');
+  }
+  deck.addEventListener('click',function(e){
+    if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    e.preventDefault();
+    deckPlay();
+  });
+  /* PRESS PLAY: the first press starts the album and the cassette flies out of the Walkman into the iPod player
+     (with its pulsing red pill, upper right, to shrink it to the floating pill). The page stays put. After that,
+     OPEN PLAYER brings the iPod player back up (out of the pill or the strip). The J-card face still opens album.html. */
+  function deckPlay(){
+    deck.setAttribute('data-noface','');if(window.__trdClearFace)window.__trdClearFace(deck);  /* no J-card over the player */
+    if(window.trdPod.state().started){
+      if(window.trdPod.view()!=='full')window.trdPod.view('full',true);
+      else{var dk=document.querySelector('#trd-pod .tp-dock');if(dk&&dk.animate&&!matchMedia('(prefers-reduced-motion: reduce)').matches)dk.animate([{transform:'none'},{transform:'translateY(-8px) scale(1.03)'},{transform:'none'}],{duration:420,easing:'ease-out'});}
+      return;
+    }
+    if(window.trdTrack)window.trdTrack('click/album-play','Homepage: PRESS PLAY on The Red Pill Album');
+    window.trdPod.launchFrom(cas,null,'full');
+  }
+  window.__trdDeckPlay=deckPlay;
+  document.addEventListener('trdpod:state',function(e){paint(e.detail);});
+  document.addEventListener('trdpod:repaint',function(){paint(window.trdPod.state());});
+  paint(window.trdPod.state());
+})();
+/* upright Norelco faces: ONE #trd-face-portal on body (never reparent in-spine faces).
+   Desktop (fine pointer): one card at a time, tied to the spine under the cursor. A short intent delay before a
+   card appears, so sweeping across the stacks never flashes cards; moving onto another spine clears the old card
+   at once (no fade-out, no overlap). The card stays while the pointer is on its spine or on the card itself (a short
+   grace lets the pointer cross the gap), and clicking the card does what clicking its spine does. The badge on the
+   card says so ("Click to enter" / "Tap to enter"; the deck says what it does). */
+(function(){
+  var MARGIN=12,GAP=18,BADGE=16,INTENT=100,GRACE=150;
+  var fine=window.matchMedia('(hover:hover) and (pointer:fine)');
+  var byHost=new WeakMap();
+  var activeHost=null,overHost=null,overCard=false,showT=null,hideT=null,loadT=null;
+  var portal=document.getElementById('trd-face-portal');
+  if(!portal){
+    portal=document.createElement('button');
+    portal.id='trd-face-portal';
+    portal.type='button';
+    portal.setAttribute('aria-hidden','true');
+    portal.tabIndex=-1;
+    var img=document.createElement('img');
+    img.alt='';
+    img.decoding='async';
+    portal.appendChild(img);
+    var bd=document.createElement('span');
+    bd.className='tfp-badge';
+    bd.innerHTML='<span class="tfp-bt">Click to enter</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    portal.appendChild(bd);
+    document.body.appendChild(portal);
+  }
+  var portalImg=portal.querySelector('img'),badgeT=portal.querySelector('.tfp-bt');
+
+  function faceFor(host){
+    if(!host)return null;
+    var f=byHost.get(host);
+    if(f&&f.isConnected)return f;
+    f=host.querySelector('.spine-face');
+    if(f)byHost.set(host,f);
+    return f||null;
+  }
+  function srcFor(host){
+    var face=faceFor(host);
+    if(!face)return '';
+    var im=face.querySelector('img');
+    return im?(im.currentSrc||im.src||im.getAttribute('data-src')||''):'';
+  }
+  /* the badge says exactly what a click / tap on the card does (see go() below) */
+  function badgeFor(host){
+    var w=fine.matches?'Click':'Tap';
+    if(host.classList.contains('deck')){
+      var st=null;try{st=window.trdPod&&window.trdPod.state();}catch(e){}
+      return st&&st.started?w+' to open album':w+' to play';
+    }
+    return w+' to enter';
+  }
+  function clearTimers(){clearTimeout(showT);clearTimeout(hideT);clearTimeout(loadT);showT=hideT=loadT=null;}
+  function hidePortal(){
+    clearTimers();
+    portal.classList.remove('is-on','is-open','is-deck');
+    portal.style.left='';portal.style.top='';portal.style.width='';portal.style.removeProperty('--tfp-bridge');
+    portal._trdHost=null;
+    activeHost=null;overCard=false;
+  }
+  function layout(host){
+    if(!host)return;
+    var vw=window.innerWidth||document.documentElement.clientWidth;
+    var vh=window.innerHeight||document.documentElement.clientHeight;
+    var hr=host.getBoundingClientRect();
+    var mob=window.matchMedia('(max-width:720px), (hover:none), (pointer:coarse)').matches;
+    var pc=window.matchMedia('(min-width:900px) and (min-height:500px)').matches;
+    var isDeck=host.classList.contains('deck');
+    var fw=pc?(isDeck?270:230):(mob?(isDeck?180:168):Math.min(200, Math.round(vw*0.44)));
+    var fh=Math.round(fw*109/70);
+    var left=hr.left+hr.width/2-fw/2;
+    var top=hr.top-fh-GAP;                       /* the badge hangs into this gap, just above the spine */
+    if(top<MARGIN){
+      top=Math.min(hr.bottom+10, vh-fh-MARGIN-BADGE);
+      if(top+fh>vh-MARGIN-BADGE) top=MARGIN;
+    }
+    if(left<MARGIN)left=MARGIN;
+    if(left+fw>vw-MARGIN)left=vw-MARGIN-fw;
+    if(top+fh>vh-MARGIN-BADGE)top=Math.max(MARGIN, vh-MARGIN-BADGE-fh);
+    portal.style.width=fw+'px';
+    portal.style.left=Math.round(left)+'px';
+    portal.style.top=Math.round(top)+'px';
+    var br=hr.top-(Math.round(top)+fh);          /* gap down to the spine (only when the card sits above it) */
+    portal.style.setProperty('--tfp-bridge',(br>0&&br<80?Math.ceil(br)+4:0)+'px');
+    portal.classList.toggle('is-deck', isDeck);
+  }
+  function reveal(host){
+    if(activeHost!==host)return;
+    clearTimeout(loadT);loadT=null;
+    badgeT.textContent=badgeFor(host);
+    layout(host);
+    portal.classList.add('is-on');
+    portal.classList.toggle('is-open',host.classList.contains('is-face-open'));
+    requestAnimationFrame(function(){if(activeHost===host)layout(host);});
+  }
+  function placeFace(host){
+    if(!host||host.hasAttribute('data-noface'))return;
+    var src=srcFor(host);
+    if(!src)return;
+    clearTimeout(showT);showT=null;clearTimeout(hideT);hideT=null;
+    if(activeHost&&activeHost!==host)hidePortal();
+    activeHost=host;
+    portal._trdHost=host;
+    if(portalImg.getAttribute('src')!==src)portalImg.src=src;
+    /* no half-painted card: show it once its face image is ready (or after 400ms at the latest) */
+    if(portalImg.complete&&portalImg.naturalWidth)reveal(host);
+    else{
+      portalImg.onload=function(){reveal(host)};
+      clearTimeout(loadT);loadT=setTimeout(function(){reveal(host)},400);
+    }
+  }
+  function onLeave(host){
+    if(host && activeHost && host!==activeHost)return;
+    hidePortal();
+  }
+  function maybeHide(){
+    clearTimeout(hideT);
+    hideT=setTimeout(function(){hideT=null;if(!overCard&&(!activeHost||overHost!==activeHost))hidePortal();},GRACE);
+  }
+  /* desktop pointer: intent delay in, instant swap between spines, grace out */
+  function enter(host){
+    overHost=host;
+    clearTimeout(hideT);hideT=null;
+    if(activeHost===host)return;                 /* back from its own card: keep it */
+    if(activeHost)hidePortal();                  /* another spine: the old card clears at once */
+    clearTimeout(showT);
+    showT=setTimeout(function(){showT=null;if(overHost===host)placeFace(host);},INTENT);
+  }
+  function leave(host){
+    if(overHost===host)overHost=null;
+    if(!activeHost){clearTimeout(showT);showT=null;return;}
+    if(activeHost===host)maybeHide();
+  }
+  function bind(){
+    document.querySelectorAll('a.spine, a.deck').forEach(function(el){
+      var f=el.querySelector('.spine-face'); if(f)byHost.set(el,f);
+      el.addEventListener('mouseenter',function(){if(fine.matches)enter(el)});
+      el.addEventListener('mouseleave',function(){el.removeAttribute('data-noface');if(fine.matches)leave(el)});
+      el.addEventListener('focus',function(){placeFace(el)});
+      el.addEventListener('blur',function(){if(el.classList.contains('is-face-open'))return;if(activeHost===el&&!overCard&&overHost!==el)hidePortal();});
+    });
+    portal.addEventListener('mouseenter',function(){if(!fine.matches||!activeHost)return;overCard=true;clearTimeout(hideT);hideT=null;});
+    portal.addEventListener('mouseleave',function(){if(!fine.matches)return;overCard=false;maybeHide();});
+    /* pointer leaves the window: nothing stays behind */
+    document.documentElement.addEventListener('mouseleave',function(){if(fine.matches){overHost=null;overCard=false;hidePortal();}});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);
+  else bind();
+  window.addEventListener('resize',function(){
+    if(activeHost)layout(activeHost);
+  });
+  window.__trdClampFace=placeFace;
+  window.__trdClearFace=onLeave;
+  window.__trdFaceFor=function(host){
+    /* click handler expects a face node with _trdHost: the portal whenever it belongs to this host */
+    if(portal._trdHost && (!host || portal._trdHost===host))return portal;
+    return faceFor(host);
+  };
+  window.__trdFacePortal=portal;
+})();
+/* faces, clicks and taps.
+   PC: a click on a spine enters as a normal link; a click on its card enters the same way (same tracking event).
+   Touch: first tap shows the card; a second tap on the same spine or on the card enters; double-tap enters at once;
+   tapping elsewhere or 5s closes the card. The deck's PLAY key is pressed, not previewed. */
+(function(){
+  var fine=window.matchMedia('(hover:hover) and (pointer:fine)');
+  var open=null,timer=null;
+  var lastTap={host:null,t:0};
+  var DBL=320;
+  function isTouchUI(){return !fine.matches}
+  function clearT(){if(timer){clearTimeout(timer);timer=null}}
+  function closeFace(){
+    clearT();
+    if(open){
+      open.classList.remove('is-face-open');
+      if(window.__trdClearFace)window.__trdClearFace(open);
+      open=null;
+    }
+  }
+  function openFace(host){
+    if(open&&open!==host){
+      open.classList.remove('is-face-open');
+      if(window.__trdClearFace)window.__trdClearFace(open);
+    }
+    open=host;host.classList.add('is-face-open');
+    if(window.__trdClampFace)window.__trdClampFace(host);
+    var face=window.__trdFaceFor?window.__trdFaceFor(host):host.querySelector('.spine-face');
+    if(face){
+      if(face.id==='trd-face-portal')face.classList.add('is-open');
+      else face.classList.add('is-face-open');
+    }
+    clearT();timer=setTimeout(closeFace,5000);
+  }
+  function go(host){
+    closeFace();
+    if(window.__trdClearFace)window.__trdClearFace();
+    var href=host.getAttribute('href');
+    if(!href)return;
+    /* deck may launch player instead of navigating */
+    if(host.classList.contains('deck')&&host.hasAttribute('data-trd-pod-door')&&window.trdPod){
+      var cas=host.querySelector('.cas');
+      if(cas&&!window.trdPod.state().started){
+        if(window.trdTrack)window.trdTrack('click/album-play','Homepage: PRESS PLAY on The Red Pill Album');
+        window.trdPod.launchFrom(cas,null,'full');   /* into the iPod player; the page stays */
+        return;
+      }
+    }
+    if(window.trdTrack)window.trdTrack.link(host);    /* the same event a plain click on this link counts */
+    if(host.target==='_blank'){window.open(host.href,'_blank','noopener');return;}
+    window.location.href=href;
+  }
+  document.addEventListener('click',function(e){
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button)return;
+    var face=e.target.closest&&(e.target.closest('#trd-face-portal')||e.target.closest('.spine-face'));
+    var spine=e.target.closest&&e.target.closest('a.spine');
+    var deck=e.target.closest&&e.target.closest('a.deck');
+    var host=spine||deck;
+    /* floated faces are on document.body — recover host from face._trdHost */
+    if(!host&&face&&face._trdHost)host=face._trdHost;
+    if(!host){if(open)closeFace();return}
+    /* touch: the PLAY key is pressed, not previewed (no J-card first) */
+    if(deck&&!face&&isTouchUI()&&e.target.closest('.deck-keys .key-play')&&window.__trdDeckPlay){
+      e.preventDefault();e.stopPropagation();closeFace();window.__trdDeckPlay();return;}
+
+    var now=Date.now();
+    var isDbl=lastTap.host===host&&(now-lastTap.t)<DBL;
+    lastTap={host:host,t:now};
+
+    /* double-click / double-tap: skip face, enter room */
+    if(isDbl){
+      e.preventDefault();
+      e.stopPropagation();
+      go(host);
+      return;
+    }
+
+    /* desktop fine pointer: hover shows the card; a click on the spine is a normal link click,
+       a click on the card enters through go() */
+    if(!isTouchUI()){
+      if(face){e.preventDefault();e.stopPropagation();go(host)}
+      return;
+    }
+
+    /* touch: tap the open card, or tap its spine again → enter */
+    e.preventDefault();
+    if(face||host.classList.contains('is-face-open')){e.stopPropagation();go(host);return;}
+    openFace(host);
+  },true);
+  fine.addEventListener('change',function(){closeFace()});
+})();
+
+/* hero: the one primary button plays the album in the pocket player (same as pressing play on the deck);
+   without the player it is a plain link to album.html.
+   (The Spotify playlist tape case + tape swap were removed 2026-11-01: see /archive/spotify-cassette/README.md) */
+(function(){
+  var cta=document.querySelector('.hero-cta'),deck=document.querySelector('a.deck[data-trd-pod-door]');
+  if(cta)cta.addEventListener('click',function(e){
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button)return;
+    var cas=deck&&deck.querySelector('.cas');
+    if(window.trdPod&&cas&&!window.trdPod.state().started){
+      e.preventDefault();
+      if(window.trdTrack)window.trdTrack('click/album-play','Homepage: hero Play The Red Pill Album');
+      window.trdPod.launchFrom(cas,null,'full');
+    }
+  });
+})();
+
+</script>
+<script>/* cassette faces: fetched after the page has loaded (they only show on hover/tap) */(function(){function w(){[].forEach.call(document.querySelectorAll('.spine-face img[data-src]'),function(i){if(!i.getAttribute('src'))i.src=i.getAttribute('data-src');});}if(document.readyState==='complete')setTimeout(w,1500);else window.addEventListener('load',function(){setTimeout(w,1500);});})();</script>
+<script>
+/* homepage cassettes: every room title and subtitle shows in full on one line. If a line is wider than its tape
+   (narrow phone, big system font), shrink that line's font a little at a time (never below 9px). No ellipsis. */
+(function(){
+  function tooWide(e){
+    var box=e.parentElement,avail=box?box.clientWidth:e.clientWidth;
+    if(avail<8)return false;
+    var prev=e.style.width;e.style.width='max-content';
+    var sw=e.scrollWidth;e.style.width=prev;
+    return sw>avail+1;
+  }
+  function fit(){[].forEach.call(document.querySelectorAll('.tcase .sp-n,.tcase .sp-s'),function(e){
+    e.style.removeProperty('font-size');var f=parseFloat(getComputedStyle(e).fontSize),n=0;
+    while(tooWide(e)&&f>9&&n<48){f-=0.25;n++;e.style.fontSize=f+'px';}});}
+  function run(){fit();if(window.requestAnimationFrame)requestAnimationFrame(fit);}
+  run();var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(run,120);});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run);window.addEventListener('load',run);
+})();
+</script>
+<script>
+/* Welcome to my mission: the heading is a button that opens the intro in a closeable pop-up. */
+(function(){
+  var btn=document.getElementById('hello-mission'),dlg=document.getElementById('mission-dlg');
+  if(!btn||!dlg)return;
+  var closer=dlg.querySelector('.mission-dlg-x');
+  function open(){
+    if(typeof dlg.showModal==='function')dlg.showModal();
+    else dlg.setAttribute('open','');
+    btn.setAttribute('aria-expanded','true');
+  }
+  function close(){
+    if(typeof dlg.close==='function'&&dlg.open)dlg.close();
+    else dlg.removeAttribute('open');
+    btn.setAttribute('aria-expanded','false');
+    if(typeof btn.focus==='function')btn.focus();
+  }
+  btn.addEventListener('click',function(){ if(dlg.open) close(); else open(); });
+  if(closer)closer.addEventListener('click',function(e){e.preventDefault();close();});
+  dlg.addEventListener('click',function(e){ if(e.target===dlg) close(); });
+  dlg.addEventListener('close',function(){ btn.setAttribute('aria-expanded','false'); });
+  dlg.addEventListener('keydown',function(e){ if(e.key==='Escape'&&dlg.open&&typeof dlg.close!=='function'){e.preventDefault();close();} });
+})();
+</script>
+<script src="/assets/trd/onair.js?v=20261121a" defer data-trd-keep></script>
+</body>
+</html>

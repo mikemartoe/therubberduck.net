@@ -1,0 +1,1188 @@
+{
+  "Videos": {
+    "es": "Vídeos",
+    "fr": "Vidéos",
+    "fr-ca": "Vidéos",
+    "de": "Videos",
+    "nl": "Video’s",
+    "ja": "動画",
+    "en-au": "Videos"
+  },
+  "Recordings": {
+    "es": "Grabaciones",
+    "fr": "Enregistrements",
+    "fr-ca": "Enregistrements",
+    "de": "Aufnahmen",
+    "nl": "Opnamen",
+    "ja": "録音",
+    "en-au": "Recordings"
+  },
+  "PDFs": {
+    "es": "PDF",
+    "fr": "PDF",
+    "fr-ca": "PDF",
+    "de": "PDFs",
+    "nl": "PDF’s",
+    "ja": "PDF",
+    "en-au": "PDFs"
+  },
+  "Photo Search": {
+    "es": "Búsqueda de fotos",
+    "fr": "Recherche photo",
+    "fr-ca": "Recherche de photos",
+    "de": "Fotosuche",
+    "nl": "Fotozoeken",
+    "ja": "写真検索",
+    "en-au": "Photo Search"
+  },
+  "Memes": {
+    "es": "Memes",
+    "fr": "Mèmes",
+    "fr-ca": "Mèmes",
+    "de": "Memes",
+    "nl": "Memes",
+    "ja": "ミーム",
+    "en-au": "Memes"
+  },
+  "X Archive": {
+    "es": "Archivo de X",
+    "fr": "Archive X",
+    "fr-ca": "Archive X",
+    "de": "X-Archiv",
+    "nl": "X-archief",
+    "ja": "Xアーカイブ",
+    "en-au": "X Archive"
+  },
+  "Book": {
+    "es": "Libro",
+    "fr": "Livre",
+    "fr-ca": "Livre",
+    "de": "Buch",
+    "nl": "Boek",
+    "ja": "本",
+    "en-au": "Book"
+  },
+  "Sponsor the Site": {
+    "es": "Patrocina el sitio",
+    "fr": "Sponsoring du site",
+    "fr-ca": "Commanditez le site",
+    "de": "Die Seite sponsern",
+    "nl": "Sponsor de site",
+    "ja": "サイトをスポンサーする",
+    "en-au": "Sponsor the Site"
+  },
+  "The archive": {
+    "es": "El archivo",
+    "fr": "L’archive",
+    "fr-ca": "L’archive",
+    "de": "Das Archiv",
+    "nl": "Het archief",
+    "ja": "アーカイブ",
+    "en-au": "The archive"
+  },
+  "Support": {
+    "es": "Apoyo",
+    "fr": "Soutien",
+    "fr-ca": "Soutien",
+    "de": "Unterstützung",
+    "nl": "Steun",
+    "ja": "支援",
+    "en-au": "Support"
+  },
+  "Contact": {
+    "es": "Contacto",
+    "fr": "Contact",
+    "fr-ca": "Contact",
+    "de": "Kontakt",
+    "nl": "Contact",
+    "ja": "連絡先",
+    "en-au": "Contact"
+  },
+  "The book (Gumroad)": {
+    "es": "El libro (Gumroad)",
+    "fr": "Le livre (Gumroad)",
+    "fr-ca": "Le livre (Gumroad)",
+    "de": "Das Buch (Gumroad)",
+    "nl": "Het boek (Gumroad)",
+    "ja": "本（Gumroad）",
+    "en-au": "The book (Gumroad)"
+  },
+  "Message @TheRubberDuck79 on X": {
+    "es": "Escribe a @TheRubberDuck79 en X",
+    "fr": "Écrire à @TheRubberDuck79 sur X",
+    "fr-ca": "Écrire à @TheRubberDuck79 sur X",
+    "de": "@TheRubberDuck79 auf X schreiben",
+    "nl": "Stuur @TheRubberDuck79 een bericht op X",
+    "ja": "Xで @TheRubberDuck79 にメッセージ",
+    "en-au": "Message @TheRubberDuck79 on X"
+  },
+  "Email: therubberduk@gmail.com": {
+    "es": "Correo: therubberduk@gmail.com",
+    "fr": "E-mail : therubberduk@gmail.com",
+    "fr-ca": "Courriel : therubberduk@gmail.com",
+    "de": "E-Mail: therubberduk@gmail.com",
+    "nl": "E-mail: therubberduk@gmail.com",
+    "ja": "メール: therubberduk@gmail.com",
+    "en-au": "Email: therubberduk@gmail.com"
+  },
+  "Order and sponsor questions on X": {
+    "es": "Pedidos y patrocinio, por X",
+    "fr": "Commandes et sponsoring, sur X",
+    "fr-ca": "Commandes et commandites, sur X",
+    "de": "Bestell- und Sponsorenfragen auf X",
+    "nl": "Vragen over bestellingen en sponsoring op X",
+    "ja": "ご注文・スポンサーの質問はXへ",
+    "en-au": "Order and sponsor questions on X"
+  },
+  "Suggestion box": {
+    "es": "Buzón de sugerencias",
+    "fr": "Boîte à suggestions",
+    "fr-ca": "Boîte à suggestions",
+    "de": "Briefkasten für Ideen",
+    "nl": "Suggestiebox",
+    "ja": "ご意見箱",
+    "en-au": "Suggestion box"
+  },
+  "Follow @TheRubberDuck79": {
+    "es": "Sigue a @TheRubberDuck79",
+    "fr": "Suivre @TheRubberDuck79",
+    "fr-ca": "Suivre @TheRubberDuck79",
+    "de": "@TheRubberDuck79 folgen",
+    "nl": "Volg @TheRubberDuck79",
+    "ja": "@TheRubberDuck79 をフォロー",
+    "en-au": "Follow @TheRubberDuck79"
+  },
+  "An open archive of the Q era: every Q drop, the shows, X Space recordings, PDFs, memes and 100,000+ Twitter/X posts.": {
+    "es": "Un archivo abierto de la era Q: cada Q drop, los programas, grabaciones de X Spaces, PDF, memes y más de 100.000 publicaciones de Twitter/X.",
+    "fr": "Une archive ouverte de l’ère Q : chaque Q drop, les émissions, les enregistrements d’X Spaces, les PDF, les mèmes et plus de 100 000 publications Twitter/X.",
+    "fr-ca": "Une archive ouverte de l’ère Q : chaque Q drop, les émissions, les enregistrements d’X Spaces, les PDF, les mèmes et plus de 100 000 publications Twitter/X.",
+    "de": "Ein offenes Archiv der Q-Ära: jeder Q drop, die Sendungen, X-Spaces-Aufnahmen, PDFs, Memes und mehr als 100.000 Twitter/X-Beiträge.",
+    "nl": "Een open archief van het Q-tijdperk: elke Q drop, de shows, X Spaces-opnamen, PDF’s, memes en meer dan 100.000 Twitter/X-berichten.",
+    "ja": "Qの時代の公開アーカイブ。すべてのQ drop、番組、X Spacesの録音、PDF、ミーム、そして10万件を超えるTwitter/X投稿。",
+    "en-au": "An open archive of the Q era: every Q drop, the shows, X Space recordings, PDFs, memes and 100,000+ Twitter/X posts."
+  },
+  "An open archive of the Q era: every Q drop, the shows, X Space recordings, PDFs, memes and 62,975 X posts.": {
+    "es": "Un archivo abierto de la era Q: cada Q drop, los programas, grabaciones de X Spaces, PDF, memes y 62.975 publicaciones de X.",
+    "fr": "Une archive ouverte de l’ère Q : chaque Q drop, les émissions, les enregistrements d’X Spaces, les PDF, les mèmes et 62 975 publications X.",
+    "fr-ca": "Une archive ouverte de l’ère Q : chaque Q drop, les émissions, les enregistrements d’X Spaces, les PDF, les mèmes et 62 975 publications X.",
+    "de": "Ein offenes Archiv der Q-Ära: jeder Q drop, die Sendungen, X-Spaces-Aufnahmen, PDFs, Memes und 62.975 X-Beiträge.",
+    "nl": "Een open archief van het Q-tijdperk: elke Q drop, de shows, X Spaces-opnamen, PDF’s, memes en 62.975 X-berichten.",
+    "ja": "Qの時代の公開アーカイブ。すべてのQ drop、番組、X Spacesの録音、PDF、ミーム、そして62,975件のX投稿。",
+    "en-au": "An open archive of the Q era: every Q drop, the shows, X Space recordings, PDFs, memes and 62,975 X posts."
+  },
+  "Disclaimer: this is an independent archive of public posts, documents and recordings, kept for research and commentary. Third-party material belongs to its owners and is shown for reference. Nothing here is financial, legal or medical advice. Not affiliated with X, Spotify, Rumble, Gumroad or Buy Me a Coffee.": {
+    "es": "Aviso: este es un archivo independiente de publicaciones, documentos y grabaciones públicas, conservado para investigación y comentario. El material de terceros pertenece a sus dueños y se muestra como referencia. Nada de lo aquí contenido es consejo financiero, legal o médico. No está afiliado a X, Spotify, Rumble, Gumroad ni Buy Me a Coffee.",
+    "fr": "Avertissement : il s’agit d’une archive indépendante de publications, documents et enregistrements publics, conservée à des fins de recherche et de commentaire. Les contenus de tiers appartiennent à leurs titulaires et sont montrés à titre de référence. Rien ici ne constitue un conseil financier, juridique ou médical. Sans affiliation avec X, Spotify, Rumble, Gumroad ou Buy Me a Coffee.",
+    "fr-ca": "Avis : il s’agit d’une archive indépendante de publications, documents et enregistrements publics, conservée à des fins de recherche et de commentaire. Les contenus de tiers appartiennent à leurs titulaires et sont montrés à titre de référence. Rien ici ne constitue un conseil financier, juridique ou médical. Sans affiliation avec X, Spotify, Rumble, Gumroad ou Buy Me a Coffee.",
+    "de": "Hinweis: Dies ist ein unabhängiges Archiv öffentlicher Beiträge, Dokumente und Aufnahmen, geführt für Forschung und Kommentar. Material Dritter gehört den Rechteinhabern und wird zur Referenz gezeigt. Nichts hiervon ist finanzielle, rechtliche oder medizinische Beratung. Keine Verbindung zu X, Spotify, Rumble, Gumroad oder Buy Me a Coffee.",
+    "nl": "Let op: dit is een onafhankelijk archief van openbare berichten, documenten en opnamen, bijgehouden voor onderzoek en commentaar. Materiaal van derden blijft van de rechthebbenden en wordt ter referentie getoond. Niets hiervan is financieel, juridisch of medisch advies. Niet verbonden met X, Spotify, Rumble, Gumroad of Buy Me a Coffee.",
+    "ja": "注記：これは公開された投稿・文書・録音の独立したアーカイブであり、研究と論評のために保管しています。第三者の素材の権利は権利者にあり、参考として示しています。ここに金融・法律・医療の助言はありません。X、Spotify、Rumble、Gumroad、Buy Me a Coffeeとは提携していません。",
+    "en-au": "Disclaimer: this is an independent archive of public posts, documents and recordings, kept for research and commentary. Third-party material belongs to its owners and is shown for reference. Nothing here is financial, legal or medical advice. Not affiliated with X, Spotify, Rumble, Gumroad or Buy Me a Coffee."
+  },
+  "All rights reserved.": {
+    "es": "Todos los derechos reservados.",
+    "fr": "Tous droits réservés.",
+    "fr-ca": "Tous droits réservés.",
+    "de": "Alle Rechte vorbehalten.",
+    "nl": "Alle rechten voorbehouden.",
+    "ja": "無断転載を禁じます。",
+    "en-au": "All rights reserved."
+  },
+  "Rooms": {
+    "es": "Salas",
+    "fr": "Salles",
+    "fr-ca": "Salles",
+    "de": "Räume",
+    "nl": "Kamers",
+    "ja": "ルーム",
+    "en-au": "Rooms"
+  },
+  "Skip to content": {
+    "es": "Saltar al contenido",
+    "fr": "Aller au contenu",
+    "fr-ca": "Aller au contenu",
+    "de": "Zum Inhalt",
+    "nl": "Naar de inhoud",
+    "ja": "本文へ",
+    "en-au": "Skip to content"
+  },
+  "Search the ledger": {
+    "es": "Buscar en el ledger",
+    "fr": "Chercher dans le ledger",
+    "fr-ca": "Chercher dans le ledger",
+    "de": "Das Ledger durchsuchen",
+    "nl": "Zoek in de ledger",
+    "ja": "Ledgerを検索",
+    "en-au": "Search the ledger"
+  },
+  "Video Room": {
+    "es": "Sala de vídeo",
+    "fr": "Salle vidéo",
+    "fr-ca": "Salle vidéo",
+    "de": "Videoraum",
+    "nl": "Videokamer",
+    "ja": "ビデオルーム",
+    "en-au": "Video Room"
+  },
+  "Listening Room": {
+    "es": "Sala de escucha",
+    "fr": "Salle d’écoute",
+    "fr-ca": "Salle d’écoute",
+    "de": "Hörraum",
+    "nl": "Luisterkamer",
+    "ja": "リスニングルーム",
+    "en-au": "Listening Room"
+  },
+  "Meme Dump": {
+    "es": "Meme Dump",
+    "fr": "Meme Dump",
+    "fr-ca": "Meme Dump",
+    "de": "Meme Dump",
+    "nl": "Meme Dump",
+    "ja": "Meme Dump",
+    "en-au": "Meme Dump"
+  },
+  "Home": {
+    "es": "Inicio",
+    "fr": "Accueil",
+    "fr-ca": "Accueil",
+    "de": "Start",
+    "nl": "Home",
+    "ja": "ホーム",
+    "en-au": "Home"
+  },
+  "Close": {
+    "es": "Cerrar",
+    "fr": "Fermer",
+    "fr-ca": "Fermer",
+    "de": "Schließen",
+    "nl": "Sluiten",
+    "ja": "閉じる",
+    "en-au": "Close"
+  },
+  "WELCOME TO MY MISSION": {
+    "es": "BIENVENIDOS A MI MISIÓN",
+    "fr": "BIENVENUE DANS MA MISSION",
+    "fr-ca": "BIENVENUE DANS MA MISSION",
+    "de": "WILLKOMMEN BEI MEINER MISSION",
+    "nl": "WELKOM BIJ MIJN MISSIE",
+    "ja": "私のミッションへようこそ",
+    "en-au": "WELCOME TO MY MISSION"
+  },
+  "in this site you will find all of the research, work and data I've created, collected and curated - in support of my mission - over the last 10 years. all free, and all forensically searchable; my entire Twitter archive, every authentic Q drop, every meme, all podcasts and X spaces, every document declassified over the last decade, The Red Pill Album, all movies, documentaries, tv shows and clips created to WAKE YOU UP TO THE TRUTH.": {
+    "es": "en este sitio encontrarás toda la investigación, el trabajo y los datos que he creado, reunido y curado —en apoyo de mi misión— en los últimos 10 años. todo gratis y todo buscable de forma forense; todo mi archivo de Twitter, cada Q drop auténtico, cada meme, todos los pódcast y X Spaces, cada documento desclasificado de la última década, The Red Pill Album, y todas las películas, documentales, series y clips creados para DESPERTARTE A LA VERDAD.",
+    "fr": "sur ce site vous trouverez toutes les recherches, tout le travail et toutes les données que j’ai créés, rassemblés et organisés — au service de ma mission — depuis 10 ans. le tout gratuit, et intégralement searchable de façon forensique ; toute mon archive Twitter, chaque Q drop authentique, chaque mème, tous les podcasts et X Spaces, chaque document déclassifié de la dernière décennie, The Red Pill Album, tous les films, documentaires, séries et extraits conçus pour VOUS RÉVEILLER À LA VÉRITÉ.",
+    "fr-ca": "sur ce site vous trouverez toutes les recherches, tout le travail et toutes les données que j’ai créés, rassemblés et organisés — au service de ma mission — depuis 10 ans. le tout gratuit, et entièrement interrogeable de façon forensique ; toute mon archive Twitter, chaque Q drop authentique, chaque mème, tous les balados et X Spaces, chaque document déclassifié de la dernière décennie, The Red Pill Album, tous les films, documentaires, émissions et extraits conçus pour VOUS RÉVEILLER À LA VÉRITÉ.",
+    "de": "auf dieser Seite findest du die gesamte Forschung, die Arbeit und die Daten, die ich in den letzten 10 Jahren — im Dienst meiner Mission — erstellt, gesammelt und kuratiert habe. alles kostenlos und forensisch durchsuchbar; mein gesamtes Twitter-Archiv, jeder authentische Q drop, jedes Meme, alle Podcasts und X Spaces, jedes in diesem Jahrzehnt freigegebene Dokument, The Red Pill Album, alle Filme, Dokumentationen, Serien und Clips, die gemacht wurden, um DICH FÜR DIE WAHRHEIT AUFZUWECKEN.",
+    "nl": "op deze site vind je al het onderzoek, het werk en de data die ik de afgelopen 10 jaar — ter ondersteuning van mijn missie — heb gemaakt, verzameld en samengesteld. allemaal gratis, en allemaal forensisch doorzoekbaar; mijn volledige Twitter-archief, elke authentieke Q drop, elke meme, alle podcasts en X Spaces, elk document dat het afgelopen decennium is vrijgegeven, The Red Pill Album, alle films, documentaires, series en clips die zijn gemaakt om JE WAKKER TE SCHUDDEN TOT DE WAARHEID.",
+    "ja": "このサイトには、私がミッションのためにこの10年で作り、集め、整えてきた調査・仕事・データのすべてがあります。すべて無料で、すべて検証できるように検索できます。私のTwitterアーカイブ全体、本物のQ dropのすべて、すべてのミーム、すべてのポッドキャストとX Spaces、この10年で機密解除された文書、The Red Pill Album、そして真実に目を覚ますために作られた映画・ドキュメンタリー・番組・クリップのすべてです。",
+    "en-au": "in this site you will find all of the research, work and data I've created, collected and curated - in support of my mission - over the last 10 years. all free, and all forensically searchable; my entire Twitter archive, every authentic Q drop, every meme, all podcasts and X spaces, every document declassified over the last decade, The Red Pill Album, all movies, documentaries, tv shows and clips created to WAKE YOU UP TO THE TRUTH."
+  },
+  "this site will self-delete before being paywalled - so if you like what you see here - see below and consider supporting the site by visiting the store, becoming a site sponsor or supporting me and my mission.": {
+    "es": "este sitio se borrará a sí mismo antes de ponerse detrás de un muro de pago; si te gusta lo que ves, mira más abajo y valora apoyar el sitio visitando la tienda, haciéndote patrocinador o apoyándome a mí y a mi misión.",
+    "fr": "ce site s’effacera de lui-même plutôt que de passer derrière un paywall — si ce que vous voyez ici vous plaît, voyez plus bas et envisagez de soutenir le site en visitant la boutique, en devenant sponsor, ou en me soutenant, moi et ma mission.",
+    "fr-ca": "ce site s’effacera de lui-même plutôt que de passer derrière un paywall — si ce que vous voyez ici vous plaît, voyez plus bas et envisagez de soutenir le site en visitant la boutique, en devenant commanditaire, ou en me soutenant, moi et ma mission.",
+    "de": "diese Seite löscht sich selbst, bevor sie hinter eine Bezahlschranke wandert — wenn dir gefällt, was du siehst, schau nach unten und unterstütze die Seite im Shop, als Sponsor, oder indem du mich und meine Mission unterstützt.",
+    "nl": "deze site wist zichzelf liever dan achter een betaalmuur te verdwijnen — als je mooi vindt wat je hier ziet, kijk hieronder en overweeg de site te steunen via de winkel, als sponsor, of door mij en mijn missie te steunen.",
+    "ja": "このサイトは有料化される前に自ら削除します。気に入っていただけたなら、下を見て、ショップを訪れる、スポンサーになる、あるいは私と私のミッションを支援することを検討してください。",
+    "en-au": "this site will self-delete before being paywalled - so if you like what you see here - see below and consider supporting the site by visiting the store, becoming a site sponsor or supporting me and my mission."
+  },
+  "God Bless, TRD": {
+    "es": "God Bless, TRD",
+    "fr": "God Bless, TRD",
+    "fr-ca": "God Bless, TRD",
+    "de": "God Bless, TRD",
+    "nl": "God Bless, TRD",
+    "ja": "God Bless, TRD",
+    "en-au": "God Bless, TRD"
+  },
+  "Keep the tape rolling": {
+    "es": "Que siga rodando la cinta",
+    "fr": "Que la bande tourne encore",
+    "fr-ca": "Que la bande tourne encore",
+    "de": "Die Band weiterlaufen lassen",
+    "nl": "Houd de band aan het rollen",
+    "ja": "テープを回し続けよう",
+    "en-au": "Keep the tape rolling"
+  },
+  "Support the archive": {
+    "es": "Apoya el archivo",
+    "fr": "Soutenir l’archive",
+    "fr-ca": "Soutenir l’archive",
+    "de": "Das Archiv unterstützen",
+    "nl": "Steun het archief",
+    "ja": "アーカイブを支援する",
+    "en-au": "Support the archive"
+  },
+  "The archive is free to use and carries no ads. It runs on people who back the Duck, sponsors, the shop, the book and the odd coffee.": {
+    "es": "El archivo es de uso gratuito y no lleva anuncios. Lo sostienen quienes apoyan al Duck, los patrocinadores, la tienda, el libro y el café de vez en cuando.",
+    "fr": "L’archive est libre d’accès et sans publicité. Elle tient grâce à celles et ceux qui soutiennent le Duck, aux sponsors, à la boutique, au livre et au café de temps en temps.",
+    "fr-ca": "L’archive est libre d’accès et sans publicité. Elle tient grâce à celles et ceux qui appuient le Duck, aux commanditaires, à la boutique, au livre et au café de temps à autre.",
+    "de": "Das Archiv ist kostenlos und ohne Werbung. Es trägt sich durch Menschen, die den Duck unterstützen, durch Sponsoren, den Shop, das Buch und den gelegentlichen Kaffee.",
+    "nl": "Het archief is gratis te gebruiken en heeft geen advertenties. Het draait op mensen die de Duck steunen, op sponsors, de winkel, het boek en af en toe een koffie.",
+    "ja": "このアーカイブは無料で、広告はありません。Duckを支える人、スポンサー、ショップ、本、そしてときどきのコーヒーで成り立っています。",
+    "en-au": "The archive is free to use and carries no ads. It runs on people who back the Duck, sponsors, the shop, the book and the odd coffee."
+  },
+  "If you can, a few dollars a month helps keep this archive going. No paywall.": {
+    "es": "Si puedes, unos pocos dólares al mes ayudan a mantener este archivo. Sin muro de pago.",
+    "fr": "Si vous le pouvez, quelques dollars par mois aident à faire vivre cette archive. Pas de paywall.",
+    "fr-ca": "Si vous le pouvez, quelques dollars par mois aident à faire vivre cette archive. Pas de mur payant.",
+    "de": "Wenn du kannst, helfen ein paar Dollar im Monat, dieses Archiv am Laufen zu halten. Keine Bezahlschranke.",
+    "nl": "Als het kan, helpen een paar dollar per maand dit archief in de lucht te houden. Geen betaalmuur.",
+    "ja": "もしよければ、月に数ドルでこのアーカイブを続けられます。有料の壁はありません。",
+    "en-au": "If you can, a few dollars a month helps keep this archive going. No paywall."
+  },
+  "See monthly options": {
+    "es": "Ver opciones mensuales",
+    "fr": "Voir les options mensuelles",
+    "fr-ca": "Voir les options mensuelles",
+    "de": "Monatliche Optionen ansehen",
+    "nl": "Bekijk maandopties",
+    "ja": "月額の選択肢を見る",
+    "en-au": "See monthly options"
+  },
+  "See sponsorship": {
+    "es": "Ver el patrocinio",
+    "fr": "Voir le sponsoring",
+    "fr-ca": "Voir la commandite",
+    "de": "Sponsoring ansehen",
+    "nl": "Bekijk sponsoring",
+    "ja": "スポンサーについて見る",
+    "en-au": "See sponsorship"
+  },
+  "Visit the shop": {
+    "es": "Visitar la tienda",
+    "fr": "Visiter la boutique",
+    "fr-ca": "Visiter la boutique",
+    "de": "Zum Shop",
+    "nl": "Naar de winkel",
+    "ja": "ショップを見る",
+    "en-au": "Visit the shop"
+  },
+  "Get the book": {
+    "es": "Conseguir el libro",
+    "fr": "Obtenir le livre",
+    "fr-ca": "Obtenir le livre",
+    "de": "Das Buch holen",
+    "nl": "Haal het boek",
+    "ja": "本を入手",
+    "en-au": "Get the book"
+  },
+  "The shop": {
+    "es": "La tienda",
+    "fr": "La boutique",
+    "fr-ca": "La boutique",
+    "de": "Der Shop",
+    "nl": "De winkel",
+    "ja": "ショップ",
+    "en-au": "The shop"
+  },
+  "The book": {
+    "es": "El libro",
+    "fr": "Le livre",
+    "fr-ca": "Le livre",
+    "de": "Das Buch",
+    "nl": "Het boek",
+    "ja": "本",
+    "en-au": "The book"
+  },
+  "Caps, tees, mugs and signed pieces": {
+    "es": "Gorras, camisetas, tazas y piezas firmadas",
+    "fr": "Casquettes, t-shirts, mugs et pièces dédicacées",
+    "fr-ca": "Casquettes, t-shirts, tasses et pièces dédicacées",
+    "de": "Caps, Shirts, Tassen und signierte Stücke",
+    "nl": "Petten, T-shirts, mokken en gesigneerde stukken",
+    "ja": "キャップ、Tシャツ、マグ、サイン入りアイテム",
+    "en-au": "Caps, tees, mugs and signed pieces"
+  },
+  "The hardcover, on Gumroad": {
+    "es": "La edición de tapa dura, en Gumroad",
+    "fr": "L’édition reliée, sur Gumroad",
+    "fr-ca": "L’édition reliée, sur Gumroad",
+    "de": "Das Hardcover, auf Gumroad",
+    "nl": "De hardcover, op Gumroad",
+    "ja": "ハードカバー、Gumroadで",
+    "en-au": "The hardcover, on Gumroad"
+  },
+  "Support my mission": {
+    "es": "Apoya mi misión",
+    "fr": "Soutenir ma mission",
+    "fr-ca": "Soutenir ma mission",
+    "de": "Meine Mission unterstützen",
+    "nl": "Steun mijn missie",
+    "ja": "私のミッションを支援する",
+    "en-au": "Support my mission"
+  },
+  "Any amount, one time": {
+    "es": "Cualquier cantidad, una sola vez",
+    "fr": "N’importe quel montant, une seule fois",
+    "fr-ca": "N’importe quel montant, une seule fois",
+    "de": "Jeder Betrag, einmalig",
+    "nl": "Elk bedrag, eenmalig",
+    "ja": "金額は自由、一回限り",
+    "en-au": "Any amount, one time"
+  },
+  "or pay once: $100 for 3 months, $175 for 6, $500 for 12": {
+    "es": "o un solo pago: 100 $ por 3 meses, 175 $ por 6, 500 $ por 12",
+    "fr": "ou un paiement unique : 100 $ pour 3 mois, 175 $ pour 6, 500 $ pour 12",
+    "fr-ca": "ou un paiement unique : 100 $ pour 3 mois, 175 $ pour 6, 500 $ pour 12",
+    "de": "oder einmalig: 100 $ für 3 Monate, 175 $ für 6, 500 $ für 12",
+    "nl": "of eenmalig: $100 voor 3 maanden, $175 voor 6, $500 voor 12",
+    "ja": "または一括：3か月100ドル、6か月175ドル、12か月500ドル",
+    "en-au": "or pay once: US$100 for 3 months, US$175 for 6, US$500 for 12"
+  },
+  "a month": {
+    "es": "al mes",
+    "fr": "par mois",
+    "fr-ca": "par mois",
+    "de": "im Monat",
+    "nl": "per maand",
+    "ja": "月額",
+    "en-au": "a month"
+  },
+  "Site Sponsors": {
+    "es": "Patrocinadores del sitio",
+    "fr": "Sponsors du site",
+    "fr-ca": "Commanditaires du site",
+    "de": "Sponsoren der Seite",
+    "nl": "Sitesponsors",
+    "ja": "サイトスポンサー",
+    "en-au": "Site Sponsors"
+  },
+  "Stereo cassette deck": {
+    "es": "Platina de cassette estéreo",
+    "fr": "Platine cassette stéréo",
+    "fr-ca": "Platine cassette stéréo",
+    "de": "Stereo-Kassettendeck",
+    "nl": "Stereo-cassettedeck",
+    "ja": "ステレオカセットデッキ",
+    "en-au": "Stereo cassette deck"
+  },
+  "Press play to start the album. Open player": {
+    "es": "Pulsa play para empezar el álbum. Abrir el reproductor",
+    "fr": "Appuyez sur lecture pour lancer l’album. Ouvrir le lecteur",
+    "fr-ca": "Appuyez sur lecture pour lancer l’album. Ouvrir le lecteur",
+    "de": "Play drücken, um das Album zu starten. Player öffnen",
+    "nl": "Druk op play om het album te starten. Speler openen",
+    "ja": "再生してアルバムを始める。プレーヤーを開く",
+    "en-au": "Press play to start the album. Open player"
+  },
+  "22 tracks": {
+    "es": "22 temas",
+    "fr": "22 titres",
+    "fr-ca": "22 pistes",
+    "de": "22 Titel",
+    "nl": "22 nummers",
+    "ja": "22曲",
+    "en-au": "22 tracks"
+  },
+  "Side A": {
+    "es": "Cara A",
+    "fr": "Face A",
+    "fr-ca": "Face A",
+    "de": "Seite A",
+    "nl": "Kant A",
+    "ja": "サイドA",
+    "en-au": "Side A"
+  },
+  "Play": {
+    "es": "Play",
+    "fr": "Lecture",
+    "fr-ca": "Lecture",
+    "de": "Play",
+    "nl": "Play",
+    "ja": "再生",
+    "en-au": "Play"
+  },
+  "Caps · Tees · The Book · Signed Pieces": {
+    "es": "Gorras · Camisetas · El libro · Piezas firmadas",
+    "fr": "Casquettes · T-shirts · Le livre · Pièces dédicacées",
+    "fr-ca": "Casquettes · T-shirts · Le livre · Pièces dédicacées",
+    "de": "Caps · Shirts · Das Buch · Signierte Stücke",
+    "nl": "Petten · T-shirts · Het boek · Gesigneerde stukken",
+    "ja": "キャップ · Tシャツ · 本 · サイン入り",
+    "en-au": "Caps · Tees · The Book · Signed Pieces"
+  },
+  "The site stays free. Every hat, tee, book and sticker you pick up here supports The Rubber Duck and keeps the site running. Tap any card to flip it over. We ship to US addresses only. Questions about an order? Email": {
+    "es": "El sitio sigue siendo gratuito. Cada gorra, camiseta, libro y pegatina que llevas de aquí apoya a The Rubber Duck y mantiene el sitio en marcha. Toca cualquier tarjeta para darle la vuelta. Enviamos solo a direcciones de EE. UU. ¿Dudas sobre un pedido? Escribe a",
+    "fr": "Le site reste gratuit. Chaque casquette, t-shirt, livre et sticker que vous prenez ici soutient The Rubber Duck et fait vivre le site. Touchez une carte pour la retourner. Nous livrons uniquement aux adresses aux États-Unis. Une question sur une commande ? Écrivez à",
+    "fr-ca": "Le site reste gratuit. Chaque casquette, t-shirt, livre et autocollant que vous prenez ici appuie The Rubber Duck et fait vivre le site. Touchez une carte pour la retourner. Nous livrons uniquement aux adresses aux États-Unis. Une question sur une commande ? Écrivez à",
+    "de": "Die Seite bleibt kostenlos. Jede Cap, jedes Shirt, Buch und Sticker, das du hier mitnimmst, unterstützt The Rubber Duck und hält die Seite am Laufen. Tippe auf eine Karte, um sie umzudrehen. Wir versenden nur an US-Adressen. Fragen zu einer Bestellung? Schreib an",
+    "nl": "De site blijft gratis. Elke pet, elk T-shirt, boek en sticker die je hier meeneemt, steunt The Rubber Duck en houdt de site draaiende. Tik op een kaart om hem om te draaien. We verzenden alleen naar adressen in de VS. Vragen over een bestelling? Mail",
+    "ja": "サイトは無料のままです。ここで手に取っていただく帽子、Tシャツ、本、ステッカーのすべてが The Rubber Duck を支え、サイトを続けます。カードをタップすると裏返ります。発送は米国内の住所のみです。ご注文の質問はメールで",
+    "en-au": "The site stays free. Every hat, tee, book and sticker you pick up here supports The Rubber Duck and keeps the site running. Tap any card to flip it over. Prices are in US dollars (USD). This shop lists US shipping only; delivery to Australia is not offered on these pages. Questions about an order? Email"
+  },
+  "Made to order": {
+    "es": "Hecho por encargo",
+    "fr": "Fabriqué à la commande",
+    "fr-ca": "Fabriqué sur commande",
+    "de": "Auf Bestellung gefertigt",
+    "nl": "Op bestelling gemaakt",
+    "ja": "受注生産",
+    "en-au": "Made to order"
+  },
+  "Stitched or printed": {
+    "es": "Bordado o impreso",
+    "fr": "Brodé ou imprimé",
+    "fr-ca": "Brodé ou imprimé",
+    "de": "Gestickt oder gedruckt",
+    "nl": "Geborduurd of bedrukt",
+    "ja": "刺繍またはプリント",
+    "en-au": "Stitched or printed"
+  },
+  "US shipping only": {
+    "es": "Envío solo a EE. UU.",
+    "fr": "Livraison uniquement aux États-Unis",
+    "fr-ca": "Livraison uniquement aux États-Unis",
+    "de": "Versand nur in die USA",
+    "nl": "Alleen verzending naar de VS",
+    "ja": "米国内発送のみ",
+    "en-au": "US shipping only — prices in USD"
+  },
+  "Ships in 3-8 business days": {
+    "es": "Envío en 3-8 días laborables",
+    "fr": "Expédié sous 3 à 8 jours ouvrés",
+    "fr-ca": "Expédié en 3 à 8 jours ouvrables",
+    "de": "Versand in 3–8 Werktagen",
+    "nl": "Verzending in 3-8 werkdagen",
+    "ja": "3〜8営業日で発送",
+    "en-au": "Ships in 3-8 business days (US only)"
+  },
+  "Signed pieces": {
+    "es": "Piezas firmadas",
+    "fr": "Pièces dédicacées",
+    "fr-ca": "Pièces dédicacées",
+    "de": "Signierte Stücke",
+    "nl": "Gesigneerde stukken",
+    "ja": "サイン入りアイテム",
+    "en-au": "Signed pieces"
+  },
+  "Ship in 2 to 3 weeks": {
+    "es": "Se envían en 2 a 3 semanas",
+    "fr": "Expédition sous 2 à 3 semaines",
+    "fr-ca": "Expédition en 2 à 3 semaines",
+    "de": "Versand in 2 bis 3 Wochen",
+    "nl": "Verzending in 2 tot 3 weken",
+    "ja": "2〜3週間で発送",
+    "en-au": "Ship in 2 to 3 weeks"
+  },
+  "Secure checkout": {
+    "es": "Pago seguro",
+    "fr": "Paiement sécurisé",
+    "fr-ca": "Paiement sécurisé",
+    "de": "Sichere Kasse",
+    "nl": "Veilig afrekenen",
+    "ja": "安全な決済",
+    "en-au": "Secure checkout"
+  },
+  "Paid through Stripe": {
+    "es": "Pago a través de Stripe",
+    "fr": "Payé via Stripe",
+    "fr-ca": "Payé via Stripe",
+    "de": "Zahlung über Stripe",
+    "nl": "Betaald via Stripe",
+    "ja": "Stripeで支払い",
+    "en-au": "Paid through Stripe"
+  },
+  "The TRD Promise": {
+    "es": "The TRD Promise",
+    "fr": "The TRD Promise",
+    "fr-ca": "The TRD Promise",
+    "de": "The TRD Promise",
+    "nl": "The TRD Promise",
+    "ja": "The TRD Promise",
+    "en-au": "The TRD Promise"
+  },
+  "If it’s listed here, it’s ours to deliver. Everything ships in our standard time. A few colors are special orders and may take up to 7 extra days; your card is only authorized, not charged, until we confirm your order. If we can’t fill it within those 7 days, every penny comes back to you.": {
+    "es": "Si aparece aquí, nos toca entregarlo. Todo se envía en nuestro plazo habitual. Algunos colores son encargos especiales y pueden tardar hasta 7 días más; tu tarjeta queda solo autorizada, no cobrada, hasta que confirmemos el pedido. Si no podemos servirlo en esos 7 días, te devolvemos hasta el último céntimo.",
+    "fr": "Si c’est listé ici, c’est à nous de le livrer. Tout part dans nos délais habituels. Quelques couleurs sont des commandes spéciales et peuvent prendre jusqu’à 7 jours de plus ; votre carte est seulement autorisée, non débitée, jusqu’à confirmation de la commande. Si nous ne pouvons pas honorer la commande dans ces 7 jours, chaque centime vous est rendu.",
+    "fr-ca": "Si c’est inscrit ici, c’est à nous de le livrer. Tout part dans nos délais habituels. Quelques couleurs sont des commandes spéciales et peuvent prendre jusqu’à 7 jours de plus ; votre carte est seulement autorisée, non débitée, jusqu’à confirmation de la commande. Si nous ne pouvons pas honorer la commande dans ces 7 jours, chaque cent revient vers vous.",
+    "de": "Was hier steht, liefern wir. Alles geht in unserer üblichen Zeit raus. Einige Farben sind Sonderbestellungen und können bis zu 7 Extra-Tage brauchen; deine Karte wird nur autorisiert, nicht belastet, bis wir die Bestellung bestätigt haben. Können wir sie in diesen 7 Tagen nicht erfüllen, kommt jeder Cent zurück.",
+    "nl": "Als het hier staat, leveren wij het. Alles gaat in onze standaardtijd de deur uit. Sommige kleuren zijn specials en kunnen tot 7 extra dagen duren; je kaart wordt alleen geautoriseerd, niet belast, tot we de bestelling bevestigen. Als we die 7 dagen niet halen, krijg je elke cent terug.",
+    "ja": "ここに載っているものは、私たちがお届けします。発送は通常の期間です。一部の色は特注で、最大7日ほど余分にかかる場合があります。ご注文を確認するまで、カードは与信のみで課金しません。その7日以内に用意できない場合は、全額をお返しします。",
+    "en-au": "If it’s listed here, it’s ours to deliver. Everything ships in our standard time. A few colours are special orders and may take up to 7 extra days; your card is only authorised, not charged, until we confirm your order. If we can’t fill it within those 7 days, every penny comes back to you. Prices are in USD; US shipping only."
+  },
+  "Christmas 2026 · shipping included": {
+    "es": "Navidad 2026 · envío incluido",
+    "fr": "Noël 2026 · livraison incluse",
+    "fr-ca": "Noël 2026 · livraison incluse",
+    "de": "Weihnachten 2026 · Versand inklusive",
+    "nl": "Kerst 2026 · verzending inbegrepen",
+    "ja": "クリスマス2026 · 送料込み",
+    "en-au": "Christmas 2026 · shipping included (US only, prices in USD)"
+  },
+  "How ordering works": {
+    "es": "Cómo funciona el pedido",
+    "fr": "Comment commander",
+    "fr-ca": "Comment commander",
+    "de": "So funktioniert die Bestellung",
+    "nl": "Zo werkt bestellen",
+    "ja": "ご注文の流れ",
+    "en-au": "How ordering works"
+  },
+  "Open": {
+    "es": "Abierto",
+    "fr": "Ouvert",
+    "fr-ca": "Ouvert",
+    "de": "Offen",
+    "nl": "Open",
+    "ja": "営業中",
+    "en-au": "Open"
+  },
+  "Coming Soon": {
+    "es": "Próximamente",
+    "fr": "Bientôt",
+    "fr-ca": "Bientôt",
+    "de": "Demnächst",
+    "nl": "Binnenkort",
+    "ja": "近日公開",
+    "en-au": "Coming Soon"
+  },
+  "Price": {
+    "es": "Precio",
+    "fr": "Prix",
+    "fr-ca": "Prix",
+    "de": "Preis",
+    "nl": "Prijs",
+    "ja": "価格",
+    "en-au": "Price (USD)"
+  },
+  "US shipping": {
+    "es": "Envío a EE. UU.",
+    "fr": "Livraison aux États-Unis",
+    "fr-ca": "Livraison aux États-Unis",
+    "de": "Versand in die USA",
+    "nl": "Verzending naar de VS",
+    "ja": "米国内発送",
+    "en-au": "US shipping (USD)"
+  },
+  "Made": {
+    "es": "Hecho",
+    "fr": "Fabriqué",
+    "fr-ca": "Fabriqué",
+    "de": "Hergestellt",
+    "nl": "Gemaakt",
+    "ja": "仕様",
+    "en-au": "Made"
+  },
+  "Size": {
+    "es": "Talla",
+    "fr": "Taille",
+    "fr-ca": "Taille",
+    "de": "Größe",
+    "nl": "Maat",
+    "ja": "サイズ",
+    "en-au": "Size"
+  },
+  "Colors": {
+    "es": "Colores",
+    "fr": "Couleurs",
+    "fr-ca": "Couleurs",
+    "de": "Farben",
+    "nl": "Kleuren",
+    "ja": "色",
+    "en-au": "Colours"
+  },
+  "Special order": {
+    "es": "Encargo especial",
+    "fr": "Commande spéciale",
+    "fr-ca": "Commande spéciale",
+    "de": "Sonderbestellung",
+    "nl": "Speciale bestelling",
+    "ja": "特注",
+    "en-au": "Special order"
+  },
+  "One size, adjustable": {
+    "es": "Talla única, ajustable",
+    "fr": "Taille unique, réglable",
+    "fr-ca": "Taille unique, ajustable",
+    "de": "Einheitsgröße, verstellbar",
+    "nl": "One size, verstelbaar",
+    "ja": "フリーサイズ、調整可",
+    "en-au": "One size, adjustable"
+  },
+  "See the $79 bundle": {
+    "es": "Ver el lote de 79 $",
+    "fr": "Voir le coffret à 79 $",
+    "fr-ca": "Voir le coffret à 79 $",
+    "de": "Das 79-$-Bundle ansehen",
+    "nl": "Bekijk het $79-bundel",
+    "ja": "79ドルのバンドルを見る",
+    "en-au": "See the US$79 bundle"
+  },
+  "See the $129 bundle": {
+    "es": "Ver el lote de 129 $",
+    "fr": "Voir le coffret à 129 $",
+    "fr-ca": "Voir le coffret à 129 $",
+    "de": "Das 129-$-Bundle ansehen",
+    "nl": "Bekijk het $129-bundel",
+    "ja": "129ドルのバンドルを見る",
+    "en-au": "See the US$129 bundle"
+  },
+  "Get The Rubber Duck updates by email": {
+    "es": "Recibe las novedades de The Rubber Duck por correo",
+    "fr": "Recevoir les nouvelles de The Rubber Duck par e-mail",
+    "fr-ca": "Recevoir les nouvelles de The Rubber Duck par courriel",
+    "de": "Updates von The Rubber Duck per E-Mail erhalten",
+    "nl": "Updates van The Rubber Duck per e-mail ontvangen",
+    "ja": "The Rubber Duck の更新をメールで受け取る",
+    "en-au": "Get The Rubber Duck updates by email"
+  },
+  "Join the list": {
+    "es": "Apúntate a la lista",
+    "fr": "Rejoindre la liste",
+    "fr-ca": "Joindre la liste",
+    "de": "Auf die Liste",
+    "nl": "Schrijf je in",
+    "ja": "リストに加わる",
+    "en-au": "Join the list"
+  },
+  "One short note when something new lands on The Rubber Duck: new drops in the archive, videos, books and collectibles. Nothing else.": {
+    "es": "Una nota breve cuando llega algo nuevo a The Rubber Duck: nuevos drops en el archivo, vídeos, libros y coleccionables. Nada más.",
+    "fr": "Une courte note quand quelque chose de nouveau arrive sur The Rubber Duck : nouveaux drops dans l’archive, vidéos, livres et objets. Rien d’autre.",
+    "fr-ca": "Une courte note quand quelque chose de nouveau arrive sur The Rubber Duck : nouveaux drops dans l’archive, vidéos, livres et objets. Rien d’autre.",
+    "de": "Eine kurze Notiz, wenn etwas Neues auf The Rubber Duck landet: neue Drops im Archiv, Videos, Bücher und Collectibles. Sonst nichts.",
+    "nl": "Een kort bericht als er iets nieuws op The Rubber Duck verschijnt: nieuwe drops in het archief, video’s, boeken en collectibles. Niets anders.",
+    "ja": "The Rubber Duck に新しいものが届いたときだけ、短いお知らせを送ります。アーカイブの新しいdrop、動画、本、コレクタブル。それ以外はありません。",
+    "en-au": "One short note when something new lands on The Rubber Duck: new drops in the archive, videos, books and collectibles. Nothing else."
+  },
+  "Email address": {
+    "es": "Dirección de correo",
+    "fr": "Adresse e-mail",
+    "fr-ca": "Adresse courriel",
+    "de": "E-Mail-Adresse",
+    "nl": "E-mailadres",
+    "ja": "メールアドレス",
+    "en-au": "Email address"
+  },
+  "We use your email only to send The Rubber Duck updates; unsubscribe any time with one click; we never sell or share it. You will get a confirmation email first.": {
+    "es": "Usamos tu correo solo para enviar novedades de The Rubber Duck; puedes darte de baja cuando quieras con un clic; nunca lo vendemos ni lo compartimos. Primero recibirás un correo de confirmación.",
+    "fr": "Nous n’utilisons votre e-mail que pour envoyer les nouvelles de The Rubber Duck ; désinscription en un clic, à tout moment ; nous ne le vendons ni ne le partageons jamais. Vous recevrez d’abord un e-mail de confirmation.",
+    "fr-ca": "Nous n’utilisons votre courriel que pour envoyer les nouvelles de The Rubber Duck ; désabonnement en un clic, en tout temps ; nous ne le vendons ni ne le partageons jamais. Vous recevrez d’abord un courriel de confirmation.",
+    "de": "Wir nutzen deine E-Mail nur für Updates von The Rubber Duck; jederzeit mit einem Klick abbestellen; wir verkaufen oder teilen sie nie. Zuerst kommt eine Bestätigungsmail.",
+    "nl": "We gebruiken je e-mail alleen voor updates van The Rubber Duck; je kunt je altijd met één klik uitschrijven; we verkopen of delen hem nooit. Je krijgt eerst een bevestigingsmail.",
+    "ja": "メールアドレスは The Rubber Duck の更新のお知らせにだけ使います。いつでもワンクリックで配信停止できます。販売も共有もしません。先に確認メールをお送りします。",
+    "en-au": "We use your email only to send The Rubber Duck updates; unsubscribe any time with one click; we never sell or share it. You will get a confirmation email first."
+  },
+  "One field.": {
+    "es": "Un solo campo.",
+    "fr": "Un seul champ.",
+    "fr-ca": "Un seul champ.",
+    "de": "Ein Feld.",
+    "nl": "Eén veld.",
+    "ja": "項目は一つだけ。",
+    "en-au": "One field."
+  },
+  "Just your email address.": {
+    "es": "Solo tu correo.",
+    "fr": "Juste votre e-mail.",
+    "fr-ca": "Juste votre courriel.",
+    "de": "Nur deine E-Mail-Adresse.",
+    "nl": "Alleen je e-mailadres.",
+    "ja": "メールアドレスだけです。",
+    "en-au": "Just your email address."
+  },
+  "Confirm first.": {
+    "es": "Primero, confirmar.",
+    "fr": "D’abord confirmer.",
+    "fr-ca": "D’abord confirmer.",
+    "de": "Zuerst bestätigen.",
+    "nl": "Eerst bevestigen.",
+    "ja": "まず確認します。",
+    "en-au": "Confirm first."
+  },
+  "We send one email to make sure it is really you.": {
+    "es": "Enviamos un correo para asegurarnos de que eres tú.",
+    "fr": "Nous envoyons un e-mail pour vérifier que c’est bien vous.",
+    "fr-ca": "Nous envoyons un courriel pour vérifier que c’est bien vous.",
+    "de": "Wir senden eine E-Mail, um sicherzugehen, dass du es bist.",
+    "nl": "We sturen één e-mail om te controleren dat jij het echt bent.",
+    "ja": "本当にあなたご本人か確認するメールを1通送ります。",
+    "en-au": "We send one email to make sure it is really you."
+  },
+  "Leave any time.": {
+    "es": "Márchate cuando quieras.",
+    "fr": "Partez quand vous voulez.",
+    "fr-ca": "Partez quand vous le voulez.",
+    "de": "Jederzeit wieder gehen.",
+    "nl": "Stop wanneer je wilt.",
+    "ja": "いつでもやめられます。",
+    "en-au": "Leave any time."
+  },
+  "Every email has a one-click unsubscribe link.": {
+    "es": "Cada correo lleva un enlace de baja de un clic.",
+    "fr": "Chaque e-mail contient un lien de désinscription en un clic.",
+    "fr-ca": "Chaque courriel contient un lien de désabonnement en un clic.",
+    "de": "Jede E-Mail hat einen Ein-Klick-Abmeldelink.",
+    "nl": "Elke e-mail heeft een uitschrijflink met één klik.",
+    "ja": "すべてのメールに、ワンクリックの配信停止リンクがあります。",
+    "en-au": "Every email has a one-click unsubscribe link."
+  },
+  "The archive stays free.": {
+    "es": "El archivo sigue siendo gratuito.",
+    "fr": "L’archive reste gratuite.",
+    "fr-ca": "L’archive reste gratuite.",
+    "de": "Das Archiv bleibt kostenlos.",
+    "nl": "Het archief blijft gratis.",
+    "ja": "アーカイブは無料のままです。",
+    "en-au": "The archive stays free."
+  },
+  "Business-Card Ads, $50 a Month": {
+    "es": "Anuncios tamaño tarjeta, 50 $ al mes",
+    "fr": "Annonces format carte de visite, 50 $ par mois",
+    "fr-ca": "Annonces format carte de visite, 50 $ par mois",
+    "de": "Visitenkarten-Anzeigen, 50 $ im Monat",
+    "nl": "Visitekaart-advertenties, $50 per maand",
+    "ja": "名刺サイズの広告、月額50ドル",
+    "en-au": "Business-Card Ads, US$50 a Month"
+  },
+  "Business-Card Ads · From $50 a Month": {
+    "es": "Anuncios tamaño tarjeta · Desde 50 $ al mes",
+    "fr": "Annonces format carte de visite · À partir de 50 $ par mois",
+    "fr-ca": "Annonces format carte de visite · À partir de 50 $ par mois",
+    "de": "Visitenkarten-Anzeigen · Ab 50 $ im Monat",
+    "nl": "Visitekaart-advertenties · Vanaf $50 per maand",
+    "ja": "名刺サイズの広告 · 月額50ドルから",
+    "en-au": "Business-Card Ads · From US$50 a Month"
+  },
+  "The archive is free for everyone, and sponsors are how it stays that way. Sponsors get a 2 x 3 inch digital ad, the size of a business card, on this page. All y": {
+    "es": "",
+    "fr": "",
+    "de": "",
+    "nl": "",
+    "ja": ""
+  },
+  "Your ad": {
+    "es": "Tu anuncio",
+    "fr": "Votre annonce",
+    "fr-ca": "Votre annonce",
+    "de": "Deine Anzeige",
+    "nl": "Jouw advertentie",
+    "ja": "あなたの広告",
+    "en-au": "Your ad"
+  },
+  "We build it": {
+    "es": "Lo preparamos nosotros",
+    "fr": "Nous le réalisons",
+    "fr-ca": "Nous le réalisons",
+    "de": "Wir setzen es um",
+    "nl": "Wij maken het",
+    "ja": "こちらで作ります",
+    "en-au": "We build it"
+  },
+  "Copy and design, done by us": {
+    "es": "Textos y diseño, a cargo nuestro",
+    "fr": "Texte et design, à notre charge",
+    "fr-ca": "Texte et design, à notre charge",
+    "de": "Text und Design von uns",
+    "nl": "Tekst en ontwerp, door ons",
+    "ja": "文案とデザインはこちらで",
+    "en-au": "Copy and design, done by us"
+  },
+  "Your approval": {
+    "es": "Tu visto bueno",
+    "fr": "Votre accord",
+    "fr-ca": "Votre accord",
+    "de": "Dein OK",
+    "nl": "Jouw goedkeuring",
+    "ja": "あなたの確認",
+    "en-au": "Your approval"
+  },
+  "Nothing runs until you OK it": {
+    "es": "No se publica nada hasta que lo apruebes",
+    "fr": "Rien ne paraît tant que vous n’avez pas dit oui",
+    "fr-ca": "Rien ne paraît tant que vous n’avez pas dit oui",
+    "de": "Nichts läuft, bevor du es freigibst",
+    "nl": "Niets gaat live tot jij OK zegt",
+    "ja": "OKをいただくまで公開しません",
+    "en-au": "Nothing runs until you OK it"
+  },
+  "The rate card": {
+    "es": "La tarifa",
+    "fr": "La grille tarifaire",
+    "fr-ca": "La grille tarifaire",
+    "de": "Die Preisliste",
+    "nl": "De prijskaart",
+    "ja": "料金表",
+    "en-au": "The rate card"
+  },
+  "Month to month": {
+    "es": "Mes a mes",
+    "fr": "Mois par mois",
+    "fr-ca": "Mois par mois",
+    "de": "Monat für Monat",
+    "nl": "Maand tot maand",
+    "ja": "月ごと",
+    "en-au": "Month to month"
+  },
+  "Three months": {
+    "es": "Tres meses",
+    "fr": "Trois mois",
+    "fr-ca": "Trois mois",
+    "de": "Drei Monate",
+    "nl": "Drie maanden",
+    "ja": "3か月",
+    "en-au": "Three months"
+  },
+  "Six months": {
+    "es": "Seis meses",
+    "fr": "Six mois",
+    "fr-ca": "Six mois",
+    "de": "Sechs Monate",
+    "nl": "Zes maanden",
+    "ja": "6か月",
+    "en-au": "Six months"
+  },
+  "One-year commitment": {
+    "es": "Compromiso de un año",
+    "fr": "Engagement d’un an",
+    "fr-ca": "Engagement d’un an",
+    "de": "Jahresbindung",
+    "nl": "Jaarverbintenis",
+    "ja": "1年契約",
+    "en-au": "One-year commitment"
+  },
+  "The Process: How a Q Drop Was Worked": {
+    "es": "El proceso: cómo se trabajaba un Q drop",
+    "fr": "Le processus : comment un Q drop était travaillé",
+    "fr-ca": "Le processus : comment un Q drop était travaillé",
+    "de": "Der Prozess: Wie ein Q drop bearbeitet wurde",
+    "nl": "Het proces: hoe een Q drop werd bewerkt",
+    "ja": "プロセス：Q dropはどう扱われたか",
+    "en-au": "The Process: How a Q Drop Was Worked"
+  },
+  "THE PROCESS": {
+    "es": "EL PROCESO",
+    "fr": "LE PROCESSUS",
+    "fr-ca": "LE PROCESSUS",
+    "de": "DER PROZESS",
+    "nl": "HET PROCES",
+    "ja": "プロセス",
+    "en-au": "THE PROCESS"
+  },
+  "This page explains how a drop was worked. It does not decode a drop, and it will not tell you what to think about one.": {
+    "es": "Esta página explica cómo se trabajaba un drop. No descifra un drop ni te dice qué pensar de él.",
+    "fr": "Cette page explique comment un drop était travaillé. Elle ne décode pas un drop, et elle ne vous dira pas ce qu’il faut en penser.",
+    "fr-ca": "Cette page explique comment un drop était travaillé. Elle ne décode pas un drop, et elle ne vous dira pas ce qu’il faut en penser.",
+    "de": "Diese Seite erklärt, wie ein Drop bearbeitet wurde. Sie entschlüsselt keinen Drop und sagt dir nicht, was du davon halten sollst.",
+    "nl": "Deze pagina legt uit hoe een drop werd bewerkt. Ze decodeert geen drop en vertelt je niet wat je ervan moet denken.",
+    "ja": "このページは、dropがどのように扱われたかを説明します。dropを解読することはなく、どう考えるべきかも言いません。",
+    "en-au": "This page explains how a drop was worked. It does not decode a drop, and it will not tell you what to think about one."
+  },
+  "Five stages": {
+    "es": "Cinco etapas",
+    "fr": "Cinq étapes",
+    "fr-ca": "Cinq étapes",
+    "de": "Fünf Stufen",
+    "nl": "Vijf stappen",
+    "ja": "五つの段階",
+    "en-au": "Five stages"
+  },
+  "Dough": {
+    "es": "Dough",
+    "fr": "Dough",
+    "fr-ca": "Dough",
+    "de": "Dough",
+    "nl": "Dough",
+    "ja": "Dough",
+    "en-au": "Dough"
+  },
+  "Crumbs": {
+    "es": "Crumbs",
+    "fr": "Crumbs",
+    "fr-ca": "Crumbs",
+    "de": "Crumbs",
+    "nl": "Crumbs",
+    "ja": "Crumbs",
+    "en-au": "Crumbs"
+  },
+  "Bakers": {
+    "es": "Bakers",
+    "fr": "Bakers",
+    "fr-ca": "Bakers",
+    "de": "Bakers",
+    "nl": "Bakers",
+    "ja": "Bakers",
+    "en-au": "Bakers"
+  },
+  "Bread": {
+    "es": "Bread",
+    "fr": "Bread",
+    "fr-ca": "Bread",
+    "de": "Bread",
+    "nl": "Bread",
+    "ja": "Bread",
+    "en-au": "Bread"
+  },
+  "Dissemination": {
+    "es": "Difusión",
+    "fr": "Diffusion",
+    "fr-ca": "Diffusion",
+    "de": "Verbreitung",
+    "nl": "Verspreiding",
+    "ja": "普及",
+    "en-au": "Dissemination"
+  },
+  "The bread metaphor was given to us live — by the Q team, in the open, while the drops were still being posted. Dough, crumbs, bakers, bread. Then the carrying out.": {
+    "es": "La metáfora del pan nos la dieron en vivo — el equipo de Q, a la vista, mientras los drops se seguían publicando. Dough, crumbs, bakers, bread. Luego, sacarlo afuera.",
+    "fr": "La métaphore du pain nous a été donnée en direct — par l’équipe Q, au grand jour, pendant que les drops étaient encore publiés. Dough, crumbs, bakers, bread. Puis le portage au-dehors.",
+    "fr-ca": "La métaphore du pain nous a été donnée en direct — par l’équipe Q, au grand jour, pendant que les drops étaient encore publiés. Dough, crumbs, bakers, bread. Puis le portage au-dehors.",
+    "de": "Die Brot-Metapher wurde uns live gegeben — vom Q-Team, offen, während die Drops noch gepostet wurden. Dough, crumbs, bakers, bread. Dann das Hinaustragen.",
+    "nl": "De broodmetafoor kregen we live — van het Q-team, in de openbaarheid, terwijl de drops nog werden geplaatst. Dough, crumbs, bakers, bread. Daarna het naar buiten dragen.",
+    "ja": "パンの比喩は、dropがまだ投稿されているさなかに、Qチームから公の場でライブで与えられました。Dough、crumbs、bakers、bread。そして、運び出すこと。",
+    "en-au": "The bread metaphor was given to us live — by the Q team, in the open, while the drops were still being posted. Dough, crumbs, bakers, bread. Then the carrying out."
+  },
+  "The record": {
+    "es": "El registro",
+    "fr": "Le registre",
+    "fr-ca": "Le registre",
+    "de": "Das Verzeichnis",
+    "nl": "Het overzicht",
+    "ja": "記録",
+    "en-au": "The record"
+  },
+  "Chronology": {
+    "es": "Cronología",
+    "fr": "Chronologie",
+    "fr-ca": "Chronologie",
+    "de": "Chronologie",
+    "nl": "Chronologie",
+    "ja": "年表",
+    "en-au": "Chronology"
+  },
+  "Method": {
+    "es": "Método",
+    "fr": "Méthode",
+    "fr-ca": "Méthode",
+    "de": "Methode",
+    "nl": "Methode",
+    "ja": "方法",
+    "en-au": "Method"
+  },
+  "Album": {
+    "es": "Álbum",
+    "fr": "Album",
+    "fr-ca": "Album",
+    "de": "Album",
+    "nl": "Album",
+    "ja": "アルバム",
+    "en-au": "Album"
+  },
+  "Process": {
+    "es": "Proceso",
+    "fr": "Processus",
+    "fr-ca": "Processus",
+    "de": "Prozess",
+    "nl": "Proces",
+    "ja": "プロセス",
+    "en-au": "Process"
+  },
+  "The work, in order": {
+    "es": "El trabajo, en orden",
+    "fr": "Le travail, dans l’ordre",
+    "fr-ca": "Le travail, dans l’ordre",
+    "de": "Die Arbeit, der Reihe nach",
+    "nl": "Het werk, in volgorde",
+    "ja": "作業の順",
+    "en-au": "The work, in order"
+  },
+  "Five stages, one thread": {
+    "es": "Cinco etapas, un hilo",
+    "fr": "Cinq étapes, un fil",
+    "fr-ca": "Cinq étapes, un fil",
+    "de": "Fünf Stufen, ein Faden",
+    "nl": "Vijf stappen, één draad",
+    "ja": "五つの段階、一本の糸",
+    "en-au": "Five stages, one thread"
+  },
+  "What you actually do": {
+    "es": "Lo que haces de verdad",
+    "fr": "Ce que vous faites vraiment",
+    "fr-ca": "Ce que vous faites vraiment",
+    "de": "Was du tatsächlich tust",
+    "nl": "Wat je echt doet",
+    "ja": "実際にすること",
+    "en-au": "What you actually do"
+  },
+  "The witness": {
+    "es": "El testigo",
+    "fr": "Le témoin",
+    "fr-ca": "Le témoin",
+    "de": "Der Zeuge",
+    "nl": "De getuige",
+    "ja": "目撃者",
+    "en-au": "The witness"
+  },
+  "Why I tell it this way": {
+    "es": "Por qué lo cuento así",
+    "fr": "Pourquoi je le raconte ainsi",
+    "fr-ca": "Pourquoi je le raconte ainsi",
+    "de": "Warum ich es so erzähle",
+    "nl": "Waarom ik het zo vertel",
+    "ja": "なぜ私はこう語るのか",
+    "en-au": "Why I tell it this way"
+  },
+  "I'm a storyteller, and a visual learner and teacher — because pictures and stories are the only way I have ever been able to learn anything.": {
+    "es": "Soy narrador, y aprendo y enseño de forma visual — porque las imágenes y las historias son la única manera en que he podido aprender algo.",
+    "fr": "Je suis un conteur, et j’apprends et j’enseigne par l’image — parce que les images et les histoires sont la seule façon dont j’ai jamais pu apprendre quoi que ce soit.",
+    "fr-ca": "Je suis un conteur, et j’apprends et j’enseigne par l’image — parce que les images et les histoires sont la seule façon dont j’ai jamais pu apprendre quoi que ce soit.",
+    "de": "Ich bin ein Erzähler und ein visueller Lerner und Lehrer — weil Bilder und Geschichten der einzige Weg sind, auf dem ich je etwas lernen konnte.",
+    "nl": "Ik ben een verhalenverteller, en ik leer en onderricht visueel — omdat beelden en verhalen de enige manier zijn waarop ik ooit iets heb kunnen leren.",
+    "ja": "私は語り手であり、視覚で学び、視覚で教える人間です。絵と物語でしか、私は何も学べなかったからです。",
+    "en-au": "I'm a storyteller, and a visual learner and teacher — because pictures and stories are the only way I have ever been able to learn anything."
+  },
+  "So I won't hand you a loaf. I'll show you the five stages instead, and you'll do your own baking.": {
+    "es": "Así que no te daré un pan ya hecho. Te mostraré las cinco etapas, y hornearás tú.",
+    "fr": "Alors je ne vous tendrai pas un pain tout fait. Je vous montrerai les cinq étapes, et vous ferez votre propre fournée.",
+    "fr-ca": "Alors je ne vous tendrai pas un pain tout fait. Je vous montrerai les cinq étapes, et vous ferez votre propre fournée.",
+    "de": "Also reiche ich dir keinen fertigen Laib. Ich zeige dir die fünf Stufen, und du backst selbst.",
+    "nl": "Dus ik geef je geen brood in handen. Ik laat je de vijf stappen zien, en jij bakt zelf.",
+    "ja": "だから、焼き上がったパンは渡しません。五つの段階を示します。焼くのはあなたです。",
+    "en-au": "So I won't hand you a loaf. I'll show you the five stages instead, and you'll do your own baking."
+  },
+  "Start at the dough": {
+    "es": "Empieza por the dough",
+    "fr": "Commencez par the dough",
+    "fr-ca": "Commencez par the dough",
+    "de": "Beginn beim dough",
+    "nl": "Begin bij the dough",
+    "ja": "Doughから始める",
+    "en-au": "Start at the dough"
+  },
+  "Read the drops, in order": {
+    "es": "Lee los drops, en orden",
+    "fr": "Lisez les drops, dans l’ordre",
+    "fr-ca": "Lisez les drops, dans l’ordre",
+    "de": "Lies die Drops, der Reihe nach",
+    "nl": "Lees de drops, in volgorde",
+    "ja": "dropを、順に読む",
+    "en-au": "Read the drops, in order"
+  },
+  "is owned, operated and maintained by The Rubber Duck™.": {
+    "es": "es propiedad de, operado y mantenido por The Rubber Duck™.",
+    "fr": "est détenu, exploité et maintenu par The Rubber Duck™.",
+    "fr-ca": "est détenu, exploité et maintenu par The Rubber Duck™.",
+    "de": "gehört The Rubber Duck™, wird von The Rubber Duck™ betrieben und gepflegt.",
+    "nl": "is eigendom van, wordt beheerd en onderhouden door The Rubber Duck™.",
+    "ja": "は The Rubber Duck™ が所有・運営・管理しています。",
+    "en-au": "is owned, operated and maintained by The Rubber Duck™."
+  },
+  "Books": {
+    "es": "Libros",
+    "fr": "Livres",
+    "fr-ca": "Livres",
+    "de": "Bücher",
+    "nl": "Boeken",
+    "ja": "本",
+    "en-au": "Books"
+  },
+  "Q Drops Archive, Videos, X Spaces, Merch and Books": {
+    "es": "Archivo de Q drops, vídeos, X Spaces, merch y libros",
+    "fr": "Archive des Q drops, vidéos, X Spaces, boutique et livres",
+    "fr-ca": "Archive des Q drops, vidéos, X Spaces, boutique et livres",
+    "de": "Q-drops-Archiv, Videos, X Spaces, Merch und Bücher",
+    "nl": "Q-drops-archief, video’s, X Spaces, merch en boeken",
+    "ja": "Q dropアーカイブ、動画、X Spaces、グッズと本",
+    "en-au": "Q Drops Archive, Videos, X Spaces, Merch and Books"
+  }
+}

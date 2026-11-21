@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Der Prozess: Wie ein Q drop bearbeitet wurde | The Rubber Duck&trade;</title>
+<meta name="theme-color" content="#040705">
+<style>
+/* ---------- faces (local files only — no external font requests) ---------- */
+@font-face{font-family:'JBMono';src:url('/fonts/JetBrainsMono.woff2') format('woff2'),url('fonts/JetBrainsMono.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'RDSans';src:url('/fonts/Roboto-Regular.woff2') format('woff2'),url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'RDSans';src:url('/fonts/Roboto-Bold.woff2') format('woff2'),url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+
+:root{
+  --bg:#040705; --surface-1:#070D08; --surface-2:#0B1410;
+  --border:#13321F; --text:#C8F5D2; --muted:#6FA07D;
+  --body-dim:#A9D3B6;
+  --accent:#00FF41; --accent-hover:#38FF6E; --accent-ink:#00C235;
+  --accent-2:#0A2016; --on-accent:#040705;
+  --font-display:'JBMono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --font-body:'RDSans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --maxw:1120px;
+  --rail-x:38px; --stage-pad:96px; --stage-pt:56px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+/* faint scanlines — the room, not the furniture */
+body::before{
+  content:"";position:fixed;inset:0;z-index:2000;pointer-events:none;
+  background:repeating-linear-gradient(to bottom,rgba(0,255,65,.05) 0 1px,transparent 1px 3px);
+  opacity:.18;
+}
+h1,h2,h3{margin:0;font-family:var(--font-display);font-weight:700;letter-spacing:-.03em;line-height:1.06;color:var(--text)}
+p{margin:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+::selection{background:var(--accent);color:#040705}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--text);color:var(--bg);padding:12px 18px;z-index:2100;border-radius:0 0 10px 0;font-weight:700}
+.skip:focus{left:0}
+.eyebrow{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--font-display);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);
+}
+.eyebrow::before{content:"";width:6px;height:6px;background:var(--accent);box-shadow:0 0 10px rgba(0,255,65,.6);flex:none}
+
+/* ===================== NAV — same pill as the ledger ===================== */
+.site-nav{position:sticky;top:0;z-index:60;display:flex;justify-content:center;padding:14px 12px 0;
+  background:linear-gradient(to bottom,var(--bg) 30%,rgba(4,7,5,.72) 75%,transparent);
+}
+.k-pill{
+  width:100%;max-width:var(--maxw);
+  display:flex;align-items:center;gap:4px;padding:6px 6px 6px 14px;
+  background:rgba(7,13,8,.92);
+  border:1px solid var(--border);border-radius:6px;
+  box-shadow:0 18px 50px -24px #000,inset 0 1px 0 rgba(0,255,65,.08);
+  -webkit-backdrop-filter:blur(18px) saturate(1.35);backdrop-filter:blur(18px) saturate(1.35);
+}
+.k-brand{display:inline-flex;align-items:center;gap:8px;margin-right:10px;text-decoration:none;color:var(--text)}
+.k-logo{display:block;height:24px}
+.k-logo svg{height:100%;width:auto;display:block}
+.k-logo tspan{fill:var(--accent)!important}
+.k-links{display:flex;align-items:center;margin:0 0 0 auto;padding:0;list-style:none}
+.k-links a{
+  display:flex;align-items:center;height:44px;padding:0 13px;border-radius:4px;
+  font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;white-space:nowrap;
+  transition:color .22s var(--ease),background-color .22s var(--ease);
+}
+.k-links a:hover{color:var(--text);background:rgba(0,255,65,.06)}
+.k-links a[aria-current="page"]{color:var(--accent)}
+.k-cta{
+  display:inline-flex;align-items:center;gap:8px;height:44px;margin-left:8px;padding:0 16px;border-radius:4px;
+  background:var(--accent);color:var(--on-accent);border:1px solid var(--accent);
+  font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;white-space:nowrap;
+  transition:background-color .22s var(--ease),box-shadow .22s var(--ease),transform .22s var(--ease);
+}
+.k-cta:hover{background:var(--accent-hover);border-color:var(--accent-hover);box-shadow:0 0 26px rgba(0,255,65,.3);transform:translateY(-1px)}
+.k-cta svg{width:14px;height:14px;flex:none}
+
+/* ===================== HERO ===================== */
+.hero{padding:76px 0 64px;border-bottom:1px solid var(--border)}
+.hero-grid{display:grid;gap:48px}
+.hero h1{
+  margin:22px 0 0;
+  font-size:clamp(2.7rem,11.5vw,6.4rem);
+  line-height:.92;letter-spacing:-.055em;
+  text-shadow:0 0 44px rgba(0,255,65,.14);
+}
+.hero h1 .dot{color:var(--accent);text-shadow:0 0 26px rgba(0,255,65,.55)}
+.hero-lede{margin-top:26px;max-width:52ch;font-size:clamp(1rem,.96rem+.3vw,1.15rem);line-height:1.62;color:var(--body-dim)}
+.hero-scope{margin-top:18px;max-width:52ch;font-size:14px;line-height:1.6;color:var(--muted);border-left:1px solid var(--border);padding-left:14px}
+
+/* the five-name index — the shape of the page before you scroll */
+.legend-wrap{margin-top:8px}
+.legend-label{
+  font-family:var(--font-display);font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;
+}
+.legend{list-style:none;margin:0;padding:0 0 0 20px;position:relative}
+.legend::before{
+  content:"";position:absolute;left:3px;top:10px;bottom:10px;width:1px;
+  background:linear-gradient(to bottom,var(--accent-ink),var(--border));
+}
+.legend li{position:relative}
+.legend a{
+  display:flex;align-items:baseline;gap:12px;padding:9px 0;
+  font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--body-dim);text-decoration:none;
+  transition:color .2s var(--ease);
+}
+.legend a::before{
+  content:"";position:absolute;left:-20px;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--accent-ink);transition:background-color .2s var(--ease),box-shadow .2s var(--ease);
+}
+.legend a:hover{color:var(--accent)}
+.legend a:hover::before{background:var(--accent);box-shadow:0 0 10px rgba(0,255,65,.7)}
+.legend .num{color:var(--accent-ink);font-size:10px;letter-spacing:.08em;min-width:18px;font-variant-numeric:tabular-nums}
+@media(min-width:900px){
+  .hero{padding:104px 0 84px}
+  .hero-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:72px;align-items:end}
+  .legend-wrap{padding-bottom:6px}
+}
+
+/* ===================== STATEMENT ===================== */
+.statement{padding:80px 0;background:var(--surface-1);border-bottom:1px solid var(--border)}
+.statement h2{
+  max-width:24ch;
+  font-size:clamp(1.55rem,4.6vw,3rem);
+  line-height:1.16;letter-spacing:-.035em;
+}
+.statement h2 span{color:var(--accent);text-shadow:0 0 30px rgba(0,255,65,.28)}
+.statement p{margin-top:26px;max-width:58ch;font-size:clamp(1rem,.97rem+.25vw,1.1rem);line-height:1.7;color:var(--body-dim)}
+@media(min-width:900px){.statement{padding:104px 0}}
+
+/* ===================== THE THREAD / FIVE STAGES ===================== */
+.stages{padding:80px 0 40px}
+.stages-intro{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.stages-intro h2{margin-top:20px;font-size:clamp(1.7rem,4.4vw,2.9rem);letter-spacing:-.035em;max-width:20ch}
+.stages-intro p{margin-top:18px;max-width:56ch;font-size:16px;line-height:1.7;color:var(--body-dim)}
+
+.thread{
+  --pad-x:24px;
+  position:relative;list-style:none;
+  max-width:var(--maxw);margin:56px auto 0;padding:0 var(--pad-x) 72px;
+}
+/* the thread itself: a track, and a lit layer that travels down as you scroll */
+.thread::before,.thread::after{
+  content:"";position:absolute;top:0;bottom:56px;width:2px;margin-left:-1px;
+  left:calc(var(--rail-x) + var(--pad-x));pointer-events:none;z-index:0;
+}
+.thread::before{background:var(--border)}
+.thread::after{
+  transform-origin:top;opacity:.5;
+  background:linear-gradient(to bottom,rgba(0,255,65,.05),rgba(0,255,65,.45) 22%,var(--accent) 96%);
+}
+@keyframes rail-fill{from{transform:scaleY(.02)}to{transform:scaleY(1)}}
+@supports (animation-timeline:scroll()){
+  .thread::after{animation:rail-fill linear both;animation-timeline:scroll(root block)}
+}
+
+.stage{
+  position:relative;
+  padding:var(--stage-pt) 0 12px var(--stage-pad);
+  scroll-margin-top:110px;
+}
+.stage+.stage{margin-top:8px}
+.stage::before{
+  content:"";position:absolute;left:calc(var(--rail-x) - 6px);top:calc(var(--stage-pt) + 2px);
+  width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--accent-ink);
+  box-shadow:0 0 0 5px rgba(0,255,65,.05);
+  z-index:2;
+}
+.stage:first-child::before,.stage:last-child::before{
+  border-color:var(--accent);box-shadow:0 0 0 5px rgba(0,255,65,.09),0 0 16px rgba(0,255,65,.45);
+}
+.idx{
+  display:block;
+  font-family:var(--font-display);font-weight:700;font-size:10.5px;letter-spacing:.24em;
+  color:var(--accent-ink);
+}
+.stage h3{
+  margin:10px 0 0;
+  font-size:clamp(1.9rem,6.2vw,3.2rem);
+  line-height:.98;letter-spacing:-.05em;text-transform:uppercase;
+}
+.stage-body{margin-top:22px;display:grid;gap:26px}
+.what{max-width:44ch;font-size:clamp(1.05rem,1rem+.45vw,1.3rem);line-height:1.5;color:var(--text)}
+.do{max-width:48ch;border-top:1px solid var(--border);padding-top:16px}
+.do-label{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--font-display);font-weight:700;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+}
+.do-label::before{content:"";width:5px;height:5px;background:var(--accent-ink);flex:none}
+.do p:last-child{font-size:16px;line-height:1.7;color:var(--body-dim)}
+.do strong{color:var(--text);font-weight:700}
+
+/* crumbs — the small offshoots */
+.branch{
+  position:relative;list-style:none;margin:34px 0 6px;padding:0 0 0 28px;max-width:540px;
+}
+.branch::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.branch::after{
+  content:"";position:absolute;left:calc(-1 * (var(--stage-pad) - var(--rail-x)));top:0;
+  width:calc(var(--stage-pad) - var(--rail-x));height:1px;
+  background:linear-gradient(to right,rgba(0,255,65,.45),var(--border));
+}
+.branch li{
+  position:relative;padding:10px 0;
+  font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.02em;line-height:1.5;
+  color:var(--body-dim);
+}
+.branch li::before{content:"";position:absolute;left:-28px;top:calc(10px + .75em);width:15px;height:1px;background:var(--border)}
+.branch li::after{content:"";position:absolute;left:-15px;top:calc(10px + .75em - 2px);width:4px;height:4px;border-radius:50%;background:var(--accent-ink)}
+.branch-note{margin-top:10px;font-size:13.5px;color:var(--muted);max-width:46ch}
+
+@media(min-width:900px){
+  .stages{padding:104px 0 48px}
+  .stage-body{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:start}
+  .do{margin-top:0}
+  .stage{padding-bottom:20px}
+  .stage h3{max-width:16ch}
+}
+
+/* ===================== THE WITNESS ===================== */
+.witness{padding:80px 0;border-top:1px solid var(--border)}
+.witness-grid{display:grid;gap:38px}
+.witness h2{margin-top:20px;font-size:clamp(1.7rem,4.4vw,2.9rem);letter-spacing:-.035em;max-width:18ch}
+.witness p{font-size:clamp(1rem,.97rem+.35vw,1.18rem);line-height:1.72;color:var(--text)}
+.witness p+p{margin-top:20px}
+.witness p span{color:var(--body-dim)}
+.sig{display:flex;align-items:center;gap:14px;margin-top:34px;padding-top:24px;border-top:1px solid var(--border);max-width:340px}
+.sig img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid var(--border);filter:grayscale(.25) contrast(1.05)}
+.sig b{display:block;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.06em;color:var(--text)}
+.sig small{display:block;margin-top:4px;font-size:12.5px;color:var(--muted)}
+.sig a{text-decoration:none}
+.sig a:hover b{color:var(--accent)}
+@media(min-width:900px){
+  .witness{padding:112px 0}
+  .witness-grid{grid-template-columns:minmax(0,.62fr) minmax(0,1fr);gap:72px}
+  .witness-body{max-width:62ch}
+}
+
+/* ===================== CLOSING ===================== */
+.closing{padding:88px 0 96px;background:var(--surface-1);border-top:1px solid var(--border);position:relative}
+.closing h2{font-size:clamp(1.7rem,5vw,3.2rem);line-height:1.1;letter-spacing:-.04em;max-width:20ch}
+.closing h2 span{color:var(--accent)}
+.closing p{margin-top:22px;max-width:52ch;font-size:clamp(1rem,.97rem+.3vw,1.12rem);line-height:1.7;color:var(--body-dim)}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:5px;
+  font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  text-decoration:none;border:1px solid var(--accent);color:var(--accent);
+  transition:background-color .22s var(--ease),color .22s var(--ease),transform .22s var(--ease),box-shadow .22s var(--ease);
+}
+.btn:hover{background:var(--accent);color:var(--on-accent);transform:translateY(-1px);box-shadow:0 10px 30px -12px rgba(0,255,65,.55)}
+.btn-ghost{border-color:var(--border);color:var(--body-dim)}
+.btn-ghost:hover{background:var(--surface-2);color:var(--text);border-color:var(--muted);box-shadow:none}
+@media(min-width:900px){.closing{padding:112px 0 120px}}
+
+/* ===================== FOOTER ===================== */
+.footer{border-top:1px solid var(--border);padding:56px 0 64px;background:var(--bg)}
+.footer-grid{display:grid;gap:32px}
+.owned{font-size:14.5px;line-height:1.65;color:var(--body-dim);max-width:44ch}
+.owned b{color:var(--text);font-weight:700}
+.f-nav{display:flex;flex-wrap:wrap;gap:10px 22px;list-style:none;margin:0;padding:0}
+.f-nav a{
+  font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;
+  transition:color .2s var(--ease),border-color .2s var(--ease);
+}
+.f-nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.fine{margin-top:28px;padding-top:22px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;
+  font-size:12.5px;color:var(--muted)}
+.fine a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border)}
+.fine a:hover{color:var(--text);border-bottom-color:var(--muted)}
+@media(min-width:760px){
+  .footer-grid{grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:56px;align-items:start}
+  .f-nav{justify-content:flex-end}
+  .fine{justify-content:space-between}
+}
+
+/* ===================== RESPONSIVE / MOTION ===================== */
+@media(max-width:899px){
+  :root{--rail-x:20px;--stage-pad:60px;--stage-pt:44px}
+  .stage{scroll-margin-top:88px}
+}
+@media(max-width:760px){
+  .site-nav{padding:8px 10px 0}
+  .k-pill{padding:4px;overflow:hidden}
+  .k-brand{display:none}
+  .k-cta{display:none}
+  .k-links{margin:0;flex:1;justify-content:space-between;overflow-x:auto;scrollbar-width:none}
+  .k-links::-webkit-scrollbar{display:none}
+  .k-links a{height:44px;padding:0 9px;font-size:10.5px;letter-spacing:.03em;border-radius:3px}
+  .thread{--pad-x:16px}
+  .stages-intro{padding:0 16px}
+  .branch{padding-left:22px}
+  .branch li::before{left:-22px;width:11px}
+  .branch li::after{left:-13px}
+  .wrap{padding:0 16px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .thread::after{animation:none!important;transform:scaleY(1)!important}
+  .k-cta,.btn,.legend a,.f-nav a,.k-links a{transition:none!important}
+  .k-cta:hover,.btn:hover{transform:none!important}
+}
+
+/* ---- one rubber duck header — same as listening-room.html ---- */
+@font-face{font-family:'TRD Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'TRD Courier';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2'),url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+.banner{background:#000;color:#fff;position:relative;z-index:200;border-bottom:1px solid #2a1d10;box-shadow:0 1px 0 rgba(255,200,100,.18),0 10px 30px rgba(0,0,0,.7)}
+.banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
+.banner img{height:92px;width:auto;display:block}
+.banner .wm{font-family:'TRD Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;font-size:96px;line-height:.9;letter-spacing:-.01em;margin:0;white-space:nowrap}
+.banner .wm a{color:#fff;text-decoration:none}
+.banner .wm sup{font-size:.28em;vertical-align:1.6em;margin-left:2px}
+.banner .meta{display:flex;flex-direction:column;gap:6px;font-family:'TRD Courier','Courier Prime',monospace;font-size:15px;line-height:1.2}
+.banner .meta a{color:#ffe2a0}
+.banner .meta .handle{color:#b9ab8c}
+@media (max-width:760px){
+  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+  .banner img{height:62px}
+  .banner .wm{font-size:58px}
+  .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
+}
+</style>
+<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" data-trd-keep>
+<script src="/assets/trd/suggest.js?v=20261103d" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
+<script src="/assets/trd/bookbanner.js" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
+<script src="/assets/trd/duckpod.js?v=20261112b" data-trd-keep></script>
+<script src="/assets/trd/track.js" data-trd-keep></script>
+<script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
+<!-- SEO and share preview -->
+<meta name="description" content="Dough, crumbs, bakers, bread and dissemination: how a drop was worked, explained in plain words. It shows the process and leaves the answers to you.">
+<link rel="canonical" href="https://therubberduck.net/de/process.html">
+<link rel="alternate" hreflang="en" href="https://therubberduck.net/process.html">
+<link rel="alternate" hreflang="en-AU" href="https://therubberduck.net/en-au/process.html">
+<link rel="alternate" hreflang="es" href="https://therubberduck.net/es/process.html">
+<link rel="alternate" hreflang="fr-FR" href="https://therubberduck.net/fr/process.html">
+<link rel="alternate" hreflang="fr-CA" href="https://therubberduck.net/fr-ca/process.html">
+<link rel="alternate" hreflang="de" href="https://therubberduck.net/de/process.html">
+<link rel="alternate" hreflang="nl-NL" href="https://therubberduck.net/nl/process.html">
+<link rel="alternate" hreflang="ja" href="https://therubberduck.net/ja/process.html">
+<link rel="alternate" hreflang="x-default" href="https://therubberduck.net/process.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Rubber Duck&trade;">
+<meta property="og:title" content="Der Prozess: Wie ein Q drop bearbeitet wurde | The Rubber Duck&trade;">
+<meta property="og:description" content="Dough, crumbs, bakers, bread and dissemination: how a drop was worked, explained in plain words. It shows the process and leaves the answers to you.">
+<meta property="og:url" content="https://therubberduck.net/process.html">
+<meta property="og:image" content="https://therubberduck.net/images/brand/room-process-20261103.jpg?v=20261103">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Prozess on The Rubber Duck: how a Q drop was worked, in five stages from dough to dissemination.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TheRubberDuck79">
+<meta name="twitter:creator" content="@TheRubberDuck79">
+<meta name="twitter:title" content="Der Prozess: Wie ein Q drop bearbeitet wurde | The Rubber Duck&trade;">
+<meta name="twitter:description" content="Dough, crumbs, bakers, bread and dissemination: how a drop was worked, explained in plain words. It shows the process and leaves the answers to you.">
+<meta name="twitter:image" content="https://therubberduck.net/images/brand/room-process-20261103.jpg?v=20261103">
+<meta name="twitter:image:alt" content="The Prozess on The Rubber Duck: how a Q drop was worked, in five stages from dough to dissemination.">
+<!-- seo:begin -->
+<link rel="preconnect" href="https://therubberduck.goatcounter.com" crossorigin>
+<link rel="preconnect" href="https://gc.zgo.at" crossorigin>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://therubberduck.net/#org","name":"The Rubber Duck","alternateName":["TRD","The Rubber Duck™","TRD Collectibles"],"url":"https://therubberduck.net/","logo":{"@type":"ImageObject","url":"https://therubberduck.net/favicon-192.png","width":192,"height":192},"image":"https://therubberduck.net/images/brand/trd-share-2026.jpg","description":"An open archive of Trump and Q-era research: every Q drop, videos, X Spaces, PDFs, memes and the X archive, plus TRD Collectibles and the book anon mission.","sameAs":["https://x.com/TheRubberDuck79","https://x.com/TheRubberDuck78","https://rumble.com/user/TheRubberDuck78","https://rubberduck41.gumroad.com/","https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4","https://music.apple.com/us/album/the-red-pill-album/1896233683"]},{"@type":"WebSite","@id":"https://therubberduck.net/#website","url":"https://therubberduck.net/","name":"The Rubber Duck","alternateName":["TRD","therubberduck.net"],"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage": "de","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://therubberduck.net/ledger.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"Article","@id":"https://therubberduck.net/process.html#page","url":"https://therubberduck.net/process.html","name":"The Process: How a Q Drop Was Worked | The Rubber Duck™","description":"Dough, crumbs, bakers, bread and dissemination: how a drop was worked, explained in plain words. It shows the process and leaves the answers to you.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage": "de","breadcrumb":{"@id":"https://therubberduck.net/process.html#crumbs"},"headline":"The Process: How a Q Drop Was Worked | The Rubber Duck™","author":{"@id":"https://therubberduck.net/#org"},"image":"https://therubberduck.net/images/brand/trd-share-2026.jpg"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"},{"@type":"ListItem","position":2,"name":"The Process","item":"https://therubberduck.net/process.html"}],"@id":"https://therubberduck.net/process.html#crumbs"}]}</script>
+<!-- seo:end -->
+<link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261121f">
+<script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261121a">
+</head>
+<body>
+<header class="trd-nav" id="trd-nav"><div class="tn-in">
+<a class="tn-logo" href="/de/" aria-label="The Rubber Duck, home"><img src="/assets/trd/img/duck-banner.webp" width="40" height="34" alt=""><span class="tn-wm" aria-hidden="true">THE RUBBER DUCK<sup>&trade;</sup></span></a>
+<nav class="tn-links" id="tn-links" aria-label="Räume"><a href="/videos.html">Videos</a><a href="/listening-room.html">Aufnahmen</a><a href="/pdfs.html">PDFs</a><a href="/eo-library/">EO Library</a><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Fotosuche</a><a href="/memes.html">Memes</a><a href="/x/">X-Archiv</a><a href="/newsroom.html">DUCK SAUCE</a><a href="/de/merch.html#anon-mission">Buch</a></nav>
+<form class="tn-search" id="tn-form" role="search" action="/x/" method="get"><svg class="tn-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><input class="tn-q" id="tn-q" name="q" type="search" placeholder="Search the archive" aria-label="Search the whole archive" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="tn-res" aria-autocomplete="list"><div class="tn-res" id="tn-res" role="listbox" aria-label="Search results" hidden></div></form>
+<button class="tn-btn tn-menu" id="tn-menu" type="button" aria-expanded="false" aria-controls="tn-links" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+<button class="tn-btn tn-sb" id="tn-sbtn" type="button" aria-expanded="false" aria-label="Search the archive"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+</div></header>
+<script>window.trdNav||(function(){var s=document.createElement('script');s.src='/assets/trd/sitenav.js?v=20261121f';s.setAttribute('data-trd-keep','');document.head.appendChild(s);})();</script>
+<header class="banner">
+  <div class="banner-in">
+    <img src="/assets/trd/img/duck-banner.webp" alt="The Rubber Duck">
+    <h1 class="wm"><a href="/de/">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
+    <div class="meta">
+      <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
+      <a href="/ledger.html">The Drop Ledger</a>
+      <a href="/album.html">The Red Pill Album</a>
+      <a href="/de/sponsor.html">Die Seite sponsern</a>
+    </div>
+  </div>
+</header>
+
+<a class="skip" href="#main">Zum Inhalt</a>
+
+<div class="site-nav">
+  <nav class="k-pill" aria-label="Primary">
+    <a class="k-brand" href="/ledger.html">
+      <span class="k-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 207 40" height="40" role="img" aria-label="The Drop Ledger" style="color:inherit"><text x="0" y="20" dy=".36em" font-family="'JBMono', ui-monospace, monospace" font-size="22" font-weight="700" letter-spacing="-0.02em" fill="currentColor">The Drop Ledger<tspan fill="#00FF41">.</tspan></text></svg></span>
+    </a>
+    <div class="k-links">
+      <a href="/ledger.html#archive">Das Verzeichnis</a>
+      <a href="/ledger.html#chronology">Chronologie</a>
+      <a href="/ledger.html#method">Methode</a>
+      <a href="/album.html">Album</a>
+      <a href="/de/process.html" aria-current="page">Prozess</a>
+    </div>
+    <a class="k-cta" href="/ledger.html#archive"><span>Das Ledger durchsuchen</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg>
+    </a>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" aria-labelledby="process-title">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">therubberduck.net · method</p>
+          <h1 id="process-title">DER PROZESS<span class="dot">.</span></h1>
+          <p class="hero-lede">Die Brot-Metapher wurde uns live gegeben — vom Q-Team, offen, während die Drops noch gepostet wurden. Dough, crumbs, bakers, bread. Dann das Hinaustragen.</p>
+          <p class="hero-scope">Diese Seite erklärt, wie ein Drop bearbeitet wurde. Sie entschlüsselt keinen Drop und sagt dir nicht, was du davon halten sollst.</p>
+        </div>
+        <div class="legend-wrap">
+          <p class="legend-label">Fünf Stufen</p>
+          <ol class="legend">
+            <li><a href="#dough"><span class="num">01</span>Dough</a></li>
+            <li><a href="#crumbs"><span class="num">02</span>Crumbs</a></li>
+            <li><a href="#bakers"><span class="num">03</span>Bakers</a></li>
+            <li><a href="#bread"><span class="num">04</span>Bread</a></li>
+            <li><a href="#dissemination"><span class="num">05</span>Verbreitung</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATEMENT ================= -->
+  <section class="statement" aria-labelledby="statement-line">
+    <div class="wrap">
+      <h2 id="statement-line">You cannot teach someone to bake by <span>handing them a loaf.</span></h2>
+      <p>Only someone who has made bread themselves can teach another person to make it. So the process is what gets shown. The answer is left exactly where it belongs — at the end of the work, for the person who did the work.</p>
+    </div>
+  </section>
+
+  <!-- ================= THE FIVE STAGES ================= -->
+  <section class="stages" id="stages" aria-labelledby="stages-title">
+    <div class="stages-intro">
+      <p class="eyebrow">Die Arbeit, der Reihe nach</p>
+      <h2 id="stages-title">Fünf Stufen, ein Faden</h2>
+      <p>Read it from the top down. Each stage hands something to the next. Crumbs are the parts you bring back and hang on the thread so the next person can pick them up.</p>
+    </div>
+
+    <ol class="thread">
+      <li class="stage" id="dough">
+        <span class="idx">01 / 05</span>
+        <h3>Dough</h3>
+        <div class="stage-body">
+          <p class="what">The drop itself. The raw primary material, exactly as it was posted, untouched.</p>
+          <div class="do">
+            <p class="do-label">Was du tatsächlich tust</p>
+            <p>You read it where it landed, in the order it landed. You keep the words, the number, the date and the board it was posted to. You do not tidy it up, you do not explain it, and you do not decide yet what it is for. If a link in it is dead today, you say the link is dead — you <strong>don't quietly swap in a new one</strong>.</p>
+          </div>
+        </div>
+      </li>
+
+      <li class="stage" id="crumbs">
+        <span class="idx">02 / 05</span>
+        <h3>Crumbs</h3>
+        <div class="stage-body">
+          <p class="what">The research sitting underneath a drop: the sourcing, the links, the images, and the questions the drop itself asked. This is the anons' work.</p>
+          <div class="do">
+            <p class="do-label">Was du tatsächlich tust</p>
+            <p>You follow what the drop points at and bring back what you find. You label where each piece came from. Crumbs are not conclusions — they are what you can point to.</p>
+          </div>
+        </div>
+        <ul class="branch" aria-label="What crumbs look like">
+          <li>the link the drop pointed at</li>
+          <li>the picture from that day</li>
+          <li>the public record it names</li>
+          <li>the question the drop asked</li>
+          <li>what the boards were saying around it</li>
+          <li>what did not check out</li>
+        </ul>
+        <p class="branch-note">Small things, each one traceable. On their own they prove nothing. Together they are what a loaf is later made from.</p>
+      </li>
+
+      <li class="stage" id="bakers">
+        <span class="idx">03 / 05</span>
+        <h3>Bakers</h3>
+        <div class="stage-body">
+          <p class="what">Baker was never a title anybody handed out. It was the people who showed up, drop after drop, and sorted &amp; organized at the dough [anon research] so it could be baked [memed] and aggregated across all social media and Internet platforms.</p>
+          <div class="do">
+            <p class="do-label">Was du tatsächlich tust</p>
+            <p>You pick up a drop and carry it as far as you honestly can, and you show your working so the next person can check it, add to it, or correct it. Nobody bakes alone and nobody is the authority. The work is only worth something if it survives being checked by other people.</p>
+          </div>
+        </div>
+      </li>
+
+      <li class="stage" id="bread">
+        <span class="idx">04 / 05</span>
+        <h3>Bread</h3>
+        <div class="stage-body">
+          <p class="what">The cumulative result: Q intel built up across drops, answers to questions the drops asked, the work of many hands in one place. The finished thing a person can pick up.</p>
+          <div class="do">
+            <p class="do-label">Was du tatsächlich tust</p>
+            <p>You bring the work together and keep the joins visible — which drop, which crumb, which person. You don't hand over a loaf with the recipe torn off. <strong>Bread is not the same thing as a conclusion</strong>: it is what can be picked up and carried.</p>
+          </div>
+        </div>
+      </li>
+
+      <li class="stage" id="dissemination">
+        <span class="idx">05 / 05</span>
+        <h3>Verbreitung</h3>
+        <div class="stage-body">
+          <p class="what">The final step, and not a bake at all. Anons carrying the bread out across the internet and social media.</p>
+          <div class="do">
+            <p class="do-label">Was du tatsächlich tust</p>
+            <p>You take what checks out in real life — data, facts, events that were never reported or told to the public — and you put it where people will see it, past the mainstream filter. You keep it traceable back to the dough. You don't dress it up, and you don't ask anybody to take your word for it.</p>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ================= THE WITNESS ================= -->
+  <section class="witness" id="witness" aria-labelledby="witness-title">
+    <div class="wrap">
+      <div class="witness-grid">
+        <div>
+          <p class="eyebrow">Der Zeuge</p>
+          <h2 id="witness-title">Warum ich es so erzähle</h2>
+          <div class="sig">
+            <img src="/images/duck-avatar.jpg" width="48" height="48" alt="The Rubber Duck profile avatar" decoding="async">
+            <div>
+              <b>The Rubber Duck™</b>
+              <small><a href="https://x.com/TheRubberDuck79" rel="noopener">@TheRubberDuck79</a></small>
+            </div>
+          </div>
+        </div>
+        <div class="witness-body">
+          <p>Ich bin ein Erzähler und ein visueller Lerner und Lehrer — weil Bilder und Geschichten der einzige Weg sind, auf dem ich je etwas lernen konnte. <span>Not dressed up. Just the story told properly, with the nuance left in.</span></p>
+          <p>I'm autistic — diagnosed fifty years ago — with severe adult ADD. That is why the Q team nicknamed our crowd "autists" early on. They knew exactly who they were talking to.</p>
+          <p>I don't decode drops for people, and most drops never needed decoding. What I have is the part that cannot be duplicated: I was there while it was happening. Waiting for the next drop to land. Reading the board while it was still warm. Only a small number of people experienced that.</p>
+          <p>Also reiche ich dir keinen fertigen Laib. Ich zeige dir die fünf Stufen, und du backst selbst.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING ================= -->
+  <section class="closing" aria-labelledby="closing-title">
+    <div class="wrap">
+      <h2 id="closing-title">The reveal is <span>arrived at</span>, not delivered.</h2>
+      <p>That is the whole design of it. Nobody can do the work for you, and nobody should. What this page can do is show you where to start, and what to bring back when you've done the reading.</p>
+      <div class="actions">
+        <a class="btn" href="/ledger.html#archive">Lies die Drops, der Reihe nach
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#dough">Beginn beim dough</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="owned"><b>The Drop Ledger</b> gehört The Rubber Duck™, wird von The Rubber Duck™ betrieben und gepflegt.</p>
+        <p class="fine">
+          <span>© <span id="year">2026</span> The Rubber Duck™</span>
+          <a href="https://x.com/TheRubberDuck79" rel="noopener">@TheRubberDuck79</a>
+        </p>
+      </div>
+      <nav aria-label="Footer">
+        <ul class="f-nav">
+          <li><a href="/ledger.html">The Drop Ledger</a></li>
+          <li><a href="/album.html">The Red Pill Album</a></li>
+          <li><a href="/de/process.html" aria-current="page">Prozess</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+<footer class="site-foot">
+  <div class="sf-in">
+    <div class="sf-brand">
+      <a class="sf-logo" href="/de/"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="The Rubber Duck, site logo, link to home" loading="lazy" decoding="async">THE RUBBER DUCK&trade;</a>
+      <p>Ein offenes Archiv der Q-Ära: jeder Q drop, die Sendungen, X-Spaces-Aufnahmen, PDFs, Memes und 62.975 X-Beiträge.</p>
+      <a class="sf-x" href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener me"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg>@TheRubberDuck79 folgen</a>
+    </div>
+    <nav class="sf-col" aria-label="Das Archiv">
+      <h2>Das Archiv</h2>
+      <ul><li><a href="/videos.html">Videos</a></li><li><a href="/listening-room.html">Aufnahmen</a></li><li><a href="/pdfs.html">PDFs</a></li><li><a href="/eo-library/">EO Library</a></li><li><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Fotosuche</a></li><li><a href="/memes.html">Memes</a></li><li><a href="/x/">X-Archiv</a></li><li><a href="/newsroom.html">DUCK SAUCE</a></li><li><a href="/album.html">The Red Pill Album</a></li></ul>
+    </nav>
+    <nav class="sf-col" aria-label="Das Archiv unterstützen">
+      <h2>Unterstützung</h2>
+      <ul><li><a href="/de/sponsor.html">Die Seite sponsern</a></li><li><a href="/de/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">Das Buch (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Buy Me a Coffee</a></li></ul>
+    </nav>
+    <div class="sf-col">
+      <h2>Kontakt</h2>
+      <ul><li><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener">@TheRubberDuck79 auf X schreiben</a></li><li><a href="mailto:therubberduk@gmail.com">E-Mail: therubberduk@gmail.com</a></li><li><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener">Bestell- und Sponsorenfragen auf X</a></li><li><button class="sf-btn" type="button" data-sug-open>Briefkasten für Ideen</button></li></ul>
+    </div>
+  </div>
+  <nav class="sf-langs" aria-label="Language"><a href="/process.html" lang="en" hreflang="en">English</a><a href="/en-au/process.html" lang="en-AU" hreflang="en-AU">English (Australia)</a><a href="/es/process.html" lang="es" hreflang="es">Español</a><a href="/fr/process.html" lang="fr-FR" hreflang="fr-FR">Français</a><a href="/fr-ca/process.html" lang="fr-CA" hreflang="fr-CA">Français (Canada)</a><a href="/de/process.html" lang="de" hreflang="de" aria-current="page">Deutsch</a><a href="/nl/process.html" lang="nl-NL" hreflang="nl-NL">Nederlands</a><a href="/ja/process.html" lang="ja" hreflang="ja">日本語</a></nav>
+<p class="trd-i18n-note">Maschinenunterstützte Übersetzung. Zum englischen Original. <a href="/process.html" lang="en" hreflang="en">English</a></p>
+<div class="sf-legal">
+    <p>Hinweis: Dies ist ein unabhängiges Archiv öffentlicher Beiträge, Dokumente und Aufnahmen, geführt für Forschung und Kommentar. Material Dritter gehört den Rechteinhabern und wird zur Referenz gezeigt. Nichts hiervon ist finanzielle, rechtliche oder medizinische Beratung. Keine Verbindung zu X, Spotify, Rumble, Gumroad oder Buy Me a Coffee.</p>
+    <p>&copy; 2026 The Rubber Duck&trade;. Alle Rechte vorbehalten.</p>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Die Seite sponsern | Visitenkarten-Anzeigen, 50 $ im Monat | The Rubber Duck&trade;</title>
+<meta name="theme-color" content="#140b05">
+<style>
+
+@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Courier Prime';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2'),url('/assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Courier Prime';src:url('/assets/trd/fonts/CourierPrime-Bold.woff2') format('woff2'),url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Yellowtail';src:url('/assets/trd/fonts/Yellowtail-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Yellowtail-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Roboto';src:url('/fonts/Roboto-Regular.woff2') format('woff2'),url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Roboto';src:url('/fonts/Roboto-Bold.woff2') format('woff2'),url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+:root{--red:#c8202b;--red2:#e63a33;--mustard:#e3a82b;--orange:#e2652a;--brown:#7a4a24;--brown-dk:#3a2312;--cream:#f6efdc;--stock:#efe4c6;--ink:#24160b;
+  --gold1:#f6e3a1;--gold2:#c89b3c;--gold3:#8a6420;
+  --retro:'Bungee','Arial Black',Impact,sans-serif;--script:'Yellowtail','Brush Script MT',cursive;--mono:'Courier Prime','Courier New',monospace;
+  --body:'Roboto','Helvetica Neue',Arial,sans-serif;--ease:cubic-bezier(.16,1,.3,1);--noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;color:#fff;font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;background-color:#2d1b0d;
+  background-image:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.08) 30%,rgba(0,0,0,.4)),
+    repeating-linear-gradient(90deg,#3d2513 0 58px,#2a180b 58px 61px,#4a2d17 61px 120px,#26160a 120px 123px,#43291a 123px 178px,#2a180b 178px 181px)}
+a{color:inherit}
+.shop{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:30px 24px 48px}
+
+/* ============ the shop sign ============ */
+.sign{position:relative;background:#140b05;border:4px solid var(--mustard);border-radius:16px;
+  padding:26px 30px 24px;box-shadow:0 0 0 7px #140b05,0 0 0 11px var(--brown),0 22px 44px rgba(0,0,0,.6);overflow:hidden}
+.sign::before{content:"";position:absolute;inset:0;background-image:var(--noise);opacity:.35;pointer-events:none}
+.sign-c{position:relative;text-align:center}
+.stripes{display:flex;flex-direction:column;gap:5px;margin:0 auto 14px;width:min(620px,100%)}
+.stripes i{display:block;height:9px;border-radius:5px}
+.stripes i:nth-child(1){background:var(--red)}.stripes i:nth-child(2){background:var(--orange)}.stripes i:nth-child(3){background:var(--mustard)}.stripes i:nth-child(4){background:var(--brown)}
+.kicker{margin:0;font-family:var(--script);font-size:clamp(2rem,3.4vw,2.8rem);line-height:1;color:var(--mustard)}
+.marquee{margin:6px 0 0;font-family:var(--retro);font-weight:400;font-size:clamp(2.3rem,5.6vw,4.9rem);line-height:1;color:var(--cream);letter-spacing:.01em;
+  text-shadow:3px 3px 0 var(--red),6px 6px 0 var(--brown-dk)}
+.sub{margin:14px auto 0;font-family:var(--mono);font-weight:700;font-size:clamp(1rem,1.5vw,1.2rem);letter-spacing:.2em;text-transform:uppercase;color:var(--mustard)}
+.lede{margin:10px auto 0;max-width:640px;font-size:clamp(1.05rem,1.45vw,1.22rem);color:#f1e6cf;line-height:1.45;text-wrap:balance}
+.btd-note{margin:18px auto 0;max-width:640px;font-size:1.02rem;line-height:1.45;color:#f1e6cf;text-align:center;text-wrap:balance}
+.btd-note a{color:#ffd77a;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.btd-note a:hover,.btd-note a:focus-visible{color:#fff}
+.plaques{list-style:none;margin:22px auto 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;max-width:1040px}
+.plaques li{background:var(--cream);background-image:var(--noise);color:var(--ink);border-radius:10px;padding:12px 14px;text-align:center;border-bottom:5px solid var(--orange);box-shadow:0 6px 14px rgba(0,0,0,.45)}
+.plaques li:nth-child(2){border-bottom-color:var(--mustard)}.plaques li:nth-child(3){border-bottom-color:var(--red)}
+.plaques b{display:block;font-family:var(--retro);font-weight:400;font-size:1.12rem;line-height:1.1;color:var(--red)}
+.plaques span{display:block;margin-top:4px;font-size:1.02rem;line-height:1.3;text-wrap:balance}
+.neon{position:absolute;right:14px;top:12px;font-family:var(--retro);font-size:15px;letter-spacing:.12em;color:#ff5a4e;padding:3px 9px;border:2px solid #ff5a4e;border-radius:8px;
+  text-shadow:0 0 6px #ff3b30,0 0 14px #ff3b30;box-shadow:0 0 8px rgba(255,59,48,.65),inset 0 0 8px rgba(255,59,48,.45)}
+
+/* ============ section heads: brass plates ============ */
+.case,.counter,.wax{margin-top:38px}
+.head{text-align:center;margin:0 auto 18px}
+.head h2{display:inline-block;margin:0;font-family:var(--retro);font-weight:400;font-size:clamp(1.9rem,3.4vw,2.9rem);line-height:1.05;color:var(--cream);text-shadow:3px 3px 0 var(--brown-dk)}
+.head h2 small{display:block;font-family:var(--mono);font-weight:700;font-size:clamp(1rem,1.4vw,1.15rem);letter-spacing:.26em;text-transform:uppercase;color:var(--mustard);text-shadow:none;margin-bottom:6px}
+.head p{margin:8px auto 0;max-width:820px;font-size:clamp(1.05rem,1.5vw,1.2rem);color:#f1e6cf;text-wrap:balance}
+
+/* glass display case: wood frame, red velvet, glass sheen */
+.glass{position:relative;border-radius:6px;padding:26px;background:radial-gradient(120% 90% at 50% 0%,#6a0f0b 0%,#330504 58%,#1c0202 100%);
+  border:14px solid transparent;border-image:linear-gradient(180deg,#9a6534,#5a3518 45%,#3a2110) 1;box-shadow:inset 0 0 70px rgba(0,0,0,.75),0 22px 46px rgba(0,0,0,.6)}
+.glass::before{content:"";position:absolute;inset:0;background-image:var(--noise);opacity:.5;mix-blend-mode:multiply;pointer-events:none}
+.glass::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:linear-gradient(112deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,0) 20%,rgba(255,255,255,0) 58%,rgba(255,255,255,.07) 68%,rgba(255,255,255,0) 77%)}
+.brass{display:block;width:max-content;max-width:100%;margin:0 auto 22px;position:relative;z-index:1;font-family:var(--mono);font-weight:700;font-size:1.02rem;letter-spacing:.22em;text-transform:uppercase;
+  color:#3a2508;background:linear-gradient(180deg,#f6e3a1,#c89b3c 55%,#a97c2b);border-radius:4px;padding:7px 18px;box-shadow:0 2px 0 #5a3d10,0 6px 14px rgba(0,0,0,.55)}
+/* the counter: green felt under glass */
+.felt{position:relative;border-radius:6px;padding:26px;background:#174a33;background-image:var(--noise),radial-gradient(120% 90% at 50% 0%,#1f6646,#123a28);
+  border:14px solid transparent;border-image:linear-gradient(180deg,#c08a52,#8a5a2e 45%,#5a3518) 1;box-shadow:inset 0 0 60px rgba(0,0,0,.55),0 22px 46px rgba(0,0,0,.55)}
+.felt::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;background:linear-gradient(112deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 60%,rgba(255,255,255,.05) 70%,rgba(255,255,255,0) 78%)}
+/* the wax pack bin: a cardboard box with a wax-wrapper label */
+.bin{position:relative;border-radius:6px;padding:26px;background:#b58a55;background-image:var(--noise),linear-gradient(180deg,#c49a63,#a77a45);
+  border:14px solid #7a5230;box-shadow:inset 0 0 50px rgba(60,30,5,.55),0 22px 46px rgba(0,0,0,.55)}
+.wrapper{display:block;width:max-content;max-width:100%;margin:0 auto 22px;font-family:var(--retro);font-size:1.2rem;letter-spacing:.06em;color:#fff;text-shadow:2px 2px 0 #7a0d12;
+  background:repeating-linear-gradient(135deg,#c8202b 0 16px,#d83a3a 16px 32px);border:3px solid #fff;border-radius:6px;padding:8px 20px;box-shadow:0 0 0 3px #c8202b,0 8px 16px rgba(0,0,0,.4)}
+
+.grid{display:grid;gap:26px;position:relative;z-index:1}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* ============ an item = trading card + price tag ============ */
+.item{display:flex;flex-direction:column;gap:14px;min-width:0}
+.tc{position:relative;aspect-ratio:5/7;perspective:1600px;cursor:pointer;outline:none;flex:none;border-radius:12px;container-type:inline-size}
+@container (max-width:300px){.bio li:nth-child(4),.bk-foot{display:none}.bk-ship{font-size:12px}.fact p{font-size:12.5px}.back{gap:7px}}
+.tc-in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s var(--ease)}
+.tc.flipped .tc-in{transform:rotateY(180deg)}
+.tc:focus-visible{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--red)}
+.face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:12px;overflow:hidden;box-shadow:0 14px 26px rgba(0,0,0,.55),0 2px 4px rgba(0,0,0,.4)}
+.face::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6;background-image:var(--noise);opacity:.55;mix-blend-mode:multiply;
+  box-shadow:inset 0 0 0 2px rgba(255,248,225,.35),inset 0 0 22px rgba(70,40,5,.45)}
+/* front: two-tone team border, cream inner frame, photo, name plate */
+.front{display:flex;flex-direction:column;padding:11px 11px 10px;background:linear-gradient(180deg,var(--a) 0 60%,var(--b) 60% 100%)}
+.photo{position:relative;flex:1;min-height:0;border:5px solid var(--cream);border-radius:5px;background:#ece9e4;overflow:hidden}
+.photo picture,.photo>picture img{display:block;width:100%;height:100%}
+.photo>picture img{object-fit:contain;object-position:50% 50%;transition:opacity .2s}
+.plate{position:relative;margin-top:9px;background:var(--cream);border-radius:5px;padding:5px 10px 7px;text-align:center;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.team{display:block;font-family:var(--script);font-size:1.25rem;line-height:1;color:var(--a);margin-top:-1px}
+.nm{display:block;font-family:var(--retro);font-size:clamp(.95rem,1.32vw,1.18rem);line-height:1.1;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pos{position:absolute;left:3px;top:3px;z-index:5;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--retro);font-size:14px;color:#fff;background:var(--b);border:3px solid var(--cream);box-shadow:0 3px 6px rgba(0,0,0,.4);text-shadow:1px 1px 0 rgba(0,0,0,.35)}
+.cno{position:absolute;right:0;top:0;z-index:5;width:60px;height:60px;background:var(--cream);clip-path:polygon(0 0,100% 0,100% 100%);border-top-right-radius:12px}
+.cno i{position:absolute;right:7px;top:6px;font-style:normal;font-family:var(--retro);font-size:15px;color:var(--ink)}
+.rookie{position:absolute;right:8px;bottom:8px;z-index:4;font-family:var(--retro);font-size:13px;letter-spacing:.04em;color:var(--ink);background:var(--mustard);
+  border:2px solid var(--ink);border-radius:999px;padding:4px 11px;box-shadow:2px 2px 0 var(--ink);transform:rotate(-4deg)}
+/* signed: gold foil border, seal, autograph, serial */
+.signed .front{background:linear-gradient(135deg,#f6e3a1 0%,#c89b3c 22%,#fff1c2 42%,#a97c2b 62%,#f0d68a 80%,#8a6420 100%)}
+.signed .pos{background:#7a0d12}
+.signed .team{color:#8a6420}
+.seal{position:absolute;right:8px;top:44px;z-index:4;width:78px;height:78px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 35% 30%,#fff3c4,#d9b45a 45%,#8a6420);border:2px dashed #5a3d10;box-shadow:0 0 0 3px #d9b45a,0 4px 10px rgba(0,0,0,.45);
+  color:#3a2508;font-family:var(--retro);font-size:10px;line-height:1.05;text-align:center;transform:rotate(10deg)}
+.seal i{font-family:var(--script);font-style:normal;font-size:15px;line-height:1}
+.auto{position:absolute;left:14px;bottom:4px;z-index:4;font-family:var(--script);font-size:58px;line-height:1;color:#123a8c;transform:rotate(-10deg);
+  text-shadow:0 0 1px rgba(255,255,255,.7);opacity:.92;pointer-events:none}
+.serial{position:absolute;right:8px;bottom:10px;z-index:4;font-family:var(--mono);font-weight:700;font-size:15px;color:#3a2508;background:linear-gradient(180deg,#f6e3a1,#c89b3c);
+  border-radius:4px;padding:2px 8px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.serial i{font-style:normal;font-size:12px}.serial b{font-weight:700}
+/* back: printed cardboard, red ink */
+.back{transform:rotateY(180deg);display:flex;flex-direction:column;gap:8px;padding:12px;background:#d9ccad;color:var(--ink);border:8px solid #c8b78f}
+.bk-top{display:flex;align-items:center;gap:8px;background:var(--red);color:var(--cream);border-radius:4px;padding:7px 9px}
+.bk-no{flex:none;font-family:var(--retro);font-size:13px;background:var(--cream);color:var(--red);border-radius:4px;padding:3px 6px}
+.bk-nm{flex:1;min-width:0;font-family:var(--retro);font-size:1rem;line-height:1.1}
+.bk-pos{flex:none;font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.1em}
+.bio{list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:13px;line-height:1.2}
+.bio li{display:flex;gap:8px;padding:3px 2px;border-bottom:1px dashed rgba(36,22,11,.35)}
+.bio b{flex:none;width:27%;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a1a14;padding-top:1px}
+.stat{width:100%;border-collapse:collapse;font-family:var(--mono);text-align:center;background:rgba(255,255,255,.35)}
+.stat th{background:var(--ink);color:var(--cream);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:4px 2px;font-weight:700}
+.stat td{font-weight:700;font-size:14px;padding:5px 2px;border:1px solid rgba(36,22,11,.3)}
+.stat td.amt{color:#8a1a14}
+.fact{flex:1;min-height:56px;display:flex;align-items:center;gap:10px;background:var(--cream);border:2px solid #8a1a14;border-radius:6px;padding:8px 10px}
+.fact p{margin:0;font-size:13.5px;line-height:1.3}
+.fact.has-pic picture{flex:none;width:42%;align-self:stretch}
+.fact.has-pic img{display:block;width:100%;height:100%;object-fit:cover;border-radius:4px}
+.bk-ship{margin:0;font-family:var(--mono);font-weight:700;font-size:13px;text-align:center;color:#8a1a14;letter-spacing:.04em}
+.bk-foot{margin:0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-align:center;color:#5a3d1c}
+.flip{position:absolute;left:50%;bottom:-11px;z-index:8;transform:translateX(-50%);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);background:var(--cream);border:2px solid var(--ink);border-radius:999px;padding:1px 12px;box-shadow:0 3px 8px rgba(0,0,0,.45);pointer-events:none;transition:background .2s}
+.tc:hover .flip,.tc:focus-visible .flip{background:var(--mustard)}
+
+/* ============ the price tag ============ */
+.tag{flex:1;display:flex;flex-direction:column;gap:11px;background:var(--cream);background-image:var(--noise);color:var(--ink);border-radius:10px;padding:14px;
+  border-top:6px solid var(--a);box-shadow:0 10px 20px rgba(0,0,0,.45)}
+.signed .tag{border-top-color:var(--gold2)}
+.line{width:100%;border-collapse:collapse;font-family:var(--mono);text-align:center}
+.line th{background:var(--ink);color:var(--cream);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:4px 2px;font-weight:700}
+.line td{font-weight:700;font-size:16px;padding:4px 2px;border:1px solid rgba(36,22,11,.3);white-space:nowrap}
+.line td.amt{font-family:var(--retro);font-weight:400;font-size:1.65rem;line-height:1.05;color:var(--red)}
+.opt{display:flex;flex-direction:column;gap:5px;margin:0}
+.lbl{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#8a1a14}
+.lbl b{font-weight:700;color:var(--ink);letter-spacing:.04em;text-transform:none;font-size:14px;margin-left:4px}
+.sws{display:flex;flex-wrap:wrap;gap:8px;min-height:32px;align-items:center}
+.sw{width:30px;height:30px;border-radius:50%;padding:0;cursor:pointer;border:2px solid #8f7a55;background:linear-gradient(135deg,var(--sa) 50%,var(--sb) 50%);box-shadow:inset 0 0 0 2px var(--cream)}
+.sw.on{border-color:var(--red);box-shadow:inset 0 0 0 2px var(--cream),0 0 0 2px var(--red)}
+.csel{display:none}
+.fix{margin:0;min-height:32px;display:flex;align-items:center;font-size:16px;font-weight:700;color:#3a2508;border:2px dashed #c9ad78;border-radius:8px;padding:4px 10px;background:rgba(255,255,255,.45)}
+select.size,select.csel{appearance:none;-webkit-appearance:none;width:100%;font:inherit;font-size:16px;font-weight:700;color:var(--ink);background:#fff;border:2px solid #b89a63;border-radius:8px;
+  padding:6px 34px 6px 10px;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--red) 50%),linear-gradient(135deg,var(--red) 50%,transparent 50%);
+  background-position:calc(100% - 18px) 52%,calc(100% - 12px) 52%;background-size:6px 6px;background-repeat:no-repeat}
+.size-row-pad{min-height:32px}
+.buy{margin-top:auto;display:block;text-align:center;text-decoration:none;background:var(--red);color:#fff;font-family:var(--retro);font-size:1.2rem;letter-spacing:.05em;
+  padding:12px 12px 11px;border-radius:10px;border-bottom:4px solid #7a0d12;transition:transform .15s var(--ease),background .15s}
+.buy:hover{background:var(--red2);transform:translateY(-1px)}
+.buy:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.signed .buy{background:linear-gradient(180deg,#e2bf62,#a97c2b);color:#24160b;border-bottom-color:#6b4c16}
+.signed .buy:hover{background:linear-gradient(180deg,#f0d07a,#b98a35)}
+:focus-visible{outline:2px solid var(--mustard);outline-offset:3px}
+
+footer{position:relative;z-index:1;text-align:center;padding:18px 24px 34px;font-family:var(--mono);font-size:16px;color:#cbb994;border-top:1px solid #2a1a10;background:#0c0704}
+footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
+
+.t-list{list-style:none;margin:0 0 18px;padding:12px 0 0;width:100%;border-top:1px dashed rgba(90,61,30,.35);text-align:left;font-size:1.02rem;line-height:1.35;color:#3a2814}
+.t-list li{position:relative;padding:0 0 8px 18px}
+.t-list li::before{content:"";position:absolute;left:2px;top:.5em;width:8px;height:8px;border-radius:50%;background:var(--a)}
+.t-list li:first-child{font-weight:700}
+.tier[data-amt="25"] .t-list li:first-child{font-weight:400}
+.alt-pay{position:relative;z-index:1;margin:6px 0 0;text-align:center;font-size:1.02rem;color:#e9dcc0}
+.alt-pay a{color:#ffe2a0;font-weight:700}
+@media (max-width:1180px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.neon{display:none}}
+@media (max-width:1180px) and (min-width:700px){.g4 .item,.g3 .item{display:grid;grid-template-columns:52% minmax(0,1fr);gap:14px;align-items:stretch}
+  .g3{grid-template-columns:1fr}.g3 .item{grid-template-columns:44% minmax(0,1fr)}}
+@media (max-width:699px){
+  .shop{padding:18px 12px 34px}
+  .sign{padding:18px 14px 16px;gap:14px;border-width:3px;box-shadow:0 0 0 5px #140b05,0 0 0 8px var(--brown),0 16px 30px rgba(0,0,0,.6)}
+  .stripes{gap:3px;margin-bottom:10px}.stripes i{height:6px}
+  .kicker{font-size:1.8rem}.marquee{font-size:2.15rem;text-shadow:2px 2px 0 var(--red),4px 4px 0 var(--brown-dk)}
+  .sub{font-size:.86rem;letter-spacing:.14em;margin-top:10px}
+  .lede{font-size:1.04rem}.btd-note{margin-top:14px;font-size:.98rem;padding:0 12px}
+  .plaques{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}.plaques li{padding:8px 6px;border-bottom-width:4px}.plaques b{font-size:.84rem}.plaques span{font-size:.86rem}
+  .case,.counter,.wax{margin-top:26px}
+  .head h2{display:block;font-size:1.5rem}.head h2 small{font-size:.86rem;letter-spacing:.18em}.head p{font-size:1rem}
+  .glass,.felt,.bin{padding:12px;border-width:9px}
+  .brass{font-size:.8rem;letter-spacing:.14em;padding:6px 12px;margin-bottom:14px}
+  .wrapper{font-size:1rem;padding:6px 14px;margin-bottom:14px}
+  .grid,.g3,.g4{grid-template-columns:1fr;gap:16px}
+  .item{display:grid;grid-template-columns:47% minmax(0,1fr);gap:10px;align-items:stretch}
+  .tc{aspect-ratio:auto;min-height:250px;height:100%}
+  .front{padding:7px 7px 6px}
+  .photo{border-width:3px}
+  .plate{margin-top:6px;padding:3px 5px 5px}
+  .team{font-size:.95rem}.nm{font-size:.74rem}
+  .pos{width:36px;height:36px;font-size:10px;border-width:2px;left:2px;top:2px}
+  .cno{width:40px;height:40px}.cno i{font-size:11px;right:5px;top:4px}
+  .rookie{font-size:9px;padding:3px 7px;right:5px;bottom:5px;border-width:1.5px;box-shadow:1px 1px 0 var(--ink)}
+  .seal{width:52px;height:52px;font-size:7px;right:5px;top:30px}.seal i{font-size:10px}
+  .auto{font-size:36px;left:8px;bottom:2px}
+  .serial{font-size:11px;padding:1px 5px;right:5px;bottom:6px}.serial i{font-size:9px}
+  .back{padding:7px;gap:5px;border-width:5px}
+  .bk-top{padding:4px 6px;gap:5px}.bk-no{font-size:9px;padding:2px 4px}.bk-nm{font-size:.72rem}.bk-pos{display:none}
+  .bio{font-size:11px}.bio li{padding:2px 1px;gap:5px}.bio b{font-size:9px}.bio li:nth-child(n+4){display:none}.bio li{flex-direction:column;gap:0}.bio b{width:auto}
+  .stat th{font-size:8px;padding:2px 1px;letter-spacing:0}.stat td{font-size:10.5px;padding:3px 1px}
+  .fact{display:none}
+  .back{justify-content:space-between}
+  .bk-foot{display:none}
+  .bk-ship{display:none}
+  .stat td{white-space:nowrap}.stat td,.stat th{font-size:9.5px}
+  .flip{font-size:10px;padding:0 9px;bottom:-9px}
+  .tag{padding:10px;gap:8px;border-top-width:5px}
+  .line th{font-size:9.5px;letter-spacing:.02em;padding:3px 1px}.line td{font-size:13px;padding:3px 1px}.line td.amt{font-size:1.3rem}
+  .lbl{font-size:11px;letter-spacing:.08em}
+  .line .us{display:none}
+  .sws,.lbl .cname{display:none}
+  select.csel{display:block}
+  .fix{min-height:0;font-size:14px;padding:6px 9px}
+  select.size,select.csel{font-size:15px;padding:6px 28px 6px 9px;background-position:calc(100% - 15px) 52%,calc(100% - 9px) 52%}
+  .buy{font-size:1rem;padding:10px 8px 9px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* ---- one rubber duck header — same as listening-room.html ---- */
+@font-face{font-family:'TRD Steelfish';src:url('/assets/trd/fonts/Steelfish-Bd.woff2') format('woff2'),url('assets/trd/fonts/Steelfish-Bd.otf') format('opentype');font-weight:700;font-display:swap}
+@font-face{font-family:'TRD Courier';src:url('/assets/trd/fonts/CourierPrime-Regular.woff2') format('woff2'),url('assets/trd/fonts/CourierPrime-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+.banner{background:#000;color:#fff;position:relative;z-index:200;border-bottom:1px solid #2a1d10;box-shadow:0 1px 0 rgba(255,200,100,.18),0 10px 30px rgba(0,0,0,.7)}
+.banner-in{max-width:1240px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:22px}
+.banner img{height:92px;width:auto;display:block}
+.banner .wm{font-family:'TRD Steelfish','Steelfish','Arial Narrow',Impact,sans-serif;font-weight:700;font-size:96px;line-height:.9;letter-spacing:-.01em;margin:0;white-space:nowrap}
+.banner .wm a{color:#fff;text-decoration:none}
+.banner .wm sup{font-size:.28em;vertical-align:1.6em;margin-left:2px}
+.banner .meta{display:flex;flex-direction:column;gap:6px;font-family:'TRD Courier','Courier Prime',monospace;font-size:15px;line-height:1.2}
+.banner .meta a{color:#ffe2a0}
+.banner .meta .handle{color:#b9ab8c}
+@media (max-width:760px){
+  .banner-in{flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+  .banner img{height:62px}
+  .banner .wm{font-size:58px}
+  .banner .meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:4px 14px;width:100%;font-size:15px}
+}
+
+/* ============ sponsor page (builds on the store's look) ============ */
+.tiers,.gets,.current,.apply{margin-top:38px}
+.toggle{position:relative;z-index:1;display:flex;width:max-content;max-width:100%;margin:0 auto 24px;padding:5px;gap:5px;background:#0e2b1e;border-radius:999px;box-shadow:inset 0 2px 6px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.12)}
+.tg{font-family:var(--retro);font-size:1.15rem;letter-spacing:.04em;color:#cfe6d6;background:transparent;border:0;border-radius:999px;padding:11px 30px 10px;cursor:pointer;transition:background .2s var(--ease),color .2s}
+.tg[aria-pressed="true"]{background:var(--cream);color:var(--ink);box-shadow:0 3px 0 #b89a63,0 6px 12px rgba(0,0,0,.4)}
+.tg:hover:not([aria-pressed="true"]){color:#fff}
+.tier-row{position:relative;z-index:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px}
+.tier{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--cream);background-image:var(--noise);color:var(--ink);
+  border-radius:12px;padding:26px 14px 16px;border-top:8px solid var(--a);box-shadow:0 14px 26px rgba(0,0,0,.5)}
+.tier.gold{background-image:var(--noise),linear-gradient(180deg,#fff6d6,#f0dc9c)}
+.t-no{position:absolute;right:0;top:0;width:44px;height:44px;background:var(--a);clip-path:polygon(0 0,100% 0,100% 100%);border-top-right-radius:4px}
+.t-no{font-size:0}
+.t-k{margin:0;font-family:var(--script);font-size:1.6rem;line-height:1;color:var(--a)}
+.tier.gold .t-k{color:#8a6420}
+.t-amt{margin:8px 0 0;font-family:var(--retro);font-size:clamp(2.4rem,3.6vw,3.3rem);line-height:1;color:var(--red);text-shadow:2px 2px 0 rgba(36,22,11,.15)}
+.t-per{margin:8px 0 18px;font-family:var(--mono);font-weight:700;font-size:1.05rem;letter-spacing:.16em;text-transform:uppercase;color:#5a3d1e}
+.t-buy{width:100%;margin-top:auto;font-size:1.1rem;padding:14px 8px 13px}
+.tier.gold .t-buy{background:linear-gradient(180deg,#e2bf62,#a97c2b);color:#24160b;border-bottom-color:#6b4c16}
+.fine{position:relative;z-index:1;margin:20px auto 0;text-align:center;font-size:1.05rem;color:#e2f1e7;text-wrap:balance}
+
+.perks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.perks li{display:flex;flex-direction:column;gap:8px;background:var(--cream);background-image:var(--noise);color:var(--ink);border-radius:12px;padding:22px 22px 20px;
+  border-left:8px solid var(--a);box-shadow:0 12px 24px rgba(0,0,0,.45)}
+.perks b{font-family:var(--retro);font-weight:400;font-size:1.5rem;line-height:1.1;color:var(--red)}
+.perks span{font-size:1.24rem;line-height:1.4}
+
+.slot{position:relative;z-index:1;display:grid;grid-template-columns:minmax(220px,34%) minmax(0,1fr);gap:30px;align-items:center;max-width:980px;margin:0 auto;
+  background:rgba(246,239,220,.06);border:3px dashed rgba(246,227,161,.55);border-radius:14px;padding:26px}
+.slot-logo{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;border-radius:12px;border:3px dashed rgba(246,227,161,.7);
+  background:repeating-linear-gradient(135deg,rgba(246,227,161,.08) 0 14px,rgba(246,227,161,.02) 14px 28px)}
+.slot-logo span{font-family:var(--retro);font-size:1.5rem;color:rgba(246,227,161,.85);letter-spacing:.04em}
+.slot-k{margin:0;font-family:var(--mono);font-weight:700;font-size:1.05rem;letter-spacing:.26em;text-transform:uppercase;color:var(--mustard)}
+.slot-t{margin:6px 0 0;font-family:var(--retro);font-weight:400;font-size:clamp(2rem,3.6vw,3.1rem);line-height:1.02;color:var(--cream);text-shadow:3px 3px 0 #1c0202}
+.slot-d{margin:12px 0 20px;font-size:1.2rem;line-height:1.45;color:#f1e6cf;max-width:560px}
+.slot-go{display:inline-block;padding:12px 30px 11px}
+
+.ap-wrap{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:24px;align-items:stretch}
+.steps{list-style:none;margin:0;padding:22px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;background:#140b05;border:4px solid var(--mustard);border-radius:14px;
+  box-shadow:0 0 0 6px #140b05,0 0 0 9px var(--brown),0 18px 36px rgba(0,0,0,.55)}
+.steps li{flex:1;display:flex;align-items:center;gap:16px;background:rgba(246,239,220,.06);border-radius:10px;padding:14px 16px}
+.steps li>b{flex:none;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--retro);font-weight:400;font-size:1.5rem;color:#fff;background:var(--red);border:3px solid var(--cream)}
+.steps li:nth-child(2)>b{background:var(--orange)}.steps li:nth-child(3)>b{background:var(--mustard);color:var(--ink)}
+.steps strong{display:block;font-family:var(--retro);font-weight:400;font-size:1.5rem;line-height:1.1;color:var(--cream)}
+.steps span{display:block;margin-top:6px;font-size:1.22rem;color:#f1e6cf;line-height:1.35}
+.ap-card{display:flex;flex-direction:column;gap:14px;background:var(--cream);background-image:var(--noise);color:var(--ink);border-radius:14px;padding:24px;border-top:8px solid var(--red);box-shadow:0 14px 28px rgba(0,0,0,.5)}
+.ap-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ap-card label{display:flex;flex-direction:column;gap:5px;margin:0}
+.ap-card label>span{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:#8a1a14}
+.ap-card input,.ap-card select,.ap-card textarea{width:100%;font:inherit;font-size:17px;color:var(--ink);background:#fff;border:2px solid #b89a63;border-radius:8px;padding:9px 11px}
+.ap-card textarea{resize:vertical;min-height:110px}
+.ap-card input:focus,.ap-card select:focus,.ap-card textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(200,32,43,.2)}
+.ap-card .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ap-foot{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.ap-send{border:0;cursor:pointer;padding:13px 40px 12px;margin-top:0}
+.ap-send[disabled]{opacity:.7;cursor:wait}
+.ap-msg{margin:0;flex:1;min-width:200px;font-size:1.05rem;color:#3a2508}
+.ap-msg a{color:#8a1a14;font-weight:700}
+.banner .meta a[aria-current="page"]{color:#fff;text-decoration-color:var(--mustard)}
+
+/* ============ rate card: one ad size, four ways to pay ============ */
+.rate{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:stretch}
+.rc{display:flex;flex-direction:column;align-items:center;text-align:center;background:var(--cream);background-image:var(--noise);color:var(--ink);border-radius:12px;padding:24px 22px 20px;border-top:8px solid var(--a);box-shadow:0 14px 26px rgba(0,0,0,.5)}
+.rc.gold{background-image:var(--noise),linear-gradient(180deg,#fff6d6,#f0dc9c)}
+.rc-k{margin:0;font-family:var(--script);font-size:1.75rem;line-height:1;color:var(--a)}
+.rc.gold .rc-k{color:#8a6420}
+.rc-amt{margin:10px 0 0;font-family:var(--retro);font-size:clamp(3rem,4.6vw,4.2rem);line-height:1;color:var(--red);text-shadow:2px 2px 0 rgba(36,22,11,.15)}
+.rc-per{margin:8px 0 16px;font-family:var(--mono);font-weight:700;font-size:1.05rem;letter-spacing:.16em;text-transform:uppercase;color:#5a3d1e}
+.rc .t-list{flex:1;margin-bottom:18px;font-size:1.08rem}
+.rc .t-list li:first-child{font-weight:400}
+.rc .buy{width:100%;font-size:1.15rem;padding:14px 8px 13px}
+.rc.gold .buy{background:linear-gradient(180deg,#e2bf62,#a97c2b);color:#24160b;border-bottom-color:#6b4c16}
+.rc.gold .buy:hover{background:linear-gradient(180deg,#f0d07a,#b98a35)}
+.rc-spec{--a:var(--red);justify-content:center;gap:14px;background:#140b05;background-image:none;color:#f1e6cf;border:4px solid var(--mustard);border-top-width:4px;box-shadow:0 0 0 5px #140b05,0 0 0 8px var(--brown),0 14px 26px rgba(0,0,0,.5)}
+.rc-spec .rc-k{color:var(--mustard)}
+.card-mock{position:relative;width:100%;max-width:300px;aspect-ratio:3/2;margin-bottom:16px;border-radius:8px;background:var(--cream);background-image:var(--noise);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  border:3px dashed var(--red);box-shadow:0 10px 20px rgba(0,0,0,.5)}
+.card-mock b{font-family:var(--retro);font-weight:400;font-size:1.45rem;line-height:1;color:var(--red)}
+.card-mock span{font-family:var(--mono);font-weight:700;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:#5a3d1e}
+.card-mock i{position:absolute;font-style:normal;font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.08em;color:var(--mustard)}
+.card-mock .w{left:50%;bottom:-24px;transform:translateX(-50%)}
+.card-mock .h{right:-30px;top:50%;transform:translateY(-50%) rotate(90deg)}
+.rc-spec p:not(.rc-k){margin:10px 0 0;font-size:1.1rem;line-height:1.4;color:#f1e6cf;text-wrap:balance}
+.rc-spec p b{color:#ffe2a0}
+.slot-logo.ad32{aspect-ratio:3/2}
+/* four tiers: the ad spec runs as a centered banner across the top, the four plans sit 4 across below */
+.rc-spec{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;align-items:center;gap:18px 44px;padding:26px 30px 30px}
+.rc-spec .card-mock{max-width:280px;margin-bottom:22px}
+.rc-spec>div{flex:0 1 540px;text-align:left}
+.rc-spec p:not(.rc-k){font-size:1.2rem}
+
+@media (max-width:1180px){
+  .tier-row{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .tier{grid-column:span 2}
+  .tier:nth-child(4){grid-column:2 / span 2}
+  .perks{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rate{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rc-spec{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;gap:18px 30px}
+  .rc-spec .card-mock{max-width:260px}
+  .rc-spec>div{flex:1;min-width:240px;text-align:left}
+  .ap-wrap{grid-template-columns:1fr}
+  .steps{flex-direction:row}
+  .steps li{flex-direction:column;text-align:center;align-items:center}
+}
+@media (max-width:699px){
+  .tiers,.gets,.current,.apply{margin-top:26px}
+  .tg{font-size:1rem;padding:10px 22px 9px}
+  .tier-row{grid-template-columns:1fr;gap:12px}
+  .rate{grid-template-columns:1fr;gap:14px}
+  .rc{padding:18px 16px 16px}
+  .rc-spec{flex-direction:column;padding:20px 16px 18px}
+  .rc-spec>div{text-align:center;min-width:0}
+  .rc-amt{font-size:2.9rem}
+  .rc .t-list{font-size:1rem}
+  .tier,.tier:nth-child(4){grid-column:auto;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"k buy" "amt buy" "per buy" "list list";align-items:center;text-align:left;column-gap:16px;padding:16px 16px 14px;border-top:0;border-left:8px solid var(--a)}
+  .t-k{grid-area:k;font-size:1.25rem}.t-amt{grid-area:amt;margin:2px 0 0;font-size:2.4rem}.t-per{grid-area:per;margin:4px 0 0;font-size:.9rem}
+  .t-buy{grid-area:buy;width:auto;margin:0;align-self:center;font-size:1rem;padding:12px 10px 11px}
+  .t-no{width:30px;height:30px}
+  .t-list{grid-area:list;margin:12px 0 0;padding-top:10px;font-size:1rem}.t-list li{padding-bottom:5px}
+  .fine{font-size:.98rem}
+  .perks{grid-template-columns:1fr;gap:12px}
+  .perks li{padding:16px 16px 15px}.perks b{font-size:1.15rem}.perks span{font-size:1.05rem}
+  .slot{grid-template-columns:1fr;gap:16px;padding:16px;text-align:center}
+  .slot-logo{max-width:180px;width:100%;margin:0 auto}
+  .slot-d{margin:10px auto 16px;font-size:1.08rem}
+  .steps{flex-direction:column;padding:14px;gap:10px;border-width:3px;box-shadow:0 0 0 5px #140b05,0 0 0 8px var(--brown),0 16px 30px rgba(0,0,0,.6)}
+  .steps li{flex-direction:row;text-align:left;padding:10px 12px}
+  .steps li>b{width:44px;height:44px;font-size:1.2rem}
+  .ap-card{padding:16px}
+  .ap-row{grid-template-columns:1fr}
+  .ap-send{width:100%}
+}
+
+/* sponsor page only (this style block leaves with the page): on phones the minimized player tucks into the corner gutter, clear of the tier cards */
+@media (max-width:699px){
+  #trd-pod[data-view="pill"] .tp-dock:not(.tp-placed){left:0;bottom:10px}
+  #trd-pod[data-view="pill"] .tp-dock:not(.tp-placed) .tp-pill{display:flex;align-items:center;justify-content:center;width:32px;height:40px;overflow:visible}
+  #trd-pod[data-view="pill"] .tp-dock:not(.tp-placed) .tp-pill-cap{transform:rotate(-28deg) scale(.66)}
+  #trd-pod[data-view="pill"] .tp-dock:not(.tp-placed) .tp-pill:hover .tp-pill-cap{transform:rotate(-20deg) scale(.7)}
+}
+</style>
+<script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="icon" href="/favicon-duck-white.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-duck-white-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/assets/trd/suggest.css?v=20261103d" data-trd-keep>
+<script src="/assets/trd/suggest.js?v=20261103d" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/bookbanner.css" data-trd-keep>
+<script src="/assets/trd/bookbanner.js" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
+<script src="/assets/trd/duckpod.js?v=20261112b" data-trd-keep></script>
+<script src="/assets/trd/track.js" data-trd-keep></script>
+<script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
+<!-- SEO and share preview -->
+<meta name="description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 im Monat, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
+<link rel="canonical" href="https://therubberduck.net/de/sponsor.html">
+<link rel="alternate" hreflang="en" href="https://therubberduck.net/sponsor.html">
+<link rel="alternate" hreflang="en-AU" href="https://therubberduck.net/en-au/sponsor.html">
+<link rel="alternate" hreflang="es" href="https://therubberduck.net/es/sponsor.html">
+<link rel="alternate" hreflang="fr-FR" href="https://therubberduck.net/fr/sponsor.html">
+<link rel="alternate" hreflang="fr-CA" href="https://therubberduck.net/fr-ca/sponsor.html">
+<link rel="alternate" hreflang="de" href="https://therubberduck.net/de/sponsor.html">
+<link rel="alternate" hreflang="nl-NL" href="https://therubberduck.net/nl/sponsor.html">
+<link rel="alternate" hreflang="ja" href="https://therubberduck.net/ja/sponsor.html">
+<link rel="alternate" hreflang="x-default" href="https://therubberduck.net/sponsor.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Rubber Duck&trade;">
+<meta property="og:title" content="Die Seite sponsern | Visitenkarten-Anzeigen, 50 $ im Monat | The Rubber Duck&trade;">
+<meta property="og:description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 im Monat, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
+<meta property="og:url" content="https://therubberduck.net/sponsor.html">
+<meta property="og:image" content="https://therubberduck.net/images/brand/room-sponsor-20261103.jpg?v=20261103">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Die Seite sponsern on The Rubber Duck: business-card ads from $50 im Monat.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TheRubberDuck79">
+<meta name="twitter:title" content="Die Seite sponsern | Visitenkarten-Anzeigen, 50 $ im Monat | The Rubber Duck&trade;">
+<meta name="twitter:description" content="Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 im Monat, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.">
+<meta name="twitter:image" content="https://therubberduck.net/images/brand/room-sponsor-20261103.jpg?v=20261103">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://therubberduck.net/sponsor.html#page","url":"https://therubberduck.net/sponsor.html","name":"Sponsor the Site | The Rubber Duck","description":"Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.","isPartOf":{"@id":"https://therubberduck.net/#website"},"publisher":{"@id":"https://therubberduck.net/#org"},"inLanguage": "de","breadcrumb":{"@id":"https://therubberduck.net/sponsor.html#crumbs"}},{"@type":"BreadcrumbList","@id":"https://therubberduck.net/sponsor.html#crumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"},{"@type":"ListItem","position":2,"name":"Sponsor the Site","item":"https://therubberduck.net/sponsor.html"}]}]}</script>
+<link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261121f">
+<script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261121a">
+</head>
+<body>
+<header class="trd-nav" id="trd-nav"><div class="tn-in">
+<a class="tn-logo" href="/de/" aria-label="The Rubber Duck, home"><img src="/assets/trd/img/duck-banner.webp" width="40" height="34" alt=""><span class="tn-wm" aria-hidden="true">THE RUBBER DUCK<sup>&trade;</sup></span></a>
+<nav class="tn-links" id="tn-links" aria-label="Räume"><a href="/videos.html">Videos</a><a href="/listening-room.html">Aufnahmen</a><a href="/pdfs.html">PDFs</a><a href="/eo-library/">EO Library</a><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Fotosuche</a><a href="/memes.html">Memes</a><a href="/x/">X-Archiv</a><a href="/newsroom.html">DUCK SAUCE</a><a href="/de/merch.html#anon-mission">Buch</a></nav>
+<form class="tn-search" id="tn-form" role="search" action="/x/" method="get"><svg class="tn-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><input class="tn-q" id="tn-q" name="q" type="search" placeholder="Search the archive" aria-label="Search the whole archive" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="tn-res" aria-autocomplete="list"><div class="tn-res" id="tn-res" role="listbox" aria-label="Search results" hidden></div></form>
+<button class="tn-btn tn-menu" id="tn-menu" type="button" aria-expanded="false" aria-controls="tn-links" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+<button class="tn-btn tn-sb" id="tn-sbtn" type="button" aria-expanded="false" aria-label="Search the archive"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+</div></header>
+<script>window.trdNav||(function(){var s=document.createElement('script');s.src='/assets/trd/sitenav.js?v=20261121f';s.setAttribute('data-trd-keep','');document.head.appendChild(s);})();</script>
+<header class="banner">
+  <div class="banner-in">
+    <img src="/assets/trd/img/duck-banner.webp" alt="The Rubber Duck">
+    <h1 class="wm"><a href="/de/">THE RUBBER DUCK<sup>&trade;</sup></a></h1>
+    <div class="meta">
+      <a class="handle" href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>
+      <a href="/ledger.html">The Drop Ledger</a>
+      <a href="/album.html">The Red Pill Album</a>
+      <a href="/de/sponsor.html" aria-current="page">Die Seite sponsern</a>
+    </div>
+  </div>
+</header>
+
+<main class="shop spon">
+  <section class="sign" aria-labelledby="sp-title">
+    <div class="sign-c">
+      <div class="stripes" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <p class="kicker">The Rubber Duck&trade;</p>
+      <h1 class="marquee" id="sp-title">Die Seite sponsern</h1>
+      <p class="sub">Visitenkarten-Anzeigen · Ab 50 $ im Monat</p>
+      <p class="lede">Das Archiv is free for everyone, and sponsors are how it stays that way. Sponsors get a 2 x 3 inch digital ad, the size of a business card, on this page. All you do is pay. We write it, design it and put it up, and it runs only after you approve it.</p>
+    </div>
+    <ul class="plaques" aria-label="What sponsorship includes">
+      <li><b>Deine Anzeige</b><span>2 x 3 in, business-card size</span></li>
+      <li><b>Wir setzen es um</b><span>Text und Design von uns</span></li>
+      <li><b>Dein OK</b><span>Nichts läuft, bevor du es freigibst</span></li>
+      <li><b>Sichere Kasse</b><span id="sp-paidby">Zahlung über Stripe</span></li>
+    </ul>
+    <span class="neon" aria-hidden="true">Offen</span>
+  </section>
+
+  <p class="btd-note">Not looking to sponsor an ad? If you just want to help keep the archive going, you can <a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a> with a few dollars im Monat.</p>
+
+  <section class="tiers" id="levels" aria-labelledby="tiers-title">
+    <header class="head">
+      <h2 id="tiers-title"><small>Die Preisliste</small>One ad. Four ways to pay.</h2>
+      <p>One ad size, simple prices. Pay by the month, or pay once for 3, 6 or 12 months and save.</p>
+    </header>
+    <div class="felt">
+      <div class="rate" id="rate">
+        <article class="rc rc-spec">
+          <div class="card-mock" role="img" aria-label="Ad size: 2 by 3 inches, the size of a business card"><b>Your Ad Here</b><span>Business-card size</span><i class="w">3 in</i><i class="h">2 in</i></div>
+          <div>
+            <p class="rc-k">The ad</p>
+            <p><b>A 2 x 3 inch digital ad</b> on the Sponsors page, with a link to your business. You pay, and we do everything else, to your approval.</p>
+          </div>
+        </article>
+        <article class="rc" style="--a:var(--orange)">
+          <p class="rc-k">Monat für Monat</p>
+          <p class="rc-amt">$50</p>
+          <p class="rc-per">im Monat</p>
+          <ul class="t-list"><li>Your 2 x 3 in ad on the Sponsors page</li><li>We write and design it for you</li><li>It runs after you approve it</li><li>Renews monthly; stop any time with a note</li></ul>
+          <a class="buy" data-plan="monthly" href="https://buy.stripe.com/3cI8wP4Xq34s0qj7rN9IQ1i" target="_blank" rel="noopener" aria-label="Sponsor the site, $50 im Monat">Start at $50 im Monat</a>
+        </article>
+        <article class="rc" style="--a:var(--mustard)">
+          <p class="rc-k">Drei Monate</p>
+          <p class="rc-amt">$100</p>
+          <p class="rc-per">for 3 months</p>
+          <ul class="t-list"><li>Your 2 x 3 in ad for 3 months</li><li>We write and design it for you</li><li>It runs after you approve it</li><li>One payment; saves $50 over monthly</li></ul>
+          <a class="buy" data-plan="3-months" href="https://buy.stripe.com/9B628r3Tm6gE0qj6nJ9IQ1l" target="_blank" rel="noopener" aria-label="Sponsor the site, $100 for 3 months">Take 3 months for $100</a>
+        </article>
+        <article class="rc" style="--a:#2f7d55">
+          <p class="rc-k">Sechs Monate</p>
+          <p class="rc-amt">$175</p>
+          <p class="rc-per">for 6 months</p>
+          <ul class="t-list"><li>Your 2 x 3 in ad for 6 months</li><li>We write and design it for you</li><li>It runs after you approve it</li><li>One payment; saves $125 over monthly</li></ul>
+          <a class="buy" data-plan="6-months" href="https://buy.stripe.com/6oUaEXahK0Wk1unbI39IQ1m" target="_blank" rel="noopener" aria-label="Sponsor the site, $175 for 6 months">Take 6 months for $175</a>
+        </article>
+        <article class="rc gold" style="--a:var(--gold2)">
+          <p class="rc-k">Jahresbindung</p>
+          <p class="rc-amt">$500</p>
+          <p class="rc-per">for 12 months</p>
+          <ul class="t-list"><li>Your 2 x 3 in ad for a full year</li><li>We write and design it for you</li><li>It runs after you approve it</li><li>One payment; saves $100 over monthly</li></ul>
+          <a class="buy" data-plan="year" href="https://buy.stripe.com/dRm6oH4Xq8oM6OHaDZ9IQ1j" target="_blank" rel="noopener" aria-label="Sponsor the site, $500 for one year">Take the year for $500</a>
+        </article>
+      </div>
+      <p class="fine" id="sp-fine">Monthly ads renew each month until you stop them. The 3-month, 6-month and one-year ads are single payments of $100, $175 and $500 that cover 3, 6 or 12 months, and nothing renews.</p>
+    </div>
+  </section>
+
+  <section class="gets" aria-labelledby="gets-title">
+    <header class="head">
+      <h2 id="gets-title"><small>The sponsor package</small>What sponsors get</h2>
+      <p>All you do is pay. You send your logo and links, and we handle the rest, to your approval.</p>
+    </header>
+    <ul class="perks">
+      <li style="--a:var(--red)"><b>Deine Anzeige spot</b><span>A 2 x 3 inch ad, the size of a business card, right here on the Sponsors page.</span></li>
+      <li style="--a:var(--orange)"><b>Ad copy, written for you</b><span>We write the words for your ad, in plain language our readers trust.</span></li>
+      <li style="--a:var(--mustard)"><b>Artwork, designed for you</b><span>We design your ad from your logo, made to fit the look of the site.</span></li>
+      <li style="--a:#2f7d55"><b>A link to your business</b><span>Deine Anzeige links straight to your site or what you sell, one click away.</span></li>
+      <li style="--a:var(--brown)"><b>Dein OK first</b><span>We send you the finished ad. It goes up only after you say it is right.</span></li>
+      <li style="--a:var(--gold2)"><b>Simple terms</b><span>$50 im Monat, stop any time with a note. Or pay once: $100 for 3 months, $175 for 6, $500 for a year.</span></li>
+    </ul>
+  </section>
+
+  <section class="current" id="sponsors" aria-labelledby="cur-title">
+    <header class="head">
+      <h2 id="cur-title"><small>On the wall</small>Current Sponsors</h2>
+      <p>The first sponsor spots are open now.</p>
+    </header>
+    <div class="glass">
+      <span class="brass">Sponsor spot open</span>
+      <div class="slot">
+        <div class="slot-logo ad32" aria-hidden="true"><span>Your 2 x 3 ad</span></div>
+        <div class="slot-c">
+          <p class="slot-k">Available</p>
+          <h3 class="slot-t">Your business here</h3>
+          <p class="slot-d">A business-card-size ad, written and designed by us and approved by you, with a link to your business. $50 im Monat, $100 for 3 months, $175 for 6 months or $500 for the year.</p>
+          <a class="buy slot-go" href="#levels">Claim this spot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="apply" id="apply" aria-labelledby="apply-title">
+    <header class="head">
+      <h2 id="apply-title"><small>Questions first?</small>Talk to us about sponsoring</h2>
+      <p>Tell us about your business and we will get back to you. Already sponsored? Use this to send your logo and links.</p>
+    </header>
+    <div class="ap-wrap">
+      <ol class="steps" aria-label="How it works">
+        <li><b>1</b><div><strong>Pick your plan</strong><span>$50 im Monat, $100 for 3 months, $175 for 6 months or $500 for a full year.</span></div></li>
+        <li><b>2</b><div><strong>Send your details</strong><span>Your logo, your links, and what you sell.</span></div></li>
+        <li><b>3</b><div><strong>Approve your ad</strong><span>We write and design it. Once you OK it, it goes up.</span></div></li>
+      </ol>
+      <form class="ap-card" id="sp-form" novalidate>
+        <div class="ap-row">
+          <label><span>Your name</span><input name="name" type="text" autocomplete="name" required></label>
+          <label><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
+        </div>
+        <div class="ap-row">
+          <label><span>Business or brand</span><input name="business" type="text" autocomplete="organization"></label>
+          <label><span>Website</span><input name="website" type="url" inputmode="url" placeholder="https://"></label>
+        </div>
+        <label><span>Plan you are thinking about</span>
+          <select name="level">
+            <option value="Not sure yet">Not sure yet</option>
+            <option>$50 im Monat</option><option>$100 for 3 months</option><option>$175 for 6 months</option><option>$500 for one year</option>
+          </select>
+        </label>
+        <label><span>What you sell, and anything else we should know</span><textarea name="message" rows="4"></textarea></label>
+        <label class="hp" aria-hidden="true">Leave this empty<input name="_honey" type="text" tabindex="-1" autocomplete="off"></label>
+        <div class="ap-foot">
+          <button class="buy ap-send" type="submit">Send it</button>
+          <p class="ap-msg" id="sp-msg" role="status" aria-live="polite">Prefer X? Message <a href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a>.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="sf-in">
+    <div class="sf-brand">
+      <a class="sf-logo" href="/de/"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="The Rubber Duck, site logo, link to home" loading="lazy" decoding="async">THE RUBBER DUCK&trade;</a>
+      <p>Ein offenes Archiv der Q-Ära: jeder Q drop, die Sendungen, X-Spaces-Aufnahmen, PDFs, Memes und 62.975 X-Beiträge.</p>
+      <a class="sf-x" href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener me"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4zm-1.2 17.9h1.9L7.1 4.2H5.1z"/></svg>@TheRubberDuck79 folgen</a>
+    </div>
+    <nav class="sf-col" aria-label="Das Archiv">
+      <h2>Das Archiv</h2>
+      <ul><li><a href="/videos.html">Videos</a></li><li><a href="/listening-room.html">Aufnahmen</a></li><li><a href="/pdfs.html">PDFs</a></li><li><a href="/eo-library/">EO Library</a></li><li><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Fotosuche</a></li><li><a href="/memes.html">Memes</a></li><li><a href="/x/">X-Archiv</a></li><li><a href="/newsroom.html">DUCK SAUCE</a></li><li><a href="/album.html">The Red Pill Album</a></li></ul>
+    </nav>
+    <nav class="sf-col" aria-label="Das Archiv unterstützen">
+      <h2>Unterstützung</h2>
+      <ul><li><a href="/de/sponsor.html">Die Seite sponsern</a></li><li><a href="/de/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">Das Buch (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Buy Me a Coffee</a></li></ul>
+    </nav>
+    <div class="sf-col">
+      <h2>Kontakt</h2>
+      <ul><li><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener">@TheRubberDuck79 auf X schreiben</a></li><li><a href="mailto:therubberduk@gmail.com">E-Mail: therubberduk@gmail.com</a></li><li><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener">Bestell- und Sponsorenfragen auf X</a></li><li><button class="sf-btn" type="button" data-sug-open>Briefkasten für Ideen</button></li></ul>
+    </div>
+  </div>
+  <nav class="sf-langs" aria-label="Language"><a href="/sponsor.html" lang="en" hreflang="en">English</a><a href="/en-au/sponsor.html" lang="en-AU" hreflang="en-AU">English (Australia)</a><a href="/es/sponsor.html" lang="es" hreflang="es">Español</a><a href="/fr/sponsor.html" lang="fr-FR" hreflang="fr-FR">Français</a><a href="/fr-ca/sponsor.html" lang="fr-CA" hreflang="fr-CA">Français (Canada)</a><a href="/de/sponsor.html" lang="de" hreflang="de" aria-current="page">Deutsch</a><a href="/nl/sponsor.html" lang="nl-NL" hreflang="nl-NL">Nederlands</a><a href="/ja/sponsor.html" lang="ja" hreflang="ja">日本語</a></nav>
+<p class="trd-i18n-note">Maschinenunterstützte Übersetzung. Zum englischen Original. <a href="/sponsor.html" lang="en" hreflang="en">English</a></p>
+<div class="sf-legal">
+    <p>Hinweis: Dies ist ein unabhängiges Archiv öffentlicher Beiträge, Dokumente und Aufnahmen, geführt für Forschung und Kommentar. Material Dritter gehört den Rechteinhabern und wird zur Referenz gezeigt. Nichts hiervon ist finanzielle, rechtliche oder medizinische Beratung. Keine Verbindung zu X, Spotify, Rumble, Gumroad oder Buy Me a Coffee.</p>
+    <p>&copy; 2026 The Rubber Duck&trade;. Alle Rechte vorbehalten.</p>
+  </div>
+</footer>
+
+<script>
+/* ======================= SPONSOR LINKS: edit here ===========================
+   Rate card: one 2 x 3 in ad. monthly = $50 a month; '3-months' = $100, '6-months' = $175, year = $500 for 12 months (each one payment).
+   PROVIDER: 'stripe' or 'bmc'. Each plan button reads its URL from LINKS[PROVIDER][plan];
+   a blank BMC entry falls back to the Stripe link, so a half-filled list never breaks a button.
+   The same links are recorded in trd-merch/sponsor-links.json (not part of the site).          */
+var SPONSOR = {
+  PROVIDER: 'stripe',
+  PAID_BY: { stripe: 'Paid through Stripe', bmc: 'Paid through Buy Me a Coffee' },
+  LINKS: {
+    stripe: { monthly: 'https://buy.stripe.com/3cI8wP4Xq34s0qj7rN9IQ1i', '3-months': 'https://buy.stripe.com/9B628r3Tm6gE0qj6nJ9IQ1l', '6-months': 'https://buy.stripe.com/6oUaEXahK0Wk1unbI39IQ1m', year: 'https://buy.stripe.com/dRm6oH4Xq8oM6OHaDZ9IQ1j' },
+    bmc:    { monthly: '', '3-months': '', '6-months': '', year: '' }
+  },
+  FORM_ENDPOINT: 'https://formsubmit.co/ajax/therubberduk@gmail.com',   // same FormSubmit inbox as the suggestion box
+  FORM_SUBJECT: 'Sponsor inquiry: therubberduck.net'
+};
+/* ========================================================================== */
+(function(){
+  var P=SPONSOR.PROVIDER;
+  var paid=document.getElementById('sp-paidby'); if(paid&&SPONSOR.PAID_BY[P])paid.textContent=SPONSOR.PAID_BY[P];
+  document.querySelectorAll('#rate .buy[data-plan]').forEach(function(b){
+    var k=b.getAttribute('data-plan'), u=(SPONSOR.LINKS[P]&&SPONSOR.LINKS[P][k])||SPONSOR.LINKS.stripe[k]; if(u)b.href=u;
+    b.addEventListener('click',function(){if(window.trdTrack)try{trdTrack('event/sponsor-ad-'+k,'Sponsor click')}catch(e){}});
+  });
+
+  var f=document.getElementById('sp-form'), msg=document.getElementById('sp-msg'), busy=false;
+  if(!f)return;
+  var orig=msg.innerHTML;
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); if(busy)return;
+    var E=f.elements, nm=E.name.value.trim(), em=E.email.value.trim();
+    if(!nm){msg.textContent='Please add your name.';E.name.focus();return}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){msg.textContent='Please add an email we can reply to.';E.email.focus();return}
+    if(E._honey.value){f.reset();msg.textContent='Thank you. We will be in touch soon.';return}
+    if(!SPONSOR.FORM_ENDPOINT){msg.textContent='The form is not open just yet. Please message @TheRubberDuck79 on X.';return}
+    busy=true; var btn=f.querySelector('.ap-send'); btn.disabled=true; btn.textContent='Sending...';
+    var data={_subject:SPONSOR.FORM_SUBJECT,_template:'table',_captcha:'false',name:nm,email:em,_replyto:em,
+      business:E.business.value.trim()||'(not given)',website:E.website.value.trim()||'(not given)',level:E.level.value,
+      message:E.message.value.trim()||'(none)',page:location.href};
+    fetch(SPONSOR.FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(r.ok&&String(j.success)==='true')return true;throw new Error('refused')})})
+      .then(function(){f.reset();msg.textContent='Thank you, '+nm.split(/\s+/)[0]+'. Your note is in. We will reply by email soon.';
+        if(window.trdTrack)try{trdTrack('event/sponsor-inquiry','Sponsor inquiry sent')}catch(e){}},
+        function(){msg.innerHTML='That did not go through. Please try again in a minute, or message <a href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a> on X.'})
+      .then(function(){busy=false;btn.disabled=false;btn.textContent='Send it'});
+  });
+})();
+</script>
+
+<script>
+/* Sponsor page only: the floating album player starts minimized (the pill) so it never sits on the cards.
+   Whatever view the visitor had is put back when they leave this page, unless they changed it here. */
+(function(){
+  var done=false,prev=null;
+  function here(){return /\/sponsor\.html$/i.test(location.pathname)}
+  function restore(){if(done||prev===null)return;done=true;try{if(window.trdPod&&trdPod.view()==='pill')trdPod.view(prev)}catch(e){}}
+  function shrink(){
+    var p=window.trdPod;if(!p||!document.getElementById('trd-pod')||!here())return false;
+    var v=p.view();if(v==='pill')return true;
+    prev=v;p.view('pill');
+    window.addEventListener('click',function(e){
+      if(done||!here())return;var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(!a)return;
+      var u;try{u=new URL(a.href,location.href)}catch(x){return}
+      if(u.origin===location.origin&&!/\/sponsor\.html$/i.test(u.pathname))restore();
+    },true);
+    window.addEventListener('pagehide',restore);
+    window.addEventListener('popstate',function(){if(!here())restore()},true);
+    return true;
+  }
+  if(!shrink()){
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(shrink,0)});
+    else setTimeout(shrink,0);
+  }
+})();
+</script>
+<script src="/assets/trd/onair.js?v=20261117r" defer data-trd-keep></script>
+</body>
+</html>

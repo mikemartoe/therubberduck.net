@@ -189,3 +189,79 @@
   s.onload = function () { W.trdArch = { scan: W.trdSourceLink ? W.trdSourceLink.scan : function () {} }; boot(); };
   (D.head || D.documentElement).appendChild(s);
 })();
+
+/* Footer language switcher. No geo-redirects. Locale pages live under /fr/, /fr-ca/, /de/, /es/, /ja/, /nl/, /en-au/. */
+(function () {
+  var W = window, D = document;
+  if (W.trdLangSwitch) return;
+  W.trdLangSwitch = true;
+  var LOCALES = [
+    { prefix: '', lang: 'en', hreflang: 'en', label: 'English' },
+    { prefix: 'en-au', lang: 'en-AU', hreflang: 'en-AU', label: 'English (Australia)' },
+    { prefix: 'es', lang: 'es', hreflang: 'es', label: 'Español' },
+    { prefix: 'fr', lang: 'fr-FR', hreflang: 'fr-FR', label: 'Français' },
+    { prefix: 'fr-ca', lang: 'fr-CA', hreflang: 'fr-CA', label: 'Français (Canada)' },
+    { prefix: 'de', lang: 'de', hreflang: 'de', label: 'Deutsch' },
+    { prefix: 'nl', lang: 'nl-NL', hreflang: 'nl-NL', label: 'Nederlands' },
+    { prefix: 'ja', lang: 'ja', hreflang: 'ja', label: '日本語' }
+  ];
+  var TRANSLATED = {
+    '/': 1, '/merch.html': 1, '/sponsor.html': 1, '/join.html': 1, '/process.html': 1,
+    '/shop/duck-dad-hat/': 1, '/shop/duck-koozie/': 1, '/shop/duck-koozie-6-pack/': 1,
+    '/shop/duck-magnet/': 1, '/shop/duck-mug/': 1, '/shop/duck-patch/': 1,
+    '/shop/duck-sticker/': 1, '/shop/duck-tee/': 1, '/shop/duck-trucker-hat/': 1,
+    '/shop/premium-wool-cap/': 1, '/shop/signed-dad-hat/': 1, '/shop/signed-tee/': 1,
+    '/shop/signed-trucker-hat/': 1
+  };
+  function stripLocale(path) {
+    return path.replace(/^\/(fr-ca|en-au|fr|de|es|ja|nl)(?=\/|$)/, '') || '/';
+  }
+  function currentPrefix() {
+    var m = location.pathname.match(/^\/(fr-ca|en-au|fr|de|es|ja|nl)(?=\/|$)/);
+    return m ? m[1] : '';
+  }
+  function enPath() {
+    var p = stripLocale(location.pathname);
+    if (p.length > 1 && !p.endsWith('/') && !/\.[a-z0-9]+$/i.test(p)) p += '/';
+    if (p.endsWith('/index.html')) p = p.slice(0, -10);
+    return p || '/';
+  }
+  function hrefFor(prefix) {
+    var en = enPath();
+    var has = TRANSLATED[en] || TRANSLATED[en.replace(/\/$/, '') + '/'] || TRANSLATED[en.replace(/\/$/, '')];
+    if (en === '/') return prefix ? '/' + prefix + '/' : '/';
+    if (has) return (prefix ? '/' + prefix : '') + en;
+    return prefix ? '/' + prefix + '/' : '/';
+  }
+  function ensureCss() {
+    if (D.querySelector('link[href*="i18n.css"]')) return;
+    var l = D.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = '/assets/trd/i18n.css?v=20261121a';
+    (D.head || D.documentElement).appendChild(l);
+  }
+  function build() {
+    var foot = D.querySelector('footer.site-foot');
+    if (!foot) return;
+    if (foot.querySelector('.sf-langs')) return;
+    ensureCss();
+    var nav = D.createElement('nav');
+    nav.className = 'sf-langs';
+    nav.setAttribute('aria-label', 'Language');
+    var cur = currentPrefix();
+    LOCALES.forEach(function (loc) {
+      var a = D.createElement('a');
+      a.href = hrefFor(loc.prefix);
+      a.lang = loc.lang;
+      a.setAttribute('hreflang', loc.hreflang);
+      a.textContent = loc.label;
+      if (loc.prefix === cur) a.setAttribute('aria-current', 'page');
+      nav.appendChild(a);
+    });
+    var legal = foot.querySelector('.sf-legal');
+    if (legal) foot.insertBefore(nav, legal);
+    else foot.appendChild(nav);
+  }
+  if (D.readyState === 'loading') D.addEventListener('DOMContentLoaded', build);
+  else build();
+})();
