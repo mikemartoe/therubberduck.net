@@ -4,4 +4,19 @@ Disallow: /tools/
 Disallow: /workers/
 Disallow: /archive/
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://therubberduck.net/sitemap.xml
