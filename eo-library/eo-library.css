@@ -185,7 +185,7 @@ body.eol footer.site-foot{background:var(--af1-navy-deep);border-top:1px solid v
 .q-card{margin:12px 0 0;padding:14px 16px;background:#12182C;border-left:3px solid var(--af1-red)}
 .q-card a{font-family:var(--font-display);font-weight:700;color:var(--af1-gold-bright);text-decoration:none}
 .q-card a:hover{text-decoration:underline}
-.q-card blockquote{margin:8px 0 0;font-style:italic;color:#F3EFE4}
+.q-card blockquote{margin:8px 0 0;font-family:Georgia,'Times New Roman',Times,serif;font-style:normal;font-size:17px;line-height:1.6;color:#F3EFE4;overflow-wrap:anywhere}
 .q-card .q-why{margin:6px 0 0;font-size:13px;color:var(--muted)}
 
 @media (max-width:900px){
