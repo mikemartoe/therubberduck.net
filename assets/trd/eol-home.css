@@ -233,32 +233,43 @@ body.eol-home :focus-visible.sf-btn,body.eol-home footer.site-foot a:focus-visib
 /* Mission dialog: navy + gold poster card. Text left, oath video right. Same box size as before. */
 body.eol-home .mission-dlg{padding:0;border:0;background:transparent;color:#F6F1E4;
   width:min(980px,calc(100vw - 32px));max-width:calc(100vw - 32px);
-  max-height:min(92vh,640px);overflow:visible}
+  max-height:min(92vh,720px);overflow:visible}
 body.eol-home .mission-dlg::backdrop{background:rgba(8,10,20,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 body.eol-home .mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
-  min-height:0;max-height:min(92vh,640px);border-radius:8px;overflow:hidden;
+  min-height:0;max-height:min(92vh,720px);border-radius:8px;overflow:hidden;
   background:
     radial-gradient(120% 60% at 20% 0%,rgba(208,175,108,.16),transparent 52%),
     linear-gradient(160deg,#1C2448 0%,#151B33 42%,#0E1224 100%);
   color:#F6F1E4;text-align:left;
   border:1px solid #2A3358;
   box-shadow:inset 0 0 0 1px rgba(208,175,108,.28),inset 0 0 0 7px rgba(14,18,36,.88),0 28px 70px rgba(0,0,0,.72)}
-body.eol-home .mission-dlg-copy{position:relative;display:flex;flex-direction:column;justify-content:center;min-width:0;min-height:0;
-  padding:40px 20px 36px 40px;overflow:auto;overscroll-behavior:contain}
+body.eol-home .mission-dlg-copy{position:relative;display:flex;flex-direction:column;justify-content:flex-start;min-width:0;min-height:0;
+  padding:28px 16px 24px 28px;overflow:auto;overscroll-behavior:contain;touch-action:auto}
 body.eol-home .mission-dlg-h{margin:0;padding:0 36px 0 0;font-family:var(--eo-display);font-weight:700;
-  font-size:clamp(26px,3.6vw,42px);line-height:1.08;letter-spacing:.04em;color:#fff;
+  font-size:clamp(22px,3.2vw,34px);line-height:1.08;letter-spacing:.04em;color:#fff;
   text-shadow:0 2px 24px rgba(0,0,0,.45);text-wrap:balance;text-transform:uppercase}
 body.eol-home .mission-dlg-h:focus{outline:none}
-body.eol-home .mission-dlg .hello-s{margin:14px 0 0;font-family:var(--eo-body);font-size:clamp(15px,1.35vw,17.5px);
-  line-height:1.5;color:#F3EFE4;text-align:left;max-width:none;font-style:normal}
+body.eol-home .mission-dlg .hello-s{margin:10px 0 0;font-family:var(--eo-body);font-size:clamp(13.5px,1.15vw,15.5px);
+  line-height:1.45;color:#F3EFE4;text-align:left;max-width:none;font-style:normal}
 body.eol-home .mission-dlg .hello-s b{color:var(--af1-gold-bright)}
-body.eol-home .mission-dlg .hello-sign{margin-top:18px;font-weight:700;color:var(--af1-gold-bright);text-align:left;font-family:var(--eo-display);letter-spacing:.06em}
+body.eol-home .mission-dlg .hello-sign{margin-top:12px;font-weight:700;color:var(--af1-gold-bright);text-align:left;font-family:var(--eo-display);letter-spacing:.06em}
+body.eol-home .mission-drop{margin:14px 0 0;padding:0;width:100%;max-width:100%}
+body.eol-home .mission-drop img{display:block;width:100%;height:auto;border:0;border-radius:0}
 body.eol-home .mission-dlg-media{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;
-  padding:36px 36px 36px 8px;box-sizing:border-box}
-body.eol-home .mission-oath{display:block;width:100%;height:auto;max-height:min(420px,calc(92vh - 96px));
-  aspect-ratio:16/9;object-fit:contain;background:#0C1020;
+  padding:28px 28px 28px 8px;box-sizing:border-box}
+body.eol-home .mission-oath{display:block;width:100%;height:auto;max-height:min(520px,calc(92vh - 80px));
+  aspect-ratio:720/800;object-fit:contain;background:#0C1020;
   border:1px solid rgba(208,175,108,.38);border-radius:4px;
   box-shadow:0 14px 32px rgba(0,0,0,.5),0 0 0 1px rgba(14,18,36,.8)}
+body.eol-home .mission-oath::cue{
+  font-family:var(--eo-body);font-size:15px;line-height:1.25;
+  color:#F6F1E4;background:rgba(12,16,32,.78);
+}
+body.eol-home .mission-oath-note{
+  display:none;margin:10px 0 0;padding:0;
+  font-family:var(--eo-body);font-style:italic;font-weight:600;font-size:15px;line-height:1.25;
+  letter-spacing:.01em;text-transform:none;color:var(--af1-gold-leaf);text-align:center;
+}
 body.eol-home .mission-dlg-x{-webkit-appearance:none;appearance:none;position:absolute;top:10px;right:10px;z-index:2;
   width:44px;height:44px;margin:0;padding:0;border:0;border-radius:4px;background:transparent;cursor:pointer;
   color:var(--af1-gold-leaf);font:700 32px/1 var(--eo-display);box-shadow:none}
@@ -266,13 +277,16 @@ body.eol-home .mission-dlg-x:hover{color:var(--af1-gold-bright);background:rgba(
 body.eol-home .mission-dlg-x:focus-visible{outline:none;background:rgba(208,175,108,.18)}
 @media (max-width:699px){
   body.eol-home .mission-dlg{width:calc(100vw - 16px);max-width:calc(100vw - 16px);max-height:92vh}
-  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,55%) minmax(0,45%);align-items:start;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
-  body.eol-home .mission-dlg-copy{padding:44px 8px 18px 14px;overflow:auto}
-  body.eol-home .mission-dlg-media{padding:44px 14px 16px 4px;align-items:flex-start}
-  body.eol-home .mission-dlg-h{font-size:clamp(15px,4.6vw,22px);padding-right:32px;letter-spacing:.03em}
-  body.eol-home .mission-dlg .hello-s{font-size:clamp(11.5px,3.1vw,13.5px);margin-top:8px;line-height:1.4}
-  body.eol-home .mission-dlg .hello-sign{margin-top:10px;letter-spacing:.04em}
+  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,58%) minmax(0,42%);align-items:start;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
+  body.eol-home .mission-dlg-copy{padding:36px 8px 16px 12px;overflow:auto}
+  body.eol-home .mission-dlg-media{flex-direction:column;padding:48px 28px 16px 4px;align-items:center;justify-content:flex-start}
+  body.eol-home .mission-dlg-h{font-size:clamp(14px,4.2vw,20px);padding-right:32px;letter-spacing:.03em}
+  body.eol-home .mission-dlg .hello-s{font-size:clamp(11px,2.9vw,12.5px);margin-top:7px;line-height:1.38}
+  body.eol-home .mission-dlg .hello-sign{margin-top:8px;letter-spacing:.04em}
+  body.eol-home .mission-drop{margin-top:10px}
   body.eol-home .mission-oath{max-height:none}
+  body.eol-home .mission-dlg-media.is-pending .mission-oath::-webkit-media-controls{display:none!important;opacity:0}
+  body.eol-home .mission-oath-note{display:block;font-size:12.5px;margin-top:8px}
 }
 
 /* Cinzel is wider than Steelfish, so the wordmark is sized to keep the header balanced. */
