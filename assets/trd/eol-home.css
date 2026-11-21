@@ -333,11 +333,21 @@ body.eol-home .hello-btn-hover{
   text-wrap:balance;
   transition:opacity .28s var(--ease);
 }
-body.eol-home .hello-btn-hover{opacity:0}
+body.eol-home .hello-btn-hover{
+  opacity:0;
+  font-family:var(--eo-body);
+  font-weight:600;
+  font-style:normal;
+  letter-spacing:.01em;
+  text-transform:none;
+  font-variant:normal;
+  font-variant-caps:normal;
+}
 body.eol-home .hello-hint{
   display:none;margin:8px 0 0;padding:0;
-  font-family:var(--eo-display);font-weight:600;font-size:11px;line-height:1.2;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--af1-gold-leaf);
+  font-family:var(--eo-body);font-weight:600;font-style:normal;font-size:15px;line-height:1.2;
+  letter-spacing:.01em;text-transform:none;font-variant:normal;font-variant-caps:normal;
+  color:var(--af1-gold-leaf);
   text-align:center;
 }
 @media (hover:hover) and (pointer:fine){
