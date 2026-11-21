@@ -1,0 +1,302 @@
+/* Homepage-only restyle to the Executive Order Library theme (navy + gold).
+   Layout, cassette art, store art, Walkman, and ON AIR are unchanged.
+   Room pages are not affected: this file is loaded only from index.html. */
+@font-face{font-family:'Cinzel';src:url('/assets/trd/fonts/Cinzel-var.woff2') format('woff2'),url('/assets/trd/fonts/Cinzel-var.ttf') format('truetype');font-weight:400 900;font-display:swap}
+@font-face{font-family:'EB Garamond';src:url('/assets/trd/fonts/EBGaramond-var.woff2') format('woff2'),url('/assets/trd/fonts/EBGaramond-var.ttf') format('truetype');font-weight:400 800;font-display:swap}
+@font-face{font-family:'EB Garamond';src:url('/assets/trd/fonts/EBGaramond-Italic-var.woff2') format('woff2'),url('/assets/trd/fonts/EBGaramond-Italic-var.ttf') format('truetype');font-weight:400 800;font-style:italic;font-display:swap}
+
+body.eol-home{
+  --af1-navy:#151B33;
+  --af1-navy-deep:#0C1020;
+  --af1-navy-mid:#1C2444;
+  --af1-red:#8B142E;
+  --af1-gold:#6F5A33;
+  --af1-gold-leaf:#D0AF6C;
+  --af1-gold-bright:#E4C98A;
+  --af1-white:#FFFFFF;
+  --cream:#F6F1E4;
+  --bg:#0C1020;
+  --ink:#F6F1E4;
+  --ink-soft:#C9C0A8;
+  --muted:#C9C0A8;
+  --paper:#F6F1E4;
+  --paper2:#E4C98A;
+  --brown:#151B33;
+  --brown2:#1C2444;
+  --mustard:#D0AF6C;
+  --mustard2:#E4C98A;
+  --orange:#E4C98A;
+  --red:#8B142E;
+  --wood:#1C2444;
+  --eo-display:'Cinzel','Times New Roman',Times,serif;
+  --eo-body:'EB Garamond',Georgia,'Times New Roman',serif;
+  background:var(--af1-navy-deep);
+  color:var(--cream);
+}
+body.eol-home::before{
+  background:
+    radial-gradient(70% 55% at 38% 30%,rgba(208,175,108,.10) 0%,rgba(208,175,108,.04) 45%,transparent 75%),
+    radial-gradient(40% 40% at 85% 60%,rgba(208,175,108,.07) 0%,transparent 70%);
+}
+body.eol-home .haze{
+  background:radial-gradient(120% 100% at 50% 40%,rgba(12,16,32,0) 40%,rgba(12,16,32,.78) 100%);
+}
+body.eol-home .room-duck{
+  filter:sepia(.2) saturate(.85) brightness(1.15) contrast(.9);
+  opacity:.14;
+}
+
+/* Shared nav tinted only on the homepage (sitenav.css itself is unchanged). */
+body.eol-home .trd-nav{
+  background:var(--af1-navy-deep);
+  border-bottom:1px solid var(--af1-gold);
+  box-shadow:0 1px 0 rgba(208,175,108,.22),0 8px 24px rgba(0,0,0,.55);
+}
+
+/* Presidential flag stripe, same as the EO Library. */
+.eol-cheat{display:grid;grid-template-columns:1fr 10px 22px 1fr;height:8px;background:var(--af1-navy);position:relative;z-index:201}
+.eol-cheat span:nth-child(1){background:#fff}
+.eol-cheat span:nth-child(2){background:var(--af1-gold-leaf)}
+.eol-cheat span:nth-child(3){background:var(--af1-red)}
+.eol-cheat span:nth-child(4){background:var(--af1-navy)}
+
+/* Header band */
+body.eol-home .banner{
+  background:var(--af1-navy-deep);
+  color:var(--af1-white);
+  border-bottom:1px solid rgba(208,175,108,.28);
+  box-shadow:0 1px 0 rgba(208,175,108,.18),0 10px 30px rgba(0,0,0,.55);
+}
+body.eol-home .banner .wm{font-family:var(--eo-display);font-weight:700;letter-spacing:.02em;line-height:1.02}
+body.eol-home .banner .wm a{color:var(--af1-white)}
+body.eol-home .hb-sign{
+  background:linear-gradient(160deg,#1C2448 0%,#151B33 50%,#0E1224 100%);
+  border:1px solid #2A3358;
+  box-shadow:inset 0 0 0 1px rgba(208,175,108,.28),inset 0 0 0 5px rgba(14,18,36,.88),0 8px 18px rgba(0,0,0,.45);
+}
+body.eol-home .hb-sign::before{
+  background:linear-gradient(90deg,#fff 0 28%,var(--af1-gold-leaf) 28% 40%,var(--af1-red) 40% 62%,var(--af1-navy) 62% 100%);
+  height:6px;
+}
+body.eol-home .hb-spon::before{
+  background:linear-gradient(90deg,#fff 0 28%,var(--af1-gold-leaf) 28% 40%,var(--af1-red) 40% 62%,var(--af1-navy) 62% 100%);
+}
+body.eol-home .hb-sign-k{font-family:var(--eo-display);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:var(--af1-gold-leaf)}
+body.eol-home .hb-sign-n{font-family:var(--eo-display);font-weight:700;color:var(--af1-white);text-shadow:none;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+body.eol-home .hb-sign:hover,body.eol-home .hb-sign:focus-visible{
+  box-shadow:inset 0 0 0 1px rgba(208,175,108,.45),inset 0 0 0 5px rgba(14,18,36,.88),0 0 0 2px var(--af1-gold-leaf),0 10px 22px rgba(0,0,0,.55);
+}
+body.eol-home .hb-sign:focus-visible{outline:3px solid var(--af1-gold-leaf);outline-offset:3px}
+body.eol-home .hb-cap{color:var(--af1-gold-leaf)}
+body.eol-home .banner a.logo-x:hover .hb-cap,body.eol-home .banner a.logo-x:focus-visible .hb-cap{color:var(--af1-gold-bright)}
+body.eol-home .banner a.hb-book{
+  filter:drop-shadow(0 16px 14px rgba(0,0,0,.9)) drop-shadow(0 0 3px rgba(208,175,108,.45)) drop-shadow(0 0 18px rgba(208,175,108,.22));
+}
+body.eol-home .banner a.hb-book::before{
+  background:radial-gradient(closest-side,rgba(208,175,108,.28),rgba(208,175,108,.08) 60%,rgba(0,0,0,0));
+}
+
+/* Mission button */
+body.eol-home .hello-h,body.eol-home .hello-btn{
+  font-family:var(--eo-display);
+  letter-spacing:.04em;
+}
+body.eol-home .hello-btn{
+  background:linear-gradient(180deg,#1C2448,#0E1224);
+  border:2px solid var(--af1-gold-leaf);
+  color:var(--af1-white);
+  box-shadow:0 0 0 1px rgba(208,175,108,.28),0 8px 20px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);
+  text-shadow:0 2px 16px rgba(0,0,0,.45);
+}
+body.eol-home .hello-btn:hover,body.eol-home .hello-btn:focus-visible{
+  background:linear-gradient(180deg,#243056,#151B33);
+  box-shadow:0 0 0 2px #0C1020,0 0 0 5px var(--af1-gold-leaf),0 8px 22px rgba(0,0,0,.55);
+}
+body.eol-home .hello-btn:focus-visible{outline:3px solid var(--af1-gold-leaf);outline-offset:4px}
+
+/* Shelf unit: navy cabinet with gold trim (posts, bays, plaques, table). */
+body.eol-home .b-unit{
+  background:linear-gradient(90deg,#0E1224,#1C2444 40%,#151B33) left/var(--post) 100% no-repeat,
+    linear-gradient(90deg,#151B33,#1C2444 60%,#0E1224) right/var(--post) 100% no-repeat,
+    #0E1224;
+  box-shadow:0 0 0 1px #2A3358,0 0 0 2px rgba(208,175,108,.35),0 22px 40px rgba(0,0,0,.6);
+  border-top:10px solid #D0AF6C;
+}
+@media (min-width:900px){
+  body.eol-home .b-unit{
+    background:linear-gradient(90deg,#0E1224,#1C2444 40%,#151B33) left/14px 100% no-repeat,
+      linear-gradient(90deg,#151B33,#1C2444 60%,#0E1224) right/14px 100% no-repeat,
+      linear-gradient(90deg,#151B33,#1C2444 50%,#151B33) calc(33.3% + 2px) 0/12px 100% no-repeat,
+      #0E1224;
+  }
+}
+body.eol-home .b-bay{
+  background:radial-gradient(80% 70% at 50% 35%,rgba(208,175,108,.10),transparent 75%),
+    linear-gradient(180deg,#1C2444,#0E1224);
+}
+@media (max-width:899px){
+  body.eol-home .b-bay1{background:radial-gradient(80% 70% at 50% 35%,rgba(208,175,108,.10),transparent 75%),linear-gradient(180deg,#1C2444,#121830)}
+  body.eol-home .b-bay2{background:radial-gradient(80% 70% at 50% 45%,rgba(208,175,108,.08),transparent 75%),linear-gradient(180deg,#121830,#0E1224)}
+}
+body.eol-home .b-bay::after{
+  background:linear-gradient(180deg,#E4C98A,#D0AF6C 45%,#6F5A33);
+  box-shadow:0 4px 8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.28);
+}
+body.eol-home .b-plaque{
+  background:linear-gradient(180deg,#E4C98A,#D0AF6C);
+  color:#0C1020;
+  font-family:var(--eo-display);
+  font-weight:700;
+  letter-spacing:.16em;
+  box-shadow:0 2px 0 #6F5A33,0 4px 8px rgba(0,0,0,.4);
+}
+body.eol-home .wood{
+  background:
+    repeating-linear-gradient(92deg,rgba(208,175,108,.0) 0 18px,rgba(208,175,108,.12) 18px 19px,rgba(255,255,255,.04) 19px 31px,rgba(12,16,32,.18) 31px 32px),
+    linear-gradient(180deg,#1C2444,#151B33 55%,#0E1224);
+}
+body.eol-home .tc-cap{color:var(--af1-gold-bright)}
+body.eol-home .tc-cap i{background:linear-gradient(90deg,transparent,rgba(208,175,108,.6))}
+body.eol-home .tc-cap i:last-child{background:linear-gradient(90deg,rgba(208,175,108,.6),transparent)}
+body.eol-home .tcase .tc-front{
+  box-shadow:inset 1px 1px 0 rgba(208,175,108,.28),inset -1px -1px 0 rgba(0,0,0,.6);
+}
+
+/* Walkman deck: keep the silver face and cassette art; restyle only the wood side rails. */
+body.eol-home .deck{
+  border-left-color:#1C2444;
+  border-right-color:#1C2444;
+  box-shadow:0 0 0 2px #0E1224,0 0 0 3px rgba(208,175,108,.45),0 18px 36px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(0,0,0,.2);
+}
+body.eol-home .deck::before,body.eol-home .deck::after{
+  background:repeating-linear-gradient(180deg,rgba(208,175,108,.18) 0 2px,transparent 2px 7px),linear-gradient(90deg,#0E1224,#1C2444 50%,#0E1224);
+}
+body.eol-home .deck:hover,body.eol-home .deck:focus-visible{
+  box-shadow:0 0 0 2px #0E1224,0 0 0 5px var(--af1-gold-leaf),0 24px 44px rgba(0,0,0,.65),0 0 40px rgba(208,175,108,.22);
+}
+
+/* Shop stays a colorful storefront; only the cabinet glow around it shifts to gold leaf. */
+body.eol-home .shop{
+  box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 2px #0E1224,0 0 0 5px var(--af1-gold-leaf),0 0 40px rgba(208,175,108,.14);
+}
+body.eol-home .shop:hover,body.eol-home .shop:focus-visible{
+  box-shadow:0 24px 50px rgba(0,0,0,.6),0 0 0 2px #0E1224,0 0 0 5px var(--af1-gold-bright),0 0 40px rgba(208,175,108,.22);
+}
+
+/* Chips, suggestion card, support section */
+body.eol-home .mk-chip{
+  background:linear-gradient(180deg,#E4C98A,#D0AF6C);
+  color:#0C1020;
+  border-color:#6F5A33;
+  box-shadow:0 4px 10px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.35);
+}
+body.eol-home .mk-sug{
+  border-color:rgba(208,175,108,.7);
+  background:rgba(14,18,36,.82);
+}
+body.eol-home .mk-sug-t b,body.eol-home .mk-sugc b,body.eol-home .mk-h2{
+  font-family:var(--eo-display);
+  color:var(--af1-gold-bright);
+}
+body.eol-home .mk-sug:hover,body.eol-home .mk-sug:focus-visible{background:rgba(28,36,68,.92);border-color:var(--af1-gold-leaf)}
+body.eol-home .mk-sugc{
+  border-color:rgba(208,175,108,.75);
+  background:linear-gradient(180deg,rgba(28,36,68,.95),rgba(14,18,36,.95));
+}
+body.eol-home .mk-sugc:hover,body.eol-home .mk-sugc:focus-visible{
+  border-color:var(--af1-gold-leaf);
+  background:linear-gradient(180deg,rgba(36,48,88,.96),rgba(21,27,51,.96));
+}
+
+body.eol-home .support{
+  background:linear-gradient(180deg,rgba(12,16,32,0),rgba(12,16,32,.92) 60px,#0C1020);
+}
+body.eol-home .sup-k{color:var(--af1-gold-leaf);font-family:var(--eo-display);letter-spacing:.18em;text-transform:uppercase;font-size:13px;font-weight:600}
+body.eol-home .sup-h,body.eol-home .btd-k{font-family:var(--eo-display);color:var(--af1-white)}
+body.eol-home .sup-card,body.eol-home .sup-btd,body.eol-home .sc-sign{
+  background:linear-gradient(160deg,#1C2448 0%,#151B33 50%,#0E1224 100%);
+  border:1px solid #2A3358;
+  box-shadow:inset 0 0 0 1px rgba(208,175,108,.28),0 8px 20px rgba(0,0,0,.5);
+}
+body.eol-home .sup-card::before,body.eol-home .sup-btd::before,body.eol-home .sc-spon::before{
+  background:linear-gradient(90deg,#fff 0 28%,var(--af1-gold-leaf) 28% 40%,var(--af1-red) 40% 62%,var(--af1-navy) 62% 100%);
+}
+body.eol-home .sc-sign{border-color:var(--af1-gold-leaf);box-shadow:inset 0 0 0 3px rgba(14,18,36,.88)}
+body.eol-home .sc-k,body.eol-home .sc-sign small,body.eol-home .sc-go{color:var(--af1-gold-leaf)}
+body.eol-home .sc-n,body.eol-home .sc-sign b{text-shadow:none;color:var(--af1-white)}
+body.eol-home .sup-card:hover,body.eol-home .sup-card:focus-visible,
+body.eol-home .sup-btd:hover,body.eol-home .sup-btd:focus-visible{
+  box-shadow:0 12px 24px rgba(0,0,0,.7),0 0 0 2px var(--af1-gold-leaf);
+}
+body.eol-home .btd-go{background:var(--af1-gold-leaf);color:#0C1020}
+
+/* Footer tint, homepage only. */
+body.eol-home footer.site-foot{
+  background:var(--af1-navy-deep);
+  color:var(--muted);
+  border-top:1px solid rgba(208,175,108,.28);
+  box-shadow:0 -1px 0 rgba(208,175,108,.12);
+}
+body.eol-home footer.site-foot a,body.eol-home .sf-btn{color:var(--cream)}
+body.eol-home footer.site-foot a:hover,body.eol-home footer.site-foot a:focus-visible,
+body.eol-home .sf-btn:hover,body.eol-home .sf-btn:focus-visible{color:var(--af1-gold-bright);border-bottom-color:var(--af1-gold-leaf)}
+body.eol-home footer.site-foot a.sf-x{border-color:rgba(208,175,108,.35);background:#0E1224}
+body.eol-home footer.site-foot a.sf-x:hover,body.eol-home footer.site-foot a.sf-x:focus-visible{border-color:var(--af1-gold-leaf)}
+body.eol-home .sf-legal{border-top-color:rgba(208,175,108,.22);color:var(--muted)}
+body.eol-home :focus-visible.sf-btn,body.eol-home footer.site-foot a:focus-visible{outline-color:var(--af1-gold-leaf)}
+
+/* Mission dialog: same navy + gold poster card as the signup pop-up. Full duck, never clipped. */
+body.eol-home .mission-dlg{padding:0;border:0;background:transparent;color:#F6F1E4;
+  width:min(980px,calc(100vw - 32px));max-width:calc(100vw - 32px);
+  max-height:min(92vh,640px);overflow:visible}
+body.eol-home .mission-dlg::backdrop{background:rgba(8,10,20,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+body.eol-home .mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);
+  min-height:0;max-height:min(92vh,640px);border-radius:8px;overflow:hidden;
+  background:
+    radial-gradient(120% 60% at 20% 0%,rgba(208,175,108,.16),transparent 52%),
+    linear-gradient(160deg,#1C2448 0%,#151B33 42%,#0E1224 100%);
+  color:#F6F1E4;text-align:left;
+  border:1px solid #2A3358;
+  box-shadow:inset 0 0 0 1px rgba(208,175,108,.28),inset 0 0 0 7px rgba(14,18,36,.88),0 28px 70px rgba(0,0,0,.72)}
+body.eol-home .mission-dlg-art{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;overflow:visible;
+  padding:40px 16px 40px 36px;background:transparent;box-sizing:border-box}
+body.eol-home .mission-dlg-art img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;
+  object-fit:contain;object-position:center;pointer-events:none;
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.55)) drop-shadow(0 0 24px rgba(208,175,108,.28))}
+body.eol-home .mission-dlg-copy{position:relative;display:flex;flex-direction:column;justify-content:center;min-width:0;min-height:0;
+  padding:40px 48px 36px 16px;overflow:auto;overscroll-behavior:contain}
+body.eol-home .mission-dlg-h{margin:0;padding:0 40px 0 0;font-family:var(--eo-display);font-weight:700;
+  font-size:clamp(28px,4.2vw,46px);line-height:1.08;letter-spacing:.04em;color:#fff;
+  text-shadow:0 2px 24px rgba(0,0,0,.45);text-wrap:balance;text-transform:uppercase}
+body.eol-home .mission-dlg-h:focus{outline:none}
+body.eol-home .mission-dlg .hello-s{margin:14px 0 0;font-family:var(--eo-body);font-size:clamp(16px,1.5vw,18.5px);
+  line-height:1.5;color:#F3EFE4;text-align:left;max-width:none;font-style:normal}
+body.eol-home .mission-dlg .hello-s b{color:var(--af1-gold-bright)}
+body.eol-home .mission-dlg .hello-sign{margin-top:18px;font-weight:700;color:var(--af1-gold-bright);text-align:left;font-family:var(--eo-display);letter-spacing:.06em}
+body.eol-home .mission-dlg-x{-webkit-appearance:none;appearance:none;position:absolute;top:10px;right:10px;z-index:2;
+  width:44px;height:44px;margin:0;padding:0;border:0;border-radius:4px;background:transparent;cursor:pointer;
+  color:var(--af1-gold-leaf);font:700 32px/1 var(--eo-display);box-shadow:none}
+body.eol-home .mission-dlg-x:hover{color:var(--af1-gold-bright);background:rgba(208,175,108,.12)}
+body.eol-home .mission-dlg-x:focus-visible{outline:none;background:rgba(208,175,108,.18)}
+@media (max-width:699px){
+  body.eol-home .mission-dlg{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:92vh}
+  body.eol-home .mission-dlg-card{grid-template-columns:1fr;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
+  body.eol-home .mission-dlg-art{padding:32px 28px 16px;max-height:none;overflow:visible}
+  body.eol-home .mission-dlg-art img{max-width:78%;max-height:none;width:auto;height:auto;margin:0 auto}
+  body.eol-home .mission-dlg-copy{padding:16px 22px 28px;overflow:visible}
+  body.eol-home .mission-dlg-h{font-size:clamp(22px,8.4vw,32px);padding-right:36px}
+  body.eol-home .mission-dlg .hello-s{font-size:16px;margin-top:10px}
+}
+
+/* Cinzel is wider than Steelfish, so the wordmark is sized to keep the header balanced. */
+body.eol-home .banner .wm{font-size:clamp(32px,4.4vw,58px);white-space:nowrap}
+@media (max-width:760px){
+  body.eol-home .banner .wm{font-size:clamp(26px,8.4vw,38px)}
+}
+@media (min-width:900px) and (max-width:1279px){
+  body.eol-home .banner .wm{font-size:clamp(28px,4.8vw,48px)}
+}
+@media (max-width:899px){
+  body.eol-home .hb-sign-k{font-size:10px}
+  body.eol-home .hb-sign-n{font-size:13px}
+}

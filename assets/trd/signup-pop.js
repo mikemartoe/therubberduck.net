@@ -52,8 +52,9 @@
           '<img src="' + IMG + '" width="960" height="825" alt="The Rubber Duck&trade;" decoding="async">' +
         '</div>' +
         '<div class="trd-signup-copy">' +
-          '<h2 class="trd-signup-h" id="trd-signup-title">JOIN THE<br>DUCK SAUCE</h2>' +
-          '<p class="trd-signup-s">The weekly recap from The Rubber Duck&trade;, free in your inbox every Sunday night.</p>' +
+          '<p class="trd-signup-k">The Rubber Duck&trade;</p>' +
+          '<h2 class="trd-signup-h" id="trd-signup-title">WEEKLY SAUCE<br>DELIVERY</h2>' +
+          '<p class="trd-signup-s">The free weekly recap, delivered to your inbox every Sunday night.</p>' +
           '<form class="trd-signup-form" action="' + API + '" method="post" novalidate>' +
             '<input type="hidden" name="source" value="embed">' +
             '<input type="hidden" name="first_url" value="">' +
