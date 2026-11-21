@@ -47,7 +47,7 @@
     var iosSafari = isIOS && /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS/.test(ua);
     if (!bip && !iosSafari) return;
     banner = el('aside', 'trd-pwa-bar');
-    banner.setAttribute('role', 'dialog'); banner.setAttribute('aria-label', 'Install The Rubber Duck app');
+    banner.setAttribute('aria-label', 'Install The Rubber Duck app');
     var text = bip ? 'Install The Rubber Duck on your home screen for one-tap access and alerts.'
                    : 'Add The Rubber Duck to your Home Screen: tap Share, then Add to Home Screen.';
     banner.innerHTML = '<img class="trd-pwa-ico" src="/images/app/app-icon-192.png" alt="" width="44" height="44">' +

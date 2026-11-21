@@ -87,7 +87,7 @@
   function build() {
     el = document.createElement('a');
     el.className = 'trd-onair is-dim';
-    el.setAttribute('aria-label', 'On air: nothing live right now');
+    el.setAttribute('aria-label', 'ON AIR Live. On air: nothing live right now');
     el.innerHTML = '<span class="oa-box" aria-hidden="true"><span class="oa-on">ON AIR</span><span class="oa-sub">Live</span></span><span class="oa-lbl" aria-hidden="true"></span>';
     el.addEventListener('click', function (e) {
       if (!state.lit) { e.preventDefault(); return; }
@@ -126,11 +126,11 @@
       if (state.external) { el.target = '_blank'; el.rel = 'noopener'; } else { el.removeAttribute('target'); el.removeAttribute('rel'); }
       lbl.innerHTML = state.label + '<i>&rsaquo;</i>';
       sub.textContent = el.classList.contains('compact') ? (state.mode === 'live' ? 'Live now' : state.mode === 'soon' ? 'Today' : state.mode === 'replay' ? 'Replay' : 'New post') : 'Live';
-      el.setAttribute('aria-label', state.aria); el.title = state.aria;
+      el.setAttribute('aria-label', 'ON AIR ' + sub.textContent + '. ' + state.aria); el.title = 'ON AIR ' + sub.textContent + '. ' + state.aria;
     } else {
       el.removeAttribute('href'); el.setAttribute('aria-disabled', 'true'); el.tabIndex = -1; el.removeAttribute('title');
       sub.textContent = 'Live';
-      el.setAttribute('aria-label', 'On air sign: nothing live right now');
+      el.setAttribute('aria-label', 'ON AIR Live. On air sign: nothing live right now');
     }
   }
   function decide(d) {
