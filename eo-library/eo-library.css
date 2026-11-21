@@ -190,6 +190,7 @@ body.eol footer.site-foot{background:var(--af1-navy-deep);border-top:1px solid v
 
 @media (max-width:900px){
   .eol-hero{min-height:min(78vh,720px)}
+  .eol-hero-photo{object-position:22% 30%}
   .eol-hero-in{padding:56px 18px 36px}
   .eol-desk{position:relative;top:0;padding:22px 16px}
   .eol-search{min-height:54px;padding-left:42px}
