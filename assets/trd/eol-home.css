@@ -305,6 +305,9 @@ body.eol-home .mission-dlg .trd-ss-b:focus-visible{
 }
 body.eol-home .mission-dlg .trd-ss-dot{color:rgba(208,175,108,.55)}
 body.eol-home .mission-dlg .trd-ss-share-row{border-top-color:rgba(208,175,108,.28)}
+body.eol-home .mission-dlg .trd-ss-line-short,
+body.eol-home .mission-dlg .trd-ss-short{display:none}
+body.eol-home .mission-dlg .trd-ss-ico{margin-right:.2em}
 @media (max-width:699px){
   body.eol-home .mission-dlg .trd-ss-dot{display:none}
 }
@@ -316,21 +319,27 @@ body.eol-home .mission-dlg-x{-webkit-appearance:none;appearance:none;position:ab
 body.eol-home .mission-dlg-x:hover{color:#fff;background:rgba(208,175,108,.28);border-color:var(--af1-gold-bright)}
 body.eol-home .mission-dlg-x:focus-visible{outline:3px solid var(--af1-gold-leaf);outline-offset:2px}
 @media (max-width:699px){
-  body.eol-home .mission-dlg{width:calc(100vw - 16px);max-width:calc(100vw - 16px);max-height:96vh}
-  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy copy" "media media" "strip drop";align-items:stretch;min-height:0;max-height:96vh;overflow:auto;overscroll-behavior:contain}
-  body.eol-home .mission-dlg-copy{padding:48px 16px 8px 16px;overflow:visible}
-  body.eol-home .mission-dlg-media{flex-direction:column;padding:2px 16px 6px;align-items:center;justify-content:flex-start;gap:8px}
-  body.eol-home .mission-dlg .trd-ss{padding:0 8px 12px 16px}
-  body.eol-home .mission-drop{padding:0 16px 12px 8px;align-self:center}
+  body.eol-home .mission-dlg{width:calc(100vw - 40px);max-width:calc(100vw - 40px);max-height:88vh;margin:auto}
+  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy copy" "media media" "strip strip" "drop drop";align-items:stretch;min-height:0;max-height:88vh;overflow:auto;overscroll-behavior:contain}
+  body.eol-home .mission-dlg-copy{padding:42px 14px 6px 14px;overflow:visible}
+  body.eol-home .mission-dlg-media{flex-direction:column;padding:2px 14px 4px;align-items:center;justify-content:flex-start;gap:6px}
+  body.eol-home .mission-dlg .trd-ss{padding:0 14px 6px 14px;align-self:stretch}
+  body.eol-home .mission-drop{padding:0 14px 12px 14px;align-self:stretch}
+  body.eol-home .mission-drop img{width:100%;height:auto}
   body.eol-home .mission-dlg-h{font-size:clamp(18px,5.8vw,24px);padding-right:56px;letter-spacing:.03em}
-  body.eol-home .mission-dlg .hello-s{font-size:clamp(14.5px,3.9vw,16.5px);margin-top:6px;line-height:1.32}
-  body.eol-home .mission-dlg .hello-sign{margin-top:8px;font-size:clamp(14.5px,3.9vw,16.5px);letter-spacing:.04em}
+  body.eol-home .mission-dlg .hello-s{font-size:clamp(14.5px,3.9vw,16.5px);margin-top:5px;line-height:1.28}
+  body.eol-home .mission-dlg .hello-sign{margin-top:6px;font-size:clamp(14.5px,3.9vw,16.5px);letter-spacing:.04em}
   body.eol-home .mission-dlg-x{width:48px;height:48px;min-width:48px;min-height:48px;font-size:30px}
-  body.eol-home .mission-oath{max-height:min(28vh,220px)}
-  body.eol-home .mission-dlg .trd-ss-in{padding:8px 8px 8px}
-  body.eol-home .mission-dlg .trd-ss-line{font-size:11.5px;margin-bottom:6px;line-height:1.25}
-  body.eol-home .mission-dlg .trd-ss-acts{flex-direction:column;align-items:stretch;gap:5px}
-  body.eol-home .mission-dlg .trd-ss-b{width:100%;justify-content:center;min-height:32px;font-size:12px;padding:4px 8px}
+  body.eol-home .mission-oath{max-height:min(20vh,170px)}
+  body.eol-home .mission-dlg .trd-ss-in{padding:6px 8px 7px}
+  body.eol-home .mission-dlg .trd-ss-line{font-size:11.5px;margin-bottom:5px;line-height:1.2;white-space:nowrap}
+  body.eol-home .mission-dlg .trd-ss-line-full{display:none}
+  body.eol-home .mission-dlg .trd-ss-line-short{display:inline}
+  body.eol-home .mission-dlg .trd-ss-lab{display:none}
+  body.eol-home .mission-dlg .trd-ss-short{display:inline}
+  body.eol-home .mission-dlg .trd-ss-acts{flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:6px}
+  body.eol-home .mission-dlg .trd-ss-b{flex:1 1 0;width:auto;justify-content:center;min-height:36px;font-size:12px;padding:4px 6px;gap:4px;white-space:nowrap}
+  body.eol-home .mission-dlg .trd-ss-ico{margin-right:0}
   body.eol-home .mission-dlg-media.is-pending .mission-oath::-webkit-media-controls{display:none!important;opacity:0}
   body.eol-home .mission-oath-note{display:block;font-size:12.5px;margin-top:8px}
 }
