@@ -351,7 +351,7 @@ body.eol-home .banner .wm{font-size:clamp(32px,4.4vw,58px);white-space:nowrap}
 /* Commander in Chief coin: flat photoreal coin (no added gold rim), floating
    above the page so the top and bottom edges cross the row borders, with a
    soft ground shadow, a shine sweep, and a lowercase caption beside it. */
-body.eol-home .mk.mk-b{overflow:visible;padding-top:0;gap:0}
+body.eol-home .mk.mk-b{overflow:visible;padding-top:0;gap:0;position:relative;z-index:400}
 @media (min-width:900px){
   body.eol-home .mk.mk-b{padding-top:0;gap:0}
 }
