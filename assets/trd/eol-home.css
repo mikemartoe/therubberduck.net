@@ -269,6 +269,7 @@ body.eol-home .mission-dlg-media{grid-area:media;position:relative;display:flex;
 body.eol-home .mission-drop{grid-area:drop;margin:0;padding:0 28px 24px 12px;width:100%;max-width:100%;flex:none;box-sizing:border-box;align-self:end}
 body.eol-home .mission-drop img{display:block;width:100%;height:auto;border:0;border-radius:0;
   box-shadow:0 8px 22px rgba(0,0,0,.35)}
+body.eol-home .mission-drop-card{display:none}
 body.eol-home .mission-oath{display:block;width:100%;height:auto;max-height:min(520px,calc(92vh - 80px));
   aspect-ratio:720/800;object-fit:contain;background:#0C1020;
   border:1px solid rgba(208,175,108,.38);border-radius:4px;
@@ -320,25 +321,42 @@ body.eol-home .mission-dlg-x:hover{color:#fff;background:rgba(208,175,108,.28);b
 body.eol-home .mission-dlg-x:focus-visible{outline:3px solid var(--af1-gold-leaf);outline-offset:2px}
 @media (max-width:699px){
   body.eol-home .mission-dlg{width:calc(100vw - 40px);max-width:calc(100vw - 40px);max-height:88vh;margin:auto}
-  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy copy" "media media" "drop drop" "strip strip";align-items:stretch;min-height:0;max-height:88vh;overflow:auto;overscroll-behavior:contain}
-  body.eol-home .mission-dlg-copy{padding:42px 14px 6px 14px;overflow:visible}
-  body.eol-home .mission-dlg-media{flex-direction:column;padding:2px 14px 4px;align-items:center;justify-content:flex-start;gap:6px}
-  body.eol-home .mission-dlg .trd-ss{padding:0 14px 6px 14px;align-self:stretch}
-  body.eol-home .mission-drop{padding:0 14px 12px 14px;align-self:stretch}
-  body.eol-home .mission-drop img{width:100%;height:auto}
+  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,1fr) minmax(128px,.95fr);grid-template-areas:"copy copy" "drop media" "strip media";align-items:start;column-gap:0;min-height:0;max-height:88vh;overflow:auto;overscroll-behavior:contain}
+  body.eol-home .mission-dlg-copy{padding:40px 14px 6px 14px;overflow:visible}
+  body.eol-home .mission-dlg-media{flex-direction:column;padding:0 14px 10px 6px;align-items:stretch;justify-content:flex-start;gap:0;align-self:stretch}
+  body.eol-home .mission-dlg .trd-ss{padding:0 6px 10px 14px;align-self:stretch}
+  body.eol-home .mission-drop{padding:0 6px 6px 14px;align-self:stretch}
+  body.eol-home .mission-drop img,body.eol-home .mission-drop-img{display:none}
+  body.eol-home .mission-drop-card{
+    display:block;margin:0;padding:6px 7px 8px;box-sizing:border-box;width:100%;
+    background:#D6DAF0;color:#111;border:2px solid #B7C5D9;border-radius:0;
+    font-family:Tahoma,Arial,Helvetica,sans-serif;
+    box-shadow:0 8px 22px rgba(0,0,0,.35)
+  }
+  body.eol-home .mission-drop-meta{
+    display:block;margin:0;font-size:10.5px;line-height:1.4;color:#222;font-weight:400
+  }
+  body.eol-home .mission-drop-who{white-space:nowrap;color:#117743;font-weight:700;margin-right:5px}
+  body.eol-home .mission-drop-name,body.eol-home .mission-drop-trip{color:#117743;font-weight:700}
+  body.eol-home .mission-drop-id{
+    display:inline-block;background:#F4AC89;color:#222;font-weight:700;
+    padding:0 4px;line-height:1.4;white-space:nowrap;margin-right:5px
+  }
+  body.eol-home .mission-drop-time,body.eol-home .mission-drop-no{color:#222;white-space:nowrap;margin-right:5px}
+  body.eol-home .mission-drop-body{margin:6px 0 0;font-size:13.5px;line-height:1.35;color:#111;font-weight:400}
   body.eol-home .mission-dlg-h{font-size:clamp(18px,5.8vw,24px);padding-right:56px;letter-spacing:.03em}
   body.eol-home .mission-dlg .hello-s{font-size:clamp(14.5px,3.9vw,16.5px);margin-top:5px;line-height:1.28}
   body.eol-home .mission-dlg .hello-sign{margin-top:6px;font-size:clamp(14.5px,3.9vw,16.5px);letter-spacing:.04em}
   body.eol-home .mission-dlg-x{width:48px;height:48px;min-width:48px;min-height:48px;font-size:30px}
-  body.eol-home .mission-oath{max-height:min(20vh,170px)}
-  body.eol-home .mission-dlg .trd-ss-in{padding:6px 8px 7px}
-  body.eol-home .mission-dlg .trd-ss-line{font-size:11.5px;margin-bottom:5px;line-height:1.2;white-space:nowrap}
+  body.eol-home .mission-oath{width:100%;height:auto;max-height:none;aspect-ratio:720/800;object-fit:contain;background:#0C1020}
+  body.eol-home .mission-dlg .trd-ss-in{padding:7px 8px 8px}
+  body.eol-home .mission-dlg .trd-ss-line{font-size:11px;margin-bottom:6px;line-height:1.25;white-space:normal}
   body.eol-home .mission-dlg .trd-ss-line-full{display:none}
   body.eol-home .mission-dlg .trd-ss-line-short{display:inline}
   body.eol-home .mission-dlg .trd-ss-lab{display:none}
   body.eol-home .mission-dlg .trd-ss-short{display:inline}
-  body.eol-home .mission-dlg .trd-ss-acts{flex-direction:row;flex-wrap:nowrap;align-items:stretch;gap:6px}
-  body.eol-home .mission-dlg .trd-ss-b{flex:1 1 0;width:auto;justify-content:center;min-height:36px;font-size:12px;padding:4px 6px;gap:4px;white-space:nowrap}
+  body.eol-home .mission-dlg .trd-ss-acts{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:5px}
+  body.eol-home .mission-dlg .trd-ss-b{flex:none;width:100%;justify-content:flex-start;min-height:32px;font-size:12px;padding:4px 8px;gap:6px;white-space:nowrap}
   body.eol-home .mission-dlg .trd-ss-ico{margin-right:0}
   body.eol-home .mission-dlg-media.is-pending .mission-oath::-webkit-media-controls{display:none!important;opacity:0}
   body.eol-home .mission-oath-note{display:block;font-size:12.5px;margin-top:8px}
