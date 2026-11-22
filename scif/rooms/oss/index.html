@@ -103,7 +103,7 @@ h1 .red{color:#e2312f}
 .doc-open:focus-visible{outline:3px solid #f1d27a;outline-offset:3px}
 .doc-foot{display:flex;justify-content:space-between;gap:8px;align-items:center;margin:8px 2px 0;font-size:13px;min-height:1.2em}
 .doc-foot a{color:#1d1b16;font-family:var(--label);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid #1d1b16}
-.mike{font-family:var(--label);letter-spacing:.12em;text-transform:uppercase;font-size:11px;background:#111;color:#e6d3a3;padding:2px 6px}
+.trd-added{font-family:var(--label);letter-spacing:.12em;text-transform:uppercase;font-size:11px;background:#111;color:#e6d3a3;padding:2px 6px}
 .player{background:rgba(0,0,0,.4);border:1px solid rgba(232,222,190,.16);padding:12px}
 .player video{display:block;width:100%;max-height:70vh;background:#000}
 .player figcaption{padding:10px 4px 4px}
@@ -310,7 +310,7 @@ details.qbox summary .qmeta{font-family:var(--label);letter-spacing:.12em;text-t
     </nav>
     <section class="block" id="timeline">
       <h2>Timeline</h2>
-      <p class="seclede">Every line below comes from a document in Mike's OSS folder (file named in brackets).</p>
+      <p class="seclede">Every line below comes from a document in The Rubber Duck's OSS folder (file named in brackets).</p>
       <ol class="tl" id="tl"><li class="wait">Opening the timeline…</li></ol>
     </section>
     <section class="block" id="documents">
@@ -481,8 +481,8 @@ function docCard(it){
   var src=safeUrl(it.source_url), file=safeUrl(it.url);
   if(src&&src===file) src="";
   var foot="";
-  if(src||it.mike_added){
-    foot='<p class="doc-foot">'+(src?'<a href="'+esc(src)+'" target="_blank" rel="noopener noreferrer">Source</a>':'<span></span>')+(it.mike_added?'<span class="mike">Mike added</span>':"")+"</p>";
+  if(src||it.trd_added){
+    foot='<p class="doc-foot">'+(src?'<a href="'+esc(src)+'" target="_blank" rel="noopener noreferrer">Source</a>':'<span></span>')+(it.trd_added?'<span class="trd-added">The Rubber Duck added</span>':"")+"</p>";
   }
   return '<article class="doc"><button type="button" class="doc-open" data-id="'+esc(it.id)+'">'+
     '<img src="'+esc(it.thumb_url||"")+'" alt="" loading="lazy" decoding="async" width="240" height="320">'+
@@ -497,7 +497,7 @@ function extCard(it, cls){
   if(!url){
     return '<article class="'+cls+' is-cite">'+top+(it.note?'<p class="go">'+esc(it.note)+'</p>':"")+"</article>";
   }
-  var when=it.date?'<span class="go">'+esc(fmtDate(it.date))+(it.mike_added?" · Mike added":"")+"</span>":'<span class="go">'+(it.mike_added?"Mike added":"Open")+"</span>";
+  var when=it.date?'<span class="go">'+esc(fmtDate(it.date))+(it.trd_added?" · The Rubber Duck added":"")+"</span>":'<span class="go">'+(it.trd_added?"The Rubber Duck added":"Open")+"</span>";
   return '<a class="'+cls+'" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+top+when+"</a>";
 }
 function renderVideos(players, links){
@@ -678,6 +678,6 @@ Promise.all([
 ]).then(function(pair){boot(pair[0],pair[1]);}).catch(fail);
 })();
 </script>
-<script src="/assets/trd/onair.js?v=20261117r" defer data-trd-keep></script>
+<script src="/assets/trd/onair.js?v=20261122a" defer data-trd-keep></script>
 </body>
 </html>

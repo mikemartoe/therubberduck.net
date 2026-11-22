@@ -665,7 +665,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
 <!-- seo:end -->
 <link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck"><link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261112b" defer data-trd-keep></script>
 <style id="lrail-css">
-/* Desktop only (>=1100px), Mike-approved v2 layout (2026-11-03). Phones and tablets (<1100px) never match these rules.
+/* Desktop only (>=1100px), owner-approved v2 layout (2026-11-03). Phones and tablets (<1100px) never match these rules.
    1) Each drop: number and date as a header line on top ("#4961 • 8 Nov 2022"), the text uses the full column width,
       the source links sit between the text and the share row. Pure CSS, so it holds even if scripts fail.
    2) html.lrail (set by the small script inside #archive, only while the viewport is >=1100px): the room intro that sat
@@ -1210,7 +1210,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         <button type="button" class="arc-endless" id="arcEndless" role="switch" aria-checked="false" title="Load more drops automatically as you scroll"><span class="sw" aria-hidden="true"></span>Endless scroll</button>
       </div>
       <script id="lrail-js">
-      /* Desktop only (>=1100px, Mike-approved v2 layout, 2026-11-03): move the room intro into a sticky right column
+      /* Desktop only (>=1100px, owner-approved v2 layout, 2026-11-03): move the room intro into a sticky right column
          (#lrail) inside the ledger grid, before the first drop is drawn. Each block keeps a placeholder at its home, so
          below 1100px (phones, tablets, or a narrowed window) every block goes back exactly where it was. Nothing is removed. */
       (function(){
@@ -1772,7 +1772,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
      each time the reader nears its end. Off: the Prev / Next paging is unchanged. */
   var EKEY='trd.ledgerEndless', endlessBtn=document.getElementById('arcEndless'), moreEl=document.getElementById('arcMore'),
       topEl=document.getElementById('arcTop'), countTop=document.getElementById('arcCountTop'), footEl=document.querySelector('.arc-foot');
-  /* Desktop (>=1100px, Mike 2026-11-03): endless scroll is on unless the reader turned it off on this device.
+  /* Desktop (>=1100px, 2026-11-03): endless scroll is on unless the reader turned it off on this device.
      Phones and tablets keep the old default (off) until switched on. */
   var EDESK=!!(window.matchMedia&&matchMedia('(min-width:1100px)').matches);
   state.endless=EDESK; try{ var ev=localStorage.getItem(EKEY); if(ev==='1'||ev==='0') state.endless=(ev==='1'); }catch(e){}
@@ -1784,7 +1784,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
   function countText(out, from, to){
     return out.length ? ('Showing '+nf(from)+'–'+nf(to)+' of '+nf(out.length)+(out.length===ALL.length?' records':' matching records')) : 'No matching records';
   }
-  /* Search highlights (Mike 2026-11-03): wrap matching words in the visible drop text in a soft
+  /* Search highlights (2026-11-03): wrap matching words in the visible drop text in a soft
      transparent <mark class="lx-hl">, by splitting text nodes only (never touching markup, links or the share row). */
   function hlRegex(terms){
     var parts=(terms||[]).map(function(a){
@@ -2256,7 +2256,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
  figure.sect-plate img{height:clamp(190px,46vw,300px)}
 }
 @media(prefers-reduced-motion:reduce){.k-find-row button{transition:none}.e3-hero-kinetic .k-media img{animation:none!important;transform:none!important}}
-/* Readability (Mike t1957u #4): larger drop text, more line spacing, brighter labels and a lighter
+/* Readability (t1957u #4): larger drop text, more line spacing, brighter labels and a lighter
    scanline veil. Same colours, fonts and layout; nothing else restyled. */
 .arc-row .e{font-size:17px!important;line-height:1.72!important}
 .arc-row .e .ex{max-width:74ch}
@@ -2435,7 +2435,7 @@ html.lrail.lx-photos .arc-wrap,html.lx-photos.lrail .arc-wrap{grid-template-colu
 }
 </style>
 <script src="assets/trd/ledger-photos.js?v=20261121a"></script>
-<script src="/assets/trd/onair.js?v=20261117r" defer data-trd-keep></script>
+<script src="/assets/trd/onair.js?v=20261122a" defer data-trd-keep></script>
 <style id="ledger-search-top">
 /* Ledger-only layout pass, 2026-11-20: slim the masthead into the ON AIR row,
    put the existing search bar first with a highlighter-yellow border, and keep

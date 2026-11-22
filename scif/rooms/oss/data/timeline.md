@@ -1,6 +1,6 @@
 # OSS Secret Room: timeline in plain words
 
-Every line below comes from a document in Mike's `OSS` folder (file named in brackets). R2 copies are at https://memes.therubberduck.net/scif/rooms/oss/pdfs/.
+Every line below comes from a document in The Rubber Duck's `OSS` folder (file named in brackets). R2 copies are at https://memes.therubberduck.net/scif/rooms/oss/pdfs/.
 
 **June 13, 1942: the OSS is born.** President Roosevelt orders the creation of the Office of Strategic Services and names William J. "Wild Bill" Donovan its director. [FDR-Order-Establishing-OSS-1942-06-13]
 

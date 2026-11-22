@@ -720,7 +720,7 @@ const embedSrc = v => v.e + (v.e.includes('?') ? '&' : '?') + 'autoplay=2';   //
    The drive-in speaker toggles unmute them; the choice is saved in localStorage. Only the single most
    visible clip is ever audible, and while a Rumble feature is on the screen every clip is muted and paused. */
 const CLIP = '/assets/trd/clips/';
-const SHOW_CHURCH_CARD = true;   // optional for Mike: "See You In CHURCH Sunday!" card in the sign-off rotation
+const SHOW_CHURCH_CARD = true;   // optional: "See You In CHURCH Sunday!" card in the sign-off rotation
 const IDLE_LIST = ['intermission-card', 'rubber-duck-ad', 'intermission-card', 'forest-intermission', 'rubber-duck-ad'];
 const COUNTDOWNS = ['countdown-8', 'countdown-7', 'countdown-6', 'countdown-5', 'countdown-3', 'countdown-2', 'countdown-1'];
 const RM = matchMedia('(prefers-reduced-motion: reduce)');
@@ -985,7 +985,7 @@ function shareImg(v) {
   if (!th || th.indexOf('intermission-card') !== -1) return SHARE_FALLBACK_IMG;
   return th;
 }
-/* Only platforms that post the link as a real preview card (title + poster) get a button (Mike, Oct 27):
+/* Only platforms that post the link as a real preview card (title + poster) get a button (Oct 27):
    X, Truth Social, Facebook, plus Email and Text (title + link filled in) and Copy link.
    TikTok and Instagram cannot take a link post from a web page, so they are not offered here. */
 const SHARE_OFF = ['tiktok', 'ig'];
@@ -1005,7 +1005,7 @@ function shareRow(v) {
   host.appendChild(row);
 }
 /* A clamped (long) description grows to whole lines until its column reaches the bottom edge of the other two
-   (Mike's rule: side-by-side blocks share top and bottom edges, no empty space). Never fewer than the CSS 8 lines. */
+   (standing rule: side-by-side blocks share top and bottom edges, no empty space). Never fewer than the CSS 8 lines. */
 function fitClamp() {
   const d = $('pdesc'); d.style.maxHeight = '';
   if (!d.classList.contains('clamp') || matchMedia('(max-width:760px)').matches) return;
@@ -1164,6 +1164,6 @@ if ('requestIdleCallback' in window) requestIdleCallback(warmCountdown, {timeout
 applyAudio();
 document.fonts.ready.then(layout); addEventListener('resize', layout); layout();
 </script>
-<script src="/assets/trd/onair.js?v=20261117r" defer data-trd-keep></script>
+<script src="/assets/trd/onair.js?v=20261122a" defer data-trd-keep></script>
 </body>
 </html>

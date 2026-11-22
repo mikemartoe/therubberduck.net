@@ -191,7 +191,7 @@
     var key = on ? POPK + ':' + state.href + ':' + state.mode : '';
     if (!on || lsGet(key)) { if (pop) { pop.parentNode && pop.parentNode.removeChild(pop); pop = null; } return; }
     // never on top of the Christmas bundle pop-up: wait until it is closed
-    var line = state.mode === 'live' ? 'Mike is live on X Spaces now' : state.when.replace(/^Live (today|\w+) /, 'Live $1 at ') + ' on X Spaces';
+    var line = state.mode === 'live' ? 'The Rubber Duck is live on X Spaces now' : state.when.replace(/^Live (today|\w+) /, 'Live $1 at ') + ' on X Spaces';
     var go = state.mode === 'live' ? 'Join \u203a' : 'Set reminder \u203a';
     if (state.mode === 'replay') { line = 'Missed it? Listen to the replay'; go = 'Listen \u203a'; }
     if (!pop) {

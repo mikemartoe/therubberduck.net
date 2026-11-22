@@ -2,7 +2,7 @@
 
 ## Background photos
 
-The DUCK SAUCE collage (`images/newsroom/collage-desktop.webp`, `collage-mobile.webp`) is made from Mike’s six theme photos of soldiers with *Stars and Stripes* / field newspapers (Vietnam through Iraq / Kosovo / desert deployment). Source files live at `images/newsroom/ducksauce-src/`. Cropped and scaled only for the collage; not otherwise altered.
+The DUCK SAUCE collage (`images/newsroom/collage-desktop.webp`, `collage-mobile.webp`) is made from The Rubber Duck’s six theme photos of soldiers with *Stars and Stripes* / field newspapers (Vietnam through Iraq / Kosovo / desert deployment). Source files live at `images/newsroom/ducksauce-src/`. Cropped and scaled only for the collage; not otherwise altered.
 
 | File | Subject |
 |---|---|
