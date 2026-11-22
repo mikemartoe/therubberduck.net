@@ -302,27 +302,51 @@ body.eol-home .banner .wm{font-size:clamp(32px,4.4vw,58px);white-space:nowrap}
   body.eol-home .hb-sign-n{font-size:13px}
 }
 
-/* Oversized Commander in Chief coin: floats above the page with a soft shadow,
-   a thin gold edge at the top and bottom, a shine sweep, and a lowercase caption. */
-body.eol-home .hello{position:relative;padding-top:16px;padding-bottom:4px}
+/* Commander in Chief coin: slightly smaller, floating above the page so the
+   top edge crosses the flag stripe and the bottom edge crosses the gold
+   shelf rule, with a soft ground shadow, a thin gold edge, a shine sweep,
+   and a lowercase caption beside the coin. */
+body.eol-home .mk.mk-b{overflow:visible;padding-top:0;gap:0}
+@media (min-width:900px){
+  body.eol-home .mk.mk-b{padding-top:0;gap:0}
+}
+body.eol-home .hello{
+  --coin:215px;
+  --row:170px;
+  position:relative;z-index:220;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;max-width:none;box-sizing:border-box;
+  height:var(--row);min-height:var(--row);max-height:var(--row);
+  padding:0 6px;overflow:visible;
+}
+@media (max-width:699px){
+  body.eol-home .hello{--coin:150px;--row:114px}
+}
+body.eol-home .hello-h{
+  position:absolute;left:50%;top:50%;z-index:2;
+  width:var(--coin);height:var(--coin);max-width:none;
+  margin:0;padding:0;line-height:0;font-size:0;
+  transform:translate(-50%,-50%);
+  overflow:visible;
+}
+@media (max-width:699px){
+  body.eol-home .hello-h{top:calc(50% + 4px)}
+}
 body.eol-home .hello-btn.hello-coin{
-  --coin:248px;
-  width:var(--coin);height:var(--coin);
+  width:var(--coin);height:var(--coin);max-width:none;
   position:relative;display:grid;place-items:center;
   padding:0;margin:0;border:0;border-radius:50%;
   background:none;box-shadow:none;text-shadow:none;color:inherit;
   overflow:visible;isolation:isolate;cursor:pointer;
+  flex:none;
   transition:transform .25s var(--ease);
-}
-@media (max-width:699px){
-  body.eol-home .hello-btn.hello-coin{--coin:172px}
-  body.eol-home .hello{padding-top:10px}
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.55));
 }
 body.eol-home .hello-coin-shadow{
-  position:absolute;left:50%;bottom:-14px;z-index:0;pointer-events:none;
-  width:86%;height:36px;transform:translateX(-50%);
-  background:radial-gradient(ellipse at center,rgba(0,0,0,.9) 0%,rgba(0,0,0,.5) 40%,transparent 74%);
-  filter:blur(8px);
+  position:absolute;left:50%;bottom:-32px;z-index:0;pointer-events:none;
+  width:94%;height:56px;transform:translateX(-50%);
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.92) 0%,rgba(0,0,0,.55) 38%,rgba(0,0,0,.18) 62%,transparent 78%);
+  filter:blur(12px);
   animation:coinShadow 4.8s ease-in-out infinite;
 }
 body.eol-home .hello-coin-bob{
@@ -360,10 +384,22 @@ body.eol-home .hello-btn-shine::after{
 }
 body.eol-home .hello-coin-cap,
 body.eol-home .hello-hint{
-  margin:18px 0 0;padding:0;min-height:1.25em;
-  font-family:var(--eo-body);font-weight:600;font-style:normal;font-size:17px;line-height:1.25;
+  position:absolute;z-index:3;
+  left:calc(50% + (var(--coin) / 2) + 14px);
+  top:50%;transform:translateY(-50%);
+  margin:0;padding:0;max-width:11.5em;min-height:0;
+  font-family:var(--eo-body);font-weight:600;font-style:normal;font-size:16px;line-height:1.25;
   letter-spacing:.01em;text-transform:none;font-variant:normal;font-variant-caps:normal;
-  color:var(--af1-gold-leaf);text-align:center;
+  color:var(--af1-gold-leaf);text-align:left;
+  text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 10px rgba(12,16,32,.95);
+  pointer-events:none;
+}
+@media (max-width:699px){
+  body.eol-home .hello-coin-cap,
+  body.eol-home .hello-hint{
+    left:calc(50% + (var(--coin) / 2) + 8px);
+    font-size:13px;max-width:7.4em;line-height:1.2;
+  }
 }
 body.eol-home .hello-coin-cap{display:none;opacity:0;transition:opacity .28s var(--ease)}
 body.eol-home .hello-hint{display:none}
@@ -375,9 +411,9 @@ body.eol-home .hello-hint{display:none}
   body.eol-home .hello-btn.hello-coin:focus-visible .hello-coin-face{
     box-shadow:0 -3px 0 0 #f0d78a,0 0 0 2px #0C1020,0 0 0 5px var(--af1-gold-leaf),0 0 28px rgba(208,175,108,.55);
   }
-  body.eol-home .hello-btn.hello-coin:hover .hello-coin-bob,
-  body.eol-home .hello-btn.hello-coin:focus-visible .hello-coin-bob{
-    filter:drop-shadow(0 10px 18px rgba(208,175,108,.28));
+  body.eol-home .hello-btn.hello-coin:hover,
+  body.eol-home .hello-btn.hello-coin:focus-visible{
+    filter:drop-shadow(0 18px 22px rgba(0,0,0,.55)) drop-shadow(0 0 16px rgba(208,175,108,.28));
   }
 }
 body.eol-home .hello-btn.hello-coin:focus-visible{
@@ -397,11 +433,18 @@ body.eol-home .hello-btn.hello-coin:active .hello-coin-bob{
 }
 @keyframes coinFloat{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-9px)}
+  50%{transform:translateY(-8px)}
+}
+@keyframes coinFloatPhone{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
 }
 @keyframes coinShadow{
   0%,100%{transform:translateX(-50%) scale(1);opacity:.95}
-  50%{transform:translateX(-50%) scale(.86);opacity:.58}
+  50%{transform:translateX(-50%) scale(.8);opacity:.48}
+}
+@media (max-width:699px){
+  body.eol-home .hello-coin-bob{animation-name:coinFloatPhone}
 }
 @media (prefers-reduced-motion:reduce){
   body.eol-home .hello-coin-bob,
