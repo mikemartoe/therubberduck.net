@@ -59,6 +59,15 @@ body.eol-home .trd-nav{
 .eol-cheat span:nth-child(2){background:var(--af1-gold-leaf)}
 .eol-cheat span:nth-child(3){background:var(--af1-red)}
 .eol-cheat span:nth-child(4){background:var(--af1-navy)}
+/* Homepage hero only: move the white→gold/red/navy break just past the coin
+   so the color transition stays visible to the right of the hovering coin. */
+body.eol-home .eol-cheat{
+  --coin:215px;
+  grid-template-columns:calc(50% + (var(--coin) / 2) + 16px) 10px 22px 1fr;
+}
+@media (max-width:699px){
+  body.eol-home .eol-cheat{--coin:150px}
+}
 
 /* Header band */
 body.eol-home .banner{
@@ -376,12 +385,12 @@ body.eol-home .hello-btn.hello-coin{
   overflow:visible;isolation:isolate;cursor:pointer;
   flex:none;
   transition:transform .25s var(--ease);
-  filter:drop-shadow(0 16px 22px rgba(0,0,0,.62)) drop-shadow(0 4px 8px rgba(0,0,0,.4));
+  filter:drop-shadow(0 16px 22px rgba(0,0,0,.31)) drop-shadow(0 4px 8px rgba(0,0,0,.2));
 }
 body.eol-home .hello-coin-shadow{
   position:absolute;left:50%;bottom:-28px;z-index:0;pointer-events:none;
   width:90%;height:52px;transform:translateX(-50%);
-  background:radial-gradient(ellipse at center,rgba(0,0,0,.9) 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.16) 64%,transparent 80%);
+  background:radial-gradient(ellipse at center,rgba(0,0,0,.45) 0%,rgba(0,0,0,.25) 40%,rgba(0,0,0,.08) 64%,transparent 80%);
   filter:blur(11px);
   animation:coinShadow 4.8s ease-in-out infinite;
 }
@@ -444,7 +453,7 @@ body.eol-home .hello-hint{display:none}
   }
   body.eol-home .hello-btn.hello-coin:hover,
   body.eol-home .hello-btn.hello-coin:focus-visible{
-    filter:drop-shadow(0 18px 24px rgba(0,0,0,.62)) drop-shadow(0 0 16px rgba(208,175,108,.28));
+    filter:drop-shadow(0 18px 24px rgba(0,0,0,.31)) drop-shadow(0 0 16px rgba(208,175,108,.28));
   }
 }
 body.eol-home .hello-btn.hello-coin:focus-visible{
