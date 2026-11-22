@@ -29,7 +29,7 @@ ET = ZoneInfo('America/New_York')
 TODAY = datetime.date.today().isoformat()
 BRAND = 'The Rubber Duck\u2122'
 SHARE = SITE + '/images/brand/trd-share-2026.jpg'
-# Web app (PWA, Mike approved 2026-10-30): head tags for pages that offer install + alerts, and the two small
+# Web app (PWA, owner approved 2026-10-30): head tags for pages that offer install + alerts, and the two small
 # data files the push Worker (workers/trd-push.js) reads. Keep these in every rebuild.
 PWA_HEAD = ('<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes">'
             '<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck">'
@@ -163,7 +163,7 @@ NAV = [('/', 'Home'), ('/ledger.html', 'Drop Ledger'), ('/videos.html', 'Video R
 DROP_OG = 'https://memes.therubberduck.net/drops/og2/%d.jpg'   # right-sized share cards on R2 (tools/drop-cards/rightsize.py); old 1200x630 in drops/og/
 _V2 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v2.json')   # drops re-rendered with their real attached images (2026-10-27)
 DROP_V2 = json.load(open(_V2)) if os.path.exists(_V2) else {'prefix': 'v2/', 'drops': {}}
-_V3 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v3.json')   # no-board previews (Mike, 2026-10-30)
+_V3 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v3.json')   # no-board previews (2026-10-30)
 DROP_V3 = json.load(open(_V3)) if os.path.exists(_V3) else {'prefix': 'v3/', 'drops': {}}
 _V4P = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'drop-cards', 'cards-v4.json')
 DROP_V4 = json.load(open(_V4P)) if os.path.exists(_V4P) else {'prefix': 'v4/', 'drops': {}}
@@ -269,7 +269,7 @@ POST_HEADER = re.compile(r'^&ldquo;(?:Anonymous|Q !)[^&]*?No\. \d+&rdquo;$')
 
 
 def strip_board_credit(w):
-    """No board credit (Mike, 2026-10-30): context blocks on drop pages keep their quotes but lose the
+    """No board credit (2026-10-30): context blocks on drop pages keep their quotes but lose the
     board names, the original-board / 4plebs / qalerts.app links, and quotes that are only a post header."""
     if not w:
         return w
@@ -317,7 +317,7 @@ def build_drops():
 
     def drop_card(d, own_link=True):
         h = ('<h2 id="drop-%d"><a href="/drops/%d/">Q drop #%d</a></h2>' % (d['n'], d['n'], d['n'])) if own_link else ''
-        # No board credit (Mike, 2026-10-30): the date line shows the date only, no site/board name.
+        # No board credit (2026-10-30): the date line shows the date only, no site/board name.
         meta = '<p class="meta"><time datetime="%s">%s</time></p>' % (d['dt'].isoformat(), d['dt'].strftime('%B %-d, %Y, %-I:%M %p ET'))
         return '<article class="item">%s%s<div class="text">%s</div></article>' % (h, meta, linkify(d['text']) or '<em>(image or link only)</em>')
 
@@ -338,7 +338,7 @@ def build_drops():
         witness = strip_board_credit(witness)
         body = ('<h1>Q Drop #%d</h1>' % n + drop_card(d, own_link=False) + witness +
                 '<ul class="links"><li><a href="/ledger.html#drop-%d">Open Q drop #%d in The Drop Ledger</a></li>' % (n, n) +
-                # No board credit (Mike, 2026-10-30): no original-board, 4plebs or qalerts.app links on drop pages.
+                # No board credit (2026-10-30): no original-board, 4plebs or qalerts.app links on drop pages.
                 '<li><a href="/drops/%s/">All Q drops from %s</a></li></ul>' % (mk, mname) + pn)
         g = [{'@type': 'CreativeWork', '@id': SITE + '/drops/%d/#drop' % n, 'name': 'Q drop #%d' % n, 'text': d['text'][:5000],
               'dateCreated': d['dt'].isoformat(), 'datePublished': d['dt'].isoformat(), 'author': {'@type': 'Person', 'name': 'Q'},
@@ -738,7 +738,7 @@ def build_shop():
                    sig_preview(it['slug']) + facts, order or '<p class="cta"><a class="btn" href="/merch.html">Choose color and size in the store</a> <a href="%s" rel="noopener">Buy now through Stripe</a></p>' % E(it['buy']),
                    E(it['shipin'] or 'Ships in 3 to 8 business days')))
         # the umbrella special-order promise, on every listing (tools/umbrella_lineup.py)
-        # signed listings: Mike's example photo of the hand-written number + signature (tools/shop_demo_media.py SIG_EXAMPLE)
+        # signed listings: the example photo of the hand-written number + signature (tools/shop_demo_media.py SIG_EXAMPLE)
         body += sig_example_block(it['slug'])
         body += promise_block(it['slug'], it['special_colors'], it['signed'], bool(gal))
         body += demo_block(it['slug'])

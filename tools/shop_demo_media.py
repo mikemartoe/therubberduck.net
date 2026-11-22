@@ -10,7 +10,7 @@ def _and(xs):
     xs = list(xs)
     return ', '.join(xs[:-1]) + ' and ' + xs[-1] if len(xs) > 1 else xs[0]
 
-# The six demo colors (Mike, Oct 25 2026: show the full color set; colors are being added to the lineup).
+# The six demo colors (Oct 25 2026: show the full color set; colors are being added to the lineup).
 COLORS = [
     ('black', 'Black', '#111111'),
     ('white', 'White', '#f3f2ee'),
@@ -33,19 +33,19 @@ def _posters(base_slug, own):
 DEMO_MEDIA = {
     'duck-trucker-hat': ('Trucker hat', '', [c[0] for c in COLORS]),
     'duck-dad-hat': ('Dad hat', '', [c[0] for c in COLORS]),
-    # Oct 26 2026 (Mike): the signed hats show the FRONT only. The old signed demos (store-img/demo/signed-*_demo.*, a hat held up
+    # Oct 26 2026: the signed hats show the FRONT only. The old signed demos (store-img/demo/signed-*_demo.*, a hat held up
     # to show the brim) are no longer used anywhere; the signed listings play the regular hat's front demo instead (MEDIA_SLUG).
     'signed-dad-hat': ('Dad hat', _FRONT, [c[0] for c in COLORS]),
     'signed-trucker-hat': ('Trucker hat', _FRONT, [c[0] for c in COLORS]),
 }
-# Mike's standing rule (Oct 31 2026): the default/first color is White, never Black. These listings keep their current default for now
+# Standing rule (Oct 31 2026): the default/first color is White, never Black. These listings keep their current default for now
 # because White is a SPECIAL-ORDER color there (tools/umbrella_lineup.py); making it the default would open the page on the special-order
-# notice and the special-order Stripe link. Mike decides; see trd-logs/white-default-preview-2026-11-03.md.
+# notice and the special-order Stripe link. The owner decides; see trd-logs/white-default-preview-2026-11-03.md.
 WHITE_DEFAULT_HOLD = set()   # truckers: White is a regular, default color since Nov 3 2026
 MEDIA_SLUG = {'signed-dad-hat': 'duck-dad-hat', 'signed-trucker-hat': 'duck-trucker-hat'}
 
 # The small signed-brim preview (a real signed hat, No. 11 of 500) on the signed hat listings: a secondary tile, never the main photo.
-SIG_PREVIEW = set()  # back-of-hat renderings removed on Mike's order; never re-add
+SIG_PREVIEW = set()  # back-of-hat renderings removed on the owner's order; never re-add
 def sig_preview(slug):
     if slug not in SIG_PREVIEW:
         return ''
@@ -56,11 +56,11 @@ def sig_preview(slug):
             '<img src="/store-img/signed-brim-11of500.jpg" alt="The brim of a signed hat, marked 11/500 TRD" width="480" height="480" loading="lazy" decoding="async"></picture>'
             '<figcaption>Signed and numbered under the brim, out of 500. Shown: No. 11; yours carries its own number.</figcaption></figure>')
 
-# ---------------------------------------------------------------- signature example, on every signed listing (Oct 26 2026, Mike)
-# Mike's own photo of a real signed hat (white marker "11/500 -TRD" under a navy brim): shown ONLY as an example of what the hand-written
+# ---------------------------------------------------------------- signature example, on every signed listing (Oct 26 2026)
+# Example photo of a real signed hat (white marker "11/500 -TRD" under a navy brim): shown ONLY as an example of what the hand-written
 # number and signature look like; the copy says so and never promises a number. Files: store-img/signature-example-11-500_{592,360}.{jpg,webp}
-# (592 = Mike's photo, pixels untouched, metadata stripped; 360 = downscale). This is a real photo, not one of the back-of-hat renderings
-# Mike had removed (SIG_PREVIEW above stays empty).
+# (592 = the example photo, pixels untouched, metadata stripped; 360 = downscale). This is a real photo, not one of the back-of-hat renderings
+# previously removed (SIG_PREVIEW above stays empty).
 SIG_EXAMPLE = {
     'signed-dad-hat': ('Your hat is signed and numbered by hand under the brim, out of 500.',),
     'signed-trucker-hat': ('Your hat is signed and numbered by hand under the brim, out of 500.',),
@@ -107,7 +107,7 @@ def demo_block(slug):
     posters = entry[3] if len(entry) > 3 else {}
     lab = (U.TRUCKER.get(slug) or {}).get('demo_label', {})   # e.g. the trucker's black demo IS the Black / White hat
     cols = [(k, lab.get(k, l), sw) for k, l, sw in COLORS if k in keys]
-    # White first and preselected (Mike, Oct 31 2026), except where White is a special-order color on the listing (WHITE_DEFAULT_HOLD)
+    # White first and preselected (Oct 31 2026), except where White is a special-order color on the listing (WHITE_DEFAULT_HOLD)
     if slug not in WHITE_DEFAULT_HOLD:
         cols = [c for c in cols if c[0] == 'white'] + [c for c in cols if c[0] != 'white']
     names = [c[1] for c in cols]
@@ -153,11 +153,11 @@ def demo_block(slug):
             % (ms, html.escape(kind), tabs, _figs(ms, kind, k0, l0, posters.get(k0)), cap) + js)
 
 # ---------------------------------------------------------------- listing gallery: one main photo per color with color tabs
-# Red Pill Tee: Mike's front + back mock (Oct 26 2026) in six colors, landscape 1600x982 (+900 w), made by tools/make_tee_mock_images.py.
+# Red Pill Tee: front + back mock (Oct 26 2026) in six colors, landscape 1600x982 (+900 w), made by tools/make_tee_mock_images.py.
 # Shown as the listing's main photo, full width above the facts; the frame has the photo's own aspect ratio, so nothing is cropped or letterboxed.
 # Signed Duck Tee (Oct 26 2026, branch shirts-audit): same print front + back, so it reuses the same approved mock files; the caption says the
 # signature is added by hand (the mock shows the print only). The colors you can order are still the ones in merch.html.
-# White first and preselected (Mike's standing rule, Oct 31 2026: the default color is White, never Black; his avatar is the duck on white).
+# White first and preselected (standing rule, Oct 31 2026: the default color is White, never Black; his avatar is the duck on white).
 GALLERY_COLORS = [
     ('white', 'White', '#f3f2ee'),
     ('black', 'Black', '#141414'),
@@ -166,7 +166,7 @@ GALLERY_COLORS = [
     ('tiffany', 'Tiffany Blue', '#81d8d0'),
     ('hotpink', 'Hot Pink', '#dd1e78'),
 ]
-# Oct 26 2026 (Mike): all six colors are sold. Tiffany Blue and Hot Pink are SPECIAL ORDERS under the umbrella rule (tools/umbrella_lineup.py:
+# Oct 26 2026: all six colors are sold. Tiffany Blue and Hot Pink are SPECIAL ORDERS under the umbrella rule (tools/umbrella_lineup.py:
 # standard time plus up to 7 extra days; card authorized, not charged, until we confirm the order; hold released / every penny refunded
 # if it can't be made within those 7 days) on their own Stripe links (merch.html size options carry data-special-link). Keep in step with merch.html.
 SPECIAL_COLORS = {'tiffany', 'hotpink'}

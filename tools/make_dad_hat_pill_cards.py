@@ -1,4 +1,4 @@
-"""Dad hat card photos that show the red pill honestly (Mike t1969u/t1970u).
+"""Dad hat card photos that show the red pill honestly (t1969u/t1970u).
 Printful stitches the red pill on the BACK of the dad hat, above the strap (file emb-dadhat-back-redpill on every
 variant); it cannot embroider the bill. So each card photo is the real front mockup plus a round inset of the real
 Printful back mockup (pill above the strap), labelled "BACK". Gold / Tiffany Blue / Hot Pink backs are tinted from

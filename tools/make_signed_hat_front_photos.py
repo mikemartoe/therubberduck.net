@@ -1,4 +1,4 @@
-"""Signed hat card photos = the approved FRONT-view product photos of the regular hats (Mike, Oct 26 2026: front views only; the
+"""Signed hat card photos = the approved FRONT-view product photos of the regular hats (Oct 26 2026: front views only; the
 11/500 signature shows only as the small preview on the card back and the listing page). Usage, from the repo root:
     python3 tools/make_signed_hat_front_photos.py
 Dad hat: store-img/duck-dad-hat_<c>_product.{jpg,webp} copied byte for byte to store-img/signed-dad-hat-f_<c>.{jpg,webp}.
@@ -63,7 +63,7 @@ for k, f in dadS.items():
     TRK[k] = out
     print(k, want.round(), tgt.round())
 
-# ---- red pill on the bill, all 12 (Mike, Oct 26 2026): placement measured per image, see tools/signed_hat_pill.py
+# ---- red pill on the bill, all 12 (Oct 26 2026): placement measured per image, see tools/signed_hat_pill.py
 def finish(kind, stem, arrs):
     ms = {c: sp.measure(arrs[c], kind) for c in COLS}
     ref = {k: float(np.median([m[k] for m in ms.values()])) for k in ms['black']}

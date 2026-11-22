@@ -15,7 +15,7 @@ header bar. Phones: inside the header bar, right of the logo.
 ```
 
 ## New live link = edit ONE file (`/live.json`)
-Mike sends a link to where he is speaking live -> set these fields in `live.json`, commit, push, purge Cloudflare:
+When there is a live link to where The Rubber Duck is speaking -> set these fields in `live.json`, commit, push, purge Cloudflare:
 ```json
 "live": true,
 "liveUrl": "https://x.com/therubberduck79/status/2122915526754324765",

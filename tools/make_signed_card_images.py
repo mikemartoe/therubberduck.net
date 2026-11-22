@@ -1,6 +1,6 @@
 """Square store-card photos for the three signed listings in the new six-color lineup (Oct 26 2026, branch umbrella-special-orders).
 Signed tee: the Red Pill Tee front photo (store-img/demo/duck-tee_<c>_front.jpg, 800x1300), padded onto its own gray studio backdrop.
-Signed hats: NOT built here any more (Oct 26 2026, Mike: front views only). The old crop of the signed demo still showed a malformed
+Signed hats: NOT built here any more (Oct 26 2026: front views only). The old crop of the signed demo still showed a malformed
 held-up hat; the hat cards are now the approved front product photos, see tools/make_signed_hat_front_photos.py.
 Output: store-img/signed-tee_<c>.{jpg,webp}, 800x800."""
 from PIL import Image

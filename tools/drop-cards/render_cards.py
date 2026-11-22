@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Q-drop share cards (approved v4 layout, 2026-10-25) for the share feature.
 
-Replica of the original post body. No board anywhere (Mike, 2026-10-30): no banner, no name/trip/ID/post No. header;
+Replica of the original post body. No board anywhere (2026-10-30): no banner, no name/trip/ID/post No. header;
 the header line is "Q drop #N  Month D, YYYY",
 wide Unicode spaces shown as ordinary spaces IN THE IMAGE ONLY (data/drops.js is never changed),
 caption under the post box: "[duck] therubberduck.net".
@@ -36,12 +36,12 @@ def duck_uri(px_h):
     b = io.BytesIO(); im.save(b, "PNG"); return "data:image/png;base64," + base64.b64encode(b.getvalue()).decode()
 SITE = {"4chan": "4chan", "8chan": "8chan", "8kun": "8kun"}
 def caption_html(n, scale, css_px=16, font_pt=9.5):
-    # no board credit (Mike, 2026-10-30): the caption is the duck and the site name only
+    # no board credit (2026-10-30): the caption is the duck and the site name only
     w = round(css_px * DUCK_AR, 2)
     return (f'<div class="cap"><span class="site"><img class="duck" width="{w}" height="{css_px}" '
             f'src="{duck_uri(round(css_px*scale))}" alt="">therubberduck.net</span></div>')
 def head_html(n, t, site):
-    # no board header (Mike, 2026-10-30): no name, trip, ID, flag, post No. or board; the drop number and the date only
+    # no board header (2026-10-30): no name, trip, ID, flag, post No. or board; the drop number and the date only
     inner = f'<span class="subject">Q drop #{n}</span> <span class="dateTime">{t.strftime("%B %-d, %Y")}</span>'
     return f'<div class="postInfo">{inner}</div>' if site == "4chan" else f'<p class="intro">{inner}</p>'
 CAP_CSS = """.cap{clear:both;display:flex;justify-content:center;align-items:center;gap:0;margin:10px auto 2px;padding:7px 0 1px;

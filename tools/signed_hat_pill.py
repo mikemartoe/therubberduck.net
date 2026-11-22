@@ -1,4 +1,4 @@
-"""Red pill on the bill of the signed-hat front photos (Mike, Oct 26 2026).
+"""Red pill on the bill of the signed-hat front photos (Oct 26 2026).
 The approved trademark pill art (tools/art/red-pill.png, the same pill_crop art used by the hat demo stills and the premium mockups),
 placed by the approved navy-still rules, measured per image from landmarks (never by eye):
   width = 0.335 x crown width; shape 3.9:1 (the approved ratio); centred on the bill centre line;

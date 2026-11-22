@@ -3,7 +3,7 @@
 What it stores: one row per page view / page leave (visible ms) / share tap, keyed by a random visit id that
 expires after 30 min idle (assets/trd/visit.js). No IP, user agent, cookie or account. GPC/DNT browsers send nothing.
 
-Deploy (only when Mike approves):
+Deploy (only when the owner approves):
 1. `npx wrangler d1 create trd-visits` and paste the id into wrangler.toml
 2. `npx wrangler d1 execute trd-visits --remote --file schema.sql`
 3. `npx wrangler secret put REPORT_KEY`

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mike's rule (Oct 27 2026): Wikipedia is never named, linked or used as a source on therubberduck.net.
+"""Standing rule (Oct 27 2026): Wikipedia is never named, linked or used as a source on therubberduck.net.
 - Wikipedia links inside archived Q drops / X posts -> plain "(ref: Topic)" (no link, no name).
 - Library/PDF display titles: drop "Wikipedia" / "Wikipedia, the free encyclopedia" (PDF files, thumbs and page URLs untouched).
 Re-runnable; prints per-file counts. Usage: python3 tools/strip_wikipedia.py [--apply]"""

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build DUCK SAUCE battlefield collage WebPs from Mike's six soldier+Stars-and-Stripes photos.
+"""Build DUCK SAUCE battlefield collage WebPs from The Rubber Duck's six soldier+Stars-and-Stripes photos.
 
 Default photo dir: images/newsroom/ducksauce-src/ (not shipped on the live site).
 Override with --src. Writes collage-desktop.webp + collage-mobile.webp under --out.

@@ -4,7 +4,7 @@ Last updated Tuesday, November 17, 2026 (America/New_York, ET). No passwords, to
 
 ## Live URLs
 - Christmas page: https://therubberduck.net/christmas/
-  - On /christmas/ and in the homepage pop-up the bundles are named Bundle One ($79), Bundle Two ($129) and Bundle Three ($179) (Mike, Nov 17 evening). Stripe product names and the store page (merch.html) still use the original names (The Rubber Duck Christmas Bundle / Big Duck / TRD-MVP).
+  - On /christmas/ and in the homepage pop-up the bundles are named Bundle One ($79), Bundle Two ($129) and Bundle Three ($179) (Nov 17 evening). Stripe product names and the store page (merch.html) still use the original names (The Rubber Duck Christmas Bundle / Big Duck / TRD-MVP).
   - Anchors: #bundle-one, #bundle-two, #bundle-three, plus the original #christmas-bundle, #christmas-bundle-big-duck, #christmas-bundle-trd-mvp (still work)
 - Homepage pop-up (full screen, homepage only, EXIT / Esc / tap outside close it, hidden 24h after close, off after Dec 25): https://therubberduck.net/
 - Store lineup: https://therubberduck.net/merch.html#christmas-bundles (bundle rows unchanged)
@@ -21,7 +21,7 @@ Last updated Tuesday, November 17, 2026 (America/New_York, ET). No passwords, to
 | $129 Big Duck | prod_VeDt0oZq25R0Z3 | price_1UcvSBGC9fEXRvQSJY2Rxb5C | plink_1UcvSQGC9fEXRvQSZzUFFtmR |
 | $179 TRD-MVP | prod_VeDt98kcSPNb2Q | price_1UcvSEGC9fEXRvQSRORBwJfM | plink_1UcvSXGC9fEXRvQSZqsxqBSU |
 
-Custom fields: teecolor, teesize (Big Duck) / size "Size (tee + hoodie)" (TRD-MVP), hatcolor "Baseball cap color". US shipping, no shipping charge. $129 and $179 include the bundle-only bonus "+ FREE $50 ad on therubberduck.net, runs 90 days" (fine print is Mike's call).
+Custom fields: teecolor, teesize (Big Duck) / size "Size (tee + hoodie)" (TRD-MVP), hatcolor "Baseball cap color". US shipping, no shipping charge. $129 and $179 include the bundle-only bonus "+ FREE $50 ad on therubberduck.net, runs 90 days" (fine print is the owner's call).
 
 ## Site commits (repo github.com/mikemartoe/therubberduck.net, /workspace/trd-site)
 | Step | Commit | Rollback tag (points at the commit before) |

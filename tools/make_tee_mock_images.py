@@ -1,6 +1,6 @@
-"""Web images for the Red Pill Tee six-color mock (front + back on gray, 5700x3500 source, approved by Mike Oct 26 2026).
+"""Web images for the Red Pill Tee six-color mock (front + back on gray, 5700x3500 source, owner approved Oct 26 2026).
 Writes store-img/demo/duck-tee_<color>_mock.{jpg,webp} (1600x982) and _mock-900.{jpg,webp} (900x553).
---cards-only (Oct 26 2026, approved by Mike): the merch.html store card shows the FRONT of the shirt large on the card face and the BACK
+--cards-only (Oct 26 2026, owner approved): the merch.html store card shows the FRONT of the shirt large on the card face and the BACK
 (slogan + QR) on the flip side, per color:
   store-img/demo/duck-tee_<color>_front.{jpg,webp} (800x1300): a tight crop of the front shirt from the mock. The shirt fills the width
     with a small even margin; the frame is object-fit:cover, so desktop (about 0.85 wide:tall) trims only gray above and below and mobile

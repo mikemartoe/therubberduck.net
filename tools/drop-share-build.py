@@ -32,7 +32,7 @@ OG_H = {int(k): v for k, v in json.load(open(_SZ)).items()} if os.path.exists(_S
 _V2 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v2.json')
 V2 = json.load(open(_V2)) if os.path.exists(_V2) else {'prefix': 'v2/', 'drops': {}}
 V2D = {int(k): v for k, v in V2['drops'].items()}
-_V3 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v3.json')   # no-board previews (Mike, 2026-10-30): drops/v3/og2/N.jpg
+_V3 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v3.json')   # no-board previews (2026-10-30): drops/v3/og2/N.jpg
 V3 = json.load(open(_V3)) if os.path.exists(_V3) else {'prefix': 'v3/', 'drops': {}}
 V3D = {int(k): v for k, v in V3['drops'].items()}
 _V4 = os.path.join(ROOT, 'tools', 'drop-cards', 'cards-v4.json')   # fixed 1200x630 previews (2026-11-02, PREVIEW): drops/v4/og/N.jpg
@@ -51,7 +51,7 @@ esc = lambda s: html.escape(s or '', quote=True)
 
 
 def tease(n, dt, site, board):
-    return 'Q drop #%d \u00b7 %s' % (n, dt.strftime('%B %-d, %Y'))   # no board credit (Mike, 2026-10-30)
+    return 'Q drop #%d \u00b7 %s' % (n, dt.strftime('%B %-d, %Y'))   # no board credit (2026-10-30)
 
 
 def figs(n):
@@ -65,9 +65,9 @@ def page(d):
     dt = datetime.fromtimestamp(ts, ET)
     when = dt.strftime('%B %-d, %Y')
     title = 'Q Drop #%d, %s | The Drop Ledger | The Rubber Duck\u2122' % (n, when)
-    desc = tease(n, dt, site, board)   # tease only (Mike, 2026-10-25): no drop text in previews
+    desc = tease(n, dt, site, board)   # tease only (2026-10-25): no drop text in previews
     img = MEDIA + V4['prefix'] + 'og/%d.jpg' % n if n in V4D else MEDIA + (V3['prefix'] if n in V3D else V2['prefix'] if n in V2D else '') + '%s/%d.jpg' % (OG_DIR, n)
-    alt = 'Q drop #%d as originally posted, %s' % (n, when)   # no board credit (Mike, 2026-10-30)
+    alt = 'Q drop #%d as originally posted, %s' % (n, when)   # no board credit (2026-10-30)
     dest = '/ledger.html#drop-%d' % n
     return '''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">

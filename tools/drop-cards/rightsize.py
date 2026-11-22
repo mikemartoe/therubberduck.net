@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Right-sized link-preview cards (og/N.jpg replacement), prepared 2026-10-26, NOT deployed.
 
-Mike's reference (Q drop #1): the post cropped tight to its content. Header row (name, trip, ID, flag, date, No.)
+Reference (Q drop #1): the post cropped tight to its content. Header row (name, trip, ID, flag, date, No.)
 on ONE line across the top, the post text below at a natural readable size filling the card width, a small even
-margin all round, no empty band, then the thin caption strip "[duck] therubberduck.net" (no board: header row is "Q drop #N  Month D, YYYY", Mike 2026-10-30).
+margin all round, no empty band, then the thin caption strip "[duck] therubberduck.net" (no board: header row is "Q drop #N  Month D, YYYY", 2026-10-30).
 The image height is set by the content (not forced to 1200x630).
 
 How: the same replica HTML as render_cards.py (same text check against data/drops.js) with

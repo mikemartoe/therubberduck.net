@@ -1,5 +1,5 @@
 /* Cloudflare Worker: trd-pwa-preview (PREVIEW ONLY, workers.dev, never on therubberduck.net routes)
-   Serves the pwa-preview-20261030 branch of mikemartoe/therubberduck.net from GitHub raw so Mike can
+   Serves the pwa-preview-20261030 branch of mikemartoe/therubberduck.net from GitHub raw so the owner can
    try the web app, install banner and alerts on a phone before anything goes live. noindex everywhere. */
 const BRANCH = 'pwa-preview-20261030';
 const RAW = 'https://raw.githubusercontent.com/mikemartoe/therubberduck.net/' + BRANCH;

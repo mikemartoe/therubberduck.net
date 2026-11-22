@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """DUCK SAUCE per-story OG cards (1200x630 JPG) for The Rubber Duck Newsroom.
 
-Uses Mike's six battlefield theme photos + Steelfish/Courier plate.
+Uses the six battlefield theme photos + Steelfish/Courier plate.
 Writes images/newsroom/og/<slug>.jpg. Does not touch newsroom.jpg or HTML.
 """
 from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageEnhance, ImageOps
@@ -29,7 +29,7 @@ def theme_imgs():
     if _theme_imgs is None:
         missing = [f for f in THEME if not os.path.exists(os.path.join(SRC, f))]
         if missing:
-            raise SystemExit('Missing theme photos in %s: %s (Mike\'s six; not shipped live)' % (SRC, ', '.join(missing)))
+            raise SystemExit('Missing theme photos in %s: %s (the six; not shipped live)' % (SRC, ', '.join(missing)))
         _theme_imgs = [Image.open(os.path.join(SRC, f)).convert('RGB') for f in THEME]
     return _theme_imgs
 

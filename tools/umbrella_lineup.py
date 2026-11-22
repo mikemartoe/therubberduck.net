@@ -1,8 +1,8 @@
-"""The umbrella special-order rule (Mike, Oct 26 2026) and the six-color lineup for the signed listings.
+"""The umbrella special-order rule (Oct 26 2026) and the six-color lineup for the signed listings.
 
 THE RULE: anything listed in the store is ours to deliver. A listed option that can't be mapped to a product our printer
 (Printful) can make today is a SPECIAL ORDER: its own Stripe link with manual capture (card authorized, not charged), never
-sent to Printful automatically; Mike gets alerts (new / day 4 / 24 h left / expired); we take up to 7 extra days to source
+sent to Printful automatically; the owner gets alerts (new / day 4 / 24 h left / expired); we take up to 7 extra days to source
 and make it; the card is charged when a partner maker confirms; if nobody can make it within those 7 days the hold is
 released (or, if already charged, every penny is refunded) at once. The buyer agrees at checkout.
 
@@ -26,7 +26,7 @@ RETIRED = ['Pink', 'Light Blue']   # never offered again on the signed listings;
 
 # Placeholder checkout links for special orders that don't exist in Stripe yet. A link containing '/PENDING-' is shown
 # as "Special order link not live yet" and can't be clicked (merch.html script); tools/check_umbrella_ready.py fails
-# the deploy while any remain. Replace each one with the real buy.stripe.com URL once Mike approves and it is created.
+# the deploy while any remain. Replace each one with the real buy.stripe.com URL once the owner approves and it is created.
 def pending(name):
     return 'https://buy.stripe.com/PENDING-' + name
 
@@ -58,7 +58,7 @@ SIGNED = {
     },
 }
 
-# Unsigned listings in the same lineup (Mike approved Oct 26 2026: Duck Dad Hat moves to the new lineup; Light Blue, Pink and
+# Unsigned listings in the same lineup (owner approved Oct 26 2026: Duck Dad Hat moves to the new lineup; Light Blue, Pink and
 # Charcoal retired). Yupoong 6245CM in Printful has Black, White and Navy but no Gold, Tiffany Blue or Hot Pink -> special orders.
 UNSIGNED = {
     'duck-dad-hat': {
@@ -87,7 +87,7 @@ SPECIAL_SHIP = {'duck-dad-hat': '4.95', 'duck-trucker-hat': '4.95', 'signed-dad-
 RETIRED_UNSIGNED = {'duck-dad-hat': ['Light Blue', 'Pink', 'Charcoal']}
 
 # ---- wording (one place) ----
-# Oct 26 2026 (Mike): shipping time is the same standard time across the board; a special order adds UP TO 7 EXTRA DAYS on top of
+# Oct 26 2026: shipping time is the same standard time across the board; a special order adds UP TO 7 EXTRA DAYS on top of
 # the item's standard time. Public text never gives the reason for the 7 days (no "source", "partner" or "maker" wording).
 STD_SHIP_UNSIGNED = '3-8 business days'      # regular items
 STD_SHIP_SIGNED = 'about 2 to 3 weeks'       # signed pieces: hand-signed and numbered, then mailed (unchanged)

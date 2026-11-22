@@ -1,6 +1,6 @@
 # Archived: the Spotify "Personal Playlist" cassette (homepage)
 
-Taken off the homepage on 2026-11-01 at Mike's request. Nothing was deleted: the assets are still where
+Taken off the homepage on 2026-11-01 at the owner's request. Nothing was deleted: the assets are still where
 they were and every removed line is saved in this folder, so it can be brought back.
 
 Last commit with it live: `fa19b6f62` (also tagged `rollback-pre-hoverbadge-20261101`).

@@ -1,4 +1,4 @@
-"""Premium line, COMING SOON (refresh: branch hat-lines-coming-soon, Oct 26 2026; not live until Mike approves the screenshots).
+"""Premium line, COMING SOON (refresh: branch hat-lines-coming-soon, Oct 26 2026; not live until the owner approves the screenshots).
 One line, no prices and no buy buttons: it is announced, not sold.
   /shop/premium-wool-cap/     wool-blend cap, chrome duck embroidered front center (pill on the bill in mockups is artwork only)
 The premium leather baseball cap was taken off the store on 2026-11-18 and is archived at /workspace/ideas/leather-hats/ (idea on hold).

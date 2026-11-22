@@ -32,7 +32,7 @@ TODAY = S.TODAY
 LEDGER_DELTA = '/ledger.html?delta=today'
 DX_CSS = '<link rel="stylesheet" href="/assets/seo/dx.css?v=1">\n'
 RE_CSS = re.compile(r'<link rel="stylesheet" href="/assets/seo/dx\.css[^"]*">\n')
-# Web app (Mike, 2026-11-01): in the installed app (display-mode: standalone) these pages get an app bar with Back,
+# Web app (2026-11-01): in the installed app (display-mode: standalone) these pages get an app bar with Back,
 # app home and the app menu instead of the website header (assets/trd/appbar.js does nothing in a browser tab).
 APPBAR = '<script src="/assets/trd/appbar.js?v=20261101a"></script>\n'
 RE_APPBAR = re.compile(r'<script src="/assets/trd/appbar\.js[^"]*"></script>\n')

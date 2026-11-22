@@ -5,7 +5,7 @@ Ids and titles come from the same two sources the room uses:
   - the ALL list inside videos.html (Rumble features + reposts)
   - data/video-room-local.json (file-hosted local-archive reels)
 
-Each page is a real preview page (2026-10-30, preview for Mike): the poster frame (tap to play it in the room),
+Each page is a real preview page (2026-10-30, preview): the poster frame (tap to play it in the room),
 title, date and running time, the feature's own notes (filename guesses are never shown), Watch in the Video Room,
 the compact share row (assets/trd/share.js, same as under each drop), and three more features. og/twitter tags use the
 feature's 1200x630 card (tools/video-cards/render_video_cards.py, R2 video-room/og/<id>.jpg). No page ever

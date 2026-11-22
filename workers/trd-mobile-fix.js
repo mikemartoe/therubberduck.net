@@ -1,7 +1,7 @@
 /* Cloudflare Worker: trd-mobile-fix
    Serves homepage HTML + critical TRD assets from GitHub raw while Pages
    builds are unhealthy. Do NOT re-add header dock/watermark experiments
-   unless Mike explicitly asks. Known-good mobile: logo duck beside title,
+   unless the owner explicitly asks. Known-good mobile: logo duck beside title,
    suggestion box + support duck bottom-right beside cassette. */
 const RAW = 'https://raw.githubusercontent.com/mikemartoe/therubberduck.net/main';
 const PROXY = new Set([
