@@ -1,0 +1,74 @@
+/* Dedicated Executive Order pages (/eo-library/<n>/) and static index directory on /eo-library/. */
+
+.eol-dir{margin-top:40px;padding:16px 20px;background:var(--af1-navy);border:1px solid rgba(208,175,108,.35);border-radius:6px;color:var(--cream)}
+.eol-dir summary{cursor:pointer;font-family:var(--font-display);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--af1-gold-bright);list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.eol-dir summary::-webkit-details-marker{display:none}
+.eol-dir summary::after{content:"+";font-size:18px;line-height:1;color:var(--af1-gold-leaf)}
+.eol-dir[open] summary::after{content:"\2212"}
+.eol-dir-note{margin:12px 0 0;color:var(--muted);font-size:15px}
+.eol-dir-group{margin-top:18px;padding-top:14px;border-top:1px solid rgba(208,175,108,.2)}
+.eol-dir-group h3{margin:0 0 10px;font-family:var(--font-display);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--af1-gold-leaf)}
+.eol-dir-list{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:8px 18px}
+.eol-dir-list li{font-size:16px;line-height:1.4}
+.eol-dir-list a{color:var(--cream);text-decoration:none;border-bottom:1px solid rgba(208,175,108,.25)}
+.eol-dir-list a:hover,.eol-dir-list a:focus-visible{color:var(--af1-gold-bright);border-bottom-color:var(--af1-gold-bright)}
+.eol-dir-n{font-family:var(--font-display);font-weight:700;color:var(--af1-gold-bright);margin-right:6px}
+.eol-dir-date{color:var(--muted);font-size:14px;margin-left:6px;white-space:nowrap}
+
+/* Individual EO page */
+.eo-wrap{max-width:980px;margin:0 auto;padding:24px 20px 64px}
+.eo-crumbs{margin:0 0 18px;font-family:var(--font-display);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.eo-crumbs a{color:var(--af1-gold-leaf);text-decoration:none}
+.eo-crumbs a:hover,.eo-crumbs a:focus-visible{color:var(--af1-gold-bright);text-decoration:underline}
+
+.eo-head{position:relative;background:linear-gradient(160deg,#1C2448 0%,#151B33 48%,#0E1224 100%);border:1px solid rgba(208,175,108,.45);border-radius:6px;padding:28px 28px 26px 40px;box-shadow:0 18px 40px rgba(0,0,0,.45);overflow:hidden}
+.eo-head::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:10px;background:linear-gradient(90deg,#0A0E1C,#151B33 60%,#1C2448);border-right:1px solid rgba(208,175,108,.22)}
+.eo-head::after{content:"";position:absolute;left:10px;top:10px;bottom:10px;width:8px;background:linear-gradient(90deg,var(--af1-gold-bright) 0,var(--af1-gold-bright) 1.5px,var(--af1-red) 1.5px,var(--af1-red) 6.5px,var(--af1-gold-bright) 6.5px,var(--af1-gold-bright) 8px)}
+.eo-head-top{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.eo-head-seal{width:64px;height:64px;flex:none;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.eo-kicker{margin:0;font-family:var(--font-display);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--af1-gold-leaf)}
+.eo-num-tag{margin:4px 0 0;font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:.08em;color:var(--af1-gold-bright)}
+.eo-head h1{margin:6px 0 0;font-family:var(--font-display);font-weight:700;font-size:clamp(1.5rem,3.4vw,2.4rem);line-height:1.18;color:var(--af1-white)}
+
+.eo-meta{margin:20px 0 0;padding:16px 0 0;border-top:1px solid rgba(208,175,108,.28);display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px 20px}
+.eo-meta div{min-width:0}
+.eo-meta dt{font-family:var(--font-display);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--af1-gold-leaf)}
+.eo-meta dd{margin:3px 0 0;font-size:17px;color:var(--cream);overflow-wrap:anywhere}
+
+.eo-tags{margin:16px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.eo-tag{border:1px solid rgba(208,175,108,.35);background:rgba(12,16,32,.6);color:var(--cream);border-radius:999px;padding:3px 11px;font-family:var(--font-display);font-size:11px;letter-spacing:.05em}
+
+.eo-actions{margin:20px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+.eo-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:4px;border:1px solid rgba(208,175,108,.55);background:rgba(12,16,32,.75);color:var(--af1-gold-bright);font-family:var(--font-display);font-size:12px;letter-spacing:.07em;text-transform:uppercase;text-decoration:none}
+.eo-btn:hover,.eo-btn:focus-visible{background:var(--af1-navy-mid);border-color:var(--af1-gold-bright);color:var(--af1-white)}
+.eo-btn-pri{background:var(--af1-red);border-color:var(--af1-red);color:var(--af1-white)}
+.eo-btn-pri:hover,.eo-btn-pri:focus-visible{background:#a61938;border-color:#a61938;color:var(--af1-white)}
+
+.eo-box{margin-top:24px;padding:22px 26px;background:var(--af1-navy);border:1px solid rgba(208,175,108,.28);border-radius:6px}
+.eo-box h2{margin:0 0 10px;font-family:var(--font-display);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--af1-gold-leaf)}
+.eo-box p{margin:0;font-size:1.12rem;line-height:1.6;color:var(--cream)}
+.eo-status-note{margin-top:10px!important;font-size:16px!important;color:var(--muted)!important}
+
+.eo-paper-wrap{margin-top:24px;background:#0E1224;padding:14px;border:1px solid rgba(208,175,108,.32);border-radius:6px}
+.eo-paper{background:var(--cream);color:var(--ink);border:1px solid #d9d0bd;box-shadow:inset 0 0 0 1px #fff,0 10px 30px rgba(0,0,0,.35);padding:28px 34px 36px}
+.eo-paper-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px;padding-bottom:14px;margin-bottom:20px;border-bottom:2px solid rgba(111,90,51,.35)}
+.eo-paper-head h2{margin:0;font-family:var(--font-display);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--af1-navy)}
+.eo-paper-cite{margin:0;font-family:var(--font-display);font-size:12px;letter-spacing:.08em;color:#4f4634}
+.eo-doc-title{margin:0 0 18px;font-family:var(--font-display);font-weight:700;font-size:1.22rem;line-height:1.35;color:var(--af1-navy)}
+.eo-doc-body p{margin:0 0 14px;font-size:1.08rem;line-height:1.65;color:#1a1610;max-width:68ch;overflow-wrap:anywhere}
+.eo-doc-sign{margin-top:22px;padding-top:12px;border-top:1px solid rgba(111,90,51,.25);font-family:var(--font-display);font-size:14px;letter-spacing:.06em;color:var(--af1-navy)}
+.eo-doc-sign p{margin:2px 0;font-size:15px}
+
+.eo-pager{margin-top:26px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-top:18px;border-top:1px solid rgba(208,175,108,.28)}
+.eo-pager a{display:inline-flex;align-items:center;padding:9px 14px;border:1px solid rgba(208,175,108,.4);border-radius:4px;background:var(--af1-navy);color:var(--af1-gold-bright);font-family:var(--font-display);font-size:12px;letter-spacing:.06em;text-decoration:none}
+.eo-pager a:hover,.eo-pager a:focus-visible{border-color:var(--af1-gold-bright);background:var(--af1-navy-mid);color:var(--af1-white)}
+
+@media (max-width:640px){
+  .eo-wrap{padding:16px 12px 48px}
+  .eo-head{padding:20px 16px 20px 30px}
+  .eo-box{padding:18px 16px}
+  .eo-paper-wrap{padding:8px}
+  .eo-paper{padding:20px 16px 26px}
+  .eol-dir{padding:14px}
+  .eol-dir-list{grid-template-columns:1fr}
+}
