@@ -4,6 +4,7 @@
 @font-face{font-family:'Cinzel';src:url('/assets/trd/fonts/Cinzel-var.woff2') format('woff2'),url('/assets/trd/fonts/Cinzel-var.ttf') format('truetype');font-weight:400 900;font-display:swap}
 @font-face{font-family:'EB Garamond';src:url('/assets/trd/fonts/EBGaramond-var.woff2') format('woff2'),url('/assets/trd/fonts/EBGaramond-var.ttf') format('truetype');font-weight:400 800;font-display:swap}
 @font-face{font-family:'EB Garamond';src:url('/assets/trd/fonts/EBGaramond-Italic-var.woff2') format('woff2'),url('/assets/trd/fonts/EBGaramond-Italic-var.ttf') format('truetype');font-weight:400 800;font-style:italic;font-display:swap}
+@font-face{font-family:'VT323';src:url('/assets/trd/fonts/VT323-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 
 body.eol-home{
   --af1-navy:#151B33;
@@ -274,9 +275,25 @@ body.eol-home .mission-oath{display:block;width:100%;height:auto;max-height:min(
   aspect-ratio:720/800;object-fit:contain;background:#0C1020;
   border:1px solid rgba(208,175,108,.38);border-radius:4px;
   box-shadow:0 14px 32px rgba(0,0,0,.5),0 0 0 1px rgba(14,18,36,.8)}
+body.eol-home .mission-oath-wrap{
+  position:relative;display:block;width:100%;
+  max-width:min(100%,calc(min(520px,92vh - 80px)*720/800));
+  margin-inline:auto;container-type:inline-size;
+}
+body.eol-home .mission-oath-wrap .mission-oath{
+  display:block;width:100%;height:auto;max-height:none;
+}
+body.eol-home .mission-oath-date{
+  position:absolute;right:3.9%;bottom:4.5%;z-index:2;
+  margin:0;padding:0;border:0;color:#FFB000;
+  font-family:'VT323','Courier New',Courier,monospace;
+  font-size:13px;font-size:clamp(11px,7.2cqw,34px);font-weight:400;line-height:1;
+  letter-spacing:.04em;white-space:nowrap;pointer-events:none;user-select:none;
+  text-shadow:1px 1px 0 rgba(0,0,0,.85),0 0 2px rgba(0,0,0,.65);
+}
 body.eol-home .mission-oath::cue{
-  font-family:var(--eo-body);font-size:15px;line-height:1.25;
-  color:#F6F1E4;background:rgba(12,16,32,.78);
+  font-family:var(--eo-body);font-size:16px;line-height:1.25;
+  color:#F6F1E4;background:rgba(12,16,32,.82);
 }
 body.eol-home .mission-oath-note{
   display:none;margin:10px 0 0;padding:0;
@@ -349,7 +366,9 @@ body.eol-home .mission-dlg-x:focus-visible{outline:3px solid var(--af1-gold-leaf
   body.eol-home .mission-dlg .hello-s{font-size:clamp(14.5px,3.9vw,16.5px);margin-top:5px;line-height:1.28}
   body.eol-home .mission-dlg .hello-sign{margin-top:6px;font-size:clamp(14.5px,3.9vw,16.5px);letter-spacing:.04em}
   body.eol-home .mission-dlg-x{width:48px;height:48px;min-width:48px;min-height:48px;font-size:30px}
-  body.eol-home .mission-oath{width:100%;height:auto;max-height:none;aspect-ratio:720/800;object-fit:contain;background:#0C1020;flex:none;align-self:stretch;box-sizing:content-box}
+  body.eol-home .mission-oath-wrap{width:100%;max-width:100%;max-height:none;margin:0;flex:none;align-self:stretch}
+  body.eol-home .mission-oath-wrap .mission-oath,body.eol-home .mission-oath{width:100%;height:auto;max-height:none;aspect-ratio:720/800;object-fit:contain;background:#0C1020;flex:none;align-self:stretch;box-sizing:content-box}
+  body.eol-home .mission-oath::cue{font-size:12px;line-height:1.2}
   body.eol-home .mission-dlg .trd-ss{padding:0 14px 10px 14px;align-self:stretch}
   body.eol-home .mission-dlg .trd-ss-bang{display:none}
   body.eol-home .mission-dlg .trd-ss-in{
