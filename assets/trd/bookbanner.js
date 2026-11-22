@@ -19,7 +19,7 @@
     URL: 'https://rubberduck41.gumroad.com/l/ttmhx',
     LABEL: '',                             // optional tag before the kicker; empty = none
     KICKER: 'ORDER YOUR COPY',
-    TITLE: 'anon mission',                 // the lead, all lowercase, exactly as Mike writes it
+    TITLE: 'anon mission',                 // the lead, all lowercase, exactly as The Rubber Duck writes it
     OR: 'or',
     SUBTITLE: 'all you need to know about q - and how they made you afraid to ask',
     DETAIL: 'A polished, printable PDF by The Rubber Duck, for just',

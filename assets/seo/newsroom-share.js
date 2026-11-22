@@ -23,7 +23,7 @@
     fileName: 'the-rubber-duck-' + id + '.jpg',
     groupLabel: host.getAttribute('data-share-label') || 'Share this piece'
   });
-  /* keep Mike\'s platform order (share.js filters in its own platform-list order) */
+  /* keep The Rubber Duck's platform order (share.js filters in its own platform-list order) */
   var btns = row.querySelector('.shr-btns');
   if (btns) {
     var map = {};

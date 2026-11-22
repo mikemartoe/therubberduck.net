@@ -155,7 +155,7 @@
 @media (prefers-reduced-motion:reduce){#trd-book .trb-cta{transition:none}}
 
 /* ---------- the title card: "anon mission / or / all you need to know about q - and how they made you afraid to ask" ----------
-   Mike's exact words, all lowercase (never text-transformed). Kubrick's title-card rhythm: the big lead,
+   The Rubber Duck's exact words, all lowercase (never text-transformed). Kubrick's title-card rhythm: the big lead,
    a small "or", then the long subtitle smaller. Two lines, sized by CSS (no auto-fit). */
 #trd-book,#trd-book.trb-big{--trb-fit:none}
 #trd-book .trb-copy{gap:2px}
