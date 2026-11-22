@@ -46,6 +46,19 @@
     }));
   }
 
+  function fillHome(host) {
+    host.appendChild(W.trdShare.build({
+      kind: 'home', id: 'home',
+      page: SITE + '/',
+      text: 'The Rubber Duck',
+      thumb: SITE + '/images/brand/room-home-20261103.jpg',
+      file: SITE + '/images/brand/room-home-20261103.jpg',
+      fileName: 'the-rubber-duck.jpg',
+      compact: true, only: SHARE_ONLY,
+      groupLabel: 'Share the site'
+    }));
+  }
+
   function ensureShare(cb) {
     var jobs = [];
     if (!W.trdShare) jobs.push(loadScript('/assets/trd/share.js?v=20261030c', function () { return !!W.trdShare; }));
@@ -73,6 +86,7 @@
         var kind = root.getAttribute('data-ss-kind');
         var id = root.getAttribute('data-ss-id');
         if (kind === 'ledger') fillLedger(host);
+        else if (kind === 'home') fillHome(host);
         else fillDrop(host, parseInt(id, 10));
         host.setAttribute('data-ready', '1');
       });
