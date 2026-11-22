@@ -320,7 +320,7 @@ body.eol-home .mission-dlg-x:hover{color:#fff;background:rgba(208,175,108,.28);b
 body.eol-home .mission-dlg-x:focus-visible{outline:3px solid var(--af1-gold-leaf);outline-offset:2px}
 @media (max-width:699px){
   body.eol-home .mission-dlg{width:calc(100vw - 40px);max-width:calc(100vw - 40px);max-height:88vh;margin:auto}
-  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy copy" "media media" "strip strip" "drop drop";align-items:stretch;min-height:0;max-height:88vh;overflow:auto;overscroll-behavior:contain}
+  body.eol-home .mission-dlg-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"copy copy" "media media" "drop drop" "strip strip";align-items:stretch;min-height:0;max-height:88vh;overflow:auto;overscroll-behavior:contain}
   body.eol-home .mission-dlg-copy{padding:42px 14px 6px 14px;overflow:visible}
   body.eol-home .mission-dlg-media{flex-direction:column;padding:2px 14px 4px;align-items:center;justify-content:flex-start;gap:6px}
   body.eol-home .mission-dlg .trd-ss{padding:0 14px 6px 14px;align-self:stretch}
