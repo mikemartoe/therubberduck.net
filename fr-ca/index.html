@@ -374,7 +374,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .sup-in{max-width:1240px;margin:0 auto}
 .sup-head{text-align:center;max-width:640px;margin:0 auto 26px}
 .sup-k{margin:0;font:400 26px/1 var(--script);color:var(--mustard)}
-.sup-h{margin:6px 0 0;font:700 44px/1 var(--display);letter-spacing:.01em;color:#fff}
+.sup-h{margin:0;font:700 44px/1 var(--display);letter-spacing:.01em;color:#fff}
 .sup-s{margin:10px 0 0;font-size:16px;line-height:1.45;color:var(--ink-soft,#d8cbb2)}
 .sup-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .sup-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:20px 14px 16px;border-radius:10px;text-decoration:none;color:#f6ecd4;overflow:hidden;
@@ -393,6 +393,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .sc-sign b{font:400 15px/1.05 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14;text-transform:uppercase}
 .sc-k{font:400 18px/1.1 var(--script);color:#ffd77a}
 .sc-n{font:400 19px/1.1 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14}
+.sc-bmc .sc-n{padding-top:24px}
 .sc-s{font:400 14.5px/1.35 var(--body);color:#e9dcc0;min-height:2.7em}
 .sc-go{margin-top:auto;padding-top:10px;font:700 14px/1 var(--body);color:#ffd77a;letter-spacing:.02em}
 .sc-go i{font-style:normal;display:inline-block;transition:transform .2s var(--ease)}
@@ -400,7 +401,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 @media (min-width:600px) and (max-width:899px){.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:599px){.support{padding:32px 16px 40px}.sup-h{font-size:38px}.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .sup-card{padding:16px 8px 14px}.sc-art{height:80px;margin-bottom:6px}.sc-shop .sc-art img{height:60px}.sc-bmc .sc-art img{height:68px}
-  .sc-sign{width:118px;height:66px}.sc-sign small{font-size:12px}.sc-sign b{font-size:12px}.sc-k{font-size:16px}.sc-n{font-size:15px}.sc-s{font-size:13px}.sc-go{font-size:13px}}
+  .sc-sign{width:118px;height:66px}.sc-sign small{font-size:12px}.sc-sign b{font-size:12px}.sc-k{font-size:16px}.sc-n{font-size:15px}.sc-s{font-size:13px}.sc-go{font-size:13px}.sc-bmc .sc-n{padding-top:20px}}
 @media (min-width:900px) and (min-height:500px){.support{padding:56px 0 64px}.sup-in{max-width:clamp(1240px,84vw,1640px);padding:0 24px;box-sizing:border-box}}
 @media (min-width:900px) and (max-width:1100px) and (min-height:500px){.sup-in{padding:0 16px}}
 @media (prefers-reduced-motion:reduce){.sup-card,.sc-go i{transition:none}.sup-card:hover{transform:none}}
@@ -1261,9 +1262,9 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
         <div class="mission-dlg-card">
           <button type="button" class="mission-dlg-x" aria-label="Fermer">&times;</button>
           <div class="mission-dlg-copy">
-            <h2 class="mission-dlg-h" id="mission-dlg-title">BIENVENUE DANS MA MISSION</h2>
-            <p class="hello-s">sur ce site vous trouverez toutes les recherches, tout le travail et toutes les données que j’ai créés, rassemblés et organisés — au service de ma mission — depuis 10 ans. le tout gratuit, et entièrement interrogeable de façon forensique ; toute mon archive Twitter, chaque Q drop authentique, chaque mème, tous les balados et X Spaces, chaque document déclassifié de la dernière décennie, The Red Pill Album, tous les films, documentaires, émissions et extraits conçus pour VOUS RÉVEILLER À LA VÉRITÉ.</p>
-            <p class="hello-s">ce site s’effacera de lui-même plutôt que de passer derrière un mur payant — si ce que vous voyez ici vous plaît, voyez plus bas et envisagez de soutenir le site en allant magasiner à la boutique, en devenant commanditaire, ou en me soutenant, moi et ma mission.</p>
+            <h2 class="mission-dlg-h" id="mission-dlg-title">bienvenue dans la mission</h2>
+            <p class="hello-s">sur ce site vous trouverez toutes les recherches, tout le travail et toutes les données que j’ai créés, rassemblés et organisés — au service de la mission — depuis 10 ans. le tout gratuit, et entièrement interrogeable de façon forensique ; toute mon archive Twitter, chaque Q drop authentique, chaque mème, tous les balados et X Spaces, chaque document déclassifié de la dernière décennie, The Red Pill Album, tous les films, documentaires, émissions et extraits conçus pour VOUS RÉVEILLER À LA VÉRITÉ.</p>
+            <p class="hello-s">ce site s’effacera de lui-même plutôt que de passer derrière un mur payant. si vous donnez, soutenez la mission.</p>
             <p class="hello-s hello-sign">God Bless, TRD</p>
           </div>
           <div class="mission-dlg-media">
@@ -1274,13 +1275,13 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
             <span class="mission-oath-date" aria-hidden="true">JUN 27 2020</span>
             </div>
           </div>
-                    <aside class="trd-ss" id="trdSupportStrip" data-ss-kind="home" data-ss-id="home" aria-label="Soutenir l’archive">
+                    <aside class="trd-ss" id="trdSupportStrip" data-ss-kind="home" data-ss-id="home" aria-label="Soutenir la mission">
             <div class="trd-ss-in">
-              <p class="trd-ss-line"><span class="trd-ss-bang" aria-hidden="true">‼️</span> <span class="trd-ss-line-full">Cette archive reste gratuite grâce à des gens comme vous.</span><span class="trd-ss-line-short">cette archive reste gratuite</span></p>
+              <p class="trd-ss-line"><span class="trd-ss-bang" aria-hidden="true">‼️</span> <span class="trd-ss-line-full">cette archive reste gratuite.</span><span class="trd-ss-line-short">cette archive reste gratuite</span></p>
               <div class="trd-ss-acts">
                 <a class="trd-ss-b" href="/fr-ca/merch.html"><span class="trd-ss-ico" aria-hidden="true">👉🏼</span><span class="trd-ss-lab">Prenez un t-shirt dans la boutique</span><span class="trd-ss-short">Boutique</span></a>
                 <span class="trd-ss-dot" aria-hidden="true">·</span>
-                <a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener"><span class="trd-ss-ico" aria-hidden="true">☕</span><span class="trd-ss-lab">Offrez-moi un café</span><span class="trd-ss-short">Café</span></a>
+                <a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener"><span class="trd-ss-ico" aria-hidden="true">☕</span><span class="trd-ss-lab">Soutenir la mission</span><span class="trd-ss-short">Café</span></a>
                 <span class="trd-ss-dot" aria-hidden="true">·</span>
                 <button type="button" class="trd-ss-b trd-ss-share" aria-expanded="false" aria-controls="trdSsShareRow"><span class="trd-ss-ico" aria-hidden="true">🔗</span><span class="trd-ss-lab">Partagez le site</span><span class="trd-ss-short">Partager</span></button>
               </div>
@@ -1348,16 +1349,15 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 <section class="support" id="support" aria-labelledby="support-h">
   <div class="sup-in">
     <header class="sup-head">
-      <p class="sup-k">Que la bande tourne encore</p>
-      <h2 class="sup-h" id="support-h">Soutenir l’archive</h2>
-      <p class="sup-s">L’archive est libre d’accès et sans publicité. Elle tient grâce à celles et ceux qui appuient le Duck, aux commanditaires, à la boutique, au livre et au café de temps à autre.</p>
+      <h2 class="sup-h" id="support-h">Soutenir la mission</h2>
+      <p class="sup-s">l’archive est libre d’accès, et sans publicité. pas de mur payant.</p>
     </header>
-    <a class="sup-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="Back the Duck: a few dollars par mois helps keep this archive going. Opens Buy Me a Coffee membership in a new tab">
+    <a class="sup-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="Soutenir la mission">
       <span class="btd-copy">
-        <span class="btd-k">Back the Duck</span>
-        <span class="btd-s">Si vous le pouvez, quelques dollars par mois aident à faire vivre cette archive. Pas de mur payant.</span>
+        <span class="btd-k">mensuel</span>
+        <span class="btd-s">quelques dollars par mois. pas de mur payant.</span>
       </span>
-      <span class="btd-go">Voir les options mensuelles <i aria-hidden="true">&rsaquo;</i></span>
+      <span class="btd-go">Soutenir la mission <i aria-hidden="true">&rsaquo;</i></span>
     </a>
     <div class="sup-grid">
       <a class="sup-card sc-spon" href="/fr-ca/sponsor.html">
@@ -1381,12 +1381,10 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
         <span class="sc-s">L’édition reliée, sur Gumroad</span>
         <span class="sc-go">Obtenir le livre <i aria-hidden="true">&rsaquo;</i></span>
       </a>
-      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Buy Me a Coffee: support my mission, any amount, one time. Opens in a new tab">
+      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Soutenir la mission">
         <span class="sc-art" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" loading="lazy" decoding="async"></span>
-        <span class="sc-k">Buy Me a Coffee</span>
-        <span class="sc-n">Soutenir ma mission</span>
-        <span class="sc-s">N’importe quel montant, une seule fois</span>
-        <span class="sc-go">Buy a coffee <i aria-hidden="true">&rsaquo;</i></span>
+        <span class="sc-n">N’importe quel montant, une seule fois</span>
+        <span class="sc-go">Soutenir la mission <i aria-hidden="true">&rsaquo;</i></span>
       </a>
     </div>
   </div>
@@ -1403,9 +1401,9 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
       <h2>L’archive</h2>
       <ul><li><a href="/videos.html">Vidéos</a></li><li><a href="/listening-room.html">Enregistrements</a></li><li><a href="/pdfs.html">PDF</a></li><li><a href="/eo-library/">EO Library</a></li><li><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Recherche de photos</a></li><li><a href="/memes.html">Mèmes</a></li><li><a href="/x/">Archive X</a></li><li><a href="/newsroom.html">DUCK SAUCE</a></li><li><a href="/album.html">The Red Pill Album</a></li></ul>
     </nav>
-    <nav class="sf-col" aria-label="Soutenir l’archive">
+    <nav class="sf-col" aria-label="Soutenir la mission">
       <h2>Soutien</h2>
-      <ul><li><a href="/fr-ca/sponsor.html">Commanditez le site</a></li><li><a href="/fr-ca/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">Le livre (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Buy Me a Coffee</a></li></ul>
+      <ul><li><a href="/fr-ca/sponsor.html">Commanditez le site</a></li><li><a href="/fr-ca/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">Le livre (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Soutenir la mission</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Soutenir la mission</a></li></ul>
     </nav>
     <div class="sf-col">
       <h2>Contact</h2>

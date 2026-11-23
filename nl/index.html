@@ -374,7 +374,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .sup-in{max-width:1240px;margin:0 auto}
 .sup-head{text-align:center;max-width:640px;margin:0 auto 26px}
 .sup-k{margin:0;font:400 26px/1 var(--script);color:var(--mustard)}
-.sup-h{margin:6px 0 0;font:700 44px/1 var(--display);letter-spacing:.01em;color:#fff}
+.sup-h{margin:0;font:700 44px/1 var(--display);letter-spacing:.01em;color:#fff}
 .sup-s{margin:10px 0 0;font-size:16px;line-height:1.45;color:var(--ink-soft,#d8cbb2)}
 .sup-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .sup-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:20px 14px 16px;border-radius:10px;text-decoration:none;color:#f6ecd4;overflow:hidden;
@@ -393,6 +393,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .sc-sign b{font:400 15px/1.05 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14;text-transform:uppercase}
 .sc-k{font:400 18px/1.1 var(--script);color:#ffd77a}
 .sc-n{font:400 19px/1.1 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14}
+.sc-bmc .sc-n{padding-top:24px}
 .sc-s{font:400 14.5px/1.35 var(--body);color:#e9dcc0;min-height:2.7em}
 .sc-go{margin-top:auto;padding-top:10px;font:700 14px/1 var(--body);color:#ffd77a;letter-spacing:.02em}
 .sc-go i{font-style:normal;display:inline-block;transition:transform .2s var(--ease)}
@@ -400,7 +401,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 @media (min-width:600px) and (max-width:899px){.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:599px){.support{padding:32px 16px 40px}.sup-h{font-size:38px}.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .sup-card{padding:16px 8px 14px}.sc-art{height:80px;margin-bottom:6px}.sc-shop .sc-art img{height:60px}.sc-bmc .sc-art img{height:68px}
-  .sc-sign{width:118px;height:66px}.sc-sign small{font-size:12px}.sc-sign b{font-size:12px}.sc-k{font-size:16px}.sc-n{font-size:15px}.sc-s{font-size:13px}.sc-go{font-size:13px}}
+  .sc-sign{width:118px;height:66px}.sc-sign small{font-size:12px}.sc-sign b{font-size:12px}.sc-k{font-size:16px}.sc-n{font-size:15px}.sc-s{font-size:13px}.sc-go{font-size:13px}.sc-bmc .sc-n{padding-top:20px}}
 @media (min-width:900px) and (min-height:500px){.support{padding:56px 0 64px}.sup-in{max-width:clamp(1240px,84vw,1640px);padding:0 24px;box-sizing:border-box}}
 @media (min-width:900px) and (max-width:1100px) and (min-height:500px){.sup-in{padding:0 16px}}
 @media (prefers-reduced-motion:reduce){.sup-card,.sc-go i{transition:none}.sup-card:hover{transform:none}}
@@ -1261,9 +1262,9 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
         <div class="mission-dlg-card">
           <button type="button" class="mission-dlg-x" aria-label="Sluiten">&times;</button>
           <div class="mission-dlg-copy">
-            <h2 class="mission-dlg-h" id="mission-dlg-title">WELKOM BIJ MIJN MISSIE</h2>
-            <p class="hello-s">op deze site vind je al het onderzoek, het werk en de data die ik de afgelopen 10 jaar — ter ondersteuning van mijn missie — heb gemaakt, verzameld en samengesteld. allemaal gratis, en allemaal forensisch doorzoekbaar; mijn volledige Twitter-archief, elke authentieke Q drop, elke meme, alle podcasts en X Spaces, elk document dat het afgelopen decennium is vrijgegeven, The Red Pill Album, alle films, documentaires, series en clips die zijn gemaakt om JE WAKKER TE SCHUDDEN TOT DE WAARHEID.</p>
-            <p class="hello-s">deze site wist zichzelf liever dan achter een betaalmuur te verdwijnen — als je mooi vindt wat je hier ziet, kijk hieronder en overweeg de site te steunen via de winkel, als sponsor, of door mij en mijn missie te steunen.</p>
+            <h2 class="mission-dlg-h" id="mission-dlg-title">welkom bij de missie</h2>
+            <p class="hello-s">op deze site vind je al het onderzoek, het werk en de data die ik de afgelopen 10 jaar — ter ondersteuning van de missie — heb gemaakt, verzameld en samengesteld. allemaal gratis, en allemaal forensisch doorzoekbaar; mijn volledige Twitter-archief, elke authentieke Q drop, elke meme, alle podcasts en X Spaces, elk document dat het afgelopen decennium is vrijgegeven, The Red Pill Album, alle films, documentaires, series en clips die zijn gemaakt om JE WAKKER TE SCHUDDEN TOT DE WAARHEID.</p>
+            <p class="hello-s">deze site wist zichzelf liever dan achter een betaalmuur te verdwijnen. als je geeft, steun de missie.</p>
             <p class="hello-s hello-sign">God Bless, TRD</p>
           </div>
           <div class="mission-dlg-media">
@@ -1274,13 +1275,13 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
             <span class="mission-oath-date" aria-hidden="true">JUN 27 2020</span>
             </div>
           </div>
-                    <aside class="trd-ss" id="trdSupportStrip" data-ss-kind="home" data-ss-id="home" aria-label="Steun het archief">
+                    <aside class="trd-ss" id="trdSupportStrip" data-ss-kind="home" data-ss-id="home" aria-label="Steun de missie">
             <div class="trd-ss-in">
-              <p class="trd-ss-line"><span class="trd-ss-bang" aria-hidden="true">‼️</span> <span class="trd-ss-line-full">Dit archief blijft gratis dankzij mensen zoals jij.</span><span class="trd-ss-line-short">dit archief blijft gratis</span></p>
+              <p class="trd-ss-line"><span class="trd-ss-bang" aria-hidden="true">‼️</span> <span class="trd-ss-line-full">dit archief blijft gratis.</span><span class="trd-ss-line-short">dit archief blijft gratis</span></p>
               <div class="trd-ss-acts">
                 <a class="trd-ss-b" href="/nl/merch.html"><span class="trd-ss-ico" aria-hidden="true">👉🏼</span><span class="trd-ss-lab">Haal een shirt in de winkel</span><span class="trd-ss-short">Winkel</span></a>
                 <span class="trd-ss-dot" aria-hidden="true">·</span>
-                <a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener"><span class="trd-ss-ico" aria-hidden="true">☕</span><span class="trd-ss-lab">Geef me een kop koffie</span><span class="trd-ss-short">Koffie</span></a>
+                <a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener"><span class="trd-ss-ico" aria-hidden="true">☕</span><span class="trd-ss-lab">Steun de missie</span><span class="trd-ss-short">Koffie</span></a>
                 <span class="trd-ss-dot" aria-hidden="true">·</span>
                 <button type="button" class="trd-ss-b trd-ss-share" aria-expanded="false" aria-controls="trdSsShareRow"><span class="trd-ss-ico" aria-hidden="true">🔗</span><span class="trd-ss-lab">Deel de site</span><span class="trd-ss-short">Delen</span></button>
               </div>
@@ -1348,16 +1349,15 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 <section class="support" id="support" aria-labelledby="support-h">
   <div class="sup-in">
     <header class="sup-head">
-      <p class="sup-k">Houd de band aan het rollen</p>
-      <h2 class="sup-h" id="support-h">Steun het archief</h2>
-      <p class="sup-s">Het archief is gratis te gebruiken en heeft geen advertenties. Het draait op mensen die de Duck steunen, op sponsors, de winkel, het boek en af en toe een koffie.</p>
+      <h2 class="sup-h" id="support-h">Steun de missie</h2>
+      <p class="sup-s">het archief is gratis te gebruiken, en heeft geen advertenties. geen betaalmuur.</p>
     </header>
-    <a class="sup-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="Back the Duck: a few dollars per maand helps keep this archive going. Opens Buy Me a Coffee membership in a new tab">
+    <a class="sup-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="Steun de missie">
       <span class="btd-copy">
-        <span class="btd-k">Back the Duck</span>
-        <span class="btd-s">Als het kan, helpen een paar dollar per maand dit archief in de lucht te houden. Geen betaalmuur.</span>
+        <span class="btd-k">maandelijks</span>
+        <span class="btd-s">een paar dollar per maand. geen betaalmuur.</span>
       </span>
-      <span class="btd-go">Bekijk maandopties <i aria-hidden="true">&rsaquo;</i></span>
+      <span class="btd-go">Steun de missie <i aria-hidden="true">&rsaquo;</i></span>
     </a>
     <div class="sup-grid">
       <a class="sup-card sc-spon" href="/nl/sponsor.html">
@@ -1381,12 +1381,10 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
         <span class="sc-s">De hardcover, op Gumroad</span>
         <span class="sc-go">Haal het boek <i aria-hidden="true">&rsaquo;</i></span>
       </a>
-      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Buy Me a Coffee: support my mission, any amount, one time. Opens in a new tab">
+      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Steun de missie">
         <span class="sc-art" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" loading="lazy" decoding="async"></span>
-        <span class="sc-k">Buy Me a Coffee</span>
-        <span class="sc-n">Steun mijn missie</span>
-        <span class="sc-s">Elk bedrag, eenmalig</span>
-        <span class="sc-go">Buy a coffee <i aria-hidden="true">&rsaquo;</i></span>
+        <span class="sc-n">Elk bedrag, eenmalig</span>
+        <span class="sc-go">Steun de missie <i aria-hidden="true">&rsaquo;</i></span>
       </a>
     </div>
   </div>
@@ -1403,9 +1401,9 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
       <h2>Het archief</h2>
       <ul><li><a href="/videos.html">Video’s</a></li><li><a href="/listening-room.html">Opnamen</a></li><li><a href="/pdfs.html">PDF’s</a></li><li><a href="/eo-library/">EO Library</a></li><li><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Fotozoeken</a></li><li><a href="/memes.html">Memes</a></li><li><a href="/x/">X-archief</a></li><li><a href="/newsroom.html">DUCK SAUCE</a></li><li><a href="/album.html">The Red Pill Album</a></li></ul>
     </nav>
-    <nav class="sf-col" aria-label="Steun het archief">
+    <nav class="sf-col" aria-label="Steun de missie">
       <h2>Steun</h2>
-      <ul><li><a href="/nl/sponsor.html">Sponsor de site</a></li><li><a href="/nl/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">Het boek (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Buy Me a Coffee</a></li></ul>
+      <ul><li><a href="/nl/sponsor.html">Sponsor de site</a></li><li><a href="/nl/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">Het boek (Gumroad)</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Steun de missie</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Steun de missie</a></li></ul>
     </nav>
     <div class="sf-col">
       <h2>Contact</h2>

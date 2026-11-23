@@ -374,7 +374,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .sup-in{max-width:1240px;margin:0 auto}
 .sup-head{text-align:center;max-width:640px;margin:0 auto 26px}
 .sup-k{margin:0;font:400 26px/1 var(--script);color:var(--mustard)}
-.sup-h{margin:6px 0 0;font:700 44px/1 var(--display);letter-spacing:.01em;color:#fff}
+.sup-h{margin:0;font:700 44px/1 var(--display);letter-spacing:.01em;color:#fff}
 .sup-s{margin:10px 0 0;font-size:16px;line-height:1.45;color:var(--ink-soft,#d8cbb2)}
 .sup-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .sup-card{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:20px 14px 16px;border-radius:10px;text-decoration:none;color:#f6ecd4;overflow:hidden;
@@ -393,6 +393,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 .sc-sign b{font:400 15px/1.05 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14;text-transform:uppercase}
 .sc-k{font:400 18px/1.1 var(--script);color:#ffd77a}
 .sc-n{font:400 19px/1.1 var(--retro);color:#f6ecd4;text-shadow:0 2px 0 #8a1c14}
+.sc-bmc .sc-n{padding-top:24px}
 .sc-s{font:400 14.5px/1.35 var(--body);color:#e9dcc0;min-height:2.7em}
 .sc-go{margin-top:auto;padding-top:10px;font:700 14px/1 var(--body);color:#ffd77a;letter-spacing:.02em}
 .sc-go i{font-style:normal;display:inline-block;transition:transform .2s var(--ease)}
@@ -400,7 +401,7 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
 @media (min-width:600px) and (max-width:899px){.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:599px){.support{padding:32px 16px 40px}.sup-h{font-size:38px}.sup-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .sup-card{padding:16px 8px 14px}.sc-art{height:80px;margin-bottom:6px}.sc-shop .sc-art img{height:60px}.sc-bmc .sc-art img{height:68px}
-  .sc-sign{width:118px;height:66px}.sc-sign small{font-size:12px}.sc-sign b{font-size:12px}.sc-k{font-size:16px}.sc-n{font-size:15px}.sc-s{font-size:13px}.sc-go{font-size:13px}}
+  .sc-sign{width:118px;height:66px}.sc-sign small{font-size:12px}.sc-sign b{font-size:12px}.sc-k{font-size:16px}.sc-n{font-size:15px}.sc-s{font-size:13px}.sc-go{font-size:13px}.sc-bmc .sc-n{padding-top:20px}}
 @media (min-width:900px) and (min-height:500px){.support{padding:56px 0 64px}.sup-in{max-width:clamp(1240px,84vw,1640px);padding:0 24px;box-sizing:border-box}}
 @media (min-width:900px) and (max-width:1100px) and (min-height:500px){.sup-in{padding:0 16px}}
 @media (prefers-reduced-motion:reduce){.sup-card,.sc-go i{transition:none}.sup-card:hover{transform:none}}
@@ -1267,9 +1268,9 @@ html[lang="ja"] .mission-dlg-h .nobr{white-space:nowrap}
         <div class="mission-dlg-card">
           <button type="button" class="mission-dlg-x" aria-label="閉じる">&times;</button>
           <div class="mission-dlg-copy">
-            <h2 class="mission-dlg-h" id="mission-dlg-title"><span class="nobr">私のミッション</span>へようこそ</h2>
+            <h2 class="mission-dlg-h" id="mission-dlg-title"><span class="nobr">ミッションへようこそ</span></h2>
             <p class="hello-s">このサイトには、私がミッションのためにこの10年で作り、集め、整えてきた調査・仕事・データのすべてがあります。すべて無料で、すべて検証できるように検索できます。私のTwitterアーカイブ全体、本物のQ dropのすべて、すべてのミーム、すべてのポッドキャストとX Spaces、この10年で機密解除された文書、The Red Pill Album、そして真実に目を覚ますために作られた映画・ドキュメンタリー・番組・クリップのすべてです。</p>
-            <p class="hello-s">このサイトは有料化される前に自ら削除します。気に入っていただけたなら、下を見て、ショップを訪れる、スポンサーになる、あるいは私と私のミッションを支援することを検討してください。</p>
+            <p class="hello-s">このサイトは有料化される前に自ら削除します。ご支援いただけるなら、ミッションを支援してください。</p>
             <p class="hello-s hello-sign">God Bless, TRD</p>
           </div>
           <div class="mission-dlg-media">
@@ -1280,13 +1281,13 @@ html[lang="ja"] .mission-dlg-h .nobr{white-space:nowrap}
             <span class="mission-oath-date" aria-hidden="true">JUN 27 2020</span>
             </div>
           </div>
-                    <aside class="trd-ss" id="trdSupportStrip" data-ss-kind="home" data-ss-id="home" aria-label="アーカイブを支援する">
+                    <aside class="trd-ss" id="trdSupportStrip" data-ss-kind="home" data-ss-id="home" aria-label="ミッションを支援する">
             <div class="trd-ss-in">
-              <p class="trd-ss-line"><span class="trd-ss-bang" aria-hidden="true">‼️</span> <span class="trd-ss-line-full">このアーカイブが無料で続いているのは、あなたのような人のおかげです。</span><span class="trd-ss-line-short">無料のままです</span></p>
+              <p class="trd-ss-line"><span class="trd-ss-bang" aria-hidden="true">‼️</span> <span class="trd-ss-line-full">このアーカイブは無料のままです。</span><span class="trd-ss-line-short">無料のままです</span></p>
               <div class="trd-ss-acts">
                 <a class="trd-ss-b" href="/ja/merch.html"><span class="trd-ss-ico" aria-hidden="true">👉🏼</span><span class="trd-ss-lab">ショップでTシャツを手に取る</span><span class="trd-ss-short">ショップ</span></a>
                 <span class="trd-ss-dot" aria-hidden="true">·</span>
-                <a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener"><span class="trd-ss-ico" aria-hidden="true">☕</span><span class="trd-ss-lab">コーヒーをおごる</span><span class="trd-ss-short">コーヒー</span></a>
+                <a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener"><span class="trd-ss-ico" aria-hidden="true">☕</span><span class="trd-ss-lab">ミッションを支援する</span><span class="trd-ss-short">コーヒー</span></a>
                 <span class="trd-ss-dot" aria-hidden="true">·</span>
                 <button type="button" class="trd-ss-b trd-ss-share" aria-expanded="false" aria-controls="trdSsShareRow"><span class="trd-ss-ico" aria-hidden="true">🔗</span><span class="trd-ss-lab">サイトをシェアする</span><span class="trd-ss-short">シェア</span></button>
               </div>
@@ -1354,16 +1355,15 @@ html[lang="ja"] .mission-dlg-h .nobr{white-space:nowrap}
 <section class="support" id="support" aria-labelledby="support-h">
   <div class="sup-in">
     <header class="sup-head">
-      <p class="sup-k">テープを回し続けよう</p>
-      <h2 class="sup-h" id="support-h">アーカイブを支援する</h2>
-      <p class="sup-s">このアーカイブは無料で、広告はありません。Duckを支える人、スポンサー、ショップ、本、そしてときどきのコーヒーで成り立っています。</p>
+      <h2 class="sup-h" id="support-h">ミッションを支援する</h2>
+      <p class="sup-s">このアーカイブは無料で、広告はありません。有料の壁はありません。</p>
     </header>
-    <a class="sup-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="Back the Duck: a few dollars 月額 helps keep this archive going. Opens Buy Me a Coffee membership in a new tab">
+    <a class="sup-btd" href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener" aria-label="ミッションを支援する">
       <span class="btd-copy">
-        <span class="btd-k">Back the Duck</span>
-        <span class="btd-s">もしよければ、月に数ドルでこのアーカイブを続けられます。有料の壁はありません。</span>
+        <span class="btd-k">月額</span>
+        <span class="btd-s">月に数ドル。有料の壁はありません。</span>
       </span>
-      <span class="btd-go">月額の選択肢を見る <i aria-hidden="true">&rsaquo;</i></span>
+      <span class="btd-go">ミッションを支援する <i aria-hidden="true">&rsaquo;</i></span>
     </a>
     <div class="sup-grid">
       <a class="sup-card sc-spon" href="/ja/sponsor.html">
@@ -1387,12 +1387,10 @@ html[lang="ja"] .mission-dlg-h .nobr{white-space:nowrap}
         <span class="sc-s">ハードカバー、Gumroadで</span>
         <span class="sc-go">本を入手 <i aria-hidden="true">&rsaquo;</i></span>
       </a>
-      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="Buy Me a Coffee: support my mission, any amount, one time. Opens in a new tab">
+      <a class="sup-card sc-bmc" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener" aria-label="ミッションを支援する">
         <span class="sc-art" aria-hidden="true"><img src="/assets/trd/img/duck-banner.webp" width="268" height="230" alt="" loading="lazy" decoding="async"></span>
-        <span class="sc-k">Buy Me a Coffee</span>
-        <span class="sc-n">私のミッションを支援する</span>
-        <span class="sc-s">金額は自由、一回限り</span>
-        <span class="sc-go">Buy a coffee <i aria-hidden="true">&rsaquo;</i></span>
+        <span class="sc-n">金額は自由、一回限り</span>
+        <span class="sc-go">ミッションを支援する <i aria-hidden="true">&rsaquo;</i></span>
       </a>
     </div>
   </div>
@@ -1409,9 +1407,9 @@ html[lang="ja"] .mission-dlg-h .nobr{white-space:nowrap}
       <h2>アーカイブ</h2>
       <ul><li><a href="/videos.html">動画</a></li><li><a href="/listening-room.html">録音</a></li><li><a href="/pdfs.html">PDF</a></li><li><a href="/eo-library/">EO Library</a></li><li><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">写真検索</a></li><li><a href="/memes.html">ミーム</a></li><li><a href="/x/">Xアーカイブ</a></li><li><a href="/newsroom.html">DUCK SAUCE</a></li><li><a href="/album.html">The Red Pill Album</a></li></ul>
     </nav>
-    <nav class="sf-col" aria-label="アーカイブを支援する">
+    <nav class="sf-col" aria-label="ミッションを支援する">
       <h2>支援</h2>
-      <ul><li><a href="/ja/sponsor.html">サイトのスポンサーになる</a></li><li><a href="/ja/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">本（Gumroad）</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">Back the Duck</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">Buy Me a Coffee</a></li></ul>
+      <ul><li><a href="/ja/sponsor.html">サイトのスポンサーになる</a></li><li><a href="/ja/merch.html">TRD Collectibles</a></li><li><a href="https://rubberduck41.gumroad.com/l/ttmhx" target="_blank" rel="noopener">本（Gumroad）</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju/membership" target="_blank" rel="noopener">ミッションを支援する</a></li><li><a href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">ミッションを支援する</a></li></ul>
     </nav>
     <div class="sf-col">
       <h2>連絡先</h2>
