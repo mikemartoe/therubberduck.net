@@ -196,13 +196,13 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
             '<script src="/assets/trd/support-strip.js?v=20261120a" data-trd-keep></script>\n'
         )
         support_html = (
-            '<aside class="wrap trd-ss" id="trdSupportStrip" data-ss-kind="%s" data-ss-id="%s" aria-label="Support the archive">\n'
+            '<aside class="wrap trd-ss" id="trdSupportStrip" data-ss-kind="%s" data-ss-id="%s" aria-label="support the mission">\n'
             '<div class="trd-ss-in">\n'
-            '<p class="trd-ss-line">‼️ This archive stays free because of people like you.</p>\n'
+            '<p class="trd-ss-line">‼️ this archive stays free.</p>\n'
             '<div class="trd-ss-acts">\n'
             '<a class="trd-ss-b" href="/merch.html">👉🏼 Grab a shirt in the store</a>\n'
             '<span class="trd-ss-dot" aria-hidden="true">·</span>\n'
-            '<a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">☕ Buy me a coffee</a>\n'
+            '<a class="trd-ss-b" href="https://buymeacoffee.com/re7l3hzgju" target="_blank" rel="noopener">☕ support the mission</a>\n'
             '<span class="trd-ss-dot" aria-hidden="true">·</span>\n'
             '<button type="button" class="trd-ss-b trd-ss-share" aria-expanded="false" aria-controls="trdSsShareRow">🔗 %s</button>\n'
             '</div>\n'
@@ -212,7 +212,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
         ) % (E(str(ss_kind)), E(str(ss_id)), E(ss_label))
     else:
         support_html = (
-            '<aside class="wrap support" aria-label="Support the archive">\n'
+            '<aside class="wrap support" aria-label="support the mission">\n'
             '<p><b>The archive stays free.</b> Keep it running: pick up a signed cap or tee at '
             '<a href="/merch.html">TRD Collectibles</a>, or get the book '
             '<a href="/book/anon-mission/">anon mission, Volume 1</a> ($19.99 on Gumroad).</p>\n'
