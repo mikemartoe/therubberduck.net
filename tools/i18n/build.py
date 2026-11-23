@@ -263,6 +263,7 @@ def _apply_to_chunk(html: str, catalog: dict[str, str]) -> str:
             keys.append(en_tok)
         for a, b in (
             ("'", "&#39;"),
+            ("'", "&#x27;"),
             ("'", "&apos;"),
             ("'", "&rsquo;"),
             ("’", "&rsquo;"),
