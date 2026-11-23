@@ -717,6 +717,8 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   box-shadow:0 0 0 2px #2e1f13,0 0 0 5px var(--mustard),0 8px 22px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,220,170,.28)}
 .hello-btn:focus-visible{outline:3px solid var(--mustard);outline-offset:4px}
 .hello-btn:active{transform:translateY(1px)}
+.hello-btn.hello-coin{position:relative;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:none;box-shadow:none;text-shadow:none;overflow:visible;color:inherit}
+.hello-btn.hello-coin:hover,.hello-btn.hello-coin:focus-visible{background:none;box-shadow:none}
 .mk-b .hello{padding:0 6px}
 .mk-b .hello-h{font-size:clamp(26px,6.4vw,45px);line-height:1.08}
 @media (min-width:900px){
@@ -733,7 +735,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   width:min(980px,calc(100vw - 32px));max-width:calc(100vw - 32px);
   max-height:min(90vh,620px);overflow:visible}
 .mission-dlg::backdrop{background:rgba(8,5,3,.8);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-.mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,40%) minmax(0,1fr);
+.mission-dlg-card{position:relative;margin:0;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
   min-height:0;max-height:min(90vh,620px);border-radius:16px;overflow:hidden;
   background:
     radial-gradient(90% 80% at 18% 0%,rgba(255,236,170,.72) 0%,rgba(227,168,43,0) 58%),
@@ -757,14 +759,15 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   color:#2e1f13;font:700 32px/1 var(--body);box-shadow:none}
 .mission-dlg-x:hover{color:#2e1f13;background:rgba(46,31,19,.1)}
 .mission-dlg-x:focus-visible{outline:none;background:rgba(46,31,19,.12)}
+.mission-dlg-media{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;padding:32px 36px 32px 8px}
+.mission-oath{display:block;width:100%;height:auto;max-height:100%;aspect-ratio:720/800;background:#0C1020;border:0;border-radius:4px}
 @media (max-width:699px){
   .mission-dlg{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:92vh}
-  .mission-dlg-card{grid-template-columns:1fr;min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
-  .mission-dlg-art{padding:44px 28px 0;min-height:160px;max-height:200px}
-  .mission-dlg-art img{max-height:180px;width:auto;margin:0 auto}
-  .mission-dlg-copy{padding:8px 20px 24px;overflow:visible}
-  .mission-dlg-h{font-size:clamp(32px,11vw,48px)}
-  .mission-dlg .hello-s{font-size:15px;margin-top:10px}
+  .mission-dlg-card{grid-template-columns:minmax(0,55%) minmax(0,45%);min-height:0;max-height:92vh;overflow:auto;overscroll-behavior:contain}
+  .mission-dlg-copy{padding:14px 10px 16px 14px;overflow:auto}
+  .mission-dlg-media{padding:36px 12px 16px 4px}
+  .mission-dlg-h{font-size:clamp(16px,4.8vw,24px)}
+  .mission-dlg .hello-s{font-size:13px;margin-top:8px}
 }
 </style>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
