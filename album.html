@@ -330,6 +330,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-ink);outline
 <script src="/assets/trd/bookbanner.js" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
 <script src="/assets/trd/duckpod.js?v=20261112b" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/share.css?v=20261123a" data-trd-keep>
+<script src="/assets/trd/share.js?v=20261123a" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/album-player.css?v=20261123b">
+<script src="/assets/trd/album-player.js?v=20261123b" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
 <!-- SEO and share preview -->
@@ -359,7 +363,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-ink);outline
 <!-- seo:end -->
 <script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
 </head>
-<body>
+<body class="al-room-player">
 <header class="banner">
   <div class="banner-in">
     <img src="/assets/trd/img/duck-banner.png" alt="The Rubber Duck">
@@ -432,176 +436,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-ink);outline
     </div>
   </section>
 
-  <!-- ================= TRACKLIST ================= -->
-  <section class="al-tracks" id="tracklist" aria-labelledby="tracks-title">
-    <div class="al-wrap">
-      <div class="al-tracks-head">
-        <div>
-          <p class="eyebrow">The tracklist</p>
-          <h2 id="tracks-title">Every track, in order</h2>
-            <p class="al-tracks-note">Press play on any track to hear the full song — it runs straight on into the next, right through the record.</p>
-        </div>
-        <p class="al-count" aria-label="22 tracks"><span class="n">22</span><span class="l">tracks</span></p>
-      </div>
-
-      <ol class="al-list">
-        <li class="tr" data-preview="audio/01-and-frogs-to-destroy-them.mp3" data-title="And Frogs To Destroy Them">
-          <span class="tn">01</span>
-          <button class="tr-btn" type="button" aria-label="Play track: And Frogs To Destroy Them" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">And Frogs To Destroy Them</span>
-          <span class="td">2:36</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/02-boom-boom-boom.mp3" data-title="Boom, Boom, Boom">
-          <span class="tn">02</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Boom, Boom, Boom" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Boom, Boom, Boom</span>
-          <span class="td">3:23</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/03-dark-to-light.mp3" data-title="Dark to Light">
-          <span class="tn">03</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Dark to Light" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Dark to Light</span>
-          <span class="td">2:50</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/04-enjoy-the-show.mp3" data-title="Enjoy The Show">
-          <span class="tn">04</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Enjoy The Show" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Enjoy The Show</span>
-          <span class="td">4:46</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/05-follow-marina-abramovic.mp3" data-title="Follow Marina Abramovic">
-          <span class="tn">05</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Follow Marina Abramovic" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Follow Marina Abramovic</span>
-          <span class="td">3:03</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/06-full-control.mp3" data-title="Full Control">
-          <span class="tn">06</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Full Control" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Full Control</span>
-          <span class="td">3:19</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/07-god-wins.mp3" data-title="GOD WINS">
-          <span class="tn">07</span>
-          <button class="tr-btn" type="button" aria-label="Play track: GOD WINS" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">GOD WINS</span>
-          <span class="td">2:39</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/08-military-intelligence.mp3" data-title="Military Intelligence">
-          <span class="tn">08</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Military Intelligence" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Military Intelligence</span>
-          <span class="td">3:38</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/09-mockingbird.mp3" data-title="Mockingbird">
-          <span class="tn">09</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Mockingbird" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Mockingbird</span>
-          <span class="td">4:56</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/10-q-clearance-patriot.mp3" data-title="Q Clearance Patriot">
-          <span class="tn">10</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Q Clearance Patriot" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Q Clearance Patriot</span>
-          <span class="td">6:04</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/11-shall-we-play-a-game.mp3" data-title="Shall We Play a Game">
-          <span class="tn">11</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Shall We Play a Game" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Shall We Play a Game</span>
-          <span class="td">2:48</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/12-the-storm-is-upon-us.mp3" data-title="The Storm Is Upon Us">
-          <span class="tn">12</span>
-          <button class="tr-btn" type="button" aria-label="Play track: The Storm Is Upon Us" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">The Storm Is Upon Us</span>
-          <span class="td">2:51</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/13-there-is-no-qanon.mp3" data-title="There is no Qanon">
-          <span class="tn">13</span>
-          <button class="tr-btn" type="button" aria-label="Play track: There is no Qanon" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">There is no Qanon</span>
-          <span class="td">3:37</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/14-trumpxiputin-trump-zee-pootin.mp3" data-title="Trumpxiputin (trump-zee-pootin)">
-          <span class="tn">14</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Trumpxiputin (trump-zee-pootin)" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Trumpxiputin (trump-zee-pootin)</span>
-          <span class="td">3:49</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/15-very-dangerous-animal.mp3" data-title="Very Dangerous Animal">
-          <span class="tn">15</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Very Dangerous Animal" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Very Dangerous Animal</span>
-          <span class="td">4:33</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/16-welcome-to-epstein-island.mp3" data-title="Welcome To Epstein Island">
-          <span class="tn">16</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Welcome To Epstein Island" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Welcome To Epstein Island</span>
-          <span class="td">3:24</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/17-what-happened-to-diana.mp3" data-title="What happened to Diana">
-          <span class="tn">17</span>
-          <button class="tr-btn" type="button" aria-label="Play track: What happened to Diana" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">What happened to Diana</span>
-          <span class="td">3:54</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/18-what-makes-a-movie-good.mp3" data-title="What makes a movie GOOD">
-          <span class="tn">18</span>
-          <button class="tr-btn" type="button" aria-label="Play track: What makes a movie GOOD" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">What makes a movie GOOD</span>
-          <span class="td">3:04</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/19-who-follows-satan.mp3" data-title="Who Follows Satan">
-          <span class="tn">19</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Who Follows Satan" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Who Follows Satan</span>
-          <span class="td">2:31</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/20-who-is-rachel-c-handler.mp3" data-title="Who is Rachel (C)handler">
-          <span class="tn">20</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Who is Rachel (C)handler" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Who is Rachel (C)handler</span>
-          <span class="td">3:24</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/21-wizards-warlocks.mp3" data-title="Wizards &amp; Warlocks">
-          <span class="tn">21</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Wizards &amp; Warlocks" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Wizards &amp; Warlocks</span>
-          <span class="td">3:44</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-        <li class="tr" data-preview="audio/22-alice-in-wonderland.mp3" data-title="Alice in Wonderland">
-          <span class="tn">22</span>
-          <button class="tr-btn" type="button" aria-label="Play track: Alice in Wonderland" aria-pressed="false"><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5.14v13.72a.5.5 0 0 0 .77.42l10.28-6.86a.5.5 0 0 0 0-.84L8.77 4.72A.5.5 0 0 0 8 5.14Z"/></svg><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7 4h3.4v16H7zM13.6 4H17v16h-3.4z"/></svg></button>
-          <span class="tt">Alice in Wonderland</span>
-          <span class="td">6:26</span>
-          <span class="tr-track" aria-hidden="true"><span class="tr-fill"></span></span>
-        </li>
-      </ol>
-    </div>
-  </section>
+  <!-- ================= PLAYER & TRACKLIST ================= -->
+  <section class="al-player-sec" id="tracklist" aria-labelledby="tracklist-title" data-page-mode="album"></section>
 
   <!-- ================= VINYL ================= -->
   <section class="al-vinyl rv" id="vinyl" aria-label="The album on vinyl">
@@ -696,37 +532,15 @@ var yrEl=document.getElementById('yr'); if(yrEl) yrEl.textContent=new Date().get
   els.forEach(function(el){if(el.getAttribute('data-rv')==='wait')io.observe(el);});
 })();
 
-/* tracks: these buttons drive the site-wide player (The Duck Pod), so one track plays at a time
-   and the record keeps playing while visitors move around the site */
+/* Red Pill room player (powered by The Duck Pod) */
 (function(){
-  var rows=[].slice.call(document.querySelectorAll('.al-list .tr'));
-  if(!rows.length)return;
-  rows.forEach(function(r){var td=r.querySelector('.td');r.dataset.full=td.textContent;});
-  function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
-  function paint(st){
-    rows.forEach(function(r,i){
-      var on=!!(st&&st.started&&i===st.i), live=on&&st.playing;
-      r.classList.toggle('is-playing',live);
-      var b=r.querySelector('.tr-btn');
-      b.setAttribute('aria-pressed',live?'true':'false');
-      b.setAttribute('aria-label',(live?'Pause track: ':'Play track: ')+r.dataset.title);
-      r.querySelector('.tr-fill').style.width=on&&st.d?Math.min(100,(st.t/st.d)*100)+'%':'0%';
-      r.querySelector('.td').textContent=on&&st.t>0?fmt(st.t)+' / '+fmt(st.d):r.dataset.full;
-    });
+  function loadJs(src,cb){var s=document.createElement('script');s.src=src;s.setAttribute('data-trd-keep','');s.onload=cb;document.head.appendChild(s);}
+  function boot(){
+    if(!window.trdShare){loadJs('/assets/trd/share.js?v=20261123a',boot);return;}
+    if(!window.trdAlbumPlayer){loadJs('/assets/trd/album-player.js?v=20261123b',boot);return;}
+    window.trdAlbumPlayer.mount({root:'#tracklist',mode:'album'});
   }
-  if(window.trdPod){
-    rows.forEach(function(r,i){r.querySelector('.tr-btn').addEventListener('click',function(){window.trdPod.toggleIndex(i);});});
-    document.addEventListener('trdpod:state',function(e){paint(e.detail);});
-    paint(window.trdPod.state());
-    return;
-  }
-  /* fallback if the player script is unavailable: play on this page */
-  var audio=new Audio(); audio.preload='none'; var cur=-1;
-  function st(){return {i:cur,started:cur>=0,playing:!audio.paused,t:audio.currentTime,d:isFinite(audio.duration)?audio.duration:0};}
-  function play(i){if(i===cur&&!audio.paused){audio.pause();return;}if(i!==cur){cur=i;audio.src=rows[i].dataset.preview;if(window.trdTrack)window.trdTrack('event/album-track/'+(i<9?'0':'')+(i+1)+'-'+window.trdTrack.slug(rows[i].dataset.title,40),'Red Pill Album: '+(i+1)+'. '+rows[i].dataset.title,0);}var p=audio.play();if(p&&p.catch)p.catch(function(){paint(st());});}
-  rows.forEach(function(r,i){r.querySelector('.tr-btn').addEventListener('click',function(){play(i);});});
-  ['play','pause','timeupdate'].forEach(function(ev){audio.addEventListener(ev,function(){paint(st());});});
-  audio.addEventListener('ended',function(){if(cur+1<rows.length)play(cur+1);else{cur=-1;paint(st());}});
+  boot();
 })();
 </script>
 <!-- trd-support -->
