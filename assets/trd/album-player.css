@@ -1424,7 +1424,7 @@ body.al-room-player.al-theater-open #trd-suggest-fx .trs-tab { display: none !im
 .ap-video-overlay {
   position: fixed;
   inset: 0;
-  z-index: 80;
+  z-index: 2147483600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1484,6 +1484,17 @@ body.al-room-player.al-theater-open #trd-suggest-fx .trs-tab { display: none !im
   vertical-align: middle;
 }
 body.al-video-open { overflow: hidden; }
+/* Hide site chrome that would otherwise sit over the lyric video. Restored when the overlay closes. */
+body.al-video-open .trd-onair,
+body.al-video-open .trd-oap,
+body.al-video-open .trd-sup,
+body.al-video-open #trdSup,
+body.al-video-open #trd-suggest-fx,
+body.al-video-open .trd-pwa-bar,
+body.al-video-open .tp-dock,
+body.al-video-open .tp-ghost {
+  display: none !important;
+}
 @media (max-width: 720px) {
   .ap-video-overlay { padding: 10px; align-items: flex-end; }
   .ap-video-dialog { width: 100%; border-radius: 14px 14px 10px 10px; }
