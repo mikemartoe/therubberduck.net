@@ -61,10 +61,12 @@
 
   /* ================= storage ================= */
   var KEY = 'trdPod.v1', HINT_KEY = 'trdPod.hinted';
-  var S = { i: 0, t: 0, playing: false, started: false, view: 'mini', back: 'mini', vol: 1, clicker: true, pos: null, at: 0 };
+  var S = { i: 0, t: 0, playing: false, started: false, view: 'mini', back: 'mini', vol: 1, clicker: true, shuffle: false, repeat: 'off', pos: null, at: 0 };
   try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) for (var k in S) if (k in saved) S[k] = saved[k]; } catch (e) {}
   if (!(S.i >= 0 && S.i < N)) S.i = 0;
   if (['mini', 'full', 'pill'].indexOf(S.view) < 0) S.view = 'mini';
+  if (['off', 'all', 'one'].indexOf(S.repeat) < 0) S.repeat = 'off';
+  S.shuffle = !!S.shuffle;
   function save() { try { S.at = Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 
   /* ================= page-scope sandbox for soft navigation =================
@@ -188,12 +190,42 @@
   function toggle() { if (audio.paused) play(); else pause(); }
   function playIndex(i) { S.started = true; loadTrack(i, 0); play(); }
   function toggleIndex(i) { if (S.started && i === S.i && audio.getAttribute('src')) toggle(); else playIndex(i); }
-  function next() { var was = !audio.paused || !S.started; playIndex2(S.i + 1, was); }
+  function pickNextIndex(fromEnded) {
+    if (S.shuffle && N > 1) {
+      var j = S.i;
+      for (var k = 0; k < 8 && j === S.i; k++) j = Math.floor(Math.random() * N);
+      if (j === S.i) j = (S.i + 1) % N;
+      return j;
+    }
+    if (fromEnded && S.i + 1 >= N) return S.repeat === 'all' ? 0 : -1;
+    return (S.i + 1) % N;
+  }
+  function next() { var was = !audio.paused || !S.started; playIndex2(pickNextIndex(false), was); }
   function prev() {
-    if (audio.currentTime > 3) { audio.currentTime = 0; if (!S.started) play(); return; }
+    if (audio.currentTime > 3) { seek(0); if (!S.started) play(); return; }
     playIndex2(S.i - 1, !audio.paused || !S.started);
   }
   function playIndex2(i, autoplay) { S.started = true; loadTrack(i, 0); if (autoplay) play(); else render(); save(); }
+  function loadIndex(i, t) { S.started = true; S.playing = false; if (!audio.paused) audio.pause(); loadTrack(i, t || 0); render(); save(); }
+  function seek(t) {
+    if (X) { if (X.seek) X.seek(t); tick(); return; }
+    var d = dur();
+    t = Math.max(0, Math.min(d > 0 ? d - 0.1 : 99999, +t || 0));
+    if (!S.started) S.started = true;
+    if (!audio.getAttribute('src')) loadTrack(S.i, t);
+    else if (audio.readyState >= 1) { try { audio.currentTime = t; } catch (e) {} pendingSeek = null; }
+    else { pendingSeek = t; }
+    S.t = t; tick(); save();
+  }
+  function setVolume(v) {
+    if (X) return;
+    v = Math.max(0, Math.min(1, +v || 0));
+    audio.volume = v; S.vol = v; save(); emit();
+  }
+  function setShuffle(b) { S.shuffle = !!b; save(); emit(); }
+  function toggleShuffle() { setShuffle(!S.shuffle); return S.shuffle; }
+  function setRepeat(m) { S.repeat = (m === 'one' || m === 'all') ? m : 'off'; save(); emit(); }
+  function cycleRepeat() { setRepeat(S.repeat === 'off' ? 'all' : (S.repeat === 'all' ? 'one' : 'off')); return S.repeat; }
 
   /* ================= a page can lend the pod another source =================
      The homepage Personal Playlist tape (Spotify) plays through the same pod: the page hands over an
@@ -245,7 +277,9 @@
   }
   on(audio, 'pause', function () { if (!audio.ended) { S.playing = false; S.t = audio.currentTime; render(); save(); } });
   on(audio, 'ended', function () {
-    if (S.i + 1 < N) playIndex(S.i + 1);
+    if (S.repeat === 'one') { seek(0); play(); return; }
+    var ni = pickNextIndex(true);
+    if (ni >= 0) playIndex(ni);
     else { loadTrack(0, 0); S.playing = false; render(); save(); }
   });
   var lastSave = 0;
@@ -482,8 +516,10 @@
   var emitQueued = false;
   function emitSoon() { if (emitQueued) return; emitQueued = true; _raf(function () { emitQueued = false; emit(); }); }
   function albumState() { return { src: 'album', i: S.i, title: TRACKS[S.i].title, playing: S.playing, started: S.started,
-    t: pendingSeek != null ? pendingSeek : (audio.getAttribute('src') ? audio.currentTime : S.t), d: isFinite(audio.duration) && audio.duration > 0 ? audio.duration : TRACKS[S.i].secs, view: S.view }; }
-  function state() { if (!X) return albumState(); var ci = srcI(); return { src: X.id, i: ci, title: srcTracks()[ci].title, playing: srcPlaying(), started: srcStarted(), t: cur(), d: dur(), view: S.view }; }
+    t: pendingSeek != null ? pendingSeek : (audio.getAttribute('src') ? audio.currentTime : S.t), d: isFinite(audio.duration) && audio.duration > 0 ? audio.duration : TRACKS[S.i].secs,
+    vol: audio.volume, shuffle: !!S.shuffle, repeat: S.repeat, view: S.view }; }
+  function state() { if (!X) return albumState(); var ci = srcI(); return { src: X.id, i: ci, title: srcTracks()[ci].title, playing: srcPlaying(), started: srcStarted(), t: cur(), d: dur(),
+    vol: audio.volume, shuffle: !!S.shuffle, repeat: S.repeat, view: S.view }; }
   function emit() { try { D.dispatchEvent(new CustomEvent('trdpod:state', { detail: state() })); } catch (e) {} }
 
   function drawMenu() {
@@ -894,7 +930,7 @@
   }
   if (D.readyState === 'loading') on(D, 'DOMContentLoaded', boot); else boot();
 
-  W.trdPod = { play: uPlay, pause: uPause, toggle: uToggle, playIndex: uPlayIndex, toggleIndex: uToggleIndex, next: uNext, prev: uPrev,
+  W.trdPod = { play: uPlay, pause: uPause, toggle: uToggle, playIndex: uPlayIndex, toggleIndex: uToggleIndex, loadIndex: loadIndex, seek: seek, setVolume: setVolume, setShuffle: setShuffle, toggleShuffle: toggleShuffle, setRepeat: setRepeat, cycleRepeat: cycleRepeat, next: uNext, prev: uPrev,
     state: state, albumState: albumState, pauseAlbum: function () { if (!audio.paused) audio.pause(); },
     useSource: useSource, dropSource: dropSource, refresh: function () { render(); }, source: function () { return X ? X.id : 'album'; }, tracks: TRACKS.map(function (t) { return { title: t.title, src: t.src, length: t.len }; }), audio: audio,
     view: function (v, fx) { if (v) setView(v, false, !!fx); return S.view; }, resetPosition: resetPos, launchFrom: launchFrom, navigate: function (h) { return go(h, true); } };

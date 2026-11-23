@@ -1,0 +1,281 @@
+{
+  "n": 4,
+  "slug": "enjoy-the-show",
+  "title": "Enjoy The Show",
+  "artist": "The Rubber Duck™",
+  "album": "The Red Pill Album",
+  "durationSec": 286.43,
+  "source": "KEXP artist-confirmed lyric sheet (word-for-word, plus post-solo chorus/outro repeat present in audio); synced via faster-whisper word timestamps + audio onset verification",
+  "lines": [
+    {
+      "t": 0.0,
+      "end": 22.22,
+      "text": "",
+      "break": true
+    },
+    {
+      "t": 22.22,
+      "end": 27.54,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 27.54,
+      "end": 32.98,
+      "text": "Trust the plan"
+    },
+    {
+      "t": 32.98,
+      "end": 38.4,
+      "text": "Nothing can stop what is coming"
+    },
+    {
+      "t": 38.4,
+      "end": 41.52,
+      "text": "Dark to light"
+    },
+    {
+      "t": 41.52,
+      "end": 44.7,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 44.7,
+      "end": 48.54,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 48.54,
+      "end": 52.64,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 52.64,
+      "end": 55.9,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 55.9,
+      "end": 59.9,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 59.9,
+      "end": 62.3,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 62.3,
+      "end": 70.18,
+      "text": "",
+      "break": true
+    },
+    {
+      "t": 70.18,
+      "end": 74.3,
+      "text": "You are the news now"
+    },
+    {
+      "t": 74.3,
+      "end": 76.9,
+      "text": "Trust the plan"
+    },
+    {
+      "t": 76.9,
+      "end": 79.7,
+      "text": "God bless"
+    },
+    {
+      "t": 79.7,
+      "end": 83.56,
+      "text": "We are the storm"
+    },
+    {
+      "t": 83.56,
+      "end": 86.74,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 86.74,
+      "end": 90.8,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 90.8,
+      "end": 94.74,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 94.74,
+      "end": 97.94,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 97.94,
+      "end": 102.06,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 102.06,
+      "end": 105.86,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 105.86,
+      "end": 108.36,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 108.36,
+      "end": 111.2,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 111.2,
+      "end": 113.98,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 113.98,
+      "end": 116.34,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 116.34,
+      "end": 119.66,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 119.66,
+      "end": 122.88,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 122.88,
+      "end": 125.9,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 125.9,
+      "end": 129.1,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 129.1,
+      "end": 150.86,
+      "text": "",
+      "break": true
+    },
+    {
+      "t": 150.86,
+      "end": 154.08,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 154.08,
+      "end": 158.22,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 158.22,
+      "end": 162.12,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 162.12,
+      "end": 165.3,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 165.3,
+      "end": 169.3,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 169.3,
+      "end": 172.84,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 172.84,
+      "end": 175.7,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 175.7,
+      "end": 178.6,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 178.6,
+      "end": 181.44,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 181.44,
+      "end": 184.3,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 184.3,
+      "end": 225.8,
+      "text": "",
+      "break": true
+    },
+    {
+      "t": 225.8,
+      "end": 229.8,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 229.8,
+      "end": 234.28,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 234.28,
+      "end": 238.02,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 238.02,
+      "end": 241.56,
+      "text": "The storm is upon us"
+    },
+    {
+      "t": 241.56,
+      "end": 245.38,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 245.38,
+      "end": 249.5,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 249.5,
+      "end": 252.02,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 252.02,
+      "end": 254.92,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 254.92,
+      "end": 257.76,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 257.76,
+      "end": 260.6,
+      "text": "Jeffrey Epsteen's Island"
+    },
+    {
+      "t": 260.6,
+      "end": 286.43,
+      "text": "",
+      "break": true
+    }
+  ]
+}

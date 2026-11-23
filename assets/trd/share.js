@@ -44,7 +44,7 @@
   };
 
   /* GoatCounter event titles per kind (the event path is always event/<kind>-share/<platform>/<id>) */
-  var LABEL = { drop: 'Q drop #', meme: 'Meme ', video: 'Video ' };
+  var LABEL = { drop: 'Q drop #', meme: 'Meme ', video: 'Video ', song: 'Song ' };
 
   function tagged(page, p, camp) {
     var u = new URL(page, SITE);
