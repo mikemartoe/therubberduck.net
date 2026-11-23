@@ -19,8 +19,8 @@
       "appleId": "6766199881",
       "src": "/audio/01-and-frogs-to-destroy-them.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199881",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/and-frogs-to-destroy-them/"
     },
     {
       "n": 2,
@@ -33,8 +33,8 @@
       "appleId": "6766199882",
       "src": "/audio/02-boom-boom-boom.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199882",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/boom-boom-boom/"
     },
     {
       "n": 3,
@@ -47,8 +47,8 @@
       "appleId": "6766199883",
       "src": "/audio/03-dark-to-light.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199883",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/dark-to-light/"
     },
     {
       "n": 4,
@@ -75,8 +75,8 @@
       "appleId": "6766199885",
       "src": "/audio/05-follow-marina-abramovic.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199885",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/follow-marina-abramovic/"
     },
     {
       "n": 6,
@@ -89,8 +89,8 @@
       "appleId": "6766199886",
       "src": "/audio/06-full-control.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199886",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/full-control/"
     },
     {
       "n": 7,
@@ -103,8 +103,8 @@
       "appleId": "6766199947",
       "src": "/audio/07-god-wins.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199947",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/god-wins/"
     },
     {
       "n": 8,
@@ -117,8 +117,8 @@
       "appleId": "6766199948",
       "src": "/audio/08-military-intelligence.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199948",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/military-intelligence/"
     },
     {
       "n": 9,
@@ -131,8 +131,8 @@
       "appleId": "6766199949",
       "src": "/audio/09-mockingbird.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199949",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/mockingbird/"
     },
     {
       "n": 10,
@@ -145,8 +145,8 @@
       "appleId": "6766199950",
       "src": "/audio/10-q-clearance-patriot.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199950",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/q-clearance-patriot/"
     },
     {
       "n": 11,
@@ -159,8 +159,8 @@
       "appleId": "6766199951",
       "src": "/audio/11-shall-we-play-a-game.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199951",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/shall-we-play-a-game/"
     },
     {
       "n": 12,
@@ -173,8 +173,8 @@
       "appleId": "6766199952",
       "src": "/audio/12-the-storm-is-upon-us.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199952",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/the-storm-is-upon-us/"
     },
     {
       "n": 13,
@@ -187,8 +187,8 @@
       "appleId": "6766199953",
       "src": "/audio/13-there-is-no-qanon.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199953",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/there-is-no-qanon/"
     },
     {
       "n": 14,
@@ -201,8 +201,8 @@
       "appleId": "6766199954",
       "src": "/audio/14-trumpxiputin-trump-zee-pootin.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199954",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/trumpxiputin/"
     },
     {
       "n": 15,
@@ -215,8 +215,8 @@
       "appleId": "6766199955",
       "src": "/audio/15-very-dangerous-animal.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199955",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/very-dangerous-animal/"
     },
     {
       "n": 16,
@@ -229,8 +229,8 @@
       "appleId": "6766199956",
       "src": "/audio/16-welcome-to-epstein-island.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199956",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/welcome-to-epstein-island/"
     },
     {
       "n": 17,
@@ -243,8 +243,8 @@
       "appleId": "6766199957",
       "src": "/audio/17-what-happened-to-diana.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199957",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/what-happened-to-diana/"
     },
     {
       "n": 18,
@@ -257,8 +257,8 @@
       "appleId": "6766199958",
       "src": "/audio/18-what-makes-a-movie-good.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199958",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/what-makes-a-movie-good/"
     },
     {
       "n": 19,
@@ -271,8 +271,8 @@
       "appleId": "6766199960",
       "src": "/audio/19-who-follows-satan.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199960",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/who-follows-satan/"
     },
     {
       "n": 20,
@@ -285,8 +285,8 @@
       "appleId": "6766199961",
       "src": "/audio/20-who-is-rachel-c-handler.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199961",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/who-is-rachel-chandler/"
     },
     {
       "n": 21,
@@ -299,8 +299,8 @@
       "appleId": "6766199962",
       "src": "/audio/21-wizards-warlocks.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199962",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/wizards-and-warlocks/"
     },
     {
       "n": 22,
@@ -313,8 +313,8 @@
       "appleId": "6766199963",
       "src": "/audio/22-alice-in-wonderland.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199963",
-      "hasLyrics": false,
-      "shareUrl": null
+      "hasLyrics": true,
+      "shareUrl": "/album/alice-in-wonderland/"
     }
   ]
 }
