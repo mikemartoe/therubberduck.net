@@ -1490,9 +1490,11 @@ body.al-video-open .trd-oap,
 body.al-video-open .trd-sup,
 body.al-video-open #trdSup,
 body.al-video-open #trd-suggest-fx,
+body.al-video-open .trs-tab,
 body.al-video-open .trd-pwa-bar,
 body.al-video-open .tp-dock,
-body.al-video-open .tp-ghost {
+body.al-video-open .tp-ghost,
+body.al-video-open .ap-bar {
   display: none !important;
 }
 @media (max-width: 720px) {
