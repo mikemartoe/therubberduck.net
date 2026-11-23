@@ -5,13 +5,18 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 218.2,
-  "source": "Suno ID3 verified word-for-word against site audio (no lyric video or KEXP sheet exists)",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
-      "end": 11.24,
+      "end": 8.04,
       "text": "",
       "break": true
+    },
+    {
+      "t": 8.04,
+      "end": 11.24,
+      "text": "Military Intelligence."
     },
     {
       "t": 11.24,
@@ -176,7 +181,7 @@
     {
       "t": 122.46,
       "end": 125.0,
-      "text": "Why is Antifa allowed to operate?"
+      "text": "Why is Anteefa allowed to operate?"
     },
     {
       "t": 125.0,

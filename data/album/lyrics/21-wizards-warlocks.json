@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 224.48,
-  "source": "On-screen lyric video & Suno ID3 (exact match); synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -249,16 +249,31 @@
     },
     {
       "t": 194.14,
-      "end": 195.18,
+      "end": 194.99,
       "text": "Q"
     },
     {
-      "t": 195.18,
-      "end": 197.28,
+      "t": 194.99,
+      "end": 195.84,
       "text": "The wizards and warlocks"
     },
     {
-      "t": 197.28,
+      "t": 195.84,
+      "end": 196.69,
+      "text": "will not allow another"
+    },
+    {
+      "t": 196.69,
+      "end": 197.54,
+      "text": "Satanic Evil Piece of Shit control our country!"
+    },
+    {
+      "t": 197.54,
+      "end": 198.39,
+      "text": "The wizards and warlocks"
+    },
+    {
+      "t": 198.39,
       "end": 200.22,
       "text": "will not allow another"
     },

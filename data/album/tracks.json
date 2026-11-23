@@ -20,7 +20,9 @@
       "src": "/audio/01-and-frogs-to-destroy-them.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199881",
       "hasLyrics": true,
-      "shareUrl": "/album/and-frogs-to-destroy-them/"
+      "shareUrl": "/album/and-frogs-to-destroy-them/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/01-and-frogs-to-destroy-them.mp4",
+      "videoPoster": "/images/album/video/01-and-frogs-to-destroy-them.jpg"
     },
     {
       "n": 2,
@@ -34,7 +36,9 @@
       "src": "/audio/02-boom-boom-boom.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199882",
       "hasLyrics": true,
-      "shareUrl": "/album/boom-boom-boom/"
+      "shareUrl": "/album/boom-boom-boom/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/02-boom-boom-boom.mp4",
+      "videoPoster": "/images/album/video/02-boom-boom-boom.jpg"
     },
     {
       "n": 3,
@@ -48,7 +52,9 @@
       "src": "/audio/03-dark-to-light.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199883",
       "hasLyrics": true,
-      "shareUrl": "/album/dark-to-light/"
+      "shareUrl": "/album/dark-to-light/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/03-dark-to-light.mp4",
+      "videoPoster": "/images/album/video/03-dark-to-light.jpg"
     },
     {
       "n": 4,
@@ -62,7 +68,9 @@
       "hasLyrics": true,
       "shareUrl": "/album/enjoy-the-show/",
       "src": "/audio/04-enjoy-the-show.mp3",
-      "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199884"
+      "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199884",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/04-enjoy-the-show.mp4",
+      "videoPoster": "/images/album/video/04-enjoy-the-show.jpg"
     },
     {
       "n": 5,
@@ -76,7 +84,9 @@
       "src": "/audio/05-follow-marina-abramovic.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199885",
       "hasLyrics": true,
-      "shareUrl": "/album/follow-marina-abramovic/"
+      "shareUrl": "/album/follow-marina-abramovic/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/05-follow-marina-abramovic.mp4",
+      "videoPoster": "/images/album/video/05-follow-marina-abramovic.jpg"
     },
     {
       "n": 6,
@@ -90,7 +100,9 @@
       "src": "/audio/06-full-control.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199886",
       "hasLyrics": true,
-      "shareUrl": "/album/full-control/"
+      "shareUrl": "/album/full-control/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/06-full-control.mp4",
+      "videoPoster": "/images/album/video/06-full-control.jpg"
     },
     {
       "n": 7,
@@ -104,7 +116,9 @@
       "src": "/audio/07-god-wins.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199947",
       "hasLyrics": true,
-      "shareUrl": "/album/god-wins/"
+      "shareUrl": "/album/god-wins/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/07-god-wins.mp4",
+      "videoPoster": "/images/album/video/07-god-wins.jpg"
     },
     {
       "n": 8,
@@ -118,7 +132,9 @@
       "src": "/audio/08-military-intelligence.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199948",
       "hasLyrics": true,
-      "shareUrl": "/album/military-intelligence/"
+      "shareUrl": "/album/military-intelligence/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/08-military-intelligence.mp4",
+      "videoPoster": "/images/album/video/08-military-intelligence.jpg"
     },
     {
       "n": 9,
@@ -132,7 +148,9 @@
       "src": "/audio/09-mockingbird.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199949",
       "hasLyrics": true,
-      "shareUrl": "/album/mockingbird/"
+      "shareUrl": "/album/mockingbird/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/09-mockingbird.mp4",
+      "videoPoster": "/images/album/video/09-mockingbird.jpg"
     },
     {
       "n": 10,
@@ -146,7 +164,9 @@
       "src": "/audio/10-q-clearance-patriot.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199950",
       "hasLyrics": true,
-      "shareUrl": "/album/q-clearance-patriot/"
+      "shareUrl": "/album/q-clearance-patriot/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/10-q-clearance-patriot.mp4",
+      "videoPoster": "/images/album/video/10-q-clearance-patriot.jpg"
     },
     {
       "n": 11,
@@ -160,7 +180,9 @@
       "src": "/audio/11-shall-we-play-a-game.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199951",
       "hasLyrics": true,
-      "shareUrl": "/album/shall-we-play-a-game/"
+      "shareUrl": "/album/shall-we-play-a-game/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/11-shall-we-play-a-game.mp4",
+      "videoPoster": "/images/album/video/11-shall-we-play-a-game.jpg"
     },
     {
       "n": 12,
@@ -174,7 +196,9 @@
       "src": "/audio/12-the-storm-is-upon-us.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199952",
       "hasLyrics": true,
-      "shareUrl": "/album/the-storm-is-upon-us/"
+      "shareUrl": "/album/the-storm-is-upon-us/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/12-the-storm-is-upon-us.mp4",
+      "videoPoster": "/images/album/video/12-the-storm-is-upon-us.jpg"
     },
     {
       "n": 13,
@@ -188,7 +212,9 @@
       "src": "/audio/13-there-is-no-qanon.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199953",
       "hasLyrics": true,
-      "shareUrl": "/album/there-is-no-qanon/"
+      "shareUrl": "/album/there-is-no-qanon/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/13-there-is-no-qanon.mp4",
+      "videoPoster": "/images/album/video/13-there-is-no-qanon.jpg"
     },
     {
       "n": 14,
@@ -202,7 +228,9 @@
       "src": "/audio/14-trumpxiputin-trump-zee-pootin.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199954",
       "hasLyrics": true,
-      "shareUrl": "/album/trumpxiputin/"
+      "shareUrl": "/album/trumpxiputin/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/14-trumpxiputin-trump-zee-pootin.mp4",
+      "videoPoster": "/images/album/video/14-trumpxiputin-trump-zee-pootin.jpg"
     },
     {
       "n": 15,
@@ -216,7 +244,9 @@
       "src": "/audio/15-very-dangerous-animal.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199955",
       "hasLyrics": true,
-      "shareUrl": "/album/very-dangerous-animal/"
+      "shareUrl": "/album/very-dangerous-animal/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/15-very-dangerous-animal.mp4",
+      "videoPoster": "/images/album/video/15-very-dangerous-animal.jpg"
     },
     {
       "n": 16,
@@ -230,7 +260,9 @@
       "src": "/audio/16-welcome-to-epstein-island.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199956",
       "hasLyrics": true,
-      "shareUrl": "/album/welcome-to-epstein-island/"
+      "shareUrl": "/album/welcome-to-epstein-island/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/16-welcome-to-epstein-island.mp4",
+      "videoPoster": "/images/album/video/16-welcome-to-epstein-island.jpg"
     },
     {
       "n": 17,
@@ -244,7 +276,9 @@
       "src": "/audio/17-what-happened-to-diana.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199957",
       "hasLyrics": true,
-      "shareUrl": "/album/what-happened-to-diana/"
+      "shareUrl": "/album/what-happened-to-diana/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/17-what-happened-to-diana.mp4",
+      "videoPoster": "/images/album/video/17-what-happened-to-diana.jpg"
     },
     {
       "n": 18,
@@ -258,7 +292,9 @@
       "src": "/audio/18-what-makes-a-movie-good.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199958",
       "hasLyrics": true,
-      "shareUrl": "/album/what-makes-a-movie-good/"
+      "shareUrl": "/album/what-makes-a-movie-good/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/18-what-makes-a-movie-good.mp4",
+      "videoPoster": "/images/album/video/18-what-makes-a-movie-good.jpg"
     },
     {
       "n": 19,
@@ -272,7 +308,9 @@
       "src": "/audio/19-who-follows-satan.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199960",
       "hasLyrics": true,
-      "shareUrl": "/album/who-follows-satan/"
+      "shareUrl": "/album/who-follows-satan/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/19-who-follows-satan.mp4",
+      "videoPoster": "/images/album/video/19-who-follows-satan.jpg"
     },
     {
       "n": 20,
@@ -286,7 +324,9 @@
       "src": "/audio/20-who-is-rachel-c-handler.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199961",
       "hasLyrics": true,
-      "shareUrl": "/album/who-is-rachel-chandler/"
+      "shareUrl": "/album/who-is-rachel-chandler/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/20-who-is-rachel-c-handler.mp4",
+      "videoPoster": "/images/album/video/20-who-is-rachel-c-handler.jpg"
     },
     {
       "n": 21,
@@ -300,7 +340,9 @@
       "src": "/audio/21-wizards-warlocks.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199962",
       "hasLyrics": true,
-      "shareUrl": "/album/wizards-and-warlocks/"
+      "shareUrl": "/album/wizards-and-warlocks/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/21-wizards-warlocks.mp4",
+      "videoPoster": "/images/album/video/21-wizards-warlocks.jpg"
     },
     {
       "n": 22,
@@ -314,7 +356,9 @@
       "src": "/audio/22-alice-in-wonderland.mp3",
       "appleUrl": "https://music.apple.com/us/album/the-red-pill-album/1896233683?i=6766199963",
       "hasLyrics": true,
-      "shareUrl": "/album/alice-in-wonderland/"
+      "shareUrl": "/album/alice-in-wonderland/",
+      "videoUrl": "https://stream.therubberduck.net/video-room/red-pill-album/22-alice-in-wonderland.mp4",
+      "videoPoster": "/images/album/video/22-alice-in-wonderland.jpg"
     }
   ]
 }

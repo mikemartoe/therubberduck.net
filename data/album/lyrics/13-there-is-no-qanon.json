@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 217.24,
-  "source": "On-screen lyric video (preferred) & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -15,18 +15,18 @@
     },
     {
       "t": 10.96,
-      "end": 14.46,
-      "text": "Find the newspaper articles regarding Freemasons."
+      "end": 15.08,
+      "text": "Find the newspaper articles regarding Freemasons are Controlled."
     },
     {
-      "t": 14.46,
-      "end": 15.31,
-      "text": "All controlled."
+      "t": 15.08,
+      "end": 18.12,
+      "text": "Why are Freemasons on the scene of most shooting locations?"
     },
     {
-      "t": 15.31,
+      "t": 18.12,
       "end": 21.76,
-      "text": "Why are Freemasons on the scene at most shooting locations openly giving interviews or in background shots?"
+      "text": "Openly giving interviews or in background shots?"
     },
     {
       "t": 21.76,
@@ -55,18 +55,23 @@
     },
     {
       "t": 32.64,
+      "end": 34.84,
+      "text": "They can end this at any time simply by"
+    },
+    {
+      "t": 34.84,
       "end": 37.98,
-      "text": "They can end this at any time simply by asking President Trump, right?"
+      "text": "asking President Trump, right?"
     },
     {
       "t": 37.98,
       "end": 40.54,
-      "text": "We may have to force this one."
+      "text": "We may have to ‘force’ this one."
     },
     {
       "t": 40.54,
       "end": 42.06,
-      "text": "There is Q."
+      "text": "There is Cue."
     },
     {
       "t": 42.06,
@@ -76,12 +81,12 @@
     {
       "t": 43.02,
       "end": 45.54,
-      "text": "There is no Qanon."
+      "text": "There is no Q anon."
     },
     {
       "t": 45.54,
       "end": 46.64,
-      "text": "There is Q."
+      "text": "There is Cue."
     },
     {
       "t": 46.64,
@@ -91,7 +96,7 @@
     {
       "t": 48.1,
       "end": 50.96,
-      "text": "There is no Qanon."
+      "text": "There is no Q anon"
     },
     {
       "t": 50.96,
@@ -111,87 +116,22 @@
     {
       "t": 58.34,
       "end": 62.74,
-      "text": "Sheep no more."
+      "text": "sheep no more."
     },
     {
       "t": 62.74,
       "end": 70.72,
-      "text": "You are witnessing the systematic destruction of the OLD GUARD."
+      "text": "You are witnessing the systematic destruction of the Old Guard"
     },
     {
       "t": 70.72,
-      "end": 74.82,
-      "text": "That whenever any Form of Government becomes destructive of these ends,"
-    },
-    {
-      "t": 74.82,
-      "end": 78.42,
-      "text": "it is the Right of the People to alter or to abolish it,"
-    },
-    {
-      "t": 78.42,
-      "end": 80.12,
-      "text": "and to institute new Government,"
-    },
-    {
-      "t": 80.12,
-      "end": 86.26,
-      "text": "laying its foundation on such principles and organizing its powers in such form,"
-    },
-    {
-      "t": 86.26,
-      "end": 90.62,
-      "text": "as to them shall seem most likely to effect their Safety and Happiness."
-    },
-    {
-      "t": 90.62,
-      "end": 97.74,
-      "text": "Prudence, indeed, will dictate that Governments long established should not be changed for light and transient causes;"
-    },
-    {
-      "t": 97.74,
-      "end": 103.2,
-      "text": "and accordingly all experience hath shewn, that mankind are more disposed to suffer,"
-    },
-    {
-      "t": 103.2,
-      "end": 110.12,
-      "text": "while evils are sufferable, than to right themselves by abolishing the forms to which they are accustomed."
-    },
-    {
-      "t": 110.12,
-      "end": 113.16,
-      "text": "But when a long train of abuses and usurpations,"
-    },
-    {
-      "t": 113.16,
-      "end": 120.36,
-      "text": "pursuing invariably the same Object evinces a design to reduce them under absolute Despotism,"
-    },
-    {
-      "t": 120.36,
-      "end": 121.54,
-      "text": "it is their right,"
-    },
-    {
-      "t": 121.54,
-      "end": 122.8,
-      "text": "it is their duty,"
-    },
-    {
-      "t": 122.8,
-      "end": 124.46,
-      "text": "to throw off such Government,"
-    },
-    {
-      "t": 124.46,
       "end": 131.46,
-      "text": "and to provide new Guards for their future security."
+      "text": "That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it, and to institute new Government, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their Safety and Happiness. Prudence, indeed, will dictate that Governments long established should not be changed for light and transient causes; and accordingly all experience hath shewn that mankind are more disposed to suffer, while evils are sufferable than to right themselves by abolishing the forms to which they are accustomed. But when a long train of abuses and usurpations, pursuing invariably the same Object evinces a design to reduce them under absolute Despotism, it is their right, it is their duty, to throw off such Government, and to provide new Guards for their future security."
     },
     {
       "t": 131.46,
       "end": 133.8,
-      "text": "We’ve had the ball the entire time."
+      "text": "We've had the ball the entire time."
     },
     {
       "t": 133.8,
@@ -200,23 +140,33 @@
     },
     {
       "t": 134.65,
+      "end": 137.2,
+      "text": "Why did President Trump move his entire operation"
+    },
+    {
+      "t": 137.2,
+      "end": 139.4,
+      "text": "out of Trump Tower the day after"
+    },
+    {
+      "t": 139.4,
       "end": 141.98,
-      "text": "Why did President Trump move his entire operation out of Trump Tower the day after meeting Admiral Mike Rogers in the SCIF?"
+      "text": "meeting Admiral Mike Rogers in the Skiff?"
     },
     {
       "t": 141.98,
       "end": 144.66,
-      "text": "The world is watching."
+      "text": "The WORLD is WATCHING."
     },
     {
       "t": 144.66,
       "end": 146.36,
-      "text": "The world is here."
+      "text": "The WORLD is HERE."
     },
     {
       "t": 146.36,
       "end": 147.88,
-      "text": "EYES ON!"
+      "text": "EYES ON."
     },
     {
       "t": 147.88,
@@ -236,18 +186,23 @@
     },
     {
       "t": 162.14,
+      "end": 163.74,
+      "text": "They can end this at any time"
+    },
+    {
+      "t": 163.74,
       "end": 168.14,
-      "text": "They can end this at any time simply by asking President Trump, right?"
+      "text": "simply by asking POTUS, right?"
     },
     {
       "t": 168.14,
       "end": 170.0,
-      "text": "We may have to force this one."
+      "text": "We may have to ‘force’ this one."
     },
     {
       "t": 170.0,
       "end": 171.36,
-      "text": "There is Q."
+      "text": "There is Cue."
     },
     {
       "t": 171.36,
@@ -257,12 +212,12 @@
     {
       "t": 172.6,
       "end": 175.18,
-      "text": "There is no Qanon."
+      "text": "There is no Q anon."
     },
     {
       "t": 175.18,
       "end": 176.3,
-      "text": "There is Q."
+      "text": "There is Cue."
     },
     {
       "t": 176.3,
@@ -272,7 +227,7 @@
     {
       "t": 177.8,
       "end": 180.68,
-      "text": "There is no Qanon."
+      "text": "There is no Q anon"
     },
     {
       "t": 180.68,
@@ -287,22 +242,22 @@
     {
       "t": 186.0,
       "end": 188.17,
-      "text": "Those asleep blind."
+      "text": "Those asleep are blind."
     },
     {
       "t": 188.17,
       "end": 192.6,
-      "text": "Sheep no more."
+      "text": "sheep no more."
     },
     {
       "t": 192.6,
       "end": 202.5,
-      "text": "You are witnessing the systematic destruction of the OLD GUARD."
+      "text": "You are witnessing the systematic destruction of the Old Guard"
     },
     {
       "t": 202.5,
       "end": 204.36,
-      "text": "Power will return to the people."
+      "text": "POWER WILL RETURN TO THE PEOPLE."
     },
     {
       "t": 204.36,

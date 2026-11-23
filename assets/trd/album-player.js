@@ -35,7 +35,8 @@
     share: svg('<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/>'),
     search: svg('<circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m21 21-4.3-4.3"/>'),
     queue: svg('<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6h14M3 12h14M3 18h10M18 15l4 3-4 3z"/>'),
-    ext: svg('<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/>')
+    ext: svg('<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M9 7h8v8"/>'),
+    video: svg('<rect x="2" y="5" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M10 9.2v5.6a.5.5 0 0 0 .76.42l4.8-2.8a.5.5 0 0 0 0-.84l-4.8-2.8A.5.5 0 0 0 10 9.2z"/>')
   };
 
   var dataCache = null;
@@ -168,6 +169,7 @@
                     '<p class="ap-np-artist">' + esc(album.artist) + ' · ' + esc(album.album) + '</p>' +
                     '<div class="ap-np-actions">' +
                       '<a class="ap-pill-btn js-np-apple" href="#" target="_blank" rel="noopener">Apple Music ' + IC.ext + '</a>' +
+                      '<button class="ap-pill-btn js-watch-video" type="button">' + IC.video + ' watch video</button>' +
                       '<button class="ap-pill-btn js-open-sheet" type="button">' + IC.expand + ' full player</button>' +
                     '</div>' +
                   '</div>' +
@@ -200,6 +202,7 @@
                 '<div class="ap-lyrics-head">' +
                   '<div class="ap-lyrics-label"><span class="dot" aria-hidden="true"></span><span>lyrics</span></div>' +
                   '<div class="ap-lyrics-tools">' +
+                    '<button class="ap-pill-btn js-watch-video" type="button">' + IC.video + ' watch video</button>' +
                     '<button class="ap-pill-btn js-theater-open" type="button" title="expand lyrics">' + IC.expand + ' expand</button>' +
                   '</div>' +
                 '</div>' +
@@ -365,6 +368,23 @@
       var emptyEl = rootEl.querySelector('.js-empty');
       var filterEl = rootEl.querySelector('.js-filter');
       var theaterEl = chrome.querySelector('.js-theater');
+      if (!chrome.querySelector('.js-video-overlay')) {
+        chrome.insertAdjacentHTML('beforeend',
+          '<div class="ap-video-overlay js-video-overlay" hidden>' +
+            '<div class="ap-video-backdrop js-video-close" aria-hidden="true"></div>' +
+            '<div class="ap-video-dialog" role="dialog" aria-modal="true" aria-labelledby="ap-video-title">' +
+              '<div class="ap-video-bar">' +
+                '<h3 class="ap-video-heading" id="ap-video-title"><span class="js-video-kicker">watch video</span><span class="js-video-title"></span></h3>' +
+                '<button class="ap-pill-btn js-video-close" type="button">close</button>' +
+              '</div>' +
+              '<video class="ap-video-el js-lyric-video" playsinline webkit-playsinline controls preload="metadata" controlslist="nodownload"></video>' +
+            '</div>' +
+          '</div>'
+        );
+      }
+      var videoOverlay = chrome.querySelector('.js-video-overlay');
+      var lyricVideo = chrome.querySelector('.js-lyric-video');
+
       var sheetEl = chrome.querySelector('.js-sheet');
 
       function renderTrackRows() {
@@ -388,6 +408,7 @@
               '<div class="ap-row-sub">' + esc(album.artist) + '</div>' +
             '</div>' +
             '<div class="ap-row-acts">' +
+              (t.videoUrl ? '<button class="ap-row-video js-row-video" type="button" aria-label="watch video for ' + esc(t.title) + '">watch video</button>' : '') +
               (t.shareUrl ? '<a class="ap-row-share" href="' + esc(t.shareUrl) + '" title="share ' + esc(t.title) + '" aria-label="share ' + esc(t.title) + '">' + IC.share + '</a>' : '') +
             '</div>' +
             '<div class="ap-row-dur">' + esc(t.len) + '</div>' +
@@ -399,7 +420,7 @@
           return '<li class="ap-row" data-i="' + i + '">' +
             '<div class="ap-row-num"><span class="ap-row-n">' + t.n + '</span><span class="ap-eq" aria-hidden="true"><i></i><i></i><i></i></span><button class="ap-row-play" type="button" aria-label="play ' + esc(t.title) + '">' + IC.play + '</button></div>' +
             '<div class="ap-row-info"><div class="ap-row-title-line"><span class="ap-row-title">' + esc(t.title) + '</span>' + (t.hasLyrics ? '<span class="ap-badge-lyrics">lyrics</span>' : '') + '</div><div class="ap-row-sub">' + esc(album.artist) + '</div></div>' +
-            '<div class="ap-row-acts"></div>' +
+            '<div class="ap-row-acts">' + (t.videoUrl ? '<button class="ap-row-video js-row-video" type="button" aria-label="watch video for ' + esc(t.title) + '">watch video</button>' : '') + '</div>' +
             '<div class="ap-row-dur">' + esc(t.len) + '</div>' +
           '</li>';
         }).join('');
@@ -409,7 +430,7 @@
 
       function bindQueueClicks(ol) {
         ol.addEventListener('click', function (e) {
-          if (e.target.closest('.ap-row-share')) return;
+          if (e.target.closest('.ap-row-share') || e.target.closest('.js-row-video')) return;
           var li = e.target.closest('.ap-row');
           if (!li || !pod) return;
           var idx = +li.getAttribute('data-i');
@@ -491,6 +512,54 @@
         D.body.classList.remove('al-sheet-open');
       }
 
+      function currentTrack() {
+        var s = getState();
+        return tracks[s.i] || tracks[0];
+      }
+      function openVideoFor(track) {
+        if (!track || !track.videoUrl || !videoOverlay || !lyricVideo) return;
+        if (pod && pod.pause) pod.pause();
+        if (theaterEl && !theaterEl.hidden) closeTheater();
+        lyricVideo.pause();
+        lyricVideo.setAttribute('playsinline', '');
+        lyricVideo.setAttribute('webkit-playsinline', '');
+        lyricVideo.poster = track.videoPoster || '';
+        if (lyricVideo.src !== (new URL(track.videoUrl, location.href)).href) {
+          lyricVideo.src = track.videoUrl;
+        }
+        var titleEl = videoOverlay.querySelector('.js-video-title');
+        if (titleEl) titleEl.textContent = track.title || '';
+        videoOverlay.hidden = false;
+        D.body.classList.add('al-video-open');
+        var playP = lyricVideo.play();
+        if (playP && playP.catch) playP.catch(function () {});
+      }
+      function closeVideo() {
+        if (!videoOverlay || videoOverlay.hidden) return;
+        if (lyricVideo) {
+          lyricVideo.pause();
+        }
+        videoOverlay.hidden = true;
+        D.body.classList.remove('al-video-open');
+      }
+      bindAll('.js-watch-video', function () { openVideoFor(currentTrack()); });
+      bindAll('.js-video-close', closeVideo);
+      function bindRowVideos(ol) {
+        if (!ol) return;
+        ol.addEventListener('click', function (e) {
+          var btn = e.target.closest('.js-row-video');
+          if (!btn) return;
+          e.preventDefault();
+          e.stopPropagation();
+          var li = btn.closest('.ap-row');
+          if (!li) return;
+          var idx = +li.getAttribute('data-i');
+          openVideoFor(tracks[idx]);
+        });
+      }
+      bindRowVideos(tracklistEl);
+      bindRowVideos(sheetQueueEl);
+
       bindAll('.js-theater-open', openTheater);
       bindAll('.js-theater-close', closeTheater);
       bindAll('.js-open-sheet', function () { openSheet('now'); });
@@ -517,6 +586,7 @@
 
       D.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
+          if (videoOverlay && !videoOverlay.hidden) { closeVideo(); return; }
           if (!theaterEl.hidden) closeTheater();
           if (!sheetEl.hidden) closeSheet();
         }

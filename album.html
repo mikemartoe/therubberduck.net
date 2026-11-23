@@ -332,8 +332,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-ink);outline
 <script src="/assets/trd/duckpod.js?v=20261112b" data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/share.css?v=20261123a" data-trd-keep>
 <script src="/assets/trd/share.js?v=20261123a" data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/album-player.css?v=20261123a">
-<script src="/assets/trd/album-player.js?v=20261123a" data-trd-keep></script>
+<link rel="stylesheet" href="/assets/trd/album-player.css?v=20261123b">
+<script src="/assets/trd/album-player.js?v=20261123b" data-trd-keep></script>
 <script src="/assets/trd/track.js" data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" data-trd-keep></script>
 <!-- SEO and share preview -->
@@ -537,7 +537,7 @@ var yrEl=document.getElementById('yr'); if(yrEl) yrEl.textContent=new Date().get
   function loadJs(src,cb){var s=document.createElement('script');s.src=src;s.setAttribute('data-trd-keep','');s.onload=cb;document.head.appendChild(s);}
   function boot(){
     if(!window.trdShare){loadJs('/assets/trd/share.js?v=20261123a',boot);return;}
-    if(!window.trdAlbumPlayer){loadJs('/assets/trd/album-player.js?v=20261123a',boot);return;}
+    if(!window.trdAlbumPlayer){loadJs('/assets/trd/album-player.js?v=20261123b',boot);return;}
     window.trdAlbumPlayer.mount({root:'#tracklist',mode:'album'});
   }
   boot();

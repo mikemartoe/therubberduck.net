@@ -5,609 +5,369 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 364.92,
-  "source": "Suno ID3 verified against site audio (lyric video is flag/photo montage with no on-screen lyric text)",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
-      "end": 30.0,
+      "end": 5.12,
       "text": "",
       "break": true
     },
     {
-      "t": 30.0,
-      "end": 31.04,
-      "text": "Plane Crash 1999."
+      "t": 5.12,
+      "end": 36.4,
+      "text": "My fellow Americans, over the course of the next several days you will undoubtedly realize that we are taking back our great country - the land of the free - from the evil tyrants that wish to do us harm and destroy the last remaining refuge of shining light."
     },
     {
-      "t": 31.04,
-      "end": 33.08,
-      "text": "Hillary Clinton, Senate 2000."
+      "t": 36.4,
+      "end": 37.89,
+      "text": "President Trump and John F Kennedy Junior."
     },
     {
-      "t": 33.08,
-      "end": 37.14,
-      "text": "The Start."
+      "t": 37.89,
+      "end": 38.74,
+      "text": "Relationship."
     },
     {
-      "t": 37.14,
-      "end": 39.78,
-      "text": "On President Trump’s order,"
+      "t": 38.74,
+      "end": 39.59,
+      "text": "Plane crash 1999."
     },
     {
-      "t": 39.78,
-      "end": 42.5,
-      "text": "we have initiated certain fail-safes"
+      "t": 39.59,
+      "end": 40.44,
+      "text": "Hillary Clinton - Senate 2000."
     },
     {
-      "t": 42.5,
-      "end": 44.1,
-      "text": "that shall safeguard the public"
+      "t": 40.44,
+      "end": 41.29,
+      "text": "The “Start.”"
     },
     {
-      "t": 44.1,
-      "end": 45.44,
-      "text": "from the primary fallout"
-    },
-    {
-      "t": 45.44,
-      "end": 47.93,
-      "text": "which is slated to occur ELEVEN-THREE"
-    },
-    {
-      "t": 47.93,
-      "end": 49.36,
-      "text": "upon the arrest announcement"
-    },
-    {
-      "t": 49.36,
+      "t": 41.29,
       "end": 51.14,
-      "text": "of Mr. Podesta"
+      "text": "On President Trump’s order, we have initiated certain fail-safes that shall safeguard the public from the primary fallout which is slated to occur ELEVEN-THREE - upon the arrest announcement of Mr. Podesta."
     },
     {
       "t": 51.14,
       "end": 53.34,
-      "text": "actionable ELEVEN-FOUR."
+      "text": "actionable ELEVEN-FOUR!"
     },
     {
       "t": 53.34,
       "end": 55.76,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 55.76,
       "end": 60.76,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 60.76,
       "end": 63.24,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 63.24,
       "end": 68.52,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 68.52,
-      "end": 70.74,
-      "text": "Confirmation to the public of what is occurring"
-    },
-    {
-      "t": 70.74,
-      "end": 71.78,
-      "text": "will then be revealed"
-    },
-    {
-      "t": 71.78,
-      "end": 73.26,
-      "text": "and will not be openly accepted."
-    },
-    {
-      "t": 73.26,
-      "end": 75.62,
-      "text": "Public riots are being organized"
-    },
-    {
-      "t": 75.62,
-      "end": 77.1,
-      "text": "in serious numbers"
-    },
-    {
-      "t": 77.1,
-      "end": 79.9,
-      "text": "in an effort to prevent the arrest and capture"
-    },
-    {
-      "t": 79.9,
       "end": 83.2,
-      "text": "of more senior public officials."
+      "text": "Confirmation to the public of what is occurring will then be revealed and will not be openly accepted. Public riots are being organized in serious numbers in an effort to prevent the arrest and capture of more senior public officials."
     },
     {
       "t": 83.2,
+      "end": 86.28,
+      "text": "President Trump and John F Kennedy Junior."
+    },
+    {
+      "t": 86.28,
       "end": 87.4,
-      "text": "President Trump & John F. Kennedy Jr. Relationship."
+      "text": "Relationship."
     },
     {
       "t": 87.4,
       "end": 90.64,
-      "text": "Plane Crash 1999."
+      "text": "Plane crash 1999."
     },
     {
       "t": 90.64,
       "end": 92.66,
-      "text": "Hillary Clinton, Senate 2000."
+      "text": "Hillary Clinton - Senate 2000."
     },
     {
       "t": 92.66,
       "end": 94.4,
-      "text": "The Start."
+      "text": "The “Start.”"
     },
     {
       "t": 94.4,
       "end": 97.14,
-      "text": "ENJOY THE SHOW."
+      "text": "ENJOY THE SHOW!!"
     },
     {
       "t": 97.14,
-      "end": 98.8,
-      "text": "On President Trump’s order,"
-    },
-    {
-      "t": 98.8,
-      "end": 102.06,
-      "text": "a state of temporary military control will be actioned"
-    },
-    {
-      "t": 102.06,
-      "end": 104.4,
-      "text": "and special ops carried out."
-    },
-    {
-      "t": 104.4,
-      "end": 105.58,
-      "text": "False leaks have been made"
-    },
-    {
-      "t": 105.58,
-      "end": 109.08,
-      "text": "to retain several within the confines of the United States"
-    },
-    {
-      "t": 109.08,
-      "end": 110.48,
-      "text": "to prevent extradition"
-    },
-    {
-      "t": 110.48,
       "end": 114.3,
-      "text": "and special operator necessity."
+      "text": "On President Trump’s order, a state of temporary military control will be actioned and special ops carried out. False leaks have been made to retain several within the confines of the United States to prevent extradition and special operator necessity."
     },
     {
       "t": 114.3,
-      "end": 115.42,
-      "text": "Rest assured,"
-    },
-    {
-      "t": 115.42,
-      "end": 118.78,
-      "text": "the safety and well-being of every man, woman, and child"
-    },
-    {
-      "t": 118.78,
-      "end": 120.5,
-      "text": "of this country"
-    },
-    {
-      "t": 120.5,
       "end": 123.84,
-      "text": "is being exhausted in full."
+      "text": "Rest assured, the safety and well-being of every man, woman, and child of this country is being exhausted in full."
     },
     {
       "t": 123.84,
       "end": 126.24,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 126.24,
       "end": 130.78,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 130.78,
       "end": 133.84,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 133.84,
       "end": 138.74,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 138.74,
       "end": 141.14,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 141.14,
       "end": 145.7,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 145.7,
-      "end": 147.4,
-      "text": "However,"
-    },
-    {
-      "t": 147.4,
-      "end": 148.86,
-      "text": "the atmosphere within the country"
-    },
-    {
-      "t": 148.86,
-      "end": 150.6,
-      "text": "will unfortunately be divided"
-    },
-    {
-      "t": 150.6,
-      "end": 152.08,
-      "text": "as so many have fallen"
-    },
-    {
-      "t": 152.08,
-      "end": 154.24,
-      "text": "for the corrupt and evil narrative"
-    },
-    {
-      "t": 154.24,
       "end": 157.2,
-      "text": "that has long been broadcast."
+      "text": "However, the atmosphere within the country will unfortunately be divided as so many have fallen for the corrupt and evil narrative that has long been broadcast."
     },
     {
       "t": 157.2,
-      "end": 160.8,
-      "text": "We will be initiating the Emergency Broadcast System"
-    },
-    {
-      "t": 160.8,
-      "end": 161.78,
-      "text": "during this time"
-    },
-    {
-      "t": 161.78,
-      "end": 164.44,
-      "text": "in an effort to provide a direct message"
-    },
-    {
-      "t": 164.44,
-      "end": 166.64,
-      "text": "avoiding the fake news"
-    },
-    {
-      "t": 166.64,
       "end": 171.04,
-      "text": "to all citizens."
+      "text": "We will be initiating the Emergency Broadcast System during this time in an effort to provide a direct message - avoiding the fake news - to all citizens."
     },
     {
       "t": 171.04,
-      "end": 172.96,
-      "text": "Organizations and/or people"
-    },
-    {
-      "t": 172.96,
-      "end": 175.38,
-      "text": "that wish to do us harm during this time"
-    },
-    {
-      "t": 175.38,
       "end": 180.56,
-      "text": "will be met with swift fury."
+      "text": "Organizations and/or people that wish to do us harm during this time will be met with swift fury."
     },
     {
       "t": 180.56,
-      "end": 184.24,
-      "text": "President Trump & John F. Kennedy Jr. Relationship."
+      "end": 183.72,
+      "text": "President Trump and John F Kennedy Junior."
     },
     {
-      "t": 184.24,
+      "t": 183.72,
+      "end": 184.57,
+      "text": "Relationship."
+    },
+    {
+      "t": 184.57,
       "end": 185.98,
-      "text": "Plane Crash 1999."
+      "text": "Plane crash 1999."
     },
     {
       "t": 185.98,
       "end": 188.52,
-      "text": "Hillary Clinton, Senate 2000."
+      "text": "Hillary Clinton - Senate 2000."
     },
     {
       "t": 188.52,
       "end": 191.4,
-      "text": "The Start."
+      "text": "The “Start.”"
     },
     {
       "t": 191.4,
       "end": 193.2,
-      "text": "ENJOY THE SHOW."
+      "text": "ENJOY THE SHOW!!"
     },
     {
       "t": 193.2,
-      "end": 195.36,
-      "text": "Certain laws have been pre-lifted"
+      "end": 199.74,
+      "text": "Certain laws have been pre-lifted to provide our great military the necessary authority to handle and conduct these operations"
     },
     {
-      "t": 195.36,
-      "end": 197.82,
-      "text": "to provide our great military the necessary authority"
-    },
-    {
-      "t": 197.82,
-      "end": 200.87,
-      "text": "to handle and conduct these operations"
-    },
-    {
-      "t": 200.87,
-      "end": 202.9,
+      "t": 199.74,
+      "end": 201.77,
       "text": "at home and abroad."
     },
     {
-      "t": 202.9,
+      "t": 201.77,
       "end": 221.82,
       "text": "",
       "break": true
     },
     {
       "t": 221.82,
-      "end": 227.82,
-      "text": "Now they all lose."
+      "end": 223.55,
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
-      "t": 227.82,
-      "end": 231.0,
-      "text": "POTUS will be well insulated and protected"
+      "t": 223.55,
+      "end": 225.47,
+      "text": "NOW THEY ALL LOSE."
     },
     {
-      "t": 231.0,
-      "end": 231.85,
-      "text": "on Air Force One and abroad"
+      "t": 225.47,
+      "end": 226.19,
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
-      "t": 231.85,
+      "t": 226.19,
+      "end": 226.8,
+      "text": "NOW THEY ALL LOSE."
+    },
+    {
+      "t": 226.8,
+      "end": 227.42,
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
+    },
+    {
+      "t": 227.42,
+      "end": 228.03,
+      "text": "NOW THEY ALL LOSE."
+    },
+    {
+      "t": 228.03,
       "end": 237.6,
-      "text": "due to the nature of the entrenchment."
+      "text": "POTUS will be well insulated/protected on AIR FORCE ONE and abroad (specific locations classified) while these operations are conducted due to the nature of the entrenchment."
     },
     {
       "t": 237.6,
-      "end": 239.72,
-      "text": "It is time to take back our country"
-    },
-    {
-      "t": 239.72,
-      "end": 241.76,
-      "text": "and make America great again."
-    },
-    {
-      "t": 241.76,
-      "end": 243.76,
-      "text": "Let us salute and pray"
-    },
-    {
-      "t": 243.76,
-      "end": 246.58,
-      "text": "for the brave men and women in uniform"
-    },
-    {
-      "t": 246.58,
-      "end": 248.98,
-      "text": "who will undertake this assignment"
-    },
-    {
-      "t": 248.98,
-      "end": 251.44,
-      "text": "to bring forth peace, unity,"
-    },
-    {
-      "t": 251.44,
       "end": 254.8,
-      "text": "and return power to the people."
+      "text": "It is time to take back our country and make America great again. Let us salute and pray for the brave men and women in uniform who will undertake this assignment to bring forth peace, unity, and return power to the people."
     },
     {
       "t": 254.8,
-      "end": 256.88,
-      "text": "It is our hope that this message"
-    },
-    {
-      "t": 256.88,
-      "end": 258.04,
-      "text": "reaches enough people"
-    },
-    {
-      "t": 258.04,
-      "end": 260.22,
-      "text": "to make a meaningful impact."
-    },
-    {
-      "t": 260.22,
-      "end": 263.47,
-      "text": "We cannot yet telegraph this message"
-    },
-    {
-      "t": 263.47,
-      "end": 265.1,
-      "text": "through normal methods"
-    },
-    {
-      "t": 265.1,
       "end": 271.76,
-      "text": "for reasons I’m sure everyone here can understand."
+      "text": "It is our hope that this message reaches enough people to make a meaningful impact. We cannot yet telegraph this message through normal methods for reasons I’m sure everyone here can understand."
     },
     {
       "t": 271.76,
       "end": 273.26,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 273.26,
       "end": 278.42,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 278.42,
       "end": 280.8,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 280.8,
       "end": 283.22,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 283.22,
       "end": 288.24,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 288.24,
       "end": 290.64,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 290.64,
-      "end": 293.38,
-      "text": "Follow the questions from the previous threads"
-    },
-    {
-      "t": 293.38,
-      "end": 294.88,
-      "text": "and remain calm,"
-    },
-    {
-      "t": 294.88,
-      "end": 297.58,
-      "text": "the primary targets are within DC"
-    },
-    {
-      "t": 297.58,
       "end": 299.88,
-      "text": "and remain at the top"
+      "text": "Follow the questions from the previous threads and remain calm, as the primary targets are within DC and remain at the top ."
     },
     {
       "t": 299.88,
       "end": 302.64,
-      "text": "(on both sides)."
+      "text": "on both sides."
     },
     {
       "t": 302.64,
+      "end": 305.26,
+      "text": "President Trump and John F Kennedy Junior."
+    },
+    {
+      "t": 305.26,
       "end": 307.14,
-      "text": "President Trump & John F. Kennedy Jr. Relationship."
+      "text": "Relationship."
     },
     {
       "t": 307.14,
       "end": 309.88,
-      "text": "Plane Crash 1999."
+      "text": "Plane crash 1999."
     },
     {
       "t": 309.88,
       "end": 312.66,
-      "text": "Hillary Clinton, Senate 2000."
+      "text": "Hillary Clinton - Senate 2000."
     },
     {
       "t": 312.66,
       "end": 314.12,
-      "text": "The Start."
+      "text": "The “Start.”"
     },
     {
       "t": 314.12,
       "end": 315.78,
-      "text": "ENJOY THE SHOW."
+      "text": "ENJOY THE SHOW!!"
     },
     {
       "t": 315.78,
-      "end": 317.66,
-      "text": "The spillover in the streets"
-    },
-    {
-      "t": 317.66,
-      "end": 319.62,
-      "text": "will be quickly shut down."
-    },
-    {
-      "t": 319.62,
       "end": 322.4,
-      "text": "Look for more false flags"
+      "text": "The spill over in the streets will be quickly shut down. Look for more false flags."
     },
     {
       "t": 322.4,
-      "end": 323.5,
-      "text": "stay alert,"
+      "end": 326.5,
+      "text": "stay alert, be vigilant, and above all, please pray."
     },
     {
-      "t": 323.5,
-      "end": 324.58,
-      "text": "be vigilant,"
-    },
-    {
-      "t": 324.58,
-      "end": 325.72,
-      "text": "and above all,"
-    },
-    {
-      "t": 325.72,
-      "end": 326.57,
-      "text": "please pray."
-    },
-    {
-      "t": 326.57,
-      "end": 329.86,
-      "text": "For God so loved the world"
-    },
-    {
-      "t": 329.86,
-      "end": 333.88,
-      "text": "that he gave his one and only Son,"
-    },
-    {
-      "t": 333.88,
-      "end": 337.84,
-      "text": "that whoever believes in him shall not perish"
-    },
-    {
-      "t": 337.84,
-      "end": 340.72,
-      "text": "but have eternal life."
-    },
-    {
-      "t": 340.72,
+      "t": 326.5,
       "end": 344.84,
-      "text": "Love is patient, love is kind."
+      "text": "“For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life. Love is patient, love is kind.”"
     },
     {
       "t": 344.84,
       "end": 346.82,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 346.82,
       "end": 348.78,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 348.78,
       "end": 350.44,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 350.44,
       "end": 351.29,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 351.29,
       "end": 352.56,
-      "text": "They never thought she would lose."
+      "text": "THEY NEVER THOUGHT SHE WOULD LOSE."
     },
     {
       "t": 352.56,
       "end": 356.54,
-      "text": "Now they all lose."
+      "text": "NOW THEY ALL LOSE."
     },
     {
       "t": 356.54,

@@ -5,16 +5,15 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 386.32,
-  "source": "On-screen lyric video & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
-      "t": 0.0,
-      "end": 11.16,
-      "text": "",
-      "break": true
+      "t": 3.22,
+      "end": 6.42,
+      "text": "Alice & Wonderland."
     },
     {
-      "t": 11.16,
+      "t": 6.42,
       "end": 16.69,
       "text": "Follow the Harvard University Muslim Association."
     },

@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 199.36,
-  "source": "On-screen lyric video (preferred) & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -16,7 +16,7 @@
     {
       "t": 16.54,
       "end": 22.29,
-      "text": "You are not alone Patriot."
+      "text": "You are not alone, Patriot."
     },
     {
       "t": 22.29,
@@ -32,12 +32,12 @@
     {
       "t": 33.48,
       "end": 40.48,
-      "text": "Never in our history has this been attempted."
+      "text": "Never, in our history, has this been attempted."
     },
     {
       "t": 40.48,
       "end": 43.98,
-      "text": "God bless you and your family."
+      "text": "GOD BLESS YOU & YOUR FAMILY."
     },
     {
       "t": 43.98,
@@ -213,7 +213,7 @@
     {
       "t": 179.74,
       "end": 180.98,
-      "text": "NOTHING!"
+      "text": "NOTHING!!"
     },
     {
       "t": 180.98,

@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 168.0,
-  "source": "On-screen lyric video (preferred) & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -31,57 +31,47 @@
     {
       "t": 13.06,
       "end": 18.79,
-      "text": "The map is the key."
+      "text": "The MAP is the KEY."
     },
     {
       "t": 18.79,
-      "end": 23.3,
-      "text": "This was all planned in 2015."
+      "end": 22.66,
+      "text": "this was all planned in two thousand fifteen."
     },
     {
-      "t": 23.3,
+      "t": 22.66,
       "end": 25.84,
-      "text": "Evil deep within."
+      "text": "corruption and evil deep within."
     },
     {
       "t": 25.84,
       "end": 28.04,
-      "text": "Treason at the highest levels."
+      "text": "treason at the highest levels!"
     },
     {
       "t": 28.04,
-      "end": 30.12,
-      "text": "Have patience."
-    },
-    {
-      "t": 30.12,
-      "end": 31.74,
-      "text": "There is no escape."
-    },
-    {
-      "t": 31.74,
       "end": 33.6,
-      "text": "There are no deals."
+      "text": "have patience, there is no escape and there are no deals."
     },
     {
       "t": 33.6,
       "end": 40.72,
-      "text": "Why does it take the information going public before justice is served?"
+      "text": "Why does it take the information going PUBLIC before JUSTICE is served?"
     },
     {
       "t": 40.72,
       "end": 47.24,
-      "text": "Foreign agents within our government at the highest levels."
+      "text": "foreign agents within our government at the highest levels."
     },
     {
       "t": 47.24,
       "end": 52.48,
-      "text": "No private communications, past, present and future."
+      "text": "NO private communications past, present or future."
     },
     {
       "t": 52.48,
       "end": 59.06,
-      "text": "No communications made outside of this platform."
+      "text": "NO communications made outside of this platform."
     },
     {
       "t": 59.06,
@@ -91,62 +81,57 @@
     {
       "t": 67.16,
       "end": 74.48,
-      "text": "Where we go one, we go all."
+      "text": "WHERE WE GO ONE, WE GO ALL.."
     },
     {
       "t": 74.48,
       "end": 77.06,
-      "text": "7th floor is no more."
+      "text": "Seventh floor is no more."
     },
     {
       "t": 77.06,
       "end": 78.18,
-      "text": "We see all."
+      "text": "we see all."
     },
     {
       "t": 78.18,
       "end": 79.03,
-      "text": "We hear all."
+      "text": "we hear all."
     },
     {
       "t": 79.03,
       "end": 80.36,
-      "text": "The hunt continues."
+      "text": "the hunt continues."
     },
     {
       "t": 80.36,
       "end": 84.42,
-      "text": "Prison."
+      "text": "prison."
     },
     {
       "t": 84.42,
       "end": 86.0,
-      "text": "Death."
+      "text": "death."
     },
     {
       "t": 86.0,
       "end": 89.22,
-      "text": "The puppet masters have been removed."
+      "text": "the puppet masters have been removed."
     },
     {
       "t": 89.22,
-      "end": 93.88,
-      "text": "All vehicles of delivery removed."
-    },
-    {
-      "t": 93.88,
       "end": 99.36,
-      "text": "All strings cut."
+      "text": "all vehicles of delivery removed and ALL strings cut."
     },
     {
       "t": 99.36,
       "end": 103.42,
-      "text": "You and your families are safe, promise."
+      "text": "You and your families are safe. (promise)."
     },
     {
       "t": 103.42,
       "end": 108.54,
-      "text": "Between 4-6% will be lost forever."
+      "text": "between four and six percent will be lost forever."
     },
     {
       "t": 108.54,
@@ -161,12 +146,12 @@
     {
       "t": 118.0,
       "end": 123.54,
-      "text": "No private communications, past, present and future."
+      "text": "NO private communications past, present or future."
     },
     {
       "t": 123.54,
       "end": 128.56,
-      "text": "No communications made outside of this platform."
+      "text": "NO communications made outside of this platform."
     },
     {
       "t": 128.56,
@@ -175,21 +160,11 @@
     },
     {
       "t": 137.06,
-      "end": 139.54,
-      "text": "Where we go one, we go all."
+      "end": 143.04,
+      "text": "WHERE WE GO ONE, WE GO ALL.."
     },
     {
-      "t": 139.54,
-      "end": 146.64,
-      "text": "Where we go one, we go all."
-    },
-    {
-      "t": 146.64,
-      "end": 147.14,
-      "text": "HELLO GEORGE."
-    },
-    {
-      "t": 147.14,
+      "t": 143.04,
       "end": 160.73,
       "text": "",
       "break": true

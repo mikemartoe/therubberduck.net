@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 234.24,
-  "source": "On-screen lyric video & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 3.14,
@@ -342,17 +342,37 @@
     },
     {
       "t": 216.22,
-      "end": 225.6,
+      "end": 218.62,
+      "text": "Why are migrants so important?"
+    },
+    {
+      "t": 218.62,
+      "end": 223.68,
       "text": "",
       "break": true
     },
     {
-      "t": 225.6,
-      "end": 227.7,
+      "t": 223.68,
+      "end": 224.92,
+      "text": "What are assets?"
+    },
+    {
+      "t": 224.92,
+      "end": 226.66,
       "text": "Why are migrants so important?"
     },
     {
-      "t": 227.7,
+      "t": 226.66,
+      "end": 227.51,
+      "text": "What are assets?"
+    },
+    {
+      "t": 227.51,
+      "end": 229.01,
+      "text": "Why are migrants so important?"
+    },
+    {
+      "t": 229.01,
       "end": 234.24,
       "text": "",
       "break": true

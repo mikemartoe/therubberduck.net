@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 204.96,
-  "source": "Suno ID3 verified against site audio & video title card (video is photo/Instagram montage with no lyric screens)",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -76,12 +76,12 @@
     {
       "t": 49.06,
       "end": 54.08,
-      "text": "WHO IS RACHEL CHANDLER??"
+      "text": "WHO IS RAITCHEL CHANDLER??"
     },
     {
       "t": 54.08,
       "end": 56.86,
-      "text": "WHO IS RACHEL CHANDLER??"
+      "text": "WHO IS RAITCHEL CHANDLER??"
     },
     {
       "t": 56.86,
@@ -180,14 +180,13 @@
     },
     {
       "t": 116.54,
-      "end": 120.22,
+      "end": 121.66,
       "text": "Why is the temple on top of a mountain???"
     },
     {
-      "t": 120.22,
+      "t": 121.66,
       "end": 125.36,
-      "text": "",
-      "break": true
+      "text": "How many levels might exist below???"
     },
     {
       "t": 125.36,
@@ -242,12 +241,12 @@
     {
       "t": 164.72,
       "end": 171.82,
-      "text": "WHO IS RACHEL CHANDLER??"
+      "text": "WHO IS RAITCHEL CHANDLER??"
     },
     {
       "t": 171.82,
       "end": 175.68,
-      "text": "WHO IS RACHEL CHANDLER??"
+      "text": "WHO IS RAITCHEL CHANDLER??"
     },
     {
       "t": 175.68,

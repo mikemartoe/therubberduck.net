@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 171.36,
-  "source": "On-screen lyric video & KEXP sheet & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -16,52 +16,52 @@
     {
       "t": 23.66,
       "end": 28.28,
-      "text": "The storm is upon us."
+      "text": "The storm is upon us"
     },
     {
       "t": 28.28,
       "end": 32.28,
-      "text": "Trust the plan."
+      "text": "Trust the plan"
     },
     {
       "t": 32.28,
       "end": 39.04,
-      "text": "Nothing can stop what is coming."
+      "text": "Nothing can stop what is coming"
     },
     {
       "t": 39.04,
       "end": 39.89,
-      "text": "Dark to light."
+      "text": "Dark to light"
     },
     {
       "t": 39.89,
       "end": 43.64,
-      "text": "You are the news now."
+      "text": "You are the news now"
     },
     {
       "t": 43.64,
       "end": 47.78,
-      "text": "God bless."
+      "text": "God bless"
     },
     {
       "t": 47.78,
       "end": 51.54,
-      "text": "Where we go one we go all."
+      "text": "Where we go one we go all"
     },
     {
       "t": 51.54,
       "end": 55.6,
-      "text": "Where we go one we go all."
+      "text": "Where we go one we go all"
     },
     {
       "t": 55.6,
       "end": 59.4,
-      "text": "Where we go one we go all."
+      "text": "Where we go one we go all"
     },
     {
       "t": 59.4,
       "end": 61.32,
-      "text": "Enjoy the show."
+      "text": "Enjoy the show"
     },
     {
       "t": 61.32,
@@ -72,63 +72,68 @@
     {
       "t": 69.06,
       "end": 73.2,
-      "text": "We are the storm."
+      "text": "We are the storm"
     },
     {
       "t": 73.2,
       "end": 75.94,
-      "text": "The plan is unfolding."
+      "text": "The plan is unfolding"
     },
     {
       "t": 75.94,
       "end": 80.1,
-      "text": "Have faith in humanity."
+      "text": "Have faith in humanity"
     },
     {
       "t": 80.1,
       "end": 84.6,
-      "text": "You are the news now."
+      "text": "You are the news now"
     },
     {
       "t": 84.6,
       "end": 88.26,
-      "text": "God bless."
+      "text": "God bless"
     },
     {
       "t": 88.26,
       "end": 90.64,
-      "text": "Where we go one we go all."
+      "text": "Where we go one we go all"
     },
     {
       "t": 90.64,
       "end": 94.8,
-      "text": "Where we go one we go all."
+      "text": "Where we go one we go all"
     },
     {
       "t": 94.8,
       "end": 98.46,
-      "text": "Where we go one we go all."
+      "text": "Where we go one we go all"
     },
     {
       "t": 98.46,
       "end": 99.88,
-      "text": "Enjoy the show."
+      "text": "Enjoy the show"
     },
     {
       "t": 99.88,
-      "end": 117.12,
+      "end": 114.72,
       "text": "",
       "break": true
     },
     {
+      "t": 114.72,
+      "end": 117.12,
+      "text": "The storm is upon us"
+    },
+    {
       "t": 117.12,
       "end": 124.74,
-      "text": "Nothing can stop what's coming."
+      "text": "Nothing can stop what is coming"
     },
     {
       "t": 124.74,
       "end": 127.12,
-      "text": "We are the storm."
+      "text": "We are the storm"
     },
     {
       "t": 127.12,
@@ -138,18 +143,28 @@
     },
     {
       "t": 140.86,
+      "end": 142.7,
+      "text": "Where we go one we go all"
+    },
+    {
+      "t": 142.7,
       "end": 144.98,
-      "text": "Where we go one we go all."
+      "text": "Where we go one we go all"
     },
     {
       "t": 144.98,
-      "end": 146.54,
-      "text": "Where we go one we go all."
+      "end": 148.3,
+      "text": "Where we go one we go all"
     },
     {
-      "t": 146.54,
+      "t": 148.3,
+      "end": 149.15,
+      "text": "Enjoy the show"
+    },
+    {
+      "t": 149.15,
       "end": 152.92,
-      "text": "Where we go one we go all."
+      "text": "Where we go one we go all"
     },
     {
       "t": 152.92,

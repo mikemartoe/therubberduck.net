@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 203.96,
-  "source": "On-screen lyric video (preferred), cross-checked with KEXP sheet & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -26,12 +26,12 @@
     {
       "t": 30.88,
       "end": 36.14,
-      "text": "\"I turned & double pointed just to be clear.\""
+      "text": "\"I turned and double pointed just to be clear.\""
     },
     {
       "t": 36.14,
       "end": 43.2,
-      "text": "\"Did they pick up the 'Boom, Boom, Boom Something is Happening'.\""
+      "text": "\"Did they pick up the 'Boom, Boom, Boom Something is Happening\"."
     },
     {
       "t": 43.2,
@@ -66,22 +66,23 @@
     {
       "t": 65.18,
       "end": 66.03,
-      "text": "(Fantasy land)"
+      "text": "Fantasy land"
     },
     {
       "t": 66.03,
-      "end": 71.32,
+      "end": 70.93,
       "text": "The world is fighting back"
     },
     {
-      "t": 71.32,
+      "t": 70.93,
       "end": 77.8,
-      "text": "(and destroying the cult)"
+      "text": "",
+      "break": true
     },
     {
       "t": 77.8,
       "end": 84.04,
-      "text": "(and destroying the cult)"
+      "text": "and destroying the cult"
     },
     {
       "t": 84.04,
@@ -126,7 +127,7 @@
     {
       "t": 109.16,
       "end": 111.36,
-      "text": "(Fantasy land)"
+      "text": "Fantasy land"
     },
     {
       "t": 111.36,
@@ -136,7 +137,7 @@
     {
       "t": 115.38,
       "end": 120.28,
-      "text": "(and destroying the cult)"
+      "text": "and destroying the cult"
     },
     {
       "t": 120.28,

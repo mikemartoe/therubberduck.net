@@ -1384,3 +1384,109 @@ body.al-room-player.al-theater-open #trd-suggest-fx .trs-tab { display: none !im
   width: 15px;
   height: 15px;
 }
+
+
+/* watch video buttons */
+.ap-row-acts {
+  gap: 8px;
+}
+.ap-row-video {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font: 600 12px/1 var(--font-body);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: border-color .18s, background .18s, color .18s;
+}
+.ap-row-video:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  background: var(--accent-2);
+}
+.ap-lyrics-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ap-np-actions {
+  gap: 8px;
+}
+
+/* in-player lyric video overlay */
+.ap-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+.ap-video-overlay[hidden] { display: none !important; }
+.ap-video-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 0, 0, .82);
+}
+.ap-video-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(960px, 100%);
+  background: #110000;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .65);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.ap-video-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(42, 18, 18, .85);
+}
+.ap-video-heading {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.ap-video-heading .js-video-kicker {
+  font: 600 11px/1.2 var(--font-body);
+  letter-spacing: .06em;
+  text-transform: lowercase;
+  color: var(--muted);
+}
+.ap-video-heading .js-video-title {
+  font: 600 15px/1.25 var(--font-body);
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ap-video-el {
+  display: block;
+  width: 100%;
+  max-height: min(70vh, 720px);
+  background: #000;
+  vertical-align: middle;
+}
+body.al-video-open { overflow: hidden; }
+@media (max-width: 720px) {
+  .ap-video-overlay { padding: 10px; align-items: flex-end; }
+  .ap-video-dialog { width: 100%; border-radius: 14px 14px 10px 10px; }
+  .ap-video-el { max-height: 62vh; }
+  .ap-row-acts { margin-left: 4px; }
+}

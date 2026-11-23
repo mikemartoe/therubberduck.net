@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 229.64,
-  "source": "On-screen lyric video (preferred) & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -41,13 +41,23 @@
     },
     {
       "t": 33.15,
+      "end": 39.85,
+      "text": "The families that comprise the Tri-Lataral Commission"
+    },
+    {
+      "t": 39.85,
       "end": 45.59,
-      "text": "The families that comprise the Tri-Lataral Commission also comprise and control the NWO."
+      "text": "also comprise and control the New World Order."
     },
     {
       "t": 45.59,
+      "end": 48.54,
+      "text": "you'll see these families will all collapse."
+    },
+    {
+      "t": 48.54,
       "end": 49.55,
-      "text": "You'll see these families will all collapse."
+      "text": "BOOM!"
     },
     {
       "t": 49.55,
@@ -57,33 +67,52 @@
     {
       "t": 51.46,
       "end": 53.48,
-      "text": "What nation dominates all others?"
+      "text": "What Nation dominates all others?"
     },
     {
       "t": 53.48,
       "end": 58.02,
-      "text": "What nation has influence over all others?"
+      "text": "What Nation has influence over all others?"
     },
     {
       "t": 58.02,
-      "end": 61.34,
-      "text": "You're allowed to say it publicly now!"
+      "end": 63.82,
+      "text": "You're allowed to say it publicly now, hahahahaha!"
     },
     {
-      "t": 61.34,
+      "t": 63.82,
+      "end": 69.98,
+      "text": "What if China, Russia, and others are coordinating with"
+    },
+    {
+      "t": 69.98,
+      "end": 76.4,
+      "text": "President Trump to eliminate the New World Order?"
+    },
+    {
+      "t": 76.4,
+      "end": 81.48,
+      "text": "How did President Trump remove one side of the pyramid?"
+    },
+    {
+      "t": 81.48,
       "end": 90.04,
-      "text": "",
-      "break": true
+      "text": "Saudi Arabia strings cut. No more puppets in the shadows."
     },
     {
       "t": 90.04,
+      "end": 93.7,
+      "text": "Each side of the triangle controls"
+    },
+    {
+      "t": 93.7,
       "end": 96.84,
-      "text": "Each side of the triangle controls a certain subsect of Power Brokers."
+      "text": "a certain subsect of power brokers."
     },
     {
       "t": 96.84,
       "end": 100.7,
-      "text": "Power Brokers are both puppets and servants."
+      "text": "Power brokers are both puppets and servants."
     },
     {
       "t": 100.7,
@@ -92,8 +121,13 @@
     },
     {
       "t": 106.98,
+      "end": 110.48,
+      "text": "Why did Donald Trump receive a"
+    },
+    {
+      "t": 110.48,
       "end": 115.38,
-      "text": "Why did Donald Trump receive a Sword Dance when visiting Saudi Arabia?"
+      "text": "sword dance when visiting Saudi Arabia?"
     },
     {
       "t": 115.38,
@@ -122,13 +156,8 @@
     },
     {
       "t": 139.68,
-      "end": 144.54,
-      "text": "What is the cultural significance?"
-    },
-    {
-      "t": 144.54,
       "end": 146.08,
-      "text": "Why?"
+      "text": "What is the cultural significance?"
     },
     {
       "t": 146.08,
@@ -143,12 +172,17 @@
     {
       "t": 152.32,
       "end": 158.68,
-      "text": "Who REALLY controls North Korea?"
+      "text": "Who really controls North Korea?"
     },
     {
       "t": 158.68,
+      "end": 164.38,
+      "text": "What if China, Russia, and others are coordinating with"
+    },
+    {
+      "t": 164.38,
       "end": 170.42,
-      "text": "What if China, Russia, and others are coordinating with President Trump to eliminate the New World Order?"
+      "text": "President Trump to eliminate the New World Order?"
     },
     {
       "t": 170.42,

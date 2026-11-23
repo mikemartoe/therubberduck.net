@@ -5,7 +5,7 @@
   "artist": "The Rubber Duck™",
   "album": "The Red Pill Album",
   "durationSec": 204.64,
-  "source": "On-screen lyric video (preferred) & Suno ID3; synced to site audio",
+  "source": "KEXP artist-confirmed lyric sheet (tracks 02, 04, 12) or Suno ID3 lyric sheet (all others except 19). Paper text is used exactly where it differs from the audio or lyric video. Unsung sheet lines are timed between neighboring lines. Who Follows Satan keeps Mike-approved on-screen text.",
   "lines": [
     {
       "t": 0.0,
@@ -20,49 +20,49 @@
     },
     {
       "t": 10.14,
-      "end": 14.6,
+      "end": 15.89,
       "text": "Ask yourself, is this normal?"
     },
     {
-      "t": 14.6,
-      "end": 20.48,
+      "t": 15.89,
+      "end": 22.56,
       "text": "",
       "break": true
     },
     {
-      "t": 20.48,
-      "end": 22.56,
-      "text": "This is normal."
-    },
-    {
       "t": 22.56,
       "end": 27.54,
-      "text": "What does a temple typically symbolize?"
+      "text": "What does a Temple typically symbolize????"
     },
     {
       "t": 27.54,
       "end": 30.44,
-      "text": "What does an owl symbolize in dark religion?"
+      "text": "What does an OWL symbolize in dark religion????"
     },
     {
       "t": 30.44,
       "end": 35.2,
-      "text": "Tunnels underneath the temple."
+      "text": "Tunnels underneath the Temple????"
     },
     {
       "t": 35.2,
-      "end": 40.6,
-      "text": "How many channels captured on Rachel Chandler's picture of security monitors?"
+      "end": 38.72,
+      "text": "How many channels captured on Rachel Chandler's"
     },
     {
-      "t": 40.6,
+      "t": 38.72,
+      "end": 40.86,
+      "text": "picture of security monitors?"
+    },
+    {
+      "t": 40.86,
       "end": 42.94,
-      "text": "The rooms indicate size."
+      "text": "Rooms indicate size."
     },
     {
       "t": 42.94,
       "end": 47.7,
-      "text": "Hallways shown."
+      "text": "Hallways shown?"
     },
     {
       "t": 47.7,
@@ -101,8 +101,18 @@
     },
     {
       "t": 72.72,
+      "end": 76.94,
+      "text": "Why is Epstein spending twenty nine million dollars to"
+    },
+    {
+      "t": 76.94,
+      "end": 82.7,
+      "text": "bury the tunnels underneath is temple on Epstein Island?"
+    },
+    {
+      "t": 82.7,
       "end": 86.3,
-      "text": "Why is Epstein spending twenty nine million dollars to bury the tunnels underneath is temple on Epstein Island?"
+      "text": "Problem."
     },
     {
       "t": 86.3,
@@ -116,8 +126,13 @@
     },
     {
       "t": 92.82,
+      "end": 100.58,
+      "text": "Is it possible Epstein was a puppet and not the main person"
+    },
+    {
+      "t": 100.58,
       "end": 103.42,
-      "text": "Is it possible Epstein was a puppet and not the main person or persons of interest?"
+      "text": "or persons of interest?"
     },
     {
       "t": 103.42,
@@ -191,16 +206,11 @@
     },
     {
       "t": 175.22,
-      "end": 183.02,
+      "end": 178.5,
       "text": "nothing can stop what's coming."
     },
     {
-      "t": 183.02,
-      "end": 183.72,
-      "text": "NOTHING!"
-    },
-    {
-      "t": 183.72,
+      "t": 178.5,
       "end": 188.74,
       "text": "",
       "break": true
@@ -208,7 +218,7 @@
     {
       "t": 188.74,
       "end": 190.14,
-      "text": "NOTHING!"
+      "text": "nothing."
     },
     {
       "t": 190.14,
