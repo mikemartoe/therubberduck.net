@@ -178,7 +178,9 @@ def drop_og(n):
 def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='website', extra_head='', og_desc=None, signup=False, robots='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1', support_strip=None):
     url = SITE + path
     full_title = title if title.endswith(BRAND) else title + ' | ' + BRAND
-    graph = [{'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'url': SITE + '/', 'sameAs': SAME_AS[:3]}, {'@type': 'WebPage', '@id': url + '#page', 'url': url, 'name': full_title, 'description': desc,
+    graph = [{'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'url': SITE + '/', 'sameAs': SAME_AS[:3]},
+             {'@type': 'WebSite', '@id': SITE_ID, 'url': SITE + '/', 'name': 'The Rubber Duck', 'alternateName': ['TRD', 'therubberduck.net'], 'publisher': {'@id': ORG_ID}, 'inLanguage': 'en', 'potentialAction': {'@type': 'SearchAction', 'target': {'@type': 'EntryPoint', 'urlTemplate': SITE + '/ledger.html?q={search_term_string}'}, 'query-input': 'required name=search_term_string'}},
+             {'@type': 'WebPage', '@id': url + '#page', 'url': url, 'name': full_title, 'description': desc,
                                  'isPartOf': {'@id': SITE_ID}, 'publisher': {'@id': ORG_ID}, 'inLanguage': 'en',
                                  'breadcrumb': {'@id': url + '#crumbs'}}] + graph
     bc = crumbs(crumb_items); bc['@id'] = url + '#crumbs'; graph.append(bc)
@@ -253,7 +255,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
 {body}
 </main>
 {signup_block() if signup else ''}{support_html}
-<footer class="wrap foot"><p>{E(BRAND)} &middot; <a href="/">therubberduck.net</a> &middot; <a href="https://x.com/TheRubberDuck79" rel="me">@TheRubberDuck79</a> &middot; <a href="https://x.com/TheRubberDuck78" rel="me">@TheRubberDuck78</a> &middot; <a href="https://rumble.com/user/TheRubberDuck78" rel="me">Rumble</a> &middot; <a href="/drops/">Q drops by month</a> &middot; <a href="/x/archive/">X posts by month</a> &middot; <a href="/library/">PDF library</a> &middot; <a href="/watch/">Videos</a> &middot; <a href="/listen/">Spaces and shows</a></p></footer>
+<footer class="wrap foot"><p>{E(BRAND)} &middot; <a href="/">therubberduck.net</a> &middot; <a href="https://x.com/TheRubberDuck79" rel="me">@TheRubberDuck79</a> &middot; <a href="https://x.com/TheRubberDuck78" rel="me">@TheRubberDuck78</a> &middot; <a href="https://rumble.com/user/TheRubberDuck78" rel="me">Rumble</a> &middot; <a href="/drops/">Q drops by month</a> &middot; <a href="/x/archive/">X posts by month</a> &middot; <a href="/library/">PDF library</a> &middot; <a href="/watch/">Videos</a> &middot; <a href="/listen/">Spaces and shows</a> &middot; <a href="mailto:therubberduk@gmail.com">therubberduk@gmail.com</a> &middot; <a href="https://therubberduck78.substack.com/subscribe" target="_blank" rel="noopener">email updates</a> &middot; <a href="/suggest.html">suggestion box</a></p></footer>
 <script src="/assets/trd/drop-view.js?v=20261112b" data-trd-keep></script>
 </body>
 </html>
