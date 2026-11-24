@@ -17,7 +17,7 @@
    - Heavy app pages (and anything the router cannot run safely) load normally;
      the pod then resumes the saved track and position from localStorage.
    Include once per page, in <head>:
-     <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
+     <link rel="stylesheet" href="/assets/trd/duckpod.css?v=20261123p" data-trd-keep>
      <script src="/assets/trd/duckpod.js?v=20261123p" data-trd-keep></script>          */
 (function () {
   'use strict';
