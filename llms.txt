@@ -23,7 +23,7 @@ The site presents source material and leaves interpretation to the reader. Q dro
 - [The X Archive](https://therubberduck.net/x/): searchable archive of 62,975 posts by The Rubber Duck (@TheRubberDuck79) on X
 - [X posts by month](https://therubberduck.net/x/archive/): 15,449 original posts with full text, dates and links to the original post on X, one crawlable page per month (June 2020 to November 2026). The searchable archive holds 17,380 originals and 62,975 posts in all, including replies and reposts.
 - [X Archive Atom feed](https://therubberduck.net/x/feed.xml): recent original posts, with original dates, archive permalinks and links to the post on X
-- [X post permalinks](https://therubberduck.net/x/status/): sample crawlable pages for individual archive posts at /x/status/{id}/, each with the original date and a link to the post on X. tools/back-catalog-schema.py can build the rest of the month-visible set.
+- [X post permalinks](https://therubberduck.net/x/status/): 15,471 crawlable pages at /x/status/{id}/ for every original post already shown in the monthly archive (and posts already linked from DUCK SAUCE), each with the original date and a link to the post on X.
 - [DUCK SAUCE](https://therubberduck.net/newsroom.html): commentary, opinion and X threads by The Rubber Duck
 - [DUCK SAUCE RSS feed](https://therubberduck.net/newsroom/feed.xml): every DUCK SAUCE story, newest first, with dates and permalinks
 

@@ -483,31 +483,51 @@ def write_feed(posts):
 
 
 def write_status_sitemap(posts):
-    rows = ['<?xml version="1.0" encoding="UTF-8"?>',
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for p in sorted(posts, key=lambda x: x['c']):
-        rows.append(
-            '  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>'
-            % (SITE, status_path(p['i']), TODAY)
-        )
-    rows.append('</urlset>')
-    path = ROOT / 'sitemaps/x-status.xml'
-    path.write_text('\n'.join(rows) + '\n', encoding='utf-8')
-    return len(posts)
+    """Write sitemaps/x-status.xml, split into 50,000-URL / 50 MB files if needed."""
+    posts = sorted(posts, key=lambda x: x['c'])
+    header = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    footer = '</urlset>\n'
+    url_limit = 50000
+    byte_limit = 50 * 1024 * 1024
+    for old in (ROOT / 'sitemaps').glob('x-status*.xml'):
+        old.unlink()
+    chunks, cur, cur_bytes = [], [], len(header.encode()) + len(footer.encode())
+    for p in posts:
+        row = '  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>\n' % (SITE, status_path(p['i']), TODAY)
+        add = len(row.encode())
+        if cur and (len(cur) >= url_limit or cur_bytes + add > byte_limit):
+            chunks.append(cur)
+            cur, cur_bytes = [], len(header.encode()) + len(footer.encode())
+        cur.append(row)
+        cur_bytes += add
+    if cur or not chunks:
+        chunks.append(cur)
+    names = []
+    for i, chunk in enumerate(chunks, 1):
+        name = 'x-status.xml' if len(chunks) == 1 else 'x-status-%d.xml' % i
+        (ROOT / 'sitemaps' / name).write_text(header + ''.join(chunk) + footer, encoding='utf-8')
+        names.append(name)
+    return len(posts), names
 
 
-def update_sitemap_index():
+def update_sitemap_index(status_sitemaps=None):
     idx = ROOT / 'sitemap.xml'
     text = idx.read_text(encoding='utf-8')
-    entry = '  <sitemap><loc>%s/sitemaps/x-status.xml</loc><lastmod>%s</lastmod></sitemap>' % (SITE, TODAY)
-    if 'sitemaps/x-status.xml' in text:
-        text = re.sub(
-            r'  <sitemap><loc>%s/sitemaps/x-status.xml</loc><lastmod>[^<]*</lastmod></sitemap>' % re.escape(SITE),
-            entry,
-            text,
-        )
-    else:
-        text = text.replace('</sitemapindex>', entry + '\n</sitemapindex>')
+    # drop any previous x-status entries, then add the current file list
+    text = re.sub(
+        r'  <sitemap><loc>%s/sitemaps/x-status[^<]*</loc><lastmod>[^<]*</lastmod></sitemap>\n?' % re.escape(SITE),
+        '',
+        text,
+    )
+    if status_sitemaps is None:
+        status_sitemaps = sorted(path.name for path in (ROOT / 'sitemaps').glob('x-status*.xml'))
+    entries = ''.join(
+        '  <sitemap><loc>%s/sitemaps/%s</loc><lastmod>%s</lastmod></sitemap>\n' % (SITE, name, TODAY)
+        for name in status_sitemaps
+    )
+    if '</sitemapindex>' not in text:
+        raise SystemExit('sitemap.xml has no sitemapindex close tag')
+    text = text.replace('</sitemapindex>', entries + '</sitemapindex>')
     # bump x.xml lastmod in the index (month pages gained JSON-LD today)
     text = re.sub(
         r'(<sitemap><loc>%s/sitemaps/x.xml</loc><lastmod>)[^<]+' % re.escape(SITE),
@@ -757,8 +777,8 @@ def main():
         if patch_month_page(path, sel, have_permalinks):
             month_changed += 1
     feed_n = write_feed(written)
-    sm_n = write_status_sitemap(written)
-    update_sitemap_index()
+    sm_n, sm_names = write_status_sitemap(written)
+    update_sitemap_index(sm_names)
     update_x_sitemap_lastmods()
     new_urls = append_all_urls(written)
     memes_changed, meme_count, meme_gen = patch_memes(dry=False)
@@ -768,7 +788,7 @@ def main():
     print('status permalinks: %d' % len(written))
     print('month pages patched: %d (empty/skipped %d)' % (month_changed, skipped_empty))
     print('atom feed entries: %d -> /x/feed.xml' % feed_n)
-    print('x-status sitemap urls: %d' % sm_n)
+    print('x-status sitemap urls: %d in %s' % (sm_n, ', '.join(sm_names)))
     print('new all-urls lines: %d' % new_urls)
     print('newsroom stories patched with source status: %d (ids: %d)' % (newsroom_patched, len(set(newsroom_ids))))
     print('memes.html CollectionPage updated: %s (numberOfItems=%s, dateModified=%s)' % (memes_changed, meme_count, meme_gen))
