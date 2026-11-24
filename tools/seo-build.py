@@ -140,7 +140,7 @@ CSS_HREF = '/assets/seo/archive.css?v=1'
 # Rollback: set SIGNUP_ON = False and re-run (or git revert).
 SIGNUP_ON = True
 SIGNUP_ACTION = 'https://therubberduck78.substack.com/subscribe'
-SIGNUP_JS = '<script src="/assets/seo/signup.js?v=20261123f1" defer></script>\n'
+SIGNUP_JS = '<script src="/assets/seo/signup.js?v=20261123f2" defer></script>\n'
 def signup_form(uid, big=False):
     return ('<form class="signup-form" action="%s" method="get" target="_blank" rel="noopener" accept-charset="utf-8">'
             '<label class="sr" for="%s">Email address</label>'
