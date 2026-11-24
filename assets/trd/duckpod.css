@@ -1,5 +1,7 @@
 /* The Duck Pod: site-wide player for The Red Pill Album.
-   Pure HTML/CSS device, docked bottom-left, clear of the support duck (bottom-right). */
+   Pure HTML/CSS device, docked bottom-left, clear of the support duck (bottom-right).
+   Views: the little red pill (default) and the full iPod. The mini strip is retired
+   and is never shown. Pill view reserves no page space. */
 #trd-pod{display:block;height:var(--tp-space,92px);margin:0;padding:0;border:0;background:transparent;clear:both;flex:none;width:100%;pointer-events:none}
 #trd-pod[data-view="pill"]{--tp-space:0px}
 #trd-pod,#trd-pod *{box-sizing:border-box}
@@ -14,7 +16,6 @@
 .tp-dock.tp-placed{bottom:auto}
 .tp-dock > *{display:none}
 #trd-pod[data-view="full"] .tp-device{display:block}
-#trd-pod[data-view="mini"] .tp-strip{display:flex}
 #trd-pod[data-view="pill"] .tp-pill{display:grid}
 
 /* ---------- shared glossy shell ---------- */
@@ -38,6 +39,7 @@
 .tp-grip{flex:1;height:100%;display:flex;align-items:center;justify-content:center;border-radius:10px}
 .tp-grip i{display:block;width:34px;height:5px;border-radius:3px;background:repeating-linear-gradient(90deg,#b9b9b9 0 2px,transparent 2px 4px);opacity:.9}
 .tp-tool{width:24px;height:24px;flex:none;display:grid;place-items:center;border:0;padding:0;border-radius:50%;background:transparent;color:#8a8a8a;cursor:pointer}
+.tp-tool-spacer{pointer-events:none;visibility:hidden}
 .tp-tool:hover{color:#e10600;background:rgba(0,0,0,.05)}
 /* Bright red pill-minimize icon — always readable on the silver shell */
 /* #trd-pod prefix: must outrank the "#trd-pod button{color:inherit}" reset above, which otherwise turns it #111 */
@@ -152,6 +154,7 @@
 /* ---------- phones ---------- */
 @media (max-width:600px){
   #trd-pod{--tp-space:84px}
+  #trd-pod[data-view="pill"]{--tp-space:0px}
   .tp-dock{left:8px;bottom:8px}
   .tp-strip{width:calc(100vw - 96px);height:64px;gap:8px;padding:0 6px 0 4px;border-radius:16px}
   .tp-disc{width:44px;height:44px}

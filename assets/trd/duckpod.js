@@ -8,6 +8,9 @@
   (document.head || document.documentElement).appendChild(s);
 })();
 /* The Duck Pod: a site-wide player for The Red Pill Album by The Rubber Duck.
+   Views: the little red pill (default) and the full iPod player. The mini strip
+   is retired: click the pill to open the iPod, close returns to the pill, and
+   playback keeps going either way.
    - One <audio> element that lives for the whole visit.
    - A small soft-navigation router: internal links fetch the next page and swap
      head styles + body content, so the pod and its audio are never torn down.
@@ -15,7 +18,7 @@
      the pod then resumes the saved track and position from localStorage.
    Include once per page, in <head>:
      <link rel="stylesheet" href="/assets/trd/duckpod.css" data-trd-keep>
-     <script src="/assets/trd/duckpod.js?v=20261112b" data-trd-keep></script>          */
+     <script src="/assets/trd/duckpod.js?v=20261123p" data-trd-keep></script>          */
 (function () {
   'use strict';
   var W = window, D = document;
@@ -61,10 +64,11 @@
 
   /* ================= storage ================= */
   var KEY = 'trdPod.v1', HINT_KEY = 'trdPod.hinted';
-  var S = { i: 0, t: 0, playing: false, started: false, view: 'mini', back: 'mini', vol: 1, clicker: true, shuffle: false, repeat: 'off', pos: null, at: 0 };
+  var S = { i: 0, t: 0, playing: false, started: false, view: 'pill', back: 'full', vol: 1, clicker: true, shuffle: false, repeat: 'off', pos: null, at: 0 };
   try { var saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved) for (var k in S) if (k in saved) S[k] = saved[k]; } catch (e) {}
   if (!(S.i >= 0 && S.i < N)) S.i = 0;
-  if (['mini', 'full', 'pill'].indexOf(S.view) < 0) S.view = 'mini';
+  if (S.view === 'mini' || ['full', 'pill'].indexOf(S.view) < 0) S.view = 'pill';
+  S.back = 'full';
   if (['off', 'all', 'one'].indexOf(S.repeat) < 0) S.repeat = 'off';
   S.shuffle = !!S.shuffle;
   function save() { try { S.at = Date.now(); localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -332,9 +336,9 @@
         /* full device */
         '<section class="tp-device tp-shell" aria-label="The Duck Pod: The Red Pill Album player">' +
           '<div class="tp-top">' +
-            '<button class="tp-tool tp-to-mini" type="button" aria-label="Collapse player" title="Collapse">' + svg(I.down) + '</button>' +
+            '<span class="tp-tool tp-tool-spacer" aria-hidden="true"></span>' +
             '<div class="tp-grip tp-grab" title="Drag to move. Double-tap to reset.">' + '<span class="tp-move">' + svg(I.move) + '</span><i></i></div>' +
-            '<button class="tp-tool tp-to-pill" type="button" aria-label="Minimize player" title="Minimize">' + svg(I.pill) + '</button>' +
+            '<button class="tp-tool tp-to-pill" type="button" aria-label="Close player, back to the red pill" title="Close">' + svg(I.pill) + '</button>' +
           '</div>' +
           '<div class="tp-bezel"><div class="tp-screen">' +
             '<div class="tp-hdr"><span class="tp-st"></span><b class="tp-hdr-t">Now Playing</b><span class="tp-batt" aria-hidden="true"></span></div>' +
@@ -359,7 +363,7 @@
             '<button class="tp-center" type="button" aria-label="Select"></button>' +
           '</div>' +
         '</section>' +
-        /* mini strip */
+        /* retired mini strip: kept in the DOM, never shown */
         '<section class="tp-strip tp-shell tp-grab" aria-label="The Red Pill Album player">' +
           '<div class="tp-sgrip" title="Drag to move. Double-tap to reset."><span class="tp-move">' + svg(I.move) + '</span><i></i></div>' +
           '<div class="tp-disc"><button class="tp-mini-btn" type="button" aria-label="Play The Red Pill Album"></button></div>' +
@@ -422,9 +426,10 @@
   }
 
   function setView(v, quiet, fx) {
+    if (v === 'mini' || (v !== 'full' && v !== 'pill')) v = 'pill';
     var was = S.view, fromEl = (fx && !quiet && v === 'pill' && was !== 'pill') ? (was === 'full' ? els.device : els.strip) : null;
     var fromR = fromEl && fromEl.offsetParent !== null ? fromEl.getBoundingClientRect() : null;
-    if (v !== 'pill') S.back = v;
+    S.back = 'full';
     S.view = v; root.setAttribute('data-view', v);
     if (!quiet) { save(); applyPos(); }
     if (quiet || !fx || reducedMotion()) return;   /* transitions only for a visitor's own tap */
@@ -574,10 +579,9 @@
     bind('.tp-center', select);
     bind('.tp-mini-btn', function () { clickSound('press'); uToggle(); });
     bind('.tp-to-full', function () { clickSound('press'); setView('full'); });
-    bind('.tp-to-mini', function () { clickSound('press'); setView('mini'); });
     bind('.tp-to-pill', function () { clickSound('press'); setView('pill', false, true); });
     /* pointer taps on the pill are handled by the drag code; this covers the keyboard */
-    bind('.tp-pill', function (e) { if (e.detail !== 0) return; clickSound('press'); setView(S.back === 'full' ? 'full' : 'mini', false, true); });
+    bind('.tp-pill', function (e) { if (e.detail !== 0) return; clickSound('press'); setView('full', false, true); });
     on(els.lcd, 'keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setView('full'); } });
     on(els.list, 'click', guard(function (e) {
       var li = e.target.closest('li'); if (!li) return;
@@ -612,7 +616,7 @@
     on(root.querySelector('.tp-device'), 'keydown', function (e) {
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight' && screen === 'menu') { e.preventDefault(); notch(1); }
       else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' && screen === 'menu') { e.preventDefault(); notch(-1); }
-      else if (e.key === 'Escape') { e.preventDefault(); if (screen === 'menu') menu(); else setView('mini'); }
+      else if (e.key === 'Escape') { e.preventDefault(); if (screen === 'menu') menu(); else setView('pill', false, true); }
     });
 
     wireDrag();
@@ -670,7 +674,7 @@
          sits where the pill was): swallow it so expanding never toggles playback */
       if (d.onLcd || d.onPill) suppressUntil = Date.now() + 400;
       if (d.onLcd) { clickSound('press'); setView('full'); }
-      else if (d.onPill) { clickSound('press'); setView(S.back === 'full' ? 'full' : 'mini', false, true); }
+      else if (d.onPill) { clickSound('press'); setView('full', false, true); }
     }
     on(dock, 'pointerup', end); on(dock, 'pointercancel', end);
     on(dock, 'dblclick', function (e) { if (e.target.closest('.tp-grip,.tp-sgrip')) { e.preventDefault(); } });
@@ -697,7 +701,7 @@
     if (launching || !root) return;
     launching = true;
     if (href) getPage(href).catch(function () {});
-    view = view === 'full' ? 'full' : 'mini';
+    view = view === 'pill' ? 'pill' : 'full';
     if (S.view !== view) setView(view, true);
     play();                                   /* inside the tap, so the browser allows it */
     var rm = W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches;
