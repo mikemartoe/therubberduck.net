@@ -1,10 +1,10 @@
-/* Email signup: progressive enhancement for .signup-form (MailerLite, double opt-in).
-   Without JS the form POSTs normally (MailerLite's JSON reply opens in a new tab).
-   With JS it posts via fetch() and shows an inline message. No MailerLite scripts are loaded. */
+/* Email signup: .signup-form now hands off to Substack (the one newsletter, chosen by Mike 2026-11-23).
+   With JS: the reader's email opens therubberduck78.substack.com/subscribe?email=... in a new tab,
+   where they press Subscribe; this page says so plainly and never claims success itself.
+   Without JS the form still POSTs to its HTML action (old MailerLite list) until the page templates are rebuilt. */
 (function () {
-  if (!window.fetch || !window.FormData || !window.URLSearchParams) return;
+  var SUB = 'https://therubberduck78.substack.com/subscribe';
   var forms = document.querySelectorAll('form.signup-form');
-  /* form-submit counts (t1964u): GoatCounter event, through trdTrack where the page has it */
   function ev(r, t) {
     var path = 'event/form/newsletter-' + r, title = 'Form: newsletter signup ' + t + ' (' + location.pathname + ')';
     try {
@@ -14,27 +14,20 @@
     } catch (e) {}
   }
   for (var i = 0; i < forms.length; i++) (function (f) {
-    var msg = f.nextElementSibling, btn = f.querySelector('button');
-    function say(t, err) { msg.textContent = t; msg.className = 'signup-msg' + (err ? ' err' : ''); }
+    var msg = f.nextElementSibling, inp = f.querySelector('input[type=email]');
+    function say(html, err) { if (!msg) return; msg.innerHTML = html; msg.className = 'signup-msg' + (err ? ' err' : ''); }
     f.addEventListener('submit', function (e) {
-      if (f.getAttribute('data-native')) { ev('native', 'sent by plain POST'); return; }  // fallback after a network error: plain POST
       e.preventDefault();
-      var body = new URLSearchParams(new FormData(f)); body.append('ajax', '1');
-      btn.disabled = true; say('Sending\u2026');
-      fetch(f.action, { method: 'POST', body: body, mode: 'cors', credentials: 'omit' })
-        .then(function (r) { return r.json(); })
-        .then(function (j) {
-          btn.disabled = false;
-          if (j && j.success) { ev('sent', 'sent'); f.hidden = true; say('Check your inbox to confirm your email. The confirmation link finishes your signup.'); }
-          else {
-            ev('refused', 'refused'); var m = j && j.errors && j.errors.fields && j.errors.fields.email;
-            say((m && m[0]) || 'That did not go through. Please check the address and try again.', true);
-          }
-        })
-        .catch(function () {
-          ev('unreachable', 'could not reach the service'); btn.disabled = false; f.setAttribute('data-native', '1');
-          say('Could not reach the signup service. Press Join the list again to open it in a new tab.', true);
-        });
+      var addr = (inp && inp.value || '').trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(addr)) { say('that email doesn\'t look right. check it and try again.', true); if (inp) inp.focus(); return; }
+      var url = SUB + '?email=' + encodeURIComponent(addr) + '&utm_source=therubberduck.net&utm_medium=inline';
+      var win = null;
+      try { win = window.open(url, '_blank'); if (win) win.opener = null; } catch (x) { win = null; }
+      ev('substack-handoff', 'handed off to Substack');
+      f.hidden = true;
+      say('almost there. press <b>subscribe</b> on the substack tab ' + (win ? 'that just opened' : 'here') +
+          ', and the sunday recap starts coming. <a href="' + url.replace(/"/g, '&quot;') + '" target="_blank" rel="noopener">' +
+          (win ? 'tab didn\'t open? finish here' : 'finish on substack') + '</a>');
     });
   })(forms[i]);
 })();

@@ -141,7 +141,7 @@ CSS_HREF = '/assets/seo/archive.css?v=1'
 # Rollback: set SIGNUP_ON = False and re-run (or git revert the newsletter-signup commit).
 SIGNUP_ON = True
 SIGNUP_ACTION = 'https://assets.mailerlite.com/jsonp/2747950/forms/202511556768958088/subscribe'
-SIGNUP_JS = '<script src="/assets/seo/signup.js?v=1" defer></script>\n'
+SIGNUP_JS = '<script src="/assets/seo/signup.js?v=20261123f1" defer></script>\n'
 def signup_form(uid, big=False):
     return ('<form class="signup-form" action="%s" method="post" target="_blank" accept-charset="utf-8">'
             '<label class="sr" for="%s">Email address</label>'

@@ -279,9 +279,9 @@
     return el;
   }
   if (!D.querySelector('link[href*="signup-pop.css"]')) {
-    add('link', { rel: 'stylesheet', href: '/assets/trd/signup-pop.css?v=20261121q' });
+    add('link', { rel: 'stylesheet', href: '/assets/trd/signup-pop.css?v=20261123f1' });
   }
   if (!D.querySelector('script[src*="signup-pop.js"]')) {
-    add('script', { src: '/assets/trd/signup-pop.js?v=20261121q', defer: '' });
+    add('script', { src: '/assets/trd/signup-pop.js?v=20261123f1', defer: '' });
   }
 })();

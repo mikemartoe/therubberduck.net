@@ -74,3 +74,18 @@
 @media print{
   .trd-signup{display:none}
 }
+/* 2026-11-23 fix 1: privacy line + honest hand-off state (tight, even spacing per Nov 10 rule) */
+.trd-signup-fine{margin:10px 0 0;font:400 14px/1.4 'EB Garamond',Georgia,'Times New Roman',serif;color:#A9A08A}
+.trd-signup-fine[hidden]{display:none}
+.trd-signup-ok{margin:22px 0 0;font:400 18px/1.4 'EB Garamond',Georgia,'Times New Roman',serif;color:#C9C0A8}
+.trd-signup-ok-h{margin:0;font:700 24px/1.2 'EB Garamond',Georgia,'Times New Roman',serif;color:#E4C98A}
+.trd-signup-ok-s{margin:8px 0 0}
+.trd-signup-ok-s b{color:#FFFFFF}
+.trd-signup-again{display:flex;align-items:center;justify-content:center;margin:14px 0 0;text-decoration:none;
+  text-transform:none;letter-spacing:.02em;font:700 18px/1 'EB Garamond',Georgia,'Times New Roman',serif}
+@media (max-width:699px){
+  .trd-signup-fine{margin-top:8px;font-size:13.5px}
+  .trd-signup-ok{margin-top:14px;font-size:16.5px}
+  .trd-signup-ok-h{font-size:21px}
+  .trd-signup-again{margin-top:12px;font-size:17px}
+}
