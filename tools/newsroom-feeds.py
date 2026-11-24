@@ -110,3 +110,12 @@ if __name__ == '__main__':
         open(os.path.join(ROOT, 'newsroom', 'feed.xml'), 'w', encoding='utf-8').write(feed)
         open(os.path.join(ROOT, 'sitemaps', 'news.xml'), 'w', encoding='utf-8').write(sm)
     print(f'feed: {min(len(items),50)} items | news sitemap: {n} urls in the 48h window ending {now.isoformat()}')
+    # Keep the article-end "support the mission" block in place on every story.
+    import importlib.util
+    support = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'newsroom-support.py')
+    spec = importlib.util.spec_from_file_location('newsroom_support', support)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    rows = mod.apply(dry=a.dry)
+    nchg = sum(1 for *_, c in rows if c)
+    print(f'support block: {"dry, would update" if a.dry else "updated"} {nchg} of {len(rows)} articles')

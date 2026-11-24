@@ -58,7 +58,7 @@ python3 tools/update-live-json.py --off
 Commit + push `live.json`. GitHub Pages usually serves it within ~1–2 minutes; open pages pick it up within 2 more.
 
 ## Every DUCK SAUCE publish
-Run `python3 tools/newsroom-feeds.py` (rebuilds `newsroom/feed.xml` and the 48-hour `sitemaps/news.xml`; give new stories a full time like `2026-11-24T09:15:00-05:00`), then run `python3 tools/update-live-json.py` as the last step (sets `latestArticle` to the newest
+Run `python3 tools/newsroom-feeds.py` (rebuilds `newsroom/feed.xml` and the 48-hour `sitemaps/news.xml`, and applies the reusable "support the mission" block at the end of every `newsroom/<slug>/` article from `tools/templates/article-support.html`; give new stories a full time like `2026-11-24T09:15:00-05:00`), then run `python3 tools/update-live-json.py` as the last step (sets `latestArticle` to the newest
 `newsroom/<slug>/` story by schema `datePublished`). For a story filed today that carries an older
 original X date, pass `--published-at 2026-11-09T18:00:00-05:00` so the 24-hour window counts from the
 newsroom publish.

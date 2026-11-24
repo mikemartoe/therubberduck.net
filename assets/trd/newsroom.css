@@ -354,3 +354,53 @@ a{color:inherit}
 .np.lead .np-body:after{content:"";order:1;flex:1 1 auto;min-height:0;
   background:repeating-linear-gradient(180deg,rgba(29,22,17,.55) 0 .45cqw,transparent .45cqw 1.3cqw);
   -webkit-mask:linear-gradient(90deg,#000 48.5%,transparent 48.5%,transparent 51.5%,#000 51.5%);mask:linear-gradient(90deg,#000 48.5%,transparent 48.5%,transparent 51.5%,#000 51.5%)}
+
+
+/* Article-end "support the mission" block (preview 2026-11-23).
+   Courier Prime to match the dispatch type. Tight, even spacing, no extra gap.
+   Label stays lowercase. Reuses the existing mission coin and Buy Me a Coffee URL. */
+.ds-support{
+  display:flex;align-items:center;gap:12px;
+  margin:16px 0 0;padding:10px 12px;
+  background:rgba(232,220,192,.92);border:2px solid var(--rule);
+  color:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.28);
+}
+.ds-support-coin{
+  flex:0 0 auto;width:56px;height:56px;display:block;
+  border-radius:50%;object-fit:cover;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));
+}
+.ds-support-copy{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap}
+.ds-support-p{
+  flex:1 1 16rem;margin:0;
+  font:400 15px/1.35 'Courier Prime',monospace;
+  color:var(--ink);text-wrap:pretty;
+}
+.ds-support-go{
+  flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  min-height:40px;padding:8px 14px;margin:0;
+  background:var(--olive-dk);color:#f3e6c8;
+  border:1px solid #5a4e36;
+  font:700 13px/1.2 'Courier Prime',monospace;
+  letter-spacing:.02em;text-decoration:none;white-space:nowrap;
+}
+.ds-support-go:hover,.ds-support-go:focus-visible{
+  background:#3a4a28;color:#fff4d6;outline:2px solid var(--gold);outline-offset:2px;
+}
+.sheet .story + .ds-support,
+.sheet .story + aside.ds-support{margin-top:16px}
+.sheet .ds-support + .dx-share{margin-top:12px}
+@media (max-width:640px){
+  .ds-support{align-items:flex-start;gap:10px;padding:10px 10px;margin-top:14px}
+  .ds-support-coin{width:44px;height:44px}
+  .ds-support-copy{display:block}
+  .ds-support-p{font-size:14px;line-height:1.35;margin:0 0 8px}
+  .ds-support-go{display:flex;width:100%;box-sizing:border-box}
+  .sheet .ds-support + .dx-share{margin-top:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ds-support-go{transition:none}
+}
+@media print{
+  .ds-support{break-inside:avoid;box-shadow:none}
+}
