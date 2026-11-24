@@ -836,6 +836,15 @@
     "ja": "メールアドレスは The Rubber Duck の更新のお知らせにだけ使います。いつでもワンクリックで配信停止できます。販売も共有もしません。先に確認メールをお送りします。",
     "en-au": "We use your email only to send The Rubber Duck updates; unsubscribe any time with one click; we never sell or share it. You will get a confirmation email first."
   },
+  "We use your email only to send The Rubber Duck updates; unsubscribe any time with one click; we never sell or share it. you finish on substack: press subscribe in the new tab.": {
+    "es": "Usamos tu correo solo para enviar novedades de The Rubber Duck; puedes darte de baja cuando quieras con un clic; nunca lo vendemos ni lo compartimos. Terminas en Substack, en una pestaña nueva.",
+    "fr": "Nous n’utilisons votre e-mail que pour envoyer les nouvelles de The Rubber Duck ; désinscription en un clic, à tout moment ; nous ne le vendons ni ne le partageons jamais. Vous terminez sur Substack, dans un nouvel onglet.",
+    "fr-ca": "Nous n’utilisons votre courriel que pour envoyer les nouvelles de The Rubber Duck ; désabonnement en un clic, en tout temps ; nous ne le vendons ni ne le partageons jamais. Vous terminez sur Substack, dans un nouvel onglet.",
+    "de": "Wir nutzen deine E-Mail nur für Updates von The Rubber Duck; jederzeit mit einem Klick abbestellen; wir verkaufen oder teilen sie nie. Du schließt auf Substack in einem neuen Tab ab.",
+    "nl": "We gebruiken je e-mail alleen voor updates van The Rubber Duck; je kunt je altijd met één klik uitschrijven; we verkopen of delen hem nooit. Je maakt het af op Substack, in een nieuw tabblad.",
+    "ja": "メールアドレスは The Rubber Duck の更新のお知らせにだけ使います。いつでもワンクリックで配信停止できます。販売も共有もしません。新しいタブの Substack で登録を完了してください。",
+    "en-au": "We use your email only to send The Rubber Duck updates; unsubscribe any time with one click; we never sell or share it. you finish on substack: press subscribe in the new tab."
+  },
   "One field.": {
     "es": "Un solo campo.",
     "fr": "Un seul champ.",
@@ -863,6 +872,15 @@
     "ja": "まず確認します。",
     "en-au": "Confirm first."
   },
+  "finish on substack.": {
+    "es": "Termina en Substack.",
+    "fr": "Terminer sur Substack.",
+    "fr-ca": "Terminer sur Substack.",
+    "de": "Auf Substack abschließen.",
+    "nl": "Afronden op Substack.",
+    "ja": "Substack で完了します。",
+    "en-au": "finish on substack."
+  },
   "We send one email to make sure it is really you.": {
     "es": "Enviamos un correo para asegurarnos de que eres tú.",
     "fr": "Nous envoyons un e-mail pour vérifier que c’est bien vous.",
@@ -871,6 +889,15 @@
     "nl": "We sturen één e-mail om te controleren dat jij het echt bent.",
     "ja": "本当にあなたご本人か確認するメールを1通送ります。",
     "en-au": "We send one email to make sure it is really you."
+  },
+  "a new tab opens so you can press subscribe there.": {
+    "es": "Se abre una pestaña nueva para que completes el registro allí.",
+    "fr": "Un nouvel onglet s’ouvre pour que vous puissiez vous inscrire là-bas.",
+    "fr-ca": "Un nouvel onglet s’ouvre pour que vous puissiez vous inscrire là-bas.",
+    "de": "Ein neuer Tab öffnet sich, damit du dich dort anmelden kannst.",
+    "nl": "Er opent een nieuw tabblad zodat je je daar kunt inschrijven.",
+    "ja": "新しいタブが開くので、そこで登録を完了してください。",
+    "en-au": "a new tab opens so you can press subscribe there."
   },
   "Leave any time.": {
     "es": "Márchate cuando quieras.",
