@@ -32,10 +32,10 @@ def _posters(base_slug, own):
 # slug -> (what the demo shows, extra caption sentence or '', list of color keys that have media[, {color: poster base or None}])
 DEMO_MEDIA = {
     'duck-trucker-hat': ('Trucker hat', '', [c[0] for c in COLORS]),
-    'duck-dad-hat': ('Dad hat', '', [c[0] for c in COLORS]),
+    'duck-dad-hat': ('Baseball cap', '', [c[0] for c in COLORS]),
     # Oct 26 2026: the signed hats show the FRONT only. The old signed demos (store-img/demo/signed-*_demo.*, a hat held up
     # to show the brim) are no longer used anywhere; the signed listings play the regular hat's front demo instead (MEDIA_SLUG).
-    'signed-dad-hat': ('Dad hat', _FRONT, [c[0] for c in COLORS]),
+    'signed-dad-hat': ('Baseball cap', _FRONT, [c[0] for c in COLORS]),
     'signed-trucker-hat': ('Trucker hat', _FRONT, [c[0] for c in COLORS]),
 }
 # Standing rule (Oct 31 2026): the default/first color is White, never Black. These listings keep their current default for now

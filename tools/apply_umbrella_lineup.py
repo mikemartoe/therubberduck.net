@@ -56,7 +56,7 @@ for slug, spec in U.SIGNED.items():
     b = b.replace('\n      <a class="buy"', '\n      <p class="sp-note" role="note" hidden>%s</p>\n      <a class="buy"' % U.NOTE_SIGNED, 1)
     h = h[:m.start()] + b + h[m.end():]
 
-# Unsigned listings moved to the lineup (Duck Dad Hat): color picker, special link, special note and ship wording
+# Unsigned listings moved to the lineup (Duck Baseball Cap): color picker, special link, special note and ship wording
 for slug, spec in U.UNSIGNED.items():
     m = card(slug); b = m.group(0)
     b = re.sub(r'(<article class="item counter" data-slug="%s")(?: data-sp-ship="[^"]*" data-sp-shipin="[^"]*")?' % slug,

@@ -1466,14 +1466,14 @@
     "ja": "このラインはまだ販売していないため、ここでは決済できません。価格は発売時に発表します。",
     "en-au": "This line is not on sale yet, so there is no checkout here. The price is announced at launch."
   },
-  "The chrome duck, stitched front and center, with the red pill stitched on the back strap. The trucker hats are off the rack for now; the dad hats are ready, signed or not. Pick yours.": {
-    "es": "El pato cromado, bordado al centro del frente, y la red pill bordada en la tira trasera. Las gorras trucker salen ahora de stock; las dad hats están listas, firmadas o no. Elige la tuya.",
-    "fr": "Le canard chromé, brodé au centre du devant, et la red pill brodée sur la lanière arrière. Les casquettes trucker sont pour l’instant sur étagère ; les dad hats sont prêtes, signées ou non. Choisissez la vôtre.",
-    "fr-ca": "Le canard chromé, brodé au centre du devant, et la red pill brodée sur la lanière arrière. Les casquettes trucker sont pour l’instant en stock ; les dad hats sont prêtes, signées ou non. Choisissez la vôtre.",
-    "de": "Der verchromte Duck, mittig vorn gestickt, und die red pill auf dem hinteren Riemen gestickt. Die Trucker-Hats kommen vorerst aus dem Regal; die Dad Hats sind fertig, signiert oder nicht. Suchen Sie sich eine aus.",
-    "nl": "De chroom-duck, geborduurd in het midden van de voorkant, en de red pill geborduurd op de achterband. De trucker hats komen voorlopig uit de schappen; de dad hats zijn klaar, gesigneerd of niet. Kies de uwe.",
-    "ja": "前面中央にクロムのダック、後ろのストラップに red pill を刺しゅうしています。トラッカーハットは当面既製品、ダッドハットはサインの有無を問わず用意があります。お選びください。",
-    "en-au": "The chrome duck, stitched front and center, with the red pill stitched on the back strap. The trucker hats are off the rack for now; the dad hats are ready, signed or not. Pick yours."
+  "The chrome duck, stitched front and center, with the red pill stitched on the back strap. The trucker hats are off the rack for now; the baseball caps are ready, signed or not. Pick yours.": {
+    "es": "El pato cromado, bordado al centro del frente, y la red pill bordada en la tira trasera. Las gorras trucker salen ahora de stock; las gorras de béisbol están listas, firmadas o no. Elige la tuya.",
+    "fr": "Le canard chromé, brodé au centre du devant, et la red pill brodée sur la lanière arrière. Les casquettes trucker sont pour l’instant sur étagère ; les casquettes de baseball sont prêtes, signées ou non. Choisissez la vôtre.",
+    "fr-ca": "Le canard chromé, brodé au centre du devant, et la red pill brodée sur la lanière arrière. Les casquettes trucker sont pour l’instant en stock ; les casquettes de baseball sont prêtes, signées ou non. Choisissez la vôtre.",
+    "de": "Der verchromte Duck, mittig vorn gestickt, und die red pill auf dem hinteren Riemen gestickt. Die Trucker-Hats kommen vorerst aus dem Regal; die Baseballcaps sind fertig, signiert oder nicht. Suchen Sie sich eine aus.",
+    "nl": "De chroom-duck, geborduurd in het midden van de voorkant, en de red pill geborduurd op de achterband. De trucker hats komen voorlopig uit de schappen; de baseballpetten zijn klaar, gesigneerd of niet. Kies de uwe.",
+    "ja": "前面中央にクロムのダック、後ろのストラップに red pill を刺しゅうしています。トラッカーハットは当面既製品、ベースボールキャップはサインの有無を問わず用意があります。お選びください。",
+    "en-au": "The chrome duck, stitched front and center, with the red pill stitched on the back strap. The trucker hats are off the rack for now; the baseball caps are ready, signed or not. Pick yours."
   },
   "The Rubber Duck merch store: caps, tees, mugs, patches and stickers from $5, plus signed caps and tees numbered by hand out of 500. Every order keeps the site free.": {
     "es": "La tienda de merchandising de The Rubber Duck: gorras, camisetas, tazas, parches y pegatinas desde 5 $, más gorras y camisetas firmadas y numeradas a mano sobre 500. Cada pedido mantiene el sitio gratuito.",
@@ -1880,14 +1880,14 @@
     "ja": "特注です。",
     "en-au": "Special order."
   },
-  "Cotton dad hat": {
-    "es": "Gorra dad hat de algodón",
-    "fr": "Casquette dad hat en coton",
-    "fr-ca": "Casquette dad hat en coton",
-    "de": "Dad Hat aus Baumwolle",
-    "nl": "Dad hat van katoen",
-    "ja": "コットンのダッドハット",
-    "en-au": "Cotton dad hat"
+  "Cotton baseball cap": {
+    "es": "Gorra de béisbol de algodón",
+    "fr": "Casquette de baseball en coton",
+    "fr-ca": "Casquette de baseball en coton",
+    "de": "Baseballcap aus Baumwolle",
+    "nl": "Baseballpet van katoen",
+    "ja": "コットンのベースボールキャップ",
+    "en-au": "Cotton baseball cap"
   },
   "Soft cotton tee": {
     "es": "Camiseta de algodón suave",
@@ -2231,14 +2231,14 @@
     "ja": "Duck Coffee Mugのカード。タップして裏返し、詳細をご覧ください。",
     "en-au": "Duck Coffee Mug card. Press to flip it over for the details."
   },
-  "Signed Dad Hat card. Press to flip it over for the details.": {
-    "es": "Tarjeta de Signed Dad Hat. Pulse para voltearla y ver los detalles.",
-    "fr": "Carte Signed Dad Hat. Appuyez pour la retourner et voir les détails.",
-    "fr-ca": "Carte Signed Dad Hat. Appuyez pour la retourner et voir les détails.",
-    "de": "Karte Signed Dad Hat. Tippen Sie, um sie umzudrehen und die Details zu sehen.",
-    "nl": "Kaart Signed Dad Hat. Tik om hem om te draaien en de details te zien.",
-    "ja": "Signed Dad Hatのカード。タップして裏返し、詳細をご覧ください。",
-    "en-au": "Signed Dad Hat card. Press to flip it over for the details."
+  "Signed Baseball Cap card. Press to flip it over for the details.": {
+    "es": "Tarjeta de Signed Baseball Cap. Pulse para voltearla y ver los detalles.",
+    "fr": "Carte Signed Baseball Cap. Appuyez pour la retourner et voir les détails.",
+    "fr-ca": "Carte Signed Baseball Cap. Appuyez pour la retourner et voir les détails.",
+    "de": "Karte Signed Baseball Cap. Tippen Sie, um sie umzudrehen und die Details zu sehen.",
+    "nl": "Kaart Signed Baseball Cap. Tik om hem om te draaien en de details te zien.",
+    "ja": "Signed Baseball Capのカード。タップして裏返し、詳細をご覧ください。",
+    "en-au": "Signed Baseball Cap card. Press to flip it over for the details."
   },
   "Signed Trucker card. Press to flip it over for the details.": {
     "es": "Tarjeta de Signed Trucker. Pulse para voltearla y ver los detalles.",
@@ -2249,14 +2249,14 @@
     "ja": "Signed Truckerのカード。タップして裏返し、詳細をご覧ください。",
     "en-au": "Signed Trucker card. Press to flip it over for the details."
   },
-  "Duck Dad Hat card. Press to flip it over for the details.": {
-    "es": "Tarjeta de Duck Dad Hat. Pulse para voltearla y ver los detalles.",
-    "fr": "Carte Duck Dad Hat. Appuyez pour la retourner et voir les détails.",
-    "fr-ca": "Carte Duck Dad Hat. Appuyez pour la retourner et voir les détails.",
-    "de": "Karte Duck Dad Hat. Tippen Sie, um sie umzudrehen und die Details zu sehen.",
-    "nl": "Kaart Duck Dad Hat. Tik om hem om te draaien en de details te zien.",
-    "ja": "Duck Dad Hatのカード。タップして裏返し、詳細をご覧ください。",
-    "en-au": "Duck Dad Hat card. Press to flip it over for the details."
+  "Duck Baseball Cap card. Press to flip it over for the details.": {
+    "es": "Tarjeta de Duck Baseball Cap. Pulse para voltearla y ver los detalles.",
+    "fr": "Carte Duck Baseball Cap. Appuyez pour la retourner et voir les détails.",
+    "fr-ca": "Carte Duck Baseball Cap. Appuyez pour la retourner et voir les détails.",
+    "de": "Karte Duck Baseball Cap. Tippen Sie, um sie umzudrehen und die Details zu sehen.",
+    "nl": "Kaart Duck Baseball Cap. Tik om hem om te draaien en de details te zien.",
+    "ja": "Duck Baseball Capのカード。タップして裏返し、詳細をご覧ください。",
+    "en-au": "Duck Baseball Cap card. Press to flip it over for the details."
   },
   "Duck Sticker card. Press to flip it over for the details.": {
     "es": "Tarjeta de Duck Sticker. Pulse para voltearla y ver los detalles.",
@@ -2420,59 +2420,59 @@
     "ja": "· 左が前面、右が背面。White、Black、Navyで販売。",
     "en-au": "· front (left) and back (right). Sold in White, Black and Navy."
   },
-  "Signed Dad Hat in white, with the back inset showing the red pill stitched above the strap": {
-    "es": "Signed Dad Hat en blanco, con el recuadro trasero que muestra la red pill bordada encima de la tira",
-    "fr": "Signed Dad Hat en blanc, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
-    "fr-ca": "Signed Dad Hat en blanc, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
-    "de": "Signed Dad Hat in Weiß, mit dem hinteren Einsatz, der die red pill über dem Riemen gestickt zeigt",
-    "nl": "Signed Dad Hat in het wit, met de inzet van de achterkant die de red pill geborduurd boven de band toont",
-    "ja": "白いSigned Dad Hat。差し込みの背面に、ストラップの上の red pill 刺しゅうが見えます",
-    "en-au": "Signed Dad Hat in white, with the back inset showing the red pill stitched above the strap"
+  "Signed Baseball Cap in white, with the back inset showing the red pill stitched above the strap": {
+    "es": "Signed Baseball Cap en blanco, con el recuadro trasero que muestra la red pill bordada encima de la tira",
+    "fr": "Signed Baseball Cap en blanc, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
+    "fr-ca": "Signed Baseball Cap en blanc, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
+    "de": "Signed Baseball Cap in Weiß, mit dem hinteren Einsatz, der die red pill über dem Riemen gestickt zeigt",
+    "nl": "Signed Baseball Cap in het wit, met de inzet van de achterkant die de red pill geborduurd boven de band toont",
+    "ja": "白いSigned Baseball Cap。差し込みの背面に、ストラップの上の red pill 刺しゅうが見えます",
+    "en-au": "Signed Baseball Cap in white, with the back inset showing the red pill stitched above the strap"
   },
-  "Signed Dad Hat - White, front, with the back inset showing the red pill stitched above the strap": {
-    "es": "Signed Dad Hat - White, frente, con el recuadro trasero que muestra la red pill bordada encima de la tira",
-    "fr": "Signed Dad Hat - White, devant, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
-    "fr-ca": "Signed Dad Hat - White, devant, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
-    "de": "Signed Dad Hat - White, Vorderseite, mit dem hinteren Einsatz, der die red pill über dem Riemen gestickt zeigt",
-    "nl": "Signed Dad Hat - White, voorkant, met de inzet van de achterkant die de red pill geborduurd boven de band toont",
-    "ja": "Signed Dad Hat - White、前面。差し込みの背面に、ストラップの上の red pill 刺しゅうが見えます",
-    "en-au": "Signed Dad Hat - White, front, with the back inset showing the red pill stitched above the strap"
+  "Signed Baseball Cap - White, front, with the back inset showing the red pill stitched above the strap": {
+    "es": "Signed Baseball Cap - White, frente, con el recuadro trasero que muestra la red pill bordada encima de la tira",
+    "fr": "Signed Baseball Cap - White, devant, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
+    "fr-ca": "Signed Baseball Cap - White, devant, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
+    "de": "Signed Baseball Cap - White, Vorderseite, mit dem hinteren Einsatz, der die red pill über dem Riemen gestickt zeigt",
+    "nl": "Signed Baseball Cap - White, voorkant, met de inzet van de achterkant die de red pill geborduurd boven de band toont",
+    "ja": "Signed Baseball Cap - White、前面。差し込みの背面に、ストラップの上の red pill 刺しゅうが見えます",
+    "en-au": "Signed Baseball Cap - White, front, with the back inset showing the red pill stitched above the strap"
   },
-  "Duck Dad Hat in white, with the back inset showing the red pill stitched above the strap": {
-    "es": "Duck Dad Hat en blanco, con el recuadro trasero que muestra la red pill bordada encima de la tira",
-    "fr": "Duck Dad Hat en blanc, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
-    "fr-ca": "Duck Dad Hat en blanc, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
-    "de": "Duck Dad Hat in Weiß, mit dem hinteren Einsatz, der die red pill über dem Riemen gestickt zeigt",
-    "nl": "Duck Dad Hat in het wit, met de inzet van de achterkant die de red pill geborduurd boven de band toont",
-    "ja": "白いDuck Dad Hat。差し込みの背面に、ストラップの上の red pill 刺しゅうが見えます",
-    "en-au": "Duck Dad Hat in white, with the back inset showing the red pill stitched above the strap"
+  "Duck Baseball Cap in white, with the back inset showing the red pill stitched above the strap": {
+    "es": "Duck Baseball Cap en blanco, con el recuadro trasero que muestra la red pill bordada encima de la tira",
+    "fr": "Duck Baseball Cap en blanc, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
+    "fr-ca": "Duck Baseball Cap en blanc, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
+    "de": "Duck Baseball Cap in Weiß, mit dem hinteren Einsatz, der die red pill über dem Riemen gestickt zeigt",
+    "nl": "Duck Baseball Cap in het wit, met de inzet van de achterkant die de red pill geborduurd boven de band toont",
+    "ja": "白いDuck Baseball Cap。差し込みの背面に、ストラップの上の red pill 刺しゅうが見えます",
+    "en-au": "Duck Baseball Cap in white, with the back inset showing the red pill stitched above the strap"
   },
-  "Duck Dad Hat - White, front, with the back inset showing the red pill stitched above the strap": {
-    "es": "Duck Dad Hat - White, frente, con el recuadro trasero que muestra la red pill bordada encima de la tira",
-    "fr": "Duck Dad Hat - White, devant, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
-    "fr-ca": "Duck Dad Hat - White, devant, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
-    "de": "Duck Dad Hat - White, Vorderseite, mit dem hinteren Einsatz, der die red pill über dem Riemen gestickt zeigt",
-    "nl": "Duck Dad Hat - White, voorkant, met de inzet van de achterkant die de red pill geborduurd boven de band toont",
-    "ja": "Duck Dad Hat - White、前面。差し込みの背面に、ストラップの上の red pill 刺しゅうが見えます",
-    "en-au": "Duck Dad Hat - White, front, with the back inset showing the red pill stitched above the strap"
+  "Duck Baseball Cap - White, front, with the back inset showing the red pill stitched above the strap": {
+    "es": "Duck Baseball Cap - White, frente, con el recuadro trasero que muestra la red pill bordada encima de la tira",
+    "fr": "Duck Baseball Cap - White, devant, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
+    "fr-ca": "Duck Baseball Cap - White, devant, avec l’encart du dos montrant la red pill brodée au-dessus de la lanière",
+    "de": "Duck Baseball Cap - White, Vorderseite, mit dem hinteren Einsatz, der die red pill über dem Riemen gestickt zeigt",
+    "nl": "Duck Baseball Cap - White, voorkant, met de inzet van de achterkant die de red pill geborduurd boven de band toont",
+    "ja": "Duck Baseball Cap - White、前面。差し込みの背面に、ストラップの上の red pill 刺しゅうが見えます",
+    "en-au": "Duck Baseball Cap - White, front, with the back inset showing the red pill stitched above the strap"
   },
-  "Back of the dad hat: the red pill stitched above the strap": {
-    "es": "Reverso de la dad hat: la red pill bordada encima de la tira",
-    "fr": "Dos de la dad hat : la red pill brodée au-dessus de la lanière",
-    "fr-ca": "Dos de la dad hat : la red pill brodée au-dessus de la lanière",
-    "de": "Rückseite der Dad Hat: die red pill über dem Riemen gestickt",
-    "nl": "Achterkant van de dad hat: de red pill geborduurd boven de band",
-    "ja": "ダッドハットの背面：ストラップの上に red pill の刺しゅう",
-    "en-au": "Back of the dad hat: the red pill stitched above the strap"
+  "Back of the baseball cap: the red pill stitched above the strap": {
+    "es": "Reverso de la gorra de béisbol: la red pill bordada encima de la tira",
+    "fr": "Dos de la casquette de baseball : la red pill brodée au-dessus de la lanière",
+    "fr-ca": "Dos de la casquette de baseball : la red pill brodée au-dessus de la lanière",
+    "de": "Rückseite der Baseballcap: die red pill über dem Riemen gestickt",
+    "nl": "Achterkant van de baseballpet: de red pill geborduurd boven de band",
+    "ja": "ベースボールキャップの背面：ストラップの上に red pill の刺しゅう",
+    "en-au": "Back of the baseball cap: the red pill stitched above the strap"
   },
-  "Back of the dad hat with the red pill on the strap": {
-    "es": "Reverso de la dad hat con la red pill en la tira",
-    "fr": "Dos de la dad hat avec la red pill sur la lanière",
-    "fr-ca": "Dos de la dad hat avec la red pill sur la lanière",
-    "de": "Rückseite der Dad Hat mit der red pill auf dem Riemen",
-    "nl": "Achterkant van de dad hat met de red pill op de band",
-    "ja": "ストラップに red pill が付いたダッドハットの背面",
-    "en-au": "Back of the dad hat with the red pill on the strap"
+  "Back of the baseball cap with the red pill on the strap": {
+    "es": "Reverso de la gorra de béisbol con la red pill en la tira",
+    "fr": "Dos de la casquette de baseball avec la red pill sur la lanière",
+    "fr-ca": "Dos de la casquette de baseball avec la red pill sur la lanière",
+    "de": "Rückseite der Baseballcap mit der red pill auf dem Riemen",
+    "nl": "Achterkant van de baseballpet met de red pill op de band",
+    "ja": "ストラップに red pill が付いたベースボールキャップの背面",
+    "en-au": "Back of the baseball cap with the red pill on the strap"
   },
   "Back: the red pill, stitched above the strap.": {
     "es": "Reverso: la red pill, bordada encima de la tira.",
@@ -2627,14 +2627,14 @@
     "ja": "Black / Whiteのトラッカーハット。手に持ったところと着用したところ",
     "en-au": "Trucker hat in Black / White, shown in hand and worn"
   },
-  "Dad hat in Black, shown in hand and worn": {
-    "es": "Dad hat en Black, en la mano y puesta",
-    "fr": "Dad hat en Black, tenue et portée",
-    "fr-ca": "Dad hat en Black, tenue et portée",
-    "de": "Dad Hat in Black, in der Hand und getragen",
-    "nl": "Dad hat in Black, in de hand en gedragen",
-    "ja": "Blackのダッドハット。手に持ったところと着用したところ",
-    "en-au": "Dad hat in Black, shown in hand and worn"
+  "Baseball cap in Black, shown in hand and worn": {
+    "es": "Gorra de béisbol en Black, en la mano y puesta",
+    "fr": "Casquette de baseball en Black, tenue et portée",
+    "fr-ca": "Casquette de baseball en Black, tenue et portée",
+    "de": "Baseballcap in Black, in der Hand und getragen",
+    "nl": "Baseballpet in Black, in de hand en gedragen",
+    "ja": "Blackのベースボールキャップ。手に持ったところと着用したところ",
+    "en-au": "Baseball cap in Black, shown in hand and worn"
   },
   "Duck Patch, shown in hand and on a backpack": {
     "es": "Duck Patch, en la mano y en una mochila",
@@ -2762,14 +2762,14 @@
     "ja": "Duck Coffee Mug、$16 | TRD Collectibles | The Rubber Duck™",
     "en-au": "Duck Coffee Mug, $16 | TRD Collectibles | The Rubber Duck™"
   },
-  "Signed Dad Hat, $45 | TRD Collectibles | The Rubber Duck™": {
-    "es": "Signed Dad Hat, $45 | TRD Collectibles | The Rubber Duck™",
-    "fr": "Signed Dad Hat, $45 | TRD Collectibles | The Rubber Duck™",
-    "fr-ca": "Signed Dad Hat, $45 | TRD Collectibles | The Rubber Duck™",
-    "de": "Signed Dad Hat, $45 | TRD Collectibles | The Rubber Duck™",
-    "nl": "Signed Dad Hat, $45 | TRD Collectibles | The Rubber Duck™",
-    "ja": "Signed Dad Hat、$45 | TRD Collectibles | The Rubber Duck™",
-    "en-au": "Signed Dad Hat, $45 | TRD Collectibles | The Rubber Duck™"
+  "Signed Baseball Cap, $45 | TRD Collectibles | The Rubber Duck™": {
+    "es": "Signed Baseball Cap, $45 | TRD Collectibles | The Rubber Duck™",
+    "fr": "Signed Baseball Cap, $45 | TRD Collectibles | The Rubber Duck™",
+    "fr-ca": "Signed Baseball Cap, $45 | TRD Collectibles | The Rubber Duck™",
+    "de": "Signed Baseball Cap, $45 | TRD Collectibles | The Rubber Duck™",
+    "nl": "Signed Baseball Cap, $45 | TRD Collectibles | The Rubber Duck™",
+    "ja": "Signed Baseball Cap、$45 | TRD Collectibles | The Rubber Duck™",
+    "en-au": "Signed Baseball Cap, $45 | TRD Collectibles | The Rubber Duck™"
   },
   "Signed Trucker, $48 | TRD Collectibles | The Rubber Duck™": {
     "es": "Signed Trucker, $48 | TRD Collectibles | The Rubber Duck™",
@@ -2780,14 +2780,14 @@
     "ja": "Signed Trucker、$48 | TRD Collectibles | The Rubber Duck™",
     "en-au": "Signed Trucker, $48 | TRD Collectibles | The Rubber Duck™"
   },
-  "Duck Dad Hat, $28 | TRD Collectibles | The Rubber Duck™": {
-    "es": "Duck Dad Hat, $28 | TRD Collectibles | The Rubber Duck™",
-    "fr": "Duck Dad Hat, $28 | TRD Collectibles | The Rubber Duck™",
-    "fr-ca": "Duck Dad Hat, $28 | TRD Collectibles | The Rubber Duck™",
-    "de": "Duck Dad Hat, $28 | TRD Collectibles | The Rubber Duck™",
-    "nl": "Duck Dad Hat, $28 | TRD Collectibles | The Rubber Duck™",
-    "ja": "Duck Dad Hat、$28 | TRD Collectibles | The Rubber Duck™",
-    "en-au": "Duck Dad Hat, $28 | TRD Collectibles | The Rubber Duck™"
+  "Duck Baseball Cap, $28 | TRD Collectibles | The Rubber Duck™": {
+    "es": "Duck Baseball Cap, $28 | TRD Collectibles | The Rubber Duck™",
+    "fr": "Duck Baseball Cap, $28 | TRD Collectibles | The Rubber Duck™",
+    "fr-ca": "Duck Baseball Cap, $28 | TRD Collectibles | The Rubber Duck™",
+    "de": "Duck Baseball Cap, $28 | TRD Collectibles | The Rubber Duck™",
+    "nl": "Duck Baseball Cap, $28 | TRD Collectibles | The Rubber Duck™",
+    "ja": "Duck Baseball Cap、$28 | TRD Collectibles | The Rubber Duck™",
+    "en-au": "Duck Baseball Cap, $28 | TRD Collectibles | The Rubber Duck™"
   },
   "Trucker Hat, $32 | TRD Collectibles | The Rubber Duck™": {
     "es": "Trucker Hat, $32 | TRD Collectibles | The Rubber Duck™",
@@ -2843,14 +2843,14 @@
     "ja": "Signed Duck Tee。500点限定の手書き署名と番号入り。",
     "en-au": "Signed Duck Tee, signed and numbered by hand out of 500."
   },
-  "Signed Dad Hat, signed and numbered by hand out of 500.": {
-    "es": "Signed Dad Hat, firmada y numerada a mano sobre 500.",
-    "fr": "Signed Dad Hat, signé et numéroté à la main sur 500.",
-    "fr-ca": "Signed Dad Hat, signé et numéroté à la main sur 500.",
-    "de": "Signed Dad Hat, von Hand signiert und nummeriert aus 500.",
-    "nl": "Signed Dad Hat, met de hand gesigneerd en genummerd op 500.",
-    "ja": "Signed Dad Hat。500点限定の手書き署名と番号入り。",
-    "en-au": "Signed Dad Hat, signed and numbered by hand out of 500."
+  "Signed Baseball Cap, signed and numbered by hand out of 500.": {
+    "es": "Signed Baseball Cap, firmada y numerada a mano sobre 500.",
+    "fr": "Signed Baseball Cap, signé et numéroté à la main sur 500.",
+    "fr-ca": "Signed Baseball Cap, signé et numéroté à la main sur 500.",
+    "de": "Signed Baseball Cap, von Hand signiert und nummeriert aus 500.",
+    "nl": "Signed Baseball Cap, met de hand gesigneerd en genummerd op 500.",
+    "ja": "Signed Baseball Cap。500点限定の手書き署名と番号入り。",
+    "en-au": "Signed Baseball Cap, signed and numbered by hand out of 500."
   },
   "Signed Trucker, signed and numbered by hand out of 500.": {
     "es": "Signed Trucker, firmada y numerada a mano sobre 500.",

@@ -58,7 +58,7 @@ SIGNED = {
     },
 }
 
-# Unsigned listings in the same lineup (owner approved Oct 26 2026: Duck Dad Hat moves to the new lineup; Light Blue, Pink and
+# Unsigned listings in the same lineup (owner approved Oct 26 2026: Duck Baseball Cap moves to the new lineup; Light Blue, Pink and
 # Charcoal retired). Yupoong 6245CM in Printful has Black, White and Navy but no Gold, Tiffany Blue or Hot Pink -> special orders.
 UNSIGNED = {
     'duck-dad-hat': {

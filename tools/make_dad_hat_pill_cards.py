@@ -1,5 +1,5 @@
-"""Dad hat card photos that show the red pill honestly (t1969u/t1970u).
-Printful stitches the red pill on the BACK of the dad hat, above the strap (file emb-dadhat-back-redpill on every
+"""Baseball cap card photos that show the red pill honestly (t1969u/t1970u).
+Printful stitches the red pill on the BACK of the baseball cap, above the strap (file emb-dadhat-back-redpill on every
 variant); it cannot embroider the bill. So each card photo is the real front mockup plus a round inset of the real
 Printful back mockup (pill above the strap), labelled "BACK". Gold / Tiffany Blue / Hot Pink backs are tinted from
 the real White back mockup with the same multiply recolor used for their fronts (tools/make_dad_hat_special_photos.py);

@@ -1,6 +1,6 @@
 """Write the Trucker Hat special-order colors (tools/umbrella_lineup.py TRUCKER) into merch.html. Safe to rerun.
 Keeps the four Printful two-tones as they are and adds White, Navy, Gold, Tiffany Blue and Hot Pink as special orders
-(swatch + picker option with data-special="1", the 7-day note, the special link on the Buy button), like the Duck Dad Hat card.
+(swatch + picker option with data-special="1", the 7-day note, the special link on the Buy button), like the Duck Baseball Cap card.
 Also gives the two unsigned hat cards data-sp-shipamt (special-order shipping) so the card's Ship price follows the color.
 Usage, from the repo root:  python3 tools/apply_trucker_lineup.py   then   python3 tools/build_shop_only.py"""
 import os, re, sys

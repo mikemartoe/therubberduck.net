@@ -1,4 +1,4 @@
-"""Duck Dad Hat card photos for the special colors (Gold, Tiffany Blue, Hot Pink): Printful has no such blank color, so these are
+"""Duck Baseball Cap card photos for the special colors (Gold, Tiffany Blue, Hot Pink): Printful has no such blank color, so these are
 recolors of the real Printful White mockup (duck-dad-hat_white_product.jpg). The embroidery is protected using the aligned Black
 mockup; only the cap fabric is tinted (multiply), so stitching, shading and shadow stay real."""
 from PIL import Image, ImageFilter
