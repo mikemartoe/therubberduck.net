@@ -319,8 +319,28 @@ html[data-theme="dark"] .corr .go{color:#1A1710}
 .lx-info[hidden]{display:none}
 .lx-lbl{color:var(--text);min-width:0;overflow-wrap:anywhere}
 /* Total matching drops, beside the search label. The whole filtered set, not the rows drawn so far. */
-.lx-total{justify-self:end;margin:0;padding:1px 0 1px 4px;font-family:var(--font-display);font-weight:600;font-size:12.5px;line-height:1;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lx-total{margin:0;padding:1px 0 1px 4px;font-family:var(--font-display);font-weight:600;font-size:12.5px;line-height:1;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
 .lx-total b{font-size:18px;font-weight:700;letter-spacing:0;text-transform:none;margin-right:5px;text-shadow:0 0 12px rgba(0,255,65,.45)}
+/* Search-results Share: highlighted button beside the N DROPS count (only while a search is active). */
+.lx-tools{display:inline-flex;align-items:center;gap:10px;justify-self:end;min-width:0}
+.lx-share{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;min-height:32px;padding:0 12px;border:1px solid var(--accent);border-radius:3px;background:var(--accent);color:var(--on-accent);font-family:var(--font-display);font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;box-shadow:0 0 14px rgba(0,255,65,.4);transition:filter .16s,box-shadow .16s}
+.lx-share svg{width:13px;height:13px;display:block;flex:none}
+.lx-share:hover,.lx-share:focus-visible{filter:brightness(1.08);box-shadow:0 0 18px rgba(0,255,65,.55);outline:2px solid var(--accent);outline-offset:2px}
+.lx-share[aria-expanded="true"]{box-shadow:0 0 16px rgba(0,255,65,.55);outline:2px solid var(--accent);outline-offset:2px}
+.lx-share-panel{grid-column:1/-1;margin:0;padding:8px;border:1px solid rgba(0,255,65,.4);border-radius:3px;background:var(--surface-2)}
+.lx-share-panel[hidden]{display:none}
+.lx-share-panel .shr.shr-nopic{margin:0;padding:0;border:0;background:none}
+.lx-share-panel .shr-btns{grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:auto;gap:8px}
+.lx-share-panel.lx-share-has-native .shr-btns{grid-template-columns:repeat(6,minmax(0,1fr))}
+.lx-share-panel .shr-b{min-height:52px;padding:8px 4px;border-color:rgba(0,255,65,.35);background:var(--surface-1);color:var(--text);font-family:var(--font-display);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border-radius:3px}
+.lx-share-panel .shr-b:hover,.lx-share-panel .shr-b:focus-visible{border-color:var(--accent);color:var(--accent);background:rgba(0,255,65,.08)}
+.lx-share-panel .shr-hint{margin-top:6px;font-family:var(--font-display);font-size:12.5px;color:var(--accent)}
+@media (max-width:640px){
+  .lx-share{min-height:36px;padding:0 12px;font-size:12px}
+  .lx-share svg{width:14px;height:14px}
+  .lx-share-panel .shr-btns,.lx-share-panel.lx-share-has-native .shr-btns{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lx-share-panel .shr-b{min-height:56px}
+}
 .lx-acts{display:inline-flex;flex-wrap:wrap;gap:8px;grid-column:1 / -1}
 .lx-acts-empty{justify-content:center;margin-top:4px}
 .lx-act{min-height:34px;padding:0 12px;border:1px solid rgba(0,255,65,.4);border-radius:3px;background:transparent;color:var(--accent);font-family:var(--font-display);font-size:11.5px;letter-spacing:.03em;cursor:pointer}
@@ -1203,7 +1223,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
         <div class="lx-panel" id="lxPanel" hidden></div>
       </div>
 
-      <p class="lx-info" id="arcInfo" aria-live="polite" hidden></p>
+      <div class="lx-info" id="arcInfo" aria-live="polite" hidden></div>
 
       <div class="arc-top" id="arcTop">
         <p class="arc-count" id="arcCountTop">4,966 records held</p>
@@ -1724,9 +1744,91 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     var word=n===1?'drop':'drops';
     return '<span class="lx-total" title="'+nf(n)+' matching '+word+'"><b>'+nf(n)+'</b> '+word+'</span>';
   }
+  function searchShareURL(){
+    var q=(state.q||'').trim(), parts=[];
+    if(window.TRDLedgerPhotos && window.TRDLedgerPhotos.state.view==='photos'){
+      parts.push('view=photos');
+      var typ=window.TRDLedgerPhotos.state.type; if(typ) parts.push('type='+encodeURIComponent(typ));
+    }
+    if(/^(today|yesterday|tomorrow)$/i.test(q)) parts.push('delta='+encodeURIComponent(q.toLowerCase()));
+    else if(q) parts.push('q='+encodeURIComponent(q));
+    return 'https://www.therubberduck.net/ledger.html'+(parts.length?('?'+parts.join('&')):'');
+  }
+  function searchShareText(res, n){
+    var q=(state.q||'').trim(), word=n===1?'Q drop':'Q drops', num=nf(n);
+    if(/^(today|yesterday|tomorrow)$/i.test(q)) return num+' '+word+' for '+q.toLowerCase();
+    if(res && res.kind==='number' && n===1){
+      var id=(res.jump!=null?res.jump:String(q).replace(/^#/,'')).toString();
+      return 'Q drop #'+id;
+    }
+    return num+' '+word+' containing \u201c'+q+'\u201d';
+  }
+  function searchShareId(q){
+    var s=String(q||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    return (s||'search').slice(0,60);
+  }
+  function closeSearchShare(){
+    if(!info) return;
+    var btn=info.querySelector('#lxSearchShare'), panel=info.querySelector('#lxSearchSharePanel');
+    if(btn) btn.setAttribute('aria-expanded','false');
+    if(panel) panel.hidden=true;
+  }
+  function openSearchShare(res, shown){
+    var btn=info.querySelector('#lxSearchShare'), panel=info.querySelector('#lxSearchSharePanel');
+    if(!btn||!panel||!window.trdShare) return;
+    var page=searchShareURL(), text=searchShareText(res, shown), only=['x','fb','sms','email','link'];
+    panel.innerHTML='';
+    panel.classList.remove('lx-share-has-native');
+    var row=trdShare.build({
+      kind:'ledger-search', id:searchShareId(state.q), page:page, text:text,
+      only:only, noPic:true, groupLabel:'Share this search'
+    });
+    var btns=row.querySelector('.shr-btns');
+    if(btns){
+      var map={};
+      Array.prototype.forEach.call(btns.querySelectorAll('[data-p]'), function(b){ map[b.getAttribute('data-p')]=b; });
+      only.forEach(function(k){ if(map[k]) btns.appendChild(map[k]); });
+      if(navigator.share){
+        var b=document.createElement('button');
+        b.type='button'; b.className='shr-b shr-native';
+        b.setAttribute('aria-label','Share');
+        b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10M8 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v5a2 2 0 002 2h10a2 2 0 002-2v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Share</span>';
+        b.addEventListener('click', function(){
+          navigator.share({ title:text, text:text, url:page }).catch(function(){});
+        });
+        btns.insertBefore(b, btns.firstChild);
+        panel.classList.add('lx-share-has-native');
+      }
+    }
+    panel.appendChild(row);
+    panel.hidden=false;
+    btn.setAttribute('aria-expanded','true');
+  }
+  function bindSearchShare(res, shown){
+    var btn=info.querySelector('#lxSearchShare'); if(!btn) return;
+    btn.addEventListener('click', function(e){
+      e.preventDefault(); e.stopPropagation();
+      if(btn.getAttribute('aria-expanded')==='true') closeSearchShare();
+      else openSearchShare(res, shown);
+    });
+  }
+  if(!window._trdSearchShareDoc){
+    window._trdSearchShareDoc=true;
+    document.addEventListener('click', function(e){
+      if(!info || info.hidden) return;
+      if(e.target.closest && e.target.closest('#lxSearchShare, #lxSearchSharePanel')) return;
+      closeSearchShare();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key==='Escape') closeSearchShare();
+    });
+  }
   function renderInfo(res, shown){
-    if(!res || !res.q){ info.hidden=true; info.innerHTML=''; return; }
-    var h=(res.note?'<span class="lx-note">'+esc(res.note)+'</span> ':'')+'<span class="lx-lbl">'+esc(res.label||'')+'</span>'+dropTotalHTML(shown);
+    if(!res || !res.q){ closeSearchShare(); info.hidden=true; info.innerHTML=''; return; }
+    var shareIco='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10M8 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v5a2 2 0 002 2h10a2 2 0 002-2v-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+    var h=(res.note?'<span class="lx-note">'+esc(res.note)+'</span> ':'')+'<span class="lx-lbl">'+esc(res.label||'')+'</span>';
+    h+='<span class="lx-tools">'+dropTotalHTML(shown)+'<button type="button" class="lx-share" id="lxSearchShare" aria-haspopup="true" aria-expanded="false" aria-controls="lxSearchSharePanel">'+shareIco+'Share</button></span>';
+    h+='<div class="lx-share-panel" id="lxSearchSharePanel" hidden></div>';
     var acts='';
     if(res.alt) acts+=btn(res.alt.label, res.alt.q);
     if(res.kind==='delta' && res.rows.length && res.numberDeltas && res.numberDeltas.length){
@@ -1736,6 +1838,7 @@ figure.sect-plate figcaption{font-family:var(--font-display)!important;font-size
     if(state.noSyn && res.kind==='text') acts+='<button type="button" class="lx-act" data-lx-nosyn="0">Include related names</button>';
     info.innerHTML=h+(acts?'<span class="lx-acts">'+acts+'</span>':'');
     info.hidden=false;
+    bindSearchShare(res, shown);
   }
   /* 8ch.net deep links now open that site's homepage. Open the same thread and
      post on 8kun or on a Wayback capture of the dchan archive instead. */
