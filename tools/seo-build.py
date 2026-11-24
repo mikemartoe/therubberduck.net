@@ -135,21 +135,20 @@ def book_ld():
 # ---------------------------------------------------------------- page shell for generated pages
 CSS_HREF = '/assets/seo/archive.css?v=1'
 
-# ---------------------------------------------------------------- email signup (MailerLite "TRD signup", double opt-in)
-# One field, one promise. Plain HTML POST works without JavaScript (opens MailerLite's reply in a new tab);
-# /assets/seo/signup.js (deferred, no MailerLite scripts) upgrades it to an inline "check your inbox" message.
-# Rollback: set SIGNUP_ON = False and re-run (or git revert the newsletter-signup commit).
+# ---------------------------------------------------------------- email signup (Substack handoff; therubberduck78.substack.com is the one newsletter)
+# No-JS: GET /subscribe with name=email in a new tab. With JS, /assets/seo/signup.js opens the same URL.
+# Rollback: set SIGNUP_ON = False and re-run (or git revert).
 SIGNUP_ON = True
-SIGNUP_ACTION = 'https://assets.mailerlite.com/jsonp/2747950/forms/202511556768958088/subscribe'
+SIGNUP_ACTION = 'https://therubberduck78.substack.com/subscribe'
 SIGNUP_JS = '<script src="/assets/seo/signup.js?v=20261123f1" defer></script>\n'
 def signup_form(uid, big=False):
-    return ('<form class="signup-form" action="%s" method="post" target="_blank" accept-charset="utf-8">'
+    return ('<form class="signup-form" action="%s" method="get" target="_blank" rel="noopener" accept-charset="utf-8">'
             '<label class="sr" for="%s">Email address</label>'
-            '<input id="%s" type="email" name="fields[email]" placeholder="you@example.com" autocomplete="email" required maxlength="254">'
-            '<input type="hidden" name="ml-submit" value="1"><input type="hidden" name="anticsrf" value="true">'
+            '<input id="%s" type="email" name="email" placeholder="you@example.com" autocomplete="email" required maxlength="254">'
+            '<input type="hidden" name="utm_source" value="therubberduck.net"><input type="hidden" name="utm_medium" value="inline">'
             '<button type="submit">Join the list</button></form>'
             '<p class="signup-msg" role="status" aria-live="polite"></p>'
-            '<p class="signup-fine">We use your email only to send The Rubber Duck updates; unsubscribe any time with one click; we never sell or share it. You will get a confirmation email first.</p>'
+            '<p class="signup-fine">We use your email only to send The Rubber Duck updates; unsubscribe any time with one click; we never sell or share it. you finish on substack: press subscribe in the new tab.</p>'
             ) % (SIGNUP_ACTION, uid, uid)
 def signup_block():
     if not SIGNUP_ON: return ''
@@ -962,7 +961,7 @@ def build_join():
             '<h1 id="join-h">Get The Rubber Duck updates by email</h1>'
             '<p class="lede">One short note when something new lands on The Rubber Duck: new drops in the archive, videos, books and collectibles. Nothing else.</p>'
             '<div class="signup-box join-box">' + signup_form('join-email') + '</div>'
-            '<ul class="join-points"><li><b>One field.</b> Just your email address.</li><li><b>Confirm first.</b> We send one email to make sure it is really you.</li><li><b>Leave any time.</b> Every email has a one-click unsubscribe link.</li></ul>'
+            '<ul class="join-points"><li><b>One field.</b> Just your email address.</li><li><b>finish on substack.</b> a new tab opens so you can press subscribe there.</li><li><b>Leave any time.</b> Every email has a one-click unsubscribe link.</li></ul>'
             '<p class="join-more">Not ready? Browse <a href="/drops/">every Q drop by month</a>, the <a href="/library/">PDF library</a> or <a href="/watch/">the video archive</a>.</p>'
             '</section>')
     write('join.html', page('/join.html', 'Get The Rubber Duck updates by email',
