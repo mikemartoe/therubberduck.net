@@ -1,0 +1,95 @@
+<!-- DUCK SAUCE article template (PREVIEW). Replace every {{...}}. Keep "headline" directly
+     followed by "datePublished" in the JSON-LD: tools/update-live-json.py depends on that order.
+     Author + publisher are ALWAYS "The Rubber Duck". Never a personal name.
+     Publish text as written. No satire/parody labels. No paywall (isAccessibleForFree true). -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{HEADLINE}} | DUCK SAUCE | The Rubber Duck™</title>
+<meta name="description" content="{{ONE OR TWO SENTENCE SUMMARY, his words, 120-160 chars}}">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://therubberduck.net/newsroom/{{slug}}/">
+<link rel="alternate" type="application/rss+xml" title="DUCK SAUCE" href="https://therubberduck.net/newsroom/feed.xml">
+<meta name="author" content="The Rubber Duck">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Rubber Duck™">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="{{HEADLINE}}">
+<meta property="og:description" content="{{SAME SUMMARY}}">
+<meta property="og:url" content="https://therubberduck.net/newsroom/{{slug}}/">
+<meta property="og:image" content="https://therubberduck.net/images/newsroom/og/{{slug}}.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{WHAT THE PHOTO SHOWS}}">
+<meta property="article:published_time" content="{{2026-11-24T09:15:00-05:00}}">
+<meta property="article:modified_time" content="{{2026-11-24T09:15:00-05:00}}">
+<meta property="article:author" content="https://therubberduck.net/about/">
+<meta property="article:section" content="{{news|commentary}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TheRubberDuck79">
+<meta name="twitter:creator" content="@TheRubberDuck79">
+<meta name="twitter:title" content="{{HEADLINE}}">
+<meta name="twitter:description" content="{{SAME SUMMARY}}">
+<meta name="twitter:image" content="https://therubberduck.net/images/newsroom/og/{{slug}}.jpg">
+<meta name="twitter:image:alt" content="{{WHAT THE PHOTO SHOWS}}">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://therubberduck.net/#org","name":"The Rubber Duck","url":"https://therubberduck.net/",
+  "logo":{"@type":"ImageObject","url":"https://therubberduck.net/favicon-192.png","width":192,"height":192},
+  "sameAs":["https://x.com/TheRubberDuck79","https://x.com/TheRubberDuck78"]},
+ {"@type":"Person","@id":"https://therubberduck.net/about/#duck","name":"The Rubber Duck",
+  "url":"https://therubberduck.net/about/","sameAs":["https://x.com/TheRubberDuck79","https://x.com/TheRubberDuck78","https://therubberduck.net/"]},
+ {"@type":"NewsArticle","@id":"https://therubberduck.net/newsroom/{{slug}}/#article",
+  "headline":"{{HEADLINE, as written, 110 chars max}}",
+  "datePublished":"{{2026-11-24T09:15:00-05:00}}",
+  "dateModified":"{{2026-11-24T09:15:00-05:00}}",
+  "description":"{{SAME SUMMARY}}",
+  "image":["https://therubberduck.net/images/newsroom/og/{{slug}}.jpg",
+           "https://therubberduck.net/images/newsroom/sq/{{slug}}.jpg",
+           "https://therubberduck.net/images/newsroom/43/{{slug}}.jpg"],
+  "author":[{"@id":"https://therubberduck.net/about/#duck","@type":"Person","name":"The Rubber Duck","url":"https://therubberduck.net/about/"}],
+  "publisher":{"@id":"https://therubberduck.net/#org"},
+  "mainEntityOfPage":{"@type":"WebPage","@id":"https://therubberduck.net/newsroom/{{slug}}/"},
+  "url":"https://therubberduck.net/newsroom/{{slug}}/",
+  "isAccessibleForFree":true,
+  "inLanguage":"en",
+  "articleSection":"{{News|Commentary}}",
+  "wordCount":{{N}},
+  "citation":["{{URL of each primary source he links}}"],
+  "isPartOf":{"@type":"CollectionPage","@id":"https://therubberduck.net/newsroom.html"}},
+ {"@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://therubberduck.net/"},
+  {"@type":"ListItem","position":2,"name":"DUCK SAUCE","item":"https://therubberduck.net/newsroom.html"},
+  {"@type":"ListItem","position":3,"name":"{{HEADLINE}}","item":"https://therubberduck.net/newsroom/{{slug}}/"}]}
+]}
+</script>
+<!-- + the existing newsroom head assets (nav, newsroom.css, share.css, analytics) copied from a current article -->
+</head>
+<body>
+<!-- existing nav/banner block unchanged -->
+<main class="nr-room"><div class="nr-wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <a href="/newsroom.html">DUCK SAUCE</a></nav>
+<article class="sheet">
+  <p class="mast"><a href="/newsroom.html">DUCK SAUCE</a></p>
+  <h1>{{HEADLINE}}</h1>
+  <!-- One visible date AND time, between headline and body (Google News article-page best practice). -->
+  <p class="byline">by <a rel="author" href="/about/">The Rubber Duck</a> · <a href="https://x.com/TheRubberDuck79">@TheRubberDuck79</a></p>
+  <p class="strip">
+    <span>published <time datetime="{{2026-11-24T09:15:00-05:00}}">{{nov 24, 2026 · 9:15 am et}}</time></span>
+    <!-- only when really changed: --> <span>updated <time datetime="{{ISO}}">{{date · time et}}</time></span>
+  </p>
+  <figure><img src="/images/newsroom/media/{{slug}}.webp" width="1600" height="900" alt="{{WHAT THE PHOTO SHOWS}}" fetchpriority="high">
+    <figcaption>{{caption + photo source/credit}}</figcaption></figure>
+  <div class="story">{{ARTICLE TEXT EXACTLY AS WRITTEN}}</div>
+  <!-- Optional, his voice, only if he wants it: -->
+  <aside class="sources"><h2>sources</h2><ul><li><a href="{{primary source URL}}">{{what it is}}</a></li></ul></aside>
+  <p class="permalink">cite this: <a href="https://therubberduck.net/newsroom/{{slug}}/">therubberduck.net/newsroom/{{slug}}/</a></p>
+  <!-- corrections note appears here only if a correction is made: "correction, {{date}}: {{what changed}}" -->
+</article>
+<!-- existing share row, suggest box and "support the mission" strip unchanged -->
+</div></main>
+</body>
+</html>
