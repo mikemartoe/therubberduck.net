@@ -23,6 +23,7 @@ The site presents source material and leaves interpretation to the reader. Q dro
 - [The X Archive](https://therubberduck.net/x/): searchable archive of posts by The Rubber Duck (@TheRubberDuck79) on X
 - [X posts by month](https://therubberduck.net/x/archive/): 14,955 original posts and quote posts, June 2020 to September 2026, one page per month
 - [DUCK SAUCE](https://therubberduck.net/newsroom.html): commentary, opinion and X threads by The Rubber Duck
+- [DUCK SAUCE RSS feed](https://therubberduck.net/newsroom/feed.xml): every DUCK SAUCE story, newest first, with dates and permalinks
 
 ## Video and audio
 
