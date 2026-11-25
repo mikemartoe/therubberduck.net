@@ -566,6 +566,9 @@ def build_videos():
         when = (datetime.datetime.fromtimestamp(int(v['ts']), ET).strftime('%B %-d, %Y') if v.get('source') != 'local' else '')
         title = '%s%s' % (v['t'], ' (Video)' if not v.get('live') else ' (Livestream)')
         desc = clip('%s%s' % ((v['t'] + ': ') if not desc_full.startswith(v['t']) else '', desc_full))
+        if desc_full.strip() == v['t'].strip():
+            # No description beyond the title: give search a factual one built from the date and length (metadata only; page text unchanged).
+            desc = clip('%s%s Video%s%s in The Rubber Duck Drive-In archive. Watch free.' % (v['t'].strip(), '' if v['t'].strip().endswith(('.', '!', '?')) else '.', (' posted ' + when) if when else '', (' (' + v['dur'] + ')') if v.get('dur') else ''), 158)
         th = v['th'] if v['th'].startswith('http') else SITE + v['th']
         if v.get('e'):
             player = '<div class="player"><iframe src="%s" title="%s" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>' % (E(v['e']), E(v['t']))
