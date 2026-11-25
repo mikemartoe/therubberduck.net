@@ -504,7 +504,12 @@ def build_library():
         size = ('%d KB' % max(1, round(d['bytes'] / 1024))) if d['mb'] < 0.1 else '%.1f MB' % d['mb']
         title = '%s (PDF)' % d['title']
         desc = clip('%s %s Free to read or download: %s pages, %s.' % (d['title'] + ('' if d['title'].endswith(('.', '?', '!')) else '.'), d.get('about') or d.get('desc', ''), d.get('pages', '?'), size), 158)
-        img = '<img class="thumb" src="%s" alt="First page of %s" width="240" height="310" loading="lazy" decoding="async">' % (thumb_q, E(d['title'])) if thumb else ''
+        # Resized WebP copies of the same first-page render (w240/ and w480/ beside the PNG) for the 240px thumb; the PNG stays for og:image and pdfs.html.
+        _wq = lambda w: thumb_q.rsplit('/', 1)[0] + '/w%d/' % w + re.sub(r'\.png$', '.webp', thumb_q.rsplit('/', 1)[1])
+        if thumb and thumb.endswith('.png') and os.path.exists(os.path.join(ROOT, thumb.lstrip('/').rsplit('/', 1)[0], 'w480', thumb.rsplit('/', 1)[1][:-4] + '.webp')):
+            img = '<img class="thumb" src="%s" srcset="%s 240w, %s 480w" sizes="240px" alt="First page of %s" width="240" height="310" loading="lazy" decoding="async">' % (_wq(480), _wq(240), _wq(480), E(d['title']))
+        else:
+            img = '<img class="thumb" src="%s" alt="First page of %s" width="240" height="310" loading="lazy" decoding="async">' % (thumb_q, E(d['title'])) if thumb else ''
         body = ('<h1>%s</h1><div class="doc">%s<div><p class="lede">%s</p><dl class="facts"><dt>Topic</dt><dd>%s</dd><dt>Pages</dt><dd>%s</dd><dt>Size</dt><dd>%s</dd><dt>File</dt><dd>%s</dd><dt>Catalog no.</dt><dd>%s</dd></dl>'
                 '<p class="cta"><a class="btn" href="%s">Read or download this PDF (%s, %s)</a> <a href="/pdfs.html">Search every document in SCI[F]</a></p></div></div>'
                 % (E(d['title']), img, E(d.get('about') or d.get('desc', '')), E(d.get('topic', '')), E(d.get('pages', '')), size, E(d['name']), E(d['id']), pdf_q,
