@@ -1,0 +1,1025 @@
+{
+  "version": 1,
+  "updated": "2026-11-21",
+  "rule": "A link is stored only when a public video is confirmed to show the signing of that specific order (the title, description, captions, or an official transcript names the order or its subject, and it is the signing event). Never guessed. Many orders were signed without cameras; those stay blank.",
+  "counts": {
+    "ordersWithVideo": 68,
+    "firstTerm": 6,
+    "secondTerm": 62,
+    "videos": 40
+  },
+  "orders": {
+    "13765": {
+      "url": "https://www.youtube.com/watch?v=p3VwaIjf87Y",
+      "source": "PBS NewsHour",
+      "note": "PBS NewsHour footage of President Trump’s first Oval Office signings on January 20, 2017, which included EO 13765, Minimizing the Economic Burden of the Patient Protection and Affordable Care Act Pending Repeal.",
+      "videoId": "p3VwaIjf87Y",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "13767": {
+      "url": "https://archive.org/details/CSPAN_20170125_195300_President_Trump_Visits_the_Department_of_Homeland_Security",
+      "source": "C-SPAN (Internet Archive)",
+      "note": "C-SPAN coverage, preserved at the Internet Archive, of the January 25, 2017 Department of Homeland Security visit where the President signed EO 13767, Border Security and Immigration Enforcement Improvements, and EO 13768 on sanctuary jurisdictions.",
+      "videoId": "CSPAN_20170125_195300",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "13768": {
+      "url": "https://archive.org/details/CSPAN_20170125_195300_President_Trump_Visits_the_Department_of_Homeland_Security",
+      "source": "C-SPAN (Internet Archive)",
+      "note": "C-SPAN coverage, preserved at the Internet Archive, of the January 25, 2017 DHS visit where the President signed EO 13768, Enhancing Public Safety in the Interior of the United States (sanctuary jurisdictions), along with the border-security order.",
+      "videoId": "CSPAN_20170125_195300",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "13783": {
+      "url": "https://www.youtube.com/watch?v=h9h34F4m5qg",
+      "source": "AP Archive",
+      "note": "Associated Press footage of the March 28, 2017 signing of EO 13783, Promoting Energy Independence and Economic Growth, rolling back the Obama-era Clean Power Plan.",
+      "videoId": "h9h34F4m5qg",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "13788": {
+      "url": "https://archive.org/details/CSPAN_20170418_192100_President_Trump_Signs_Executive_Order_to_Limit_Cheap_Foreign_Labor",
+      "source": "C-SPAN (Internet Archive)",
+      "note": "C-SPAN coverage, preserved at the Internet Archive, of the April 18, 2017 ceremony at Snap-on in Kenosha, Wisconsin, where the President signed EO 13788, Buy American and Hire American.",
+      "videoId": "CSPAN_20170418_192100",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "13841": {
+      "url": "https://archive.org/details/CSPAN_20180620_230400_President_Trump_Signs_Executive_Order_on_Migrant_Families",
+      "source": "C-SPAN (Internet Archive)",
+      "note": "C-SPAN coverage, preserved at the Internet Archive, of the June 20, 2018 White House signing of EO 13841, Affording Congress an Opportunity to Address Family Separation.",
+      "videoId": "CSPAN_20180620_230400",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14147": {
+      "url": "https://www.youtube.com/watch?v=WPuGrf46WTE",
+      "source": "C-SPAN",
+      "note": "C-SPAN video of the January 20, 2025 Capital One Arena ceremony. The official transcript records the President signing EO 14147, Ending the Weaponization of the Federal Government, as the last item on stage.",
+      "videoId": "WPuGrf46WTE",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14148": {
+      "url": "https://www.youtube.com/watch?v=WPuGrf46WTE",
+      "source": "C-SPAN",
+      "note": "C-SPAN video of the Capital One Arena ceremony. The official transcript records this as the first item signed: EO 14148, Initial Rescissions of Harmful Executive Orders and Actions.",
+      "videoId": "WPuGrf46WTE",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14149": {
+      "url": "https://www.youtube.com/watch?v=WPuGrf46WTE",
+      "source": "C-SPAN",
+      "note": "C-SPAN video of the Capital One Arena ceremony. The official transcript records the President signing EO 14149, Restoring Freedom of Speech and Ending Federal Censorship.",
+      "videoId": "WPuGrf46WTE",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14157": {
+      "url": "https://www.youtube.com/watch?v=si19rPJi5NQ",
+      "source": "White House YouTube",
+      "note": "Official White House Oval Office video from the night of January 20, 2025. Staff introduce and the President signs the order designating cartels as foreign terrorist organizations (EO 14157).",
+      "videoId": "si19rPJi5NQ",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14159": {
+      "url": "https://www.youtube.com/watch?v=si19rPJi5NQ",
+      "source": "White House YouTube",
+      "note": "Official White House Oval Office video from the night of January 20, 2025. Staff introduce EO 14159, Protecting the American People Against Invasion, and the President signs it.",
+      "videoId": "si19rPJi5NQ",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14161": {
+      "url": "https://www.youtube.com/watch?v=si19rPJi5NQ",
+      "source": "White House YouTube",
+      "note": "Official White House Oval Office video from the night of January 20, 2025. Staff introduce the order protecting the United States from foreign terrorists and other national-security threats (EO 14161).",
+      "videoId": "si19rPJi5NQ",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14162": {
+      "url": "https://www.youtube.com/watch?v=WPuGrf46WTE",
+      "source": "C-SPAN",
+      "note": "C-SPAN video of the Capital One Arena ceremony. The official transcript records the President signing EO 14162, Putting America First in International Environmental Agreements (withdrawal from the Paris climate treaty).",
+      "videoId": "WPuGrf46WTE",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14163": {
+      "url": "https://www.youtube.com/watch?v=si19rPJi5NQ",
+      "source": "White House YouTube",
+      "note": "Official White House Oval Office video from the night of January 20, 2025. Staff introduce EO 14163, Realigning the United States Refugee Admissions Program, and the President signs it.",
+      "videoId": "si19rPJi5NQ",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14176": {
+      "url": "https://www.youtube.com/watch?v=3rmWeGbfN8o&t=273s",
+      "source": "White House YouTube",
+      "note": "Official White House video “01/23/25: President Trump Signs Executive Orders.” Captions name this order (“declassification of files”) during the official signing video.",
+      "videoId": "3rmWeGbfN8o",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 273
+    },
+    "14177": {
+      "url": "https://www.youtube.com/watch?v=3rmWeGbfN8o&t=124s",
+      "source": "White House YouTube",
+      "note": "Official White House video “01/23/25: President Trump Signs Executive Orders.” Captions name this order (“advisory commission on science and technology”) during the official signing video.",
+      "videoId": "3rmWeGbfN8o",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 124
+    },
+    "14178": {
+      "url": "https://www.youtube.com/watch?v=3rmWeGbfN8o&t=66s",
+      "source": "White House YouTube",
+      "note": "Official White House video “01/23/25: President Trump Signs Executive Orders.” Captions name this order (“crypto eo”) during the official signing video.",
+      "videoId": "3rmWeGbfN8o",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 66
+    },
+    "14179": {
+      "url": "https://www.youtube.com/watch?v=3rmWeGbfN8o&t=18s",
+      "source": "White House YouTube",
+      "note": "Official White House video “01/23/25: President Trump Signs Executive Orders.” Captions name this order (“executive order on ai”) during the official signing video.",
+      "videoId": "3rmWeGbfN8o",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 18
+    },
+    "14192": {
+      "url": "https://www.youtube.com/watch?v=kKucRFpb-w8&t=7s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Jan. 31, 2025.” Captions name this order (“unleashing prosperity”) during the official signing video.",
+      "videoId": "kKucRFpb-w8",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 7
+    },
+    "14196": {
+      "url": "https://www.youtube.com/watch?v=07UH2FTaqE4&t=264s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Feb. 3, 2025.” Captions name this order (“sovereign wealth”) during the official signing video.",
+      "videoId": "07UH2FTaqE4",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 264
+    },
+    "14199": {
+      "url": "https://www.youtube.com/watch?v=1hWZ8oG_x9I&t=192s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Feb. 4, 2025.” Staff or the President name this order’s subject during the official signing video.",
+      "videoId": "1hWZ8oG_x9I",
+      "confidence": "high",
+      "how": "caption-unique-tokens",
+      "checked": "2026-11-21",
+      "t": 192
+    },
+    "14201": {
+      "url": "https://www.youtube.com/watch?v=_f3Nhvz_o5A",
+      "source": "White House YouTube",
+      "note": "Official White House video of the signing of EO 14201, Keeping Men Out of Women's Sports.",
+      "videoId": "_f3Nhvz_o5A",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14207": {
+      "url": "https://www.youtube.com/watch?v=5mQDlMIjDRo&t=71s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office,  Feb. 10, 2025.” Captions name this order (“federal executive institute”) during the official signing video.",
+      "videoId": "5mQDlMIjDRo",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 71
+    },
+    "14208": {
+      "url": "https://www.youtube.com/watch?v=5mQDlMIjDRo&t=256s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office,  Feb. 10, 2025.” Captions name this order (“paper straws”) during the official signing video.",
+      "videoId": "5mQDlMIjDRo",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 256
+    },
+    "14209": {
+      "url": "https://www.youtube.com/watch?v=5mQDlMIjDRo&t=106s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office,  Feb. 10, 2025.” Captions name this order (“foreign corrupt practices”) during the official signing video.",
+      "videoId": "5mQDlMIjDRo",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 106
+    },
+    "14216": {
+      "url": "https://www.youtube.com/watch?v=s4_oK1KBw7Q&t=110s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders at Mar-a-Lago, Feb. 18, 2025.” Captions name this order (“in vitro fertilization”) during the official signing video.",
+      "videoId": "s4_oK1KBw7Q",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 110
+    },
+    "14242": {
+      "url": "https://www.youtube.com/watch?v=ZjnoGgEJvLs&t=152s",
+      "source": "White House YouTube",
+      "note": "Official White House education-event video. At about 2:32 the President says he will sign the executive order beginning elimination of the Federal Department of Education (EO 14242, Improving Education Outcomes by Empowering Parents, States, and Communities).",
+      "videoId": "ZjnoGgEJvLs",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 152
+    },
+    "14254": {
+      "url": "https://www.youtube.com/watch?v=oQE2dgqe_bI&t=58s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs an Executive Order in the Oval Office, Mar. 31, 2025.” Captions name this order (“live entertainment”) during the official signing video.",
+      "videoId": "oQE2dgqe_bI",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 58
+    },
+    "14260": {
+      "url": "https://www.youtube.com/watch?v=yGoDK8bVB9k&t=3260s",
+      "source": "White House YouTube",
+      "note": "Official White House energy signing event on April 8, 2025. Staff introduce the order directing the Justice Department to challenge state energy policies (EO 14260, Protecting American Energy From State Overreach).",
+      "videoId": "yGoDK8bVB9k",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 3260
+    },
+    "14261": {
+      "url": "https://www.youtube.com/watch?v=yGoDK8bVB9k&t=2896s",
+      "source": "White House YouTube",
+      "note": "Official White House energy signing event on April 8, 2025. Staff present the order protecting coal plants and ending discriminatory policies against the coal industry (EO 14261, Reinvigorating America's Beautiful Clean Coal Industry).",
+      "videoId": "yGoDK8bVB9k",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 2896
+    },
+    "14262": {
+      "url": "https://www.youtube.com/watch?v=yGoDK8bVB9k&t=3189s",
+      "source": "White House YouTube",
+      "note": "Official White House energy signing event on April 8, 2025. Staff introduce the order promoting electric-grid security and reliability (EO 14262, Strengthening the Reliability and Security of the United States Electric Grid).",
+      "videoId": "yGoDK8bVB9k",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 3189
+    },
+    "14264": {
+      "url": "https://www.youtube.com/watch?v=tuFp-3RIgnQ",
+      "source": "White House YouTube",
+      "note": "Official White House short of the signing of EO 14264, Maintaining Acceptable Water Pressure in Showerheads.",
+      "videoId": "tuFp-3RIgnQ",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14273": {
+      "url": "https://www.youtube.com/watch?v=ZFzwTtdRywo",
+      "source": "White House YouTube",
+      "note": "Official White House short of the signing of EO 14273, Lowering Drug Prices by Once Again Putting Americans First.",
+      "videoId": "ZFzwTtdRywo",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14277": {
+      "url": "https://www.youtube.com/watch?v=zkDVSD6bA08&t=349s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Apr. 23, 2025.” Captions name this order (“artificial intelligence education”) during the official signing video.",
+      "videoId": "zkDVSD6bA08",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 349
+    },
+    "14278": {
+      "url": "https://www.youtube.com/watch?v=zkDVSD6bA08&t=361s",
+      "source": "White House YouTube",
+      "note": "Official White House Oval Office video. Staff describe the order to expand apprenticeships and skilled trade jobs (EO 14278, Preparing Americans for High-Paying Skilled Trade Jobs of the Future).",
+      "videoId": "zkDVSD6bA08",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 361
+    },
+    "14279": {
+      "url": "https://www.youtube.com/watch?v=zkDVSD6bA08&t=159s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Apr. 23, 2025.” Captions name this order (“accreditation”) during the official signing video.",
+      "videoId": "zkDVSD6bA08",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 159
+    },
+    "14280": {
+      "url": "https://www.youtube.com/watch?v=zkDVSD6bA08&t=515s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Apr. 23, 2025.” Captions name this order (“school discipline”) during the official signing video.",
+      "videoId": "zkDVSD6bA08",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 515
+    },
+    "14281": {
+      "url": "https://www.youtube.com/watch?v=zkDVSD6bA08&t=271s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Apr. 23, 2025.” Captions name this order (“meritocracy”) during the official signing video.",
+      "videoId": "zkDVSD6bA08",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 271
+    },
+    "14282": {
+      "url": "https://www.youtube.com/watch?v=zkDVSD6bA08&t=128s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Apr. 23, 2025.” Captions name this order (“foreign gifts”) during the official signing video.",
+      "videoId": "zkDVSD6bA08",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 128
+    },
+    "14283": {
+      "url": "https://www.youtube.com/watch?v=zkDVSD6bA08&t=308s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, Apr. 23, 2025.” Captions name this order (“\\bhbcus\\b”) during the official signing video.",
+      "videoId": "zkDVSD6bA08",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 308
+    },
+    "14293": {
+      "url": "https://www.youtube.com/watch?v=mXMKuhDtlpo&t=152s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office, May 5, 2025.” Captions name this order (“pharmaceutical supply”) during the official signing video.",
+      "videoId": "mXMKuhDtlpo",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 152
+    },
+    "14299": {
+      "url": "https://www.youtube.com/watch?v=O9rCTRL6vmQ&t=607s",
+      "source": "White House YouTube",
+      "note": "Official White House Oval Office video. At about 10:07 staff introduce the first nuclear order, speeding approval of specialized nuclear reactors at defense and AI sites (EO 14299, Deploying Advanced Nuclear Reactor Technologies for National Security).",
+      "videoId": "O9rCTRL6vmQ",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 607
+    },
+    "14300": {
+      "url": "https://www.youtube.com/watch?v=O9rCTRL6vmQ&t=686s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office,  May 23, 2025.” Captions name this order (“nuclear regulatory commission”) during the official signing video.",
+      "videoId": "O9rCTRL6vmQ",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 686
+    },
+    "14301": {
+      "url": "https://www.youtube.com/watch?v=O9rCTRL6vmQ&t=733s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office,  May 23, 2025.” Captions name this order (“reactor testing”) during the official signing video.",
+      "videoId": "O9rCTRL6vmQ",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 733
+    },
+    "14302": {
+      "url": "https://www.youtube.com/watch?v=O9rCTRL6vmQ&t=783s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office,  May 23, 2025.” Captions name this order (“nuclear industrial base”) during the official signing video.",
+      "videoId": "O9rCTRL6vmQ",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 783
+    },
+    "14303": {
+      "url": "https://www.youtube.com/watch?v=O9rCTRL6vmQ&t=841s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders in the Oval Office,  May 23, 2025.” Captions name this order (“gold standard science”) during the official signing video.",
+      "videoId": "O9rCTRL6vmQ",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 841
+    },
+    "14328": {
+      "url": "https://www.youtube.com/watch?v=QFBG9DBdsHg&t=81s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs an Executive Order, Aug. 5, 2025.” Captions name this order (“task force on the 2028”) during the official signing video.",
+      "videoId": "QFBG9DBdsHg",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 81
+    },
+    "14341": {
+      "url": "https://www.youtube.com/watch?v=rlPfxyCnxHg&t=1044s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders, Aug. 25, 2025.” Captions name this order (“flag burning”) during the official signing video.",
+      "videoId": "rlPfxyCnxHg",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 1044
+    },
+    "14351": {
+      "url": "https://www.youtube.com/watch?v=gK9L029BcaM&t=2721s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders, Sep. 19, 2025.” Captions name this order (“gold card”) during the official signing video.",
+      "videoId": "gK9L029BcaM",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 2721
+    },
+    "14352": {
+      "url": "https://www.youtube.com/watch?v=D3urjiwp_wQ&t=126s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders, Sep. 25, 2025.” Captions name this order (“tiktok”) during the official signing video.",
+      "videoId": "D3urjiwp_wQ",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 126
+    },
+    "14355": {
+      "url": "https://www.youtube.com/watch?v=SckFiRw0suk&t=10s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders, Sep. 30, 2025.” Captions name this order (“pediatric cancer”) during the official signing video.",
+      "videoId": "SckFiRw0suk",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 10
+    },
+    "14359": {
+      "url": "https://www.youtube.com/watch?v=pH6QHx9Qvkk",
+      "source": "White House YouTube",
+      "note": "Official White House short of President Trump and the First Lady signing EO 14359, Fostering the Future for American Children and Families, on November 13, 2025.",
+      "videoId": "pH6QHx9Qvkk",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21"
+    },
+    "14370": {
+      "url": "https://www.youtube.com/watch?v=DTVbPs1RoKo&t=57s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs an Executive Order, Dec. 18, 2025.” Captions name this order (“marijuana”) during the official signing video.",
+      "videoId": "DTVbPs1RoKo",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 57
+    },
+    "14381": {
+      "url": "https://www.youtube.com/watch?v=E9y3yfTAUaE&t=109s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders, Jan. 30, 2026.” Captions name this order (“motor racing”) during the official signing video.",
+      "videoId": "E9y3yfTAUaE",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 109
+    },
+    "14399": {
+      "url": "https://www.youtube.com/watch?v=ELT3855m3qA&t=115s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs an Executive Order, Mar. 31, 2026.” Captions name this order (“secure elections”) during the official signing video.",
+      "videoId": "ELT3855m3qA",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 115
+    },
+    "14401": {
+      "url": "https://www.youtube.com/watch?v=8xrI-_qo64E&t=49s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs an Executive Order, Apr. 18, 2026.” Captions name this order (“mental illness”) during the official signing video.",
+      "videoId": "8xrI-_qo64E",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 49
+    },
+    "14402": {
+      "url": "https://www.youtube.com/watch?v=jDw21pUBBMU&t=521s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Participates in an Executive Order Signing, April 30th, 2026.” Captions name this order (“federal contracting”) during the official signing video.",
+      "videoId": "jDw21pUBBMU",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 521
+    },
+    "14403": {
+      "url": "https://www.youtube.com/watch?v=jDw21pUBBMU&t=173s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Participates in an Executive Order Signing, April 30th, 2026.” Captions name this order (“trumpira”) during the official signing video.",
+      "videoId": "jDw21pUBBMU",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 173
+    },
+    "14410": {
+      "url": "https://www.youtube.com/watch?v=4EUzlV7-Dew&t=869s",
+      "source": "White House YouTube",
+      "note": "Official White House video. Staff introduce an executive order on reforms to the federal workforce and policy-making positions (EO 14410, Implementing Schedule Policy/Career in the Excepted Service).",
+      "videoId": "4EUzlV7-Dew",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 869
+    },
+    "14411": {
+      "url": "https://www.youtube.com/watch?v=4EUzlV7-Dew&t=754s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders, Jun. 3, 2026.” Captions name this order (“customs enforcement”) during the official signing video.",
+      "videoId": "4EUzlV7-Dew",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 754
+    },
+    "14412": {
+      "url": "https://www.youtube.com/watch?v=HNipoXNANAs&t=224s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders, Jun. 22, 2026.” Captions name this order (“quantum cryptography”) during the official signing video.",
+      "videoId": "HNipoXNANAs",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 224
+    },
+    "14413": {
+      "url": "https://www.youtube.com/watch?v=HNipoXNANAs&t=590s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs Executive Orders, Jun. 22, 2026.” Captions name this order (“quantum innovation”) during the official signing video.",
+      "videoId": "HNipoXNANAs",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 590
+    },
+    "14417": {
+      "url": "https://www.youtube.com/watch?v=EtctNOj2gz4&t=30s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs an Executive Order, Aug. 3, 2026.” Captions name this order (“military spouse”) during the official signing video.",
+      "videoId": "EtctNOj2gz4",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 30
+    },
+    "14418": {
+      "url": "https://www.youtube.com/watch?v=0VTaVDkSWx4&t=327s",
+      "source": "White House YouTube",
+      "note": "Official White House Signing Time video. Staff first introduce the order implementing the Supreme Court ruling on who is ineligible for birthright citizenship (EO 14418, Continuing To Protect the Meaning and Value of American Citizenship). The same ceremony then signs the birth-tourism order.",
+      "videoId": "0VTaVDkSWx4",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 327
+    },
+    "14419": {
+      "url": "https://www.youtube.com/watch?v=0VTaVDkSWx4&t=297s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Participates in Signing Time, Aug. 6, 2026.” Captions name this order (“birth tourism”) during the official signing video.",
+      "videoId": "0VTaVDkSWx4",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 297
+    },
+    "14420": {
+      "url": "https://www.youtube.com/watch?v=H_RititNE8U&t=97s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Signs an Executive Order, Aug. 10, 2026.” Captions name this order (“childhood vaccine”) during the official signing video.",
+      "videoId": "H_RititNE8U",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 97
+    },
+    "14422": {
+      "url": "https://www.youtube.com/watch?v=Kr7Ep94Mq1A&t=124s",
+      "source": "White House YouTube",
+      "note": "Official White House video “President Trump Participates in Signing Time, Aug. 27, 2026.” Captions name this order (“lake ontario”) during the official signing video.",
+      "videoId": "Kr7Ep94Mq1A",
+      "confidence": "high",
+      "how": "caption-alias",
+      "checked": "2026-11-21",
+      "t": 124
+    },
+    "14437": {
+      "url": "https://www.youtube.com/watch?v=7TGnUK1Dj2c&t=119s",
+      "source": "White House YouTube",
+      "note": "Official White House video of President Trump and the First Lady signing EO 14437. The order is named in full in the video: Advancing Women's Health to Improve Outcomes in All Phases of Life.",
+      "videoId": "7TGnUK1Dj2c",
+      "confidence": "high",
+      "how": "manual-verified",
+      "checked": "2026-11-21",
+      "t": 119
+    }
+  },
+  "videos": {
+    "ELT3855m3qA": {
+      "id": "ELT3855m3qA",
+      "title": "President Trump Signs an Executive Order, Mar. 31, 2026",
+      "date": "2026-03-31",
+      "duration": 2497,
+      "url": "https://www.youtube.com/watch?v=ELT3855m3qA",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "E9y3yfTAUaE": {
+      "id": "E9y3yfTAUaE",
+      "title": "President Trump Signs Executive Orders, Jan. 30, 2026",
+      "date": "2026-01-30",
+      "duration": 1901,
+      "url": "https://www.youtube.com/watch?v=E9y3yfTAUaE",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "DTVbPs1RoKo": {
+      "id": "DTVbPs1RoKo",
+      "title": "President Trump Signs an Executive Order, Dec. 18, 2025",
+      "date": "2025-12-18",
+      "duration": 2167,
+      "url": "https://www.youtube.com/watch?v=DTVbPs1RoKo",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "SckFiRw0suk": {
+      "id": "SckFiRw0suk",
+      "title": "President Trump Signs Executive Orders, Sep. 30, 2025",
+      "date": "2025-09-30",
+      "duration": 2132,
+      "url": "https://www.youtube.com/watch?v=SckFiRw0suk",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "D3urjiwp_wQ": {
+      "id": "D3urjiwp_wQ",
+      "title": "President Trump Signs Executive Orders, Sep. 25, 2025",
+      "date": "2025-09-25",
+      "duration": 3234,
+      "url": "https://www.youtube.com/watch?v=D3urjiwp_wQ",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "rlPfxyCnxHg": {
+      "id": "rlPfxyCnxHg",
+      "title": "President Trump Signs Executive Orders, Aug. 25, 2025",
+      "date": "2025-08-25",
+      "duration": 4664,
+      "url": "https://www.youtube.com/watch?v=rlPfxyCnxHg",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "QFBG9DBdsHg": {
+      "id": "QFBG9DBdsHg",
+      "title": "President Trump Signs an Executive Order, Aug. 5, 2025",
+      "date": "2025-08-05",
+      "duration": 1910,
+      "url": "https://www.youtube.com/watch?v=QFBG9DBdsHg",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "O9rCTRL6vmQ": {
+      "id": "O9rCTRL6vmQ",
+      "title": "President Trump Signs Executive Orders in the Oval Office,  May 23, 2025",
+      "date": "2025-05-23",
+      "duration": 1617,
+      "url": "https://www.youtube.com/watch?v=O9rCTRL6vmQ",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "mXMKuhDtlpo": {
+      "id": "mXMKuhDtlpo",
+      "title": "President Trump Signs Executive Orders in the Oval Office, May 5, 2025",
+      "date": "2025-05-05",
+      "duration": 1192,
+      "url": "https://www.youtube.com/watch?v=mXMKuhDtlpo",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "zkDVSD6bA08": {
+      "id": "zkDVSD6bA08",
+      "title": "President Trump Signs Executive Orders in the Oval Office, Apr. 23, 2025",
+      "date": "2025-04-23",
+      "duration": 2959,
+      "url": "https://www.youtube.com/watch?v=zkDVSD6bA08",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "yGoDK8bVB9k": {
+      "id": "yGoDK8bVB9k",
+      "title": "President Trump Participates in an Unleashing American Energy Executive Order Signing Event",
+      "date": null,
+      "duration": 3374,
+      "url": "https://www.youtube.com/watch?v=yGoDK8bVB9k",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "oQE2dgqe_bI": {
+      "id": "oQE2dgqe_bI",
+      "title": "President Trump Signs an Executive Order in the Oval Office, Mar. 31, 2025",
+      "date": "2025-03-31",
+      "duration": 2386,
+      "url": "https://www.youtube.com/watch?v=oQE2dgqe_bI",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "5mQDlMIjDRo": {
+      "id": "5mQDlMIjDRo",
+      "title": "President Trump Signs Executive Orders in the Oval Office,  Feb. 10, 2025",
+      "date": "2025-02-10",
+      "duration": 2233,
+      "url": "https://www.youtube.com/watch?v=5mQDlMIjDRo",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "kKucRFpb-w8": {
+      "id": "kKucRFpb-w8",
+      "title": "President Trump Signs Executive Orders in the Oval Office, Jan. 31, 2025",
+      "date": "2025-01-31",
+      "duration": 1765,
+      "url": "https://www.youtube.com/watch?v=kKucRFpb-w8",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "1hWZ8oG_x9I": {
+      "id": "1hWZ8oG_x9I",
+      "title": "President Trump Signs Executive Orders in the Oval Office, Feb. 4, 2025",
+      "date": "2025-02-04",
+      "duration": 1873,
+      "url": "https://www.youtube.com/watch?v=1hWZ8oG_x9I",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "07UH2FTaqE4": {
+      "id": "07UH2FTaqE4",
+      "title": "President Trump Signs Executive Orders in the Oval Office, Feb. 3, 2025",
+      "date": "2025-02-03",
+      "duration": 2087,
+      "url": "https://www.youtube.com/watch?v=07UH2FTaqE4",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "3rmWeGbfN8o": {
+      "id": "3rmWeGbfN8o",
+      "title": "01/23/25: President Trump Signs Executive Orders",
+      "date": "2025-01-23",
+      "duration": 1210,
+      "url": "https://www.youtube.com/watch?v=3rmWeGbfN8o",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "si19rPJi5NQ": {
+      "id": "si19rPJi5NQ",
+      "title": "President Donald J. Trump Signs Executive Orders on Day One of Administration",
+      "date": "2025-01-20",
+      "duration": 2864,
+      "url": "https://www.youtube.com/watch?v=si19rPJi5NQ",
+      "source": "White House YouTube",
+      "hasCaptions": false
+    },
+    "8xrI-_qo64E": {
+      "id": "8xrI-_qo64E",
+      "title": "President Trump Signs an Executive Order, Apr. 18, 2026",
+      "date": "2026-04-18",
+      "duration": 2971,
+      "url": "https://www.youtube.com/watch?v=8xrI-_qo64E",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "7TGnUK1Dj2c": {
+      "id": "7TGnUK1Dj2c",
+      "title": "President Trump and the First Lady Sign an Executive Order",
+      "date": null,
+      "duration": 1234,
+      "url": "https://www.youtube.com/watch?v=7TGnUK1Dj2c",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "4EUzlV7-Dew": {
+      "id": "4EUzlV7-Dew",
+      "title": "President Trump Signs Executive Orders, Jun. 3, 2026",
+      "date": "2026-06-03",
+      "duration": 2602,
+      "url": "https://www.youtube.com/watch?v=4EUzlV7-Dew",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "EtctNOj2gz4": {
+      "id": "EtctNOj2gz4",
+      "title": "President Trump Signs an Executive Order, Aug. 3, 2026",
+      "date": "2026-08-03",
+      "duration": 3361,
+      "url": "https://www.youtube.com/watch?v=EtctNOj2gz4",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "H_RititNE8U": {
+      "id": "H_RititNE8U",
+      "title": "President Trump Signs an Executive Order, Aug. 10, 2026",
+      "date": "2026-08-10",
+      "duration": 2485,
+      "url": "https://www.youtube.com/watch?v=H_RititNE8U",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "_f3Nhvz_o5A": {
+      "id": "_f3Nhvz_o5A",
+      "title": "President Trump Signs No Men in Women's Sports Executive Order Into Law",
+      "date": null,
+      "duration": 2090,
+      "url": "https://www.youtube.com/watch?v=_f3Nhvz_o5A",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "HNipoXNANAs": {
+      "id": "HNipoXNANAs",
+      "title": "President Trump Signs Executive Orders, Jun. 22, 2026",
+      "date": "2026-06-22",
+      "duration": 2353,
+      "url": "https://www.youtube.com/watch?v=HNipoXNANAs",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "tuFp-3RIgnQ": {
+      "id": "tuFp-3RIgnQ",
+      "title": "President Trump Signs an Executive Order Ending the Biden-Era War on Showers!",
+      "date": null,
+      "duration": 75,
+      "url": "https://www.youtube.com/watch?v=tuFp-3RIgnQ",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "jDw21pUBBMU": {
+      "id": "jDw21pUBBMU",
+      "title": "President Trump Participates in an Executive Order Signing, April 30th, 2026",
+      "date": "2026-04-30",
+      "duration": 3606,
+      "url": "https://www.youtube.com/watch?v=jDw21pUBBMU",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "s4_oK1KBw7Q": {
+      "id": "s4_oK1KBw7Q",
+      "title": "President Trump Signs Executive Orders at Mar-a-Lago, Feb. 18, 2025",
+      "date": "2025-02-18",
+      "duration": 2215,
+      "url": "https://www.youtube.com/watch?v=s4_oK1KBw7Q",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "pH6QHx9Qvkk": {
+      "id": "pH6QHx9Qvkk",
+      "title": "President Trump and First Lady Melania Trump sign an executive order for foster care children. 🇺🇸💙",
+      "date": null,
+      "duration": 58,
+      "url": "https://www.youtube.com/watch?v=pH6QHx9Qvkk",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "ZjnoGgEJvLs": {
+      "id": "ZjnoGgEJvLs",
+      "title": "President Trump Participates in an Education Event and Signs an Executive Order",
+      "date": null,
+      "duration": 971,
+      "url": "https://www.youtube.com/watch?v=ZjnoGgEJvLs",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "ZFzwTtdRywo": {
+      "id": "ZFzwTtdRywo",
+      "title": "President Trump Signs Executive Order: \"Drug Prices Will Come Down\"",
+      "date": null,
+      "duration": 62,
+      "url": "https://www.youtube.com/watch?v=ZFzwTtdRywo",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "gK9L029BcaM": {
+      "id": "gK9L029BcaM",
+      "title": "President Trump Signs Executive Orders, Sep. 19, 2025",
+      "date": "2025-09-19",
+      "duration": 6081,
+      "url": "https://www.youtube.com/watch?v=gK9L029BcaM",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "Kr7Ep94Mq1A": {
+      "id": "Kr7Ep94Mq1A",
+      "title": "President Trump Participates in Signing Time, Aug. 27, 2026",
+      "date": "2026-08-27",
+      "duration": 737,
+      "url": "https://www.youtube.com/watch?v=Kr7Ep94Mq1A",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "0VTaVDkSWx4": {
+      "id": "0VTaVDkSWx4",
+      "title": "President Trump Participates in Signing Time, Aug. 6, 2026",
+      "date": "2026-08-06",
+      "duration": 1212,
+      "url": "https://www.youtube.com/watch?v=0VTaVDkSWx4",
+      "source": "White House YouTube",
+      "hasCaptions": true
+    },
+    "WPuGrf46WTE": {
+      "id": "WPuGrf46WTE",
+      "title": "President Trump Signs Executive Orders at Capitol One Arena",
+      "url": "https://www.youtube.com/watch?v=WPuGrf46WTE",
+      "source": "C-SPAN",
+      "date": "2025-01-20"
+    },
+    "p3VwaIjf87Y": {
+      "id": "p3VwaIjf87Y",
+      "title": "Watch President Trump's first signings in Oval Office",
+      "url": "https://www.youtube.com/watch?v=p3VwaIjf87Y",
+      "source": "PBS NewsHour",
+      "date": "2017-01-20"
+    },
+    "CSPAN_20170125_195300": {
+      "id": "CSPAN_20170125_195300",
+      "title": "President Trump Visits the Department of Homeland Security",
+      "url": "https://archive.org/details/CSPAN_20170125_195300_President_Trump_Visits_the_Department_of_Homeland_Security",
+      "source": "C-SPAN (Internet Archive)",
+      "date": "2017-01-25"
+    },
+    "h9h34F4m5qg": {
+      "id": "h9h34F4m5qg",
+      "title": "Trump Signs Roll-Back on Obama-Era Climate Plan",
+      "url": "https://www.youtube.com/watch?v=h9h34F4m5qg",
+      "source": "AP Archive",
+      "date": "2017-03-28"
+    },
+    "CSPAN_20170418_192100": {
+      "id": "CSPAN_20170418_192100",
+      "title": "President Trump Signs Executive Order to Limit Cheap Foreign Labor",
+      "url": "https://archive.org/details/CSPAN_20170418_192100_President_Trump_Signs_Executive_Order_to_Limit_Cheap_Foreign_Labor",
+      "source": "C-SPAN (Internet Archive)",
+      "date": "2017-04-18"
+    },
+    "CSPAN_20180620_230400": {
+      "id": "CSPAN_20180620_230400",
+      "title": "President Trump Signs Executive Order on Migrant Families",
+      "url": "https://archive.org/details/CSPAN_20180620_230400_President_Trump_Signs_Executive_Order_on_Migrant_Families",
+      "source": "C-SPAN (Internet Archive)",
+      "date": "2018-06-20"
+    }
+  }
+}

@@ -227,3 +227,20 @@ body.eol footer.site-foot{background:var(--af1-navy-deep);border-top:1px solid v
   .eol-photos figure{padding:6px 6px 10px}
   .eol-photos figcaption{margin:8px 2px 0;font-size:9px;letter-spacing:.06em}
 }
+
+.binder-badge.signing{background:transparent;color:var(--af1-gold-bright);border:1px solid var(--af1-gold-leaf)}
+.folio-watch-wrap{margin:16px 0 2px}
+.folio-watch{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 18px;
+  background:var(--af1-gold-leaf);color:var(--af1-navy)!important;
+  font-family:var(--font-display);font-size:13px;font-weight:600;
+  letter-spacing:.10em;text-transform:uppercase;text-decoration:none;
+  border:1px solid var(--af1-gold);
+  box-shadow:0 8px 22px rgba(0,0,0,.4);
+}
+.folio-watch::before{content:"";width:0;height:0;border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent var(--af1-navy)}
+.folio-watch:hover,.folio-watch:focus{background:var(--af1-gold-bright);color:var(--af1-navy-deep)!important}
+@media (max-width:700px){
+  .folio-watch{width:100%;justify-content:center;padding:14px 16px}
+}

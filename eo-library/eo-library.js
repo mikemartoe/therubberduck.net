@@ -250,6 +250,7 @@ function chipYears(){
 function binderCard(r, hl){
   const badges = [];
   if (r.q && r.q.length) badges.push('<span class="binder-badge q">Q</span>');
+  if (r.signingVideo && r.signingVideo.url) badges.push('<span class="binder-badge signing">Signing</span>');
   if (r.status==='revoked') badges.push('<span class="binder-badge">Revoked</span>');
   else if (r.status==='amended') badges.push('<span class="binder-badge">Amended</span>');
   else if (r.status==='superseded') badges.push('<span class="binder-badge">Superseded</span>');
@@ -390,6 +391,19 @@ async function openBinder(n){
   if (r.frUrl) links.push('<a href="'+esc(r.frUrl)+'" target="_blank" rel="noopener">Federal Register page</a>');
   if (r.pdfUrl) links.push('<a href="'+esc(r.pdfUrl)+'" target="_blank" rel="noopener">govinfo.gov official file</a>');
   $('folioLinks').innerHTML = links.join('');
+  const watchWrap = $('folioWatchWrap');
+  const watch = $('folioWatch');
+  if (watchWrap && watch){
+    const sv = r.signingVideo;
+    if (sv && sv.url){
+      watch.href = sv.url;
+      watch.setAttribute('aria-label', 'Watch the live signing of Executive Order '+r.n+' (opens in a new tab)');
+      watchWrap.hidden = false;
+    } else {
+      watch.removeAttribute('href');
+      watchWrap.hidden = true;
+    }
+  }
   const qhost = $('folioQList');
   if (r.q && r.q.length){
     $('folioQ').hidden = false;

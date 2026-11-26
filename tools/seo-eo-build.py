@@ -321,7 +321,7 @@ def build_eo_page(r: dict, raw_text: str, prev_r: dict | None, next_r: dict | No
 <link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261126sl">
 <link rel="stylesheet" href="/assets/trd/suggest.css">
 <link rel="stylesheet" href="/assets/trd/support-strip.css?v=20261120a">
-<link rel="stylesheet" href="/eo-library/eo-library.css?v=20261121q">
+<link rel="stylesheet" href="/eo-library/eo-library.css?v=779d94d30a">
 <link rel="stylesheet" href="/eo-library/eo-page.css?v=20261121a">
 <script>window.trdNav||(function(){{var s=document.createElement('script');s.src='/assets/trd/sitenav.js?v=20261123f2';s.setAttribute('data-trd-keep','');document.head.appendChild(s);}})();</script>
 <script type="application/ld+json">{{"@context":"https://schema.org","@graph":{ld}}}</script>
@@ -453,9 +453,10 @@ def update_library_index(eos: list[dict]) -> bool:
 
     css_link = '<link rel="stylesheet" href="/eo-library/eo-page.css?v=20261121a">'
     if "/eo-library/eo-page.css" not in h:
-        needle = '<link rel="stylesheet" href="/eo-library/eo-library.css?v=20261121q">'
-        if needle not in h:
+        m = re.search(r'<link rel="stylesheet" href="/eo-library/eo-library\.css\?v=[^"]+">', h)
+        if not m:
             raise SystemExit("Could not find eo-library.css link in eo-library/index.html")
+        needle = m.group(0)
         h = h.replace(needle, needle + "\n" + css_link, 1)
 
     dir_block = build_directory_html(eos)
