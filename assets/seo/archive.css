@@ -92,3 +92,8 @@ h2{font-size:20px;margin:28px 0 8px}
 @media (max-width:720px){.sbs{grid-template-columns:1fr}.sbs-q,.comms .sbs-q,.said .sbs-q{font-size:15.5px}.sbs-none{font-size:15.5px}}
 /* sticky header + archive search (Vincent brief P2): the search box itself is added by signup.js */
 header.top{position:sticky;top:0;z-index:50}
+
+/* Substack signup embed in the archive (wrap) footer */
+footer.wrap.foot .sf-substack,footer.xm-foot .sf-substack,footer.sg-foot .sf-substack{padding:24px 16px 20px}
+footer.wrap.foot .sf-substack iframe,footer.xm-foot .sf-substack iframe,footer.sg-foot .sf-substack iframe{width:480px;max-width:100%;height:260px;border:1px solid #EEE;background:#fff;display:block;margin:0 auto;box-sizing:border-box}
+footer.sg-foot,footer.xm-foot{text-align:center}

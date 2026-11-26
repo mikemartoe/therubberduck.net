@@ -163,7 +163,10 @@ FOOTER_HTML = """<footer class="site-foot">
       <ul><li><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener">Message @TheRubberDuck79 on X</a></li><li><a href="https://x.com/TheRubberDuck79" target="_blank" rel="noopener">Order and sponsor questions on X</a></li><li><button class="sf-btn" type="button" data-sug-open>Suggestion box</button></li></ul>
     </div>
   </div>
-  <div class="sf-legal">
+  <div class="sf-substack" role="region" aria-label="Subscribe by email on Substack">
+  <iframe src="https://therubberduck78.substack.com/embed" width="480" height="260" style="border: 1px solid #EEE; background: white; max-width: 100%; width: 480px; height: 260px;" frameborder="0" scrolling="no" title="Subscribe to The Rubber Duck on Substack"></iframe>
+</div>
+<div class="sf-legal">
     <p>Colors on this page are sampled from the official U.S. Air Force VC-25B Executive Airlift rendering (DVIDS VIRIN 260218-O-F3227-1001, February 18, 2026). Each order links to the official Federal Register record and PDF, which carries the printed presidential signature. Texts are from the American Presidency Project and the Federal Register; computer-captured text can contain errors, so quote the official PDF when it matters. Q connections are to matching words, names, or phrases in the drop text, with a link to the drop.</p>
     <p>&copy; 2026 The Rubber Duck&trade;. All rights reserved.</p>
   </div>
