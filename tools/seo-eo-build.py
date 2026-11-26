@@ -164,7 +164,7 @@ FOOTER_HTML = """<footer class="site-foot">
     </div>
   </div>
   <div class="sf-substack" role="region" aria-label="Subscribe by email on Substack">
-  <iframe src="https://therubberduck78.substack.com/embed" width="480" height="260" style="border: 1px solid #EEE; background: white; max-width: 100%; width: 480px; height: 260px;" frameborder="0" scrolling="no" title="Subscribe to The Rubber Duck on Substack"></iframe>
+  <iframe src="https://therubberduck78.substack.com/embed" width="480" height="260" style="border: 1px solid #EEE; background: white; max-width: 100%; width: 480px; height: 260px;" frameborder="0" scrolling="no" loading="lazy" title="Subscribe to The Rubber Duck on Substack"></iframe>
 </div>
 <div class="sf-legal">
     <p>Colors on this page are sampled from the official U.S. Air Force VC-25B Executive Airlift rendering (DVIDS VIRIN 260218-O-F3227-1001, February 18, 2026). Each order links to the official Federal Register record and PDF, which carries the printed presidential signature. Texts are from the American Presidency Project and the Federal Register; computer-captured text can contain errors, so quote the official PDF when it matters. Q connections are to matching words, names, or phrases in the drop text, with a link to the drop.</p>
@@ -318,7 +318,7 @@ def build_eo_page(r: dict, raw_text: str, prev_r: dict | None, next_r: dict | No
 <meta name="twitter:image" content="{SITE}/eo-library/img/signing.webp">
 <meta name="twitter:image:alt" content="President Donald J. Trump signing an executive order.">
 <link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261121e">
+<link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261126sl">
 <link rel="stylesheet" href="/assets/trd/suggest.css">
 <link rel="stylesheet" href="/assets/trd/support-strip.css?v=20261120a">
 <link rel="stylesheet" href="/eo-library/eo-library.css?v=20261121q">

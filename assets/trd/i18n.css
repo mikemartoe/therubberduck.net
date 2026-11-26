@@ -24,3 +24,7 @@ html[lang="ja"] body.eol-home{
   --eo-display:'Cinzel','Hiragino Mincho ProN','Yu Mincho','YuMincho','Hiragino Sans','Yu Gothic','YuGothic','Noto Serif JP','Noto Sans JP','Meiryo',serif;
   --eo-body:'EB Garamond','Hiragino Mincho ProN','Yu Mincho','YuMincho','Hiragino Sans','Yu Gothic','YuGothic','Noto Serif JP','Noto Sans JP','Meiryo',serif;
 }
+
+/* Localized one-line lead-in above the English Substack embed */
+.sf-substack{display:flex;flex-direction:column;justify-content:center;align-items:center}
+.sf-substack-lead{margin:0 0 10px;padding:0;max-width:480px;width:100%;text-align:center;font:400 14px/1.45 'Roboto','Helvetica Neue',Arial,sans-serif;color:var(--muted,#d8cbb2)}

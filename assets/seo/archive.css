@@ -94,6 +94,7 @@ h2{font-size:20px;margin:28px 0 8px}
 header.top{position:sticky;top:0;z-index:50}
 
 /* Substack signup embed in the archive (wrap) footer */
-footer.wrap.foot .sf-substack,footer.xm-foot .sf-substack,footer.sg-foot .sf-substack{padding:24px 16px 20px}
-footer.wrap.foot .sf-substack iframe,footer.xm-foot .sf-substack iframe,footer.sg-foot .sf-substack iframe{width:480px;max-width:100%;height:260px;border:1px solid #EEE;background:#fff;display:block;margin:0 auto;box-sizing:border-box}
+footer.wrap.foot .sf-substack,footer.xm-foot .sf-substack,footer.sg-foot .sf-substack{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px 16px 20px;box-sizing:border-box}
+footer.wrap.foot .sf-substack-lead,footer.xm-foot .sf-substack-lead,footer.sg-foot .sf-substack-lead{margin:0 0 10px;padding:0;max-width:480px;width:100%;text-align:center;font:400 14px/1.45 'Roboto','Helvetica Neue',Arial,sans-serif;color:var(--muted,#d8cbb2)}
+footer.wrap.foot .sf-substack iframe,footer.xm-foot .sf-substack iframe,footer.sg-foot .sf-substack iframe{width:480px;max-width:100%;height:260px;min-height:260px;border:1px solid #EEE;background:#fff;display:block;margin:0 auto;box-sizing:border-box}
 footer.sg-foot,footer.xm-foot{text-align:center}

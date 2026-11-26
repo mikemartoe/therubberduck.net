@@ -84,6 +84,47 @@ GLOSSARY = [
     "therubberduck.net",
 ]
 
+# Localized chrome around the English-only Substack embed (locale pages only).
+# Paywall wording matches catalog.json (muro de pago, paywall, mur payant, Bezahlschranke, betaalmuur).
+SUBSTACK_COPY = {
+    "en-au": {
+        "lead": "free newsletter. no paywall.",
+        "title": "Subscribe to The Rubber Duck on Substack",
+        "aria": "Subscribe by email on Substack",
+    },
+    "es": {
+        "lead": "boletín gratis. sin muro de pago.",
+        "title": "Suscríbete a The Rubber Duck en Substack",
+        "aria": "Suscríbete por correo en Substack",
+    },
+    "fr": {
+        "lead": "newsletter gratuite. pas de paywall.",
+        "title": "S’abonner à The Rubber Duck sur Substack",
+        "aria": "S’abonner par e-mail sur Substack",
+    },
+    "fr-ca": {
+        "lead": "infolettre gratuite. pas de mur payant.",
+        "title": "S’abonner à The Rubber Duck sur Substack",
+        "aria": "S’abonner par courriel sur Substack",
+    },
+    "de": {
+        "lead": "kostenloser newsletter. keine bezahlschranke.",
+        "title": "The Rubber Duck auf Substack abonnieren",
+        "aria": "Per E-Mail auf Substack abonnieren",
+    },
+    "nl": {
+        "lead": "gratis nieuwsbrief. geen betaalmuur.",
+        "title": "Abonneer je op The Rubber Duck via Substack",
+        "aria": "Abonneren via e-mail op Substack",
+    },
+    "ja": {
+        "lead": "無料ニュースレター。有料の壁はありません。",
+        "title": "SubstackでThe Rubber Duckを購読",
+        "aria": "Substackでメール購読",
+    },
+}
+
+
 NOTE = {
     "en-au": "Australian English edition. Prices are in USD. View the original.",
     "es": "Traducción asistida por máquina. Ver el original en inglés.",
@@ -347,8 +388,40 @@ def set_in_language(html: str, lang: str) -> str:
     return re.sub(r'<script type="application/ld\+json">[\s\S]*?</script>', fix, html)
 
 
+
+def localize_substack(html: str, prefix: str, lang: str) -> str:
+    """Add a short localized lead-in and localize iframe title / aria-label.
+
+    The official Substack embed itself stays English. English source pages are
+    unchanged. Idempotent if a lead-in is already present.
+    """
+    if not prefix:
+        return html
+    copy = SUBSTACK_COPY.get(prefix)
+    if not copy or "sf-substack" not in html:
+        return html
+    lead = f'<p class="sf-substack-lead" lang="{lang}">{copy["lead"]}</p>\n  '
+    pattern = re.compile(
+        r'(<div class="sf-substack" role="region" aria-label=")([^"]*)(">\s*)'
+        r'(?:<p class="sf-substack-lead"[^>]*>.*?</p>\s*)?'
+        r'(<iframe src="https://therubberduck78\.substack\.com/embed"[^>]*></iframe>)',
+        re.S,
+    )
+
+    def repl(m: re.Match) -> str:
+        iframe = m.group(4)
+        iframe = re.sub(r' title="[^"]*"', f' title="{copy["title"]}"', iframe, count=1)
+        if " lang=" not in iframe:
+            iframe = iframe.replace("<iframe ", '<iframe lang="en" ', 1)
+        if "loading=" not in iframe:
+            iframe = iframe.replace(' scrolling="no"', ' scrolling="no" loading="lazy"', 1)
+        return f'{m.group(1)}{copy["aria"]}{m.group(3)}{lead}{iframe}'
+
+    return pattern.sub(repl, html)
+
+
 def inject_css(html: str) -> str:
-    tag = '<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261121a">'
+    tag = '<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261126sl">'
     if "i18n.css" in html:
         return html
     if "</head>" in html:
@@ -381,6 +454,7 @@ def transform(src_html: str, prefix: str, rel: str, lang: str, catalog: dict[str
         html = apply_catalog(html, catalog)
         html = absolutize(html, prefix)
     html = inject_note_and_switcher(html, prefix, rel)
+    html = localize_substack(html, prefix, lang)
     return html
 
 

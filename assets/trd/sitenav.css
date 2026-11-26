@@ -92,8 +92,9 @@ footer.site-foot .sf-col a,footer.site-foot .sf-col .sf-btn{display:inline;paddi
 }
 
 /* Substack signup embed in the site footer */
-.sf-substack{display:flex;justify-content:center;align-items:center;width:100%;max-width:100%;margin:0;padding:8px 24px 20px;box-sizing:border-box}
-.sf-substack iframe{width:480px;max-width:100%;height:260px;border:1px solid #EEE;background:#fff;display:block;margin:0 auto;box-sizing:border-box;vertical-align:top}
+.sf-substack{display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;max-width:100%;margin:0;padding:8px 24px 20px;box-sizing:border-box}
+.sf-substack-lead{margin:0 0 10px;padding:0;max-width:480px;width:100%;text-align:center;font:400 14px/1.45 'Roboto','Helvetica Neue',Arial,sans-serif;color:var(--muted,#d8cbb2)}
+.sf-substack iframe{width:480px;max-width:100%;height:260px;min-height:260px;border:1px solid #EEE;background:#fff;display:block;margin:0 auto;box-sizing:border-box;vertical-align:top}
 @media (max-width:899px){.sf-substack{padding:4px 16px 18px}}
 @media (max-width:520px){.sf-substack{padding:0 12px 16px}}
 
