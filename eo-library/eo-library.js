@@ -126,7 +126,7 @@ function loadTexts(){
   if (TEXTS || textsLoading) return textsLoading || Promise.resolve(TEXTS);
   textsLoading = new Promise((resolve) => {
     const s = document.createElement('script');
-    s.src = '/eo-library/data/eo-texts.js';
+    s.src = '/eo-library/data/eo-texts.js?v=4c89e4786e';
     s.onload = () => { TEXTS = window.TRD_EO_TEXTS || {}; resolve(TEXTS); };
     s.onerror = () => { TEXTS = {}; resolve(TEXTS); };
     document.head.appendChild(s);
