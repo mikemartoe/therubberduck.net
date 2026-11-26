@@ -18,6 +18,7 @@ What it does (idempotent, safe to re-run after any data change):
   3. Writes sitemap.xml (a sitemap index) plus /sitemaps/*.xml, and robots.txt.
 The rooms themselves are not changed visually; the new pages are separate URLs.
 """
+import collections
 import html, json, os, re, subprocess, sys, datetime
 from zoneinfo import ZoneInfo
 from collections import OrderedDict, defaultdict, Counter as collections_counter
@@ -601,11 +602,13 @@ def build_listen():
     for v in D['vols']:
         if v['id'] in seen: continue
         seen.add(v['id']); vols.append(v)
+    base_n = collections.Counter('%s, %s' % (v['t'], v.get('ds') or v.get('d')) for v in vols)
     for v in vols:
         url = '/listen/%s/' % v['id']
         mn = v.get('min') or {}
         summ = mn.get('sum') or v.get('sum') or ''
         title = '%s, %s' % (v['t'], v.get('ds') or v.get('d'))
+        if base_n[title] > 1 and v.get('lenl'): title += ' (%s)' % v['lenl']   # same show twice on one day: keep titles unique
         desc = clip('%s (%s, %s). %s' % (v['t'], v.get('d'), 'Rumble' if v['src'] == 'rumble' else 'X Space', summ))
         player = ''
         if v.get('embed'):
