@@ -237,7 +237,7 @@
     if (D.querySelector('link[href*="i18n.css"]')) return;
     var l = D.createElement('link');
     l.rel = 'stylesheet';
-    l.href = '/assets/trd/i18n.css?v=20261121a';
+    l.href = '/assets/trd/i18n.css?v=2ff883709c';
     (D.head || D.documentElement).appendChild(l);
   }
   function build() {

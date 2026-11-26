@@ -40,7 +40,7 @@ RE_APPBAR = re.compile(r'<script src="/assets/trd/appbar\.js[^"]*"></script>\n')
 # (preview card images/deltas/og/MM-DD.png, made by tools/deltas-cards.py) and the Ledger's compact row under every drop.
 SHARE_CSS = ('<link rel="stylesheet" href="/assets/trd/share.css?v=20261030c">\n'
              '<link rel="stylesheet" href="/assets/seo/dx-share.css?v=1">\n')
-SHARE_JS = '<script src="/assets/trd/share.js?v=20261030c"></script><script src="/assets/seo/dx-share.js?v=1"></script>'
+SHARE_JS = '<script src="/assets/trd/share.js?v=7861f370e4"></script><script src="/assets/seo/dx-share.js?v=1"></script>'
 DX_CARD = '/images/deltas/og/%s.png'
 IMG_BASE = 'https://memes.therubberduck.net/drops/img/'
 MISSING_IMAGES = set()   # keys listed in data/drop-images.js but not on R2 (404); 1001_1 uploaded 2026-10-30

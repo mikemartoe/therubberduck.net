@@ -322,7 +322,7 @@
   function shareRow(host, n, rec) {
     ensureShareCss();
     var jobs = [
-      loadScript('/assets/trd/share.js?v=20261030c', function () { return !!W.trdShare; }),
+      loadScript('/assets/trd/share.js?v=7861f370e4', function () { return !!W.trdShare; }),
       loadScript('/data/drop-cards.js', function () { return !!W.TRD_DROP_CARDS; }).catch(function () {})
     ];
     Promise.all(jobs).then(function () {

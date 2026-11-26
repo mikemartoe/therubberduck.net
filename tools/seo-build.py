@@ -134,7 +134,7 @@ def book_ld():
                        'seller': {'@id': ORG_ID}}}
 
 # ---------------------------------------------------------------- page shell for generated pages
-CSS_HREF = '/assets/seo/archive.css?v=1'
+CSS_HREF = '/assets/seo/archive.css?v=2c7e4dc25a'
 
 # ---------------------------------------------------------------- email signup (Substack handoff; therubberduck78.substack.com is the one newsletter)
 # No-JS: GET /subscribe with name=email in a new tab. With JS, /assets/seo/signup.js opens the same URL.
@@ -194,7 +194,7 @@ def page(path, title, desc, body, graph, crumb_items, og_image=SHARE, og_type='w
         ss_head = (
             '<link rel="stylesheet" href="/assets/trd/share.css?v=20261030c">\n'
             '<link rel="stylesheet" href="/assets/trd/support-strip.css?v=20261120a">\n'
-            '<script src="/assets/trd/share.js?v=20261030c" data-trd-keep></script>\n'
+            '<script src="/assets/trd/share.js?v=7861f370e4" data-trd-keep></script>\n'
             '<script src="/assets/trd/support-strip.js?v=20261120a" data-trd-keep></script>\n'
         )
         support_html = (

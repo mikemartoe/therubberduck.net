@@ -61,7 +61,7 @@
 
   function ensureShare(cb) {
     var jobs = [];
-    if (!W.trdShare) jobs.push(loadScript('/assets/trd/share.js?v=20261030c', function () { return !!W.trdShare; }));
+    if (!W.trdShare) jobs.push(loadScript('/assets/trd/share.js?v=7861f370e4', function () { return !!W.trdShare; }));
     if (!W.TRD_DROP_CARDS) jobs.push(loadScript('/data/drop-cards.js', function () { return !!W.TRD_DROP_CARDS; }).catch(function () {}));
     Promise.all(jobs).then(cb, cb);
   }

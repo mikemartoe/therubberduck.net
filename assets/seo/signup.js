@@ -37,7 +37,7 @@
 (function () {
   var wrap = document.querySelector('header.top .wrap');
   if (!wrap || document.getElementById('tn-q')) return;
-  var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/assets/trd/sitenav.css?v=2'; document.head.appendChild(css);
+  var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/assets/trd/sitenav.css?v=8917b1b4e2'; document.head.appendChild(css);
   var f = document.createElement('form');
   f.className = 'tn-search'; f.id = 'tn-form'; f.setAttribute('role', 'search'); f.action = '/x/'; f.method = 'get';
   f.innerHTML = '<svg class="tn-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>' +

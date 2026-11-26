@@ -326,7 +326,7 @@
   }
   function buildShare() {
     if (shareReady || !CONFIG.SHARE_URL || !shareBox) return;
-    shareReady = Promise.all([need('link', 'href', '/assets/trd/share.css?v=20261030c'), W.trdShare ? null : need('script', 'src', '/assets/trd/share.js?v=20261030c')])
+    shareReady = Promise.all([need('link', 'href', '/assets/trd/share.css?v=20261030c'), W.trdShare ? null : need('script', 'src', '/assets/trd/share.js?v=7861f370e4')])
       .then(function () {
         if (shareBox.firstChild) return;
         if (!W.trdShare) { shareReady = null; return; }

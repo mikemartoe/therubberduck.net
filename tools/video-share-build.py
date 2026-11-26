@@ -271,7 +271,7 @@ def page(v, img, meta, others):
 <section class="more" aria-labelledby="mh"><h2 id="mh">More in the Video Room</h2><ul>{more}</ul></section>
 </main>
 <footer class="foot"><a href="/">therubberduck.net</a> &middot; <a href="/videos.html">Video Room</a> &middot; <a href="https://x.com/TheRubberDuck79" rel="me">@TheRubberDuck79</a></footer>
-<script src="/assets/trd/share.js?v=20261030c" data-trd-keep></script>
+<script src="/assets/trd/share.js?v=7861f370e4" data-trd-keep></script>
 <script>if(window.trdShare)document.getElementById('shr').appendChild(trdShare.build({share}));</script>
 </body></html>
 """

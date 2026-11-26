@@ -378,7 +378,7 @@ def status_page(p):
 <meta name="twitter:description" content="%s">
 <meta name="twitter:image" content="%s">
 <link rel="icon" href="/favicon-duck-white.ico" sizes="any">
-<link rel="stylesheet" href="/assets/seo/archive.css?v=1">
+<link rel="stylesheet" href="/assets/seo/archive.css?v=2c7e4dc25a">
 <script type="application/ld+json">%s</script>
 </head>
 <body>
