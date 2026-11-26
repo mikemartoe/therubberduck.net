@@ -418,21 +418,8 @@ function closeBinder(){
   history.replaceState(null,'', u.pathname+u.search);
 }
 
-async function findSignaturePage(){
-  if (!pdfDoc) return 1;
-  let named=0;
-  for (let i=1;i<=pdfDoc.numPages;i++){
-    const page = await pdfDoc.getPage(i);
-    const tc = await page.getTextContent();
-    const text = tc.items.map((it)=>it.str).join(' ');
-    if (/Trump\.EPS/i.test(text) || (/THE WHITE HOUSE/.test(text) && /Billing code|December|January|February|March|April|May|June|July|August|September|October|November/.test(text) && !/I, DONALD J\. TRUMP/.test(text))){
-      // Prefer a later page: the preamble also says "I, DONALD J. TRUMP".
-      named = i;
-    }
-  }
-  return named || 0;
-}
-
+// Open every official PDF on page 1. Do not jump to the signature
+// page (Mike, 2026-11-26). The printed signature stays in the file.
 async function showDocument(r){
   const msg = $('folioPdfMsg');
   const textEl = $('folioText');
@@ -458,8 +445,6 @@ async function showDocument(r){
       canvas.hidden = false;
       msg.textContent = r.hasPdf ? 'Official Federal Register PDF, including the printed presidential signature.' : '';
       await drawPage();
-      const sig = await findSignaturePage();
-      if (sig && sig!==pdfPage){ pdfPage=sig; await drawPage(); }
       return;
     }catch(e){ /* try next */ }
   }
