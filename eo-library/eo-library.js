@@ -262,7 +262,7 @@ function binderCard(r, hl){
       '<span class="binder-num">'+highlight(esc(String(r.n)), hl)+'</span>'+
       '<span class="binder-title">'+highlight(esc(r.title), hl)+'</span>'+
       '<span class="binder-date">'+esc(r.dateLabel)+'</span>'+
-      '<span class="binder-sign">Donald J. Trump</span>'+
+      '<span class="binder-sign"><img src="/eo-library/img/trump-signature-gold-240.webp" srcset="/eo-library/img/trump-signature-gold-240.webp 240w, /eo-library/img/trump-signature-gold.webp 480w" sizes="80px" width="240" height="202" alt="Donald J. Trump signature" loading="lazy" decoding="async"></span>'+
     '</span></button>';
 }
 
