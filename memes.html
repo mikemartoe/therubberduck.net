@@ -205,6 +205,11 @@ main{position:relative;z-index:1}
 .tile .badge{position:absolute;top:8px;left:8px;background:var(--pill);
   color:#fff;font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.06em;
   padding:3px 8px;border-radius:3px;z-index:2}
+/* memeshirts: small "on a shirt" link for memes that are on a MemeShirt (remove to roll back) */
+.tile .wear{position:absolute;top:8px;right:8px;background:#c8202b;color:#fff;font-family:var(--body);font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:3px;box-shadow:0 2px 8px rgba(0,0,0,.45);pointer-events:none;z-index:2}
+.lb-wear{display:inline-flex;align-items:center;gap:7px;margin:0 0 14px;padding:7px 12px;border-radius:999px;background:#c8202b;color:#fff;font-family:var(--body);font-weight:700;font-size:12.5px;letter-spacing:.02em;text-decoration:none}
+.lb-wear:hover,.lb-wear:focus-visible{background:#e02a36;color:#fff}
+.lb-wear[hidden]{display:none}
 .tile .badge.vid{background:var(--orange)}
 .tile .badge.gif{background:var(--green)}
 .tile .tf{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:8px 11px;border-top:1px solid var(--rule);
@@ -489,6 +494,7 @@ footer.site b{color:#c4cad0;font-weight:700}
       <div class="lb-id" id="lbid"></div>
       <h2 id="lbtitle"></h2>
       <p class="lb-src" id="lbsrc"></p>
+      <a class="lb-wear" id="lbwear" href="/shop/memeshirt-2-kinds-of-anons/" hidden>Now on a shirt: <span id="lbwearn"></span> &rarr;</a>
       <dl class="specs" id="lbspecs"></dl>
       <h3>Tags</h3>
       <div class="lbtags" id="lbtags"></div>
@@ -512,6 +518,8 @@ var SITE='https://therubberduck.net/memes.html';
 var MEDIA_BASE='https://memes.therubberduck.net/';
 function mediaUrl(p){if(!p)return p;if(/^https?:\/\//i.test(p))return p;return MEDIA_BASE+String(p).replace(/^\//,'')}
 var PAGE='memes.html', PER=12;
+/* memeshirts: memes that are on a shirt in TRD Collectibles */
+var WEAR={'img-0723':{href:'/shop/memeshirt-2-kinds-of-anons/',name:'2 Kinds Of Anons Tee'}};
 var DATA=[], items=[], view=[], shownN=0, cur=-1, seed='', reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 var F={typeTag:[],orientation:[],family:[],brightness:[],animated:[],faceBucket:[],faceSize:[],people:[],topics:[]};
 var $=function(s){return document.getElementById(s)};
@@ -983,7 +991,7 @@ function renderChunk(){
     }
     var tags=(it.topics||[]).slice(0,4).map(function(t){return '<span>'+esc(t)+'</span>'}).join('');
     var foot='<span class="tf"><b>'+esc(it.title||it.id)+'</b><span>'+(it.width&&it.height?it.width+' × '+it.height:Math.round((it.bytes||0)/1024)+' KB')+'</span></span>';
-    el.innerHTML=media+'<span class="badge '+b[1]+'">'+b[0]+'</span><span class="hover">'+tags+'</span>'+foot;
+    el.innerHTML=media+'<span class="badge '+b[1]+'">'+b[0]+'</span><span class="hover">'+tags+'</span>'+foot+(WEAR[it.id]?'<span class="wear">On a shirt</span>':'');
     frag.appendChild(el);
   }
   $('grid').appendChild(frag);
@@ -1020,6 +1028,7 @@ function openAt(i){
     : '<img src="'+mediaUrl(it.file)+'" alt="'+esc(it.title)+'">';
   $('lbid').textContent=typeTagOf(it).toUpperCase()+' · '+it.id;
   $('lbtitle').textContent=it.title||it.id;
+  var wr=WEAR[it.id],wa=$('lbwear');if(wa){wa.hidden=!wr;if(wr){wa.href=wr.href;$('lbwearn').textContent=wr.name;}}
   $('lbsrc').textContent='source file: '+(it.source||'—');
   var kb=(it.bytes/1024).toFixed(0);
   var rows=[['Type',typeTagOf(it).toUpperCase()],['Size',kb+' KB'],
