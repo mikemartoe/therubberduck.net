@@ -249,3 +249,9 @@ body.eol footer.site-foot{background:var(--af1-navy-deep);border-top:1px solid v
 @media (max-width:700px){
   .folio-watch{width:100%;justify-content:center;padding:14px 16px}
 }
+
+/* Share row inside the open binder (assets/trd/share.js, compact) */
+.folio-share{--border:rgba(208,175,108,.45);--text:#F3EFE4;--accent:var(--af1-gold-bright);--muted:var(--af1-gold-leaf);--surface-1:rgba(14,18,36,.6);margin:14px 0 0}
+.folio-share:empty{display:none}
+.folio-share .shr.shr-compact{margin:0}
+@media (max-width:640px){.folio-share .shr-compact .shr-btns{gap:4px;flex-wrap:nowrap}.folio-share .shr-compact .shr-b{width:37px;height:37px}.folio-share .shr-compact .shr-b svg{width:18px;height:18px}}

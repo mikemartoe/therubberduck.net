@@ -391,6 +391,16 @@ async function openBinder(n){
   if (r.frUrl) links.push('<a href="'+esc(r.frUrl)+'" target="_blank" rel="noopener">Federal Register page</a>');
   if (r.pdfUrl) links.push('<a href="'+esc(r.pdfUrl)+'" target="_blank" rel="noopener">govinfo.gov official file</a>');
   $('folioLinks').innerHTML = links.join('');
+  const shareHost = $('folioShare');
+  if (shareHost){
+    shareHost.innerHTML = '';
+    if (window.trdShare){
+      const img = 'https://therubberduck.net/eo-library/img/signing.webp';
+      shareHost.appendChild(window.trdShare.build({ kind:'eo', id:String(r.n), page:'https://therubberduck.net/eo-library/'+r.n+'/',
+        text:'Executive Order '+r.n+': '+r.title, thumb:img, file:img, fileName:'executive-order-'+r.n+'.webp',
+        compact:true, groupLabel:'Share Executive Order '+r.n }));
+    }
+  }
   const watchWrap = $('folioWatchWrap');
   const watch = $('folioWatch');
   if (watchWrap && watch){
