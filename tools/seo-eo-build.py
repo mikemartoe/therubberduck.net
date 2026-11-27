@@ -307,7 +307,8 @@ def build_eo_page(r: dict, raw_text: str, prev_r: dict | None, next_r: dict | No
 <meta property="og:title" content="{E(og_title)}">
 <meta property="og:description" content="{E(og_desc)}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{SITE}/eo-library/img/signing.webp">
+<meta property="og:image" content="{SITE}/eo-library/img/signing.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1245">
 <meta property="og:image:height" content="700">
 <meta property="og:image:alt" content="President Donald J. Trump signing an executive order.">
@@ -315,7 +316,7 @@ def build_eo_page(r: dict, raw_text: str, prev_r: dict | None, next_r: dict | No
 <meta name="twitter:site" content="@TheRubberDuck79">
 <meta name="twitter:title" content="{E(og_title)}">
 <meta name="twitter:description" content="{E(og_desc)}">
-<meta name="twitter:image" content="{SITE}/eo-library/img/signing.webp">
+<meta name="twitter:image" content="{SITE}/eo-library/img/signing.jpg">
 <meta name="twitter:image:alt" content="President Donald J. Trump signing an executive order.">
 <link rel="icon" href="/favicon.ico">
 <link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261126sl">

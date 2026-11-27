@@ -801,7 +801,7 @@ ROOMS = OrderedDict([
     ('memes.html', {'path': '/memes.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Meme Dump', '/memes.html')], 'img': None}),
     ('pdfs.html', {'path': '/pdfs.html', 'title': 'SCI[F] | Free PDF Library on Q, PSYOP and Epstein | The Rubber Duck&trade;', 'desc': None,
                    'crumbs': [('Home', '/'), ('SCI[F]', '/pdfs.html')], 'img': None}),
-    ('eo-library/index.html', {'path': '/eo-library/', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('Executive Order Library', '/eo-library/')], 'img': '/eo-library/img/signing.webp'}),
+    ('eo-library/index.html', {'path': '/eo-library/', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('Executive Order Library', '/eo-library/')], 'img': '/eo-library/img/signing.jpg'}),
     ('scif/rooms/oss/index.html', {'path': '/scif/rooms/oss/', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('SCI[F]', '/pdfs.html'), ('OSS Secret Room', '/scif/rooms/oss/')], 'img': None}),
     ('x/index.html', {'path': '/x/', 'title': 'The X Archive: Every @TheRubberDuck79 Post | The Rubber Duck&trade;', 'desc': None, 'crumbs': [('Home', '/'), ('X Archive', '/x/')], 'img': None}),
     ('album.html', {'path': '/album.html', 'title': None, 'desc': None, 'crumbs': [('Home', '/'), ('The Red Pill Album', '/album.html')], 'img': None}),
