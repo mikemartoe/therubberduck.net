@@ -67,7 +67,7 @@ body.eol-home .eol-cheat{
   grid-template-columns:calc(50% + (var(--coin) / 2) + 16px) 10px 22px 1fr;
 }
 @media (max-width:699px){
-  body.eol-home .eol-cheat{--coin:150px}
+  body.eol-home .eol-cheat{--coin:75px}
 }
 
 /* Header band */
@@ -422,7 +422,8 @@ body.eol-home .hello{
   padding:0 6px;overflow:visible;
 }
 @media (max-width:699px){
-  body.eol-home .hello{--coin:150px;--row:114px}
+  body.eol-home .hello{--coin:75px;--row:57px}
+  body.eol-home .hello-coin-shadow{bottom:-14px;height:26px;filter:blur(6px)}
 }
 body.eol-home .hello-h{
   position:absolute;left:50%;top:50%;z-index:2;
@@ -432,7 +433,7 @@ body.eol-home .hello-h{
   overflow:visible;
 }
 @media (max-width:699px){
-  body.eol-home .hello-h{top:calc(50% + 4px)}
+  body.eol-home .hello-h{top:calc(50% + 2px)}
 }
 body.eol-home .hello-btn.hello-coin{
   width:var(--coin);height:var(--coin);max-width:none;
