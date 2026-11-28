@@ -39,9 +39,14 @@ for f, u, name in ROOMS:
     elif os.path.exists(f):
         t, d = page(f); rows.append([0, name, u, d])
 rows.append(list(PHOTO_SEARCH))
+# TRD-0087 stays on the shelf and at this page. It is never a search row.
+SKIP_URLS = {'/library/epstein-black-book/'}
 def section(folder, ti):
     for f in sorted(glob.glob(folder + '/*/index.html')):
-        t, d = page(f); rows.append([ti, t, '/' + os.path.dirname(f) + '/', d])
+        u = '/' + os.path.dirname(f) + '/'
+        if u in SKIP_URLS:
+            continue
+        t, d = page(f); rows.append([ti, t, u, d])
 def num(f):
     m = re.search(r'/(\d+)/index\.html$', f); return int(m.group(1)) if m else 0
 for f in sorted(glob.glob('drops/*/index.html'), key=num):

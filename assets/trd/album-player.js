@@ -72,13 +72,18 @@
     D.body.classList.add('al-room-player');
     var mode = opts.mode || rootEl.getAttribute('data-page-mode') || 'album';
     var initialSlug = opts.initialTrack || rootEl.getAttribute('data-initial-track') || '';
-    if (!initialSlug) {
+    var startAt = 0;
+    try {
+      var hq = new URLSearchParams(String(location.hash || '').replace(/^#/, ''));
       var sp = new URLSearchParams(location.search);
-      initialSlug = sp.get('track') || '';
-      if (!initialSlug && location.hash && location.hash.indexOf('track=') >= 0) {
-        initialSlug = decodeURIComponent(location.hash.replace(/^#/, '').split('track=')[1].split('&')[0]);
+      if (!initialSlug) {
+        initialSlug = sp.get('track') || '';
+        if (!initialSlug && hq.get('track')) initialSlug = hq.get('track');
       }
-    }
+      var tv = hq.get('t');
+      if (tv == null) tv = sp.get('t');
+      if (tv != null && /^\d+(\.\d+)?$/.test(tv)) startAt = parseFloat(tv);
+    } catch (e1) {}
 
     var pod = W.trdPod;
     var showRemaining = false;
@@ -123,7 +128,9 @@
       if (initIdx >= 0 && pod) {
         var curS = pod.state();
         if (!curS.started || curS.i !== initIdx) {
-          pod.loadIndex(initIdx, 0);
+          pod.loadIndex(initIdx, startAt);
+        } else if (startAt > 0) {
+          pod.seek(startAt);
         }
       }
 

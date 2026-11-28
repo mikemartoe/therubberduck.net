@@ -4,8 +4,9 @@
   python3 tools/scif-text-extract.py --out /workspace/scif-text-cache [--pdfs DIR] [--only TRD-0033,TRD-0034]
 
 * The PDFs live on R2 (memes.therubberduck.net / media.therubberduck.net); they are downloaded to --pdfs (default: <out>/pdfs).
-* Native text comes from the PDF text layer (PyMuPDF). A page is OCR'd with tesseract when it has no real text layer (under 25 characters),
-  or only a short header/stamp (under 150 characters) while the page carries an image (scanned bodies under a Bates stamp, screenshots).
+* Native text comes from the PDF text layer (PyMuPDF). A page is OCR'd with tesseract when that layer is missing,
+  short (under 150 characters, with or without an image), or long but junk (font garbage or a rotated scan).
+  A layer of 150 characters or more is not trusted just because it is long.
 * OCR output that does not look like English (rotated scans) is retried at 90/180/270 degrees and the best reading is kept.
 * Output: <out>/<TRD-id>.json = {"id","pages":[page text ...],"ocr":[page numbers that were OCR'd]}.
 Needs: pip install pymupdf; apt install tesseract-ocr. Re-runnable: finished documents are skipped.
@@ -32,6 +33,21 @@ def ocr_page(page, rot=0):
     finally:
         os.unlink(fn)
 
+def needs_ocr(text):
+    """True when the text layer should not be trusted and the page image should be read."""
+    s = (text or '').strip()
+    n = len(s)
+    if n < 150:
+        return True
+    if '(cid:' in s.lower():
+        return True
+    words = re.findall(r'[A-Za-z]{4,}', s)
+    if len(words) >= 20:
+        bare = sum(1 for w in words if not re.search(r'[aeiouAEIOU]', w))
+        if bare / len(words) >= 0.45:
+            return True
+    return False
+
 def best_ocr(page):
     t = ocr_page(page)
     if len(TOK.findall(t.lower())) >= 15 and english_ratio(t) < 0.12:
@@ -55,10 +71,11 @@ def work(a):
     for pn, p in enumerate(doc):
         try: t = p.get_text('text')
         except Exception: t = ''
-        n = len(t.strip())
-        if n < 25 or (n < 150 and p.get_images()):
+        if needs_ocr(t):
+            n = len(t.strip())
             try: o = best_ocr(p)
             except Exception: o = ''
+            # keep a real header line and add the reading of the scan
             t = (t + '\n' + o) if n >= 25 else o
             ocr.append(pn + 1)
         pages.append(t)
@@ -69,8 +86,14 @@ def fetch(d, pdfdir):
     f = d['file']
     url = f if re.match(r'https?://', f) else 'https://memes.therubberduck.net/' + '/'.join(urllib.parse.quote(urllib.parse.unquote(s)) for s in f.split('/'))
     dst = os.path.join(pdfdir, d['id'] + '.pdf')
-    if not os.path.exists(dst):
-        urllib.request.urlretrieve(url, dst)
+    if not os.path.exists(dst) or os.path.getsize(dst) < 1000:
+        req = urllib.request.Request(url, headers={'User-Agent': 'therubberduck-preview'})
+        with urllib.request.urlopen(req, timeout=300) as r, open(dst, 'wb') as out:
+            while True:
+                chunk = r.read(1024 * 256)
+                if not chunk:
+                    break
+                out.write(chunk)
     return dst
 
 if __name__ == '__main__':

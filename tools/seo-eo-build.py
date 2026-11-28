@@ -324,7 +324,7 @@ def build_eo_page(r: dict, raw_text: str, prev_r: dict | None, next_r: dict | No
 <link rel="stylesheet" href="/assets/trd/support-strip.css?v=20261120a">
 <link rel="stylesheet" href="/eo-library/eo-library.css?v=779d94d30a">
 <link rel="stylesheet" href="/eo-library/eo-page.css?v=20261121a">
-<script>window.trdNav||(function(){{var s=document.createElement('script');s.src='/assets/trd/sitenav.js?v=5b8b8ea6fc';s.setAttribute('data-trd-keep','');document.head.appendChild(s);}})();</script>
+<script>window.trdNav||(function(){{var s=document.createElement('script');s.src='/assets/trd/sitenav.js?v=6ecf81cc49';s.setAttribute('data-trd-keep','');document.head.appendChild(s);}})();</script>
 <script type="application/ld+json">{{"@context":"https://schema.org","@graph":{ld}}}</script>
 <script data-goatcounter="https://therubberduck.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script src="/assets/trd/analytics.js?v=20261121a" data-trd-keep></script>
