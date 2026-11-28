@@ -33,7 +33,7 @@ SHARE = SITE + '/images/brand/trd-share-2026.jpg'
 # Web app (PWA, owner approved 2026-10-30): head tags for pages that offer install + alerts, and the two small
 # data files the push Worker (workers/trd-push.js) reads. Keep these in every rebuild.
 PWA_HEAD = ('<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes">'
-            '<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck">'
+            '<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="The Rubber Duck">'
             '<link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261030a" defer data-trd-keep></script>\n')
 def og_size(alt):
     return '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="%s">\n' % E(alt)
@@ -53,14 +53,18 @@ def write_pwa_data(arr):
         json.dump({'n': last[0], 'ts': last[1], 'url': '/drops/%d/' % last[0]}, f)
 GUMROAD = 'https://rubberduck41.gumroad.com/l/ttmhx'
 BOOK_PRICE = '19.99'
+# Official profiles only (first 3 are reused by the short Organization node and MusicGroup: keep their order).
+# The Spotify and Apple Music album URLs live on the MusicAlbum node in album.html, not here.
 SAME_AS = [
     'https://x.com/TheRubberDuck79',
     'https://x.com/TheRubberDuck78',
     'https://rumble.com/user/TheRubberDuck78',
     'https://rubberduck41.gumroad.com/',
-    'https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4',
-    'https://music.apple.com/us/album/the-red-pill-album/1896233683',
+    'https://therubberduck78.substack.com/',
+    'https://t.me/therubberducknet',
 ]
+ORG_ALT = ['TRD', 'The Rubber Duck\u2122', 'TRD Collectibles', 'therubberduck', 'TheRubberDuck', 'therubberduck.net', 'TheRubberDuck.net']
+WEBSITE_ALT = ['TRD', 'therubberduck.net', 'therubberduck', 'TheRubberDuck', 'TheRubberDuck.net', 'The Rubber Duck net']
 ORG_ID = SITE + '/#org'
 SITE_ID = SITE + '/#website'
 E = lambda s: html.escape(str(s if s is not None else ''), quote=True)
@@ -102,13 +106,13 @@ def git_date(path):
 
 # ---------------------------------------------------------------- JSON-LD helpers
 def org():
-    return {'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'alternateName': ['TRD', 'The Rubber Duck\u2122', 'TRD Collectibles'],
+    return {'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'alternateName': ORG_ALT,
             'url': SITE + '/', 'logo': {'@type': 'ImageObject', 'url': SITE + '/favicon-192.png', 'width': 192, 'height': 192},
             'image': SHARE, 'description': 'An open archive of Trump and Q-era research: every Q drop, videos, X Spaces, PDFs, memes and the X archive, plus TRD Collectibles and the book anon mission.',
             'sameAs': SAME_AS}
 
 def website():
-    return {'@type': 'WebSite', '@id': SITE_ID, 'url': SITE + '/', 'name': 'The Rubber Duck', 'alternateName': ['TRD', 'therubberduck.net'],
+    return {'@type': 'WebSite', '@id': SITE_ID, 'url': SITE + '/', 'name': 'The Rubber Duck', 'alternateName': WEBSITE_ALT,
             'publisher': {'@id': ORG_ID}, 'inLanguage': 'en',
             'potentialAction': {'@type': 'SearchAction', 'target': {'@type': 'EntryPoint', 'urlTemplate': SITE + '/ledger.html?q={search_term_string}'},
                                 'query-input': 'required name=search_term_string'}}
@@ -408,8 +412,10 @@ def build_x():
                 kinds = {'p': 'photo', 'v': 'video', 'g': 'GIF'}
                 ks = sorted(set(kinds.get(m[0], 'media') for m in p['m']))
                 media = ' &middot; with ' + ' and '.join(ks)
-            items.append('<article class="item" id="p%s"><p class="meta"><time datetime="%s">%s</time>%s%s &middot; <a href="/x/post.html?id=%s">Open this post in the X Archive</a> &middot; <a href="https://x.com/TheRubberDuck79/status/%s" rel="nofollow noopener" target="_blank">View this post on X</a></p><div class="text">%s</div></article>'
-                         % (p['i'], dt.isoformat(), dt.strftime('%B %-d, %Y, %-I:%M %p ET'), ' &middot; quote post' if p['y'] == 'q' else '', media, p['i'], p['i'], linkify(p['x'])))
+            # crawlable link down to the post's own permalink page (only when that page exists), so /x/status/ pages are not orphans
+            perm = (' &middot; <a href="/x/status/%s/">Permalink to this post</a>' % p['i']) if os.path.isdir('x/status/%s' % p['i']) else ''
+            items.append('<article class="item" id="p%s"><p class="meta"><time datetime="%s">%s</time>%s%s &middot; <a href="/x/post.html?id=%s">Open this post in the X Archive</a>%s &middot; <a href="https://x.com/TheRubberDuck79/status/%s" rel="nofollow noopener" target="_blank">View this post on X</a></p><div class="text">%s</div></article>'
+                         % (p['i'], dt.isoformat(), dt.strftime('%B %-d, %Y, %-I:%M %p ET'), ' &middot; quote post' if p['y'] == 'q' else '', media, p['i'], perm, p['i'], linkify(p['x'])))
         pn = '<nav class="pn">%s%s</nav>' % (
             ('<a rel="prev" href="/x/archive/%s/">&lsaquo; X posts from %s</a>' % (keep_months[j - 1][0], datetime.date(int(keep_months[j - 1][0][:4]), int(keep_months[j - 1][0][5:]), 1).strftime('%B %Y'))) if j else '<span></span>',
             ('<a rel="next" href="/x/archive/%s/">X posts from %s &rsaquo;</a>' % (keep_months[j + 1][0], datetime.date(int(keep_months[j + 1][0][:4]), int(keep_months[j + 1][0][5:]), 1).strftime('%B %Y'))) if j + 1 < len(keep_months) else '<span></span>')

@@ -28,3 +28,29 @@ html[lang="ja"] body.eol-home{
 /* Localized one-line lead-in above the English Substack embed */
 .sf-substack{display:flex;flex-direction:column;justify-content:center;align-items:center}
 .sf-substack-lead{margin:0 0 10px;padding:0;max-width:480px;width:100%;text-align:center;font:400 14px/1.45 'Roboto','Helvetica Neue',Arial,sans-serif;color:var(--muted,#d8cbb2)}
+
+/* brand signals: the domain as plain text under the footer brand name, and links to the other official profiles.
+   Desktop and mobile are handled separately (breakpoint matches the standard footer, 899px). */
+footer.site-foot a.sf-domain{display:block;margin:6px 0 0;width:max-content;max-width:100%;font:700 15px/1.3 'TRN Courier','Courier New',monospace;letter-spacing:.03em;color:#e3a82b}
+footer.site-foot a.sf-domain:hover,footer.site-foot a.sf-domain:focus-visible{color:#ffd77a}
+footer.site-foot ul.sf-also{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;max-width:46ch}
+footer.site-foot ul.sf-also li{margin:0;padding:0}
+footer.site-foot ul.sf-also a{font:600 13px/1.3 'Roboto','Helvetica Neue',Arial,sans-serif;color:#d8cbb2}
+@media (min-width:900px){
+  footer.site-foot ul.sf-also a{display:inline-block;padding:2px 0}
+}
+@media (max-width:899px){
+  footer.site-foot a.sf-domain{margin-top:8px;font-size:16px;padding:4px 0}
+  footer.site-foot ul.sf-also{gap:0 20px}
+  footer.site-foot ul.sf-also a{display:inline-block;padding:9px 0;font-size:14px}
+}
+
+/* browse-the-archive row in the homepage footer: crawlable hub links. Desktop and mobile handled separately. */
+footer.site-foot nav.sf-browse{max-width:1240px;margin:0 auto;padding:0 24px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px}
+footer.site-foot nav.sf-browse .sf-browse-h{font:700 13px/1 'TRN Courier','Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:#e3a82b;margin-right:2px}
+footer.site-foot nav.sf-browse a{font:600 13px/1.3 'Roboto','Helvetica Neue',Arial,sans-serif;color:#d8cbb2;padding:2px 0}
+@media (max-width:899px){
+  footer.site-foot nav.sf-browse{padding:0 16px 14px;gap:0 18px}
+  footer.site-foot nav.sf-browse .sf-browse-h{flex:0 0 100%;margin:0 0 4px}
+  footer.site-foot nav.sf-browse a{display:inline-block;padding:8px 0;font-size:14px}
+}

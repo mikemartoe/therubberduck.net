@@ -1,7 +1,7 @@
 {
   "id": "/",
   "name": "The Rubber Duck",
-  "short_name": "Rubber Duck",
+  "short_name": "The Rubber Duck",
   "description": "Every Q drop, today's Deltas, Q Proofs, videos, recordings and the X archive.",
   "start_url": "/app/?source=pwa",
   "scope": "/",
