@@ -4,7 +4,8 @@
 /* TRD-0087 stays on the shelf. TRD-0129 is a saved 404, not a document; the card stays. */
 export const EXCLUDE_DOCS = Object.freeze(['TRD-0087', 'TRD-0129']);
 
-/* Owner toggle. true: /library/epstein-black-book/ is left out of this index. The site-index.json row is not changed. */
+/* Owner toggle. true: /library/epstein-black-book/ is left out of this index.
+   tools/site-search-build.py uses the same URL skip for the title index. */
 export const DROP_LIBRARY_TITLE = true;
 export const EXCLUDE_URLS = Object.freeze(DROP_LIBRARY_TITLE ? ['/library/epstein-black-book/'] : []);
 

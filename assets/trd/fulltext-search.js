@@ -1,13 +1,12 @@
 /* Unified full-text search. Runs in the browser. No analytics, no query logging.
    ONE constant: TRD_FULLTEXT_BASE is where the index files live (trailing slash).
-   The preview build writes them to /search/unified/ and that directory is not in git.
-   Point the constant at a public R2 URL to serve the same files.
-   Token rules match tools/search/tokens.mjs. TRD-0087 is not in this index. */
+   Production files are on R2 at this version. Token rules match tools/search/tokens.mjs.
+   TRD-0087 and TRD-0129 are not in this index. */
 (function () {
   'use strict';
   var W = window;
   if (W.trdFulltext) return;
-  var TRD_FULLTEXT_BASE = '/search/unified/';
+  var TRD_FULLTEXT_BASE = 'https://scif-search.therubberduck.net/fulltext/981b404b79/';
   var BASE = TRD_FULLTEXT_BASE;
   var man = null, manP = null, stopSet = null, splitSet = null, shardSet = null;
   var cache = Object.create(null);

@@ -43,15 +43,13 @@ node tools/search/measure.mjs
 In `assets/trd/fulltext-search.js`:
 
 ```javascript
-var TRD_FULLTEXT_BASE = '/search/unified/';
+var TRD_FULLTEXT_BASE = 'https://scif-search.therubberduck.net/fulltext/981b404b79/';
 ```
 
-That is the only place the index is loaded from. For a local preview, leave it
-and serve the repo root. The build writes the files there.
-
-To serve the same files from R2, change that constant to the public base,
-including the trailing slash, for example `https://search.example/unified/`.
-Ship the updated script. Do not commit `search/unified/`.
+That is the only place the index is loaded from. The build still writes a local
+copy at `search/unified/` for a preview. Do not commit that directory. A new
+build gets a new content hash; point the constant at
+`https://scif-search.therubberduck.net/fulltext/<hash>/`.
 
 ## Upload to R2
 
