@@ -483,11 +483,18 @@ def build_library():
     docs = json.loads(re.search(r'var DOCS = (\[.*?\]);\n', h, re.S).group(1))
     lm = git_date('pdfs.html')
     used = set(); topics = OrderedDict()
+    # tools/library-slugs.json freezes each catalog id's URL slug so retitling a document (tools/scif-labels.json) never moves its page.
+    _fz = os.path.join(ROOT, 'tools', 'library-slugs.json')
+    frozen = json.load(open(_fz, encoding='utf-8')) if os.path.exists(_fz) else {}
+    used.update(frozen.values())
     for d in docs:
-        s = slugify(d.get('title') or d['name'])
-        base = s; k = 2
-        while s in used: s = '%s-%d' % (base, k); k += 1
-        used.add(s); d['slug'] = s
+        if d['id'] in frozen:
+            d['slug'] = frozen[d['id']]
+        else:
+            s = slugify(d.get('title') or d['name'])
+            base = s; k = 2
+            while s in used: s = '%s-%d' % (base, k); k += 1
+            used.add(s); d['slug'] = s
         # Group typo/duplicate shelves together on the index only; item pages keep the original topic label.
         _topic = {'Epstein': 'EPSTEIN', 'Q': 'Q DROPS'}.get(d.get('topic') or 'Other', d.get('topic') or 'Other')
         topics.setdefault(_topic, []).append(d)
@@ -530,6 +537,7 @@ def build_library():
         if rel:
             body += '<h2>More on %s</h2><ul class="list">%s</ul>' % (E(d.get('topic')), ''.join('<li><a href="/library/%s/">%s</a></li>' % (x['slug'], E(x['title'])) for x in rel))
         g = [{'@type': 'DigitalDocument', 'name': d['title'], 'description': d.get('about') or d.get('desc', ''), 'url': SITE + url, 'encodingFormat': 'application/pdf',
+              **({'keywords': d['kw']} if d.get('kw') else {}),
               'numberOfPages': d.get('pages'), 'contentSize': size, 'about': d.get('topic'), 'isAccessibleForFree': True,
               'provider': {'@id': ORG_ID},
               'associatedMedia': {'@type': 'MediaObject', 'contentUrl': pdf_abs, 'encodingFormat': 'application/pdf'},
