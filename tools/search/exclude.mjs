@@ -1,7 +1,9 @@
 /* Documents that stay on the shelf and keep their own pages, and are never
-   put in a search index this tool builds. TRD-0087 is the scanned contact
-   directory. The room still lists it. Search must not. */
-/* TRD-0087 stays on the shelf. TRD-0129 is a saved 404, not a document; the card stays. */
+   put in a search index this tool builds. TRD-0087 is the scanned, redacted
+   92-page contact directory. The room still lists it. Search must not.
+   TRD-0246 is the Wikimedia Commons / Internet Archive unredacted 95-page
+   scan (a different file). Duck asked that 0246 be made searchable; it is
+   not on this exclusion list. */
 export const EXCLUDE_DOCS = Object.freeze(['TRD-0087', 'TRD-0129']);
 
 /* Owner toggle. true: /library/epstein-black-book/ is left out of this index.
