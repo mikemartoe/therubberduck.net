@@ -78,6 +78,19 @@ a{color:inherit}
 .foot{text-align:center;color:var(--muted);font-family:var(--font-display);font-size:13px;letter-spacing:.08em;padding:14px 0 0}
 @media (max-width:340px){.pair{grid-template-columns:1fr}}
 @media (min-width:720px){.stack,.pair{gap:12px}.card{min-height:108px}.pair.tall .card{min-height:132px}}
+/* xmaspush-app:begin (Christmas order-by banner for the home-screen app; same banner as merch.html; remove this block and the aside to roll back) */
+@font-face{font-family:'Bungee';src:url('/assets/trd/fonts/Bungee-Regular.woff2') format('woff2'),url('/assets/trd/fonts/Bungee-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Courier Prime';src:url('/assets/trd/fonts/CourierPrime-Bold.woff2') format('woff2'),url('/assets/trd/fonts/CourierPrime-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+.xmas-push{background:linear-gradient(180deg,#143a28,#0a1e16);color:#faf4e6;border:1px solid var(--line);border-bottom:3px solid #c8202b;border-radius:6px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.32)}
+.xmas-push-in{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:12px 14px;color:inherit;text-decoration:none}
+.xmas-push-copy{min-width:0}
+.xmas-push-k{margin:0;color:#ecbe5a;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;font-family:Arial,Helvetica,sans-serif}
+.xmas-push-h{margin:2px 0 0;font-family:'Bungee',Impact,sans-serif;font-weight:400;font-size:clamp(1.05rem,2.4vw,1.45rem);line-height:1.15;color:#faf4e6}
+.xmas-push-s{margin:4px 0 0;font-family:'Courier Prime',monospace;font-weight:700;font-size:.82rem;letter-spacing:.02em;color:#e9dcc0}
+.xmas-push-cta{display:block;text-align:center;background:#c8202b;color:#fff;font-weight:800;font-size:.95rem;padding:10px 16px;border-radius:9px;font-family:Arial,Helvetica,sans-serif}
+.xmas-push-in:hover .xmas-push-cta,.xmas-push-in:focus-visible .xmas-push-cta{background:#e63a33}
+@media (min-width:761px){.xmas-push-in{flex-direction:row;align-items:center;justify-content:space-between;gap:14px 20px;padding:10px 16px}.xmas-push-cta{flex:none;white-space:nowrap}}
+/* xmaspush-app:end */
 </style>
 <script src="/assets/trd/analytics.js?v=20261117b" data-trd-keep></script>
 </head>
@@ -90,6 +103,18 @@ a{color:inherit}
 </nav></details>
 </header>
 <main class="stack">
+<!-- xmaspush-app:begin -->
+<aside class="xmas-push" id="xmas-push" aria-label="Christmas order-by">
+  <a class="xmas-push-in" href="/christmas/">
+    <div class="xmas-push-copy">
+      <p class="xmas-push-k">Christmas 2026 &middot; shipping included</p>
+      <p class="xmas-push-h">Order by Sunday, December 6</p>
+      <p class="xmas-push-s">Three bundles &middot; $79, $129, $179 &middot; support the mission</p>
+    </div>
+    <span class="xmas-push-cta">See the bundles</span>
+  </a>
+</aside>
+<!-- xmaspush-app:end -->
 <section class="hero"><h1>Q DROPS. DATES. RESEARCH.</h1></section>
 <form class="search" id="appSearch" action="/ledger.html" method="get" role="search"><label for="q" class="sr" style="position:absolute;left:-9999px">Search the drops</label><div class="app-search-wrap" id="appSearchWrap" data-trd-ticker data-trd-ticker-input="q" data-trd-ticker-id="appPhTick" data-trd-ticker-label="Search the drops"><input id="q" name="q" type="search" placeholder="Search the Q drops" autocomplete="off" enterkeyhint="search"></div><input type="hidden" name="from" value="app"><button type="submit" aria-label="Search"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button></form>
 <div class="pair tall">
