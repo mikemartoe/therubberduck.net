@@ -60,6 +60,16 @@ rows.append([2, 'Jeffrey Epstein Little Black Book unredacted (Internet Archive,
              '/pdfs.html?open=TRD-0246',
              'Wikimedia Commons file “Jeffrey Epstein Little Black Book unredacted.pdf,” from the Internet Archive (posted 9 July 2020; author unknown). Public domain. 95 unredacted pages; catalog no. TRD-0246.'])
 section('library', 2); section('watch', 3); section('listen', 4); section('shop', 5); section('book', 6)
+# A SCI[F] document with no /library/<slug>/ page yet (a new intake on a preview) still gets a title row,
+# which opens the viewer. TRD-0087 never gets a row (Duck, Nov 28). Ids in tools/library-slugs.json already have one.
+NO_TITLE_ROW = {'TRD-0087'}
+_lib = set(json.load(open('tools/library-slugs.json', encoding='utf-8')))
+_seen = {r[2] for r in rows}
+for _d in json.loads(re.search(r'var DOCS = (\[.*?\]);\n', open('pdfs.html', encoding='utf-8').read(), re.S).group(1)):
+    _u = '/pdfs.html?open=' + _d['id']
+    if _d['id'] in _lib or _d['id'] in NO_TITLE_ROW or _u in _seen:
+        continue
+    rows.append([2, _d['title'] + ' (PDF)', _u, clean(_d.get('desc'), 220)])
 m = json.load(open('memes/data/memes.json', encoding='utf-8'))
 for it in m['items']:
     tags = ' '.join(x for x in (it.get('topics') or []) if x != 'text-in-image')

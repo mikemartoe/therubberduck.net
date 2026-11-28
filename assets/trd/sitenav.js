@@ -12,7 +12,7 @@
   var W = window, D = document;
   if (W.trdNav) return;
   var on = function (t, ty, fn, o) { EventTarget.prototype.addEventListener.call(t, ty, fn, o); };
-  var IDX = '/assets/search/site-index.json?v=20261128a', data = null, loading = null, hay = null, sel = -1, last = '';
+  var IDX = '/assets/search/site-index.json?v=20261128b', data = null, loading = null, hay = null, sel = -1, last = '';
   var RANK = [0, 6, 2, 3, 4, 1, 1, 7];   /* Room, Q drop, PDF, Video, Recording, Collectible, Book, Meme */
   function $(id) { return D.getElementById(id); }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -85,7 +85,7 @@
   }
   /* Text inside the SCI[F] PDFs (assets/trd/scif-search.js, built by tools/scif-fulltext-build.py).
      Loaded only when someone types a search; adds up to 4 files, each with the page and a highlighted line, above the X row. */
-  var SCIF = '/assets/trd/scif-search.js?v=804be7d8ca', scifP = null, dseq = 0;
+  var SCIF = '/assets/trd/scif-search.js?v=5fb54b0c4d', scifP = null, dseq = 0;
   function scifLoad() {
     if (W.scifSearch) return Promise.resolve(W.scifSearch);
     if (scifP) return scifP;
@@ -137,7 +137,7 @@
     inDocs(q, b);
     fullText(q, b);
   }
-  var FULL = '/assets/trd/fulltext-search.js?v=634b221d47', fullP = null, fseq = 0;
+  var FULL = '/assets/trd/fulltext-search.js?v=e758a0b3bf', fullP = null, fseq = 0;
   function fullLoad() {
     if (W.trdFulltext) return Promise.resolve(W.trdFulltext);
     if (fullP) return fullP;

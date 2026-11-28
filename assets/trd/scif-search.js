@@ -12,7 +12,7 @@
 (function () {
   'use strict';
   var W = window; if (W.scifSearch) return;
-  var BASE = 'https://scif-search.therubberduck.net/scif-search/f8dba5b85f/';   /* Cloudflare R2, versioned folder; stamped by tools/scif-fulltext-build.py */
+  var BASE = 'https://scif-search.therubberduck.net/scif-search/1186c17667/';   /* Cloudflare R2, versioned folder; stamped by tools/scif-fulltext-build.py */
   var man = null, manP = null, shardSet = null, splitSet = null, stopSet = null, shardP = {}, metaP = {}, partP = {};
   function get(u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
   function fold(s) { return String(s).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[\u2018\u2019]/g, "'"); }
