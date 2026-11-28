@@ -52,6 +52,13 @@ def num(f):
 for f in sorted(glob.glob('drops/*/index.html'), key=num):
     if not num(f): continue
     t, d = page(f); rows.append([1, re.sub(r':\s*Full Text$', '', t), '/' + os.path.dirname(f) + '/', d])
+
+# TRD-0246 is the Wikimedia unredacted scan. Its library home is the existing
+# /library/epstein-black-book/ page (which stays out of the title index, because
+# that URL is the TRD-0087 card). Add an explicit title row that opens the viewer.
+rows.append([2, 'Jeffrey Epstein Little Black Book unredacted (Internet Archive, 2020) (PDF)',
+             '/pdfs.html?open=TRD-0246',
+             'Wikimedia Commons file “Jeffrey Epstein Little Black Book unredacted.pdf,” from the Internet Archive (posted 9 July 2020; author unknown). Public domain. 95 unredacted pages; catalog no. TRD-0246.'])
 section('library', 2); section('watch', 3); section('listen', 4); section('shop', 5); section('book', 6)
 # A SCI[F] document with no /library/<slug>/ page yet (a new intake on a preview) still gets a title row,
 # which opens the viewer. TRD-0087 never gets a row (Duck, Nov 28). Ids in tools/library-slugs.json already have one.
