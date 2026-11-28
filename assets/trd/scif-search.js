@@ -192,7 +192,7 @@
     }).catch(function () { return { terms: [], phrases: [], ignored: [], docs: [], total: 0, totalPages: 0 }; });
   }
   function searchBoth(q) {
-    return Promise.all([search(q), searchExtra(q)]).then(function (pair) {
+    return Promise.all([search(q).catch(function () { return { terms: [], phrases: [], ignored: [], docs: [], total: 0, totalPages: 0 }; }), searchExtra(q)]).then(function (pair) {
       var a = pair[0], b = pair[1];
       if (!b || !b.docs || !b.docs.length) return a;
       a.docs = (a.docs || []).concat(b.docs).sort(function (x, y) { return (y.score || 0) - (x.score || 0); });

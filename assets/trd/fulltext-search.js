@@ -333,7 +333,7 @@
   var _search = search;
   function searchBoth(q, opt) {
     opt = opt || {};
-    return Promise.all([_search(q, opt), extraHits(q)]).then(function (pair) {
+    return Promise.all([_search(q, opt).catch(function () { return { q: q, terms: [], total: 0, rooms: [] }; }), extraHits(q)]).then(function (pair) {
       var res = pair[0], extra = pair[1] || [];
       if (!extra.length) return res;
       if (opt.only && opt.only !== 'scif') return res;
