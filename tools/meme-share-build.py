@@ -95,6 +95,19 @@ def page(it, img, w, h, ctype):
     url = '%s/memes/share/%s.html' % (SITE, mid)
     dest = '/memes.html#' + mid
     alt = '%s, from The Rubber Duck Meme Dump' % title
+    ld = json.dumps({
+        '@context': 'https://schema.org',
+        '@type': 'ImageObject',
+        'name': title,
+        'caption': alt,
+        'contentUrl': img,
+        'url': url,
+        'creator': {'@type': 'Person', 'name': 'The Rubber Duck'},
+        'encodingFormat': ctype,
+        'width': w,
+        'height': h,
+        'isPartOf': {'@type': 'CollectionPage', 'name': 'The Meme Dump', 'url': SITE + '/memes.html'},
+    }, ensure_ascii=False, separators=(',', ':'))
     return '''<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <title>{t}</title>
@@ -118,12 +131,14 @@ def page(it, img, w, h, ctype):
 <meta name="twitter:description" content="{d}">
 <meta name="twitter:image" content="{i}">
 <meta name="twitter:image:alt" content="{a}">
+<link rel="canonical" href="{u}">
+<script type="application/ld+json">{ld}</script>
 <meta http-equiv="refresh" content="0; url={dest}">
 <script>location.replace("/memes.html"+location.search+{hashjs});</script>
 <style>body{{margin:0;background:#140e09;color:#f6e3b4;font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}}a{{color:#e3a82b}}</style>
 </head><body><p>Opening the meme in <a href="{dest}">The Meme Dump</a>.</p></body></html>
 '''.format(t=esc(t_full), d=esc(desc), u=esc(url), i=esc(img), ct=ctype, w=w, h=h, a=esc(alt),
-           dest=esc(dest), hashjs=json.dumps('#' + mid))
+           dest=esc(dest), hashjs=json.dumps('#' + mid), ld=ld)
 
 
 def main():
