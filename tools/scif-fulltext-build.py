@@ -3,18 +3,25 @@
 
   python3 tools/scif-fulltext-build.py --cache /workspace/scif-text-cache
 
-Writes (all static JSON, lazy-loaded by /assets/trd/scif-search.js):
+Writes (all static JSON, lazy-loaded by /assets/trd/scif-search.js). The data is NOT in the repo: it is written to --out
+(default /workspace/scif-search-out) and uploaded to Cloudflare R2 by tools/scif-search-publish.sh under
+scif-search/<build id>/ on https://scif-search.therubberduck.net (the build id is stamped into scif-search.js as BASE).
+Documents listed in EXCLUDE are left out of the index entirely (no text JSON, no manifest row, no shard entries).
+Layout under --out (the old repo paths scif/text and scif/search):
   scif/text/<TRD-id>.json          page-level text, one file per document: {"id","title","shelf","pages":N,"text":["page 1 text", ...]}
                                    long documents are split: <id>.json is then {"id","title","shelf","pages":N,"per":P,"parts":K}
                                    and <id>.<k>.json (k=0..K-1) holds {"id","from":first page,"text":[...P pages...]}
-  scif/search/manifest.json        {"v","docs":[[id,title,shelf,pages,per,kw] ...],"split":[prefixes that use 4 letters],"terms":N}
-  scif/search/<ab>.json            inverted index shard for words starting with ab (longer prefix when split): {"word":"doc:p,p,p;doc:p,p"}  (doc = index in manifest.docs, p = 1-based page)
+  search/manifest.json        {"v","docs":[[id,title,shelf,pages,per,kw] ...],"split":[prefixes that use 4 letters],"terms":N}
+  search/<ab>.json            inverted index shard for words starting with ab (longer prefix when split): {"word":"doc:p,p,p;doc:p,p"}  (doc = index in manifest.docs, p = 1-based page)
 Reusable format for other tools (AI/semantic search): the per-document text JSON above is the canonical page-level text.
 Wikipedia is never named on the site (standing rule), so the word and wikipedia URLs are dropped from the indexed text.
 """
 import argparse, collections, json, os, re, shutil, unicodedata
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
+CDN = 'https://scif-search.therubberduck.net/scif-search/'
+EXCLUDE = {'TRD-0087'}   # Epstein black book: stays in the room, never in the search index (Duck, Nov 28)
+OUT = '/workspace/scif-search-out'
 PART_CHARS = 180000      # target characters of text per part file
 SHARD_MAX = 150000       # shards are 2 letters; one above this many bytes is split by one more letter
 MAX_PAGES_PER_TERM = 7000  # words on more pages than this are stop words and are not indexed
@@ -34,10 +41,13 @@ def fold(s):
     return s.replace('\u2019', "'").replace('\u2018', "'")
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('--cache', required=True); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument('--cache', required=True); ap.add_argument('--out', default=OUT); ap.add_argument('--no-exclude', action='store_true'); a = ap.parse_args()
+    global EXCLUDE
+    if a.no_exclude: EXCLUDE = set()
     h = open('pdfs.html', encoding='utf-8').read()
-    docs = json.loads(re.search(r'var DOCS = (\[.*?\]);\n', h, re.S).group(1))
-    for d in ('scif/text', 'scif/search'):
+    docs = [d for d in json.loads(re.search(r'var DOCS = (\[.*?\]);\n', h, re.S).group(1)) if d['id'] not in EXCLUDE]
+    TXT, SRCH = os.path.join(a.out, 'text'), os.path.join(a.out, 'search')
+    for d in (TXT, SRCH):
         shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
     manifest = []; postings = collections.defaultdict(lambda: collections.defaultdict(list)); chars = 0; pages_total = 0
     for di, d in enumerate(docs):
@@ -49,11 +59,11 @@ def main():
         if total > PART_CHARS * 1.3 and len(pages) > 1:
             per = max(1, int(PART_CHARS / max(1, total / len(pages))))
             parts = (len(pages) + per - 1) // per
-            json.dump(dict(meta, pages=len(pages), per=per, parts=parts), open('scif/text/%s.json' % d['id'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+            json.dump(dict(meta, pages=len(pages), per=per, parts=parts), open(TXT + '/%s.json' % d['id'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
             for k in range(parts):
-                json.dump({'id': d['id'], 'from': k * per + 1, 'text': pages[k * per:(k + 1) * per]}, open('scif/text/%s.%d.json' % (d['id'], k), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+                json.dump({'id': d['id'], 'from': k * per + 1, 'text': pages[k * per:(k + 1) * per]}, open(TXT + '/%s.%d.json' % (d['id'], k), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
         else:
-            json.dump(dict(meta, pages=len(pages), text=pages), open('scif/text/%s.json' % d['id'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+            json.dump(dict(meta, pages=len(pages), text=pages), open(TXT + '/%s.json' % d['id'], 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
         manifest.append([d['id'], d['title'], d['topic'], len(pages), per, d.get('kw', '')])
         for pn, t in enumerate(pages, 1):
             for w in set(TOKEN.findall(fold(t))):
@@ -73,14 +83,14 @@ def main():
             dct = shards.pop(p); split.add(p)
             for w, v in dct.items(): shards[pre(w, len(p) + 1)][w] = v
     for p, dct in shards.items():
-        json.dump(dct, open('scif/search/%s.json' % p, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+        json.dump(dct, open(SRCH + '/%s.json' % p, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     json.dump({'v': 1, 'built': __import__('datetime').date.today().isoformat(), 'docs': manifest, 'split': sorted(split), 'shards': sorted(shards), 'terms': len(enc), 'stop': sorted(drop)},
-              open('scif/search/manifest.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+              open(SRCH + '/manifest.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     # stamp the build into the engine so browsers and the CDN never serve a mix of old and new files
     import hashlib
-    ver = hashlib.sha256(open('scif/search/manifest.json', 'rb').read()).hexdigest()[:10]
+    ver = hashlib.sha256(open(SRCH + '/manifest.json', 'rb').read()).hexdigest()[:10]
     js = open('assets/trd/scif-search.js', encoding='utf-8').read()
-    js = re.sub(r"var V = '[^']*';", "var V = '%s';" % ver, js, count=1)
+    js = re.sub(r"var BASE = '[^']*';", "var BASE = '%s%s/';" % (CDN, ver), js, count=1)
     open('assets/trd/scif-search.js', 'w', encoding='utf-8').write(js)
     jv = hashlib.sha256(open('assets/trd/scif-search.js', 'rb').read()).hexdigest()[:10]
     h2 = open('pdfs.html', encoding='utf-8').read()
@@ -99,8 +109,9 @@ def main():
             t = open(f, encoding='utf-8').read(); open(f, 'w', encoding='utf-8').write(t.replace('sitenav.js?v=' + old, 'sitenav.js?v=' + new))
     print('sitenav.js?v=%s (replaced %s)' % (new, ', '.join(sorted(olds)) or 'nothing'))
     sz = lambda d: sum(os.path.getsize(os.path.join(d, f)) for f in os.listdir(d)) / 1e6
+    print('R2 prefix: scif-search/%s/  (upload %s with tools/scif-search-publish.sh)' % (ver, a.out))
     print('docs %d, pages %d, text %.1f MB chars; text files %d (%.1f MB); search shards %d (%.1f MB); terms %d; stop words dropped %d; split prefixes %d' % (
-        len(docs), pages_total, chars / 1e6, len(os.listdir('scif/text')), sz('scif/text'), len(os.listdir('scif/search')), sz('scif/search'), len(enc), len(drop), len(split)))
+        len(docs), pages_total, chars / 1e6, len(os.listdir(TXT)), sz(TXT), len(os.listdir(SRCH)), sz(SRCH), len(enc), len(drop), len(split)))
 
 if __name__ == '__main__':
     main()

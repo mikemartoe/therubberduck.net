@@ -83,7 +83,7 @@
   }
   /* Text inside the SCI[F] PDFs (assets/trd/scif-search.js, built by tools/scif-fulltext-build.py).
      Loaded only when someone types a search; adds up to 4 files, each with the page and a highlighted line, above the X row. */
-  var SCIF = '/assets/trd/scif-search.js?v=22e1a226f7', scifP = null, dseq = 0;
+  var SCIF = '/assets/trd/scif-search.js?v=f08c9ea494', scifP = null, dseq = 0;
   function scifLoad() {
     if (W.scifSearch) return Promise.resolve(W.scifSearch);
     if (scifP) return scifP;

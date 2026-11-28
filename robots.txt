@@ -3,8 +3,6 @@ Allow: /
 Disallow: /tools/
 Disallow: /workers/
 Disallow: /archive/
-Disallow: /scif/text/
-Disallow: /scif/search/
 
 User-agent: OAI-SearchBot
 Allow: /

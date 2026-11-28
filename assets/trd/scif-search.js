@@ -12,10 +12,9 @@
 (function () {
   'use strict';
   var W = window; if (W.scifSearch) return;
-  var BASE = '/scif/';
-  var V = '9f44d78585';
+  var BASE = 'https://scif-search.therubberduck.net/scif-search/2beb375c5b/';   /* Cloudflare R2, versioned folder; stamped by tools/scif-fulltext-build.py */
   var man = null, manP = null, shardSet = null, splitSet = null, stopSet = null, shardP = {}, metaP = {}, partP = {};
-  function get(u) { return fetch(u + (u.indexOf('?') < 0 && V ? '?v=' + V : '')).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
+  function get(u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
   function fold(s) { return String(s).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[\u2018\u2019]/g, "'"); }
   /* same length as the input, for finding snippet positions */
   function foldLen(s) { var o = '', c, f; for (var i = 0; i < s.length; i++) { c = s.charAt(i); f = c.toLowerCase(); if (f.length !== 1) f = c; if (f.charCodeAt(0) > 127) { var n = c.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); f = n.length === 1 ? n : f; } o += f; } return o; }
@@ -153,5 +152,5 @@
     });
   }
   function href(doc, p) { return '/pdfs.html?open=' + encodeURIComponent(doc.id) + (p ? '&p=' + p : ''); }
-  W.scifSearch = { search: search, snippets: snippets, href: href, manifest: manifest, pageText: pageTextSafe, fold: fold, version: function () { return V; } };
+  W.scifSearch = { search: search, snippets: snippets, href: href, manifest: manifest, pageText: pageTextSafe, fold: fold, version: function () { return BASE; } };
 })();
