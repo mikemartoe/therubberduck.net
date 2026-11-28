@@ -3,6 +3,8 @@
    - search: on first use it fetches /assets/search/site-index.json (built by tools/site-search-build.py:
      rooms, every Q drop, PDFs, videos, recordings, collectibles, the book and every meme) and searches it
      in the browser. X posts are searched by the X Archive's own index: the last row hands the query to /x/.
+   - full text: assets/trd/fulltext-search.js adds passage hits, grouped by room, into .tn-full-slot.
+     That script loads its index from TRD_FULLTEXT_BASE. Title rows, Inside rows, and the X row stay.
    Listeners sit on document with the native method, so the Duck Pod's soft navigation never drops them,
    and every lookup is by id, so the freshly swapped-in header of the next page just works.            */
 (function () {
@@ -107,6 +109,7 @@
           h += '<a role="option" href="' + esc(o.S.href(d, p)) + '"><span class="tn-k">Inside</span><span class="tn-t">' + esc(d.title) + '</span><span class="tn-d">' + d.pages.length + (d.pages.length === 1 ? ' page' : ' pages') + ' match \u00b7 p. ' + p + (sn[i].length ? ' \u00b7 ' + sn[i][0].html : '') + '</span></a>';
         });
         if (!n) return;
+        var empty = b.querySelector('#tn-empty'); if (empty) empty.remove();
         h += '<a role="option" href="/pdfs.html?find=' + encodeURIComponent(q) + '"><span class="tn-k">SCI[F]</span><span class="tn-t">' + (r.phrases.length ? 'Open the room to see every match' : r.total.toLocaleString('en-US') + (r.total === 1 ? ' file contains' : ' files contain') + ' \u201c' + esc(q) + '\u201d \u203a') + '</span></a></div>';
         if (!D.getElementById('tn-docs-css')) { var st = D.createElement('style'); st.id = 'tn-docs-css'; st.textContent = '.tn-res .tn-docs mark{background:#ffd54a;color:#000;padding:0 1px}.tn-res .tn-docs .tn-d{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}'; (D.head || D.documentElement).appendChild(st); }
         var old = b.querySelector('.tn-docs'); if (old) old.remove();
@@ -122,15 +125,38 @@
     if (!data) { msg('Loading the archive index\u2026'); load(); return; }
     var res = hits(q), html = ledgerBackRow();
     if (html) ensureLedgerBackStyle();
+    html += '<div class="tn-full-slot"></div>';
     res.items.forEach(function (r) {
       html += '<a role="option" href="' + esc(r.href) + '"><span class="tn-k">' + esc(r.type) + '</span><span class="tn-t">' + esc(r.title) + '</span>' + (r.blurb ? '<span class="tn-d">' + esc(r.blurb) + '</span>' : '') + '</a>';
     });
-    if (!res.items.length) html += '<div class="tn-msg">Nothing in the rooms, drops, PDFs, videos, recordings or memes for \u201c' + esc(q) + '\u201d.</div>';
-    else if (res.total > res.items.length) html += '<div class="tn-msg">' + (res.total >= 4000 ? '4,000+' : res.total.toLocaleString('en-US')) + ' matches; add a word to narrow it down.</div>';
+    if (!res.items.length) html += '<div class="tn-msg" id="tn-empty">Nothing in the rooms, drops, PDFs, videos, recordings or memes for \u201c' + esc(q) + '\u201d.</div>';
+    else if (res.total > res.items.length) html += '<div class="tn-msg">' + (res.total >= 4000 ? '4,000+' : res.total.toLocaleString('en-US')) + ' title matches; add a word to narrow it down.</div>';
     html += xRow(q);
     b.innerHTML = html; b.hidden = false; sel = -1;
     if (inp) inp.setAttribute('aria-expanded', 'true');
     inDocs(q, b);
+    fullText(q, b);
+  }
+  var FULL = '/assets/trd/fulltext-search.js?v=f02cb89c6d', fullP = null, fseq = 0;
+  function fullLoad() {
+    if (W.trdFulltext) return Promise.resolve(W.trdFulltext);
+    if (fullP) return fullP;
+    fullP = new Promise(function (ok, no) {
+      var s = D.createElement('script');
+      s.src = FULL;
+      s.onload = function () { ok(W.trdFulltext); };
+      s.onerror = function () { fullP = null; no(); };
+      (D.head || D.documentElement).appendChild(s);
+    });
+    return fullP;
+  }
+  function fullText(q, b) {
+    var my = ++fseq;
+    if (fold(q).replace(/[^a-z0-9]/g, '').length < 3) return;
+    fullLoad().then(function (F) {
+      if (!F || my !== fseq) return;
+      return F.fill(b, q, function () { return fseq === my; });
+    }).catch(function () {});
   }
   function opts() { var b = box(); return b ? b.querySelectorAll('a') : []; }
   function mark(n) { var o = opts(); if (!o.length) return; sel = (n + o.length) % o.length; [].forEach.call(o, function (a, i) { a.classList.toggle('on', i === sel); }); o[sel].scrollIntoView({ block: 'nearest' }); }
