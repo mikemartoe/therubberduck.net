@@ -444,7 +444,7 @@ def localize_substack(html: str, prefix: str, lang: str) -> str:
 
 
 def inject_css(html: str) -> str:
-    tag = '<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261127bs">'
+    tag = '<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261127bt">'
     if "i18n.css" in html:
         return html
     if "</head>" in html:
