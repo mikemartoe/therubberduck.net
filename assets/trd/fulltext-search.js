@@ -6,7 +6,7 @@
   'use strict';
   var W = window;
   if (W.trdFulltext) return;
-  var TRD_FULLTEXT_BASE = 'https://scif-search.therubberduck.net/fulltext/68ae0021de/';
+  var TRD_FULLTEXT_BASE = 'https://scif-search.therubberduck.net/fulltext/7fa6f47b36/';
   var BASE = TRD_FULLTEXT_BASE;
   var man = null, manP = null, stopSet = null, splitSet = null, shardSet = null;
   var cache = Object.create(null);
