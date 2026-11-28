@@ -551,3 +551,10 @@ body.eol-home .hello-btn.hello-coin:active .hello-coin-bob{
   body.eol-home .hello-coin-cap{transition:none}
   body.eol-home .hello-btn.hello-coin:active .hello-coin-bob{transform:none}
 }
+
+/* Below-the-fold homepage blocks: skip style/paint until they approach the viewport. */
+body.eol-home section.support,
+body.eol-home footer.site-foot{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 900px;
+}
