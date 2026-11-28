@@ -370,6 +370,29 @@ def set_lang_and_canonical(html: str, prefix: str, rel: str, lang: str) -> str:
     return html
 
 
+def set_og_url_and_page_name(html: str, canon: str) -> str:
+    """Locale pages: og:url equals the canonical, and the WebPage / CollectionPage name in the JSON-LD equals the
+    page's own (localized) <title>. Only those fields are touched."""
+    import html as _h
+    html = re.sub(r'(<meta property="og:url" content=")[^"]*(")', lambda m: m.group(1) + canon + m.group(2), html, count=1)
+    tm = re.search(r"<title>(.*?)</title>", html, re.S)
+    if tm:
+        title = _h.unescape(tm.group(1)).strip()
+        jt = json.dumps(title, ensure_ascii=False)
+        html = re.sub(
+            r'("@type":"(?:WebPage|CollectionPage)"[^{}]*?"name":)"(?:[^"\\]|\\.)*"',
+            lambda m: m.group(1) + jt,
+            html,
+            count=1,
+        )
+    return html
+
+
+def set_home_breadcrumb(html: str, canon: str) -> str:
+    """Locale home only: breadcrumb item 1 points at the locale home instead of the English home."""
+    return html.replace('"position":1,"name":"Home","item":"%s/"' % SITE, '"position":1,"name":"Home","item":"%s"' % canon, 1)
+
+
 def set_in_language(html: str, lang: str) -> str:
     def fix(m: re.Match) -> str:
         block = m.group(0)
@@ -451,6 +474,9 @@ def transform(src_html: str, prefix: str, rel: str, lang: str, catalog: dict[str
     html = inject_css(html)
     html = set_in_language(html, lang)
     if prefix:
+        html = set_og_url_and_page_name(html, loc_url(prefix, rel))
+        if rel == "index.html":
+            html = set_home_breadcrumb(html, loc_url(prefix, rel))
         html = apply_catalog(html, catalog)
         html = absolutize(html, prefix)
     html = inject_note_and_switcher(html, prefix, rel)
@@ -514,7 +540,29 @@ def write_locales_sitemap(rels: list[str]) -> None:
         (ROOT / "sitemap.xml").write_text(index, encoding="utf-8")
 
 
+def patch_existing() -> int:
+    """--patch-existing: apply ONLY the og:url / WebPage name / home breadcrumb fixes to the locale pages already on
+    disk (the full build is not idempotent against hand-fixed locale pages, so it must not be re-run wholesale)."""
+    n = 0
+    for rel in SOURCES:
+        for prefix in LOCALE_DIRS:
+            path = loc_path(prefix, rel)
+            if not path.is_file():
+                continue
+            old = path.read_text(encoding="utf-8")
+            new = set_og_url_and_page_name(old, loc_url(prefix, rel))
+            if rel == "index.html":
+                new = set_home_breadcrumb(new, loc_url(prefix, rel))
+            if new != old:
+                path.write_text(new, encoding="utf-8")
+                n += 1
+    print(f"patched {n} locale pages")
+    return 0
+
+
 def main() -> int:
+    if "--patch-existing" in sys.argv:
+        return patch_existing()
     catalog = load_catalog()
     written: list[tuple[str, str, Path]] = []
     for rel in SOURCES:
