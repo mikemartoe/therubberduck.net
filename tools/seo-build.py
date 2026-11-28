@@ -33,7 +33,7 @@ SHARE = SITE + '/images/brand/trd-share-2026.jpg'
 # Web app (PWA, owner approved 2026-10-30): head tags for pages that offer install + alerts, and the two small
 # data files the push Worker (workers/trd-push.js) reads. Keep these in every rebuild.
 PWA_HEAD = ('<link rel="manifest" href="/manifest.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes">'
-            '<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Rubber Duck">'
+            '<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="The Rubber Duck">'
             '<link rel="stylesheet" href="/assets/trd/pwa.css?v=20261030a" data-trd-keep><script src="/assets/trd/pwa.js?v=20261030a" defer data-trd-keep></script>\n')
 def og_size(alt):
     return '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="%s">\n' % E(alt)
