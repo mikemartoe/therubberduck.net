@@ -325,7 +325,7 @@ footer a{margin:0 6px;white-space:nowrap;color:#e9d8b2}
 <button class="tn-btn tn-menu" id="tn-menu" type="button" aria-expanded="false" aria-controls="tn-links" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
 <button class="tn-btn tn-sb" id="tn-sbtn" type="button" aria-expanded="false" aria-label="Search the archive"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
 </div></header>
-<script>window.trdNav||(function(){var s=document.createElement('script');s.src='/assets/trd/sitenav.js?v=5b8b8ea6fc';s.setAttribute('data-trd-keep','');document.head.appendChild(s);})();</script>
+<script>window.trdNav||(function(){var s=document.createElement('script');s.src='/assets/trd/sitenav.js?v=d4c95e3dd2';s.setAttribute('data-trd-keep','');document.head.appendChild(s);})();</script>
 <header class="banner">
   <div class="banner-in">
     <img src="/assets/trd/img/duck-banner.webp" alt="The Rubber Duck">
@@ -591,6 +591,7 @@ $('vov').addEventListener('toggle', () => { if (cur) fillMates(cur); });
 $('vmin').addEventListener('click', e => {
   const b = e.target.closest('.stamp'); if (!b || !cur || cur.src !== 'rumble') return;
   startRumble(cur, +b.dataset.s);
+  history.replaceState(null, '', '#vol=' + cur.id + '&t=' + (+b.dataset.s));
   if (matchMedia('(max-width:860px)').matches) $('player').scrollIntoView({behavior: 'smooth', block: 'center'});
 });
 $('pic').addEventListener('click', () => { const hid = $('player').classList.toggle('hidepic'); $('pic').textContent = hid ? 'Show picture' : 'Hide picture'; });
@@ -728,16 +729,29 @@ let rT, lastW = 0;
 addEventListener('resize', () => { clearTimeout(rT); rT = setTimeout(() => { const w = $('wall').clientWidth; if (w !== lastW) { lastW = w; layout(); refreshLeaf(); } if (cur) fillMates(cur); }, 120); });
 
 /* ---------- start: newest volume on the desk, nothing plays ---------- */
+function hashCue() {
+  const h = location.hash.replace(/^#/, '');
+  const vol = (h.match(/(?:^|&)vol=([A-Za-z0-9]+)/) || [])[1];
+  const t = (h.match(/(?:^|&)t=(\d+)/) || [])[1];
+  return { id: vol, t: t ? +t : 0 };
+}
 function fromHash() {
-  const m = location.hash.match(/vol=([A-Za-z0-9]+)/);
-  const v = (m && VOLS.find(x => x.id === m[1])) || VOLS.slice().sort((a, b) => b.ts - a.ts)[0];
-  open(v, {quiet: !m});
+  const cue = hashCue();
+  const v = (cue.id && VOLS.find(x => x.id === cue.id)) || VOLS.slice().sort((a, b) => b.ts - a.ts)[0];
+  open(v, {quiet: !cue.id});
+  if (cue.id && cue.t && v && v.src === 'rumble') startRumble(v, cue.t);
 }
 document.fonts.ready.then(() => {
   layout(); lastW = $('wall').clientWidth; fromHash(); refreshLeaf();
   trackEvent('page_view', {volumes: VOLS.length, open: cur && cur.id});
 });
-addEventListener('hashchange', () => { const m = location.hash.match(/vol=([A-Za-z0-9]+)/); const v = m && VOLS.find(x => x.id === m[1]); if (v) open(v); });
+addEventListener('hashchange', () => {
+  const cue = hashCue();
+  const v = cue.id && VOLS.find(x => x.id === cue.id);
+  if (!v) return;
+  if (!cur || cur.id !== v.id) open(v);
+  if (cue.t && v.src === 'rumble') startRumble(v, cue.t);
+});
 </script>
 <script src="/assets/trd/onair.js?v=20261122a" defer data-trd-keep></script>
 </body>

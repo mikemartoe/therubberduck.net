@@ -13,3 +13,9 @@ memes/card/
 
 # Official FR PDFs cached for the EO library preview (too large for GitHub Pages).
 eo-library/pdfs/*.pdf
+
+# Unified full-text index. Built locally; served from TRD_FULLTEXT_BASE (R2 later).
+/search/unified/
+
+# Re-OCR output for the SCI[F] thin pages. Publish by hand. Not part of the site.
+/scif-ocr-repair/
