@@ -300,7 +300,16 @@ def patch_month_page(path, posts, have_permalinks):
     return changed
 
 
-def status_page(p):
+def pn_links(prev_p, next_p):
+    """Crawlable previous/next links between neighbouring permalink pages (chronological order). Returns (prev_nav, next_nav)."""
+    def lab(q):
+        return parse_created(q['c']).strftime('%B %-d, %Y, %-I:%M %p ET')
+    a = ('<a rel="prev" href="%s">&lsaquo; Previous: post from %s</a>' % (status_path(prev_p['i']), lab(prev_p))) if prev_p else '<span></span>'
+    b = ('<a rel="next" href="%s">Next: post from %s &rsaquo;</a>' % (status_path(next_p['i']), lab(next_p))) if next_p else '<span></span>'
+    return '<nav class="pn">' + a, b + '</nav>\n'
+
+
+def status_page(p, prev_nav='', next_nav=''):
     dt_et = parse_created(p['c'])
     month = p['_month']
     mname = dt.date(int(month[:4]), int(month[5:]), 1).strftime('%B %Y')
@@ -391,7 +400,7 @@ def status_page(p):
 <p class="meta"><time datetime="%s">%s</time>%s &middot; <a href="/x/archive/%s/#p%s">This post in the monthly archive</a> &middot; <a href="/x/post.html?id=%s">Open this post in the X Archive</a> &middot; <a href="%s" rel="nofollow noopener" target="_blank">View this post on X</a></p>
 <div class="text">%s</div>
 </article>
-<p class="foot">Original post by The Rubber Duck (@TheRubberDuck79). Text is shown as posted. This page is a crawlable permalink into the <a href="/x/">X Archive</a>.</p>
+%s<p class="foot">Original post by The Rubber Duck (@TheRubberDuck79). Text is shown as posted. This page is a crawlable permalink into the <a href="/x/">X Archive</a>.</p>
 </main>
 </body>
 </html>
@@ -421,17 +430,20 @@ def status_page(p):
         E(p['i']),
         E(x_url(p['i'])),
         linkify(p.get('x') or ''),
+        prev_nav + next_nav,
     )
     return body
 
 
 def write_status_pages(posts, dry):
     written = []
+    ordered = sorted(posts, key=lambda q: int(q['i']))
+    nb = {q['i']: (ordered[k - 1] if k else None, ordered[k + 1] if k + 1 < len(ordered) else None) for k, q in enumerate(ordered)}
     for p in posts:
         dest = ROOT / 'x/status' / p['i'] / 'index.html'
         if not dry:
             dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.write_text(status_page(p), encoding='utf-8')
+            dest.write_text(status_page(p, *pn_links(*nb[p['i']])), encoding='utf-8')
         written.append(p)
     return written
 

@@ -412,8 +412,10 @@ def build_x():
                 kinds = {'p': 'photo', 'v': 'video', 'g': 'GIF'}
                 ks = sorted(set(kinds.get(m[0], 'media') for m in p['m']))
                 media = ' &middot; with ' + ' and '.join(ks)
-            items.append('<article class="item" id="p%s"><p class="meta"><time datetime="%s">%s</time>%s%s &middot; <a href="/x/post.html?id=%s">Open this post in the X Archive</a> &middot; <a href="https://x.com/TheRubberDuck79/status/%s" rel="nofollow noopener" target="_blank">View this post on X</a></p><div class="text">%s</div></article>'
-                         % (p['i'], dt.isoformat(), dt.strftime('%B %-d, %Y, %-I:%M %p ET'), ' &middot; quote post' if p['y'] == 'q' else '', media, p['i'], p['i'], linkify(p['x'])))
+            # crawlable link down to the post's own permalink page (only when that page exists), so /x/status/ pages are not orphans
+            perm = (' &middot; <a href="/x/status/%s/">Permalink to this post</a>' % p['i']) if os.path.isdir('x/status/%s' % p['i']) else ''
+            items.append('<article class="item" id="p%s"><p class="meta"><time datetime="%s">%s</time>%s%s &middot; <a href="/x/post.html?id=%s">Open this post in the X Archive</a>%s &middot; <a href="https://x.com/TheRubberDuck79/status/%s" rel="nofollow noopener" target="_blank">View this post on X</a></p><div class="text">%s</div></article>'
+                         % (p['i'], dt.isoformat(), dt.strftime('%B %-d, %Y, %-I:%M %p ET'), ' &middot; quote post' if p['y'] == 'q' else '', media, p['i'], perm, p['i'], linkify(p['x'])))
         pn = '<nav class="pn">%s%s</nav>' % (
             ('<a rel="prev" href="/x/archive/%s/">&lsaquo; X posts from %s</a>' % (keep_months[j - 1][0], datetime.date(int(keep_months[j - 1][0][:4]), int(keep_months[j - 1][0][5:]), 1).strftime('%B %Y'))) if j else '<span></span>',
             ('<a rel="next" href="/x/archive/%s/">X posts from %s &rsaquo;</a>' % (keep_months[j + 1][0], datetime.date(int(keep_months[j + 1][0][:4]), int(keep_months[j + 1][0][5:]), 1).strftime('%B %Y'))) if j + 1 < len(keep_months) else '<span></span>')
