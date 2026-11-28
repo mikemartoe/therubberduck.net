@@ -955,10 +955,15 @@ def build_sitemaps():
         lm = max(u[1] for u in SITEMAPS[n])
         idx.append('  <sitemap><loc>%s/sitemaps/%s.xml</loc><lastmod>%s</lastmod></sitemap>' % (SITE, n, lm))
     # Sitemaps written by other builders (tools/video-share-build.py): keep their index entry on every rebuild.
-    for extra in ('deltas', 'q-proofs', 'video-share', 'locales', 'eo'):
+    for extra in ('deltas', 'q-proofs', 'video-share', 'locales', 'eo', 'news'):
         fp = os.path.join(ROOT, 'sitemaps', extra + '.xml')
         if extra not in names and os.path.exists(fp):
-            elm = max(re.findall(r'<lastmod>([^<]+)</lastmod>', open(fp, encoding='utf-8').read()) or [TODAY])
+            body = open(fp, encoding='utf-8').read()
+            # An empty Google News sitemap makes Search Console report an error; only
+            # list it when it actually has article URLs.
+            if extra == 'news' and not re.search(r'<url[\s>]', body):
+                continue
+            elm = max(re.findall(r'<lastmod>([^<]+)</lastmod>', body) or [TODAY])
             idx.append('  <sitemap><loc>%s/sitemaps/%s.xml</loc><lastmod>%s</lastmod></sitemap>' % (SITE, extra, elm))
     idx.append('</sitemapindex>\n')
     write('sitemap.xml', '\n'.join(idx))

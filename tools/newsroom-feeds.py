@@ -9,7 +9,8 @@ dateModified, image, @type) and the page's meta description.
 - feed.xml: newest 50 stories, all kinds (articles + commentary), full permalinks.
 - news.xml: only Article/NewsArticle/OpinionNewsArticle published in the last
   48 hours (Google: "articles that were created in the last two days").
-  An empty urlset is fine (Search Console shows a harmless warning).
+  An empty urlset is kept on disk, but the sitemap index only lists
+  news.xml when it has URLs (an empty news sitemap makes Search Console error).
 Author and publisher are always "The Rubber Duck". No personal names, ever.
 """
 import argparse, datetime as dt, glob, html, json, os, re
@@ -100,6 +101,25 @@ def news_sitemap(items, now):
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
             '        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n' + '\n'.join(rows) + ('\n' if rows else '') + '</urlset>\n'), len(rows)
 
+
+NEWS_INDEX_RE = re.compile(
+    r'  <sitemap><loc>%s/sitemaps/news.xml</loc><lastmod>[^<]*</lastmod></sitemap>\n?' % re.escape(SITE)
+)
+
+def sync_news_index(count, now):
+    """List sitemaps/news.xml in sitemap.xml only when it has article URLs."""
+    path = os.path.join(ROOT, 'sitemap.xml')
+    text = open(path, encoding='utf-8').read()
+    text2 = NEWS_INDEX_RE.sub('', text)
+    if count:
+        lastmod = now.date().isoformat() if hasattr(now, 'date') else str(now)[:10]
+        entry = f'  <sitemap><loc>{SITE}/sitemaps/news.xml</loc><lastmod>{lastmod}</lastmod></sitemap>\n'
+        if '</sitemapindex>' not in text2:
+            raise SystemExit('sitemap.xml has no sitemapindex close tag')
+        text2 = text2.replace('</sitemapindex>', entry + '</sitemapindex>', 1)
+    if text2 != text:
+        open(path, 'w', encoding='utf-8').write(text2)
+
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(); ap.add_argument('--now'); ap.add_argument('--dry', action='store_true')
     a = ap.parse_args()
@@ -109,6 +129,7 @@ if __name__ == '__main__':
     if not a.dry:
         open(os.path.join(ROOT, 'newsroom', 'feed.xml'), 'w', encoding='utf-8').write(feed)
         open(os.path.join(ROOT, 'sitemaps', 'news.xml'), 'w', encoding='utf-8').write(sm)
+        sync_news_index(n, now)
     print(f'feed: {min(len(items),50)} items | news sitemap: {n} urls in the 48h window ending {now.isoformat()}')
     # Keep the article-end "support the mission" block in place on every story.
     import importlib.util
