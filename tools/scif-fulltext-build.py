@@ -20,7 +20,8 @@ import argparse, collections, json, os, re, shutil, unicodedata
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 CDN = 'https://scif-search.therubberduck.net/scif-search/'
-EXCLUDE = {'TRD-0087'}   # Epstein black book: stays in the room, never in the search index (Duck, Nov 28)
+EXCLUDE = {'TRD-0087'}   # Redacted 92-page scan: stays in the room, never in the search index (Duck, Nov 28).
+    # TRD-0246 (Wikimedia unredacted 95-page scan) is a different file and is indexed.
 OUT = '/workspace/scif-search-out'
 PART_CHARS = 180000      # target characters of text per part file
 SHARD_MAX = 150000       # shards are 2 letters; one above this many bytes is split by one more letter

@@ -152,5 +152,79 @@
     });
   }
   function href(doc, p) { return '/pdfs.html?open=' + encodeURIComponent(doc.id) + (p ? '&p=' + p : ''); }
-  W.scifSearch = { search: search, snippets: snippets, href: href, manifest: manifest, pageText: pageTextSafe, fold: fold, version: function () { return BASE; } };
+
+  /* Preview overlay: TRD-0246 (Wikimedia unredacted scan). Live indexes are unchanged. */
+  var EXTRA_BASE = 'https://scif-search.therubberduck.net/preview-trd-0246/';
+  var extraIdx = null, extraP = null;
+  function extraIndex() {
+    if (extraP) return extraP;
+    extraP = fetch(EXTRA_BASE + 'index.json').then(function (r) { if (!r.ok) throw new Error('extra'); return r.json(); }).then(function (m) { extraIdx = m; return m; });
+    extraP.catch(function () { extraP = null; });
+    return extraP;
+  }
+  function searchExtra(q) {
+    return extraIndex().then(function (ex) {
+      var pq = parseQuery(q), terms = [], ignored = pq.ignored.slice();
+      pq.terms.forEach(function (x) { if (stopSet && stopSet[x.t]) ignored.push(x.t); else terms.push(x); });
+      var empty = { terms: terms, phrases: pq.phrases, ignored: ignored, docs: [], total: 0, totalPages: 0, pageLevel: true };
+      if (!terms.length) return empty;
+      var pages = null;
+      terms.forEach(function (x) {
+        var ps = [];
+        if (x.wild) {
+          Object.keys(ex.postings).forEach(function (w) { if (w.indexOf(x.t) === 0) ps = ps.concat(ex.postings[w]); });
+        } else {
+          variants(x.t).forEach(function (v) { if (ex.postings[v]) ps = ps.concat(ex.postings[v]); });
+        }
+        var uniq = [], seen = {};
+        ps.sort(function (a, b) { return a - b; }).forEach(function (p) { if (!seen[p]) { seen[p] = 1; uniq.push(p); } });
+        pages = pages ? pages.filter(function (p) { return uniq.indexOf(p) >= 0; }) : uniq;
+      });
+      if (pq.phrases.length && pages && pages.length) {
+        pages = pages.filter(function (p) {
+          var f = foldLen(ex.text[p - 1] || '').replace(/\s+/g, ' ');
+          return pq.phrases.every(function (ph) { return f.indexOf(ph) >= 0; });
+        });
+      }
+      if (!pages || !pages.length) return empty;
+      var doc = { i: 100000, id: ex.id, title: ex.title, shelf: ex.shelf, nPages: ex.pages, pages: pages, score: 80, pageLevel: true };
+      return { terms: terms, phrases: pq.phrases, ignored: ignored, docs: [doc], total: 1, totalPages: pages.length, pageLevel: true };
+    }).catch(function () { return { terms: [], phrases: [], ignored: [], docs: [], total: 0, totalPages: 0 }; });
+  }
+  function searchBoth(q) {
+    return Promise.all([search(q), searchExtra(q)]).then(function (pair) {
+      var a = pair[0], b = pair[1];
+      if (!b || !b.docs || !b.docs.length) return a;
+      a.docs = (a.docs || []).concat(b.docs).sort(function (x, y) { return (y.score || 0) - (x.score || 0); });
+      a.total = a.docs.length;
+      a.totalPages = a.docs.reduce(function (n, d) { return n + (d.pages ? d.pages.length : 0); }, 0);
+      if (b.terms && b.terms.length && !(a.terms && a.terms.length)) a.terms = b.terms;
+      return a;
+    });
+  }
+  function pageTextBoth(id, p) {
+    if (id === 'TRD-0246') return extraIndex().then(function (ex) { return (ex.text && ex.text[p - 1]) || ''; }).catch(function () { return ''; });
+    return pageTextSafe(id, p);
+  }
+  function snippetsBoth(doc, res, n) {
+    if (doc.id !== 'TRD-0246') return snippets(doc, res, n);
+    return extraIndex().then(function (ex) {
+      n = n || 3;
+      var out = [];
+      (doc.pages || []).slice(0, 12).forEach(function (p) {
+        var t = (ex.text && ex.text[p - 1]) || '';
+        if (!t) return;
+        if (res.phrases && res.phrases.length) {
+          var f = foldLen(t).replace(/\s+/g, ' ');
+          if (!res.phrases.every(function (ph) { return f.indexOf(ph) >= 0; })) return;
+        }
+        var sn = makeSnippet(t, res);
+        out.push({ p: p, html: sn.html, rank: sn.distinct * 100 + Math.min(sn.hits, 50) });
+      });
+      out.sort(function (a, b) { return b.rank - a.rank || a.p - b.p; });
+      return out.slice(0, n).sort(function (a, b) { return a.p - b.p; });
+    });
+  }
+  W.scifSearch = { search: searchBoth, snippets: snippetsBoth, href: href, manifest: manifest, pageText: pageTextBoth, fold: fold, version: function () { return BASE; } };
+
 })();

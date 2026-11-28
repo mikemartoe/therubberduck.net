@@ -85,7 +85,7 @@
   }
   /* Text inside the SCI[F] PDFs (assets/trd/scif-search.js, built by tools/scif-fulltext-build.py).
      Loaded only when someone types a search; adds up to 4 files, each with the page and a highlighted line, above the X row. */
-  var SCIF = '/assets/trd/scif-search.js?v=06a7f5ad06', scifP = null, dseq = 0;
+  var SCIF = '/assets/trd/scif-search.js?v=0246preview', scifP = null, dseq = 0;
   function scifLoad() {
     if (W.scifSearch) return Promise.resolve(W.scifSearch);
     if (scifP) return scifP;
@@ -137,7 +137,7 @@
     inDocs(q, b);
     fullText(q, b);
   }
-  var FULL = '/assets/trd/fulltext-search.js?v=9be000e789', fullP = null, fseq = 0;
+  var FULL = '/assets/trd/fulltext-search.js?v=0246preview', fullP = null, fseq = 0;
   function fullLoad() {
     if (W.trdFulltext) return Promise.resolve(W.trdFulltext);
     if (fullP) return fullP;

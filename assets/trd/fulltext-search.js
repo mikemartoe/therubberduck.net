@@ -248,7 +248,7 @@
   }
   function fill(box, q, still) {
     ensureCss();
-    return search(q, { sample: 3, show: 1 }).then(function (res) {
+    return searchBoth(q, { sample: 3, show: 1 }).then(function (res) {
       if (still && !still()) return res;
       var inp = document.getElementById('tn-q');
       if (!box || !inp || inp.value.trim() !== String(q).trim()) return res;
@@ -286,7 +286,7 @@
     var only = '';
     function draw() {
       el.innerHTML = '<p class="ft-wait">Searching the text\u2026</p>';
-      return search(q, { sample: only ? 12 : 4, show: only ? 12 : 4, only: only }).then(function (res) {
+      return searchBoth(q, { sample: only ? 12 : 4, show: only ? 12 : 4, only: only }).then(function (res) {
         el.innerHTML = pageHtml(res, q, only);
         [].forEach.call(el.querySelectorAll('[data-room]'), function (b) {
           b.addEventListener('click', function () {
@@ -302,5 +302,62 @@
     return draw();
   }
 
-  W.trdFulltext = { search: search, fill: fill, renderPage: renderPage, base: BASE };
+
+  /* Preview overlay: TRD-0246 page records, merged into the SCI[F] room. */
+  var EXTRA_BASE = 'https://scif-search.therubberduck.net/preview-trd-0246/';
+  var extraIdx = null, extraP = null;
+  function extraIndex() {
+    if (extraP) return extraP;
+    extraP = fetch(EXTRA_BASE + 'index.json').then(function (r) { if (!r.ok) throw new Error('extra'); return r.json(); }).then(function (m) { extraIdx = m; return m; });
+    extraP.catch(function () { extraP = null; });
+    return extraP;
+  }
+  function extraHits(q) {
+    return extraIndex().then(function (ex) {
+      var terms = rawTokens(q);
+      if (!terms.length) return [];
+      var pages = null;
+      terms.forEach(function (t) {
+        var ps = (ex.postings && ex.postings[t]) ? ex.postings[t].slice() : [];
+        pages = pages ? pages.filter(function (p) { return ps.indexOf(p) >= 0; }) : ps;
+      });
+      if (!pages || !pages.length) return [];
+      return pages.map(function (p) {
+        var text = (ex.text && ex.text[p - 1]) || '';
+        var title = ex.title + ' \u00b7 p. ' + p;
+        var rec = [title, '/pdfs.html?open=' + encodeURIComponent(ex.id) + '&p=' + p, text];
+        return { title: title, url: rec[1], excerpt: excerpt(text, terms), score: score(rec, terms) + 20 };
+      }).sort(function (a, b) { return b.score - a.score; });
+    }).catch(function () { return []; });
+  }
+  var _search = search;
+  function searchBoth(q, opt) {
+    opt = opt || {};
+    return Promise.all([_search(q, opt), extraHits(q)]).then(function (pair) {
+      var res = pair[0], extra = pair[1] || [];
+      if (!extra.length) return res;
+      if (opt.only && opt.only !== 'scif') return res;
+      var show = opt.show || opt.sample || 4;
+      var room = null, rooms = res.rooms ? res.rooms.slice() : [];
+      for (var i = 0; i < rooms.length; i++) if (rooms[i].id === 'scif') room = rooms[i];
+      if (!room) {
+        room = { id: 'scif', label: 'SCI[F]', total: 0, hits: [] };
+        rooms.unshift(room);
+      }
+      var seen = {};
+      room.hits.forEach(function (h) { seen[h.url] = 1; });
+      extra.forEach(function (h) {
+        if (seen[h.url]) return;
+        room.hits.push(h);
+        room.total++;
+        res.total++;
+      });
+      room.hits.sort(function (a, b) { return (b.score || 0) - (a.score || 0); });
+      if (room.hits.length > show) room.hits = room.hits.slice(0, show);
+      res.rooms = rooms;
+      return res;
+    });
+  }
+  W.trdFulltext = { search: searchBoth, fill: fill, renderPage: renderPage, base: BASE };
+
 })();
