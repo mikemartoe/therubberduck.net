@@ -1,0 +1,72 @@
+# The Rubber Duck™
+
+A shorter room map is at https://therubberduck.net/llms.txt.
+
+therubberduck.net is The Rubber Duck's open archive of the Q era. The homepage describes it as: every Q drop, videos, X Spaces, PDFs, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.
+
+The site presents source material and leaves interpretation to the reader. Q drop pages reproduce the posted text; the drop ledger links each drop to its original post on the 4plebs archive and to the original anon research thread. Library documents are public records, papers and books as published by their authors; a library page's summary describes the document, it does not endorse it. Executive orders are official Federal Register documents. DUCK SAUCE pages are commentary, opinion and X threads by The Rubber Duck, distinct from the primary-source archive rooms. Everything in the archive is free to read.
+
+This file is a plain-text map of the main rooms, with each room's own URL and the short description published on that page. There is no paywall on the archive itself.
+
+## Q drops
+
+- https://therubberduck.net/ledger.html — The Drop Ledger: every numbered Q drop, #1 to #4,966, in order as originally posted. Search by number, date or phrase, with a way back to each original source.
+- https://therubberduck.net/drops/ — All 4,966 numbered Q drops, October 2017 to November 2022, by month and by number, with full text and dates. Individual drops live at /drops/1/ through /drops/4966/.
+- https://therubberduck.net/process.html — Dough, crumbs, bakers, bread and dissemination: how a drop was worked, explained in plain words. It shows the process and leaves the answers to you.
+- https://therubberduck.net/deltas/ — Q drop deltas, day by day: every Q drop posted on each calendar date from 2017 to 2022, on 319 date pages.
+- https://therubberduck.net/q-proofs/ — Q proofs: Q drops confirmed publicly by Donald Trump. 34 proofs with the drop and the tweet side by side, all 35 drops signed Q+, and the Book of Q Proofs.
+
+## Library
+
+- https://therubberduck.net/library/ — SCI[F] Library: 243 public documents and books to read or download: PSYOP doctrine, Q drops, the Epstein files and more, grouped by topic, each with a summary.
+- https://therubberduck.net/pdfs.html — SCI[F]: a library of public documents and books on Q drops, PSYOP doctrine, the Epstein files and more. Search, read or download any file here.
+- https://therubberduck.net/eo-library/ — The Executive Order Library: every executive order signed by President Donald J. Trump, first term and second term, in a presidential library of binders. Official Federal Register documents, short summaries, Q drop connections, and forensic search. The room currently lists 512 orders.
+
+## Archive (X posts)
+
+- https://therubberduck.net/x/ — A searchable archive of every post by The Rubber Duck (@TheRubberDuck79) on X, April 2020 to November 2026, with full text, links, media and dates. 62,975 posts in all.
+- https://therubberduck.net/x/archive/ — Every original post by The Rubber Duck (@TheRubberDuck79) on X, June 2020 to November 2026, by month with full text. 15,449 posts in the monthly pages, out of 62,975 in the searchable archive.
+- https://therubberduck.net/x/status/ — 15,471 crawlable permalinks at /x/status/{id}/ for every original post already shown in the monthly archive (and posts already linked from DUCK SAUCE), each with the original date and a link to the post on X.
+- https://therubberduck.net/x/feed.xml — Atom feed of recent original posts, with original dates, archive permalinks and links to the post on X.
+
+## Watch and listen
+
+- https://therubberduck.net/watch/ — Every video and livestream in The Rubber Duck Drive-In: 84 features, each with its own page, a summary, the player and a link to Rumble.
+- https://therubberduck.net/videos.html — Private Theater: Ring of Power: Empire of the City, restored, all four parts, plus red pill clips, movies, shows and livestreams at a 70s-style drive-in.
+- https://therubberduck.net/listen/ — Every X Space and Rumble show with The Rubber Duck in The Listening Room: 81 volumes by series, each with a written summary and minutes.
+- https://therubberduck.net/listening-room.html — X Spaces and Rumble conversations with The Rubber Duck, shelved by series, each with a summary. Take down a volume, read about it and listen.
+- https://therubberduck.net/album.html — The Red Pill Album by The Rubber Duck, 22 tracks released 30 April 2026. Play the whole record here, buy it on Apple Music or stream it on Spotify.
+
+## Memes and commentary
+
+- https://therubberduck.net/memes.html — The Rubber Duck's meme archive, shuffled fresh every visit. Filter by type, look or the words inside a meme, then download or share what you find. Individual share pages live at /memes/share/{id}.html and open the meme in the dump.
+- https://therubberduck.net/newsroom.html — DUCK SAUCE, The Rubber Duck Newsroom: original news, commentary and X Articles by The Rubber Duck (@TheRubberDuck79).
+- https://therubberduck.net/newsroom/feed.xml — RSS feed of every DUCK SAUCE story, newest first, with dates and permalinks.
+- https://therubberduck.net/out-of-babylon/ — Out of Babylon, in memory of David Lester Straight (April 20, 1963 – April 1, 2025). Watch the eight-part seminar and download all 94 accompanying forms and study documents.
+
+## Shop, book and sponsorship
+
+- https://therubberduck.net/merch.html — TRD Collectibles: caps, tees, mugs, patches and stickers, plus signed caps and tees numbered by hand out of 500. Product pages are under /shop/.
+- https://therubberduck.net/book/anon-mission/ — anon mission or all you need to know about q - and how they made you afraid to ask. Volume 1 of the book by The Rubber Duck, a polished printable PDF, sold on Gumroad.
+- https://therubberduck.net/sponsor.html — Sponsor therubberduck.net with a 2 x 3 inch digital ad, the size of a business card, on the Sponsors page: $50 a month, $100 for 3 months, $175 for 6 months or $500 for a full year. You pay, we write and design the ad, and it goes up after you approve it.
+
+## Language versions of the homepage
+
+The archive rooms themselves are in English. These pages are localized front doors to the same site:
+
+- https://therubberduck.net/ — English. Welcome, curious minds. The Rubber Duck's open archive of the Q era: every Q drop, videos, X Spaces, PDFs, memes and 100,000+ Twitter/X posts, plus TRD Collectibles and the book anon mission.
+- https://therubberduck.net/en-au/ — English (Australia). Same description as the English homepage.
+- https://therubberduck.net/fr/ — French. Bienvenue, esprits curieux. L'archive ouverte de The Rubber Duck sur l'ère Q : chaque Q drop, des vidéos, des X Spaces, des PDF, des mèmes et plus de 100 000 publications Twitter/X, ainsi que TRD Collectibles et le livre anon mission.
+- https://therubberduck.net/fr-ca/ — French (Canada). Same description as the French homepage.
+- https://therubberduck.net/de/ — German. Willkommen, neugierige Köpfe. Das offene Archiv der Q-Ära von The Rubber Duck: jeder Q drop, Videos, X Spaces, PDFs, Memes und über 100.000 Twitter/X-Posts, dazu TRD Collectibles und das Buch anon mission.
+- https://therubberduck.net/es/ — Spanish. Bienvenidas, mentes curiosas. El archivo abierto de la era Q de The Rubber Duck: cada Q drop, vídeos, X Spaces, PDF, memes y más de 100.000 publicaciones de Twitter/X, además de TRD Collectibles y el libro anon mission.
+- https://therubberduck.net/ja/ — Japanese. ようこそ、好奇心あふれる皆さん。The Rubber DuckによるQの時代の公開アーカイブ。すべてのQ drop、動画、X Spaces、PDF、ミーム、10万件を超えるTwitter/X投稿に加え、TRD Collectiblesと書籍『anon mission』もそろっています。
+- https://therubberduck.net/nl/ — Dutch. Welkom, nieuwsgierige geesten. Het open archief van het Q-tijdperk van The Rubber Duck: elke Q drop, video's, X Spaces, pdf's, memes en meer dan 100.000 Twitter/X-posts, plus TRD Collectibles en het boek anon mission.
+
+## Also on the site
+
+- https://therubberduck.net/join.html — Sign up for short email updates from The Rubber Duck when something new lands. One field, finish on Substack, unsubscribe any time.
+- https://therubberduck.net/suggest.html — Got an idea for The Rubber Duck? Write it on a card and drop it in the suggestion box.
+- https://therubberduck.net/sitemap.xml — Full list of indexable URLs.
+
+The site is published by The Rubber Duck. Author and creator names in site metadata use "The Rubber Duck," not a personal name.
