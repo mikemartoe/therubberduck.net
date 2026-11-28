@@ -13,3 +13,5 @@ memes/card/
 
 # Official FR PDFs cached for the EO library preview (too large for GitHub Pages).
 eo-library/pdfs/*.pdf
+search-poc/scif/pagefind/
+tools/search-poc/node_modules

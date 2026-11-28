@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>SCI[F] full-text search (proof of concept)</title>
+<style>
+:root{color-scheme:dark;--bg:#0d0d0d;--fg:#eee;--mut:#9a9a9a;--acc:#f5c518;--line:#2a2a2a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:22px;margin:0 0 4px}p.sub{margin:0 0 16px;color:var(--mut);font-size:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px}
+input[type=search]{flex:1 1 260px;min-width:0;font-size:17px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:#161616;color:var(--fg)}
+select{font-size:15px;padding:10px;border-radius:10px;border:1px solid var(--line);background:#161616;color:var(--fg)}
+#stat{color:var(--mut);font-size:14px;margin:12px 0}
+.r{border-top:1px solid var(--line);padding:14px 0}
+.r a.t{color:var(--fg);font-weight:600;text-decoration:none}.r a.t:hover{text-decoration:underline}
+.m{color:var(--mut);font-size:13px;margin:2px 0 6px}.m a{color:var(--mut)}
+.x{font-size:15px}.x mark{background:var(--acc);color:#000;border-radius:3px;padding:0 2px}
+button.more{margin-top:14px;padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:#161616;color:var(--fg);font-size:15px}
+</style>
+</head>
+<body>
+<main>
+<h1>SCI[F] full-text search</h1>
+<p class="sub">Proof of concept. Searches every word on every page of every PDF in the SCIF room, including scanned pages read with OCR. Each result opens the PDF at that page.</p>
+<div class="bar">
+<input id="q" type="search" placeholder="Search inside every PDF, e.g. nano-thermite" aria-label="Search inside every SCIF PDF" autocomplete="off" autofocus>
+<select id="shelf" aria-label="Shelf"><option value="">All shelves</option></select>
+</div>
+<div id="stat" aria-live="polite"></div>
+<div id="out"></div>
+<button class="more" id="more" hidden>More results</button>
+</main>
+<script type="module">
+const pf = await import('./pagefind/pagefind.js');
+await pf.options({ excerptLength: 40 });
+pf.init();
+const q = document.getElementById('q'), shelf = document.getElementById('shelf'), out = document.getElementById('out'),
+      stat = document.getElementById('stat'), more = document.getElementById('more');
+const f = await pf.filters();
+Object.keys(f.shelf || {}).sort().forEach(s => shelf.add(new Option(`${s} (${f.shelf[s]} pages)`, s)));
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+let res = [], shown = 0, seq = 0;
+async function show(n) {
+  const batch = await Promise.all(res.slice(shown, shown + n).map(r => r.data()));
+  for (const d of batch) {
+    const m = d.meta, el = document.createElement('div'); el.className = 'r';
+    el.innerHTML = `<a class="t" href="${esc(d.url)}" target="_blank" rel="noopener">${esc(m.doc)}</a>
+      <div class="m">Page ${esc(m.page)} · ${esc(m.id)} · <a href="${esc(m.room)}">catalog card</a></div>
+      <div class="x">${d.excerpt}</div>`;
+    out.appendChild(el);
+  }
+  shown += batch.length; more.hidden = shown >= res.length;
+}
+async function run() {
+  const my = ++seq, term = q.value.trim();
+  if (!term) { out.innerHTML = ''; stat.textContent = ''; more.hidden = true; return; }
+  const t0 = performance.now();
+  const s = await pf.debouncedSearch(term, shelf.value ? { filters: { shelf: shelf.value } } : {}, 250);
+  if (!s || my !== seq) return;
+  res = s.results; shown = 0; out.innerHTML = '';
+  stat.textContent = `${res.length.toLocaleString()} matching pages · ${Math.round(performance.now() - t0)} ms`;
+  await show(10);
+}
+q.addEventListener('input', run); shelf.addEventListener('change', run);
+more.addEventListener('click', () => show(10));
+const u = new URLSearchParams(location.search).get('q'); if (u) { q.value = u; run(); }
+</script>
+</body>
+</html>
