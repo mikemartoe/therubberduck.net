@@ -7,9 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preload" as="image" type="image/webp" href="/walkman/walkman-window-720.webp" media="(max-width:720px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="/walkman/walkman-window-1000.webp" media="(min-width:721px)" fetchpriority="high">
-<link rel="preload" as="image" type="image/webp" href="/assets/trd/img/rpa-label-aged.webp">
+<link rel="preload" as="image" type="image/webp" href="/assets/trd/img/rpa-label-aged.webp" fetchpriority="low">
+<link rel="stylesheet" href="/assets/trd/signup-pop.css?v=20261123f2" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/assets/trd/signup-pop.css?v=20261123f2"></noscript>
+<link rel="stylesheet" href="/assets/trd/drop-view.css?v=20261112b" media="print" onload="this.media='all'" data-trd-drop-view data-trd-keep>
+<noscript><link rel="stylesheet" href="/assets/trd/drop-view.css?v=20261112b"></noscript>
 <link rel="preload" as="style" href="/assets/trd/sitenav.css?v=20261126sl">
-<link rel="preload" as="style" href="/assets/trd/eol-home.css?v=20261127a">
+<link rel="preload" as="style" href="/assets/trd/eol-home.css?v=20261128a">
 <link rel="preload" as="style" href="/assets/trd/i18n.css?v=20261127bt">
 <link rel="preload" as="font" type="font/woff2" href="/assets/trd/fonts/Steelfish-Bd.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/trd/fonts/Cinzel-var.woff2" crossorigin>
@@ -705,8 +709,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
   background:linear-gradient(115deg,rgba(255,255,255,0) 0 30%,rgba(255,255,255,.07) 30% 44%,rgba(255,255,255,0) 44% 100%),linear-gradient(rgba(10,10,14,.12),rgba(10,10,14,.12))}
 .deck:hover .deck-well .cas,.deck:focus-visible .deck-well .cas{transform:none}
 /* the Walkman itself, glass window cut out (with a light smoke and sheen) */
-.deck-well::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:url(/walkman/walkman-window-1000.webp) center/100% 100% no-repeat}
-@media (max-width:720px){.deck-well::after{background-image:url(/walkman/walkman-window-720.webp)}}
+.deck-well > img.deck-window{position:absolute;inset:0;z-index:2;pointer-events:none;width:100%;height:100%;object-fit:fill;border:0;display:block}
 .deck-keys{position:relative;z-index:4} /* keep the keys above the Walkman's drop shadow */
 
 /* ===== Mission button + closeable pop-up (2026-11-21). Intro copy stays in the dialog for SEO. ===== */
@@ -786,7 +789,7 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 <script src="/assets/trd/track.js" defer data-trd-keep></script>
 <script src="/assets/trd/visit.js?v=20261025s1" defer data-trd-keep></script>
 <link rel="stylesheet" href="/assets/trd/sitenav.css?v=20261126sl">
-<link rel="stylesheet" href="/assets/trd/eol-home.css?v=20261127a">
+<link rel="stylesheet" href="/assets/trd/eol-home.css?v=20261128a">
 <!-- SEO and share preview -->
 <meta name="description" content="Bienvenue, esprits curieux. L’archive ouverte de The Rubber Duck sur l’ère Q : chaque Q drop, des vidéos, des X Spaces, des PDF, des mèmes et plus de 100 000 publications Twitter/X, ainsi que TRD Collectibles et le livre anon mission.">
 <link rel="canonical" href="https://therubberduck.net/fr-ca/">
@@ -1232,11 +1235,11 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
 }
 </style>
 <script src="/assets/trd/analytics.js?v=20261121a" defer data-trd-keep></script>
-<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261127bt">
+<link rel="stylesheet" href="/assets/trd/i18n.css?v=20261127bt" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="/assets/trd/i18n.css?v=20261127bt"></noscript>
 </head>
 <body class="eol-home">
 <header class="trd-nav" id="trd-nav"><div class="tn-in">
-<a class="tn-logo" href="/fr-ca/" aria-label="THE RUBBER DUCK™, home"><img decoding="async" loading="lazy" src="/assets/trd/img/duck-banner-80.webp" srcset="/assets/trd/img/duck-banner-80.webp 80w, /assets/trd/img/duck-banner-128.webp 128w" sizes="40px" width="40" height="34" alt=""><span class="tn-wm" aria-hidden="true">THE RUBBER DUCK<sup>&trade;</sup></span></a>
+<a class="tn-logo" href="/fr-ca/" aria-label="THE RUBBER DUCK™, home"><img decoding="async" src="/assets/trd/img/duck-banner-80.webp" srcset="/assets/trd/img/duck-banner-80.webp 80w, /assets/trd/img/duck-banner-128.webp 128w" sizes="40px" width="40" height="34" alt=""><span class="tn-wm" aria-hidden="true">THE RUBBER DUCK<sup>&trade;</sup></span></a>
 <nav class="tn-links" id="tn-links" aria-label="Salles"><a href="/videos.html">Vidéos</a><a href="/listening-room.html">Enregistrements</a><a href="/pdfs.html">PDF</a><a href="/eo-library/">EO Library</a><a href="/ledger.html">Drop Ledger</a><a href="/ledger.html?view=photos">Recherche de photos</a><a href="/memes.html">Mèmes</a><a href="/x/">Archive X</a><a href="/newsroom.html">DUCK SAUCE</a><a href="/fr-ca/merch.html#anon-mission">Livre</a></nav>
 <form class="tn-search" id="tn-form" role="search" action="/x/" method="get"><svg class="tn-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><input class="tn-q" id="tn-q" name="q" type="search" placeholder="Chercher dans l’archive" aria-label="Chercher dans toute l’archive" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="tn-res" aria-autocomplete="list"><div class="tn-res" id="tn-res" role="listbox" aria-label="Search results" hidden></div></form>
 <button class="tn-btn tn-menu" id="tn-menu" type="button" aria-expanded="false" aria-controls="tn-links" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
@@ -1314,6 +1317,8 @@ button.spine{-webkit-appearance:none;appearance:none;font:inherit;color:inherit;
       </dialog><div class="b-unit"><div class="b-bay b-bay1"><p class="b-plaque">Face A &middot; The Red Pill Album</p><a class="deck" href="/album.html" data-trd-pod-door aria-label="The Red Pill Album, 22 pistes. Appuyez sur lecture pour lancer l’album. Ouvrir le lecteur">
         <span class="deck-top" aria-hidden="true"><b>TRD</b><span>Platine cassette stéréo</span><span class="deck-led"><i></i>Lecture</span></span>
         <span class="deck-well">
+            <img class="deck-window" src="/walkman/walkman-window-720.webp" srcset="/walkman/walkman-window-720.webp 720w, /walkman/walkman-window-1000.webp 1000w" sizes="(max-width:720px) 356px, 520px" width="720" height="477" alt="" fetchpriority="high" decoding="async" aria-hidden="true">
+            
             <span class="cas" id="podCas" aria-hidden="true">
               <i class="sc s1"></i><i class="sc s2"></i><i class="sc s3"></i><i class="sc s4"></i><i class="sc s5"></i>
               <span class="cas-label">
