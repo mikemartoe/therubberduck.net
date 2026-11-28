@@ -53,14 +53,18 @@ def write_pwa_data(arr):
         json.dump({'n': last[0], 'ts': last[1], 'url': '/drops/%d/' % last[0]}, f)
 GUMROAD = 'https://rubberduck41.gumroad.com/l/ttmhx'
 BOOK_PRICE = '19.99'
+# Official profiles only (first 3 are reused by the short Organization node and MusicGroup: keep their order).
+# The Spotify and Apple Music album URLs live on the MusicAlbum node in album.html, not here.
 SAME_AS = [
     'https://x.com/TheRubberDuck79',
     'https://x.com/TheRubberDuck78',
     'https://rumble.com/user/TheRubberDuck78',
     'https://rubberduck41.gumroad.com/',
-    'https://open.spotify.com/album/2zxmpLk7jYsvoEUAKTWbH4',
-    'https://music.apple.com/us/album/the-red-pill-album/1896233683',
+    'https://therubberduck78.substack.com/',
+    'https://t.me/therubberducknet',
 ]
+ORG_ALT = ['TRD', 'The Rubber Duck\u2122', 'TRD Collectibles', 'therubberduck', 'TheRubberDuck', 'therubberduck.net', 'TheRubberDuck.net']
+WEBSITE_ALT = ['TRD', 'therubberduck.net', 'therubberduck', 'TheRubberDuck', 'TheRubberDuck.net', 'The Rubber Duck net']
 ORG_ID = SITE + '/#org'
 SITE_ID = SITE + '/#website'
 E = lambda s: html.escape(str(s if s is not None else ''), quote=True)
@@ -102,13 +106,13 @@ def git_date(path):
 
 # ---------------------------------------------------------------- JSON-LD helpers
 def org():
-    return {'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'alternateName': ['TRD', 'The Rubber Duck\u2122', 'TRD Collectibles'],
+    return {'@type': 'Organization', '@id': ORG_ID, 'name': 'The Rubber Duck', 'alternateName': ORG_ALT,
             'url': SITE + '/', 'logo': {'@type': 'ImageObject', 'url': SITE + '/favicon-192.png', 'width': 192, 'height': 192},
             'image': SHARE, 'description': 'An open archive of Trump and Q-era research: every Q drop, videos, X Spaces, PDFs, memes and the X archive, plus TRD Collectibles and the book anon mission.',
             'sameAs': SAME_AS}
 
 def website():
-    return {'@type': 'WebSite', '@id': SITE_ID, 'url': SITE + '/', 'name': 'The Rubber Duck', 'alternateName': ['TRD', 'therubberduck.net'],
+    return {'@type': 'WebSite', '@id': SITE_ID, 'url': SITE + '/', 'name': 'The Rubber Duck', 'alternateName': WEBSITE_ALT,
             'publisher': {'@id': ORG_ID}, 'inLanguage': 'en',
             'potentialAction': {'@type': 'SearchAction', 'target': {'@type': 'EntryPoint', 'urlTemplate': SITE + '/ledger.html?q={search_term_string}'},
                                 'query-input': 'required name=search_term_string'}}
