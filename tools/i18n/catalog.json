@@ -4486,5 +4486,14 @@
     "de": "therubberduck.net ist das offene Archiv der Q-Ära von The Rubber Duck: jeder Q drop, der Reihe nach, mit einem Weg zurück zur Quelle.",
     "nl": "therubberduck.net is het open archief van het Q-tijdperk van The Rubber Duck: elke Q drop, op volgorde, met een weg terug naar de bron.",
     "ja": "therubberduck.netは、The Rubber DuckによるQの時代の公開アーカイブです。すべてのQ dropを順番に、出典へ戻る道とともに。"
+  },
+  "become a member": {
+    "fr": "devenir membre",
+    "fr-ca": "devenir membre",
+    "es": "hazte miembro",
+    "de": "mitglied werden",
+    "nl": "word lid",
+    "ja": "メンバーになる",
+    "en-au": "become a member"
   }
 }
