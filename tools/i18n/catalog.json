@@ -3158,6 +3158,33 @@
     "ja": "月額 $50",
     "en-au": "$50 a month"
   },
+  "Sponsor the site": {
+    "es": "Patrocina el sitio",
+    "fr": "Sponsoring du site",
+    "fr-ca": "Commanditez le site",
+    "de": "Die Seite sponsern",
+    "nl": "Sponsor de site",
+    "ja": "サイトのスポンサーになる",
+    "en-au": "Sponsor the site"
+  },
+  "starting at $50 a month": {
+    "es": "desde 50 $ al mes",
+    "fr": "à partir de 50 $ par mois",
+    "fr-ca": "à partir de 50 $ par mois",
+    "de": "ab 50 $ im Monat",
+    "nl": "vanaf $50 per maand",
+    "ja": "月額 $50 から",
+    "en-au": "starting at $50 a month"
+  },
+  "Sponsor the site starting at $50 a month": {
+    "es": "Patrocina el sitio desde 50 $ al mes",
+    "fr": "Sponsoring du site à partir de 50 $ par mois",
+    "fr-ca": "Commanditez le site à partir de 50 $ par mois",
+    "de": "Die Seite sponsern ab 50 $ im Monat",
+    "nl": "Sponsor de site vanaf $50 per maand",
+    "ja": "サイトのスポンサーになる 月額 $50 から",
+    "en-au": "Sponsor the site starting at $50 a month"
+  },
   "$100 for 3 months": {
     "es": "100 $ por 3 meses",
     "fr": "100 $ pour 3 mois",
