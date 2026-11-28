@@ -81,6 +81,40 @@
     st.textContent = '.tn-res .tn-ledger-back{display:block;margin:0 0 8px;padding:8px 10px;border:1px solid #00ED39;border-radius:6px;color:#00ED39;text-decoration:none;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:12.5px}.tn-res .tn-ledger-back:hover{background:rgba(0,255,65,.08);color:#fff}';
     (D.head || D.documentElement).appendChild(st);
   }
+  /* Text inside the SCI[F] PDFs (assets/trd/scif-search.js, built by tools/scif-fulltext-build.py).
+     Loaded only when someone types a search; adds up to 4 files, each with the page and a highlighted line, above the X row. */
+  var SCIF = '/assets/trd/scif-search.js?v=f08c9ea494', scifP = null, dseq = 0;
+  function scifLoad() {
+    if (W.scifSearch) return Promise.resolve(W.scifSearch);
+    if (scifP) return scifP;
+    scifP = new Promise(function (ok, no) { var s = D.createElement('script'); s.src = SCIF; s.onload = function () { ok(W.scifSearch); }; s.onerror = function () { scifP = null; no(); }; (D.head || D.documentElement).appendChild(s); });
+    return scifP;
+  }
+  function inDocs(q, b) {
+    var my = ++dseq;
+    if (fold(q).replace(/[^a-z0-9]/g, '').length < 3) return;
+    scifLoad().then(function (S) { return S.search(q).then(function (r) { return { S: S, r: r }; }); }).then(function (o) {
+      var r = o.r, inp = $('tn-q');
+      if (my !== dseq || !r.docs.length || b.hidden || !inp || inp.value.trim() !== q) return;
+      var top = r.docs.slice(0, 4);
+      return Promise.all(top.map(function (d) { return o.S.snippets(d, r, 1).catch(function () { return []; }); })).then(function (sn) {
+        var inp2 = $('tn-q'); if (my !== dseq || b.hidden || !inp2 || inp2.value.trim() !== q) return;
+        var h = '<div class="tn-docs">', n = 0;
+        top.forEach(function (d, i) {
+          if (r.phrases.length && !sn[i].length) return;
+          var p = sn[i].length ? sn[i][0].p : d.pages[0];
+          n++;
+          h += '<a role="option" href="' + esc(o.S.href(d, p)) + '"><span class="tn-k">Inside</span><span class="tn-t">' + esc(d.title) + '</span><span class="tn-d">' + d.pages.length + (d.pages.length === 1 ? ' page' : ' pages') + ' match \u00b7 p. ' + p + (sn[i].length ? ' \u00b7 ' + sn[i][0].html : '') + '</span></a>';
+        });
+        if (!n) return;
+        h += '<a role="option" href="/pdfs.html?find=' + encodeURIComponent(q) + '"><span class="tn-k">SCI[F]</span><span class="tn-t">' + (r.phrases.length ? 'Open the room to see every match' : r.total.toLocaleString('en-US') + (r.total === 1 ? ' file contains' : ' files contain') + ' \u201c' + esc(q) + '\u201d \u203a') + '</span></a></div>';
+        if (!D.getElementById('tn-docs-css')) { var st = D.createElement('style'); st.id = 'tn-docs-css'; st.textContent = '.tn-res .tn-docs mark{background:#ffd54a;color:#000;padding:0 1px}.tn-res .tn-docs .tn-d{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}'; (D.head || D.documentElement).appendChild(st); }
+        var old = b.querySelector('.tn-docs'); if (old) old.remove();
+        var x = b.querySelector('.tn-x'), w = D.createElement('div'); w.innerHTML = h;
+        x ? b.insertBefore(w.firstChild, x) : b.appendChild(w.firstChild);
+      });
+    }).catch(function () {});
+  }
   function run(raw) {
     var q = raw.trim(), b = box(), inp = $('tn-q');
     if (!b) return;
@@ -96,6 +130,7 @@
     html += xRow(q);
     b.innerHTML = html; b.hidden = false; sel = -1;
     if (inp) inp.setAttribute('aria-expanded', 'true');
+    inDocs(q, b);
   }
   function opts() { var b = box(); return b ? b.querySelectorAll('a') : []; }
   function mark(n) { var o = opts(); if (!o.length) return; sel = (n + o.length) % o.length; [].forEach.call(o, function (a, i) { a.classList.toggle('on', i === sel); }); o[sel].scrollIntoView({ block: 'nearest' }); }

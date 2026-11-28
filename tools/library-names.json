@@ -135,7 +135,7 @@
   "source": "PDF metadata Title/Author and page 1 text"
  },
  "TRD-0081": {
-  "title": "The Book of Q Proofs (Cover)",
+  "title": "The Book of Q Proofs v1.5 (Cover Page)",
   "about": "Single-page cover image reading The Book of Q Proofs.",
   "source": "text on the page image"
  },
@@ -380,7 +380,7 @@
   "source": "PDF page 1 text"
  },
  "TRD-0216": {
-  "title": "The Art of Psychological Warfare by Michael T. Stevens",
+  "title": "The Art of Psychological Warfare (Michael T. Stevens, 2016)",
   "about": "Book by Michael T. Stevens, 2016.",
   "source": "PDF metadata Title/Author and page 1 text"
  },
@@ -400,18 +400,748 @@
   "source": "PDF report documentation page"
  },
  "TRD-0235": {
-  "title": "Who Are the Black Nobility? by Dee Jay (Copy 2)",
+  "title": "Who Are the Black Nobility? (Dee Jay, June 28, 2000), Copy 2",
   "about": "Article by Dee Jay dated June 28, 2000 (one of three copies in the library).",
   "source": "PDF metadata Title and page 1 text"
  },
  "TRD-0236": {
-  "title": "Full Text of Who Are the Black Nobility? by Dee Jay",
+  "title": "Who Are the Black Nobility? (Dee Jay, Full Text Saved 2006)",
   "about": "Full text of the article by Dee Jay, as saved 08/09/2006.",
   "source": "PDF metadata Title and page 1 text"
  },
  "TRD-0237": {
-  "title": "Who Are the Black Nobility? by Dee Jay (Copy 3)",
+  "title": "Who Are the Black Nobility? (Dee Jay, June 28, 2000), Copy 3",
   "about": "Article by Dee Jay dated June 28, 2000 (one of three copies in the library).",
   "source": "PDF metadata Title and page 1 text"
+ },
+ "TRD-0012": {
+  "title": "“The City” Where the Queen Bows to “The Black Nobility”: The World’s Prophecy",
+  "about": "Article asserting that “The City” of London is ruled by the “Black Nobility”, naming the Rothschild Bank of England and the Illuminati. Author not credited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0015": {
+  "title": "100 Main Laws of Shulchan Aruch: Talmudic-Khazar Law Regarding Christians (1999)",
+  "about": "Compilation of passages from the Shulchan Aruch (Jewish legal code), last revised 16 April 1999, with an introduction on the Protocols of the Elders. Annexes excluded.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0023": {
+  "title": "18 E 71st St, New York, NY 10021 (Google Maps Capture)",
+  "about": "One-page Google Maps screenshot (imagery 2019) of the address 18 E 71st St, New York.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0030": {
+  "title": "Feasts and Prophecies Linked Chart (2023 / 2022)",
+  "about": "One-page Bible prophecy timeline chart linking the biblical feasts to Revelation events (Rev 14, Rev 20, John 5:22). File name: 2023_FEASTSPROPHECIESLINKED2022.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0031": {
+  "title": "The Last Year Prophecy Chart (2023 / 2022)",
+  "about": "One-page Bible prophecy chart on the four horsemen of Revelation 6 (white, red, black, pale horse). File name: 2023_THELASTYEAR2022.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0040": {
+  "title": "650 Years Ago: How Venice Rigged the First, and Worst, Global Financial Crash (Paul Gallagher, American Almanac, 1995)",
+  "about": "Article by Paul Gallagher printed in the American Almanac, 4 September 1995, on the 14th-century financial collapse and Venetian banking. 21-page print version.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0041": {
+  "title": "650 Years Ago: How Venice Rigged the First, and Worst, Global Financial Crash (Paul Gallagher, American Almanac, 1995), Web Copy",
+  "about": "Same Paul Gallagher article (American Almanac, 4 September 1995) saved as a web page, with site navigation text.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0045": {
+  "title": "Ace Elevator Company: 9/11 Front-Company Claim (One-Page Note)",
+  "about": "One-page note claiming A.C.E. Elevator Company, bankrupt in 2006, was a front company; it cites Larry Silverstein’s insurance payout. Unsourced and uncredited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0046": {
+  "title": "Against Oligarchy: The Venetian Conspiracy (ICLC Address, 1981)",
+  "about": "Opens with an address to the ICLC conference near Wiesbaden, Germany, Easter Sunday 1981 (Campaigner, Sept. 1981) on the Venetian oligarchy.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0047": {
+  "title": "Anglo-Israelism (Joseph Jacobs, Jewish Encyclopedia)",
+  "about": "Jewish Encyclopedia entry by Joseph Jacobs on the theory that the Anglo-Saxon peoples descend from the Lost Ten Tribes: history, arguments, biblical texts.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0048": {
+  "title": "US Patent 3,060,795: Apparatus for Producing Visual Stimulation (Corrigan & Becker, 1962)",
+  "about": "US patent granted 30 October 1962 to Robert E. Corrigan and Hal C. Becker (filed 7 May 1958) for a visual stimulation apparatus.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0049": {
+  "title": "Beyond Misinformation: What Science Says About the Destruction of WTC Buildings 1, 2, and 7 (AE911Truth, 2015)",
+  "about": "Report from Architects & Engineers for 9/11 Truth on the collapse of WTC 1, 2 and 7.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0050": {
+  "title": "Army IO Is PSYOP: Influencing More with Less (Col. Curtis D. Boyd, Military Review, 2007)",
+  "about": "Article by Col. Curtis D. Boyd, Military Review, May–June 2007, arguing Army information operations is psychological operations.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0051": {
+  "title": "U.S. Army Special Operations Forces Strategy (USASOC G5, Draft Pre-Decisional, Copy 1)",
+  "about": "Draft pre-decisional ARSOF strategy from USASOC G5 Strategic Planning Division, marked UNCLASSIFIED//DRAFT. 8 pages. Copy 1 of 2.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0052": {
+  "title": "U.S. Army Special Operations Forces Strategy (USASOC G5, Draft Pre-Decisional, Copy 2)",
+  "about": "Second copy of the draft ARSOF strategy from USASOC G5 Strategic Planning Division, marked UNCLASSIFIED//DRAFT.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0053": {
+  "title": "Douglas Morton Dunlop (Encyclopedia Biography)",
+  "about": "Saved encyclopedia article on D. M. Dunlop (1909–1987), British orientalist and historian of Islamic and Eurasian history, author of The History of the Jewish Khazars.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0054": {
+  "title": "Lamassu (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the Lamassu, the Mesopotamian winged-bull protective deity, with the Flag of Venice shown.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0056": {
+  "title": "The Babylonian Talmud (tr. Michael L. Rodkinson, Volumes 1–10, 1918)",
+  "about": "Michael L. Rodkinson’s English translation of the Babylonian Talmud, volumes 1–10 (1918, public domain).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0057": {
+  "title": "Bihar (Khazar) (Encyclopedia Article)",
+  "about": "Saved encyclopedia stub on Bihar, Khazar khagan in the 730s and father of Tzitzak (Irene).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0058": {
+  "title": "Black Nobility (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the Black Nobility, Roman aristocratic families loyal to the Papacy after 1870.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0059": {
+  "title": "The Book of Q Proofs v1.5 (10/26/2018), Copy 2",
+  "about": "Full 609-page Book of Q Proofs, version 1.5 dated 10/26/2018. Copy 2 of 2.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0060": {
+  "title": "The Book of Q Proofs v1.5, Page 29 (Trump Retweets @patrioticpepe, 2016)",
+  "about": "Single page (29) of The Book of Q Proofs v1.5 (10/26/2018): Trump retweets the @patrioticpepe account, July 30, 2016.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0061": {
+  "title": "The Book of Q Proofs v1.5, Page 30 (4chan Reaction to the Retweet)",
+  "about": "Single page (30) of The Book of Q Proofs v1.5 (10/26/2018): users on 4chan notice the retweet and start a thread.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0062": {
+  "title": "The Book of Q Proofs v1.5, Page 31 (Trump’s Next Tweet)",
+  "about": "Single page (31) of The Book of Q Proofs v1.5 (10/26/2018): Trump’s next tweet, about five hours after the retweet.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0063": {
+  "title": "The Book of Q Proofs v1.5 (10/26/2018), Copy 1",
+  "about": "Full 609-page Book of Q Proofs, version 1.5 dated 10/26/2018. Copy 1 of 2.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0064": {
+  "title": "Imperial British-Israelism: Justification for an Empire (Gregory S. Neal, SMU Thesis, 1987)",
+  "about": "Bachelor of Arts thesis by Gregory S. Neal, Southern Methodist University, 12 May 1987, on British-Israelite theory and its use to justify empire.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0065": {
+  "title": "British Israelism (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on British Israelism (Anglo-Israelism), the belief that Western Europeans descend from the Lost Tribes of Israel.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0066": {
+  "title": "British-Israel-World Federation (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the British-Israel-World Federation, founded in London on 3 July 1919.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0067": {
+  "title": "Thalassocracy (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on thalassocracy (maritime empire), filed as the Canaanite–Phoenician–Venetian–British thalassocracy.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0068": {
+  "title": "Canaanites Become the “Black Nobility” of Later Europe (Excerpt, Eustace Mullins, The Curse of Canaan), Copy 1",
+  "about": "Excerpt from page 10 of Eustace Mullins’ The Curse of Canaan about Noah’s curse of Canaan and the Black Nobility.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0069": {
+  "title": "Canaanites Become the “Black Nobility” of Later Europe (Excerpt, Eustace Mullins, The Curse of Canaan), Copy 2",
+  "about": "Second copy of the excerpt from The Curse of Canaan, page 10.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0070": {
+  "title": "Sons of Abraham or Children of Attila? The Oxymoron of Anti-Semitism (Hari Heath, Idaho Observer, 2007)",
+  "about": "Article by Hari Heath in the Idaho Observer, September 2007, on the Khazars and the term anti-Semitism. Filed as “Children of Attila: Khazars to Khazionism”.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0071": {
+  "title": "Christian Rosencreuz (Chapter XX, Barbara Aho)",
+  "about": "Chapter XX, “Christian Rosencreuz”, from a work by Barbara Aho on the Rosicrucian Enlightenment of the 17th century and the Rosicrucian manifestos.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0072": {
+  "title": "Pizza for Hillary: Fundraiser Invitation (Podesta, Alefantis, April 10, 2016)",
+  "about": "One-page invitation to a “Pizza for Hillary” fundraiser, Sunday April 10, 2016, Washington, D.C., with contribution levels from $250 to $2,700.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0073": {
+  "title": "U.S. Government Counterinsurgency Guide (Interagency Counterinsurgency Initiative, 2009)",
+  "about": "Counterinsurgency guide issued by the U.S. Government Interagency Counterinsurgency Initiative, January 2009.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0075": {
+  "title": "Committee of 300 (Excerpt, Dr. John Coleman)",
+  "about": "Excerpt by Dr. John Coleman, from the Whale website, on the “Committee of 300”; mentions Aldo Moro and Kissinger.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0076": {
+  "title": "Confusion of Terms “Jew” and Khazar: Cultural Identity Theft",
+  "about": "One-page essay on the distinction it claims between the Khazars and the Israelites. Author not credited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0077": {
+  "title": "Congress of Vienna (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the Congress of Vienna (1814–15). Filed under “Black Nobility Oligarchs Reps”.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0078": {
+  "title": "Conspirators’ Hierarchy: The Story of the Committee of 300, Part 1 (John Coleman)",
+  "about": "Opening part of John Coleman’s Conspirators’ Hierarchy: The Story of the Committee of 300, beginning with the foreword.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0079": {
+  "title": "Conspirators’ Hierarchy: The Story of the Committee of 300, Part 3 (John Coleman)",
+  "about": "Part 3 of John Coleman’s Conspirators’ Hierarchy: institutions through which control is exercised, including the Tavistock Institute.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0080": {
+  "title": "Conspirators’ Hierarchy: The Story of the Committee of 300, Members (John Coleman)",
+  "about": "Members section of John Coleman’s Conspirators’ Hierarchy, including a list of Tavistock institutions in the United States.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0082": {
+  "title": "DoD Law of War Manual (June 2015, Updated December 2016)",
+  "about": "Department of Defense Office of General Counsel Law of War Manual, promulgated 12 June 2015, updated December 2016.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0083": {
+  "title": "“A Future Message” from the President (Unattributed Draft Speech)",
+  "about": "One-page unattributed text styled as a future message from the U.S. President about RICO prosecutions and a ‘Most Wanted List’. File name is an image ID (EDLv8yNXYAAGlLJ).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0084": {
+  "title": "Edom (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the ancient kingdom of Edom and Idumaea.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0085": {
+  "title": "Emergency: This Book Will Save Your Life (Neil Strauss, 2009)",
+  "about": "Book by Neil Strauss about preparing for societal collapse. Scanned; OCR text.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0087": {
+  "title": "Jeffrey Epstein’s “Black Book” (Contact Directory, Scanned)",
+  "about": "Scan of an address book of names, addresses and phone numbers, as circulated in the Epstein contact-book release. Scanned; text recovered by OCR.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0088": {
+  "title": "Redheaded Warrior Jews (Philologos, The Forward, “On Language”)",
+  "about": "Forward.com “On Language” column by Philologos on redheaded warrior Jews.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0089": {
+  "title": "FM 33-1: Psychological Operations (U.S. Army, 31 August 1979, Obsolete Copy)",
+  "about": "Department of the Army field manual FM 33-1, 31 August 1979 (supersedes FM 33-1 of 4 Feb 1971 and FM 33-5). Stamped obsolete.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0090": {
+  "title": "How the Venetian System Was Transplanted into England (Webster Tarpley, New Federalist, 1996)",
+  "about": "Part 1 of a Webster Tarpley article from New Federalist, 3 June 1996, on Venetian influence on England. Filed as “From Venice to England”.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0091": {
+  "title": "FuddyHoax Memes (Meme Collection)",
+  "about": "Captioned meme images headed “FuddyHoax”, mocking a staged-event claim. Text recovered by OCR. File name: FuddyHoax_Memes_ms.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0092": {
+  "title": "Gog, Magog and the Kingdom of the Khazars: A Biblical Perspective",
+  "about": "Word-document essay by MSobhan (per PDF metadata) linking Gog and Magog to the Khazar kingdom. Page text is partly clipped in the source.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0096": {
+  "title": "Guelphs and Ghibellines (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the Guelph (papal) and Ghibelline (imperial) factions of medieval Italy.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0097": {
+  "title": "Developing a Hippocampal Neural Prosthetic to Facilitate Human Memory Encoding and Recall (Hampson et al., 2018)",
+  "about": "Journal of Neural Engineering 15 036014 (2018), Robert E. Hampson et al.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0098": {
+  "title": "Hitler, Churchill and Rothschild (Clifford Shack, Facts and Factoids)",
+  "about": "Facts and Factoids article by Clifford Shack presenting one view of the Rothschilds’ role in World War II and the founding of Israel.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0099": {
+  "title": "House of Hohenstaufen (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the Hohenstaufen dynasty of Holy Roman Emperors.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0100": {
+  "title": "House of Welf (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the House of Welf (Guelph).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0101": {
+  "title": "How the Venetian Virus Infected and Took Over England (H. Graham Lowry, EIR, 1994)",
+  "about": "Article by H. Graham Lowry printed in Executive Intelligence Review, 15 April 1994.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0102": {
+  "title": "How the Venetians Took Over England and Created Freemasonry (Gerald Rose, American Almanac, 1993)",
+  "about": "Schiller Institute conference address by Gerald Rose, September 1993, printed in the American Almanac, 29 November 1993.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0103": {
+  "title": "NSTISSAM INFOSEC/1-99: The Insider Threat to U.S. Government Information Systems (1999)",
+  "about": "National Security Telecommunications and Information Systems Security Advisory Memorandum, July 1999, on insider threats to government information systems.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0104": {
+  "title": "Investiture Controversy (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the medieval conflict between popes and kings over appointing bishops.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0129": {
+  "title": "Diplomacy by Deception (John Coleman, 1993): Saved 404 Error Page, No Content",
+  "about": "File named for John Coleman’s Diplomacy by Deception (1993), but it is a saved HTML “404 Page Not Found” capture, not a readable PDF. Needs replacing.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0131": {
+  "title": "United States v. Welch: Statement of the Offense, Factual Proffer (D.D.C. Case 1:16-cr-00232, Document 18)",
+  "about": "Defendant’s factual proffer filed 03/24/17 in United States v. Edgar Maddison Welch, on the December 4, 2016 shooting at Comet Ping Pong, Washington, D.C.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0132": {
+  "title": "Irene (Wife of Constantine V): Khazar Princess (Lynda Garland, De Imperatoribus Romanis)",
+  "about": "Entry by Lynda Garland, University of New England, from the Online Encyclopedia of Roman Emperors, on the Khazar princess who married Constantine V.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0133": {
+  "title": "The Khazarian Connection: A Search for Judaic Origins (Harrell Rhome, 2009)",
+  "about": "Essay by Harrell Rhome (© 2009) on the Khazars and the origins of the Jewish people.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0134": {
+  "title": "“Kill the Best Gentiles!”: Khazaric Talmudism (James W. von Brunn, 2002)",
+  "about": "Book by James W. von Brunn (dated 2002 in the file name) on the Talmud and the Khazar-origin theory. Scanned; text recovered by OCR.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0135": {
+  "title": "Laura Silsby and the New Life Children’s Refuge: Haiti 2010 (One-Page Summary)",
+  "about": "One-page text claiming Hillary Clinton took an interest in Laura Silsby, who was detained in Haiti in 2010 with 33 children; cites WikiLeaks cables and emails. Scanned",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0136": {
+  "title": "Leo IV the Khazar (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on Leo IV, Byzantine emperor 775–780, son of the Khazar princess Tzitzak.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0137": {
+  "title": "List of Khazar Rulers (Encyclopedia Article)",
+  "about": "Saved encyclopedia list of Khazar khagans (Ashina dynasty) and beks, 618 to the 860s.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0138": {
+  "title": "Little Saint James (Google Maps Capture, 3 Pages)",
+  "about": "Three-page Google Maps capture (imagery 2019) of Little Saint James island, St. Thomas, U.S. Virgin Islands.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0139": {
+  "title": "Little St James Island (Google Maps Capture, 2 Pages)",
+  "about": "Two-page Google Maps capture (imagery 2019) of Little St James Island, St. Thomas, U.S. Virgin Islands.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0140": {
+  "title": "Mandate of Heaven (NationMaster Encyclopedia Article)",
+  "about": "Saved NationMaster Encyclopedia article on the Chinese political concept of the Mandate of Heaven.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0141": {
+  "title": "MARADMIN 550/19: Manpower Guidance for Reserve Marines Ordered to Active Duty for Defense Support of Civil Authorities (2019)",
+  "about": "Marine Corps message MARADMIN 550/19 signed 3 October 2019 on activating and deactivating Reserve Marines for defense support of civil authorities.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0142": {
+  "title": "US Patent 6,506,148 B2: Nervous System Manipulation by Electromagnetic Fields from Monitors (Hendricus Loos, 2003)",
+  "about": "US patent, 14 January 2003, inventor Hendricus G. Loos.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0143": {
+  "title": "Cultural Evolution and Memetics (Francis Heylighen & Klaas Chielens)",
+  "about": "Encyclopedia of Complexity and Systems Science article by Heylighen and Chielens (Vrije Universiteit Brussel).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0144": {
+  "title": "A Memetics Compendium (Robert Finkelstein, for DARPA)",
+  "about": "Compendium of memetics papers compiled by Dr. Robert Finkelstein (Robotic Technology Inc.), prepared for Dr. Amy Kruse of DARPA.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0145": {
+  "title": "Merovingian Bloodline and the Black Nobility (Fritz Springmeier)",
+  "about": "Fritz Springmeier text (revised 16 Nov 2006, from the FactsAboutPsychiatry website) on the “Thirteenth Satanic Bloodline”, the Merovingians and Black Nobility.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0146": {
+  "title": "JP 3-13.2: Military Information Support Operations (Joint Publication, 2010, Change 1, 2011)",
+  "about": "U.S. Joint Publication 3-13.2, 7 January 2010, incorporating Change 1 of 20 December 2011.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0147": {
+  "title": "When “Altering Brain Function” Becomes “Mind Control” (Koivuniemi & Otto, 2014)",
+  "about": "Frontiers in Systems Neuroscience article, 14 Oct 2014 (doi 10.3389/fnsys.2014.00202), Andrew Koivuniemi and Kevin Otto.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0148": {
+  "title": "US Patent 6,011,991: Communication System and Method Including Brain Wave Analysis (Mardirossian, 2000)",
+  "about": "US patent, 4 January 2000, inventor Mardirossian, on communicating through brain wave analysis. 10 pages. Scanned; OCR.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0149": {
+  "title": "The Media, Government Departments and Psychotronic Weapons (Translated Article, CIA-RDP96-00792R000600440001-3)",
+  "about": "CIA reading-room copy (released 2000/08/09) of a translated Russian article on psychotronic weapons, with an Igor Vinokurov profile. OCR text.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0150": {
+  "title": "Patents by Inventor Hendricus G. Loos (Listing)",
+  "about": "Printed listing of patents and applications filed by Hendricus G. Loos.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0151": {
+  "title": "23 U.S. Patented Mind-Control-Related Devices (1956–2003)",
+  "about": "Table of 23 U.S. patents (1956–2003) for devices related to mind control, with patent links.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0152": {
+  "title": "Unconventional Research in USSR and Russia: Short Overview (Serge Kernbach)",
+  "about": "Survey by Serge Kernbach of Soviet and Russian research on “high-penetrating” non-biological emission, late 19th to early 21st century.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0153": {
+  "title": "The Most Shocking Interview: Daniel Estulin and Dimitri Khalezov on Viktor Bout",
+  "about": "Interview in which Daniel Estulin questions Dimitri A. Khalezov about Viktor Bout (“Merchant of Death”) and the post-9/11 case against him.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0154": {
+  "title": "Khazaria (NationMaster Encyclopedia Article)",
+  "about": "Saved NationMaster Encyclopedia article on Khazaria.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0155": {
+  "title": "Khazars (NationMaster Encyclopedia Article)",
+  "about": "Saved NationMaster Encyclopedia article on the Khazars.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0156": {
+  "title": "NATO MC 0422/4: NATO Military Policy on Information Operations (2012)",
+  "about": "NATO Military Committee decision, 20 July 2012, endorsing MC 0422/4, NATO Military Policy on Information Operations.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0157": {
+  "title": "Venetian Black Nobility: Roots of Today’s Ruling Oligarchy (Excerpt from The Committee of 300, Dr. John Coleman)",
+  "about": "Excerpt from John Coleman’s The Committee of 300: A Brief History of World Power on the Venetian Black Nobility.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0159": {
+  "title": "The Phoenicians and the Celts Founded Genoa (Phoenicia.org)",
+  "about": "Page from Phoenicia.org (Phoenician International Research Center) on Phoenician and Celtic founding of Genoa.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0160": {
+  "title": "Military Memetics Tutorial (Robert Finkelstein, 13 Dec 2011)",
+  "about": "152-slide tutorial by Dr. Robert Finkelstein (Robotic Technology Inc.), December 2011, with a brief overview of memetics.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0161": {
+  "title": "Ashtoreth, the Queen of Heaven (Canaanite Goddess)",
+  "about": "Page on the Canaanite goddess Ashtoreth, with Strong’s concordance entries. Filed under “see Khazar Pope”.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0162": {
+  "title": "Project MKULTRA, the CIA’s Program of Research in Behavioral Modification (Senate Joint Hearing, August 3, 1977)",
+  "about": "Joint hearing before the Senate Select Committee on Intelligence and the Subcommittee on Health and Scientific Research, 95th Congress, 3 August 1977. 178 pages. Scanned",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0164": {
+  "title": "Psychological Operations: The Ethical Dimension (Lt. Col. Michael A. Aquino, ICAF, 1987)",
+  "about": "Paper by Lt. Col. Michael A. Aquino, Industrial College of the Armed Forces, National Defense University, Class of 1987.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0165": {
+  "title": "FM 3-05.302 / MCRP 3-40.6B: Tactical Psychological Operations, Tactics, Techniques, and Procedures (2005)",
+  "about": "U.S. Army and Marine Corps manual, October 2005, on tactical PSYOP tactics, techniques and procedures.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0169": {
+  "title": "Paths to Victory: Lessons from Modern Insurgencies (RAND, 2013)",
+  "about": "Full RAND report by Christopher Paul, Colin P. Clarke, Beth Grill and Molly Dunigan on historical insurgency cases. 332 pages. Chapters appear separately in this library.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0170": {
+  "title": "Reigns of Leo IV the Khazar, Constantine VI and Irene, AD 775–802 (Byzantine Empire, Book I, Chapter I, Section IV)",
+  "about": "Third Millennium Library text on the Byzantine reigns of Leo IV the Khazar, Constantine VI and Irene, AD 775–802.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0184": {
+  "title": "The Rise of the House of Rothschild (Count Egon Caesar Corti, 1770–1830)",
+  "about": "Biography by Count Egon Caesar Corti, translated from the German by Brian and Beatrix Lunn, covering 1770–1830.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0185": {
+  "title": "The Rosicrucian Manifestos: Fama Fraternitatis and Confessio Fraternitatis (Emperor Norton Books, 2000)",
+  "about": "Anonymous Rosicrucian manifestos (Fama and Confessio), Emperor Norton Books, Cincinnati, 2000.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0186": {
+  "title": "Rosicrucian Manifestos (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the two early 17th-century Rosicrucian manifestos of unknown authorship.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0187": {
+  "title": "Rothschild and Other Red Things (Chapter)",
+  "about": "Chapter on the claim that the House of Rothschild controls politics, finance and media. Author not credited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0188": {
+  "title": "Rothschild Family (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on the Rothschild family, filed as a background master file.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0189": {
+  "title": "Rothschild Money Trust (George Armstrong)",
+  "about": "Book by George Armstrong. The library file name adds that it “mistakes Talmudic Khazars for Jews”.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0190": {
+  "title": "Rothschilds’ Tyrants: A Thug Family Dossier",
+  "about": "Dossier on the Rothschild family, with links to online e-books. Author not credited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0191": {
+  "title": "Secret Treaty of Verona (Senator Owen, Congressional Record, 1916)",
+  "about": "Extract from the 1916 Congressional Record in which Senator Owen enters the text of the 22 November 1822 secret treaty of Verona.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0192": {
+  "title": "Some Publications Showing the Jews to Be Khazars and Not Israelites (Compiled by Willie Martin)",
+  "about": "Compilation of quotations by Willie Martin arguing that most Jews descend from Khazars rather than ancient Israelites.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0194": {
+  "title": "The Babylonian Talmud: Tract Sanhedrin (tr. Michael L. Rodkinson)",
+  "about": "Tract Sanhedrin of the Babylonian Talmud in Michael L. Rodkinson’s English translation.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0195": {
+  "title": "The Black Nobility: Overview",
+  "about": "Overview of the Black Nobility families of Italy, Germany, Switzerland and Britain. Author not credited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0196": {
+  "title": "Who Are the Black Nobility? (Dee Jay, June 28, 2000), Copy 1",
+  "about": "Article by Dee Jay posted 28 June 2000 on the Venetian and Genoese oligarchic families. Copy 1 of 3 in the library.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0197": {
+  "title": "The British Crown Created Green Fascism: The Venetian Method (The New Citizen, Oct/Nov 2011)",
+  "about": "The New Citizen, October/November 2011, page 35, on the Venetian and British oligarchy and the environmental movement.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0198": {
+  "title": "The Curse of Canaan (Eustace Mullins)",
+  "about": "Book by Eustace Mullins on the ‘curse of Canaan’ in history.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0199": {
+  "title": "The Truth About the Khazars (Benjamin H. Freedman, 1954)",
+  "about": "Benjamin H. Freedman’s 1954 explanation of the Khazars, written for Dr. David Goldstein of Boston.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0200": {
+  "title": "The History of the Jewish Khazars (D. M. Dunlop, 1954; Schocken Ed. 1967)",
+  "about": "Scanned excerpt of D. M. Dunlop’s history (Princeton University Press, 1954; Schocken edition 1967): contents and introduction. OCR text.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0201": {
+  "title": "The Jew of Malta (Christopher Marlowe, Play)",
+  "about": "Full text of the play The Jew of Malta by Christopher Marlowe.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0202": {
+  "title": "The Khazars and the Scythians (Vladimir Pomakov)",
+  "about": "Essay by Vladimir Pomakov on the Khazars and the Scythians.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0203": {
+  "title": "The Legend of British-Israel (C. T. Dimont, SPCK, 1933)",
+  "about": "Critical booklet by C. T. Dimont, Salisbury Theological College (SPCK, London, 1933).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0204": {
+  "title": "The Medieval Origins of the “Financial Revolution”: Usury, Rentes, and Negotiability (John H. Munro, 2002), Copy 1",
+  "about": "Munich Personal RePEc Archive paper by John H. Munro, 2002.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0205": {
+  "title": "The Medieval Origins of the “Financial Revolution”: Usury, Rentes, and Negotiability (John H. Munro, 2002), Copy 2",
+  "about": "Second copy of John H. Munro’s 2002 Munich Personal RePEc Archive paper.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0206": {
+  "title": "The Other Europe in the Middle Ages: Avars, Bulgars, Khazars and Cumans (ed. Florin Curta, Brill, 2008)",
+  "about": "Brill volume edited by Florin Curta with Roman Kovalev, East Central and Eastern Europe in the Middle Ages, 450–1450, vol. 2 (2008).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0207": {
+  "title": "The Role of Black Nobility and the Venetians in Modern Middle East Conflicts (Coleman, Diplomacy by Deception, p. 32), Copy 1",
+  "about": "Excerpt from page 32 of John Coleman’s Diplomacy by Deception on Venetian and Black Nobility involvement in the Middle East.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0208": {
+  "title": "The Role of Black Nobility and the Venetians in Modern Middle East Conflicts (Coleman, Diplomacy by Deception, p. 32), Copy 2",
+  "about": "Second copy of the page-32 excerpt from Diplomacy by Deception.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0209": {
+  "title": "The Rosicrucian Enlightenment (Frances A. Yates)",
+  "about": "Book by historian Frances A. Yates on the Rosicrucian manifestos and their cultural context. Scanned; OCR text.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0210": {
+  "title": "The Rothschild Government: Fed, IRS, EPA, FDA and Licensing as Control (Web Page, 19 July 2008)",
+  "about": "Web page saved 19 July 2008 asserting Rothschild control through U.S. agencies; mentions the Illuminati. Author not credited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0211": {
+  "title": "The Schottenstein Edition of the Babylonian Talmud (Exhibit Essay, Schiffman)",
+  "about": "Exhibit essay “Printing the Talmud: From Bomberg to Schottenstein” on the ArtScroll Schottenstein Edition.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0212": {
+  "title": "The Sovereign Voice: ITNJ Commemorative Issue (Westminster Sittings)",
+  "about": "Commemorative issue on the ITNJ Judicial Commission of Inquiry into Human Trafficking and Child Sex Abuse (the Westminster sittings).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0213": {
+  "title": "The Synagogue of Satan: The Secret History of Jewish World Domination (Andrew Carrington Hitchcock)",
+  "about": "Book by Andrew Carrington Hitchcock with a foreword by Texe Marrs. Scanned; OCR text.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0214": {
+  "title": "The Venetian Takeover of England: A 200-Year Project (Gerald Rose, EIR, 1994)",
+  "about": "Gerald Rose article printed in Executive Intelligence Review, 15 April 1994.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0215": {
+  "title": "The Problem and Potential of Memetics (Joseph Poulshock, 2002)",
+  "about": "Journal of Psychology and Theology article, March 2002 (Joseph Poulshock).",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0217": {
+  "title": "Memetics: A Growth Industry in US Military Operations (Maj. Michael B. Prosser, USMC, 2006)",
+  "about": "Marine Corps University School of Advanced Warfighting thesis, academic year 2005–2006, by Maj. Michael B. Prosser.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0218": {
+  "title": "Tony Bobulinski WhatsApp Message History (with CEFC Contact, June–July 2017)",
+  "about": "WhatsApp export between Tony Bobulinski and a CEFC assistant, June–July 2017, starting with messages about meeting Chairman Ye in Moscow.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0219": {
+  "title": "The Illuminati Formula to Create an Undetectable Total Mind Control Slave (Fritz Springmeier & Cisco Wheeler)",
+  "about": "Book by Fritz Springmeier and Cisco Wheeler on trauma-based (“Monarch”) mind control, with glossary.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0220": {
+  "title": "Trump v. Clinton et al.: Complaint for Damages (S.D. Fla., No. 2:22-cv-14102)",
+  "about": "Civil complaint by Donald J. Trump against Hillary Clinton, the DNC, Perkins Coie, Fusion GPS, Christopher Steele, James Comey and others, U.S.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0221": {
+  "title": "Memorandum of Telephone Conversation: President Trump and President Zelenskyy (July 25, 2019)",
+  "about": "White House memorandum of the 25 July 2019 call, declassified 24 September 2019.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0222": {
+  "title": "Tzitzak (Irene), Khazar Princess and Wife of Constantine V (Encyclopedia Article)",
+  "about": "Saved encyclopedia article on Tzitzak (baptised Irene), Khazar princess who married Constantine V and mother of Leo IV.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0224": {
+  "title": "Statement on Protecting Children (One-Page Text, Untitled-1)",
+  "about": "One-page text on protecting children, homes and communities, with no title, source or date. File name: Untitled-1. Scanned; OCR text.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0227": {
+  "title": "Rosicrucian Utopia (Chapter, Venetian Black Nobility Religion)",
+  "about": "Chapter on the modern Rosicrucian goal of a world government, quoting the Rosicrucian Order manifesto.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0228": {
+  "title": "The Role of the Venetian Oligarchy in the Reformation, Counter-Reformation, Enlightenment and the Thirty Years’ War, Part III (Webster Tarpley, American Almanac, 1993)",
+  "about": "Webster Tarpley article printed in the American Almanac, 12 April 1993.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0229": {
+  "title": "Venice: The Methodology of Evil, Part III (Christina N. Huth, American Almanac, 1994), Copy 1",
+  "about": "Final installment of a series by Christina N. Huth, American Almanac, 30 May 1994.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0230": {
+  "title": "The Lebanese-Phoenicians (Phoenicia.org: Venice Derived from Phoenicia)",
+  "about": "Phoenicia.org page on the Lebanese-Phoenicians, filed as the source for the claim that Venice derives from Phoenicia.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0231": {
+  "title": "Venice’s War Against Western Civilization (Fidelio, Summer 1995)",
+  "about": "Article reprinted from the Summer 1995 issue of Fidelio Magazine.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0232": {
+  "title": "Venice: The Methodology of Evil, Part III (Christina N. Huth, American Almanac, 1994), Copy 2",
+  "about": "Second copy of Christina N. Huth’s American Almanac article, 30 May 1994.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0233": {
+  "title": "What Is Oligarchy? Learn from Aeschylus (The New Citizen, Oct/Nov 2011)",
+  "about": "The New Citizen, October/November 2011, page 39, on Aeschylus’s Prometheus Trilogy and ‘population control’.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0234": {
+  "title": "Who Are the Ashkenazim? (Kanook, Tlingit Nation, July 4, 2010)",
+  "about": "Article dated 4 July 2010 from the Kanook Tlingit Nation site on the origin of the Ashkenazim, starting with Benjamin Netanyahu.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0238": {
+  "title": "Who Is Esau-Edom? (Charles A. Weisman)",
+  "about": "Book by Charles A. Weisman on the biblical Esau-Edom and the identity he assigns to his descendants. The library note calls it a flawed book with useful sections. Scanned",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0239": {
+  "title": "Who Was That Masked Man Who Sent Your Son Off to War? (The 13 Families)",
+  "about": "Essay on ‘planetary overlords’ and the “13 families”, blaming bankers and munitions makers for war. Author not credited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0240": {
+  "title": "WikiLeaks Podesta Emails: “Re: Follow up the HRC idea re; foundation” (April 30, 2015)",
+  "about": "Email chain printed from WikiLeaks Podesta Emails (email ID 52561), dated 30 April 2015, from jbenenson@bsgco.com.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
+ },
+ "TRD-0241": {
+  "title": "World Depopulation and Slavery: A Christian Point of View",
+  "about": "Text on depopulation and slavery from a Christian viewpoint, opening with Genesis 1:28. Author not credited.",
+  "source": "SCI[F] label pass 2026-11-28: read from the PDF (page 1 text, metadata or OCR)"
  }
 }

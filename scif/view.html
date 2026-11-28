@@ -26,7 +26,7 @@ h1{font-size:15px;margin:12px 14px 4px;color:#ffe2a0;word-break:break-word}
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/legacy/build/pdf.min.js"></script>
 <script>
 (function(){
-var q=new URLSearchParams(location.search),f=q.get('f')||'',t=q.get('t')||'';
+var q=new URLSearchParams(location.search),f=q.get('f')||'',t=q.get('t')||'';var goPage=Math.max(0,parseInt(q.get('p'),10)||0);
 var back=document.getElementById('back');
 var backPath=q.get('back')||'';
 if(/^\/[A-Za-z0-9._~\/-]+$/.test(backPath)&&backPath.indexOf('..')<0&&backPath.length<180){
@@ -56,8 +56,8 @@ pdfjsLib.getDocument(url).promise.then(function(pdf){
   st.textContent=pdf.numPages+' pages';var n=1,w=Math.min(1000,host.clientWidth||window.innerWidth),dpr=Math.min(2,window.devicePixelRatio||1);
   function next(){if(n>pdf.numPages)return;pdf.getPage(n++).then(function(pg){
     var v=pg.getViewport({scale:1});var s=w/v.width*dpr;var vp=pg.getViewport({scale:s});
-    var c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;host.appendChild(c);
-    return pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;}).then(function(){setTimeout(next,0)});}
+    var c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;host.appendChild(c);var mine=n-1;
+    return pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise.then(function(){if(goPage&&mine===goPage){setTimeout(function(){c.scrollIntoView({block:'start'});},30);}});}).then(function(){setTimeout(next,0)});}
   next();
 }).catch(function(){st.innerHTML='Could not render here. <a style="color:#ffe2a0" href="'+url+'">Open the PDF</a>';});
 })();
